@@ -2,12 +2,22 @@ extends GridContainer
 
 var event_bus: EventBus
 
+@export
+var button_disabled_color: Color
+
 @onready var widget := %Widget
 
 @onready var bottom_container := %BottomContainer
 
 @onready var tooltip := %WidgetTooltip
 
+@onready
+var building_buttons = {
+	Buildings.Ids.Tent: $BuildResidential,
+	Buildings.Ids.Lumberjack: $BuildLumberjack,
+	Buildings.Ids.Hut: $BuildHut,
+	Buildings.Ids.Sawmill: $BuildSawmill,
+}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,6 +28,7 @@ func _ready():
 
 		event_bus.send_building_created.connect(_on_building_event.unbind(1))
 		event_bus.send_building_creation_aborted.connect(_on_building_event.unbind(1))
+		event_bus.send_building_limit_updated.connect(_on_send_building_limit_updated)
 
 		for child in get_children():
 			child.pressed.connect(_on_building_button_pressed.bind(child.building_id))
@@ -48,3 +59,13 @@ func _on_building_button_mouse_entered(building_id: Buildings.Ids):
 func _on_building_button_mouse_exited():
 	tooltip.visible = false
 	pass
+	
+func _on_send_building_limit_updated(building_id: Buildings.Ids, limit_reached: bool):
+	# FIXME : it's not perfect but we don't have a texture for disabled buildings
+	var button: TextureButton = building_buttons[building_id]
+	if limit_reached:
+		button.disabled = true
+		button.modulate = button_disabled_color
+	else:
+		button.disabled = false
+		button.modulate = Color.WHITE

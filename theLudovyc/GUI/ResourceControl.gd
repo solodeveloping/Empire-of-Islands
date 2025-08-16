@@ -32,3 +32,9 @@ func _on_EventBus_resource_updated(type, amount):
 func _on_EventBus_resource_production_rate_updated(type, rate):
 	if type == resource_type:
 		label_production_rate.text = "(" + Helper.get_string_from_signed_int(rate) + ")"
+		if rate < 0:
+			label_production_rate.add_theme_color_override("font_color", Color.RED)
+		elif rate == 0:
+			label_production_rate.add_theme_color_override("font_color", Color.BLACK)
+		else:
+			label_production_rate.add_theme_color_override("font_color", Color.DARK_GREEN)

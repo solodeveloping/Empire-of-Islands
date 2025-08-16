@@ -3,23 +3,47 @@
 extends EntityStatic
 class_name Building2D
 
+# Info : this is the script used to display all buildings
+# the other scenes are not used
+
 signal selected(type)
 
 enum Datas {Texture, Width, Height}
 
+# We are using 1 frame atlas_texture for now
+# When we have the appropriate buildings (sawmill)
+# We can either replace the source of the AtlasTexture
+# Or we can delete them and replace the placeholder texture with the right one
+# In this case, we need to modify the number of VFrames in Building2D.tscn
+
 const datas = {
 	Buildings.Ids.Warehouse: {
-		Datas.Texture: preload("res://theLudovyc/Building/warehouse.png"),
+		#Datas.Texture: preload("res://theLudovyc/Building/warehouse.png"),
+		Datas.Texture: preload("res://theLudovyc/Building/atlas_textures/warehouse_atlas_texture.tres"),
 		Datas.Width: 3,
 		Datas.Height: 3,
 	},
+	# Level 1
 	Buildings.Ids.Tent: {
-		Datas.Texture: preload("res://theLudovyc/Building/residential.png"),
+		#Datas.Texture: preload("res://theLudovyc/Building/residential.png"),
+		Datas.Texture: preload("res://theLudovyc/Building/atlas_textures/tent_atlas_texture.tres"),
 		Datas.Width: 2,
 		Datas.Height: 2,
 	},
 	Buildings.Ids.Lumberjack: {
-		Datas.Texture: preload("res://theLudovyc/Building/lumberjack.png"),
+		#Datas.Texture: preload("res://theLudovyc/Building/lumberjack.png"),
+		Datas.Texture: preload("res://theLudovyc/Building/atlas_textures/lumberjack_atlas_texture.tres"),
+		Datas.Width: 2,
+		Datas.Height: 2,
+	},
+	# Level 2
+	Buildings.Ids.Hut: {
+		Datas.Texture: preload("res://theLudovyc/Building/atlas_textures/hut_atlas_texture.tres"),
+		Datas.Width: 2,
+		Datas.Height: 2,
+	},
+	Buildings.Ids.Sawmill: {
+		Datas.Texture: preload("res://theLudovyc/Building/atlas_textures/sawmill_atlas_texture.tres"),
 		Datas.Width: 2,
 		Datas.Height: 2,
 	},

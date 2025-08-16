@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://theLudovyc/Building/Building.gd" id="2_8of1u"]
 
 [node name="Building2D" type="Sprite2D"]
-hframes = 4
 script = ExtResource("2_8of1u")
 
 [node name="Area2D" type="Area2D" parent="."]

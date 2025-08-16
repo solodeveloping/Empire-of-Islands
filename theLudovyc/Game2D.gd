@@ -16,6 +16,7 @@ class_name Game2D
 @onready var the_factory := $TheFactory
 @onready var the_market := $TheMarket
 @onready var the_builder := $TheBuilder
+@onready var the_population := $ThePopulation
 
 @onready var gui := $GUI
 @onready var pause_menu := %PauseMenu
@@ -27,11 +28,6 @@ var cursor_entity: Building2D
 # avoid create building on first clic
 var cursor_entity_wait_release: bool = false
 
-var population := 0:
-	set(value):
-		population = value
-		event_bus.population_updated.emit(value)
-		event_bus.available_workers_updated.emit(population - the_factory.workers)
 
 var current_selected_building: Building2D = null
 
@@ -56,6 +52,7 @@ func _ready():
 
 		the_storage.add_resource(Resources.Types.Wood, 2)
 		the_storage.add_resource(Resources.Types.Textile, 16)
+		the_storage.add_resource(Resources.Types.Plank, 10)
 	
 	elif SaveHelper.load_saved_file_name() == OK:
 		if SaveHelper.last_loaded_data.is_empty():
@@ -65,9 +62,8 @@ func _ready():
 		
 		if game_data.is_empty():
 			return
-			
-		population = game_data["population"]
 		
+		the_population.load_population_save()
 		the_storage.load_storage_save()
 		the_bank.load_bank_save()
 		the_factory.load_factory_save()
@@ -178,10 +174,11 @@ func _process(delta):
 					match Buildings.get_building_type(building_id):
 						Buildings.Types.Residential:
 							var amount := Buildings.get_max_workers(building_id)
+							var population_type := Buildings.get_population_type((building_id))
+							
+							the_population.population_increase(population_type, amount)
 
-							population += amount
-
-							the_factory.population_increase(amount)
+							the_factory.population_increase(population_type, amount)
 
 						Buildings.Types.Producing:
 							the_factory.add_workers(
@@ -192,6 +189,7 @@ func _process(delta):
 					the_bank.money += building_total_cost[0]
 
 					the_storage.conclude_building_construction(building_total_cost[1])
+					the_builder.conclude_building_construction(building_id)
 
 					event_bus.send_building_created.emit(building_id)
 
@@ -243,14 +241,17 @@ func _on_EventBus_ask_demolish_current_building():
 	var building_id = current_selected_building.building_id
 
 	the_storage.recover_building_construction(building_id)
+	
+	the_builder.conclude_building_destruction(building_id)
 
 	match Buildings.get_building_type(building_id):
 		Buildings.Types.Residential:
 			var amount := Buildings.get_max_workers(building_id)
+			var population_type := Buildings.get_population_type(building_id)
 
-			population -= amount
+			the_population.population_decrease(population_type,amount)
 
-			the_factory.population_decrease(amount)
+			the_factory.population_decrease(population_type,amount)
 
 		Buildings.Types.Producing:
 			the_factory.rem_workers(
@@ -266,9 +267,10 @@ func _on_EventBus_ask_demolish_current_building():
 
 func _on_PauseMenu_ask_to_save() -> void:
 	var dicoToSave := {
-		"Game": {"population":population}
+		"Game": {}
 	}
 	
+	dicoToSave.merge(the_population.get_population_save())
 	dicoToSave.merge(the_storage.get_storage_save())
 	dicoToSave.merge(the_bank.get_bank_save())
 	dicoToSave.merge(the_factory.get_factory_save())

@@ -204,6 +204,7 @@ layout_mode = 2
 mouse_filter = 2
 columns = 4
 script = ExtResource("4_v8nok")
+button_disabled_color = Color(0.446777, 0.446777, 0.446777, 1)
 metadata/_tab_index = 1
 
 [node name="BuildResidential" type="TextureButton" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildGridContainer"]
@@ -221,6 +222,22 @@ texture_pressed = ExtResource("9_kn7dp")
 texture_hover = ExtResource("10_jbw0d")
 script = ExtResource("8_i5i22")
 building_id = 2
+
+[node name="BuildHut" type="TextureButton" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildGridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("8_04hx7")
+texture_pressed = ExtResource("9_7d646")
+texture_hover = ExtResource("10_na55f")
+script = ExtResource("8_i5i22")
+building_id = 3
+
+[node name="BuildSawmill" type="TextureButton" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildGridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("8_8yekw")
+texture_pressed = ExtResource("9_kn7dp")
+texture_hover = ExtResource("10_jbw0d")
+script = ExtResource("8_i5i22")
+building_id = 4
 
 [node name="BuildingContainer" type="VBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer"]
 layout_mode = 2
@@ -470,11 +487,12 @@ text = "Unknow City Name
 
 [node name="TextureRect2" type="TextureRect" parent="CityInfo/PanelContainer/HBoxContainer"]
 layout_mode = 2
-tooltip_text = "Population"
+tooltip_text = "Sailors"
 texture = ExtResource("15_p3ujw")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CityInfo/PanelContainer/HBoxContainer"]
 layout_mode = 2
+tooltip_text = "Sailors"
 theme_override_constants/separation = 0
 
 [node name="LabelPopulation" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer"]
@@ -486,6 +504,33 @@ script = ExtResource("17_v0ai2")
 layout_mode = 2
 text = "(0)"
 script = ExtResource("18_xklsp")
+
+[node name="VSeparator3" type="VSeparator" parent="CityInfo/PanelContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_orjbh")
+
+[node name="TextureRect3" type="TextureRect" parent="CityInfo/PanelContainer/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Pioneers"
+texture = ExtResource("15_p3ujw")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CityInfo/PanelContainer/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Pioneers"
+theme_override_constants/separation = 0
+
+[node name="LabelPopulation" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "0"
+script = ExtResource("17_v0ai2")
+population_type = 1
+
+[node name="LabelWorkers" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "(0)"
+script = ExtResource("18_xklsp")
+population_type = 1
 
 [node name="VSeparator2" type="VSeparator" parent="CityInfo/PanelContainer/HBoxContainer"]
 layout_mode = 2
@@ -528,6 +573,10 @@ tooltip_text = "Textile"
 
 [node name="TextureButton" parent="Money+Resources/Resources/ControlResourceTextile" index="1"]
 tooltip_text = "Textile"
+
+[node name="ControlResourcePlank" parent="Money+Resources/Resources" instance=ExtResource("36_hya2t")]
+layout_mode = 2
+resource_type = 2
 
 [node name="RichTextLabelInfo" type="RichTextLabel" parent="."]
 visible = false

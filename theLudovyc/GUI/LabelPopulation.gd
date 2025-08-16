@@ -1,5 +1,8 @@
 extends Label
 
+@export var population_type: Populations.Types:
+	set(value):
+		population_type = value
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,4 +17,4 @@ func _ready():
 
 
 func _on_EventBus_popupation_updated(population_count):
-	text = str(population_count)
+	text = str(population_count[population_type])

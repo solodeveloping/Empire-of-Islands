@@ -72,7 +72,7 @@ func conclude_building_construction(building:Building2D):
 
 func demolish_building(building:Building2D):
 	var top_left_tile = entityStatic_get_top_left_tile(building,
-		local_to_map(building.position))
+		ground_layer.local_to_map(ground_layer.to_local(building.global_position)))
 
 	for x in building.width:
 		for y in building.height:

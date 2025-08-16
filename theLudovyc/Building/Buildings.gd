@@ -3,18 +3,29 @@ class_name Buildings
 
 enum Types { Placeholder, Warehouse, Residential, Producing }
 
-enum Ids { Warehouse, Tent, Lumberjack }
+enum Ids { 
+	Warehouse,
+	# Level 1
+	Tent,
+	Lumberjack,
+	# Level 2
+	Hut,
+	Sawmill,
+}
 
-enum Datas { Name, Type, Cost, Produce, Max_Workers }
+enum Datas { Name, Type, Cost, Produce, Max_Workers, Level, PopulationType, Max_Count }
 
 const datas = {
 	Ids.Warehouse: {Datas.Name: &"Warehouse", Datas.Type: Types.Warehouse},
+	# Level 1
 	Ids.Tent:
 	{
 		Datas.Name: &"Tent",
 		Datas.Type: Types.Residential,
 		Datas.Cost: [[Resources.Types.Wood, 1], [Resources.Types.Textile, 1]],
-		Datas.Max_Workers: 4
+		Datas.Max_Workers: 4,
+		Datas.Level: 1,
+		Datas.PopulationType: Populations.Types.Sailor,
 	},
 	Ids.Lumberjack:
 	{
@@ -22,8 +33,27 @@ const datas = {
 		Datas.Type: Types.Producing,
 		Datas.Cost: [[Resources.Types.Wood, 1], [Resources.Types.Textile, 1]],
 		Datas.Produce: Resources.Types.Wood,
+		Datas.Max_Workers: 4,
+		Datas.Max_Count: 3,
+	},
+	# Level 2
+	Ids.Hut:
+	{
+		Datas.Name: &"Hut",
+		Datas.Type: Types.Residential,
+		Datas.Cost: [[Resources.Types.Plank, 1],],
+		Datas.Max_Workers: 4,
+		Datas.Level: 2,
+		Datas.PopulationType: Populations.Types.Pioneer,
+	},
+	Ids.Sawmill:
+	{
+		Datas.Name: &"Sawmill",
+		Datas.Type: Types.Producing,
+		Datas.Cost: [[Resources.Types.Plank, 1],],
+		Datas.Produce: Resources.Types.Plank,
 		Datas.Max_Workers: 4
-	}
+	},
 }
 
 
@@ -60,3 +90,13 @@ static func get_max_workers(building_id: Buildings.Ids) -> int:
 	if not datas.has(building_id):
 		return -1
 	return datas[building_id].get(Datas.Max_Workers, -1)
+	
+static func get_population_type(building_id: Buildings.Ids) -> Populations.Types:
+	if not datas.has(building_id):
+		return -1
+	return datas[building_id].get(Datas.PopulationType, -1)
+	
+static func get_max_count(building_id: Buildings.Ids) -> int:
+	if not datas.has(building_id):
+		return -1
+	return datas[building_id].get(Datas.Max_Count, -1)

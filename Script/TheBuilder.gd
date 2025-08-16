@@ -8,6 +8,14 @@ var warehouse: Building2D
 
 @onready var tilemap:TileMap = %TileMap
 
+@onready var event_bus = $"../EventBus"
+
+var buildings_count = {
+	Buildings.Ids.Lumberjack: 0,
+}
+
+## Use this method to obtain an instance of the building
+## It is used to get a floating building that follows the mouse pos for instance
 func instantiate_building(building_id: Buildings.Ids) -> Building2D:
 	var instance = Building_2D_Scene.instantiate() as Building2D
 	
@@ -30,10 +38,32 @@ func build(building_id:Buildings.Ids, pos:Vector2) -> Building2D:
 	tilemap.conclude_building_construction(building)
 
 	building.build()
+	
+	conclude_building_construction(building_id)
+	
 	return building
 	
 func build_warehouse(pos:Vector2):
 	warehouse = build(Buildings.Ids.Warehouse, pos)
+
+func conclude_building_construction(building_id:Buildings.Ids):
+	if !buildings_count.has(building_id):
+		buildings_count[building_id] = 1
+	else:
+		buildings_count[building_id] += 1
+	
+	var limit = Buildings.get_max_count(building_id)
+	if limit != -1:
+		if buildings_count[building_id] >= limit:
+			event_bus.send_building_limit_updated.emit(building_id, true)
+
+func conclude_building_destruction(building_id:Buildings.Ids):
+	var previous_count = buildings_count[building_id]
+	buildings_count[building_id] -= 1
+	var limit = Buildings.get_max_count(building_id)
+	if limit != -1:
+		if previous_count == limit:
+			event_bus.send_building_limit_updated.emit(building_id, false)
 
 func get_buildings_save() -> Dictionary:
 	var datas:Array

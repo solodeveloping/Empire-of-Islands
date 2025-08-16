@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://47n0ufupvki5"]
+
+[ext_resource type="Texture2D" uid="uid://bmdul28v7pc0p" path="res://Art/Image/Buildings/Lumberjack/LumberjackHut_idle.png" id="1_2gh2v"]
+
+[resource]
+atlas = ExtResource("1_2gh2v")
+region = Rect2(128, 0, 128, 128)
