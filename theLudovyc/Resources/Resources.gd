@@ -7,6 +7,9 @@ enum Types {
 	Textile,
 	# Level 2
 	Plank,
+	Potato,
+	Pig,
+	Meat,
 }
 
 const Icons = {
@@ -15,6 +18,9 @@ const Icons = {
 	Types.Textile: preload("res://Art/Image/Gui/Icons/Resources/32/003.png"),
 	# Level 2
 	Types.Plank: preload("res://Art/Image/Gui/Icons/Resources/32/004.png"),
+	Types.Potato: preload("res://Art/Image/Gui/Icons/Resources/32/015.png"),
+	Types.Pig: preload("res://Art/Image/Gui/Icons/Resources/32/036.png"),
+	Types.Meat: preload("res://Art/Image/Gui/Icons/Resources/32/005.png"),
 }
 
 enum Datas { Name, Type, Level, }
@@ -34,6 +40,21 @@ const datas = {
 		Datas.Name: &"Plank",
 		Datas.Type: Types.Plank,
 	},
+	Types.Potato:
+	{
+		Datas.Name: &"Potato",
+		Datas.Type: Types.Potato,
+	},
+	Types.Pig:
+	{
+		Datas.Name: &"Pig",
+		Datas.Type: Types.Pig,
+	},
+	Types.Meat:
+	{
+		Datas.Name: &"Meat",
+		Datas.Type: Types.Meat,
+	},
 }
 
 static func get_resource_icon(resource_type: Types) -> Texture2D:
@@ -52,6 +73,9 @@ const Levels = {
 	Types.Wood: LevelTypes.Gathered, 
 	Types.Textile: LevelTypes.TransformedTwice,
 	Types.Plank: LevelTypes.TransformedOnce,
+	Types.Potato: LevelTypes.Gathered,
+	Types.Pig: LevelTypes.TransformedOnce,
+	Types.Meat: LevelTypes.TransformedTwice,
 }
 
 static func get_resource_level(resource_type: Types) -> LevelTypes:

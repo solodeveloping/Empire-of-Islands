@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://b3s7eqy0blp6g"]
+[gd_scene load_steps=74 format=3 uid="uid://b3s7eqy0blp6g"]
 
 [ext_resource type="Script" path="res://theLudovyc/GUI/GUI.gd" id="1_15w01"]
 [ext_resource type="Texture2D" uid="uid://5gbvga1bqpxa" path="res://Art/Image/Gui/Background/Widgets/map_bg.png" id="1_lis5v"]
@@ -31,12 +31,14 @@
 [ext_resource type="Texture2D" uid="uid://b8ks32vn2erej" path="res://Art/Image/Gui/Background/Widgets/tooltip_bg_top.png" id="17_lxyjn"]
 [ext_resource type="Script" path="res://theLudovyc/GUI/LabelPopulation.gd" id="17_v0ai2"]
 [ext_resource type="Script" path="res://theLudovyc/GUI/Tooltip.gd" id="18_divjp"]
+[ext_resource type="Texture2D" uid="uid://bqvkxst5fhe7u" path="res://Art/Image/Gui/Icons/BuildMenu/020.png" id="18_f6gb5"]
 [ext_resource type="Script" path="res://theLudovyc/GUI/BuildingContainer.gd" id="18_nngab"]
 [ext_resource type="Texture2D" uid="uid://rqkqu27konps" path="res://Art/Image/Gui/Icons/Templates/Production/production_arrow.png" id="18_v5i80"]
 [ext_resource type="Script" path="res://theLudovyc/GUI/LabelWorkers.gd" id="18_xklsp"]
 [ext_resource type="Texture2D" uid="uid://dx6qmely0bq45" path="res://Art/Image/Gui/Background/Widgets/tooltip_bg.png" id="18_yoese"]
 [ext_resource type="Texture2D" uid="uid://8immr7brv8eb" path="res://Art/Image/Gui/Background/Widgets/tooltip_bg_middle.png" id="19_28qxy"]
 [ext_resource type="Texture2D" uid="uid://dapd765c0bvd8" path="res://Art/Image/Gui/Buttons/delete_small.png" id="19_eef57"]
+[ext_resource type="Texture2D" uid="uid://chsaot336foxe" path="res://Art/Image/Gui/Icons/BuildMenu/020_d.png" id="19_sqx8j"]
 [ext_resource type="Script" path="res://theLudovyc/GUI/BuildingInfoContainer.gd" id="19_uroop"]
 [ext_resource type="Texture2D" uid="uid://bntbwjpu7i64e" path="res://Art/Image/Gui/Icons/Templates/Production/toggle_active.png" id="19_ykl4j"]
 [ext_resource type="Texture2D" uid="uid://bwf1wdtyfp4ll" path="res://Art/Image/Gui/Icons/Templates/Production/toggle_active_d.png" id="20_0fwfh"]
@@ -44,11 +46,21 @@
 [ext_resource type="Texture2D" uid="uid://bjxpcfox7403j" path="res://Art/Image/Gui/Background/Widgets/tooltip_bg_bottom.png" id="20_4xpap"]
 [ext_resource type="Script" path="res://theLudovyc/GUI/BuildingProducingContainer.gd" id="20_6ni15"]
 [ext_resource type="Texture2D" uid="uid://btewy0y3mrcwd" path="res://Art/Image/Gui/Buttons/delete_small_bw.png" id="20_70i8g"]
+[ext_resource type="Texture2D" uid="uid://difqb3sikk4b3" path="res://Art/Image/Gui/Icons/BuildMenu/020_h.png" id="20_wrh6c"]
 [ext_resource type="Texture2D" uid="uid://toeqa364p2tp" path="res://Art/Image/Gui/Icons/Resources/32/001.png" id="21_03oya"]
 [ext_resource type="PackedScene" uid="uid://n6f00tsqpgrm" path="res://theLudovyc/GUI/ResourceTextureRect.tscn" id="21_cprbo"]
 [ext_resource type="Texture2D" uid="uid://cswhnjs5r8fkk" path="res://Art/Image/Gui/Buttons/delete_small_h.png" id="21_oyj7a"]
+[ext_resource type="Texture2D" uid="uid://cuxu1af4s3ym2" path="res://Art/Image/Gui/Icons/BuildMenu/019.png" id="21_subfh"]
 [ext_resource type="Texture2D" uid="uid://cvaw1myityac7" path="res://Art/Image/Gui/Icons/Templates/Production/toggle_active_h.png" id="21_v44d5"]
+[ext_resource type="Texture2D" uid="uid://bfwkj4qpaltng" path="res://Art/Image/Gui/Icons/BuildMenu/019_d.png" id="22_bwlpf"]
+[ext_resource type="Texture2D" uid="uid://dlu8qriqt5b8w" path="res://Art/Image/Gui/Icons/BuildMenu/019_h.png" id="23_oy3y7"]
+[ext_resource type="Texture2D" uid="uid://bj0ig3hsjxl7q" path="res://Art/Image/Gui/Icons/BuildMenu/039.png" id="24_hqqxw"]
+[ext_resource type="Texture2D" uid="uid://div73bs1hkxwc" path="res://Art/Image/Gui/Icons/BuildMenu/039_d.png" id="25_rov8k"]
+[ext_resource type="Texture2D" uid="uid://cct56i6qr81fr" path="res://Art/Image/Gui/Icons/BuildMenu/039_h.png" id="26_hwluf"]
 [ext_resource type="Texture2D" uid="uid://b6nuq70hohg0w" path="res://Art/Image/Gui/Icons/Widgets/MiniMap/speed_up.png" id="26_j0dpo"]
+[ext_resource type="Texture2D" uid="uid://etyxgvuub3qn" path="res://Art/Image/Gui/Icons/BuildMenu/041.png" id="27_6gyyb"]
+[ext_resource type="Texture2D" uid="uid://cf518se81cj2d" path="res://Art/Image/Gui/Icons/BuildMenu/041_d.png" id="28_pu8o5"]
+[ext_resource type="Texture2D" uid="uid://dbbd074dljjdh" path="res://Art/Image/Gui/Icons/BuildMenu/041_h.png" id="29_3glx1"]
 [ext_resource type="Script" path="res://theLudovyc/GUI/RichTextLabelInfo.gd" id="33_hbac4"]
 [ext_resource type="PackedScene" uid="uid://dm2nc5paqgg5i" path="res://theLudovyc/GUI/ResourceControl.tscn" id="36_hya2t"]
 [ext_resource type="Script" path="res://theLudovyc/GUI/MoneyControl.gd" id="37_dntbd"]
@@ -238,6 +250,38 @@ texture_pressed = ExtResource("9_kn7dp")
 texture_hover = ExtResource("10_jbw0d")
 script = ExtResource("8_i5i22")
 building_id = 4
+
+[node name="BuildFarm" type="TextureButton" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildGridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("18_f6gb5")
+texture_pressed = ExtResource("19_sqx8j")
+texture_hover = ExtResource("20_wrh6c")
+script = ExtResource("8_i5i22")
+building_id = 5
+
+[node name="BuildPotatoField" type="TextureButton" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildGridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("21_subfh")
+texture_pressed = ExtResource("22_bwlpf")
+texture_hover = ExtResource("23_oy3y7")
+script = ExtResource("8_i5i22")
+building_id = 6
+
+[node name="BuildPigsty" type="TextureButton" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildGridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("24_hqqxw")
+texture_pressed = ExtResource("25_rov8k")
+texture_hover = ExtResource("26_hwluf")
+script = ExtResource("8_i5i22")
+building_id = 7
+
+[node name="BuildButchery" type="TextureButton" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildGridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("27_6gyyb")
+texture_pressed = ExtResource("28_pu8o5")
+texture_hover = ExtResource("29_3glx1")
+script = ExtResource("8_i5i22")
+building_id = 8
 
 [node name="BuildingContainer" type="VBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer"]
 layout_mode = 2
@@ -577,6 +621,18 @@ tooltip_text = "Textile"
 [node name="ControlResourcePlank" parent="Money+Resources/Resources" instance=ExtResource("36_hya2t")]
 layout_mode = 2
 resource_type = 2
+
+[node name="ControlResourcePotato" parent="Money+Resources/Resources" instance=ExtResource("36_hya2t")]
+layout_mode = 2
+resource_type = 3
+
+[node name="ControlResourcePig" parent="Money+Resources/Resources" instance=ExtResource("36_hya2t")]
+layout_mode = 2
+resource_type = 4
+
+[node name="ControlResourceMeat" parent="Money+Resources/Resources" instance=ExtResource("36_hya2t")]
+layout_mode = 2
+resource_type = 5
 
 [node name="RichTextLabelInfo" type="RichTextLabel" parent="."]
 visible = false

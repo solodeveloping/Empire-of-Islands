@@ -11,7 +11,14 @@ enum Ids {
 	# Level 2
 	Hut,
 	Sawmill,
+	Farm,
+	PotatoField,
+	Pigsty,
+	Butchery,
 }
+
+# FIXME : PopulationType is duplicated with the Recipes
+# If Recipes is missing, it increase PopulationType 0 on the UI
 
 enum Datas { Name, Type, Cost, Produce, Max_Workers, Level, PopulationType, Max_Count }
 
@@ -53,6 +60,45 @@ const datas = {
 		Datas.Cost: [[Resources.Types.Plank, 1],],
 		Datas.Produce: Resources.Types.Plank,
 		Datas.Max_Workers: 4
+	},
+	Ids.Farm:
+	{
+		Datas.Name: &"Farm",
+		Datas.Type: Types.Producing,
+		Datas.Cost: [[Resources.Types.Plank, 1],],
+		Datas.Max_Workers: 2,
+		Datas.Level: 2,
+		Datas.PopulationType: Populations.Types.Pioneer,
+	},
+	Ids.PotatoField:
+	{
+		Datas.Name: &"Potato field",
+		Datas.Type: Types.Producing,
+		Datas.Cost: [[Resources.Types.Plank, 1],],
+		Datas.Produce: Resources.Types.Potato,
+		Datas.Max_Workers: 2,
+		Datas.Level: 2,
+		Datas.PopulationType: Populations.Types.Pioneer,
+	},
+	Ids.Pigsty:
+	{
+		Datas.Name: &"Pigsty",
+		Datas.Type: Types.Producing,
+		Datas.Cost: [[Resources.Types.Plank, 1],],
+		Datas.Produce: Resources.Types.Pig,
+		Datas.Max_Workers: 2,
+		Datas.Level: 2,
+		Datas.PopulationType: Populations.Types.Pioneer,
+	},
+	Ids.Butchery:
+	{
+		Datas.Name: &"Butchery",
+		Datas.Type: Types.Producing,
+		Datas.Cost: [[Resources.Types.Plank, 1],],
+		Datas.Produce: Resources.Types.Meat,
+		Datas.Max_Workers: 4,
+		Datas.Level: 2,
+		Datas.PopulationType: Populations.Types.Pioneer,
 	},
 }
 

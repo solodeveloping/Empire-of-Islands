@@ -27,10 +27,15 @@ enum Waiting_Lines {
 }
 var waiting_lines := []
 
+# FIXME : we have to add the resource there regardless of the state of the game
+# Maybe the code can be fixed so that we don't have to initialize all of these
 var resources_consumption = {
 	Resources.Types.Wood: {},
 	Resources.Types.Textile: {},
 	Resources.Types.Plank: {},
+	Resources.Types.Potato: {},
+	Resources.Types.Pig: {},
+	Resources.Types.Meat: {},
 }
 
 func _add_workers(population_type: Populations.Types, amount: int):
@@ -105,11 +110,19 @@ func create_or_update_line(resource_type: Resources.Types, workers_amount: int):
 		storage.update_global_production_rate(production_lines_per_level[level][resource_type][Production_Line.input_resource_type])
 
 
-func add_workers(resource_type: Resources.Types, workers_amount: int):
+func add_workers(
+	building_pop_type: Populations.Types,
+	resource_type: Resources.Types,
+	workers_amount: int
+):
 	if workers_amount == 0:
 		return
 	elif workers_amount < 0:
-		rem_workers(resource_type, -workers_amount)
+		rem_workers(building_pop_type, resource_type, -workers_amount)
+		return
+		
+	if resource_type == -1:
+		_add_workers(building_pop_type, workers_amount)
 		return
 
 	var population_type = Recipes.get_recipe_population_type(resource_type)
@@ -121,11 +134,19 @@ func add_workers(resource_type: Resources.Types, workers_amount: int):
 		create_or_update_line(resource_type, workers_amount)
 
 
-func rem_workers(resource_type: Resources.Types, workers_amount: int):
+func rem_workers(
+	building_pop_type: Populations.Types,
+	resource_type: Resources.Types,
+	workers_amount: int
+):
 	if workers_amount == 0:
 		return
 	elif workers_amount < 0:
-		add_workers(resource_type, -workers_amount)
+		add_workers(building_pop_type, resource_type, -workers_amount)
+		return
+
+	if resource_type == -1:
+		_remove_workers(building_pop_type, workers_amount)
 		return
 
 	var population_type = Recipes.get_recipe_population_type(resource_type)

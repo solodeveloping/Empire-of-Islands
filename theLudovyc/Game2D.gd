@@ -183,6 +183,7 @@ func _process(delta):
 
 						Buildings.Types.Producing:
 							the_factory.add_workers(
+								Buildings.get_population_type(building_id),
 								Buildings.get_produce_resource(building_id),
 								Buildings.get_max_workers(building_id)
 							)
@@ -256,7 +257,9 @@ func _on_EventBus_ask_demolish_current_building():
 
 		Buildings.Types.Producing:
 			the_factory.rem_workers(
-				Buildings.get_produce_resource(building_id), Buildings.get_max_workers(building_id)
+				Buildings.get_population_type(building_id),
+				Buildings.get_produce_resource(building_id),
+				Buildings.get_max_workers(building_id)
 			)
 		_:
 			pass

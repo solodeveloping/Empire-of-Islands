@@ -18,6 +18,26 @@ const datas = {
 		Datas.Workers: 4,
 		Datas.PopulationType: Populations.Types.Pioneer,
 	},
+	Resources.Types.Potato: {
+		Datas.InputType: -1,
+		Datas.Ticks: 1,
+		Datas.Workers: 2,
+		Datas.PopulationType: Populations.Types.Pioneer,
+	},
+	Resources.Types.Pig: {
+		Datas.InputType: Resources.Types.Potato,
+		Datas.InputAmount: 1,
+		Datas.Ticks: 1,
+		Datas.Workers: 2,
+		Datas.PopulationType: Populations.Types.Pioneer,
+	},
+	Resources.Types.Meat: {
+		Datas.InputType: Resources.Types.Pig,
+		Datas.InputAmount: 2,
+		Datas.Ticks: 1,
+		Datas.Workers: 2,
+		Datas.PopulationType: Populations.Types.Pioneer,
+	},
 }
 
 

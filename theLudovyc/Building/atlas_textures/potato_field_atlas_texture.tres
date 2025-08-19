@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://cwaox26br4prd"]
+
+[ext_resource type="Texture2D" uid="uid://bhhok2fs2pvn8" path="res://Art/Image/Buildings/PotatoField/PotatoField_idle_full.png" id="1_jwy52"]
+
+[resource]
+atlas = ExtResource("1_jwy52")
+region = Rect2(0, 64, 192, 128)

@@ -47,6 +47,26 @@ const datas = {
 		Datas.Width: 2,
 		Datas.Height: 2,
 	},
+	Buildings.Ids.Farm: {
+		Datas.Texture: preload("res://theLudovyc/Building/atlas_textures/farm_atlas_texture.tres"),
+		Datas.Width: 2,
+		Datas.Height: 2,
+	},
+	Buildings.Ids.PotatoField: {
+		Datas.Texture: preload("res://theLudovyc/Building/atlas_textures/potato_field_atlas_texture.tres"),
+		Datas.Width: 2,
+		Datas.Height: 2,
+	},
+	Buildings.Ids.Pigsty: {
+		Datas.Texture: preload("res://theLudovyc/Building/atlas_textures/pigsty_atlas_texture.tres"),
+		Datas.Width: 2,
+		Datas.Height: 2,
+	},
+	Buildings.Ids.Butchery: {
+		Datas.Texture: preload("res://theLudovyc/Building/atlas_textures/butchery_atlas_texture.tres"),
+		Datas.Width: 2,
+		Datas.Height: 2,
+	},
 }
 
 var building_id: Buildings.Ids = -1:
