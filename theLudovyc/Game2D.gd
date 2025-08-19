@@ -77,6 +77,8 @@ func _ready():
 	# force camera initial pos on warehouse
 	cam.position = the_builder.warehouse.global_position
 	cam.reset_smoothing()
+	
+	pause_menu.visibility_changed.connect(_on_PauseMenu_visibility_changed)
 
 	pass  # Replace with function body.
 
@@ -108,7 +110,6 @@ func _process(delta):
 		pause_menu.show()
 		pause_menu.set_process(true)
 		get_tree().paused = true
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 	var mouse_pos = get_viewport().get_mouse_position()
 	
@@ -278,3 +279,9 @@ func _on_PauseMenu_ask_to_save() -> void:
 	dicoToSave.merge(the_builder.get_buildings_save())
 	
 	pause_menu.save_this_please(dicoToSave)
+
+func _on_PauseMenu_visibility_changed():
+	if pause_menu.visible:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	else:
+		Input.mouse_mode = Input.MOUSE_MODE_CONFINED
