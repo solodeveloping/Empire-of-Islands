@@ -52,6 +52,26 @@ func try_to_sell_resource(resource_type: Resources.Types, amount: int) -> bool:
 
 	return false
 
+# FIXME : exactly the same as try_to_sell_resource
+func try_to_remove_resource(
+	resource_type: Resources.Types,
+	amount: int
+) -> bool:
+	if not storage.has(resource_type) or amount <= 0:
+		return false
+
+	if storage[resource_type] >= amount:
+		storage[resource_type] -= amount
+
+		event_bus.resource_updated.emit(resource_type, storage[resource_type])
+
+		if storage[resource_type] == 0:
+			storage.erase(resource_type)
+
+		return true
+
+	return false
+
 # FUXME : this will probably spam events
 func try_to_consume_resource(resource_type: Resources.Types, amount: int) -> Array[int]:
 	if not storage.has(resource_type) or amount <= 0:

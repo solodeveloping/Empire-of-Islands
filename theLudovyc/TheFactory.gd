@@ -11,7 +11,8 @@ enum Production_Line {
 	input_resource_type,
 	input_consumption_rate,
 	production_rate,
-	current_ticks
+	current_ticks,
+	is_active
 }
 
 var production_lines_per_level = [{}, {}, {}]
@@ -55,7 +56,8 @@ func get_production_rate_per_tick(resource_type: Resources.Types) -> int:
 	var level = Resources.get_resource_level(resource_type)
 	var positive_prod = 0
 	if production_lines_per_level[level].has(resource_type):
-		positive_prod = production_lines_per_level[level][resource_type][Production_Line.production_rate]
+		if production_lines_per_level[level][resource_type][Production_Line.is_active]:
+			positive_prod = production_lines_per_level[level][resource_type][Production_Line.production_rate]
 	
 	var negative_prod = 0
 	for consumer_resource_type in resources_consumption[resource_type]:
@@ -93,6 +95,10 @@ func create_or_update_line(resource_type: Resources.Types, workers_amount: int):
 		if workers_amount >= needed_workers:
 			production_rate = workers_amount / needed_workers
 			input_consumption_rate = production_rate * input_count
+			
+		var is_active = true
+		if input_type != -1 and input_count > 0:
+			is_active = false
 
 		# QUESTION : maybe be this should be an object {} ? idk
 		production_lines_per_level[level][resource_type] = [
@@ -100,7 +106,8 @@ func create_or_update_line(resource_type: Resources.Types, workers_amount: int):
 			input_type,
 			input_consumption_rate,
 			production_rate,
-			0
+			0,
+			is_active,
 		]
 		if input_type != -1:
 			resources_consumption[input_type][resource_type] = input_consumption_rate
@@ -290,11 +297,19 @@ func _on_TheTicker_tick():
 					line[Production_Line.current_ticks] = 0
 					storage.add_resource(resource_type, line[Production_Line.production_rate])
 				else:
-					var storage_input_amount = storage.get_resource_amount(input_type)
-					if storage_input_amount >= input_amount:
+					if line[Production_Line.is_active] == false:
+						if !storage.try_to_remove_resource(input_type, input_amount):
+							line[Production_Line.is_active] = false
+						else:
+							line[Production_Line.is_active] = true
+							storage.update_global_production_rate(resource_type)
+					else:
 						line[Production_Line.current_ticks] = 0
-						storage.add_resource(input_type, -input_amount)
 						storage.add_resource(resource_type, line[Production_Line.production_rate])
+						
+						if !storage.try_to_remove_resource(input_type, input_amount):
+							line[Production_Line.is_active] = false
+							storage.update_global_production_rate(resource_type)
 
 func get_factory_save() -> Dictionary:
 	return {"Factory":[workers, production_lines_per_level, waiting_lines]}
