@@ -8,6 +8,8 @@ class_name Building2D
 
 signal selected(type)
 
+@onready var starving_sprite_2d: Sprite2D = $StarvingSprite2D
+
 enum Datas {Texture, Width, Height}
 
 # We are using 1 frame atlas_texture for now
@@ -90,6 +92,10 @@ var event_bus: EventBus
 
 var is_selected := false
 
+# FIXME : I'm not sure if the class should contain such a state
+# It seem wrong, on the other hand, I could not find another 'good' solution
+var is_starving := false
+
 func build():
 	var current_scene = get_tree().current_scene
 	if current_scene.has_node("EventBus"):
@@ -150,3 +156,11 @@ func select():
 func deselect():
 	is_selected = false
 	modulate = Color.WHITE
+	
+func show_starving_indicator():
+	is_starving = true
+	starving_sprite_2d.show()
+	
+func hide_starving_indicator():
+	is_starving = false
+	starving_sprite_2d.hide()

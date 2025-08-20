@@ -9,6 +9,8 @@ const money_icon = preload("res://Art/Image/Gui/Icons/Resources/32/001.png")
 
 @onready var the_storage := $"../TheStorage"
 
+@onready var the_builder := $"../TheBuilder"
+
 var money := 0:
 	set(value):
 		money = value
@@ -25,11 +27,15 @@ var orders_cost := 0:
 
 		update_money_production_rate()
 
+var last_tax_revenue := 0:
+	set(value):
+		last_tax_revenue = value
+
+		update_money_production_rate()
 
 #in futur it will also have buildings_cost
 func update_money_production_rate():
-	money_production_rate = orders_cost
-
+	money_production_rate = orders_cost + last_tax_revenue - the_builder.maintenance_cost
 
 func try_to_buy_resource(resource_type: Resources.Types, amount: int) -> bool:
 	if amount == 0:
@@ -43,7 +49,6 @@ func try_to_buy_resource(resource_type: Resources.Types, amount: int) -> bool:
 
 	return false
 
-
 func conclude_sale(resource_type: Resources.Types, amount: int):
 	if amount <= 0:
 		return
@@ -51,7 +56,6 @@ func conclude_sale(resource_type: Resources.Types, amount: int):
 	money += the_market.get_resource_cost(resource_type) * amount
 
 	recalculate_orders_cost()
-
 
 # can be optimised if we know the resource type
 # remove the resource cost then readd if it is needed
@@ -82,8 +86,15 @@ func recalculate_orders_cost():
 
 	orders_cost = tmp_orders_cost
 
+func give_taxes(amount: int):
+	money += amount
+	last_tax_revenue = amount
+
+func apply_maintenance_cost(amount: int):
+	money -= amount
+
 func get_bank_save() -> Dictionary:
-	return {"Money": [money, money_production_rate]}
+	return {"Money": [money, money_production_rate, last_tax_revenue]}
 	
 func load_bank_save() -> Error:
 	if SaveHelper.last_loaded_data.is_empty():
@@ -96,5 +107,6 @@ func load_bank_save() -> Error:
 	
 	money = bank_data[0]
 	money_production_rate = bank_data[1]
+	last_tax_revenue = bank_data[2]
 	
 	return OK

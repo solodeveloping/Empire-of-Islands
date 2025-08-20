@@ -83,3 +83,11 @@ static func get_resource_level(resource_type: Types) -> LevelTypes:
 		push_error('resource of id "%d" was not found ' % resource_type)
 		return LevelTypes.Gathered
 	return Levels[resource_type]
+	
+const Foods = [
+	Types.Potato,
+	Types.Meat
+]
+
+static func is_food(resource_type: Types) -> bool:
+	return Foods.has(resource_type)

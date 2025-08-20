@@ -18,3 +18,6 @@ This game is [free software](https://www.gnu.org/philosophy/free-sw.html).
 It uses the [GNU General Public License, version 2](https://github.com/unknown-horizons/godot-port/blob/master/LICENSE.md).
 The licenses used for music, artwork, sounds, etc. can be found
 [here](https://github.com/unknown-horizons/unknown-horizons/tree/master/doc).
+
+We are also using [game-icons](Art/External/game-icons/) icons:
+- Dead head icon by Delapouite under CC BY 3.0

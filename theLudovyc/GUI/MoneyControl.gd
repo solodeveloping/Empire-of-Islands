@@ -25,3 +25,9 @@ func _on_EventBus_money_updated(amount):
 
 func _on_EventBus_money_production_rate_updated(production_rate):
 	label_production_rate.text = "(" + Helper.get_string_from_signed_int(production_rate) + ")"
+	if production_rate < 0:
+		label_production_rate.add_theme_color_override("font_color", Color.RED)
+	elif production_rate == 0:
+		label_production_rate.add_theme_color_override("font_color", Color.DARK_ORANGE)
+	else:
+		label_production_rate.add_theme_color_override("font_color", Color.DARK_GREEN)

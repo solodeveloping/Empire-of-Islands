@@ -53,6 +53,8 @@ func _ready():
 		the_storage.add_resource(Resources.Types.Wood, 2)
 		the_storage.add_resource(Resources.Types.Textile, 16)
 		the_storage.add_resource(Resources.Types.Plank, 10)
+		the_storage.add_resource(Resources.Types.Potato, 400)
+		the_storage.add_resource(Resources.Types.Meat, 200)
 	
 	elif SaveHelper.load_saved_file_name() == OK:
 		if SaveHelper.last_loaded_data.is_empty():

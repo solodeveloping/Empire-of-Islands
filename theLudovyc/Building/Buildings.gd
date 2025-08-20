@@ -20,7 +20,17 @@ enum Ids {
 # FIXME : PopulationType is duplicated with the Recipes
 # If Recipes is missing, it increase PopulationType 0 on the UI
 
-enum Datas { Name, Type, Cost, Produce, Max_Workers, Level, PopulationType, Max_Count }
+enum Datas {
+	Name,
+	Type,
+	Cost,
+	Produce,
+	Max_Workers,
+	Level,
+	PopulationType,
+	Max_Count,
+	Maintenance_Cost,
+}
 
 const datas = {
 	Ids.Warehouse: {Datas.Name: &"Warehouse", Datas.Type: Types.Warehouse},
@@ -42,6 +52,7 @@ const datas = {
 		Datas.Produce: Resources.Types.Wood,
 		Datas.Max_Workers: 4,
 		Datas.Max_Count: 3,
+		Datas.Maintenance_Cost: 1,
 	},
 	# Level 2
 	Ids.Hut:
@@ -59,7 +70,8 @@ const datas = {
 		Datas.Type: Types.Producing,
 		Datas.Cost: [[Resources.Types.Plank, 1],],
 		Datas.Produce: Resources.Types.Plank,
-		Datas.Max_Workers: 4
+		Datas.Max_Workers: 4,
+		Datas.Maintenance_Cost: 2,
 	},
 	Ids.Farm:
 	{
@@ -69,6 +81,7 @@ const datas = {
 		Datas.Max_Workers: 2,
 		Datas.Level: 2,
 		Datas.PopulationType: Populations.Types.Pioneer,
+		Datas.Maintenance_Cost: 2,
 	},
 	Ids.PotatoField:
 	{
@@ -99,9 +112,35 @@ const datas = {
 		Datas.Max_Workers: 4,
 		Datas.Level: 2,
 		Datas.PopulationType: Populations.Types.Pioneer,
+		Datas.Maintenance_Cost: 2,
 	},
 }
 
+enum ComsumptionDatas { ResourceType, ResourceAmount }
+
+# FIXME : this could be per pop type instead
+const Comsumptions = {
+	Buildings.Ids.Tent: [
+		{
+			ComsumptionDatas.ResourceType: -1,
+			ComsumptionDatas.ResourceAmount: 4,
+		}
+	],
+	Buildings.Ids.Hut: [
+		{
+			ComsumptionDatas.ResourceType: -1,
+			ComsumptionDatas.ResourceAmount: 2,
+		},
+		{
+			ComsumptionDatas.ResourceType: Resources.Types.Potato,
+			ComsumptionDatas.ResourceAmount: 1,
+		},
+		{
+			ComsumptionDatas.ResourceType: Resources.Types.Meat,
+			ComsumptionDatas.ResourceAmount: 1,
+		},
+	],
+}
 
 # warning: conflict with get_name
 static func get_building_name(building_id: Buildings.Ids) -> StringName:
@@ -146,3 +185,17 @@ static func get_max_count(building_id: Buildings.Ids) -> int:
 	if not datas.has(building_id):
 		return -1
 	return datas[building_id].get(Datas.Max_Count, -1)
+
+static func get_food_consumption(building_id: Buildings.Ids) -> Array:
+	if not Comsumptions.has(building_id):
+		push_error("building_id " + str(building_id) + " not found")
+		return []
+
+	return Comsumptions.get(building_id)
+
+static func get_maintenance_cost(building_id: Buildings.Ids) -> int:
+	if not datas.has(building_id):
+		push_error("building_id " + str(building_id) + " not found")
+		return 0
+
+	return datas[building_id].get(Datas.Maintenance_Cost, 0)

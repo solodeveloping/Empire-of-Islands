@@ -83,6 +83,11 @@ unique_name_in_owner = true
 z_index = 1
 y_sort_enabled = true
 
+[node name="BuildingsPreview" type="Node2D" parent="ZSorter"]
+unique_name_in_owner = true
+z_index = 1
+y_sort_enabled = true
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
@@ -111,6 +116,7 @@ visible = false
 [connection signal="ask_select_warehouse" from="EventBus" to="." method="_on_EventBus_ask_select_warehouse"]
 [connection signal="send_building_selected" from="EventBus" to="." method="_on_EventBus_send_building_selected"]
 [connection signal="cycle" from="TheTicker" to="TheMarket" method="_on_TheTicker_cycle"]
+[connection signal="cycle" from="TheTicker" to="TheBuilder" method="_on_TheTicker_cycle"]
 [connection signal="tick" from="TheTicker" to="TheFactory" method="_on_TheTicker_tick"]
 [connection signal="timeout" from="TheTicker" to="TheTicker" method="_on_timeout"]
 [connection signal="ask_to_save" from="GUI/PauseMenu" to="." method="_on_PauseMenu_ask_to_save"]

@@ -45,10 +45,64 @@ func try_to_sell_resource(resource_type: Resources.Types, amount: int) -> bool:
 
 		event_bus.resource_updated.emit(resource_type, storage[resource_type])
 
+		if storage[resource_type] == 0:
+			storage.erase(resource_type)
+
 		return true
 
 	return false
 
+# FUXME : this will probably spam events
+func try_to_consume_resource(resource_type: Resources.Types, amount: int) -> Array[int]:
+	if not storage.has(resource_type) or amount <= 0:
+		return [amount, 0]
+	
+	var resource_cost: int = the_market.get_resource_cost(resource_type)
+	storage[resource_type] -= amount
+	
+	if storage[resource_type] <= 0:
+		var remaining = abs(storage[resource_type])
+		storage[resource_type] = 0
+		
+		event_bus.resource_updated.emit(resource_type, storage[resource_type])
+		
+		if storage[resource_type] == 0:
+			storage.erase(resource_type)
+		
+		return [remaining, resource_cost * (amount - remaining)]
+	
+	event_bus.resource_updated.emit(resource_type, storage[resource_type])
+	
+	return [0, resource_cost * amount]
+	
+func try_to_consume_most_available_food(amount: int) -> Array[int]:
+	var foods = storage.keys() \
+		.filter(Resources.is_food) \
+		.map(func(type): return [type, storage[type]])
+	foods.sort_custom(sort_by_quantity_descending)
+	
+	var money = 0
+	var remaining = amount
+	for food in foods:
+		var type = food[0]
+		var after_consume = try_to_consume_resource(type, remaining)
+		if after_consume[0] == 0:
+			return [0, after_consume[1]]
+		remaining -= after_consume[0]
+		if remaining <= 0:
+			return [abs(remaining), after_consume[1]]
+		
+		money += after_consume[1]
+	
+	return [remaining, money]
+
+func sort_by_quantity_ascending(a, b):
+	if a[1] < b[1]:
+		return true
+	return false
+	
+func sort_by_quantity_descending(a, b):
+	return !sort_by_quantity_ascending(a, b)
 
 func update_global_production_rate(resource_type: Resources.Types):
 	var factory_per_cycle = (
