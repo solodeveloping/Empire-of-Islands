@@ -21,3 +21,5 @@ The licenses used for music, artwork, sounds, etc. can be found
 
 We are also using [game-icons](Art/External/game-icons/) icons:
 - Dead head icon by Delapouite under CC BY 3.0
+
+We are also using SoloDeveloping tiles, under CC BY 4.0

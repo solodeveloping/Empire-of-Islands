@@ -30,6 +30,8 @@ enum Datas {
 	PopulationType,
 	Max_Count,
 	Maintenance_Cost,
+	Dependency_Max_Range,
+	Require_Building,
 }
 
 const datas = {
@@ -82,6 +84,7 @@ const datas = {
 		Datas.Level: 2,
 		Datas.PopulationType: Populations.Types.Pioneer,
 		Datas.Maintenance_Cost: 2,
+		Datas.Dependency_Max_Range: 6,
 	},
 	Ids.PotatoField:
 	{
@@ -92,6 +95,7 @@ const datas = {
 		Datas.Max_Workers: 2,
 		Datas.Level: 2,
 		Datas.PopulationType: Populations.Types.Pioneer,
+		Datas.Require_Building: Ids.Farm,
 	},
 	Ids.Pigsty:
 	{
@@ -102,6 +106,7 @@ const datas = {
 		Datas.Max_Workers: 2,
 		Datas.Level: 2,
 		Datas.PopulationType: Populations.Types.Pioneer,
+		Datas.Require_Building: Ids.Farm,
 	},
 	Ids.Butchery:
 	{
@@ -199,3 +204,17 @@ static func get_maintenance_cost(building_id: Buildings.Ids) -> int:
 		return 0
 
 	return datas[building_id].get(Datas.Maintenance_Cost, 0)
+	
+static func get_require_building(building_id: Buildings.Ids) -> Buildings.Ids:
+	if not datas.has(building_id):
+		push_error("building_id " + str(building_id) + " not found")
+		return -1
+
+	return datas[building_id].get(Datas.Require_Building, -1)
+	
+static func get_dependency_max_range(building_id: Buildings.Ids) -> Buildings.Ids:
+	if not datas.has(building_id):
+		push_error("building_id " + str(building_id) + " not found")
+		return -1
+
+	return datas[building_id].get(Datas.Dependency_Max_Range, -1)

@@ -5,8 +5,10 @@ extends Control
 	"move_down" : "Down",
 	"move_left" : "Left",
 	"move_right" : "Right",
-	"interact" : "Interact",
-	"mouse_left" : "Shoot"
+	# FIXME : IDK what this is going
+	# It's not present so it kept crashing
+	#"interact" : "Interact",
+	#"mouse_left" : "Shoot"
 }
 
 @onready var inputs_container = %InputsContainer

@@ -86,6 +86,15 @@ func conclude_building_destruction(building_id:Buildings.Ids):
 
 func get_buildings() -> Array[Node]:
 	return node_buildings.get_children()
+	
+func get_buildings_of_id(building_id: Buildings.Ids) -> Array[Building2D]:
+	var result: Array[Building2D]
+	var buildings: Array[Node] = get_buildings()
+	for building in buildings:
+		if building is Building2D:
+			if building.building_id == building_id:
+				result.push_back(building)
+	return result
 
 # FIXME : we could find a way to make sure this is called
 # after TheFactory

@@ -35,6 +35,7 @@ var current_selected_building: Building2D = null
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	tm.create_island("res://theLudovyc/singularity_40.json")
+	tm.clear_overlay()
 	
 	# set camera limits
 	var pos_limits = tm.get_pos_limits()
@@ -48,13 +49,13 @@ func _ready():
 		the_builder.build_warehouse(Vector2(704, 320))
 
 		# add some initial resources
-		the_bank.money = 100
+		the_bank.money = 500
 
-		the_storage.add_resource(Resources.Types.Wood, 2)
-		the_storage.add_resource(Resources.Types.Textile, 16)
-		the_storage.add_resource(Resources.Types.Plank, 10)
-		the_storage.add_resource(Resources.Types.Potato, 400)
-		the_storage.add_resource(Resources.Types.Meat, 200)
+		the_storage.add_resource(Resources.Types.Wood, 20)
+		the_storage.add_resource(Resources.Types.Textile, 20)
+		the_storage.add_resource(Resources.Types.Plank, 20)
+		the_storage.add_resource(Resources.Types.Potato, 800)
+		the_storage.add_resource(Resources.Types.Meat, 400)
 	
 	elif SaveHelper.load_saved_file_name() == OK:
 		if SaveHelper.last_loaded_data.is_empty():
@@ -146,6 +147,8 @@ func _process(delta):
 		cursor_entity.position = tm.ground_layer.map_to_local(tile_pos)
 
 		var building_id = cursor_entity.building_id
+		
+		# FIXME : this probably uses a lot of performances
 
 		# -1 can not build, 0 yes and 0 tree, 1+ yes and 1+ tree to destroy
 		var trees_to_destroy = tm.is_entityStatic_constructible(cursor_entity, tile_pos)
@@ -204,6 +207,8 @@ func _process(delta):
 					cursor_entity.modulate = Color.WHITE
 					cursor_entity.build()
 					cursor_entity = null
+					
+					tm.clear_overlay()
 
 		if cursor_entity_wait_release and Input.is_action_just_released("alt_command"):
 			cursor_entity_wait_release = false
@@ -215,13 +220,16 @@ func _process(delta):
 
 			cursor_entity.call_deferred("queue_free")
 			cursor_entity = null
+			
+			tm.clear_overlay()
 
 
 func _on_EventBus_ask_create_building(building_id: Buildings.Ids):
 	cursor_entity = the_builder.instantiate_building(building_id)
 	cursor_entity_wait_release = true
 	cursor_entity.modulate = Color(Color.RED, 0.6)
-
+	
+	tm.show_constructible_area_on_overlay(building_id)
 
 func _on_EventBus_send_building_selected(building_node):
 	current_selected_building = building_node
@@ -231,7 +239,6 @@ func _on_EventBus_ask_deselect_building():
 	if current_selected_building != null:
 		current_selected_building.deselect()
 		current_selected_building = null
-
 
 func _on_EventBus_ask_select_warehouse():
 	current_selected_building = the_builder.warehouse

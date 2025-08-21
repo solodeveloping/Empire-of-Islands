@@ -8,8 +8,9 @@ var sub_menu
 @onready var load_button = %LoadButton
 
 @onready var load_save_menu = %LoadSaveMenu
-@onready var option_menu = %OptionsMenu
-@onready var credit_menu = %CreditsContainer
+# FIXME : Node not found
+#@onready var option_menu = %OptionsMenu
+#@onready var credit_menu = %CreditsContainer
 
 @onready var confirm_popup = %ConfirmationDialog
 
@@ -57,11 +58,12 @@ func _on_play_button_pressed():
 func _on_load_button_pressed() -> void:
 	_open_sub_menu(load_save_menu)
 
-func _on_options_button_pressed():
-	_open_sub_menu(option_menu)
+# FIXME : same
+#func _on_options_button_pressed():
+	#_open_sub_menu(option_menu)
 
-func _on_credits_button_pressed():
-	_open_sub_menu(credit_menu)
+#func _on_credits_button_pressed():
+	#_open_sub_menu(credit_menu)
 
 func _on_exit_button_pressed():
 	confirm_popup.popup_centered_clamped()
