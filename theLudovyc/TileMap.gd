@@ -5,6 +5,7 @@ class_name MyTileMap
 @onready var ground_layer: TileMapLayer = $GroundLayer
 @onready var trees_layer: TileMapLayer = $TreesLayer
 @onready var ground_overlay_layer: TileMapLayer = %GroundOverlayLayer
+@onready var building_ground_overlay_layer: TileMapLayer = $BuildingGroundOverlayLayer
 @onready var the_builder = $"../../TheBuilder"
 
 var map_size:Vector2i
@@ -75,25 +76,49 @@ func is_entityStatic_constructible(entity:EntityStatic, tile_center:Vector2i) ->
 					return -1
 	
 	if require_building != -1:
-		var has_correct_required_building = false
-		for polygon in allowed_polygons:
-			var is_polygon_invalid = false
-			for x in entity.width:
-				if is_polygon_invalid:
-					break
-				for y in entity.height:
-					var pos = top_left_tile + Vector2i(x, y)
-					if !Geometry2D.is_point_in_polygon(pos, polygon):
-						# FIXME : we could display in red the tiles outside
-						# the region
-						is_polygon_invalid = true
-						break
-			if !is_polygon_invalid:
-				has_correct_required_building = true
-		if !has_correct_required_building:
+		var is_in_range = is_in_range_of_allowed_polygons(
+			entity, allowed_polygons, top_left_tile
+		)
+		if !is_in_range:
 			return -1
 	
 	return trees
+	
+func is_in_range_of_allowed_polygons(
+	entity:EntityStatic,
+	polygons: Array[Array],
+	top_left_tile: Vector2i
+) -> bool:
+	var has_correct_required_building = false
+	for polygon in polygons:
+		var is_in_range = is_in_range_of_polygon(entity, polygon, top_left_tile)
+		if is_in_range:
+			has_correct_required_building = true
+			break
+	if !has_correct_required_building:
+		return false
+	return true
+
+func is_in_range_of_polygon(
+	entity:EntityStatic,
+	polygon: Array,
+	top_left_tile: Vector2i
+) -> bool:
+	var is_polygon_invalid = false
+	for x in entity.width:
+		if is_polygon_invalid:
+			break
+		for y in entity.height:
+			var pos = top_left_tile + Vector2i(x, y)
+			if !Geometry2D.is_point_in_polygon(pos, polygon):
+				# FIXME : we could display in red the tiles outside
+				# the region
+				is_polygon_invalid = true
+				break
+	if is_polygon_invalid:
+		return false
+	else:
+		return true
 
 func build_entityStatic(entity:EntityStatic, tile_center:Vector2i):
 	var top_left_tile = entityStatic_get_top_left_tile(entity, tile_center)
@@ -122,6 +147,7 @@ func demolish_building(building:Building2D):
 
 func clear_overlay():
 	ground_overlay_layer.clear()
+	building_ground_overlay_layer.clear()
 	allowed_polygons.clear()
 
 func show_constructible_area_on_overlay(building_id: Buildings.Ids):
@@ -149,19 +175,7 @@ func show_constructible_area_on_overlay(building_id: Buildings.Ids):
 				var type = minimap_get_cell(tile_coord)
 				color_overlay_at_pos(tile_coord, type)
 		
-		var polygon = []
-		# x is top-right
-		# y is left-bottom
-		var right_offset = building.height + range * 2 - 1
-		var top_right_offset = building.width + range * 2 - 1
-		# visually left
-		polygon.push_back(top_left_tile + Vector2i(0 , 0))
-		# visually top
-		polygon.push_back(top_left_tile + Vector2i(top_right_offset, 0))
-		# visually right
-		polygon.push_back(top_left_tile + Vector2i(top_right_offset, right_offset))
-		# visually bottom
-		polygon.push_back(top_left_tile + Vector2i(0, right_offset))
+		var polygon = get_polygon_range_of_building(building, range)
 		allowed_polygons.push_back(polygon)
 		
 		# Use this to debug the farms limit visually in global coordinates
@@ -173,6 +187,33 @@ func show_constructible_area_on_overlay(building_id: Buildings.Ids):
 		
 	
 	ground_overlay_layer.queue_redraw()
+
+func get_polygon_range_of_building(
+	building: Building2D,
+	range: int,
+) -> Array:
+	var center = ground_layer.local_to_map(ground_layer.to_local(building.global_position))
+	var top_left_building = entityStatic_get_top_left_tile(
+		building,
+		center
+	)
+	var top_left_tile = top_left_building - Vector2i(range, range)
+	
+	var polygon = []
+	# x is top-right
+	# y is left-bottom
+	var right_offset = building.height + range * 2 - 1
+	var top_right_offset = building.width + range * 2 - 1
+	# visually left
+	polygon.push_back(top_left_tile + Vector2i(0 , 0))
+	# visually top
+	polygon.push_back(top_left_tile + Vector2i(top_right_offset, 0))
+	# visually right
+	polygon.push_back(top_left_tile + Vector2i(top_right_offset, right_offset))
+	# visually bottom
+	polygon.push_back(top_left_tile + Vector2i(0, right_offset))
+	
+	return polygon
 
 # FIXME : could use this and no alpha too
 func show_all_constructible_tiles():
@@ -192,6 +233,23 @@ func color_overlay_at_pos(pos: Vector2i, tile_type: Minimap_Cell_Type):
 			ground_overlay_layer.set_cell(pos, OverlayTileset.Green, tile_overlay_pos)
 		Minimap_Cell_Type.Tree:
 			ground_overlay_layer.set_cell(pos, OverlayTileset.Yellow, tile_overlay_pos)
+
+func show_affected_area_of_building(building: Building2D, range: int):
+	building_ground_overlay_layer.clear()
+	var center = ground_layer.local_to_map(ground_layer.to_local(building.global_position))
+	var top_left_building = entityStatic_get_top_left_tile(
+		building,
+		center
+	)
+	var top_left_tile = top_left_building - Vector2i(range, range)
+	for x in building.width + range * 2:
+		for y in building.height + range * 2:
+			var tile_coord = top_left_tile + Vector2i(x, y)
+			var type = minimap_get_cell(tile_coord)
+			color_affected_area_at_pos(tile_coord)
+
+func color_affected_area_at_pos(tile_coord: Vector2i):
+	building_ground_overlay_layer.set_cell(tile_coord, OverlayTileset.DarkerGreen, tile_overlay_pos)
 
 func create_island(map_file:String) -> int:
 	var file = FileAccess.open(map_file, FileAccess.READ)

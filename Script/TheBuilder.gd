@@ -8,12 +8,15 @@ var warehouse: Building2D
 @onready var node_buildings_preview:Node = %BuildingsPreview
 
 @onready var tilemap:TileMap = %TileMap
+@onready var ground_layer: TileMapLayer = $"../ZSorter/TileMap/GroundLayer"
 
 @onready var event_bus = $"../EventBus"
 
 @onready var the_storage = $"../TheStorage"
 @onready var the_population = $"../ThePopulation"
 @onready var the_bank = $"../TheBank"
+@onready var the_factory = $"../TheFactory"
+
 
 var buildings_count = {
 	Buildings.Ids.Lumberjack: 0,
@@ -49,30 +52,54 @@ func build(building_id: Buildings.Ids, pos: Vector2) -> Building2D:
 
 	building.build()
 	
-	conclude_building_construction(building_id)
+	conclude_building_construction(building)
 	
 	return building
 	
 func build_warehouse(pos: Vector2):
 	warehouse = build(Buildings.Ids.Warehouse, pos)
 
-func conclude_building_construction(building_id: Buildings.Ids):
+func conclude_building_construction(building: Building2D):
 	var preview_buildings = node_buildings_preview.get_children()
-	for building in preview_buildings:
-		node_buildings_preview.remove_child(building)
-		node_buildings.add_child(building)
+	for preview in preview_buildings:
+		node_buildings_preview.remove_child(preview)
+		node_buildings.add_child(preview)
 		
-	if !buildings_count.has(building_id):
-		buildings_count[building_id] = 1
+	if !buildings_count.has(building.building_id):
+		buildings_count[building.building_id] = 1
 	else:
-		buildings_count[building_id] += 1
+		buildings_count[building.building_id] += 1
 	
-	var limit = Buildings.get_max_count(building_id)
+	var limit = Buildings.get_max_count(building.building_id)
 	if limit != -1:
-		if buildings_count[building_id] >= limit:
-			event_bus.send_building_limit_updated.emit(building_id, true)
+		if buildings_count[building.building_id] >= limit:
+			event_bus.send_building_limit_updated.emit(building.building_id, true)
 			
-	maintenance_cost += Buildings.get_maintenance_cost(building_id)
+	maintenance_cost += Buildings.get_maintenance_cost(building.building_id)
+	
+	var range = Buildings.get_dependency_max_range(building.building_id)
+	if range != -1:
+		var deps = Buildings.get_building_dependencies(building.building_id)
+		var dependencies = get_building_dependencies(
+			building,
+			range,
+			deps
+		)
+		for dep in dependencies:
+			if dep.is_active == false:
+				var tile_center = tilemap.ground_layer.local_to_map(tilemap.ground_layer.to_local(dep.global_position))
+				var top_left_tile = tilemap.entityStatic_get_top_left_tile(dep, tile_center)
+				var polygon = tilemap.get_polygon_range_of_building(building, range)
+				var is_in_range = tilemap.is_in_range_of_polygon(
+					dep, polygon, top_left_tile
+				)
+				if is_in_range:
+					dep.hide_production_stoppped_indicator()
+					the_factory.add_workers(
+						Buildings.get_population_type(dep.building_id),
+						Buildings.get_produce_resource(dep.building_id),
+						Buildings.get_max_workers(dep.building_id)
+					)
 
 func conclude_building_destruction(building_id:Buildings.Ids):
 	var previous_count = buildings_count[building_id]
@@ -94,6 +121,22 @@ func get_buildings_of_id(building_id: Buildings.Ids) -> Array[Building2D]:
 		if building is Building2D:
 			if building.building_id == building_id:
 				result.push_back(building)
+	return result
+
+func get_building_dependencies(
+	building: Building2D,
+	range: int,
+	deps_ids: Array[Buildings.Ids]
+) -> Array[Building2D]:
+	var result: Array[Building2D]
+	var buildings: Array[Node] = get_buildings()
+	var polygon = tilemap.get_polygon_range_of_building(building, range)
+	for dep in buildings:
+		if dep is Building2D:
+			if dep.building_id in deps_ids:
+				var dep_center = ground_layer.local_to_map(ground_layer.to_local(dep.global_position))
+				if Geometry2D.is_point_in_polygon(dep_center, polygon):
+					result.push_back(dep)
 	return result
 
 # FIXME : we could find a way to make sure this is called

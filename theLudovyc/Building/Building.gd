@@ -9,6 +9,7 @@ class_name Building2D
 signal selected(type)
 
 @onready var starving_sprite_2d: Sprite2D = $StarvingSprite2D
+@onready var production_stopped_sprite_2d: Sprite2D = $ProductionStoppedSprite2D
 
 enum Datas {Texture, Width, Height}
 
@@ -95,6 +96,7 @@ var is_selected := false
 # FIXME : I'm not sure if the class should contain such a state
 # It seem wrong, on the other hand, I could not find another 'good' solution
 var is_starving := false
+var is_active := true
 
 func build():
 	var current_scene = get_tree().current_scene
@@ -164,3 +166,11 @@ func show_starving_indicator():
 func hide_starving_indicator():
 	is_starving = false
 	starving_sprite_2d.hide()
+	
+func show_production_stoppped_indicator():
+	production_stopped_sprite_2d.show()
+	is_active = false
+	
+func hide_production_stoppped_indicator():
+	production_stopped_sprite_2d.hide()
+	is_active = true

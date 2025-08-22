@@ -23,3 +23,5 @@ We are also using [game-icons](Art/External/game-icons/) icons:
 - Dead head icon by Delapouite under CC BY 3.0
 
 We are also using SoloDeveloping tiles, under CC BY 4.0
+
+[Cog stop](https://pictogrammers.com/library/mdi/icon/cog-stop/) was created by Michael Irigoyen, under Apache License 2.0.

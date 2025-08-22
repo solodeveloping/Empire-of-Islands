@@ -152,6 +152,9 @@ func _process(delta):
 
 		# -1 can not build, 0 yes and 0 tree, 1+ yes and 1+ tree to destroy
 		var trees_to_destroy = tm.is_entityStatic_constructible(cursor_entity, tile_pos)
+		var range = Buildings.get_dependency_max_range(cursor_entity.building_id)
+		if range != -1:
+			tm.show_affected_area_of_building(cursor_entity, range)
 		
 		if (trees_to_destroy < 0):
 			cursor_entity.modulate = Color(Color.RED, 0.6)
@@ -196,7 +199,7 @@ func _process(delta):
 					the_bank.money += building_total_cost[0]
 
 					the_storage.conclude_building_construction(building_total_cost[1])
-					the_builder.conclude_building_construction(building_id)
+					the_builder.conclude_building_construction(cursor_entity)
 
 					event_bus.send_building_created.emit(building_id)
 
@@ -254,6 +257,9 @@ func _on_EventBus_ask_demolish_current_building():
 	the_storage.recover_building_construction(building_id)
 	
 	the_builder.conclude_building_destruction(building_id)
+	
+	var dependencies: Array[Building2D] = []
+	var max_range = Buildings.get_dependency_max_range(building_id)
 
 	match Buildings.get_building_type(building_id):
 		Buildings.Types.Residential:
@@ -270,11 +276,51 @@ func _on_EventBus_ask_demolish_current_building():
 				Buildings.get_produce_resource(building_id),
 				Buildings.get_max_workers(building_id)
 			)
+			
+			if max_range != -1:
+				var deps = Buildings.get_building_dependencies(building_id)
+				dependencies = the_builder.get_building_dependencies(
+					current_selected_building,
+					max_range,
+					deps
+				)
 		_:
 			pass
 
+	node_buildings.remove_child(current_selected_building)
 	current_selected_building.queue_free()
 	current_selected_building = null
+	
+	# FIXME : maybe this should be done elsewhere
+	# But, the building needs to have been removed first
+	if dependencies.size() > 0:
+		var existing_buildings = the_builder.get_buildings_of_id(building_id)
+		if existing_buildings.size() == 0:
+			for dep in dependencies:
+				the_factory.rem_workers(
+					Buildings.get_population_type(dep.building_id),
+					Buildings.get_produce_resource(dep.building_id),
+					Buildings.get_max_workers(dep.building_id)
+				)
+				dep.show_production_stoppped_indicator()
+		else:
+			var polygons: Array[Array] = []
+			for _building in existing_buildings:
+				var polygon = tm.get_polygon_range_of_building(_building, max_range)
+				polygons.push_back(polygon)
+			for dep in dependencies:
+				var tile_center = tm.ground_layer.local_to_map(tm.ground_layer.to_local(dep.global_position))
+				var top_left_tile = tm.entityStatic_get_top_left_tile(dep, tile_center)
+				var is_in_range = tm.is_in_range_of_allowed_polygons(
+					dep, polygons, top_left_tile
+				)
+				if !is_in_range:
+					the_factory.rem_workers(
+						Buildings.get_population_type(dep.building_id),
+						Buildings.get_produce_resource(dep.building_id),
+						Buildings.get_max_workers(dep.building_id)
+					)
+					dep.show_production_stoppped_indicator()
 
 	event_bus.send_current_building_demolished.emit()
 

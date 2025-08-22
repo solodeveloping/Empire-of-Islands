@@ -218,3 +218,14 @@ static func get_dependency_max_range(building_id: Buildings.Ids) -> Buildings.Id
 		return -1
 
 	return datas[building_id].get(Datas.Dependency_Max_Range, -1)
+	
+static func get_building_dependencies(building_id: Buildings.Ids) -> Array[Buildings.Ids]:
+	if not datas.has(building_id):
+		push_error("building_id " + str(building_id) + " not found")
+		return []
+	var result: Array[Buildings.Ids] = []
+	for key in datas.keys():
+		var val = datas[key]
+		if val.get(Datas.Require_Building, -1) == building_id:
+			result.push_back(key)
+	return result
