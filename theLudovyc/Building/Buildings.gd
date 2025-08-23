@@ -3,11 +3,14 @@ class_name Buildings
 
 enum Types { Placeholder, Warehouse, Residential, Producing }
 
+# WARN : if you change this order, you will have to modify the BuildingGridContainer
+# In the GUI because of the serialized ids
 enum Ids { 
 	Warehouse,
 	# Level 1
 	Tent,
 	Lumberjack,
+	HunterTent,
 	# Level 2
 	Hut,
 	Sawmill,
@@ -56,6 +59,16 @@ const datas = {
 		Datas.Max_Count: 3,
 		Datas.Maintenance_Cost: 1,
 	},
+	Ids.HunterTent:
+	{
+		Datas.Name: &"Hunter's tent",
+		Datas.Type: Types.Producing,
+		Datas.Cost: [[Resources.Types.Wood, 1], [Resources.Types.Textile, 1]],
+		Datas.Produce: Resources.Types.GameMeat,
+		Datas.Max_Workers: 1,
+		Datas.Max_Count: 3,
+		Datas.Maintenance_Cost: 1,
+	},
 	# Level 2
 	Ids.Hut:
 	{
@@ -92,7 +105,7 @@ const datas = {
 		Datas.Type: Types.Producing,
 		Datas.Cost: [[Resources.Types.Plank, 1],],
 		Datas.Produce: Resources.Types.Potato,
-		Datas.Max_Workers: 2,
+		Datas.Max_Workers: 1,
 		Datas.Level: 2,
 		Datas.PopulationType: Populations.Types.Pioneer,
 		Datas.Require_Building: Ids.Farm,
@@ -103,7 +116,7 @@ const datas = {
 		Datas.Type: Types.Producing,
 		Datas.Cost: [[Resources.Types.Plank, 1],],
 		Datas.Produce: Resources.Types.Pig,
-		Datas.Max_Workers: 2,
+		Datas.Max_Workers: 1,
 		Datas.Level: 2,
 		Datas.PopulationType: Populations.Types.Pioneer,
 		Datas.Require_Building: Ids.Farm,

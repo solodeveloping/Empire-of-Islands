@@ -11,6 +11,12 @@ const datas = {
 		Datas.Workers: 4,
 		Datas.PopulationType: Populations.Types.Sailor,
 	},
+	Resources.Types.GameMeat: {
+		Datas.InputType: -1,
+		Datas.Ticks: 1,
+		Datas.Workers: 1,
+		Datas.PopulationType: Populations.Types.Sailor,
+	},
 	Resources.Types.Plank: {
 		Datas.InputType: Resources.Types.Wood,
 		Datas.InputAmount: 2,
@@ -21,14 +27,14 @@ const datas = {
 	Resources.Types.Potato: {
 		Datas.InputType: -1,
 		Datas.Ticks: 1,
-		Datas.Workers: 2,
+		Datas.Workers: 1,
 		Datas.PopulationType: Populations.Types.Pioneer,
 	},
 	Resources.Types.Pig: {
 		Datas.InputType: Resources.Types.Potato,
 		Datas.InputAmount: 1,
 		Datas.Ticks: 1,
-		Datas.Workers: 2,
+		Datas.Workers: 1,
 		Datas.PopulationType: Populations.Types.Pioneer,
 	},
 	Resources.Types.Meat: {

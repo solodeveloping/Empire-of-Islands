@@ -27,6 +27,8 @@ var maintenance_cost := 0:
 		maintenance_cost = value
 		the_bank.update_money_production_rate()
 
+var cycle_food_consumed = {}
+
 ## Use this method to obtain an instance of the building
 ## It is used to get a floating building that follows the mouse pos for instance
 func instantiate_building(building_id: Buildings.Ids) -> Building2D:
@@ -145,6 +147,7 @@ func _on_TheTicker_cycle() -> void:
 	var buildings: Array[Node] = get_buildings()
 	var one_building_has_no_food = false
 	var money = 0
+	var food_consumed = {}
 	for building in buildings:
 		if building is Building2D:
 			var building_type = Buildings.get_building_type(building.building_id)
@@ -178,6 +181,11 @@ func _on_TheTicker_cycle() -> void:
 						)
 						remaining = result[0]
 						money += result[1]
+						for key in result[2].keys():
+							if food_consumed.has(key):
+								food_consumed[key] += result[2][key]
+							else:
+								food_consumed[key] = result[2][key]
 						if remaining > 0:
 							one_building_has_no_food = true
 							
@@ -194,7 +202,10 @@ func _on_TheTicker_cycle() -> void:
 	
 	the_bank.give_taxes(money)
 	the_bank.apply_maintenance_cost(maintenance_cost)
-
+	cycle_food_consumed = food_consumed
+	for key in food_consumed:
+		the_storage.update_global_production_rate(key)
+		
 func _handle_building_and_food_result(building: Building2D, had_enough_food: bool):
 	if had_enough_food:
 		if building.is_starving:
@@ -218,6 +229,11 @@ func _handle_building_and_food_result(building: Building2D, had_enough_food: boo
 					building.building_id
 				)
 			)
+			
+func get_consumption_per_cycle(
+	resource_type: Resources.Types
+) -> int:
+	return cycle_food_consumed.get(resource_type, 0)
 
 func get_buildings_save() -> Dictionary:
 	var datas:Array
@@ -228,6 +244,7 @@ func get_buildings_save() -> Dictionary:
 			child.position.x,
 			child.position.y,
 			child.is_starving,
+			child.is_active
 		])
 	
 	return {"Buildings":datas}
@@ -248,6 +265,10 @@ func load_buildings_save() -> Error:
 		building.is_starving = building_data[3]
 		if building.is_starving:
 			building.show_starving_indicator()
+			
+		building.is_active = building_data[4]
+		if !building.is_active:
+			building.show_production_stoppped_indicator()
 		
 		# FIXME : this seem wrong
 		if build(building_data[0],

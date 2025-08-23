@@ -32,6 +32,7 @@ var waiting_lines := []
 # Maybe the code can be fixed so that we don't have to initialize all of these
 var resources_consumption = {
 	Resources.Types.Wood: {},
+	Resources.Types.GameMeat: {},
 	Resources.Types.Textile: {},
 	Resources.Types.Plank: {},
 	Resources.Types.Potato: {},
@@ -196,7 +197,8 @@ func population_increase(population_type: Populations.Types, amount: int):
 	var population_pool = amount
 
 	var i := 0
-
+	
+	# FIXME : this can lead to infinite loop if the code is incorrect
 	while i < waiting_lines.size():
 		if waiting_lines[i][Waiting_Lines.needed_workers] <= population_pool:
 			# FIXME? : we could put population_type inside the lines
@@ -205,6 +207,7 @@ func population_increase(population_type: Populations.Types, amount: int):
 			var line_pop_type = Recipes.get_recipe_population_type(resource_type)
 			
 			if line_pop_type != population_type:
+				i += 1
 				continue
 			
 			var waiting_line = waiting_lines.pop_at(i)

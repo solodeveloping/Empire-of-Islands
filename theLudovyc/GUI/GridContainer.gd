@@ -11,12 +11,18 @@ var button_disabled_color: Color
 
 @onready var tooltip := %WidgetTooltip
 
+# FIXME : this should be automated
 @onready
 var building_buttons = {
 	Buildings.Ids.Tent: $BuildResidential,
 	Buildings.Ids.Lumberjack: $BuildLumberjack,
+	Buildings.Ids.HunterTent: $BuildHunterTent,
 	Buildings.Ids.Hut: $BuildHut,
 	Buildings.Ids.Sawmill: $BuildSawmill,
+	Buildings.Ids.Farm: $BuildFarm,
+	Buildings.Ids.PotatoField: $BuildPotatoField,
+	Buildings.Ids.Pigsty: $BuildPigsty,
+	Buildings.Ids.Butchery: $BuildButchery,
 }
 
 # Called when the node enters the scene tree for the first time.
@@ -65,7 +71,5 @@ func _on_send_building_limit_updated(building_id: Buildings.Ids, limit_reached: 
 	var button: TextureButton = building_buttons[building_id]
 	if limit_reached:
 		button.disabled = true
-		button.modulate = button_disabled_color
 	else:
 		button.disabled = false
-		button.modulate = Color.WHITE

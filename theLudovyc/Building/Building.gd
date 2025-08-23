@@ -39,6 +39,12 @@ const datas = {
 		Datas.Width: 2,
 		Datas.Height: 2,
 	},
+	Buildings.Ids.HunterTent: {
+		#Datas.Texture: preload("res://theLudovyc/Building/lumberjack.png"),
+		Datas.Texture: preload("res://theLudovyc/Building/atlas_textures/hunter_tent_atlas_texture.tres"),
+		Datas.Width: 2,
+		Datas.Height: 2,
+	},
 	# Level 2
 	Buildings.Ids.Hut: {
 		Datas.Texture: preload("res://theLudovyc/Building/atlas_textures/hut_atlas_texture.tres"),

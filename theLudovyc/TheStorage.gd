@@ -9,6 +9,8 @@ var storage := {}
 
 @onready var the_market := $"../TheMarket"
 
+@onready var the_builder = $"../TheBuilder"
+
 @onready var the_ticker := $"../TheTicker"
 
 
@@ -94,27 +96,33 @@ func try_to_consume_resource(resource_type: Resources.Types, amount: int) -> Arr
 	event_bus.resource_updated.emit(resource_type, storage[resource_type])
 	
 	return [0, resource_cost * amount]
-	
-func try_to_consume_most_available_food(amount: int) -> Array[int]:
+
+func try_to_consume_most_available_food(amount: int) -> Array:
 	var foods = storage.keys() \
 		.filter(Resources.is_food) \
 		.map(func(type): return [type, storage[type]])
 	foods.sort_custom(sort_by_quantity_descending)
 	
+	var consumption = {}
 	var money = 0
 	var remaining = amount
 	for food in foods:
 		var type = food[0]
 		var after_consume = try_to_consume_resource(type, remaining)
+		# everything needed was consumed, we do it this way because it could be 0
 		if after_consume[0] == 0:
-			return [0, after_consume[1]]
+			consumption[type] = remaining
+			return [0, after_consume[1], consumption]
+		# at this point, we still need food and the food type is exhausted
 		remaining -= after_consume[0]
+		consumption[type] = after_consume[0]
+		# early return if we have consumed everything needed
 		if remaining <= 0:
-			return [abs(remaining), after_consume[1]]
+			return [abs(remaining), after_consume[1], consumption]
 		
 		money += after_consume[1]
 	
-	return [remaining, money]
+	return [remaining, money, consumption]
 
 func sort_by_quantity_ascending(a, b):
 	if a[1] < b[1]:
@@ -128,9 +136,11 @@ func update_global_production_rate(resource_type: Resources.Types):
 	var factory_per_cycle = (
 		the_factory.get_production_rate_per_tick(resource_type) * the_ticker.cycle_cooldown
 	)
+	var amount = factory_per_cycle + the_market.get_production_rate_per_cycle(resource_type)
+	amount -= the_builder.get_consumption_per_cycle(resource_type)
 
 	event_bus.resource_prodution_rate_updated.emit(
-		resource_type, factory_per_cycle + the_market.get_production_rate_per_cycle(resource_type)
+		resource_type, amount
 	)
 
 

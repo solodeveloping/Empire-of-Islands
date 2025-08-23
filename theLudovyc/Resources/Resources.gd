@@ -1,10 +1,13 @@
 extends Object
 class_name Resources
 
+# WARN : if you change the order or insert something
+# You will have to modify the resources indicators in the GUI as of now
 enum Types {
 	# Level 1
 	Wood,
 	Textile,
+	GameMeat,
 	# Level 2
 	Plank,
 	Potato,
@@ -16,6 +19,7 @@ const Icons = {
 	# Level 1
 	Types.Wood: preload("res://Art/Image/Gui/Icons/Resources/32/008.png"),
 	Types.Textile: preload("res://Art/Image/Gui/Icons/Resources/32/003.png"),
+	Types.GameMeat: preload("res://Art/Image/Gui/Icons/Resources/32/013.png"),
 	# Level 2
 	Types.Plank: preload("res://Art/Image/Gui/Icons/Resources/32/004.png"),
 	Types.Potato: preload("res://Art/Image/Gui/Icons/Resources/32/015.png"),
@@ -26,10 +30,22 @@ const Icons = {
 enum Datas { Name, Type, Level, }
 
 const datas = {
+	# Level 1
 	Types.Wood: {
 		Datas.Name: &"Wood", 
 		Datas.Type: Types.Wood,
 	},
+	Types.GameMeat:
+	{
+		Datas.Name: &"Game meat",
+		Datas.Type: Types.GameMeat,
+	},
+	Types.Potato:
+	{
+		Datas.Name: &"Potato",
+		Datas.Type: Types.Potato,
+	},
+	# Level 2
 	Types.Textile:
 	{
 		Datas.Name: &"Textile",
@@ -40,16 +56,12 @@ const datas = {
 		Datas.Name: &"Plank",
 		Datas.Type: Types.Plank,
 	},
-	Types.Potato:
-	{
-		Datas.Name: &"Potato",
-		Datas.Type: Types.Potato,
-	},
 	Types.Pig:
 	{
 		Datas.Name: &"Pig",
 		Datas.Type: Types.Pig,
 	},
+	# Level 3
 	Types.Meat:
 	{
 		Datas.Name: &"Meat",
@@ -70,7 +82,8 @@ static func get_resource_name(resource_type: Types) -> StringName:
 enum LevelTypes { Gathered, TransformedOnce, TransformedTwice }
 
 const Levels = {
-	Types.Wood: LevelTypes.Gathered, 
+	Types.Wood: LevelTypes.Gathered,
+	Types.GameMeat: LevelTypes.Gathered,
 	Types.Textile: LevelTypes.TransformedTwice,
 	Types.Plank: LevelTypes.TransformedOnce,
 	Types.Potato: LevelTypes.Gathered,
@@ -85,6 +98,7 @@ static func get_resource_level(resource_type: Types) -> LevelTypes:
 	return Levels[resource_type]
 	
 const Foods = [
+	Types.GameMeat,
 	Types.Potato,
 	Types.Meat
 ]
