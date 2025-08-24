@@ -36,6 +36,7 @@ var resources_consumption = {
 	Resources.Types.Wood: {},
 	Resources.Types.Stone: {},
 	Resources.Types.GameMeat: {},
+	Resources.Types.Fish: {},
 	Resources.Types.Wool: {},
 	Resources.Types.Textile: {},
 	Resources.Types.Plank: {},

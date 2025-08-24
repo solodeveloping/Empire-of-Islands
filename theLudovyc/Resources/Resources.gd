@@ -17,6 +17,7 @@ enum Types {
 	Wheat,
 	Flour,
 	Bread,
+	Fish,
 }
 
 const Icons = {
@@ -25,6 +26,7 @@ const Icons = {
 	Types.Textile: preload("res://Art/Image/Gui/Icons/Resources/32/003.png"),
 	Types.GameMeat: preload("res://Art/Image/Gui/Icons/Resources/32/013.png"),
 	Types.Stone: preload("res://Art/Image/Gui/Icons/Resources/32/051.png"),
+	Types.Fish: preload("res://Art/Temp/cc0-food-icons/fish_tail.png"),
 	# Level 2
 	Types.Plank: preload("res://Art/Image/Gui/Icons/Resources/32/004.png"),
 	Types.Potato: preload("res://Art/Image/Gui/Icons/Resources/32/015.png"),
@@ -49,6 +51,11 @@ const datas = {
 	{
 		Datas.Name: &"Game meat",
 		Datas.Type: Types.GameMeat,
+	},
+	Types.Fish:
+	{
+		Datas.Name: &"Fish",
+		Datas.Type: Types.Fish,
 	},
 	Types.Potato:
 	{
@@ -124,6 +131,7 @@ enum LevelTypes { Gathered, TransformedOnce, TransformedTwice }
 const Levels = {
 	Types.Wood: LevelTypes.Gathered,
 	Types.GameMeat: LevelTypes.Gathered,
+	Types.Fish: LevelTypes.Gathered,
 	Types.Stone: LevelTypes.Gathered,
 	Types.Textile: LevelTypes.TransformedTwice,
 	Types.Plank: LevelTypes.TransformedOnce,
@@ -145,6 +153,7 @@ static func get_resource_level(resource_type: Types) -> LevelTypes:
 	
 const Foods = [
 	Types.GameMeat,
+	Types.Fish,
 	Types.Potato,
 	Types.Meat,
 	Types.Bread,

@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://c1webhmdmhvy5"]
+
+[ext_resource type="Texture2D" uid="uid://dmivtfsbpmydq" path="res://Art/Image/Buildings/Fisherman/Fisherman_idle.png" id="1_jgrvb"]
+
+[resource]
+atlas = ExtResource("1_jgrvb")
+region = Rect2(0, 160, 128, 96)

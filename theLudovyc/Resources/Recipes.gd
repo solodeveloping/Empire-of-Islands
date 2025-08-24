@@ -24,6 +24,12 @@ const datas = {
 		Datas.Workers: 1,
 		Datas.PopulationType: Populations.Types.Sailor,
 	},
+	Resources.Types.Fish: {
+		Datas.InputType: -1,
+		Datas.Ticks: 1,
+		Datas.Workers: 1,
+		Datas.PopulationType: Populations.Types.Sailor,
+	},
 	Resources.Types.Stone: {
 		Datas.InputType: -1,
 		Datas.Ticks: 1,

@@ -17,6 +17,7 @@ var building_buttons = {
 	Buildings.Ids.Tent: $BuildResidential,
 	Buildings.Ids.Lumberjack: $BuildLumberjack,
 	Buildings.Ids.HunterTent: $BuildHunterTent,
+	Buildings.Ids.Fishery: $BuildFishery,
 	Buildings.Ids.Hut: $BuildHut,
 	Buildings.Ids.Sawmill: $BuildSawmill,
 	Buildings.Ids.Farm: $BuildFarm,

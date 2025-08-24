@@ -51,6 +51,7 @@ func is_constructible(tile_pos:Vector2i) -> int:
 			return 2
 	return 0
 
+## Visually left tile
 func entityStatic_get_top_left_tile(entity:EntityStatic, tile_center:Vector2i) -> Vector2i:
 	return entity_get_top_left_tile(
 		tile_center,
@@ -58,6 +59,7 @@ func entityStatic_get_top_left_tile(entity:EntityStatic, tile_center:Vector2i) -
 		entity.height
 	)
 
+## Visually left tile
 func entity_get_top_left_tile(
 	tile_center:Vector2i,
 	width: int,
@@ -67,7 +69,6 @@ func entity_get_top_left_tile(
 		return Vector2i(tile_center.x, tile_center.y - height / 2)
 	else:
 		return Vector2i(tile_center.x - ceil(width / 2), tile_center.y - ceil(height / 2))
-
 
 # 0 or >0 == OK
 # -1 == KO
@@ -118,11 +119,28 @@ func are_tiles_constructible_on_cell_type(
 	top_left_tile: Vector2i,
 	cell_type: MyMap.Minimap_Cell_Type
 ) -> int:
-	var trees = 0
 	for x in entity.width:
 		for y in entity.height:
 			if minimap_get_cell(top_left_tile + Vector2i(x, y)) != cell_type:
 				return -1
+	return 0
+
+## The result only matter if you have checked other rules before
+func is_coastal_entity_constructible(
+	entity: EntityStatic,
+	top_left_tile: Vector2i,
+) -> int:
+	var trees = 0
+	for x in entity.width:
+		for y in entity.height:
+			var cell_type = minimap_get_cell(top_left_tile + Vector2i(x, y))
+			match cell_type:
+				MyMap.Minimap_Cell_Type.Ground, MyMap.Minimap_Cell_Type.Sand, MyMap.Minimap_Cell_Type.Shallow:
+					pass
+				MyMap.Minimap_Cell_Type.Tree:
+					trees += 1
+				_:
+					return -1
 	return trees
 
 func is_in_range_of_allowed_polygons(
@@ -223,6 +241,11 @@ func clear_overlay():
 
 func show_constructible_area_on_overlay(building_id: Buildings.Ids):
 	ground_overlay_layer.clear()
+	
+	var is_coastal = Buildings.get_is_coastal(building_id)
+	if is_coastal:
+		show_all_constructible_tiles_of_type(MyMap.Minimap_Cell_Type.Shallow)
+		return
 	
 	var require_map_cell_tile = Buildings.get_require_map_cell_type(building_id)
 	if require_map_cell_tile != -1:

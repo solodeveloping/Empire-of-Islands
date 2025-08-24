@@ -24,6 +24,7 @@ enum Ids {
 	WheatField,
 	Windmill,
 	Bakery,
+	Fishery,
 }
 
 # FIXME : PopulationType is duplicated with the Recipes
@@ -43,6 +44,7 @@ enum Datas {
 	Require_Building,
 	Require_MapCellType,
 	Require_NaturalResource,
+	Is_Coastal,
 }
 
 const datas = {
@@ -76,6 +78,17 @@ const datas = {
 		Datas.Max_Workers: 1,
 		Datas.Max_Count: 3,
 		Datas.Maintenance_Cost: 1,
+	},
+	Ids.Fishery:
+	{
+		Datas.Name: &"Fishery",
+		Datas.Type: Types.Producing,
+		Datas.Cost: [[Resources.Types.Wood, 1], [Resources.Types.Textile, 1]],
+		Datas.Produce: Resources.Types.Fish,
+		Datas.Max_Count: 3,
+		Datas.Max_Workers: 2,
+		Datas.Maintenance_Cost: 1,
+		Datas.Is_Coastal: true,
 	},
 	Ids.StonePit:
 	{
@@ -371,3 +384,10 @@ static func get_building_dependencies(building_id: Buildings.Ids) -> Array[Build
 		if val.get(Datas.Require_Building, -1) == building_id:
 			result.push_back(key)
 	return result
+	
+static func get_is_coastal(building_id: Buildings.Ids) -> bool:
+	if not datas.has(building_id):
+		push_error("building_id " + str(building_id) + " not found")
+		return false
+
+	return datas[building_id].get(Datas.Is_Coastal, false)

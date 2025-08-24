@@ -143,11 +143,15 @@ func _process(delta):
 		the_cursor.cursor_entity.position = tm.ground_layer.map_to_local(tile_pos)
 
 		var building_id = the_cursor.cursor_entity.building_id
+		var is_coastal = Buildings.get_is_coastal(building_id)
+		var trees_to_destroy = 0
+		if is_coastal:
+			trees_to_destroy = handle_coastal_building(tile_pos)
+		else:
+			# FIXME : this probably uses a lot of performances
+			# -1 can not build, 0 yes and 0 tree, 1+ yes and 1+ tree to destroy
+			trees_to_destroy = tm.is_entityStatic_constructible(the_cursor.cursor_entity, tile_pos)
 		
-		# FIXME : this probably uses a lot of performances
-
-		# -1 can not build, 0 yes and 0 tree, 1+ yes and 1+ tree to destroy
-		var trees_to_destroy = tm.is_entityStatic_constructible(the_cursor.cursor_entity, tile_pos)
 		var range = Buildings.get_dependency_max_range(the_cursor.cursor_entity.building_id)
 		if range != -1:
 			tm.show_affected_area_of_building(the_cursor.cursor_entity, range)
@@ -228,7 +232,54 @@ func _process(delta):
 			
 			tm.clear_overlay()
 		
-
+func handle_coastal_building(tile_pos: Vector2i) -> int:
+	# x is up right / north east
+	# y is down right / south east
+	var top_left_tile = tm.entityStatic_get_top_left_tile(the_cursor.cursor_entity, tile_pos)
+	var cell_type = MyMap.Minimap_Cell_Type.Shallow
+	#tm.color_red_at_pos(top_left_tile)
+	if tm.minimap_get_cell(top_left_tile) == cell_type:
+		# visually top
+		var top_offset = Vector2i(the_cursor.cursor_entity.width - 1, 0)
+		# visually bottom
+		var bottom_offset = Vector2i(0, the_cursor.cursor_entity.height - 1)
+		if tm.minimap_get_cell(top_left_tile + top_offset) == cell_type:
+			# north west
+			the_cursor.cursor_entity.switch_to_north_west_texture()
+		elif tm.minimap_get_cell(top_left_tile + bottom_offset) == cell_type:
+			# south west
+			the_cursor.cursor_entity.switch_to_south_west_texture()
+		else:
+			return -1
+	else:
+		var offset = Vector2i(
+			the_cursor.cursor_entity.width - 1,
+			the_cursor.cursor_entity.height -1
+		)
+		# visually right
+		var right_tile = top_left_tile + offset
+		if tm.minimap_get_cell(right_tile) == cell_type:
+			# visually top
+			var top_offset = Vector2i(the_cursor.cursor_entity.width - 1, 0)
+			# visually bottom
+			var bottom_offset = Vector2i(0, the_cursor.cursor_entity.height - 1)
+			if tm.minimap_get_cell(top_left_tile + top_offset) == cell_type:
+				# north east
+				the_cursor.cursor_entity.switch_to_north_east_texture()
+			elif tm.minimap_get_cell(top_left_tile + bottom_offset) == cell_type:
+				# south east
+				the_cursor.cursor_entity.switch_to_south_east_texture()
+			else:
+				return -1
+		else:
+			return -1
+	
+	var trees_to_destroy = tm.is_coastal_entity_constructible(
+		the_cursor.cursor_entity,
+		top_left_tile
+	)
+		
+	return trees_to_destroy
 
 func _on_EventBus_ask_create_building(building_id: Buildings.Ids):
 	the_cursor.cursor_entity = the_builder.instantiate_building(building_id)

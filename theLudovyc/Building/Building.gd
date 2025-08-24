@@ -11,7 +11,15 @@ signal selected(type)
 @onready var starving_sprite_2d: Sprite2D = $StarvingSprite2D
 @onready var production_stopped_sprite_2d: Sprite2D = $ProductionStoppedSprite2D
 
-enum Datas {Texture, Width, Height}
+enum Datas {
+	Texture,
+	Width,
+	Height,
+	TextureNorthWest,
+	TextureNorthEast,
+	TextureSouthEast,
+	TextureSouthWest,
+}
 
 # We are using 1 frame atlas_texture for now
 # When we have the appropriate buildings (sawmill)
@@ -42,6 +50,14 @@ const datas = {
 	Buildings.Ids.HunterTent: {
 		#Datas.Texture: preload("res://theLudovyc/Building/lumberjack.png"),
 		Datas.Texture: preload("res://theLudovyc/Building/atlas_textures/hunter_tent_atlas_texture.tres"),
+		Datas.Width: 2,
+		Datas.Height: 2,
+	},
+	Buildings.Ids.Fishery: {
+		Datas.TextureNorthWest: preload("res://theLudovyc/Building/atlas_textures/fishery_north_west_atlas_texture.tres"),
+		Datas.TextureNorthEast: preload("res://theLudovyc/Building/atlas_textures/fishery_north_east_atlas_texture.tres"),
+		Datas.TextureSouthEast: preload("res://theLudovyc/Building/atlas_textures/fishery_south_east_atlas_texture.tres"),
+		Datas.TextureSouthWest: preload("res://theLudovyc/Building/atlas_textures/fishery_south_west_atlas_texture.tres"),
 		Datas.Width: 2,
 		Datas.Height: 2,
 	},
@@ -132,7 +148,11 @@ var building_id: Buildings.Ids = -1:
 			
 			width = building_data[Datas.Width]
 			height = building_data[Datas.Height]
-			texture = building_data[Datas.Texture]
+			var is_coastal = Buildings.get_is_coastal(building_id)
+			if !is_coastal:
+				texture = building_data[Datas.Texture]
+			else:
+				texture = building_data[Datas.TextureNorthWest]
 			
 			update_offset()
 
@@ -226,3 +246,19 @@ func show_production_stoppped_indicator():
 func hide_production_stoppped_indicator():
 	production_stopped_sprite_2d.hide()
 	is_active = true
+
+func switch_to_north_west_texture():
+	var building_data = datas.get(building_id)
+	texture = building_data[Datas.TextureNorthWest]
+	
+func switch_to_north_east_texture():
+	var building_data = datas.get(building_id)
+	texture = building_data[Datas.TextureNorthEast]
+	
+func switch_to_south_east_texture():
+	var building_data = datas.get(building_id)
+	texture = building_data[Datas.TextureSouthEast]
+	
+func switch_to_south_west_texture():
+	var building_data = datas.get(building_id)
+	texture = building_data[Datas.TextureSouthWest]
