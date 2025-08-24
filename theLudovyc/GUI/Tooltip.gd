@@ -2,13 +2,25 @@ extends PanelContainer
 
 @onready var rtl := $VBoxContainer/PanelContainer/RichTextLabel
 
+var the_storage: TheStorage
 
-func set_building_info(building_id: Buildings.Ids):
+var building_id = -1
+
+func _ready() -> void:
+	var current_node = get_tree().current_scene
+
+	if current_node.has_node("TheStorage"):
+		the_storage = current_node.get_node("TheStorage")
+
+func set_building_info(p_building_id: Buildings.Ids):
 	rtl.clear()
+	
+	building_id = p_building_id
 
 	var building_cost = Buildings.get_building_cost(building_id)
 
 	if building_cost.is_empty():
+		push_warning("building of id '%d' cost is null" % building_id)
 		return
 
 	rtl.add_text("%s\n" % Buildings.get_building_name(building_id))
@@ -20,7 +32,12 @@ func set_building_info(building_id: Buildings.Ids):
 		if i > 0:
 			rtl.add_text(" / ")
 
-		rtl.add_text(str(cost[1]) + " ")
+		var quantity = the_storage.get_resource_amount(cost[0])
+		if quantity < cost[1]:
+			rtl.append_text("[color=red]" + \
+				str(cost[1]) + "[/color] ")
+		else:
+			rtl.add_text(str(cost[1]) + " ")
 		rtl.add_image(Resources.Icons[cost[0]], 20)
 
 

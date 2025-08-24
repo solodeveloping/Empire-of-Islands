@@ -14,7 +14,7 @@ func create_natural_resources():
 
 func attempt_to_spawn(max_attempt_count: int) -> bool:
 	for i in max_attempt_count:
-		var loc = randi_range(0, tile_map.minimap.size())
+		var loc = randi_range(0, tile_map.minimap.size() - 1)
 
 		if tile_map.minimap[i] == MyMap.Minimap_Cell_Type.Ground \
 			or tile_map.minimap[loc] == MyMap.Minimap_Cell_Type.Tree:

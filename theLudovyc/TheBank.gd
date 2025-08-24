@@ -13,13 +13,15 @@ const money_icon = preload("res://Art/Image/Gui/Icons/Resources/32/001.png")
 
 var money := 0:
 	set(value):
-		money = value
-		event_bus.money_updated.emit(value)
+		if money != value:
+			money = value
+			event_bus.money_updated.emit(value)
 
 var money_production_rate := 0:
 	set(value):
-		money_production_rate = value
-		event_bus.money_production_rate_updated.emit(value)
+		if money_production_rate != value:
+			money_production_rate = value
+			event_bus.money_production_rate_updated.emit(value)
 
 var orders_cost := 0:
 	set(value):

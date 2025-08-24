@@ -64,7 +64,7 @@ func _on_building_button_mouse_entered(building_id: Buildings.Ids):
 
 func _on_building_button_mouse_exited():
 	tooltip.visible = false
-	pass
+	tooltip.building_id = -1
 	
 func _on_send_building_limit_updated(building_id: Buildings.Ids, limit_reached: bool):
 	# FIXME : it's not perfect but we don't have a texture for disabled buildings
