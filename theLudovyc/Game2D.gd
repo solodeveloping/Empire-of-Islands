@@ -151,6 +151,8 @@ func _process(delta):
 		var range = Buildings.get_dependency_max_range(the_cursor.cursor_entity.building_id)
 		if range != -1:
 			tm.show_affected_area_of_building(the_cursor.cursor_entity, range)
+		else:
+			tm.show_area_of_building(the_cursor.cursor_entity)
 		
 		if (trees_to_destroy < 0):
 			the_cursor.cursor_entity.modulate = Color(Color.RED, 0.6)

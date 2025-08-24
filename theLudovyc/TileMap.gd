@@ -233,8 +233,13 @@ func show_constructible_area_on_overlay(building_id: Buildings.Ids):
 	
 	var require_building = Buildings.get_require_building(building_id)
 	if require_building == -1:
-		# This is useful to debug for now
 		show_all_constructible_tiles()
+		var range = Buildings.get_dependency_max_range(building_id)
+		if range != -1:
+			var buildings = the_builder.get_buildings_of_id(building_id)
+			# we show similar buildings range for better experience
+			for building in buildings:
+				show_affected_area_of_existing_building(building, range)
 		return
 	
 	var range = Buildings.get_dependency_max_range(require_building)
@@ -249,8 +254,6 @@ func show_constructible_area_on_overlay(building_id: Buildings.Ids):
 		for x in building.width + range * 2:
 			for y in building.height + range * 2:
 				var tile_coord = top_left_tile + Vector2i(x, y)
-				#var dist = Vector2(center).distance_to(Vector2(tile_coord))
-				#if dist <= building.height / 2 + range:
 				var type = minimap_get_cell(tile_coord)
 				color_overlay_at_pos(tile_coord, type)
 		
@@ -329,11 +332,42 @@ func show_affected_area_of_building(building: Building2D, range: int):
 	for x in building.width + range * 2:
 		for y in building.height + range * 2:
 			var tile_coord = top_left_tile + Vector2i(x, y)
-			var type = minimap_get_cell(tile_coord)
+			color_affected_area_at_pos(tile_coord)
+
+func show_affected_area_of_existing_building(building: Building2D, range: int):
+	building_ground_overlay_layer.clear()
+	var center = ground_layer.local_to_map(ground_layer.to_local(building.global_position))
+	var top_left_building = entityStatic_get_top_left_tile(
+		building,
+		center
+	)
+	var top_left_tile = top_left_building - Vector2i(range, range)
+	for x in building.width + range * 2:
+		for y in building.height + range * 2:
+			var tile_coord = top_left_tile + Vector2i(x, y)
+			# we color in appropriate color the affected tiles
+			# we could color trees in yellow but I think it looks better
+			# if it's uniform
+			color_existing_building_affected_area_at_pos(tile_coord)
+
+func show_area_of_building(building: Building2D):
+	building_ground_overlay_layer.clear()
+	var center = ground_layer.local_to_map(ground_layer.to_local(building.global_position))
+	var top_left_building = entityStatic_get_top_left_tile(
+		building,
+		center
+	)
+	for x in building.width:
+		for y in building.height :
+			var tile_coord = top_left_building + Vector2i(x, y)
 			color_affected_area_at_pos(tile_coord)
 
 func color_affected_area_at_pos(tile_coord: Vector2i):
 	building_ground_overlay_layer.set_cell(tile_coord, OverlayTileset.DarkerGreen, tile_overlay_pos)
+
+func color_existing_building_affected_area_at_pos(pos: Vector2i):
+	ground_overlay_layer.set_cell(pos, OverlayTileset.DarkerGreen, tile_overlay_pos)
+
 
 func create_island(map_file:String) -> int:
 	var file = FileAccess.open(map_file, FileAccess.READ)
