@@ -11,13 +11,15 @@ enum Production_Line {
 	input_resource_type,
 	input_consumption_rate,
 	production_rate,
+	production_count,
 	current_ticks,
 	is_active
 }
 
-var production_lines_per_level = [{}, {}, {}]
+var production_lines_per_level = [{}, {}, {}, {}]
 
-var workers: Array[int] = [0, 0]:
+# FIXME : the instantiation could be automated
+var workers: Array[int] = [0, 0, 0]:
 	set(value):
 		workers = value
 		notify_workers_updated()
@@ -32,12 +34,18 @@ var waiting_lines := []
 # Maybe the code can be fixed so that we don't have to initialize all of these
 var resources_consumption = {
 	Resources.Types.Wood: {},
+	Resources.Types.Stone: {},
 	Resources.Types.GameMeat: {},
+	Resources.Types.Wool: {},
 	Resources.Types.Textile: {},
 	Resources.Types.Plank: {},
 	Resources.Types.Potato: {},
+	Resources.Types.Wheat: {},
 	Resources.Types.Pig: {},
 	Resources.Types.Meat: {},
+	Resources.Types.StoneBrick: {},
+	Resources.Types.Flour: {},
+	Resources.Types.Bread: {},
 }
 
 func _add_workers(population_type: Populations.Types, amount: int):
@@ -58,7 +66,7 @@ func get_production_rate_per_tick(resource_type: Resources.Types) -> int:
 	var positive_prod = 0
 	if production_lines_per_level[level].has(resource_type):
 		if production_lines_per_level[level][resource_type][Production_Line.is_active]:
-			positive_prod = production_lines_per_level[level][resource_type][Production_Line.production_rate]
+			positive_prod = production_lines_per_level[level][resource_type][Production_Line.production_count]
 	
 	var negative_prod = 0
 	for consumer_resource_type in resources_consumption[resource_type]:
@@ -81,9 +89,11 @@ func create_or_update_line(resource_type: Resources.Types, workers_amount: int):
 		)
 		
 		var input_count = Recipes.get_recipe_input_amount(resource_type)
+		var output_count = Recipes.get_recipe_output_amount(resource_type)
 		var input_consumption_rate = production_rate * input_count
 
 		line[Production_Line.production_rate] = production_rate
+		line[Production_Line.production_count] = production_rate * output_count
 		line[Production_Line.input_consumption_rate] = input_consumption_rate
 		if line[Production_Line.input_resource_type] != -1:
 			resources_consumption[line[Production_Line.input_resource_type]][resource_type] = input_consumption_rate
@@ -92,6 +102,7 @@ func create_or_update_line(resource_type: Resources.Types, workers_amount: int):
 		var input_count = Recipes.get_recipe_input_amount(resource_type)
 		var input_type = Recipes.get_recipe_input_type(resource_type)
 		var input_consumption_rate = 0
+		var output_count = Recipes.get_recipe_output_amount(resource_type)
 
 		if workers_amount >= needed_workers:
 			production_rate = workers_amount / needed_workers
@@ -107,6 +118,7 @@ func create_or_update_line(resource_type: Resources.Types, workers_amount: int):
 			input_type,
 			input_consumption_rate,
 			production_rate,
+			production_rate * output_count,
 			0,
 			is_active,
 		]
@@ -183,8 +195,10 @@ func rem_workers(
 			line[Production_Line.current_workers] / Recipes.get_recipe_needed_workers(resource_type)
 		)
 		var input_count = Recipes.get_recipe_input_amount(resource_type)
+		var output_count = Recipes.get_recipe_output_amount(resource_type)
 		
 		line[Production_Line.production_rate] = production_rate
+		line[Production_Line.production_count] = production_rate * output_count
 		line[Production_Line.input_consumption_rate] = input_count * production_rate
 		resources_consumption[line[Production_Line.input_resource_type]][resource_type] = line[Production_Line.input_consumption_rate]
 
@@ -267,10 +281,11 @@ func population_decrease(population_type: Populations.Types, amount: int):
 				line[Production_Line.current_workers] / Recipes.get_recipe_needed_workers(resource_type)
 			)
 			
-			line[Production_Line.production_rate] = production_rate
-			
 			var input_count = Recipes.get_recipe_input_amount(resource_type)
+			var output_count = Recipes.get_recipe_output_amount(resource_type)
+			line[Production_Line.production_rate] = production_rate
 			line[Production_Line.input_consumption_rate] = input_count * production_rate
+			line[Production_Line.production_count] = production_rate * output_count
 			resources_consumption[line[Production_Line.input_resource_type]][resource_type] = line[Production_Line.input_consumption_rate]
 			
 		if line[Production_Line.input_resource_type] != -1:
@@ -298,7 +313,7 @@ func _on_TheTicker_tick():
 				
 				if input_type == -1 or input_amount == 0:
 					line[Production_Line.current_ticks] = 0
-					storage.add_resource(resource_type, line[Production_Line.production_rate])
+					storage.add_resource(resource_type, line[Production_Line.production_count])
 				else:
 					if line[Production_Line.is_active] == false:
 						if !storage.try_to_remove_resource(input_type, input_amount):
@@ -308,7 +323,7 @@ func _on_TheTicker_tick():
 							storage.update_global_production_rate(resource_type)
 					else:
 						line[Production_Line.current_ticks] = 0
-						storage.add_resource(resource_type, line[Production_Line.production_rate])
+						storage.add_resource(resource_type, line[Production_Line.production_count])
 						
 						if !storage.try_to_remove_resource(input_type, input_amount):
 							line[Production_Line.is_active] = false

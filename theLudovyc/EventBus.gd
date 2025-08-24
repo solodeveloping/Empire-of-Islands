@@ -18,6 +18,9 @@ signal ask_select_warehouse
 signal ask_demolish_current_building
 signal send_current_building_demolished
 
+## NATURAL RESOURCE
+signal send_natural_resource_selected(natural_resource)
+
 ## POPULATION / WORKER
 signal population_updated(population_count)
 signal available_workers_updated(available_workers_amount)

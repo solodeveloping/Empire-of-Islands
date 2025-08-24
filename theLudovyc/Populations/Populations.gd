@@ -6,4 +6,6 @@ enum Types {
 	Sailor,
 	# Level 2
 	Pioneer,
+	# Level 3
+	Settler,
 }

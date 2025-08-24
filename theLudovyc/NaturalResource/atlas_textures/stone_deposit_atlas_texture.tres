@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://da3jce4a2bohs"]
+
+[ext_resource type="Texture2D" uid="uid://bg1ish8askh53" path="res://Art/Temp/Stonedeposit_idle.png" id="1_dguuh"]
+
+[resource]
+atlas = ExtResource("1_dguuh")
+region = Rect2(0, 0, 192, 128)

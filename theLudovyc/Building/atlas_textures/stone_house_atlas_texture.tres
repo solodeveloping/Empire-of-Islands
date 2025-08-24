@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://1ow8fr32867o"]
+
+[ext_resource type="Texture2D" uid="uid://pi46aesi2p35" path="res://Art/Image/Buildings/Residential/StoneHouse1_idle.png" id="1_np0ef"]
+
+[resource]
+atlas = ExtResource("1_np0ef")
+region = Rect2(0, 0, 128, 128)

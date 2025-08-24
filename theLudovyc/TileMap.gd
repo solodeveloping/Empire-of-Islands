@@ -7,12 +7,12 @@ class_name MyTileMap
 @onready var ground_overlay_layer: TileMapLayer = %GroundOverlayLayer
 @onready var building_ground_overlay_layer: TileMapLayer = $BuildingGroundOverlayLayer
 @onready var the_builder = $"../../TheBuilder"
+@onready var natural_resources = %NaturalResources
+
 
 var map_size:Vector2i
 
 var minimap:PackedByteArray
-
-enum Minimap_Cell_Type{Deep, Shallow, Sand, Ground, Tree, Building}
 
 var allowed_polygons: Array[Array] = []
 
@@ -28,15 +28,15 @@ enum OverlayTileset {
 # FIXME : we can remove this if we repack the tiles
 const tile_overlay_pos = Vector2i(0, 1)
 
-func minimap_set_cell(x:int, y:int, type:Minimap_Cell_Type):
+func minimap_set_cell(x:int, y:int, type:MyMap.Minimap_Cell_Type):
 	minimap[y * map_size.x + x] = type
 
-func minimap_set_cell_vec(vec:Vector2i, type:Minimap_Cell_Type):
+func minimap_set_cell_vec(vec:Vector2i, type:MyMap.Minimap_Cell_Type):
 	minimap_set_cell(vec.x, vec.y, type)
 
-func minimap_get_cell(vec:Vector2i) -> Minimap_Cell_Type:
+func minimap_get_cell(vec:Vector2i) -> MyMap.Minimap_Cell_Type:
 	if vec.x < 0 or vec.y < 0 or vec.x >= map_size.x or vec.y >= map_size.y:
-		return Minimap_Cell_Type.Deep
+		return MyMap.Minimap_Cell_Type.Deep
 	
 	return minimap[vec.y * map_size.x + vec.x]
 	
@@ -45,17 +45,29 @@ func minimap_get_pos(index:int) -> Vector2i:
 	
 func is_constructible(tile_pos:Vector2i) -> int:
 	match minimap_get_cell(tile_pos):
-		Minimap_Cell_Type.Ground:
+		MyMap.Minimap_Cell_Type.Ground:
 			return 1
-		Minimap_Cell_Type.Tree:
+		MyMap.Minimap_Cell_Type.Tree:
 			return 2
 	return 0
 
 func entityStatic_get_top_left_tile(entity:EntityStatic, tile_center:Vector2i) -> Vector2i:
-	if entity.height % 2 == 0:
-		return Vector2i(tile_center.x, tile_center.y - entity.height / 2)
+	return entity_get_top_left_tile(
+		tile_center,
+		entity.width,
+		entity.height
+	)
+
+func entity_get_top_left_tile(
+	tile_center:Vector2i,
+	width: int,
+	height: int,
+) -> Vector2i:
+	if height % 2 == 0:
+		return Vector2i(tile_center.x, tile_center.y - height / 2)
 	else:
-		return Vector2i(tile_center.x - ceil(entity.width / 2), tile_center.y - ceil(entity.height / 2))
+		return Vector2i(tile_center.x - ceil(width / 2), tile_center.y - ceil(height / 2))
+
 
 # 0 or >0 == OK
 # -1 == KO
@@ -63,17 +75,20 @@ func entityStatic_get_top_left_tile(entity:EntityStatic, tile_center:Vector2i) -
 func is_entityStatic_constructible(entity:EntityStatic, tile_center:Vector2i) -> int:
 	var top_left_tile = entityStatic_get_top_left_tile(entity, tile_center)
 	
-	var trees = 0
+	var require_cell_type = Buildings.get_require_map_cell_type(entity.building_id)
+	if require_cell_type != -1:
+		var trees = are_tiles_constructible_on_cell_type(
+			entity, top_left_tile, require_cell_type
+		)
+		return trees
+	
+	var trees = are_tiles_constructible(
+		entity, top_left_tile
+	)
+	if trees == -1:
+		return trees
 	
 	var require_building = Buildings.get_require_building(entity.building_id)
-	
-	for x in entity.width:
-		for y in entity.height:
-			match is_constructible(top_left_tile + Vector2i(x, y)):
-				2:
-					trees += 1
-				0:
-					return -1
 	
 	if require_building != -1:
 		var is_in_range = is_in_range_of_allowed_polygons(
@@ -83,7 +98,33 @@ func is_entityStatic_constructible(entity:EntityStatic, tile_center:Vector2i) ->
 			return -1
 	
 	return trees
+
+func are_tiles_constructible(
+	entity: EntityStatic,
+	top_left_tile: Vector2i
+) -> int:
+	var trees = 0
+	for x in entity.width:
+		for y in entity.height:
+			match is_constructible(top_left_tile + Vector2i(x, y)):
+				2:
+					trees += 1
+				0:
+					return -1
+	return trees
 	
+func are_tiles_constructible_on_cell_type(
+	entity: EntityStatic,
+	top_left_tile: Vector2i,
+	cell_type: MyMap.Minimap_Cell_Type
+) -> int:
+	var trees = 0
+	for x in entity.width:
+		for y in entity.height:
+			if minimap_get_cell(top_left_tile + Vector2i(x, y)) != cell_type:
+				return -1
+	return trees
+
 func is_in_range_of_allowed_polygons(
 	entity:EntityStatic,
 	polygons: Array[Array],
@@ -120,18 +161,48 @@ func is_in_range_of_polygon(
 	else:
 		return true
 
-func build_entityStatic(entity:EntityStatic, tile_center:Vector2i):
+# 0 or >0 == OK
+# -1 == KO
+# >0 numbers of trees
+func is_entity_constructible(
+	tile_center: Vector2i,
+	width: int,
+	height: int,
+) -> int:
+	var top_left_tile = entity_get_top_left_tile(
+		tile_center,
+		width,
+		height
+	)
+	
+	var trees = 0
+	
+	for x in width:
+		for y in height:
+			match is_constructible(top_left_tile + Vector2i(x, y)):
+				2:
+					trees += 1
+				0:
+					return -1
+	
+	return trees
+
+func build_entityStatic(
+	entity:EntityStatic,
+	tile_center:Vector2i,
+	cell_type: MyMap.Minimap_Cell_Type = MyMap.Minimap_Cell_Type.Building
+):
 	var top_left_tile = entityStatic_get_top_left_tile(entity, tile_center)
 	
 	for x in entity.width:
 		for y in entity.height:
 			var tile_coord = top_left_tile + Vector2i(x, y)
 			
-			if minimap_get_cell(tile_coord) == Minimap_Cell_Type.Tree:
+			if minimap_get_cell(tile_coord) == MyMap.Minimap_Cell_Type.Tree:
 				trees_layer.erase_cell(tile_coord)
 			
-			minimap_set_cell_vec(tile_coord, Minimap_Cell_Type.Building)
-			
+			minimap_set_cell_vec(tile_coord, cell_type)
+
 func conclude_building_construction(building:Building2D):
 	build_entityStatic(building, ground_layer.local_to_map(building.position))
 
@@ -143,7 +214,7 @@ func demolish_building(building:Building2D):
 		for y in building.height:
 			var tile_coord = top_left_tile + Vector2i(x, y)
 			
-			minimap_set_cell_vec(tile_coord, Minimap_Cell_Type.Ground)
+			minimap_set_cell_vec(tile_coord, MyMap.Minimap_Cell_Type.Ground)
 
 func clear_overlay():
 	ground_overlay_layer.clear()
@@ -152,6 +223,14 @@ func clear_overlay():
 
 func show_constructible_area_on_overlay(building_id: Buildings.Ids):
 	ground_overlay_layer.clear()
+	
+	var require_map_cell_tile = Buildings.get_require_map_cell_type(building_id)
+	if require_map_cell_tile != -1:
+		# FIXME : we could display the natural resources too
+		# When there is one
+		show_all_constructible_tiles_of_type(require_map_cell_tile)
+		return
+	
 	var require_building = Buildings.get_require_building(building_id)
 	if require_building == -1:
 		# This is useful to debug for now
@@ -215,23 +294,28 @@ func get_polygon_range_of_building(
 	
 	return polygon
 
-# FIXME : could use this and no alpha too
 func show_all_constructible_tiles():
 	for i in range(minimap.size()):
-		if minimap[i] == MyTileMap.Minimap_Cell_Type.Ground \
-			or minimap[i] == Minimap_Cell_Type.Tree:
+		if minimap[i] == MyMap.Minimap_Cell_Type.Ground \
+			or minimap[i] == MyMap.Minimap_Cell_Type.Tree:
 				var pos = minimap_get_pos(i)
 				match minimap[i]:
-					Minimap_Cell_Type.Ground:
+					MyMap.Minimap_Cell_Type.Ground:
 						ground_overlay_layer.set_cell(pos, OverlayTileset.Green, tile_overlay_pos)
-					Minimap_Cell_Type.Tree:
+					MyMap.Minimap_Cell_Type.Tree:
 						ground_overlay_layer.set_cell(pos, OverlayTileset.Yellow, tile_overlay_pos)
 
-func color_overlay_at_pos(pos: Vector2i, tile_type: Minimap_Cell_Type):
-	match tile_type:
-		Minimap_Cell_Type.Ground:
+func show_all_constructible_tiles_of_type(cell_type: MyMap.Minimap_Cell_Type):
+	for i in range(minimap.size()):
+		if minimap[i] == cell_type:
+			var pos = minimap_get_pos(i)
 			ground_overlay_layer.set_cell(pos, OverlayTileset.Green, tile_overlay_pos)
-		Minimap_Cell_Type.Tree:
+
+func color_overlay_at_pos(pos: Vector2i, tile_type: MyMap.Minimap_Cell_Type):
+	match tile_type:
+		MyMap.Minimap_Cell_Type.Ground:
+			ground_overlay_layer.set_cell(pos, OverlayTileset.Green, tile_overlay_pos)
+		MyMap.Minimap_Cell_Type.Tree:
 			ground_overlay_layer.set_cell(pos, OverlayTileset.Yellow, tile_overlay_pos)
 
 func show_affected_area_of_building(building: Building2D, range: int):
@@ -277,7 +361,9 @@ func create_island(map_file:String) -> int:
 		json.data["ground_tiles"]
 	)
 	
+	# FIXME : this should be loaded at some point
 	trees_layer.create_trees()
+	natural_resources.create_natural_resources()
 	
 	return OK
 

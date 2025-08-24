@@ -7,10 +7,10 @@ func create_trees():
 	noise.frequency = 0.3
 	
 	for i in range(tileMap.minimap.size()):
-		if tileMap.minimap[i] == MyTileMap.Minimap_Cell_Type.Ground:
+		if tileMap.minimap[i] == MyMap.Minimap_Cell_Type.Ground:
 			var pos = tileMap.minimap_get_pos(i)
 			
 			if noise.get_noise_2dv(pos) > 0.2:
 				set_cell(pos, 1, Vector2(0, 1))
 			
-				tileMap.minimap[i] = MyTileMap.Minimap_Cell_Type.Tree
+				tileMap.minimap[i] = MyMap.Minimap_Cell_Type.Tree

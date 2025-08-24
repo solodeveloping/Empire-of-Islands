@@ -7,17 +7,23 @@ enum Types { Placeholder, Warehouse, Residential, Producing }
 # In the GUI because of the serialized ids
 enum Ids { 
 	Warehouse,
-	# Level 1
 	Tent,
 	Lumberjack,
 	HunterTent,
-	# Level 2
 	Hut,
 	Sawmill,
 	Farm,
 	PotatoField,
 	Pigsty,
 	Butchery,
+	StonePit,
+	Stonemason,
+	Pasture,
+	Weaver,
+	House,
+	WheatField,
+	Windmill,
+	Bakery,
 }
 
 # FIXME : PopulationType is duplicated with the Recipes
@@ -35,6 +41,8 @@ enum Datas {
 	Maintenance_Cost,
 	Dependency_Max_Range,
 	Require_Building,
+	Require_MapCellType,
+	Require_NaturalResource,
 }
 
 const datas = {
@@ -68,6 +76,17 @@ const datas = {
 		Datas.Max_Workers: 1,
 		Datas.Max_Count: 3,
 		Datas.Maintenance_Cost: 1,
+	},
+	Ids.StonePit:
+	{
+		Datas.Name: &"Stone pit",
+		Datas.Type: Types.Producing,
+		Datas.Cost: [[Resources.Types.Wood, 1], [Resources.Types.Textile, 1]],
+		Datas.Produce: Resources.Types.Stone,
+		Datas.Max_Workers: 2,
+		Datas.Maintenance_Cost: 1,
+		Datas.Require_MapCellType: MyMap.Minimap_Cell_Type.StoneDeposit,
+		Datas.Require_NaturalResource: NaturalResources.Ids.StoneDeposit,
 	},
 	# Level 2
 	Ids.Hut:
@@ -121,6 +140,28 @@ const datas = {
 		Datas.PopulationType: Populations.Types.Pioneer,
 		Datas.Require_Building: Ids.Farm,
 	},
+	Ids.Pasture:
+	{
+		Datas.Name: &"Pasture",
+		Datas.Type: Types.Producing,
+		Datas.Cost: [[Resources.Types.Plank, 1],],
+		Datas.Produce: Resources.Types.Wool,
+		Datas.Max_Workers: 1,
+		Datas.Level: 2,
+		Datas.PopulationType: Populations.Types.Pioneer,
+		Datas.Require_Building: Ids.Farm,
+	},
+	Ids.WheatField:
+	{
+		Datas.Name: &"Wheat field",
+		Datas.Type: Types.Producing,
+		Datas.Cost: [[Resources.Types.Plank, 1],],
+		Datas.Produce: Resources.Types.Wheat,
+		Datas.Max_Workers: 1,
+		Datas.Level: 2,
+		Datas.PopulationType: Populations.Types.Pioneer,
+		Datas.Require_Building: Ids.Farm,
+	},
 	Ids.Butchery:
 	{
 		Datas.Name: &"Butchery",
@@ -131,6 +172,62 @@ const datas = {
 		Datas.Level: 2,
 		Datas.PopulationType: Populations.Types.Pioneer,
 		Datas.Maintenance_Cost: 2,
+	},
+	Ids.Stonemason:
+	{
+		Datas.Name: &"Stonemason",
+		Datas.Type: Types.Producing,
+		Datas.Cost: [[Resources.Types.Plank, 1], [Resources.Types.Textile, 1]],
+		Datas.Produce: Resources.Types.StoneBrick,
+		Datas.Max_Workers: 2,
+		Datas.Maintenance_Cost: 1,
+	},
+	Ids.Windmill:
+	{
+		Datas.Name: &"Windmill",
+		Datas.Type: Types.Producing,
+		Datas.Cost: [[
+			Resources.Types.Plank, 1],
+			[Resources.Types.StoneBrick, 1],
+			[Resources.Types.Textile, 1],
+		],
+		Datas.Produce: Resources.Types.Flour,
+		Datas.Max_Workers: 2,
+		Datas.Level: 2,
+		Datas.Maintenance_Cost: 1,
+		Datas.PopulationType: Populations.Types.Pioneer,
+	},
+	# Level 3
+	Ids.House:
+	{
+		Datas.Name: &"House",
+		Datas.Type: Types.Residential,
+		Datas.Cost: [[Resources.Types.Plank, 1],[Resources.Types.StoneBrick, 1],],
+		Datas.Max_Workers: 4,
+		Datas.Level: 3,
+		Datas.PopulationType: Populations.Types.Settler,
+	},
+	Ids.Bakery:
+	{
+		Datas.Name: &"Bakery",
+		Datas.Type: Types.Producing,
+		Datas.Cost: [[Resources.Types.Plank, 1],[Resources.Types.StoneBrick, 1],],
+		Datas.Produce: Resources.Types.Bread,
+		Datas.Max_Workers: 2,
+		Datas.Level: 3,
+		Datas.Maintenance_Cost: 1,
+		Datas.PopulationType: Populations.Types.Settler,
+	},
+	Ids.Weaver:
+	{
+		Datas.Name: &"Weaver",
+		Datas.Type: Types.Producing,
+		Datas.Cost: [[Resources.Types.Plank, 1],[Resources.Types.StoneBrick, 1],],
+		Datas.Produce: Resources.Types.Textile,
+		Datas.Max_Workers: 2,
+		Datas.Level: 3,
+		Datas.Maintenance_Cost: 1,
+		Datas.PopulationType: Populations.Types.Settler,
 	},
 }
 
@@ -155,6 +252,24 @@ const Comsumptions = {
 		},
 		{
 			ComsumptionDatas.ResourceType: Resources.Types.Meat,
+			ComsumptionDatas.ResourceAmount: 1,
+		},
+	],
+	Buildings.Ids.House: [
+		{
+			ComsumptionDatas.ResourceType: -1,
+			ComsumptionDatas.ResourceAmount: 1,
+		},
+		{
+			ComsumptionDatas.ResourceType: Resources.Types.Potato,
+			ComsumptionDatas.ResourceAmount: 1,
+		},
+		{
+			ComsumptionDatas.ResourceType: Resources.Types.Meat,
+			ComsumptionDatas.ResourceAmount: 1,
+		},
+		{
+			ComsumptionDatas.ResourceType: Resources.Types.Bread,
 			ComsumptionDatas.ResourceAmount: 1,
 		},
 	],
@@ -224,7 +339,21 @@ static func get_require_building(building_id: Buildings.Ids) -> Buildings.Ids:
 		return -1
 
 	return datas[building_id].get(Datas.Require_Building, -1)
-	
+
+static func get_require_map_cell_type(building_id: Buildings.Ids) -> MyMap.Minimap_Cell_Type:
+	if not datas.has(building_id):
+		push_error("building_id " + str(building_id) + " not found")
+		return -1
+
+	return datas[building_id].get(Datas.Require_MapCellType, -1)
+
+static func get_require_natural_resource(building_id: Buildings.Ids) -> NaturalResources.Ids:
+	if not datas.has(building_id):
+		push_error("building_id " + str(building_id) + " not found")
+		return -1
+
+	return datas[building_id].get(Datas.Require_NaturalResource, -1)
+
 static func get_dependency_max_range(building_id: Buildings.Ids) -> Buildings.Ids:
 	if not datas.has(building_id):
 		push_error("building_id " + str(building_id) + " not found")

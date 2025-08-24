@@ -45,6 +45,11 @@ const datas = {
 		Datas.Width: 2,
 		Datas.Height: 2,
 	},
+	Buildings.Ids.StonePit: {
+		Datas.Texture: preload("res://theLudovyc/Building/atlas_textures/stone_pit_atlas_texture.tres"),
+		Datas.Width: 3,
+		Datas.Height: 3,
+	},
 	# Level 2
 	Buildings.Ids.Hut: {
 		Datas.Texture: preload("res://theLudovyc/Building/atlas_textures/hut_atlas_texture.tres"),
@@ -66,6 +71,16 @@ const datas = {
 		Datas.Width: 3,
 		Datas.Height: 3,
 	},
+	Buildings.Ids.WheatField: {
+		Datas.Texture: preload("res://theLudovyc/Building/atlas_textures/wheat_field_atlas_texture.tres"),
+		Datas.Width: 3,
+		Datas.Height: 3,
+	},
+	Buildings.Ids.Pasture: {
+		Datas.Texture: preload("res://theLudovyc/Building/atlas_textures/pasture_atlas_texture.tres"),
+		Datas.Width: 3,
+		Datas.Height: 3,
+	},
 	Buildings.Ids.Pigsty: {
 		Datas.Texture: preload("res://theLudovyc/Building/atlas_textures/pigsty_atlas_texture.tres"),
 		Datas.Width: 3,
@@ -73,6 +88,32 @@ const datas = {
 	},
 	Buildings.Ids.Butchery: {
 		Datas.Texture: preload("res://theLudovyc/Building/atlas_textures/butchery_atlas_texture.tres"),
+		Datas.Width: 2,
+		Datas.Height: 2,
+	},
+	Buildings.Ids.Stonemason: {
+		Datas.Texture: preload("res://theLudovyc/Building/atlas_textures/stonemason_atlas_texture.tres"),
+		Datas.Width: 2,
+		Datas.Height: 2,
+	},
+	Buildings.Ids.Windmill: {
+		Datas.Texture: preload("res://theLudovyc/Building/atlas_textures/windmill_atlas_texture.tres"),
+		Datas.Width: 2,
+		Datas.Height: 2,
+	},
+	# Level 3
+	Buildings.Ids.House: {
+		Datas.Texture: preload("res://theLudovyc/Building/atlas_textures/stone_house_atlas_texture.tres"),
+		Datas.Width: 2,
+		Datas.Height: 2,
+	},
+	Buildings.Ids.Bakery: {
+		Datas.Texture: preload("res://theLudovyc/Building/atlas_textures/stonemason_atlas_texture.tres"),
+		Datas.Width: 2,
+		Datas.Height: 2,
+	},
+	Buildings.Ids.Weaver: {
+		Datas.Texture: preload("res://theLudovyc/Building/atlas_textures/weaver_atlas_texture.tres"),
 		Datas.Width: 2,
 		Datas.Height: 2,
 	},
@@ -109,6 +150,7 @@ func build():
 	if current_scene.has_node("EventBus"):
 		event_bus = current_scene.get_node("EventBus")
 		event_bus.send_building_selected.connect(_on_building_selected)
+		event_bus.send_natural_resource_selected.connect(_on_building_selected)
 		
 	var area2d := $Area2D
 	area2d.input_event.connect(_on_Area2d_input_event)
@@ -155,6 +197,10 @@ func _on_building_selected(building_node: Building2D):
 		is_selected = false
 		modulate = Color.WHITE
 
+func _on_natural_resource_selected(_natural_resource):
+	if is_selected:
+		is_selected = false
+		modulate = Color.WHITE
 
 func select():
 	is_selected = true

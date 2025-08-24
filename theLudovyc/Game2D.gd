@@ -17,17 +17,13 @@ class_name Game2D
 @onready var the_market := $TheMarket
 @onready var the_builder := $TheBuilder
 @onready var the_population := $ThePopulation
+@onready var the_cursor: TheCursor = %TheCursor
+@onready var the_nature: TheNature = $TheNature
 
 @onready var gui := $GUI
 @onready var pause_menu := %PauseMenu
 
 const Trees_Destroy_Cost = 1
-
-# if not null follow the cursor
-var cursor_entity: Building2D
-# avoid create building on first clic
-var cursor_entity_wait_release: bool = false
-
 
 var current_selected_building: Building2D = null
 
@@ -143,21 +139,21 @@ func _process(delta):
 		rtl.text += str(tm.get_cell_atlas_coords(0, tile_pos))
 
 	#spawn entity
-	if cursor_entity:
-		cursor_entity.position = tm.ground_layer.map_to_local(tile_pos)
+	if the_cursor.cursor_entity:
+		the_cursor.cursor_entity.position = tm.ground_layer.map_to_local(tile_pos)
 
-		var building_id = cursor_entity.building_id
+		var building_id = the_cursor.cursor_entity.building_id
 		
 		# FIXME : this probably uses a lot of performances
 
 		# -1 can not build, 0 yes and 0 tree, 1+ yes and 1+ tree to destroy
-		var trees_to_destroy = tm.is_entityStatic_constructible(cursor_entity, tile_pos)
-		var range = Buildings.get_dependency_max_range(cursor_entity.building_id)
+		var trees_to_destroy = tm.is_entityStatic_constructible(the_cursor.cursor_entity, tile_pos)
+		var range = Buildings.get_dependency_max_range(the_cursor.cursor_entity.building_id)
 		if range != -1:
-			tm.show_affected_area_of_building(cursor_entity, range)
+			tm.show_affected_area_of_building(the_cursor.cursor_entity, range)
 		
 		if (trees_to_destroy < 0):
-			cursor_entity.modulate = Color(Color.RED, 0.6)
+			the_cursor.cursor_entity.modulate = Color(Color.RED, 0.6)
 			
 			gui.set_rtl_visibility(false)
 		else:
@@ -172,12 +168,12 @@ func _process(delta):
 				gui.set_rtl_visibility(true)
 				
 				if trees_to_destroy > 0:
-					cursor_entity.modulate = Color(Color.ORANGE, 0.6)
+					the_cursor.cursor_entity.modulate = Color(Color.ORANGE, 0.6)
 				else:
-					cursor_entity.modulate = Color(Color.GREEN, 0.6)
+					the_cursor.cursor_entity.modulate = Color(Color.GREEN, 0.6)
 
 				if (
-					not cursor_entity_wait_release
+					not the_cursor.cursor_entity_wait_release
 					and Input.is_action_just_pressed("alt_command")
 				):
 					match Buildings.get_building_type(building_id):
@@ -195,42 +191,47 @@ func _process(delta):
 								Buildings.get_produce_resource(building_id),
 								Buildings.get_max_workers(building_id)
 							)
-
+					
 					the_bank.money += building_total_cost[0]
 
 					the_storage.conclude_building_construction(building_total_cost[1])
-					the_builder.conclude_building_construction(cursor_entity)
+					the_builder.conclude_building_construction(the_cursor.cursor_entity)
+					the_nature.conclude_building_construction(
+						the_cursor.cursor_entity,
+						tile_pos
+					)
 
 					event_bus.send_building_created.emit(building_id)
 
-					tm.build_entityStatic(cursor_entity, tile_pos)
+					tm.build_entityStatic(the_cursor.cursor_entity, tile_pos)
 
 					gui.set_rtl_visibility(false)
 
-					cursor_entity.modulate = Color.WHITE
-					cursor_entity.build()
-					cursor_entity = null
+					the_cursor.cursor_entity.modulate = Color.WHITE
+					the_cursor.cursor_entity.build()
+					the_cursor.cursor_entity = null
 					
 					tm.clear_overlay()
 
-		if cursor_entity_wait_release and Input.is_action_just_released("alt_command"):
-			cursor_entity_wait_release = false
+		if the_cursor.cursor_entity_wait_release and Input.is_action_just_released("alt_command"):
+			the_cursor.cursor_entity_wait_release = false
 
-		if cursor_entity and Input.is_action_just_pressed("main_command"):
+		if the_cursor.cursor_entity and Input.is_action_just_pressed("main_command"):
 			gui.set_rtl_visibility(false)
 
 			event_bus.send_building_creation_aborted.emit(building_id)
 
-			cursor_entity.call_deferred("queue_free")
-			cursor_entity = null
+			the_cursor.cursor_entity.call_deferred("queue_free")
+			the_cursor.cursor_entity = null
 			
 			tm.clear_overlay()
+		
 
 
 func _on_EventBus_ask_create_building(building_id: Buildings.Ids):
-	cursor_entity = the_builder.instantiate_building(building_id)
-	cursor_entity_wait_release = true
-	cursor_entity.modulate = Color(Color.RED, 0.6)
+	the_cursor.cursor_entity = the_builder.instantiate_building(building_id)
+	the_cursor.cursor_entity_wait_release = true
+	the_cursor.cursor_entity.modulate = Color(Color.RED, 0.6)
 	
 	tm.show_constructible_area_on_overlay(building_id)
 
@@ -253,10 +254,17 @@ func _on_EventBus_ask_demolish_current_building():
 	tm.demolish_building(current_selected_building)
 
 	var building_id = current_selected_building.building_id
+	var tile_pos = tm.ground_layer.local_to_map(
+		tm.ground_layer.to_local(current_selected_building.global_position)
+	)
 
 	the_storage.recover_building_construction(building_id)
 	
 	the_builder.conclude_building_destruction(building_id)
+	
+	the_nature.conclude_building_destruction(
+		current_selected_building, tile_pos
+	)
 	
 	var dependencies: Array[Building2D] = []
 	var max_range = Buildings.get_dependency_max_range(building_id)

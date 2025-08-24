@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://cpoygyhvrhab5"]
+
+[ext_resource type="Texture2D" uid="uid://70k3ixfd1gik" path="res://Art/Image/Buildings/Stonemason/Stonemason_idle.png" id="1_cw32l"]
+
+[resource]
+atlas = ExtResource("1_cw32l")
+region = Rect2(0, 0, 128, 128)

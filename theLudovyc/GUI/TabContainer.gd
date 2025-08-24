@@ -1,12 +1,14 @@
 extends TabContainer
 
-enum WidgetMenus { Market, Build, Building }
+enum WidgetMenus { Market, Build, Building, NaturalResource }
 
 @onready var bottom_container = %BottomContainer
 
 @onready var tooltip := %WidgetTooltip
 
 @onready var building_container := $BuildingContainer
+
+@onready var natural_resource_container = $NaturalResourceContainer
 
 var event_bus: EventBus
 
@@ -18,6 +20,7 @@ func _ready():
 	if event_bus != null:
 		event_bus.send_building_selected.connect(_on_receive_building_selected)
 		event_bus.send_current_building_demolished.connect(_on_receive_current_building_demolished)
+		event_bus.send_natural_resource_selected.connect(_on_receive_send_natural_resource_selected)
 
 	pass  # Replace with function body.
 
@@ -84,3 +87,14 @@ func _on_receive_building_selected(building: Building2D):
 func _on_receive_current_building_demolished():
 	if current_tab == WidgetMenus.Building:
 		bottom_container.set_menu_visibility(false)
+
+func _on_receive_send_natural_resource_selected(natural_resource: NaturalResource):
+	bottom_container.set_menu_visibility(true)
+
+	if current_tab != WidgetMenus.NaturalResource:
+		current_tab = WidgetMenus.NaturalResource
+
+	if tooltip.visible:
+		tooltip.visible = false
+
+	natural_resource_container.update_infos(natural_resource)

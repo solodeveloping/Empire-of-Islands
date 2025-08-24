@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://b3s7eqy0blp6g"]
+[gd_scene load_steps=113 format=3 uid="uid://b3s7eqy0blp6g"]
 
 [ext_resource type="Script" path="res://theLudovyc/GUI/GUI.gd" id="1_15w01"]
 [ext_resource type="Texture2D" uid="uid://5gbvga1bqpxa" path="res://Art/Image/Gui/Background/Widgets/map_bg.png" id="1_lis5v"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://340ntgsok673" path="res://Art/Image/Gui/Icons/BuildMenu/008_h.png" id="10_jbw0d"]
 [ext_resource type="Texture2D" uid="uid://bnrw8bxew25wd" path="res://Art/Image/Gui/Icons/BuildMenu/003_h.png" id="10_na55f"]
 [ext_resource type="Texture2D" uid="uid://b0gi4vdahasx6" path="res://Art/Image/Gui/Background/Widgets/cityinfo_left.png" id="13_s75r0"]
+[ext_resource type="Texture2D" uid="uid://c36pqi8rnvbl0" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/003.png" id="14_0wm6y"]
 [ext_resource type="Texture2D" uid="uid://dja8u81e6ge3k" path="res://Art/Image/Gui/Background/Widgets/cityinfo_right.png" id="14_flxif"]
 [ext_resource type="Texture2D" uid="uid://3hepoko6w1v" path="res://Art/Image/Gui/Icons/Widgets/CityInfo/settlement.png" id="14_h5vqk"]
 [ext_resource type="PackedScene" uid="uid://uwtq6pqqc8lm" path="res://theLudovyc/GUI/WidgetMenuButton.tscn" id="14_iofba"]
@@ -33,11 +34,14 @@
 [ext_resource type="Script" path="res://theLudovyc/GUI/Tooltip.gd" id="18_divjp"]
 [ext_resource type="Texture2D" uid="uid://bqvkxst5fhe7u" path="res://Art/Image/Gui/Icons/BuildMenu/020.png" id="18_f6gb5"]
 [ext_resource type="Script" path="res://theLudovyc/GUI/BuildingContainer.gd" id="18_nngab"]
+[ext_resource type="Texture2D" uid="uid://r3027vyqk7wl" path="res://Art/Image/Gui/Icons/BuildMenu/009.png" id="18_tncwm"]
 [ext_resource type="Texture2D" uid="uid://rqkqu27konps" path="res://Art/Image/Gui/Icons/Templates/Production/production_arrow.png" id="18_v5i80"]
 [ext_resource type="Script" path="res://theLudovyc/GUI/LabelWorkers.gd" id="18_xklsp"]
 [ext_resource type="Texture2D" uid="uid://dx6qmely0bq45" path="res://Art/Image/Gui/Background/Widgets/tooltip_bg.png" id="18_yoese"]
+[ext_resource type="Texture2D" uid="uid://cnhwvotyn7ksj" path="res://Art/Image/Gui/Icons/BuildMenu/009_d.png" id="19_6v2ft"]
 [ext_resource type="Texture2D" uid="uid://8immr7brv8eb" path="res://Art/Image/Gui/Background/Widgets/tooltip_bg_middle.png" id="19_28qxy"]
 [ext_resource type="Texture2D" uid="uid://dapd765c0bvd8" path="res://Art/Image/Gui/Buttons/delete_small.png" id="19_eef57"]
+[ext_resource type="Texture2D" uid="uid://dx33akwrax38v" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/008.png" id="19_qn8aj"]
 [ext_resource type="Texture2D" uid="uid://chsaot336foxe" path="res://Art/Image/Gui/Icons/BuildMenu/020_d.png" id="19_sqx8j"]
 [ext_resource type="Script" path="res://theLudovyc/GUI/BuildingInfoContainer.gd" id="19_uroop"]
 [ext_resource type="Texture2D" uid="uid://bntbwjpu7i64e" path="res://Art/Image/Gui/Icons/Templates/Production/toggle_active.png" id="19_ykl4j"]
@@ -46,7 +50,9 @@
 [ext_resource type="Texture2D" uid="uid://bjxpcfox7403j" path="res://Art/Image/Gui/Background/Widgets/tooltip_bg_bottom.png" id="20_4xpap"]
 [ext_resource type="Script" path="res://theLudovyc/GUI/BuildingProducingContainer.gd" id="20_6ni15"]
 [ext_resource type="Texture2D" uid="uid://btewy0y3mrcwd" path="res://Art/Image/Gui/Buttons/delete_small_bw.png" id="20_70i8g"]
+[ext_resource type="Texture2D" uid="uid://djk6eik5xkhhw" path="res://Art/Image/Gui/Icons/BuildMenu/009_h.png" id="20_uemu3"]
 [ext_resource type="Texture2D" uid="uid://difqb3sikk4b3" path="res://Art/Image/Gui/Icons/BuildMenu/020_h.png" id="20_wrh6c"]
+[ext_resource type="Texture2D" uid="uid://bnk4p0rrv0ed5" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/009.png" id="21_2xrf0"]
 [ext_resource type="Texture2D" uid="uid://toeqa364p2tp" path="res://Art/Image/Gui/Icons/Resources/32/001.png" id="21_03oya"]
 [ext_resource type="PackedScene" uid="uid://n6f00tsqpgrm" path="res://theLudovyc/GUI/ResourceTextureRect.tscn" id="21_cprbo"]
 [ext_resource type="Texture2D" uid="uid://cswhnjs5r8fkk" path="res://Art/Image/Gui/Buttons/delete_small_h.png" id="21_oyj7a"]
@@ -58,14 +64,47 @@
 [ext_resource type="Texture2D" uid="uid://div73bs1hkxwc" path="res://Art/Image/Gui/Icons/BuildMenu/039_d.png" id="25_rov8k"]
 [ext_resource type="Texture2D" uid="uid://cct56i6qr81fr" path="res://Art/Image/Gui/Icons/BuildMenu/039_h.png" id="26_hwluf"]
 [ext_resource type="Texture2D" uid="uid://b6nuq70hohg0w" path="res://Art/Image/Gui/Icons/Widgets/MiniMap/speed_up.png" id="26_j0dpo"]
+[ext_resource type="Texture2D" uid="uid://drbmncjyty61r" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/020.png" id="27_1ixgg"]
 [ext_resource type="Texture2D" uid="uid://etyxgvuub3qn" path="res://Art/Image/Gui/Icons/BuildMenu/041.png" id="27_6gyyb"]
 [ext_resource type="Texture2D" uid="uid://cf518se81cj2d" path="res://Art/Image/Gui/Icons/BuildMenu/041_d.png" id="28_pu8o5"]
 [ext_resource type="Texture2D" uid="uid://dbbd074dljjdh" path="res://Art/Image/Gui/Icons/BuildMenu/041_h.png" id="29_3glx1"]
+[ext_resource type="Texture2D" uid="uid://bkcjnj6dc04ir" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/019.png" id="31_e6rjf"]
 [ext_resource type="Script" path="res://theLudovyc/GUI/RichTextLabelInfo.gd" id="33_hbac4"]
+[ext_resource type="Texture2D" uid="uid://co7yxlkko5mm5" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/039.png" id="35_soms3"]
 [ext_resource type="PackedScene" uid="uid://dm2nc5paqgg5i" path="res://theLudovyc/GUI/ResourceControl.tscn" id="36_hya2t"]
+[ext_resource type="Texture2D" uid="uid://c2fwglu1y3ll5" path="res://Art/Image/Gui/Icons/BuildMenu/046.png" id="36_vhl8y"]
 [ext_resource type="Script" path="res://theLudovyc/GUI/MoneyControl.gd" id="37_dntbd"]
+[ext_resource type="Texture2D" uid="uid://cnr2qdyokj2va" path="res://Art/Image/Gui/Icons/BuildMenu/046_d.png" id="37_rqvn6"]
+[ext_resource type="Texture2D" uid="uid://dxcccu06661g4" path="res://Art/Image/Gui/Icons/BuildMenu/046_h.png" id="38_qrci0"]
+[ext_resource type="Texture2D" uid="uid://meyfdyrkdiah" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/046.png" id="39_5dpxc"]
+[ext_resource type="Texture2D" uid="uid://dheotgyfkpraw" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/041.png" id="39_aepax"]
+[ext_resource type="Texture2D" uid="uid://qbyjam3478ta" path="res://Art/Image/Gui/Icons/BuildMenu/054.png" id="40_a4w0t"]
 [ext_resource type="Script" path="res://theLudovyc/GUI/ResourcePopup.gd" id="40_c8vow"]
+[ext_resource type="Texture2D" uid="uid://d06s04d06gpg3" path="res://Art/Image/Gui/Icons/BuildMenu/018.png" id="40_o27qm"]
+[ext_resource type="Texture2D" uid="uid://csflapl4smyst" path="res://Art/Image/Gui/Icons/BuildMenu/018_d.png" id="41_8wg3i"]
+[ext_resource type="Texture2D" uid="uid://dkpa3kwuxtxvn" path="res://Art/Image/Gui/Icons/BuildMenu/054_d.png" id="41_gdg4c"]
+[ext_resource type="Texture2D" uid="uid://b6wfqgtsw61me" path="res://Art/Image/Gui/Icons/BuildMenu/054_h.png" id="42_47e60"]
+[ext_resource type="Texture2D" uid="uid://c25d2gqjswcio" path="res://Art/Image/Gui/Icons/BuildMenu/018_h.png" id="42_sqxxl"]
+[ext_resource type="Texture2D" uid="uid://cg015lc2qdy2f" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/054.png" id="43_2s4lo"]
+[ext_resource type="Texture2D" uid="uid://cr078gitr0b2e" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/018.png" id="43_ylyyj"]
+[ext_resource type="Texture2D" uid="uid://dllnqwm5uidpt" path="res://Art/Image/Gui/Icons/BuildMenu/055.png" id="44_n8bju"]
 [ext_resource type="Texture2D" uid="uid://cgyr73drevw2p" path="res://Art/Image/Gui/Background/square_120.png" id="44_wb08w"]
+[ext_resource type="Texture2D" uid="uid://btjpbjtllg176" path="res://Art/Image/Gui/Icons/BuildMenu/055_d.png" id="45_jr2ey"]
+[ext_resource type="Texture2D" uid="uid://cpwh4wjrdxk26" path="res://Art/Image/Gui/Icons/BuildMenu/055_h.png" id="46_oeex5"]
+[ext_resource type="Texture2D" uid="uid://btqpf17vpcpn0" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/055.png" id="47_agt33"]
+[ext_resource type="Texture2D" uid="uid://dwkjtxjhyygxb" path="res://Art/Image/Gui/Icons/BuildMenu/047.png" id="48_aheue"]
+[ext_resource type="Texture2D" uid="uid://cx77unr2pgyd3" path="res://Art/Image/Gui/Icons/BuildMenu/047_d.png" id="49_u5dgq"]
+[ext_resource type="Texture2D" uid="uid://q75smkfyvqj8" path="res://Art/Image/Gui/Icons/BuildMenu/047_h.png" id="50_y30tc"]
+[ext_resource type="Texture2D" uid="uid://cy3kb84wgmo7e" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/047.png" id="51_hdupb"]
+[ext_resource type="Script" path="res://theLudovyc/GUI/NaturalResourceContainer.gd" id="55_1wuat"]
+[ext_resource type="Texture2D" uid="uid://dlwlduri34m3l" path="res://Art/Image/Gui/Icons/BuildMenu/048.png" id="60_ji7q8"]
+[ext_resource type="Texture2D" uid="uid://bb7pfd7nxoux" path="res://Art/Image/Gui/Icons/BuildMenu/007.png" id="60_uatb7"]
+[ext_resource type="Texture2D" uid="uid://cet5qi63h6ybt" path="res://Art/Image/Gui/Icons/BuildMenu/007_d.png" id="61_a6w0c"]
+[ext_resource type="Texture2D" uid="uid://dg6rg1yh44od4" path="res://Art/Image/Gui/Icons/BuildMenu/048_d.png" id="61_owm3j"]
+[ext_resource type="Texture2D" uid="uid://pcttsvsppfsv" path="res://Art/Image/Gui/Icons/BuildMenu/048_h.png" id="62_jsvkb"]
+[ext_resource type="Texture2D" uid="uid://e2esl67a231m" path="res://Art/Image/Gui/Icons/BuildMenu/007_h.png" id="62_v7ij7"]
+[ext_resource type="Texture2D" uid="uid://cvfmbonc68uck" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/048.png" id="63_0a1ke"]
+[ext_resource type="Texture2D" uid="uid://c7itsp5vqf76e" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/007.png" id="63_ujidv"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q0br5"]
 content_margin_left = 20.0
@@ -224,6 +263,7 @@ layout_mode = 2
 texture_normal = ExtResource("8_04hx7")
 texture_pressed = ExtResource("9_7d646")
 texture_hover = ExtResource("10_na55f")
+texture_disabled = ExtResource("14_0wm6y")
 script = ExtResource("8_i5i22")
 building_id = 1
 
@@ -232,56 +272,144 @@ layout_mode = 2
 texture_normal = ExtResource("8_8yekw")
 texture_pressed = ExtResource("9_kn7dp")
 texture_hover = ExtResource("10_jbw0d")
+texture_disabled = ExtResource("19_qn8aj")
 script = ExtResource("8_i5i22")
 building_id = 2
+
+[node name="BuildHunterTent" type="TextureButton" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildGridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("18_tncwm")
+texture_pressed = ExtResource("19_6v2ft")
+texture_hover = ExtResource("20_uemu3")
+texture_disabled = ExtResource("21_2xrf0")
+script = ExtResource("8_i5i22")
+building_id = 3
 
 [node name="BuildHut" type="TextureButton" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildGridContainer"]
 layout_mode = 2
 texture_normal = ExtResource("8_04hx7")
 texture_pressed = ExtResource("9_7d646")
 texture_hover = ExtResource("10_na55f")
+texture_disabled = ExtResource("14_0wm6y")
 script = ExtResource("8_i5i22")
-building_id = 3
+building_id = 4
 
 [node name="BuildSawmill" type="TextureButton" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildGridContainer"]
 layout_mode = 2
 texture_normal = ExtResource("8_8yekw")
 texture_pressed = ExtResource("9_kn7dp")
 texture_hover = ExtResource("10_jbw0d")
+texture_disabled = ExtResource("19_qn8aj")
 script = ExtResource("8_i5i22")
-building_id = 4
+building_id = 5
 
 [node name="BuildFarm" type="TextureButton" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildGridContainer"]
 layout_mode = 2
 texture_normal = ExtResource("18_f6gb5")
 texture_pressed = ExtResource("19_sqx8j")
 texture_hover = ExtResource("20_wrh6c")
+texture_disabled = ExtResource("27_1ixgg")
 script = ExtResource("8_i5i22")
-building_id = 5
+building_id = 6
 
 [node name="BuildPotatoField" type="TextureButton" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildGridContainer"]
 layout_mode = 2
 texture_normal = ExtResource("21_subfh")
 texture_pressed = ExtResource("22_bwlpf")
 texture_hover = ExtResource("23_oy3y7")
+texture_disabled = ExtResource("31_e6rjf")
 script = ExtResource("8_i5i22")
-building_id = 6
+building_id = 7
 
 [node name="BuildPigsty" type="TextureButton" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildGridContainer"]
 layout_mode = 2
 texture_normal = ExtResource("24_hqqxw")
 texture_pressed = ExtResource("25_rov8k")
 texture_hover = ExtResource("26_hwluf")
+texture_disabled = ExtResource("35_soms3")
 script = ExtResource("8_i5i22")
-building_id = 7
+building_id = 8
+
+[node name="BuildWheatField" type="TextureButton" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildGridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("36_vhl8y")
+texture_pressed = ExtResource("37_rqvn6")
+texture_hover = ExtResource("38_qrci0")
+texture_disabled = ExtResource("39_5dpxc")
+script = ExtResource("8_i5i22")
+building_id = 15
+
+[node name="BuildPasture" type="TextureButton" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildGridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("40_o27qm")
+texture_pressed = ExtResource("41_8wg3i")
+texture_hover = ExtResource("42_sqxxl")
+texture_disabled = ExtResource("43_ylyyj")
+script = ExtResource("8_i5i22")
+building_id = 12
 
 [node name="BuildButchery" type="TextureButton" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildGridContainer"]
 layout_mode = 2
 texture_normal = ExtResource("27_6gyyb")
 texture_pressed = ExtResource("28_pu8o5")
 texture_hover = ExtResource("29_3glx1")
+texture_disabled = ExtResource("39_aepax")
 script = ExtResource("8_i5i22")
-building_id = 8
+building_id = 9
+
+[node name="BuildWindmill" type="TextureButton" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildGridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("48_aheue")
+texture_pressed = ExtResource("49_u5dgq")
+texture_hover = ExtResource("50_y30tc")
+texture_disabled = ExtResource("51_hdupb")
+script = ExtResource("8_i5i22")
+building_id = 16
+
+[node name="BuildStonePit" type="TextureButton" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildGridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("40_a4w0t")
+texture_pressed = ExtResource("41_gdg4c")
+texture_hover = ExtResource("42_47e60")
+texture_disabled = ExtResource("43_2s4lo")
+script = ExtResource("8_i5i22")
+building_id = 10
+
+[node name="BuildStonemason" type="TextureButton" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildGridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("44_n8bju")
+texture_pressed = ExtResource("45_jr2ey")
+texture_hover = ExtResource("46_oeex5")
+texture_disabled = ExtResource("47_agt33")
+script = ExtResource("8_i5i22")
+building_id = 11
+
+[node name="BuildHouse" type="TextureButton" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildGridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("8_04hx7")
+texture_pressed = ExtResource("9_7d646")
+texture_hover = ExtResource("10_na55f")
+texture_disabled = ExtResource("14_0wm6y")
+script = ExtResource("8_i5i22")
+building_id = 14
+
+[node name="BuildWeaver" type="TextureButton" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildGridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("60_uatb7")
+texture_pressed = ExtResource("61_a6w0c")
+texture_hover = ExtResource("62_v7ij7")
+texture_disabled = ExtResource("63_ujidv")
+script = ExtResource("8_i5i22")
+building_id = 13
+
+[node name="BuildBakery" type="TextureButton" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildGridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("60_ji7q8")
+texture_pressed = ExtResource("61_owm3j")
+texture_hover = ExtResource("62_jsvkb")
+texture_disabled = ExtResource("63_0a1ke")
+script = ExtResource("8_i5i22")
+building_id = 17
 
 [node name="BuildingContainer" type="VBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer"]
 layout_mode = 2
@@ -418,6 +546,31 @@ texture = ExtResource("21_03oya")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="NaturalResourceContainer" type="VBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("55_1wuat")
+metadata/_tab_index = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/NaturalResourceContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="Widget/BottomContainer/PanelContainer/MenuContainer/NaturalResourceContainer/HBoxContainer"]
+layout_mode = 2
+text = "BuildingName"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Widget/BottomContainer/PanelContainer/MenuContainer/NaturalResourceContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxFlat_or0xk")
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="Widget/BottomContainer/PanelContainer/MenuContainer/NaturalResourceContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+fit_content = true
+
 [node name="Bot" type="TextureRect" parent="Widget/BottomContainer"]
 layout_mode = 2
 texture = ExtResource("8_2h6rg")
@@ -529,22 +682,25 @@ layout_mode = 2
 text = "Unknow City Name
 "
 
-[node name="TextureRect2" type="TextureRect" parent="CityInfo/PanelContainer/HBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="CityInfo/PanelContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer3"]
 layout_mode = 2
 tooltip_text = "Sailors"
 texture = ExtResource("15_p3ujw")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CityInfo/PanelContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer3"]
 layout_mode = 2
 tooltip_text = "Sailors"
 theme_override_constants/separation = 0
 
-[node name="LabelPopulation" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer"]
+[node name="LabelPopulation" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer3/HBoxContainer"]
 layout_mode = 2
 text = "0"
 script = ExtResource("17_v0ai2")
 
-[node name="LabelWorkers" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer"]
+[node name="LabelWorkers" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer3/HBoxContainer"]
 layout_mode = 2
 text = "(0)"
 script = ExtResource("18_xklsp")
@@ -554,23 +710,26 @@ layout_mode = 2
 theme_override_constants/separation = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_orjbh")
 
-[node name="TextureRect3" type="TextureRect" parent="CityInfo/PanelContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CityInfo/PanelContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer"]
 layout_mode = 2
 tooltip_text = "Pioneers"
 texture = ExtResource("15_p3ujw")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CityInfo/PanelContainer/HBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer"]
 layout_mode = 2
 tooltip_text = "Pioneers"
 theme_override_constants/separation = 0
 
-[node name="LabelPopulation" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer2"]
+[node name="LabelPopulation" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer/HBoxContainer2"]
 layout_mode = 2
 text = "0"
 script = ExtResource("17_v0ai2")
 population_type = 1
 
-[node name="LabelWorkers" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer2"]
+[node name="LabelWorkers" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer/HBoxContainer2"]
 layout_mode = 2
 text = "(0)"
 script = ExtResource("18_xklsp")
@@ -581,15 +740,46 @@ layout_mode = 2
 theme_override_constants/separation = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_orjbh")
 
+[node name="HBoxContainer2" type="HBoxContainer" parent="CityInfo/PanelContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+tooltip_text = "Pioneers"
+texture = ExtResource("15_p3ujw")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+tooltip_text = "Pioneers"
+theme_override_constants/separation = 0
+
+[node name="LabelPopulation" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+text = "0"
+script = ExtResource("17_v0ai2")
+population_type = 2
+
+[node name="LabelWorkers" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+text = "(0)"
+script = ExtResource("18_xklsp")
+population_type = 2
+
+[node name="VSeparator4" type="VSeparator" parent="CityInfo/PanelContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_orjbh")
+
 [node name="TextureRect2" type="TextureRect" parent="CityInfo"]
 layout_mode = 2
 texture = ExtResource("14_flxif")
 
-[node name="Money+Resources" type="HBoxContainer" parent="."]
+[node name="Money+Resources" type="GridContainer" parent="."]
 offset_left = 20.0
 offset_top = 20.0
-offset_right = 268.0
-offset_bottom = 90.0
+offset_right = 1192.0
+offset_bottom = 238.0
+columns = 7
 
 [node name="ControlMoney" parent="Money+Resources" instance=ExtResource("36_hya2t")]
 layout_mode = 2
@@ -602,37 +792,62 @@ tooltip_text = "Money"
 tooltip_text = "Money"
 script = null
 
-[node name="Resources" type="HBoxContainer" parent="Money+Resources"]
+[node name="ControlResourceWood" parent="Money+Resources" instance=ExtResource("36_hya2t")]
 layout_mode = 2
 
-[node name="ControlResourceWood" parent="Money+Resources/Resources" instance=ExtResource("36_hya2t")]
-layout_mode = 2
-
-[node name="ControlResourceTextile" parent="Money+Resources/Resources" instance=ExtResource("36_hya2t")]
+[node name="ControlResourceTextile" parent="Money+Resources" instance=ExtResource("36_hya2t")]
 layout_mode = 2
 resource_type = 1
 
-[node name="PanelContainer" parent="Money+Resources/Resources/ControlResourceTextile/HBoxContainer" index="1"]
+[node name="PanelContainer" parent="Money+Resources/ControlResourceTextile/HBoxContainer" index="1"]
 tooltip_text = "Textile"
 
-[node name="TextureButton" parent="Money+Resources/Resources/ControlResourceTextile" index="1"]
+[node name="TextureButton" parent="Money+Resources/ControlResourceTextile" index="1"]
 tooltip_text = "Textile"
 
-[node name="ControlResourcePlank" parent="Money+Resources/Resources" instance=ExtResource("36_hya2t")]
+[node name="ControlResourceGameMeat" parent="Money+Resources" instance=ExtResource("36_hya2t")]
 layout_mode = 2
 resource_type = 2
 
-[node name="ControlResourcePotato" parent="Money+Resources/Resources" instance=ExtResource("36_hya2t")]
+[node name="ControlResourcePlank" parent="Money+Resources" instance=ExtResource("36_hya2t")]
 layout_mode = 2
 resource_type = 3
 
-[node name="ControlResourcePig" parent="Money+Resources/Resources" instance=ExtResource("36_hya2t")]
+[node name="ControlResourcePotato" parent="Money+Resources" instance=ExtResource("36_hya2t")]
 layout_mode = 2
 resource_type = 4
 
-[node name="ControlResourceMeat" parent="Money+Resources/Resources" instance=ExtResource("36_hya2t")]
+[node name="ControlResourcePig" parent="Money+Resources" instance=ExtResource("36_hya2t")]
 layout_mode = 2
 resource_type = 5
+
+[node name="ControlResourceWheat" parent="Money+Resources" instance=ExtResource("36_hya2t")]
+layout_mode = 2
+resource_type = 10
+
+[node name="ControlResourceWool" parent="Money+Resources" instance=ExtResource("36_hya2t")]
+layout_mode = 2
+resource_type = 9
+
+[node name="ControlResourceMeat" parent="Money+Resources" instance=ExtResource("36_hya2t")]
+layout_mode = 2
+resource_type = 6
+
+[node name="ControlResourceStone" parent="Money+Resources" instance=ExtResource("36_hya2t")]
+layout_mode = 2
+resource_type = 7
+
+[node name="ControlResourceFlour" parent="Money+Resources" instance=ExtResource("36_hya2t")]
+layout_mode = 2
+resource_type = 11
+
+[node name="ControlResourceStonebrick" parent="Money+Resources" instance=ExtResource("36_hya2t")]
+layout_mode = 2
+resource_type = 8
+
+[node name="ControlResourceBread" parent="Money+Resources" instance=ExtResource("36_hya2t")]
+layout_mode = 2
+resource_type = 12
 
 [node name="RichTextLabelInfo" type="RichTextLabel" parent="."]
 visible = false
@@ -696,4 +911,4 @@ unique_name_in_owner = true
 [connection signal="visibility_changed" from="RichTextLabelInfo" to="RichTextLabelInfo" method="_on_visibility_changed"]
 
 [editable path="Money+Resources/ControlMoney"]
-[editable path="Money+Resources/Resources/ControlResourceTextile"]
+[editable path="Money+Resources/ControlResourceTextile"]

@@ -4,15 +4,19 @@ class_name Resources
 # WARN : if you change the order or insert something
 # You will have to modify the resources indicators in the GUI as of now
 enum Types {
-	# Level 1
 	Wood,
 	Textile,
 	GameMeat,
-	# Level 2
 	Plank,
 	Potato,
 	Pig,
 	Meat,
+	Stone,
+	StoneBrick,
+	Wool,
+	Wheat,
+	Flour,
+	Bread,
 }
 
 const Icons = {
@@ -20,11 +24,17 @@ const Icons = {
 	Types.Wood: preload("res://Art/Image/Gui/Icons/Resources/32/008.png"),
 	Types.Textile: preload("res://Art/Image/Gui/Icons/Resources/32/003.png"),
 	Types.GameMeat: preload("res://Art/Image/Gui/Icons/Resources/32/013.png"),
+	Types.Stone: preload("res://Art/Image/Gui/Icons/Resources/32/051.png"),
 	# Level 2
 	Types.Plank: preload("res://Art/Image/Gui/Icons/Resources/32/004.png"),
 	Types.Potato: preload("res://Art/Image/Gui/Icons/Resources/32/015.png"),
 	Types.Pig: preload("res://Art/Image/Gui/Icons/Resources/32/036.png"),
 	Types.Meat: preload("res://Art/Image/Gui/Icons/Resources/32/005.png"),
+	Types.StoneBrick: preload("res://Art/Image/Gui/Icons/Resources/32/052.png"),
+	Types.Wool: preload("res://Art/Image/Gui/Icons/Resources/32/010.png"),
+	Types.Wheat: preload("res://Art/Image/Gui/Icons/Resources/32/042.png"),
+	Types.Flour: preload("res://Art/Image/Gui/Icons/Resources/32/044.png"),
+	Types.Bread: preload("res://Art/Temp/cc0-food-icons/bread.png"),
 }
 
 enum Datas { Name, Type, Level, }
@@ -45,6 +55,21 @@ const datas = {
 		Datas.Name: &"Potato",
 		Datas.Type: Types.Potato,
 	},
+	Types.Stone:
+	{
+		Datas.Name: &"Stone",
+		Datas.Type: Types.Stone,
+	},
+	Types.Wool:
+	{
+		Datas.Name: &"Wool",
+		Datas.Type: Types.Wool,
+	},
+	Types.Wheat:
+	{
+		Datas.Name: &"Wheat",
+		Datas.Type: Types.Wheat,
+	},
 	# Level 2
 	Types.Textile:
 	{
@@ -61,11 +86,26 @@ const datas = {
 		Datas.Name: &"Pig",
 		Datas.Type: Types.Pig,
 	},
+	Types.StoneBrick:
+	{
+		Datas.Name: &"Stone brick",
+		Datas.Type: Types.StoneBrick,
+	},
+	Types.Flour:
+	{
+		Datas.Name: &"Flour",
+		Datas.Type: Types.Flour,
+	},
 	# Level 3
 	Types.Meat:
 	{
 		Datas.Name: &"Meat",
 		Datas.Type: Types.Meat,
+	},
+	Types.Bread:
+	{
+		Datas.Name: &"Bread",
+		Datas.Type: Types.Bread,
 	},
 }
 
@@ -84,11 +124,17 @@ enum LevelTypes { Gathered, TransformedOnce, TransformedTwice }
 const Levels = {
 	Types.Wood: LevelTypes.Gathered,
 	Types.GameMeat: LevelTypes.Gathered,
+	Types.Stone: LevelTypes.Gathered,
 	Types.Textile: LevelTypes.TransformedTwice,
 	Types.Plank: LevelTypes.TransformedOnce,
 	Types.Potato: LevelTypes.Gathered,
 	Types.Pig: LevelTypes.TransformedOnce,
 	Types.Meat: LevelTypes.TransformedTwice,
+	Types.StoneBrick: LevelTypes.TransformedOnce,
+	Types.Wool: LevelTypes.Gathered,
+	Types.Wheat: LevelTypes.Gathered,
+	Types.Flour: LevelTypes.TransformedOnce,
+	Types.Bread: LevelTypes.TransformedTwice,
 }
 
 static func get_resource_level(resource_type: Types) -> LevelTypes:
@@ -100,7 +146,8 @@ static func get_resource_level(resource_type: Types) -> LevelTypes:
 const Foods = [
 	Types.GameMeat,
 	Types.Potato,
-	Types.Meat
+	Types.Meat,
+	Types.Bread,
 ]
 
 static func is_food(resource_type: Types) -> bool:

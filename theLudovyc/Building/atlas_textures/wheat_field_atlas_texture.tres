@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://de25c8hg56unk"]
+
+[ext_resource type="Texture2D" uid="uid://duvhcgurirn21" path="res://Art/Image/Buildings/CornField/CornField_idle_full.png" id="1_bbdkx"]
+
+[resource]
+atlas = ExtResource("1_bbdkx")
+region = Rect2(0, 64, 192, 128)

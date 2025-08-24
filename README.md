@@ -25,3 +25,5 @@ We are also using [game-icons](Art/External/game-icons/) icons:
 We are also using SoloDeveloping tiles, under CC BY 4.0
 
 [Cog stop](https://pictogrammers.com/library/mdi/icon/cog-stop/) was created by Michael Irigoyen, under Apache License 2.0.
+
+The project is using some of the [cc0-food-icons](https://opengameart.org/content/cc0-food-icons) icons, respective credits are there (CC0 license).
