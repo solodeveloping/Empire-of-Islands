@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bkup5mqdwgxlj"]
 
-[ext_resource type="Script" path="res://Script/Gui/TabWidget/TroopMenuTabWidget.gd" id="2"]
+[ext_resource type="Script" uid="uid://dfsvbg0eghc1k" path="res://Script/Gui/TabWidget/TroopMenuTabWidget.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://dh4jjo001eari" path="res://Scene/Gui/TabWidget/Switches/SwordmanSwitchTabWidget.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://bvbuafk7d6fdt" path="res://Scene/Gui/TabWidget/TabWidget.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://b25sornhxlynd" path="res://Scene/Gui/BasicControl/LabelEx.tscn" id="5"]

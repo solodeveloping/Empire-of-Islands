@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://823716nh5ws4"]
 
-[ext_resource type="Script" path="res://Script/Buildings/Weaponsmith.gd" id="1"]
+[ext_resource type="Script" uid="uid://b8x8pgai5bon" path="res://Script/Buildings/Weaponsmith.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://cahtqi0mpd1bh" path="res://Scene/Buildings/Building.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://bhwygwgw1mqr1" path="res://Art/Image/Buildings/Weaponsmith/Weaponsmith_idle.png" id="3"]
 [ext_resource type="Shape3D" uid="uid://w7dqwqb3af0c" path="res://Scene/World/Shapes/BoxShape2x2.tres" id="4"]

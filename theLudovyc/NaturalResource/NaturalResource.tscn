@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bl1hgyy50orya"]
 
-[ext_resource type="Script" path="res://theLudovyc/NaturalResource/NaturalResource.gd" id="1_rxjj4"]
+[ext_resource type="Script" uid="uid://dg708pt3igb2u" path="res://theLudovyc/NaturalResource/NaturalResource.gd" id="1_rxjj4"]
 
 [node name="NaturalResource" type="Sprite2D"]
 script = ExtResource("1_rxjj4")

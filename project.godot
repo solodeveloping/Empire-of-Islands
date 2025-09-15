@@ -13,7 +13,7 @@ config_version=5
 config/name="Empire of Islands"
 config/version="0.01"
 run/main_scene="res://RGT/Bootstrap/bootstrap.tscn"
-config/features=PackedStringArray("4.3")
+config/features=PackedStringArray("4.4")
 boot_splash/image="res://boot_splash.png"
 config/icon="res://icon.png"
 boot_splash/minimum_display_time=2000
@@ -54,7 +54,7 @@ naming/scene_name_casing=0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/rakugo_game_template/plugin.cfg")
+enabled=PackedStringArray("res://addons/gaea/plugin.cfg", "res://addons/rakugo_game_template/plugin.cfg")
 
 [gui]
 

@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://dirun2ixxn2h7"]
 
 [ext_resource type="Texture2D" uid="uid://dapd765c0bvd8" path="res://Art/Image/Gui/Buttons/delete_small.png" id="1_8qysj"]
-[ext_resource type="Script" path="res://theLudovyc/GUI/ResourceOrder.gd" id="1_ghpx7"]
+[ext_resource type="Script" uid="uid://bq4a7abww6k0d" path="res://theLudovyc/GUI/ResourceOrder.gd" id="1_ghpx7"]
 [ext_resource type="Texture2D" uid="uid://cswhnjs5r8fkk" path="res://Art/Image/Gui/Buttons/delete_small_h.png" id="2_4qexu"]
-[ext_resource type="Script" path="res://theLudovyc/GUI/CustomSpinBox.gd" id="2_h1671"]
+[ext_resource type="Script" uid="uid://cp3ovy0kk7ebn" path="res://theLudovyc/GUI/CustomSpinBox.gd" id="2_h1671"]
 [ext_resource type="Texture2D" uid="uid://dt1ef2m6h6d7x" path="res://Art/Image/Gui/Icons/Resources/32/placeholder.png" id="4_06w2f"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_0eng7"]

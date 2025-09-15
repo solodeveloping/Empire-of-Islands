@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bwtxisllq0ply" path="res://Scene/Gui/TabWidget/ProductionWithRelatedBuildingsMenuTabWidget.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://dg6whk6ygbtpi" path="res://Scene/Gui/TabWidget/ViewComponents/ProductionChain.tscn" id="3"]
-[ext_resource type="Script" path="res://Script/Gui/TabWidget/LumberjackTabWidget.gd" id="5"]
+[ext_resource type="Script" uid="uid://bm35rchfhlexj" path="res://Script/Gui/TabWidget/LumberjackTabWidget.gd" id="5"]
 [ext_resource type="PackedScene" uid="uid://bj3hi4dvcviuc" path="res://Scene/Gui/TabWidget/BuildButtons/BuildTreeButton.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://clre4f1e4md30" path="res://Scene/Gui/TabWidget/BuildButtons/BuildTreeAreaButton.tscn" id="10"]
 

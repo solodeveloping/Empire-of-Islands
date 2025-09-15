@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://gfjfmihmduqa" path="res://Scene/Buildings/Agricultural.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://dec0sbdot0kp1" path="res://Art/Image/Buildings/Pigsty/Pigsty_idle.png" id="3_h107m"]
-[ext_resource type="Script" path="res://Script/Buildings/Agricultural/Pigsty.gd" id="4"]
+[ext_resource type="Script" uid="uid://ml8t83lwvdn" path="res://Script/Buildings/Agricultural/Pigsty.gd" id="4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tne1m"]
 transparency = 2

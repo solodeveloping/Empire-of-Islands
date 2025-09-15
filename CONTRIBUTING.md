@@ -207,7 +207,7 @@ get_tree().change_scene_to(_scenes[scene])
 
 ```gdscript
 func _process(_delta: float) -> void:
-    pass
+	pass
 ```
 
 - Generally, **one** line break is to be placed where it says **two** in the official guide.

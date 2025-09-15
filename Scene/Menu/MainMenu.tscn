@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://dytw0n3b07ux4"]
 
-[ext_resource type="Script" path="res://Script/Gui/Menu/MainMenu.gd" id="1"]
+[ext_resource type="Script" uid="uid://bkuwpqae0nqja" path="res://Script/Gui/Menu/MainMenu.gd" id="1"]
 [ext_resource type="Theme" uid="uid://lyx8kydf373j" path="res://Art/Theme/MenuTheme.tres" id="1_i4hjr"]
 [ext_resource type="Texture2D" uid="uid://q5ucvivm8wdb" path="res://Art/Image/Gui/Background/MainMenu/bg_1.png" id="3_3khu6"]
 [ext_resource type="Texture2D" uid="uid://cpn75tf5b4csq" path="res://Art/Image/Gui/Background/MainMenu/wheel.png" id="3_ogkxw"]
@@ -120,8 +120,8 @@ tracks/6/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hgqkq"]
 _data = {
-"RESET": SubResource("Animation_ft716"),
-"intro": SubResource("1")
+&"RESET": SubResource("Animation_ft716"),
+&"intro": SubResource("1")
 }
 
 [node name="MainMenuUI" type="Control"]
@@ -405,7 +405,7 @@ grow_vertical = 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_hgqkq")
+&"": SubResource("AnimationLibrary_hgqkq")
 }
 autoplay = "intro"
 

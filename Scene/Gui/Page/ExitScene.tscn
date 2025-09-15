@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dtblc45yuwp0w"]
 
-[ext_resource type="Script" path="res://Script/Gui/Page/ExitScene.gd" id="1"]
+[ext_resource type="Script" uid="uid://bbb2vr5ko3adj" path="res://Script/Gui/Page/ExitScene.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://nrp4xkogand" path="res://Art/Image/Gui/Background/MainMenu/bg_4.png" id="2"]
 [ext_resource type="Theme" uid="uid://lyx8kydf373j" path="res://Art/Theme/MenuTheme.tres" id="3"]
 [ext_resource type="Texture2D" uid="uid://cpn75tf5b4csq" path="res://Art/Image/Gui/Background/MainMenu/wheel.png" id="4"]

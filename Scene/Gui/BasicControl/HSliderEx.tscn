@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://b25sornhxlynd" path="res://Scene/Gui/BasicControl/LabelEx.tscn" id="3"]
 [ext_resource type="FontFile" uid="uid://sdfro4oswrtf" path="res://Art/Fonts/LinLibertineI.ttf" id="3_u5rqw"]
-[ext_resource type="Script" path="res://Script/Gui/HSliderEx.gd" id="4"]
+[ext_resource type="Script" uid="uid://2v0k11v0sijw" path="res://Script/Gui/HSliderEx.gd" id="4"]
 [ext_resource type="FontFile" uid="uid://dgr8rlsjjeh22" path="res://Art/Fonts/LinLibertineBI.ttf" id="4_vt414"]
-[ext_resource type="Script" path="res://Script/Gui/HSlider.gd" id="6"]
+[ext_resource type="Script" uid="uid://c1h7qyv2irmgm" path="res://Script/Gui/HSlider.gd" id="6"]
 
 [node name="HSliderEx" type="VBoxContainer"]
 script = ExtResource("4")

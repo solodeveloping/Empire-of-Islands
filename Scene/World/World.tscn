@@ -1,13 +1,13 @@
 [gd_scene load_steps=10 format=3 uid="uid://b3jx1swk07856"]
 
 [ext_resource type="PackedScene" uid="uid://dis2urkbeqvnk" path="res://Scene/Player/PlayerStart.tscn" id="1"]
-[ext_resource type="Script" path="res://Script/World/World.gd" id="1_w7xx4"]
+[ext_resource type="Script" uid="uid://b5e3kpdtsbj0y" path="res://Script/World/World.gd" id="1_w7xx4"]
 [ext_resource type="MeshLibrary" uid="uid://lpmno4f5y77j" path="res://Scene/World/TerrainMeshLibrary.tres" id="2"]
 [ext_resource type="PackedScene" uid="uid://ctbaljo7ulect" path="res://Scene/Player/PlayerCamera.tscn" id="4"]
-[ext_resource type="Script" path="res://Script/World/Terrain.gd" id="7"]
-[ext_resource type="Script" path="res://Script/World/AStarMap.gd" id="8"]
+[ext_resource type="Script" uid="uid://sqcpfpvrtun" path="res://Script/World/Terrain.gd" id="7"]
+[ext_resource type="Script" uid="uid://d3705pxnuk6r3" path="res://Script/World/AStarMap.gd" id="8"]
 [ext_resource type="MeshLibrary" path="res://Scene/Buildings/Streets/TrailMeshLibrary.meshlib" id="9"]
-[ext_resource type="Script" path="res://Script/World/Streets.gd" id="10"]
+[ext_resource type="Script" uid="uid://b7mq2ix8nt762" path="res://Script/World/Streets.gd" id="10"]
 
 [sub_resource type="BoxShape3D" id="1"]
 size = Vector3(200, 0, 200)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://courccf5jxrq5"]
 
 [ext_resource type="PackedScene" uid="uid://biy4rnv5luqwq" path="res://Scene/World/Unit/Ship.tscn" id="1"]
-[ext_resource type="Script" path="res://Script/World/Unit/Ship/FreeTrader.gd" id="2"]
+[ext_resource type="Script" uid="uid://oaeey2msx2l8" path="res://Script/World/Unit/Ship/FreeTrader.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://b0hhaojulvwap" path="res://Art/Image/Units/FreeTraders_idle.png" id="3"]
 [ext_resource type="Shape3D" uid="uid://b0tf8160mv311" path="res://Scene/World/Shapes/BoxShape3x3.tres" id="4"]
 

@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://bydj0v2pgcbhx"]
 
-[ext_resource type="Script" path="res://Script/Gui/CheckBoxEx.gd" id="2"]
+[ext_resource type="Script" uid="uid://bt76ibhp46jn0" path="res://Script/Gui/CheckBoxEx.gd" id="2"]
 [ext_resource type="FontFile" uid="uid://sdfro4oswrtf" path="res://Art/Fonts/LinLibertineI.ttf" id="3_76ept"]
 [ext_resource type="PackedScene" uid="uid://b25sornhxlynd" path="res://Scene/Gui/BasicControl/LabelEx.tscn" id="4"]
-[ext_resource type="Script" path="res://Script/Gui/CheckBox.gd" id="5"]
+[ext_resource type="Script" uid="uid://x3h1i0im4ri0" path="res://Script/Gui/CheckBox.gd" id="5"]
 
 [node name="CheckBoxEx" type="HBoxContainer"]
 offset_right = 154.0

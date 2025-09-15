@@ -1,13 +1,13 @@
 [gd_scene load_steps=9 format=3 uid="uid://ctbaljo7ulect"]
 
-[ext_resource type="Script" path="res://Script/Player/PlayerCamera.gd" id="1"]
-[ext_resource type="Script" path="res://Script/Gui/SelectionBox.gd" id="2"]
+[ext_resource type="Script" uid="uid://qin0pxiltod8" path="res://Script/Player/PlayerCamera.gd" id="1"]
+[ext_resource type="Script" uid="uid://ckd8v2wmi6bsk" path="res://Script/Gui/SelectionBox.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://b7m7bdqyo6vkb" path="res://Scene/Player/PlayerHUD.tscn" id="3"]
-[ext_resource type="Script" path="res://Script/CameraControls.gd" id="4"]
-[ext_resource type="Script" path="res://Script/Player/InteractionContexts/SelectionContext.gd" id="5"]
-[ext_resource type="Script" path="res://Script/Player/InteractionContexts/MovementContext.gd" id="6"]
-[ext_resource type="Script" path="res://Script/Player/InteractionContexts/TileContext.gd" id="7"]
-[ext_resource type="Script" path="res://Script/Player/InteractionContexts/TearContext.gd" id="8"]
+[ext_resource type="Script" uid="uid://dlrlobcjy4ea8" path="res://Script/CameraControls.gd" id="4"]
+[ext_resource type="Script" uid="uid://c1u14u2j3cgao" path="res://Script/Player/InteractionContexts/SelectionContext.gd" id="5"]
+[ext_resource type="Script" uid="uid://dm3tpsttt5d4g" path="res://Script/Player/InteractionContexts/MovementContext.gd" id="6"]
+[ext_resource type="Script" uid="uid://3aa0p1beeiao" path="res://Script/Player/InteractionContexts/TileContext.gd" id="7"]
+[ext_resource type="Script" uid="uid://c3vtcum7tb8js" path="res://Script/Player/InteractionContexts/TearContext.gd" id="8"]
 
 [node name="PlayerCamera" type="Node3D"]
 script = ExtResource("1")

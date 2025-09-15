@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://qndk0ulsg1jc" path="res://Scene/Gui/BasicControl/ResourceItem.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://b25sornhxlynd" path="res://Scene/Gui/BasicControl/LabelEx.tscn" id="2"]
-[ext_resource type="Script" path="res://Script/Gui/InventorySlot.gd" id="3"]
+[ext_resource type="Script" uid="uid://cuq7nbe075rss" path="res://Script/Gui/InventorySlot.gd" id="3"]
 [ext_resource type="Texture2D" uid="uid://ci64i0ra5lm7" path="res://Art/Image/Gui/Background/inv_bg.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://cke8lkljkb73" path="res://Art/Image/Gui/Background/Widgets/progressbar_fill.png" id="5"]
 

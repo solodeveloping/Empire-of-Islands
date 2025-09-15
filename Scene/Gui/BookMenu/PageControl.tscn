@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://c740oohp88ykb" path="res://Art/Image/Gui/Buttons/parrow_left.png" id="7"]
 [ext_resource type="Texture2D" uid="uid://cpqme4x6afr1j" path="res://Art/Image/Gui/Buttons/parrow_left_h.png" id="8"]
 [ext_resource type="PackedScene" uid="uid://bivdx68a62ioq" path="res://Scene/Gui/BasicControl/RoundButton.tscn" id="9"]
-[ext_resource type="Script" path="res://Script/Gui/Menu/Book/PageControlButton.gd" id="10"]
+[ext_resource type="Script" uid="uid://b4gtohvqfq11i" path="res://Script/Gui/Menu/Book/PageControlButton.gd" id="10"]
 
 [node name="PageControl" type="HBoxContainer"]
 offset_top = 450.0

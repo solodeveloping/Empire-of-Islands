@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://daextxbtctkbi"]
 
 [ext_resource type="FontFile" uid="uid://b132ikq6ayfyj" path="res://Art/Fonts/LinLibertineC.ttf" id="1_d1qqp"]
-[ext_resource type="Script" path="res://Script/Gui/LabelEx.gd" id="1_j2vnn"]
+[ext_resource type="Script" uid="uid://bsk45d4ptfxre" path="res://Script/Gui/LabelEx.gd" id="1_j2vnn"]
 
 [node name="Caption" type="Label"]
 offset_right = 300.0

@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://6w15vx8n0tn2" path="res://Scene/Gui/TabWidget/Views/BuildRelatedBuildings.tscn" id="14"]
 [ext_resource type="PackedScene" uid="uid://c202xc2k0y3id" path="res://Scene/Gui/TabWidget/BuildButtons/BuildDoctorButton.tscn" id="15"]
 [ext_resource type="PackedScene" uid="uid://cblgqdh1ci3sb" path="res://Scene/Gui/TabWidget/BuildButtons/BuildMainSquareButton.tscn" id="16"]
-[ext_resource type="Script" path="res://Script/Gui/TabWidget/ResidenceTabWidget.gd" id="17"]
+[ext_resource type="Script" uid="uid://d32m5p7ettjd1" path="res://Script/Gui/TabWidget/ResidenceTabWidget.gd" id="17"]
 
 [node name="ResidenceTabWidget" instance=ExtResource("3")]
 script = ExtResource("17")

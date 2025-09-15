@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cm8r8l3b5rix8"]
 
 [ext_resource type="PackedScene" uid="uid://gfjfmihmduqa" path="res://Scene/Buildings/Agricultural.tscn" id="1"]
-[ext_resource type="Script" path="res://Script/Buildings/Agricultural/Alvearies.gd" id="2"]
+[ext_resource type="Script" uid="uid://canhcctd6s36i" path="res://Script/Buildings/Agricultural/Alvearies.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://ci6107lpr21ye" path="res://Art/Image/Buildings/Alvearies/Alvearies_idle_45.png" id="3_xx24k"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fyd2s"]

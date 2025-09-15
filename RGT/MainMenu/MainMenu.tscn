@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://c6k5nnpbypshi"]
 
-[ext_resource type="Script" path="res://RGT/MainMenu/MainMenu.gd" id="1"]
+[ext_resource type="Script" uid="uid://dw8a8ho2k3341" path="res://RGT/MainMenu/MainMenu.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://t2dui8ppm3a4" path="res://RGT/Credits/Credits.tscn" id="3_5dhvp"]
 [ext_resource type="PackedScene" uid="uid://bkcsjsk2ciff" path="res://addons/rakugo_game_template/MusicPlayers/BackgroundMusicPlayer.tscn" id="4_w8sbm"]
 [ext_resource type="PackedScene" uid="uid://choevp6ilq78t" path="res://RGT/LoadSaveMenu/loadSaveMenu.tscn" id="5_mfpq2"]

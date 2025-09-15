@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://b4gq47ckhaow6"]
 
-[ext_resource type="Script" path="res://Script/Gui/OptionButtonEx.gd" id="2"]
+[ext_resource type="Script" uid="uid://0v16i3gtqakr" path="res://Script/Gui/OptionButtonEx.gd" id="2"]
 [ext_resource type="FontFile" uid="uid://sdfro4oswrtf" path="res://Art/Fonts/LinLibertineI.ttf" id="3_4bos5"]
-[ext_resource type="Script" path="res://Script/Gui/OptionButton.gd" id="4"]
+[ext_resource type="Script" uid="uid://cjnksc6016y47" path="res://Script/Gui/OptionButton.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://b25sornhxlynd" path="res://Scene/Gui/BasicControl/LabelEx.tscn" id="5"]
 
 [node name="OptionButtonEx" type="HBoxContainer"]

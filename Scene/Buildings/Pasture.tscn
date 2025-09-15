@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://gfjfmihmduqa" path="res://Scene/Buildings/Agricultural.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://ci4xjmu83jaa" path="res://Art/Image/Buildings/Pasture/Pasture_idle.png" id="3_0lllr"]
-[ext_resource type="Script" path="res://Script/Buildings/Agricultural/Pasture.gd" id="4"]
+[ext_resource type="Script" uid="uid://55ccw7njixe0" path="res://Script/Buildings/Agricultural/Pasture.gd" id="4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_acf76"]
 transparency = 2

@@ -1,7 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://t2dui8ppm3a4"]
 
-[ext_resource type="Script" path="res://RGT/Credits/RichTextLabel.gd" id="2_clwmv"]
-
+[ext_resource type="Script" uid="uid://bl4c13q4crf6x" path="res://RGT/Credits/RichTextLabel.gd" id="2_clwmv"]
 
 [node name="Credits" type="ScrollContainer"]
 anchors_preset = 15

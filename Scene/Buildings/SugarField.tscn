@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://gfjfmihmduqa" path="res://Scene/Buildings/Agricultural.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://hopgj3v6wldj" path="res://Art/Image/Buildings/SugarField/SugarField_idle.png" id="3_ave6p"]
-[ext_resource type="Script" path="res://Script/Buildings/Agricultural/SugarField.gd" id="4"]
+[ext_resource type="Script" uid="uid://dfup4eru2f74d" path="res://Script/Buildings/Agricultural/SugarField.gd" id="4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vobqd"]
 transparency = 2

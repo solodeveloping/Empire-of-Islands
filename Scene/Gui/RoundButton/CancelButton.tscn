@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bivdx68a62ioq" path="res://Scene/Gui/BasicControl/RoundButton.tscn" id="1_7ko44"]
 [ext_resource type="Texture2D" uid="uid://b404vwuucqd87" path="res://Art/Image/Gui/Buttons/close.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://cdq2hvl5bwom5" path="res://Art/Image/Gui/Buttons/close_bw.png" id="4"]
-[ext_resource type="Script" path="res://Script/Gui/CancelButton.gd" id="5"]
+[ext_resource type="Script" uid="uid://b7tonyqr4wjax" path="res://Script/Gui/CancelButton.gd" id="5"]
 
 [node name="CancelButton" instance=ExtResource("1_7ko44")]
 size_flags_horizontal = 0

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://ddx05pxr84tol"]
 
-[ext_resource type="Script" path="res://Script/Gui/TabWidget/BuildingMenuTabWidget.gd" id="2"]
+[ext_resource type="Script" uid="uid://dx0taqunc4kwq" path="res://Script/Gui/TabWidget/BuildingMenuTabWidget.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://bvbuafk7d6fdt" path="res://Scene/Gui/TabWidget/TabWidget.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://bgt4majf8f241" path="res://Scene/Gui/TabWidget/Switches/BuildingSwitchTabWidget.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://bamt0see7lbpb" path="res://Scene/Gui/BasicControl/CaptionBlock.tscn" id="4_cvvym"]

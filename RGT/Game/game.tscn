@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://d1flo1brh3p4c"]
 
-[ext_resource type="Script" path="res://RGT/Game/game.gd" id="1_o2piy"]
+[ext_resource type="Script" uid="uid://bpcy13x7mbmtm" path="res://RGT/Game/game.gd" id="1_o2piy"]
 [ext_resource type="PackedScene" uid="uid://cdwvtbtwmrqbn" path="res://RGT/PauseMenu/PauseMenu.tscn" id="2_hcope"]
-[ext_resource type="Texture2D" uid="uid://beg4vmqhsx6ak" path="res://icon.svg" id="3_6luik"]
+[ext_resource type="Texture2D" uid="uid://iji0rllr53l4" path="res://icon.svg" id="3_6luik"]
 [ext_resource type="PackedScene" uid="uid://cp3p3kqcjh0me" path="res://RGT/EndMenu/EndMenu.tscn" id="3_yfekm"]
-[ext_resource type="Script" path="res://RGT/Game/Sprite2D.gd" id="4_lltyx"]
+[ext_resource type="Script" uid="uid://bsf0w2a0h7wgl" path="res://RGT/Game/Sprite2D.gd" id="4_lltyx"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_o2piy")

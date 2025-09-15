@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://be4ahk60cyncg" path="res://Art/Image/Gui/Buttons/glass_small.png" id="1"]
 [ext_resource type="PackedScene" uid="uid://byd3sp0jtoa7t" path="res://Scene/Gui/TabWidget/WidgetButton.tscn" id="2"]
-[ext_resource type="Script" path="res://Script/Gui/LabelEx.gd" id="3_qguif"]
+[ext_resource type="Script" uid="uid://bsk45d4ptfxre" path="res://Script/Gui/LabelEx.gd" id="3_qguif"]
 
 [node name="MainButton" instance=ExtResource("2")]
 offset_left = -13.0

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cqk6wj7q0wi3n"]
 
 [ext_resource type="Texture2D" uid="uid://hw78qig7tpv5" path="res://theLudovyc/Building/warehouse.png" id="1_8w56y"]
-[ext_resource type="Script" path="res://theLudovyc/Building/Building.gd" id="2_0u0ac"]
+[ext_resource type="Script" uid="uid://c2olu166xf24v" path="res://theLudovyc/Building/Building.gd" id="2_0u0ac"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p0wsj"]
 size = Vector2(163, 86)

@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://batg8pwfpasdc"]
 
 [ext_resource type="PackedScene" uid="uid://b25sornhxlynd" path="res://Scene/Gui/BasicControl/LabelEx.tscn" id="2"]
-[ext_resource type="Script" path="res://Script/Gui/LineEditEx.gd" id="3"]
+[ext_resource type="Script" uid="uid://bocgjm8v81suy" path="res://Script/Gui/LineEditEx.gd" id="3"]
 [ext_resource type="FontFile" uid="uid://sdfro4oswrtf" path="res://Art/Fonts/LinLibertineI.ttf" id="3_l3te3"]
-[ext_resource type="Script" path="res://Script/Gui/LineEdit.gd" id="5"]
+[ext_resource type="Script" uid="uid://bo31mpowmw6an" path="res://Script/Gui/LineEdit.gd" id="5"]
 
 [node name="LineEditEx" type="HBoxContainer"]
 offset_right = 289.0

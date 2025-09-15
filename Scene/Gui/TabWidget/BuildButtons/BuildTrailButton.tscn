@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://qkec7jy8u8vm" path="res://Art/Image/Gui/Icons/BuildMenu/015_h.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://d3ha8mm2xrou5" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/015.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://du43yc2vxu4ky" path="res://Art/Image/Gui/Icons/BuildMenu/015_d.png" id="5"]
-[ext_resource type="Script" path="res://Script/Gui/BuildTrailButton.gd" id="6_f5uxo"]
+[ext_resource type="Script" uid="uid://bl8j7ug5wjnrg" path="res://Script/Gui/BuildTrailButton.gd" id="6_f5uxo"]
 
 [node name="BuildTrailButton" instance=ExtResource("1")]
 texture_normal = ExtResource("2")

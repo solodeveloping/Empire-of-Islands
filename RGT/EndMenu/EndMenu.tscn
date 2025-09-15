@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cp3p3kqcjh0me"]
 
-[ext_resource type="Script" path="res://RGT/EndMenu/EndMenu.gd" id="2"]
+[ext_resource type="Script" uid="uid://d3j66vipdbfdf" path="res://RGT/EndMenu/EndMenu.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://dnlyj8r7kuvas" path="res://RGT/RGT_Dialogs/RGT_ConfirmationDialog.tscn" id="2_6mgxw"]
 
 [node name="EndMenu" type="Panel"]

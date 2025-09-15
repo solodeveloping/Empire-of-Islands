@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://d01nnvkwqvnxv" path="res://Art/Image/Gui/Background/notice350.png" id="1"]
 [ext_resource type="PackedScene" uid="uid://c46k8y74h4scl" path="res://Scene/Gui/RoundButton/OKButton.tscn" id="3"]
-[ext_resource type="Script" path="res://Script/Gui/Notification/Letter.gd" id="4"]
+[ext_resource type="Script" uid="uid://c2juifb26c6aa" path="res://Script/Gui/Notification/Letter.gd" id="4"]
 [ext_resource type="FontFile" uid="uid://dgr8rlsjjeh22" path="res://Art/Fonts/LinLibertineBI.ttf" id="4_lohmw"]
 [ext_resource type="PackedScene" uid="uid://b25sornhxlynd" path="res://Scene/Gui/BasicControl/LabelEx.tscn" id="5"]
 

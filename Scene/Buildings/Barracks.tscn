@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cahtqi0mpd1bh" path="res://Scene/Buildings/Building.tscn" id="1"]
 [ext_resource type="Shape3D" uid="uid://b0tf8160mv311" path="res://Scene/World/Shapes/BoxShape3x3.tres" id="2"]
-[ext_resource type="Script" path="res://Script/Buildings/Barracks.gd" id="3"]
+[ext_resource type="Script" uid="uid://n2bk6qj3lwl5" path="res://Script/Buildings/Barracks.gd" id="3"]
 [ext_resource type="Texture2D" uid="uid://cupnb4kfeamsh" path="res://Art/Image/Buildings/Barracks/Barracks_idle.png" id="4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ylaf7"]

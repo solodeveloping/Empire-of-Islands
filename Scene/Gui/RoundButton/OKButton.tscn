@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bivdx68a62ioq" path="res://Scene/Gui/BasicControl/RoundButton.tscn" id="1_sje05"]
 [ext_resource type="Texture2D" uid="uid://3g81ilh2clv1" path="res://Art/Image/Gui/Buttons/ok_h.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://w7yqpoer5l7p" path="res://Art/Image/Gui/Buttons/ok_bw.png" id="3"]
-[ext_resource type="Script" path="res://Script/Gui/OKButton.gd" id="5"]
+[ext_resource type="Script" uid="uid://dgff6h2bi376g" path="res://Script/Gui/OKButton.gd" id="5"]
 
 [node name="OKButton" instance=ExtResource("1_sje05")]
 size_flags_horizontal = 10
