@@ -14,6 +14,7 @@ var button_disabled_color: Color
 # FIXME : this should be automated
 @onready
 var building_buttons = {
+	Buildings.Ids.Warehouse: $BuildWarehouse,
 	Buildings.Ids.Tent: $BuildResidential,
 	Buildings.Ids.Lumberjack: $BuildLumberjack,
 	Buildings.Ids.HunterTent: $BuildHunterTent,

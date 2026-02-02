@@ -31,6 +31,10 @@ const datas = {
 	Buildings.Ids.Warehouse: {
 		#Datas.Texture: preload("res://theLudovyc/Building/warehouse.png"),
 		Datas.Texture: preload("res://theLudovyc/Building/atlas_textures/warehouse_atlas_texture.tres"),
+		Datas.TextureNorthWest: preload("res://theLudovyc/Building/atlas_textures/warehouse_north_west_atlas_texture.tres"),
+		Datas.TextureNorthEast: preload("res://theLudovyc/Building/atlas_textures/warehouse_north_east_atlas_texture.tres"),
+		Datas.TextureSouthEast: preload("res://theLudovyc/Building/atlas_textures/warehouse_south_east_atlas_texture.tres"),
+		Datas.TextureSouthWest: preload("res://theLudovyc/Building/atlas_textures/warehouse_south_west_atlas_texture.tres"),
 		Datas.Width: 3,
 		Datas.Height: 3,
 	},

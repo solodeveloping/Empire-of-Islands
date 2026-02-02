@@ -20,6 +20,8 @@ class_name Game2D
 @onready var the_cursor: TheCursor = %TheCursor
 @onready var the_nature: TheNature = $TheNature
 
+@onready var ground_layer: TileMapLayer = $ZSorter/TileMap/GroundLayer
+
 @onready var gui := $GUI
 @onready var pause_menu := %PauseMenu
 
@@ -30,7 +32,8 @@ var current_selected_building: Building2D = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	tm.create_island("res://theLudovyc/singularity_40.json")
+	# tm.create_island("res://theLudovyc/singularity_40.json")
+	tm.create_minimap_from_gaea_layers()
 	tm.clear_overlay()
 	
 	# set camera limits
@@ -42,7 +45,7 @@ func _ready():
 	var warehouse_pos = Vector2.ZERO
 	
 	if SaveHelper.save_file_name_to_load.is_empty():
-		the_builder.build_warehouse(Vector2(704, 320))
+		# the_builder.build_warehouse(Vector2(704, 320))
 
 		# add some initial resources
 		the_bank.money = 500
@@ -74,7 +77,12 @@ func _ready():
 		return
 	
 	# force camera initial pos on warehouse
-	cam.position = the_builder.warehouse.global_position
+	if the_builder.warehouse:
+		cam.position = the_builder.warehouse.global_position
+	else:
+		var rect = ground_layer.get_used_rect()
+		var center = ground_layer.to_global(ground_layer.map_to_local(rect.get_center()))
+		cam.position = center
 	cam.reset_smoothing()
 	
 	pause_menu.visibility_changed.connect(_on_PauseMenu_visibility_changed)
@@ -127,7 +135,9 @@ func _process(delta):
 
 	rtl.text += str(tile_pos) + "\n"
 	
-	rtl.text += str(tm.minimap_get_cell(tile_pos))
+	var cell_type = tm.minimap_get_cell(tile_pos)
+	var cell_name = MyMap.get_cell_type_name(cell_type)
+	rtl.text += str(cell_type) + " " + cell_name + "\n"
 
 	rtl.text += str(tm.is_constructible(tile_pos)) + "\n"
 
@@ -254,7 +264,7 @@ func handle_coastal_building(tile_pos: Vector2i) -> int:
 	else:
 		var offset = Vector2i(
 			the_cursor.cursor_entity.width - 1,
-			the_cursor.cursor_entity.height -1
+			the_cursor.cursor_entity.height - 1
 		)
 		# visually right
 		var right_tile = top_left_tile + offset
@@ -298,9 +308,10 @@ func _on_EventBus_ask_deselect_building():
 		current_selected_building = null
 
 func _on_EventBus_ask_select_warehouse():
-	current_selected_building = the_builder.warehouse
-
-	the_builder.warehouse.select()
+	if the_builder.warehouse:
+		current_selected_building = the_builder.warehouse
+		
+		the_builder.warehouse.select()
 
 
 func _on_EventBus_ask_demolish_current_building():

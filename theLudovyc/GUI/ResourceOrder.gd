@@ -23,7 +23,6 @@ var _resource_type: Resources.Types:
 
 func _ready():
 	var current_scene = get_tree().current_scene
-
 	if current_scene.has_node("EventBus"):
 		event_bus = current_scene.get_node("EventBus") as EventBus
 

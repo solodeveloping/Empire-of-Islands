@@ -102,6 +102,9 @@ func conclude_building_construction(building: Building2D):
 						Buildings.get_produce_resource(dep.building_id),
 						Buildings.get_max_workers(dep.building_id)
 					)
+					
+	if building.building_id == Buildings.Ids.Warehouse:
+		warehouse = building
 
 func conclude_building_destruction(building_id:Buildings.Ids):
 	var previous_count = buildings_count[building_id]

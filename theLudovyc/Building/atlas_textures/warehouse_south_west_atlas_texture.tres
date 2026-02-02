@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://c1478d8chxgcf"]
+
+[ext_resource type="Texture2D" uid="uid://hw78qig7tpv5" path="res://theLudovyc/Building/warehouse.png" id="1_56uis"]
+
+[resource]
+atlas = ExtResource("1_56uis")
+region = Rect2(192, 0, 192, 128)

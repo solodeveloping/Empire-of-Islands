@@ -2,7 +2,12 @@ extends TileMapLayer
 
 @onready var tileMap := get_parent()
 
-func create_terrain(deep_tiles_json, shallow_tiles_json, sand_tiles_json, ground_tiles_json):
+func create_terrain(
+	deep_tiles_json,
+	shallow_tiles_json,
+	sand_tiles_json,
+	ground_tiles_json
+):
 	var set_cells = func(array_in, atlas_pos, array_out, type:MyMap.Minimap_Cell_Type):
 		for i in range(0, array_in.size(), 2):
 			var tile_vec = Vector2i(array_in[i], array_in[i + 1])

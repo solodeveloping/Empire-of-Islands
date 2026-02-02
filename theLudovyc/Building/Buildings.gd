@@ -48,7 +48,12 @@ enum Datas {
 }
 
 const datas = {
-	Ids.Warehouse: {Datas.Name: &"Warehouse", Datas.Type: Types.Warehouse},
+	Ids.Warehouse: {
+		Datas.Name: &"Warehouse",
+		Datas.Type: Types.Warehouse,
+		Datas.Max_Count: 1,
+		Datas.Is_Coastal: true,
+	},
 	# Level 1
 	Ids.Tent:
 	{

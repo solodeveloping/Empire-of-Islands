@@ -8,6 +8,7 @@ class_name MyTileMap
 @onready var building_ground_overlay_layer: TileMapLayer = $BuildingGroundOverlayLayer
 @onready var the_builder = $"../../TheBuilder"
 @onready var natural_resources = %NaturalResources
+@onready var gaea_generator: GaeaGenerator = %GaeaGenerator
 
 
 var map_size:Vector2i
@@ -42,7 +43,10 @@ func minimap_get_cell(vec:Vector2i) -> MyMap.Minimap_Cell_Type:
 	
 func minimap_get_pos(index:int) -> Vector2i:
 	return Vector2i(index % map_size.x, index / map_size.x)
-	
+
+func minimap_get_index(vec: Vector2i):
+	return vec.y * map_size.x + vec.x
+
 func is_constructible(tile_pos:Vector2i) -> int:
 	match minimap_get_cell(tile_pos):
 		MyMap.Minimap_Cell_Type.Ground:
@@ -423,6 +427,57 @@ func create_island(map_file:String) -> int:
 	natural_resources.create_natural_resources()
 	
 	return OK
+
+func create_minimap_from_gaea_layers():
+	map_size = Vector2i(
+		gaea_generator.world_size.x,
+		gaea_generator.world_size.y,
+	)
+	
+	minimap.resize(map_size.x * map_size.y)
+	
+	assign_cell_type_to_minimap_using_ground_layer(
+		MyMap.Minimap_Cell_Type.Deep
+	)
+	assign_cell_type_to_minimap_using_ground_layer(
+		MyMap.Minimap_Cell_Type.Shallow
+	)
+	assign_cell_type_to_minimap_using_ground_layer(
+		MyMap.Minimap_Cell_Type.Sand
+	)
+	assign_cell_type_to_minimap_using_ground_layer(
+		MyMap.Minimap_Cell_Type.Ground
+	)
+	assign_cell_type_to_minimap_using_tree_layer(
+		MyMap.Minimap_Cell_Type.Tree
+	)
+	
+func assign_cell_type_to_minimap_using_ground_layer(
+	cell_type: MyMap.Minimap_Cell_Type
+):
+	var count = ground_layer.get_used_cells().size()
+	var source_id = MyMap.get_source_id(cell_type)
+	var atlas_coords = MyMap.get_atlas_coords(cell_type)
+	
+	for coord in atlas_coords:
+		var cells = ground_layer.get_used_cells_by_id(
+			source_id, coord
+		)
+		for cell in cells:
+			minimap_set_cell_vec(cell, cell_type)
+		
+func assign_cell_type_to_minimap_using_tree_layer(
+	cell_type: MyMap.Minimap_Cell_Type
+):
+	var count = trees_layer.get_used_cells().size()
+	var source_id = MyMap.get_source_id(cell_type)
+	var atlas_coords = MyMap.get_atlas_coords(cell_type)
+	for coord in atlas_coords:
+		var cells = trees_layer.get_used_cells_by_id(
+			source_id, coord
+		)
+		for cell in cells:
+			minimap_set_cell_vec(cell, cell_type)
 
 func get_pos_limits() -> PackedVector2Array:
 	var used_rect = ground_layer.get_used_rect()

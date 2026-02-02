@@ -1,4 +1,4 @@
-[gd_scene load_steps=117 format=3 uid="uid://b3s7eqy0blp6g"]
+[gd_scene load_steps=121 format=3 uid="uid://b3s7eqy0blp6g"]
 
 [ext_resource type="Script" uid="uid://btleplsaibjwi" path="res://theLudovyc/GUI/GUI.gd" id="1_15w01"]
 [ext_resource type="Texture2D" uid="uid://5gbvga1bqpxa" path="res://Art/Image/Gui/Background/Widgets/map_bg.png" id="1_lis5v"]
@@ -19,12 +19,16 @@
 [ext_resource type="Texture2D" uid="uid://dxx4hctv3pcww" path="res://Art/Image/Gui/Icons/BuildMenu/008_d.png" id="9_kn7dp"]
 [ext_resource type="Texture2D" uid="uid://340ntgsok673" path="res://Art/Image/Gui/Icons/BuildMenu/008_h.png" id="10_jbw0d"]
 [ext_resource type="Texture2D" uid="uid://bnrw8bxew25wd" path="res://Art/Image/Gui/Icons/BuildMenu/003_h.png" id="10_na55f"]
+[ext_resource type="Texture2D" uid="uid://bk6sk4bgpqvya" path="res://Art/Image/Gui/Icons/BuildMenu/002.png" id="11_yl0y5"]
+[ext_resource type="Texture2D" uid="uid://c45071tebp07s" path="res://Art/Image/Gui/Icons/BuildMenu/002_d.png" id="12_aer1l"]
+[ext_resource type="Texture2D" uid="uid://db2epqefty5oq" path="res://Art/Image/Gui/Icons/BuildMenu/002_h.png" id="13_lsdmb"]
 [ext_resource type="Texture2D" uid="uid://b0gi4vdahasx6" path="res://Art/Image/Gui/Background/Widgets/cityinfo_left.png" id="13_s75r0"]
 [ext_resource type="Texture2D" uid="uid://c36pqi8rnvbl0" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/003.png" id="14_0wm6y"]
 [ext_resource type="Texture2D" uid="uid://dja8u81e6ge3k" path="res://Art/Image/Gui/Background/Widgets/cityinfo_right.png" id="14_flxif"]
 [ext_resource type="Texture2D" uid="uid://3hepoko6w1v" path="res://Art/Image/Gui/Icons/Widgets/CityInfo/settlement.png" id="14_h5vqk"]
 [ext_resource type="PackedScene" uid="uid://uwtq6pqqc8lm" path="res://theLudovyc/GUI/WidgetMenuButton.tscn" id="14_iofba"]
 [ext_resource type="StyleBox" uid="uid://c337qd1xlk4yw" path="res://theLudovyc/GUI/PanelCityInfo.tres" id="14_p6h2t"]
+[ext_resource type="Texture2D" uid="uid://ckotlmsd3us4u" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/002.png" id="14_tev0a"]
 [ext_resource type="Texture2D" uid="uid://dry1ceb3p6yk1" path="res://Art/Image/Gui/Icons/Widgets/CityInfo/inhabitants.png" id="15_p3ujw"]
 [ext_resource type="Texture2D" uid="uid://cd61sgi3bblm7" path="res://Art/Image/Gui/Icons/TabWidget/Warehouse/buysell_u.png" id="15_t1pbn"]
 [ext_resource type="Texture2D" uid="uid://bbl0shhv3d8f5" path="res://Art/Image/Gui/Icons/TabWidget/Warehouse/buysell_d.png" id="16_ebb3u"]
@@ -261,6 +265,14 @@ columns = 4
 script = ExtResource("4_v8nok")
 button_disabled_color = Color(0.446777, 0.446777, 0.446777, 1)
 metadata/_tab_index = 1
+
+[node name="BuildWarehouse" type="TextureButton" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildGridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("11_yl0y5")
+texture_pressed = ExtResource("12_aer1l")
+texture_hover = ExtResource("13_lsdmb")
+texture_disabled = ExtResource("14_tev0a")
+script = ExtResource("8_i5i22")
 
 [node name="BuildResidential" type="TextureButton" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildGridContainer"]
 layout_mode = 2
@@ -692,8 +704,10 @@ texture = ExtResource("14_h5vqk")
 
 [node name="Label" type="Label" parent="CityInfo/PanelContainer/HBoxContainer"]
 layout_mode = 2
-text = "Unknow City Name
-"
+size_flags_horizontal = 4
+text = "Unknow City Name"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="CityInfo/PanelContainer/HBoxContainer"]
 layout_mode = 2
