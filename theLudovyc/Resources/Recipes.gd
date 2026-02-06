@@ -30,38 +30,26 @@ const datas = {
 		Datas.Workers: 1,
 		Datas.PopulationType: Populations.Types.Sailor,
 	},
-	Resources.Types.Stone: {
+	Resources.Types.Plank: {
 		Datas.InputType: -1,
 		Datas.Ticks: 1,
-		Datas.Workers: 2,
+		Datas.Workers: 1,
 		Datas.PopulationType: Populations.Types.Sailor,
 	},
-	Resources.Types.Plank: {
-		Datas.InputType: Resources.Types.Wood,
-		Datas.InputAmount: 1,
-		Datas.Ticks: 1,
-		Datas.Workers: 1,
-		Datas.PopulationType: Populations.Types.Pioneer,
-	},
+	# FIXME: reimplement once there is a sawmill
+	#Resources.Types.Plank: {
+		#Datas.InputType: Resources.Types.Wood,
+		#Datas.InputAmount: 1,
+		#Datas.Ticks: 1,
+		#Datas.Workers: 1,
+		#Datas.PopulationType: Populations.Types.Pioneer,
+	#},
 	Resources.Types.Potato: {
 		Datas.InputType: -1,
 		Datas.OutputAmount: 2,
 		Datas.Ticks: 1,
 		Datas.Workers: 1,
-		Datas.PopulationType: Populations.Types.Pioneer,
-	},
-	Resources.Types.Wool: {
-		Datas.InputType: -1,
-		Datas.OutputAmount: 2,
-		Datas.Ticks: 1,
-		Datas.Workers: 1,
-		Datas.PopulationType: Populations.Types.Pioneer,
-	},
-	Resources.Types.Wheat: {
-		Datas.InputType: -1,
-		Datas.Ticks: 1,
-		Datas.Workers: 1,
-		Datas.PopulationType: Populations.Types.Pioneer,
+		Datas.PopulationType: Populations.Types.Sailor,
 	},
 	Resources.Types.Pig: {
 		Datas.InputType: Resources.Types.Potato,
@@ -69,7 +57,7 @@ const datas = {
 		Datas.OutputAmount: 2,
 		Datas.Ticks: 1,
 		Datas.Workers: 1,
-		Datas.PopulationType: Populations.Types.Pioneer,
+		Datas.PopulationType: Populations.Types.Sailor,
 	},
 	Resources.Types.Meat: {
 		Datas.InputType: Resources.Types.Pig,
@@ -78,12 +66,39 @@ const datas = {
 		Datas.Workers: 1,
 		Datas.PopulationType: Populations.Types.Pioneer,
 	},
-	Resources.Types.StoneBrick: {
-		Datas.InputType: Resources.Types.Stone,
+	Resources.Types.Clay: {
+		Datas.InputType: -1,
+		Datas.Ticks: 1,
+		Datas.Workers: 2,
+		Datas.PopulationType: Populations.Types.Sailor,
+	},
+	Resources.Types.ClayBrick: {
+		Datas.InputType: Resources.Types.Clay,
 		Datas.InputAmount: 1,
 		Datas.Ticks: 1,
 		Datas.Workers: 2,
 		Datas.PopulationType: Populations.Types.Pioneer,
+	},
+	# Level 3
+	Resources.Types.Wool: {
+		Datas.InputType: -1,
+		Datas.OutputAmount: 2,
+		Datas.Ticks: 1,
+		Datas.Workers: 1,
+		Datas.PopulationType: Populations.Types.Pioneer,
+	},
+	Resources.Types.Textile: {
+		Datas.InputType: Resources.Types.Wool,
+		Datas.InputAmount: 1,
+		Datas.Ticks: 1,
+		Datas.Workers: 2,
+		Datas.PopulationType: Populations.Types.Settler,
+	},
+	Resources.Types.Wheat: {
+		Datas.InputType: -1,
+		Datas.Ticks: 1,
+		Datas.Workers: 1,
+		Datas.PopulationType: Populations.Types.Sailor,
 	},
 	Resources.Types.Flour: {
 		Datas.InputType: Resources.Types.Wheat,
@@ -92,19 +107,24 @@ const datas = {
 		Datas.Workers: 1,
 		Datas.PopulationType: Populations.Types.Pioneer,
 	},
-	# Level 3
-	Resources.Types.Textile: {
-		Datas.InputType: Resources.Types.Wool,
-		Datas.InputAmount: 1,
-		Datas.Ticks: 1,
-		Datas.Workers: 2,
-		Datas.PopulationType: Populations.Types.Settler,
-	},
 	Resources.Types.Bread: {
 		Datas.InputType: Resources.Types.Flour,
 		Datas.InputAmount: 1,
 		Datas.Ticks: 1,
 		Datas.Workers: 1,
+		Datas.PopulationType: Populations.Types.Settler,
+	},
+	Resources.Types.Stone: {
+		Datas.InputType: -1,
+		Datas.Ticks: 1,
+		Datas.Workers: 2,
+		Datas.PopulationType: Populations.Types.Sailor,
+	},
+	Resources.Types.StoneBrick: {
+		Datas.InputType: Resources.Types.Stone,
+		Datas.InputAmount: 1,
+		Datas.Ticks: 1,
+		Datas.Workers: 2,
 		Datas.PopulationType: Populations.Types.Settler,
 	},
 }

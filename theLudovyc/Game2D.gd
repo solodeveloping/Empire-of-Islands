@@ -55,6 +55,8 @@ func _ready():
 		the_storage.add_resource(Resources.Types.Plank, 20)
 		the_storage.add_resource(Resources.Types.Potato, 800)
 		the_storage.add_resource(Resources.Types.Meat, 400)
+		the_storage.add_resource(Resources.Types.ClayBrick, 50)
+		the_storage.add_resource(Resources.Types.StoneBrick, 50)
 	
 	elif SaveHelper.load_saved_file_name() == OK:
 		if SaveHelper.last_loaded_data.is_empty():

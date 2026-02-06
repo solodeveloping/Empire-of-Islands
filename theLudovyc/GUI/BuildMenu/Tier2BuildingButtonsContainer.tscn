@@ -1,0 +1,182 @@
+[gd_scene load_steps=36 format=3 uid="uid://cjik88o0gfyrd"]
+
+[ext_resource type="Script" uid="uid://snq0xdo03ehv" path="res://theLudovyc/GUI/BuildMenu/tier_2_building_buttons_container.gd" id="1_pggkw"]
+[ext_resource type="Script" uid="uid://dxo6pwnqt8tjp" path="res://theLudovyc/GUI/ButtonBuild.gd" id="6_kaoaq"]
+[ext_resource type="Texture2D" uid="uid://ddlgbu2x5p4tg" path="res://Art/Image/Gui/Icons/BuildMenu/003.png" id="7_fkrya"]
+[ext_resource type="Texture2D" uid="uid://cwbtvjpicrocv" path="res://Art/Image/Gui/Icons/BuildMenu/003_d.png" id="8_fcgqw"]
+[ext_resource type="Texture2D" uid="uid://bnrw8bxew25wd" path="res://Art/Image/Gui/Icons/BuildMenu/003_h.png" id="9_lpu35"]
+[ext_resource type="Texture2D" uid="uid://c36pqi8rnvbl0" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/003.png" id="10_6uxy8"]
+[ext_resource type="Texture2D" uid="uid://bqvkxst5fhe7u" path="res://Art/Image/Gui/Icons/BuildMenu/020.png" id="11_6dry3"]
+[ext_resource type="Texture2D" uid="uid://d2a22cr70qsmg" path="res://Art/Image/Gui/Icons/BuildMenu/008.png" id="11_b584v"]
+[ext_resource type="Texture2D" uid="uid://chsaot336foxe" path="res://Art/Image/Gui/Icons/BuildMenu/020_d.png" id="12_doxou"]
+[ext_resource type="Texture2D" uid="uid://dxx4hctv3pcww" path="res://Art/Image/Gui/Icons/BuildMenu/008_d.png" id="12_mtgx2"]
+[ext_resource type="Texture2D" uid="uid://340ntgsok673" path="res://Art/Image/Gui/Icons/BuildMenu/008_h.png" id="13_nfmty"]
+[ext_resource type="Texture2D" uid="uid://difqb3sikk4b3" path="res://Art/Image/Gui/Icons/BuildMenu/020_h.png" id="13_p4inc"]
+[ext_resource type="Texture2D" uid="uid://drbmncjyty61r" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/020.png" id="14_4ku7d"]
+[ext_resource type="Texture2D" uid="uid://dx33akwrax38v" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/008.png" id="14_36vux"]
+[ext_resource type="Texture2D" uid="uid://cuxu1af4s3ym2" path="res://Art/Image/Gui/Icons/BuildMenu/019.png" id="15_lpu35"]
+[ext_resource type="Texture2D" uid="uid://bfwkj4qpaltng" path="res://Art/Image/Gui/Icons/BuildMenu/019_d.png" id="16_6uxy8"]
+[ext_resource type="Texture2D" uid="uid://dlu8qriqt5b8w" path="res://Art/Image/Gui/Icons/BuildMenu/019_h.png" id="17_b584v"]
+[ext_resource type="Texture2D" uid="uid://bkcjnj6dc04ir" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/019.png" id="18_mtgx2"]
+[ext_resource type="Texture2D" uid="uid://bj0ig3hsjxl7q" path="res://Art/Image/Gui/Icons/BuildMenu/039.png" id="19_nfmty"]
+[ext_resource type="Texture2D" uid="uid://div73bs1hkxwc" path="res://Art/Image/Gui/Icons/BuildMenu/039_d.png" id="20_36vux"]
+[ext_resource type="Texture2D" uid="uid://cct56i6qr81fr" path="res://Art/Image/Gui/Icons/BuildMenu/039_h.png" id="21_4s8tm"]
+[ext_resource type="Texture2D" uid="uid://co7yxlkko5mm5" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/039.png" id="22_3legw"]
+[ext_resource type="Texture2D" uid="uid://etyxgvuub3qn" path="res://Art/Image/Gui/Icons/BuildMenu/041.png" id="31_qk36b"]
+[ext_resource type="Texture2D" uid="uid://cf518se81cj2d" path="res://Art/Image/Gui/Icons/BuildMenu/041_d.png" id="32_4nsgw"]
+[ext_resource type="Texture2D" uid="uid://dbbd074dljjdh" path="res://Art/Image/Gui/Icons/BuildMenu/041_h.png" id="33_ndwhs"]
+[ext_resource type="Texture2D" uid="uid://dheotgyfkpraw" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/041.png" id="34_rqt0k"]
+[ext_resource type="Texture2D" uid="uid://uus0ttjqii0v" path="res://Art/Image/Gui/Icons/BuildMenu/025.png" id="39_qk36b"]
+[ext_resource type="Texture2D" uid="uid://bx8rxyll8xo7d" path="res://Art/Image/Gui/Icons/BuildMenu/025_d.png" id="40_4nsgw"]
+[ext_resource type="Texture2D" uid="uid://u6g5it04iw0q" path="res://Art/Image/Gui/Icons/BuildMenu/025_h.png" id="41_ndwhs"]
+[ext_resource type="Texture2D" uid="uid://cgce4rugxsuml" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/025.png" id="42_rqt0k"]
+[ext_resource type="Texture2D" uid="uid://bfwsbgfa63v84" path="res://Art/Image/Gui/Icons/BuildMenu/024.png" id="43_qk36b"]
+[ext_resource type="Texture2D" uid="uid://d3cp3sh6227a" path="res://Art/Image/Gui/Icons/BuildMenu/024_d.png" id="44_4nsgw"]
+[ext_resource type="Texture2D" uid="uid://kfwstu0er6wa" path="res://Art/Image/Gui/Icons/BuildMenu/024_h.png" id="45_ndwhs"]
+[ext_resource type="Texture2D" uid="uid://buhp51i6xryjl" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/024.png" id="46_rqt0k"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_kcqtq"]
+color = Color(0.31061712, 0.31061712, 0.3106171, 1)
+grow_begin = -10.0
+grow_end = -10.0
+thickness = 5
+
+[node name="Tier2BuildingButtonsContainer" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pggkw")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Pioneers"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+theme_override_styles/separator = SubResource("StyleBoxLine_kcqtq")
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Residents and infrastructure"
+vertical_alignment = 1
+
+[node name="InfrastructureGridContainer" type="GridContainer" parent="VBoxContainer"]
+layout_mode = 2
+columns = 4
+
+[node name="BuildHut" type="TextureButton" parent="VBoxContainer/InfrastructureGridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("7_fkrya")
+texture_pressed = ExtResource("8_fcgqw")
+texture_hover = ExtResource("9_lpu35")
+texture_disabled = ExtResource("10_6uxy8")
+script = ExtResource("6_kaoaq")
+building_id = 4
+
+[node name="Label3" type="Label" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Services"
+vertical_alignment = 1
+
+[node name="ServicesGridContainer" type="GridContainer" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+columns = 4
+
+[node name="Label4" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Companies"
+vertical_alignment = 1
+
+[node name="CompaniesGridContainer" type="GridContainer" parent="VBoxContainer"]
+layout_mode = 2
+columns = 4
+
+[node name="BuildSawmill" type="TextureButton" parent="VBoxContainer/CompaniesGridContainer"]
+visible = false
+layout_mode = 2
+texture_normal = ExtResource("11_b584v")
+texture_pressed = ExtResource("12_mtgx2")
+texture_hover = ExtResource("13_nfmty")
+texture_disabled = ExtResource("14_36vux")
+script = ExtResource("6_kaoaq")
+building_id = 5
+
+[node name="BuildFarm" type="TextureButton" parent="VBoxContainer/CompaniesGridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("11_6dry3")
+texture_pressed = ExtResource("12_doxou")
+texture_hover = ExtResource("13_p4inc")
+texture_disabled = ExtResource("14_4ku7d")
+script = ExtResource("6_kaoaq")
+building_id = 6
+
+[node name="BuildPotatoField" type="TextureButton" parent="VBoxContainer/CompaniesGridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("15_lpu35")
+texture_pressed = ExtResource("16_6uxy8")
+texture_hover = ExtResource("17_b584v")
+texture_disabled = ExtResource("18_mtgx2")
+script = ExtResource("6_kaoaq")
+building_id = 7
+
+[node name="BuildPigsty" type="TextureButton" parent="VBoxContainer/CompaniesGridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("19_nfmty")
+texture_pressed = ExtResource("20_36vux")
+texture_hover = ExtResource("21_4s8tm")
+texture_disabled = ExtResource("22_3legw")
+script = ExtResource("6_kaoaq")
+building_id = 8
+
+[node name="BuildButchery" type="TextureButton" parent="VBoxContainer/CompaniesGridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("31_qk36b")
+texture_pressed = ExtResource("32_4nsgw")
+texture_hover = ExtResource("33_ndwhs")
+texture_disabled = ExtResource("34_rqt0k")
+script = ExtResource("6_kaoaq")
+building_id = 9
+
+[node name="BuildClayPit" type="TextureButton" parent="VBoxContainer/CompaniesGridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("39_qk36b")
+texture_pressed = ExtResource("40_4nsgw")
+texture_hover = ExtResource("41_ndwhs")
+texture_disabled = ExtResource("42_rqt0k")
+script = ExtResource("6_kaoaq")
+building_id = 19
+
+[node name="BuildBrickyard" type="TextureButton" parent="VBoxContainer/CompaniesGridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("43_qk36b")
+texture_pressed = ExtResource("44_4nsgw")
+texture_hover = ExtResource("45_ndwhs")
+texture_disabled = ExtResource("46_rqt0k")
+script = ExtResource("6_kaoaq")
+building_id = 20
+
+[node name="Label5" type="Label" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Military"
+vertical_alignment = 1
+
+[node name="MilitaryGridContainer" type="GridContainer" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+columns = 4

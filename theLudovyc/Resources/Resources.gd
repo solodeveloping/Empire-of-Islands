@@ -18,25 +18,31 @@ enum Types {
 	Flour,
 	Bread,
 	Fish,
+	Clay,
+	ClayBrick,
 }
 
 const Icons = {
 	# Level 1
 	Types.Wood: preload("res://Art/Image/Gui/Icons/Resources/32/008.png"),
-	Types.Textile: preload("res://Art/Image/Gui/Icons/Resources/32/003.png"),
 	Types.GameMeat: preload("res://Art/Image/Gui/Icons/Resources/32/013.png"),
-	Types.Stone: preload("res://Art/Image/Gui/Icons/Resources/32/051.png"),
 	Types.Fish: preload("res://Art/Temp/cc0-food-icons/fish_tail.png"),
 	# Level 2
 	Types.Plank: preload("res://Art/Image/Gui/Icons/Resources/32/004.png"),
 	Types.Potato: preload("res://Art/Image/Gui/Icons/Resources/32/015.png"),
 	Types.Pig: preload("res://Art/Image/Gui/Icons/Resources/32/036.png"),
 	Types.Meat: preload("res://Art/Image/Gui/Icons/Resources/32/005.png"),
-	Types.StoneBrick: preload("res://Art/Image/Gui/Icons/Resources/32/052.png"),
 	Types.Wool: preload("res://Art/Image/Gui/Icons/Resources/32/010.png"),
 	Types.Wheat: preload("res://Art/Image/Gui/Icons/Resources/32/042.png"),
 	Types.Flour: preload("res://Art/Image/Gui/Icons/Resources/32/044.png"),
+	Types.Clay: preload("res://Art/Image/Gui/Icons/Resources/32/021.png"),
+	Types.ClayBrick: preload("res://Art/Image/Gui/Icons/Resources/32/007.png"),
+	# Level 3
 	Types.Bread: preload("res://Art/Temp/cc0-food-icons/bread.png"),
+	Types.Textile: preload("res://Art/Image/Gui/Icons/Resources/32/003.png"),
+	Types.Stone: preload("res://Art/Image/Gui/Icons/Resources/32/051.png"),
+	Types.StoneBrick: preload("res://Art/Image/Gui/Icons/Resources/32/052.png"),
+	# Level 4
 }
 
 enum Datas { Name, Type, Level, }
@@ -61,11 +67,6 @@ const datas = {
 	{
 		Datas.Name: &"Potato",
 		Datas.Type: Types.Potato,
-	},
-	Types.Stone:
-	{
-		Datas.Name: &"Stone",
-		Datas.Type: Types.Stone,
 	},
 	Types.Wool:
 	{
@@ -93,15 +94,20 @@ const datas = {
 		Datas.Name: &"Pig",
 		Datas.Type: Types.Pig,
 	},
-	Types.StoneBrick:
-	{
-		Datas.Name: &"Stone brick",
-		Datas.Type: Types.StoneBrick,
-	},
 	Types.Flour:
 	{
 		Datas.Name: &"Flour",
 		Datas.Type: Types.Flour,
+	},
+	Types.Clay:
+	{
+		Datas.Name: &"Clay",
+		Datas.Type: Types.Clay,
+	},
+	Types.ClayBrick:
+	{
+		Datas.Name: &"Clay brick",
+		Datas.Type: Types.ClayBrick,
 	},
 	# Level 3
 	Types.Meat:
@@ -113,6 +119,16 @@ const datas = {
 	{
 		Datas.Name: &"Bread",
 		Datas.Type: Types.Bread,
+	},
+	Types.Stone:
+	{
+		Datas.Name: &"Stone",
+		Datas.Type: Types.Stone,
+	},
+	Types.StoneBrick:
+	{
+		Datas.Name: &"Stone brick",
+		Datas.Type: Types.StoneBrick,
 	},
 }
 
@@ -129,19 +145,24 @@ static func get_resource_name(resource_type: Types) -> StringName:
 enum LevelTypes { Gathered, TransformedOnce, TransformedTwice }
 
 const Levels = {
+	# Gathered
 	Types.Wood: LevelTypes.Gathered,
 	Types.GameMeat: LevelTypes.Gathered,
 	Types.Fish: LevelTypes.Gathered,
 	Types.Stone: LevelTypes.Gathered,
-	Types.Textile: LevelTypes.TransformedTwice,
-	Types.Plank: LevelTypes.TransformedOnce,
+	Types.Clay: LevelTypes.Gathered,
 	Types.Potato: LevelTypes.Gathered,
-	Types.Pig: LevelTypes.TransformedOnce,
-	Types.Meat: LevelTypes.TransformedTwice,
-	Types.StoneBrick: LevelTypes.TransformedOnce,
 	Types.Wool: LevelTypes.Gathered,
 	Types.Wheat: LevelTypes.Gathered,
+	# Transformed once
+	Types.Pig: LevelTypes.TransformedOnce,
+	Types.Plank: LevelTypes.TransformedOnce,
+	Types.StoneBrick: LevelTypes.TransformedOnce,
+	Types.ClayBrick: LevelTypes.TransformedOnce,
 	Types.Flour: LevelTypes.TransformedOnce,
+	# Transformed twice
+	Types.Textile: LevelTypes.TransformedTwice,
+	Types.Meat: LevelTypes.TransformedTwice,
 	Types.Bread: LevelTypes.TransformedTwice,
 }
 

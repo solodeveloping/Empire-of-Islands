@@ -1,6 +1,8 @@
 extends TabContainer
 
-enum WidgetMenus { Market, Build, Building, NaturalResource }
+enum WidgetMenus { Market, Build, Building, NaturalResource, Buildings }
+
+@onready var widget := %Widget
 
 @onready var bottom_container = %BottomContainer
 
@@ -9,6 +11,10 @@ enum WidgetMenus { Market, Build, Building, NaturalResource }
 @onready var building_container := $BuildingContainer
 
 @onready var natural_resource_container = $NaturalResourceContainer
+
+@onready var building_tier_button_container: MarginContainer = $"../../../BuildingTierButtonContainer"
+
+@onready var building_buttons_container: BuildingButtonsContainer = $BuildingButtonsContainer
 
 var event_bus: EventBus
 
@@ -19,27 +25,51 @@ func _ready():
 
 	if event_bus != null:
 		event_bus.send_building_selected.connect(_on_receive_building_selected)
+		event_bus.send_building_deselected.connect(_on_receive_building_deselected)
 		event_bus.send_current_building_demolished.connect(_on_receive_current_building_demolished)
+		
 		event_bus.send_natural_resource_selected.connect(_on_receive_send_natural_resource_selected)
+		event_bus.send_natural_resource_deselected.connect(_on_receive_send_natural_resource_deselected)
 
-	pass  # Replace with function body.
+		event_bus.send_building_created.connect(_on_building_event.unbind(1))
+		event_bus.send_building_creation_aborted.connect(_on_building_event.unbind(1))
+	
+	building_buttons_container.mouse_entered_building.connect(_on_mouse_entered_building)
+	building_buttons_container.mouse_exited_building.connect(_on_mouse_exited_building)
+	building_buttons_container.clicked_on_building.connect(_on_clicked_on_building)
 
 
 func on_MenuButton_pressed(menu: WidgetMenus):
 	if current_tab != menu:
-		if current_tab == WidgetMenus.Building or current_tab == WidgetMenus.Market:
+		if current_tab == WidgetMenus.Building \
+			or current_tab == WidgetMenus.Market \
+			or current_tab == WidgetMenus.Buildings:
 			event_bus.ask_deselect_building.emit()
 
 		current_tab = menu
 
 		bottom_container.set_menu_visibility(true)
+		if current_tab == WidgetMenus.Buildings:
+			building_tier_button_container.show()
+		else:
+			building_tier_button_container.hide()
 		return
 
 	bottom_container.invert_menu_visibility()
+	# Info: if we are hiding the container, we hide the tiers too
+	if !bottom_container.visible:
+		building_tier_button_container.visible = false
+	else:
+		if current_tab == WidgetMenus.Buildings:
+			building_tier_button_container.show()
+		else:
+			building_tier_button_container.hide()
 
 
 func _on_BuildMenuButton_pressed():
-	on_MenuButton_pressed(WidgetMenus.Build)
+	# TODO: remove it once we are sure it's not needed anymore
+	# on_MenuButton_pressed(WidgetMenus.Build)
+	on_MenuButton_pressed(WidgetMenus.Buildings)
 
 	if tooltip.visible:
 		tooltip.visible = false
@@ -72,6 +102,9 @@ func _on_receive_building_selected(building: Building2D):
 		if tooltip.visible == false:
 			tooltip.visible = true
 			tooltip.set_money_production_rate_info()
+			
+		if building_tier_button_container.visible:
+			building_tier_button_container.hide()
 
 		return
 
@@ -80,9 +113,20 @@ func _on_receive_building_selected(building: Building2D):
 
 	if tooltip.visible:
 		tooltip.visible = false
+	
+	if building_tier_button_container.visible:
+		building_tier_button_container.hide()
 
 	building_container.update_infos(building)
 
+func _on_receive_building_deselected(building: Building2D):
+	bottom_container.set_menu_visibility(false)
+	
+	if tooltip.visible:
+		tooltip.visible = false
+		
+	if building_tier_button_container.visible:
+		building_tier_button_container.hide()
 
 func _on_receive_current_building_demolished():
 	if current_tab == WidgetMenus.Building:
@@ -96,5 +140,56 @@ func _on_receive_send_natural_resource_selected(natural_resource: NaturalResourc
 
 	if tooltip.visible:
 		tooltip.visible = false
+		
+	if building_tier_button_container.visible:
+		building_tier_button_container.hide()
 
 	natural_resource_container.update_infos(natural_resource)
+
+func _on_receive_send_natural_resource_deselected(natural_resource: NaturalResource):
+	bottom_container.set_menu_visibility(false)
+	
+	if tooltip.visible:
+		tooltip.visible = false
+		
+	if building_tier_button_container.visible:
+		building_tier_button_container.hide()
+
+func _on_mouse_entered_building(building_id: Buildings.Ids):
+	tooltip.set_building_info(building_id)
+	tooltip.visible = true
+
+func _on_mouse_exited_building():
+	tooltip.visible = false
+	tooltip.building_id = -1
+	
+func _on_clicked_on_building(building_id: Buildings.Ids):
+	if event_bus:
+		event_bus.ask_create_building.emit(building_id)
+	
+	# TODO : make it an option
+	widget.disable_buttons(true)
+
+	bottom_container.set_menu_visibility(false)
+	
+	building_tier_button_container.hide()
+
+func _on_building_event():
+	# TODO : make it an option
+	widget.disable_buttons(false)
+
+	bottom_container.set_menu_visibility(true)
+	
+	building_tier_button_container.show()
+
+func _on_Tier1MenuButton_pressed() -> void:
+	building_buttons_container.show_tier(0)
+
+func _on_Tier2MenuButton2_pressed() -> void:
+	building_buttons_container.show_tier(1)
+
+func _on_Tier3MenuButton3_pressed() -> void:
+	building_buttons_container.show_tier(2)
+
+func _on_Tier4MenuButton_pressed() -> void:
+	building_buttons_container.show_tier(3)

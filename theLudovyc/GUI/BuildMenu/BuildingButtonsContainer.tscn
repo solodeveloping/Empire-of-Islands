@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://bl4mr5p0h8uex"]
+
+[ext_resource type="PackedScene" uid="uid://b2i6uxb6o66dn" path="res://theLudovyc/GUI/BuildMenu/Tier1BuildingButtonsContainer.tscn" id="1_r6ylw"]
+[ext_resource type="Script" uid="uid://ulud4igh6xhp" path="res://theLudovyc/GUI/BuildMenu/building_buttons_container.gd" id="1_tcanf"]
+[ext_resource type="PackedScene" uid="uid://cjik88o0gfyrd" path="res://theLudovyc/GUI/BuildMenu/Tier2BuildingButtonsContainer.tscn" id="3_iul2e"]
+[ext_resource type="PackedScene" uid="uid://b3swpm6bia000" path="res://theLudovyc/GUI/BuildMenu/Tier3BuildingButtonsContainer.tscn" id="4_uhfhv"]
+[ext_resource type="PackedScene" uid="uid://beel24s6s0aw7" path="res://theLudovyc/GUI/BuildMenu/Tier4BuildingButtonsContainer.tscn" id="5_uhfhv"]
+
+[node name="BuildingButtonsContainer" type="TabContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 0
+tabs_visible = false
+script = ExtResource("1_tcanf")
+
+[node name="Tier1BuildingButtonsContainer" parent="." instance=ExtResource("1_r6ylw")]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Tier2BuildingButtonsContainer" parent="." instance=ExtResource("3_iul2e")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Tier3BuildingButtonsContainer" parent="." instance=ExtResource("4_uhfhv")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="Tier4BuildingButtonsContainer" parent="." instance=ExtResource("5_uhfhv")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3

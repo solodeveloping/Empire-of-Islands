@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://bs43iokvd1rj8"]
+
+[ext_resource type="Texture2D" uid="uid://bn201lna0m81c" path="res://Art/Image/Buildings/Residential/HouseTimberFramed1_idle.png" id="1_yj2du"]
+
+[resource]
+atlas = ExtResource("1_yj2du")
+region = Rect2(0, 32, 128, 96)

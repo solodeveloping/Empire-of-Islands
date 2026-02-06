@@ -7,6 +7,12 @@ signal selected(type)
 enum Datas {Texture, Width, Height}
 
 const datas = {
+	# TODO : pick one of them randomly
+	NaturalResources.Ids.ClayDeposit: {
+		Datas.Texture: preload("res://theLudovyc/NaturalResource/atlas_textures/clay_deposit_atlas_texture.tres"),
+		Datas.Width: 3,
+		Datas.Height: 3,
+	},
 	NaturalResources.Ids.StoneDeposit: {
 		Datas.Texture: preload("res://theLudovyc/NaturalResource/atlas_textures/stone_deposit_atlas_texture.tres"),
 		Datas.Width: 3,
@@ -46,16 +52,19 @@ func _ready() -> void:
 		event_bus.send_building_selected.connect(_on_building_selected)
 	if current_scene.has_node("TheCursor"):
 		the_cursor = current_scene.get_node("TheCursor")
+		
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.pressed:
+			deselect()
 
 func _on_natural_resource_selected(natural_resource: NaturalResource):
 	if is_selected and natural_resource != self:
-		is_selected = false
-		modulate = Color.WHITE
+		deselect()
 		
 func _on_building_selected(_building):
 	if is_selected:
-		is_selected = false
-		modulate = Color.WHITE
+		deselect()
 
 func select():
 	is_selected = true
@@ -64,11 +73,12 @@ func select():
 func deselect():
 	is_selected = false
 	modulate = Color.WHITE
+	
+	event_bus.send_natural_resource_deselected.emit(self)
 
 func _on_Area2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if not is_selected and event.is_action_pressed("alt_command"):
-		is_selected = true
-		modulate = Color.YELLOW
+		select()
 		if event_bus != null and the_cursor.cursor_entity == null:
 			event_bus.send_natural_resource_selected.emit(self)
 

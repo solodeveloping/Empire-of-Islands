@@ -2,6 +2,7 @@ extends Object
 class_name NaturalResources
 
 enum Ids { 
+	ClayDeposit,
 	StoneDeposit,
 }
 enum Datas {
@@ -11,6 +12,12 @@ enum Datas {
 }
 
 const datas = {
+	Ids.ClayDeposit:
+	{
+		Datas.Name: &"Clay deposit",
+		Datas.Description: "You can build a clay pit on it to produce clay",
+		Datas.TileType: MyMap.Minimap_Cell_Type.ClayDeposit,
+	},
 	Ids.StoneDeposit:
 	{
 		Datas.Name: &"Stone deposit",

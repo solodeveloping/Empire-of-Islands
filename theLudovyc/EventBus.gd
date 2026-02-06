@@ -11,6 +11,7 @@ signal send_building_creation_aborted(building_id)
 signal send_building_limit_updated(building_id, limit_reached)
 
 signal send_building_selected(building_node)
+signal send_building_deselected(building_node)
 
 signal ask_deselect_building
 signal ask_select_warehouse
@@ -20,6 +21,7 @@ signal send_current_building_demolished
 
 ## NATURAL RESOURCE
 signal send_natural_resource_selected(natural_resource)
+signal send_natural_resource_deselected(natural_resource)
 
 ## POPULATION / WORKER
 signal population_updated(population_count)

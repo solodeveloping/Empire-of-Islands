@@ -6,7 +6,7 @@ class_name ThePopulation
 @onready var the_factory = $"../TheFactory"
 
 # FIXME : the instantiation could be automated
-var populations: Array[int] = [0, 0, 0]:
+var populations: Array[int] = [0, 0, 0, 0]:
 	set(value):
 		populations = value
 		notify_population_updated()

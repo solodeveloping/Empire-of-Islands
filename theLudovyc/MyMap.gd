@@ -1,7 +1,16 @@
 extends Object
 class_name MyMap
 
-enum Minimap_Cell_Type{Deep, Shallow, Sand, Ground, Tree, Building, StoneDeposit}
+enum Minimap_Cell_Type{
+	Deep,
+	Shallow,
+	Sand,
+	Ground,
+	Tree,
+	Building,
+	ClayDeposit,
+	StoneDeposit
+}
 
 enum Datas {
 	Name,
@@ -82,6 +91,11 @@ const datas = {
 	},
 	MyMap.Minimap_Cell_Type.Building: {
 		Datas.Name: "Building",
+		Datas.SourceId: -1,
+		Datas.AtlasCoords: [],
+	},
+	MyMap.Minimap_Cell_Type.ClayDeposit: {
+		Datas.Name: "Clay Deposit",
 		Datas.SourceId: -1,
 		Datas.AtlasCoords: [],
 	},

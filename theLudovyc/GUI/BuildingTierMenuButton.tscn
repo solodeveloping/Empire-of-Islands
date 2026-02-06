@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://37325tkvwpyj"]
+
+[ext_resource type="Texture2D" uid="uid://i3jf27r6a5xg" path="res://Art/Image/Gui/Icons/Widgets/MiniMap/build.png" id="1_ee2oa"]
+[ext_resource type="Texture2D" uid="uid://b1uxpsysuqamr" path="res://Art/Image/Gui/Icons/Widgets/MiniMap/build_d.png" id="2_5dgkg"]
+[ext_resource type="Texture2D" uid="uid://bmvtkldjxuyqy" path="res://Art/Image/Gui/Icons/Widgets/MiniMap/build_h.png" id="3_24v3y"]
+[ext_resource type="Texture2D" uid="uid://buc6h7fnc8aik" path="res://Art/Image/Gui/TabWidget/tab.png" id="4_ee2oa"]
+
+[node name="BuildingTierMenuButton" type="TextureButton"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -16.0
+offset_top = 82.0
+offset_right = 16.0
+offset_bottom = 114.0
+grow_horizontal = 2
+texture_normal = ExtResource("1_ee2oa")
+texture_pressed = ExtResource("2_5dgkg")
+texture_hover = ExtResource("3_24v3y")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -22.0
+offset_right = 20.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_ee2oa")

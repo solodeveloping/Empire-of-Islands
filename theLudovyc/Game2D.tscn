@@ -39,35 +39,28 @@
 [sub_resource type="Resource" id="Resource_27dsl"]
 resource_name = "Ground"
 script = ExtResource("13_j0j7v")
-enabled = true
 
 [sub_resource type="Resource" id="Resource_gdr3j"]
 resource_name = "Ocean"
 script = ExtResource("13_j0j7v")
-enabled = true
 metadata/_custom_type_script = "uid://3qsmwhn2sk47"
 
 [sub_resource type="Resource" id="Resource_4l1cc"]
 resource_name = "Trees"
 script = ExtResource("13_j0j7v")
-enabled = true
 metadata/_custom_type_script = "uid://3qsmwhn2sk47"
 
 [sub_resource type="Resource" id="Resource_lj013"]
 script = ExtResource("14_j0j7v")
-type = 0
 source_id = 1
 atlas_coord = Vector2i(1, 2)
-alternative_tile = 0
 preview_color = Color(0.28522, 0.387491, 0.00352405, 1)
 metadata/_custom_type_script = "uid://e45byecr4gi6"
 
 [sub_resource type="Resource" id="Resource_mbnj5"]
 script = ExtResource("14_j0j7v")
-type = 0
 source_id = 1
 atlas_coord = Vector2i(7, 6)
-alternative_tile = 0
 preview_color = Color(0.115686, 0.129932, 0.857712, 1)
 metadata/_custom_type_script = "uid://e45byecr4gi6"
 
@@ -82,28 +75,22 @@ noise = SubResource("FastNoiseLite_dlqpi")
 
 [sub_resource type="Resource" id="Resource_ytrec"]
 script = ExtResource("14_j0j7v")
-type = 0
 source_id = 1
 atlas_coord = Vector2i(7, 2)
-alternative_tile = 0
 preview_color = Color(0.580388, 0.793049, 0.247628, 1)
 metadata/_custom_type_script = "uid://e45byecr4gi6"
 
 [sub_resource type="Resource" id="Resource_862fo"]
 script = ExtResource("14_j0j7v")
-type = 0
 source_id = 1
 atlas_coord = Vector2i(4, 2)
-alternative_tile = 0
 preview_color = Color(0.455712, 0.493006, 0.685853, 1)
 metadata/_custom_type_script = "uid://e45byecr4gi6"
 
 [sub_resource type="Resource" id="Resource_6hib6"]
 script = ExtResource("14_j0j7v")
-type = 0
 source_id = 1
 atlas_coord = Vector2i(0, 1)
-alternative_tile = 0
 preview_color = Color(0.829433, 0.555956, 0.730643, 1)
 metadata/_custom_type_script = "uid://e45byecr4gi6"
 
@@ -118,7 +105,6 @@ metadata/_custom_type_script = "uid://jlxuofu2p4bf"
 resource_local_to_scene = true
 script = ExtResource("14_dlqpi")
 layers = Array[ExtResource("13_j0j7v")]([SubResource("Resource_27dsl"), SubResource("Resource_gdr3j"), SubResource("Resource_4l1cc")])
-logging = 0
 connections = Array[Dictionary]([{
 "from_node": 1,
 "from_port": 0,

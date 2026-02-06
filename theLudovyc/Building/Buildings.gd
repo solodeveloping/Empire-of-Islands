@@ -25,6 +25,9 @@ enum Ids {
 	Windmill,
 	Bakery,
 	Fishery,
+	ClayPit,
+	Brickyard,
+	StoneHouse,
 }
 
 # FIXME : PopulationType is duplicated with the Recipes
@@ -59,7 +62,7 @@ const datas = {
 	{
 		Datas.Name: &"Tent",
 		Datas.Type: Types.Residential,
-		Datas.Cost: [[Resources.Types.Wood, 1], [Resources.Types.Textile, 1]],
+		Datas.Cost: [[Resources.Types.Plank, 1], [Resources.Types.Textile, 1]],
 		Datas.Max_Workers: 4,
 		Datas.Level: 1,
 		Datas.PopulationType: Populations.Types.Sailor,
@@ -68,8 +71,12 @@ const datas = {
 	{
 		Datas.Name: &"Lumberjack",
 		Datas.Type: Types.Producing,
-		Datas.Cost: [[Resources.Types.Wood, 1], [Resources.Types.Textile, 1]],
-		Datas.Produce: Resources.Types.Wood,
+		Datas.Cost: [
+			[Resources.Types.Plank, 1],
+			[Resources.Types.Textile, 1]
+		],
+		# FIXME: change it back to wood once there is an actual sawmill
+		Datas.Produce: Resources.Types.Plank,
 		Datas.Max_Workers: 4,
 		Datas.Max_Count: 3,
 		Datas.Maintenance_Cost: 1,
@@ -78,7 +85,7 @@ const datas = {
 	{
 		Datas.Name: &"Hunter's tent",
 		Datas.Type: Types.Producing,
-		Datas.Cost: [[Resources.Types.Wood, 1], [Resources.Types.Textile, 1]],
+		Datas.Cost: [[Resources.Types.Plank, 1], [Resources.Types.Textile, 1]],
 		Datas.Produce: Resources.Types.GameMeat,
 		Datas.Max_Workers: 1,
 		Datas.Max_Count: 3,
@@ -88,23 +95,12 @@ const datas = {
 	{
 		Datas.Name: &"Fishery",
 		Datas.Type: Types.Producing,
-		Datas.Cost: [[Resources.Types.Wood, 1], [Resources.Types.Textile, 1]],
+		Datas.Cost: [[Resources.Types.Plank, 1], [Resources.Types.Textile, 1]],
 		Datas.Produce: Resources.Types.Fish,
 		Datas.Max_Count: 3,
 		Datas.Max_Workers: 2,
 		Datas.Maintenance_Cost: 1,
 		Datas.Is_Coastal: true,
-	},
-	Ids.StonePit:
-	{
-		Datas.Name: &"Stone pit",
-		Datas.Type: Types.Producing,
-		Datas.Cost: [[Resources.Types.Wood, 1], [Resources.Types.Textile, 1]],
-		Datas.Produce: Resources.Types.Stone,
-		Datas.Max_Workers: 2,
-		Datas.Maintenance_Cost: 1,
-		Datas.Require_MapCellType: MyMap.Minimap_Cell_Type.StoneDeposit,
-		Datas.Require_NaturalResource: NaturalResources.Ids.StoneDeposit,
 	},
 	# Level 2
 	Ids.Hut:
@@ -120,7 +116,9 @@ const datas = {
 	{
 		Datas.Name: &"Sawmill",
 		Datas.Type: Types.Producing,
-		Datas.Cost: [[Resources.Types.Plank, 1],],
+		Datas.Cost: [
+			[Resources.Types.Plank, 1],
+		],
 		Datas.Produce: Resources.Types.Plank,
 		Datas.Max_Workers: 4,
 		Datas.Maintenance_Cost: 2,
@@ -191,15 +189,6 @@ const datas = {
 		Datas.PopulationType: Populations.Types.Pioneer,
 		Datas.Maintenance_Cost: 2,
 	},
-	Ids.Stonemason:
-	{
-		Datas.Name: &"Stonemason",
-		Datas.Type: Types.Producing,
-		Datas.Cost: [[Resources.Types.Plank, 1], [Resources.Types.Textile, 1]],
-		Datas.Produce: Resources.Types.StoneBrick,
-		Datas.Max_Workers: 2,
-		Datas.Maintenance_Cost: 1,
-	},
 	Ids.Windmill:
 	{
 		Datas.Name: &"Windmill",
@@ -215,12 +204,36 @@ const datas = {
 		Datas.Maintenance_Cost: 1,
 		Datas.PopulationType: Populations.Types.Pioneer,
 	},
+	Ids.ClayPit:
+	{
+		Datas.Name: &"Clay pit",
+		Datas.Type: Types.Producing,
+		Datas.Cost: [[Resources.Types.Wood, 1], [Resources.Types.Textile, 1]],
+		Datas.Produce: Resources.Types.Clay,
+		Datas.Max_Workers: 2,
+		Datas.Maintenance_Cost: 1,
+		Datas.Require_MapCellType: MyMap.Minimap_Cell_Type.ClayDeposit,
+		Datas.Require_NaturalResource: NaturalResources.Ids.ClayDeposit,
+	},
+	Ids.Brickyard:
+	{
+		Datas.Name: &"Brickyard",
+		Datas.Type: Types.Producing,
+		Datas.Cost: [[Resources.Types.Wood, 1], [Resources.Types.Textile, 1]],
+		Datas.Produce: Resources.Types.ClayBrick,
+		Datas.Max_Workers: 2,
+		Datas.Maintenance_Cost: 1,
+	},
 	# Level 3
 	Ids.House:
 	{
 		Datas.Name: &"House",
 		Datas.Type: Types.Residential,
-		Datas.Cost: [[Resources.Types.Plank, 1],[Resources.Types.StoneBrick, 1],],
+		Datas.Cost: [
+			[Resources.Types.Plank, 1],
+			[Resources.Types.Textile, 1],
+			[Resources.Types.ClayBrick, 1],
+		],
 		Datas.Max_Workers: 4,
 		Datas.Level: 3,
 		Datas.PopulationType: Populations.Types.Settler,
@@ -229,7 +242,10 @@ const datas = {
 	{
 		Datas.Name: &"Bakery",
 		Datas.Type: Types.Producing,
-		Datas.Cost: [[Resources.Types.Plank, 1],[Resources.Types.StoneBrick, 1],],
+		Datas.Cost: [
+			[Resources.Types.Plank, 1],
+			[Resources.Types.ClayBrick, 1],
+		],
 		Datas.Produce: Resources.Types.Bread,
 		Datas.Max_Workers: 2,
 		Datas.Level: 3,
@@ -240,12 +256,52 @@ const datas = {
 	{
 		Datas.Name: &"Weaver",
 		Datas.Type: Types.Producing,
-		Datas.Cost: [[Resources.Types.Plank, 1],[Resources.Types.StoneBrick, 1],],
+		Datas.Cost: [
+			[Resources.Types.Plank, 1],
+			[Resources.Types.ClayBrick, 1],
+		],
 		Datas.Produce: Resources.Types.Textile,
 		Datas.Max_Workers: 2,
 		Datas.Level: 3,
 		Datas.Maintenance_Cost: 1,
 		Datas.PopulationType: Populations.Types.Settler,
+	},
+	Ids.StonePit:
+	{
+		Datas.Name: &"Stone pit",
+		Datas.Type: Types.Producing,
+		Datas.Cost: [[Resources.Types.Wood, 1], [Resources.Types.Textile, 1]],
+		Datas.Produce: Resources.Types.Stone,
+		Datas.Max_Workers: 2,
+		Datas.Maintenance_Cost: 1,
+		Datas.Require_MapCellType: MyMap.Minimap_Cell_Type.StoneDeposit,
+		Datas.Require_NaturalResource: NaturalResources.Ids.StoneDeposit,
+	},
+	Ids.Stonemason:
+	{
+		Datas.Name: &"Stonemason",
+		Datas.Type: Types.Producing,
+		Datas.Cost: [
+			[Resources.Types.Plank, 1],
+			[Resources.Types.Textile, 1]
+		],
+		Datas.Produce: Resources.Types.StoneBrick,
+		Datas.Max_Workers: 2,
+		Datas.Maintenance_Cost: 1,
+	},
+	# Level 4
+	Ids.StoneHouse:
+	{
+		Datas.Name: &"Stone house",
+		Datas.Type: Types.Residential,
+		Datas.Cost: [
+			[Resources.Types.Plank, 1],
+			[Resources.Types.Textile, 1],
+			[Resources.Types.StoneBrick, 1],
+		],
+		Datas.Max_Workers: 4,
+		Datas.Level: 3,
+		Datas.PopulationType: Populations.Types.Citizen,
 	},
 }
 
@@ -274,6 +330,24 @@ const Comsumptions = {
 		},
 	],
 	Buildings.Ids.House: [
+		{
+			ComsumptionDatas.ResourceType: -1,
+			ComsumptionDatas.ResourceAmount: 1,
+		},
+		{
+			ComsumptionDatas.ResourceType: Resources.Types.Potato,
+			ComsumptionDatas.ResourceAmount: 1,
+		},
+		{
+			ComsumptionDatas.ResourceType: Resources.Types.Meat,
+			ComsumptionDatas.ResourceAmount: 1,
+		},
+		{
+			ComsumptionDatas.ResourceType: Resources.Types.Bread,
+			ComsumptionDatas.ResourceAmount: 1,
+		},
+	],
+	Buildings.Ids.StoneHouse: [
 		{
 			ComsumptionDatas.ResourceType: -1,
 			ComsumptionDatas.ResourceAmount: 1,

@@ -2,9 +2,6 @@ extends GridContainer
 
 var event_bus: EventBus
 
-@export
-var button_disabled_color: Color
-
 @onready var widget := %Widget
 
 @onready var bottom_container := %BottomContainer

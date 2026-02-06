@@ -8,4 +8,6 @@ enum Types {
 	Pioneer,
 	# Level 3
 	Settler,
+	# Level 4
+	Citizen,
 }

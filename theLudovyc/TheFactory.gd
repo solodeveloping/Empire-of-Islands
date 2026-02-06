@@ -19,7 +19,7 @@ enum Production_Line {
 var production_lines_per_level = [{}, {}, {}, {}]
 
 # FIXME : the instantiation could be automated
-var workers: Array[int] = [0, 0, 0]:
+var workers: Array[int] = [0, 0, 0, 0]:
 	set(value):
 		workers = value
 		notify_workers_updated()
@@ -47,6 +47,8 @@ var resources_consumption = {
 	Resources.Types.StoneBrick: {},
 	Resources.Types.Flour: {},
 	Resources.Types.Bread: {},
+	Resources.Types.Clay: {},
+	Resources.Types.ClayBrick: {},
 }
 
 func _add_workers(population_type: Populations.Types, amount: int):

@@ -60,7 +60,8 @@ func entityStatic_get_top_left_tile(entity:EntityStatic, tile_center:Vector2i) -
 	return entity_get_top_left_tile(
 		tile_center,
 		entity.width,
-		entity.height
+		entity.height,
+		entity.height_offset
 	)
 
 ## Visually left tile
@@ -68,11 +69,12 @@ func entity_get_top_left_tile(
 	tile_center:Vector2i,
 	width: int,
 	height: int,
+	height_offset: int = 0
 ) -> Vector2i:
 	if height % 2 == 0:
-		return Vector2i(tile_center.x, tile_center.y - height / 2)
+		return Vector2i(tile_center.x, tile_center.y - height / 2 + height_offset)
 	else:
-		return Vector2i(tile_center.x - ceil(width / 2), tile_center.y - ceil(height / 2))
+		return Vector2i(tile_center.x - ceil(width / 2), tile_center.y - ceil(height / 2) + height_offset)
 
 # 0 or >0 == OK
 # -1 == KO
@@ -190,11 +192,13 @@ func is_entity_constructible(
 	tile_center: Vector2i,
 	width: int,
 	height: int,
+	height_offset: int = 0
 ) -> int:
 	var top_left_tile = entity_get_top_left_tile(
 		tile_center,
 		width,
-		height
+		height,
+		height_offset
 	)
 	
 	var trees = 0
@@ -452,10 +456,11 @@ func create_minimap_from_gaea_layers():
 		MyMap.Minimap_Cell_Type.Tree
 	)
 	
+	natural_resources.create_natural_resources()
+	
 func assign_cell_type_to_minimap_using_ground_layer(
 	cell_type: MyMap.Minimap_Cell_Type
 ):
-	var count = ground_layer.get_used_cells().size()
 	var source_id = MyMap.get_source_id(cell_type)
 	var atlas_coords = MyMap.get_atlas_coords(cell_type)
 	
@@ -469,7 +474,6 @@ func assign_cell_type_to_minimap_using_ground_layer(
 func assign_cell_type_to_minimap_using_tree_layer(
 	cell_type: MyMap.Minimap_Cell_Type
 ):
-	var count = trees_layer.get_used_cells().size()
 	var source_id = MyMap.get_source_id(cell_type)
 	var atlas_coords = MyMap.get_atlas_coords(cell_type)
 	for coord in atlas_coords:
