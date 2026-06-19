@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://3k4374b4s0ue"
+path="res://.godot/imported/sandwich.obj-4af7e487ed518301d76423a061688220.mesh"
+
+[deps]
+
+files=["res://.godot/imported/sandwich.obj-4af7e487ed518301d76423a061688220.mesh"]
+
+source_file="res://Assets/Kenney/kenney_food-kit/Models/OBJ format/sandwich.obj"
+dest_files=["res://.godot/imported/sandwich.obj-4af7e487ed518301d76423a061688220.mesh", "res://.godot/imported/sandwich.obj-4af7e487ed518301d76423a061688220.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

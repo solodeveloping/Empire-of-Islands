@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bo0xh1mx2vn11"
+path="res://.godot/imported/boat-tow-a.obj-028a7a8018e6e0d36b7e248a8dbf1155.mesh"
+
+[deps]
+
+files=["res://.godot/imported/boat-tow-a.obj-028a7a8018e6e0d36b7e248a8dbf1155.mesh"]
+
+source_file="res://Assets/Kenney/kenney_watercraft-pack/Models/OBJ format/boat-tow-a.obj"
+dest_files=["res://.godot/imported/boat-tow-a.obj-028a7a8018e6e0d36b7e248a8dbf1155.mesh", "res://.godot/imported/boat-tow-a.obj-028a7a8018e6e0d36b7e248a8dbf1155.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

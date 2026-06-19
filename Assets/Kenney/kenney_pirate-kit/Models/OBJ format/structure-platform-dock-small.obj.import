@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cygnhb66godb1"
+path="res://.godot/imported/structure-platform-dock-small.obj-bf7121a44ec559e41d814fa3d988ccfb.mesh"
+
+[deps]
+
+files=["res://.godot/imported/structure-platform-dock-small.obj-bf7121a44ec559e41d814fa3d988ccfb.mesh"]
+
+source_file="res://Assets/Kenney/kenney_pirate-kit/Models/OBJ format/structure-platform-dock-small.obj"
+dest_files=["res://.godot/imported/structure-platform-dock-small.obj-bf7121a44ec559e41d814fa3d988ccfb.mesh", "res://.godot/imported/structure-platform-dock-small.obj-bf7121a44ec559e41d814fa3d988ccfb.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://celwt0rneq78v"
+path="res://.godot/imported/ramp-wide.obj-fd4d4d5f84b6d856e91c9b70c150b8ac.mesh"
+
+[deps]
+
+files=["res://.godot/imported/ramp-wide.obj-fd4d4d5f84b6d856e91c9b70c150b8ac.mesh"]
+
+source_file="res://Assets/Kenney/kenney_watercraft-pack/Models/OBJ format/ramp-wide.obj"
+dest_files=["res://.godot/imported/ramp-wide.obj-fd4d4d5f84b6d856e91c9b70c150b8ac.mesh", "res://.godot/imported/ramp-wide.obj-fd4d4d5f84b6d856e91c9b70c150b8ac.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b72gq35ny82h2"
+path="res://.godot/imported/tower-hexagon-roof-secondary.obj-e187a9aa66bee7b8a35e0b111130923c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/tower-hexagon-roof-secondary.obj-e187a9aa66bee7b8a35e0b111130923c.mesh"]
+
+source_file="res://Assets/Kenney/kenney_castle-kit/Models/OBJ format/tower-hexagon-roof-secondary.obj"
+dest_files=["res://.godot/imported/tower-hexagon-roof-secondary.obj-e187a9aa66bee7b8a35e0b111130923c.mesh", "res://.godot/imported/tower-hexagon-roof-secondary.obj-e187a9aa66bee7b8a35e0b111130923c.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

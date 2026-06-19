@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bdytf4wp41jrm"
+path="res://.godot/imported/tower-complete-large.obj-fb931571daf2a7cfa92e5b832e7324ad.mesh"
+
+[deps]
+
+files=["res://.godot/imported/tower-complete-large.obj-fb931571daf2a7cfa92e5b832e7324ad.mesh"]
+
+source_file="res://Assets/Kenney/kenney_pirate-kit/Models/OBJ format/tower-complete-large.obj"
+dest_files=["res://.godot/imported/tower-complete-large.obj-fb931571daf2a7cfa92e5b832e7324ad.mesh", "res://.godot/imported/tower-complete-large.obj-fb931571daf2a7cfa92e5b832e7324ad.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

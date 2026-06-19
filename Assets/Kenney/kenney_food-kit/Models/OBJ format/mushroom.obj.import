@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c3v3getrd6yrp"
+path="res://.godot/imported/mushroom.obj-257b5a7da38bcbd57f292614a68ed2ec.mesh"
+
+[deps]
+
+files=["res://.godot/imported/mushroom.obj-257b5a7da38bcbd57f292614a68ed2ec.mesh"]
+
+source_file="res://Assets/Kenney/kenney_food-kit/Models/OBJ format/mushroom.obj"
+dest_files=["res://.godot/imported/mushroom.obj-257b5a7da38bcbd57f292614a68ed2ec.mesh", "res://.godot/imported/mushroom.obj-257b5a7da38bcbd57f292614a68ed2ec.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

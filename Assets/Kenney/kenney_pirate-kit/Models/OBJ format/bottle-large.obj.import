@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://x6g2irx1ij1"
+path="res://.godot/imported/bottle-large.obj-662e983cfe1ab633b7c835ce75113136.mesh"
+
+[deps]
+
+files=["res://.godot/imported/bottle-large.obj-662e983cfe1ab633b7c835ce75113136.mesh"]
+
+source_file="res://Assets/Kenney/kenney_pirate-kit/Models/OBJ format/bottle-large.obj"
+dest_files=["res://.godot/imported/bottle-large.obj-662e983cfe1ab633b7c835ce75113136.mesh", "res://.godot/imported/bottle-large.obj-662e983cfe1ab633b7c835ce75113136.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

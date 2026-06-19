@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dg458rcdnjioo"]
+
+[ext_resource type="PackedScene" uid="uid://v0gemedj2pl6" path="res://Assets/Kenney/kenney_watercraft-pack/Models/GLB format/buoy-flag.glb" id="1_y6prt"]
+[ext_resource type="Script" uid="uid://bipqnw4koy7x6" path="res://3D/ECS/entities/e_dock_buoy.gd" id="2_t4hcp"]
+
+[node name="buoy-flag2" unique_id=954263499 instance=ExtResource("1_y6prt")]
+script = ExtResource("2_t4hcp")

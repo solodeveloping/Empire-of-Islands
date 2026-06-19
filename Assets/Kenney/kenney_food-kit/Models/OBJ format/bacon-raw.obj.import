@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://2x4hle8tiylg"
+path="res://.godot/imported/bacon-raw.obj-0da0beacd1723d7f61a17a122e23ce18.mesh"
+
+[deps]
+
+files=["res://.godot/imported/bacon-raw.obj-0da0beacd1723d7f61a17a122e23ce18.mesh"]
+
+source_file="res://Assets/Kenney/kenney_food-kit/Models/OBJ format/bacon-raw.obj"
+dest_files=["res://.godot/imported/bacon-raw.obj-0da0beacd1723d7f61a17a122e23ce18.mesh", "res://.godot/imported/bacon-raw.obj-0da0beacd1723d7f61a17a122e23ce18.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

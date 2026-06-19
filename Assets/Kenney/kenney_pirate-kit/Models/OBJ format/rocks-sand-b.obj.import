@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://codvr5lcq4c2u"
+path="res://.godot/imported/rocks-sand-b.obj-b069a03522de60c113ca4a8d93a68cbd.mesh"
+
+[deps]
+
+files=["res://.godot/imported/rocks-sand-b.obj-b069a03522de60c113ca4a8d93a68cbd.mesh"]
+
+source_file="res://Assets/Kenney/kenney_pirate-kit/Models/OBJ format/rocks-sand-b.obj"
+dest_files=["res://.godot/imported/rocks-sand-b.obj-b069a03522de60c113ca4a8d93a68cbd.mesh", "res://.godot/imported/rocks-sand-b.obj-b069a03522de60c113ca4a8d93a68cbd.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://g3qw7d0e7yg4"
+path="res://.godot/imported/tree-high-crooked.obj-00bc6a4c375a73eaef6447c1832c31ac.mesh"
+
+[deps]
+
+files=["res://.godot/imported/tree-high-crooked.obj-00bc6a4c375a73eaef6447c1832c31ac.mesh"]
+
+source_file="res://Assets/Kenney/kenney_fantasy-town-kit_2.0/Models/OBJ format/tree-high-crooked.obj"
+dest_files=["res://.godot/imported/tree-high-crooked.obj-00bc6a4c375a73eaef6447c1832c31ac.mesh", "res://.godot/imported/tree-high-crooked.obj-00bc6a4c375a73eaef6447c1832c31ac.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
