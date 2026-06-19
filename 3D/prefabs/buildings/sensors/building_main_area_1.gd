@@ -59,7 +59,11 @@ func _on_MainArea3d_area_exited(area: Area3D) -> void:
 	state_changed.emit()
 
 func _on_MainArea3d_body_entered(body: Node3D) -> void:
-	#print("_on_MainArea3d_body_entered ", body.name)
+	#print(
+		#"_on_MainArea3d_body_entered ",
+		#body.name,
+		#body.get_parent().name,
+	#)
 	if body is MultiMeshInstanceCollider:
 		return
 		#trees.push_back(body)
@@ -75,7 +79,7 @@ func _on_MainArea3d_body_entered(body: Node3D) -> void:
 	#else:
 		#overlapping_bodies.append(body)
 		
-	#overlapping_bodies.append(body)
+	overlapping_bodies.append(body)
 	
 	state_changed.emit()
 
