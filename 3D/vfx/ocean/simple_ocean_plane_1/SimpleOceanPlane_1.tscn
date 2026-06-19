@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://df8yjlg3ykyc7"]
+
+[sub_resource type="Gradient" id="Gradient_fjlk2"]
+colors = PackedColorArray(0.796243, 0.796243, 0.796243, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_p4bk6"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bg43h"]
+noise = SubResource("FastNoiseLite_p4bk6")
+color_ramp = SubResource("Gradient_fjlk2")
+seamless = true
+seamless_blend_skirt = 1.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3e8c0"]
+frequency = 0.03
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3r4mw"]
+width = 1024
+height = 1024
+noise = SubResource("FastNoiseLite_3e8c0")
+seamless = true
+as_normal_map = true
+seamless_blend_skirt = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yvgft"]
+albedo_color = Color(0.08651448, 0.633489, 0.88757867, 1)
+albedo_texture = SubResource("NoiseTexture2D_bg43h")
+roughness = 0.0
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_3r4mw")
+uv1_scale = Vector3(5, 5, 5)
+
+[sub_resource type="QuadMesh" id="QuadMesh_xdfm7"]
+orientation = 1
+
+[sub_resource type="Animation" id="Animation_pxejn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:material_override:uv1_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_h7n4s"]
+resource_name = "flow"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:material_override:uv1_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nqslg"]
+_data = {
+&"RESET": SubResource("Animation_pxejn"),
+&"flow": SubResource("Animation_h7n4s")
+}
+
+[node name="SimpleOceanPlane1" type="Node3D" unique_id=1785244671]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1965929533]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_yvgft")
+mesh = SubResource("QuadMesh_xdfm7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=73798423]
+libraries/ = SubResource("AnimationLibrary_nqslg")
+speed_scale = 0.01

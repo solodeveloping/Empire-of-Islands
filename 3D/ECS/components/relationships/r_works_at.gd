@@ -1,0 +1,2 @@
+class_name R_WorksAt
+extends Component

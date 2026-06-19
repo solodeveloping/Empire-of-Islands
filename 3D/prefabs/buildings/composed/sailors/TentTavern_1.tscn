@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://ci0jb4qptteg5"]
+
+[ext_resource type="PackedScene" uid="uid://dfrp0toqgk4uv" path="res://3D/prefabs/buildings/reusables/Tent_1.tscn" id="1_ce1ko"]
+[ext_resource type="PackedScene" uid="uid://clj2wptu8nwud" path="res://Assets/Quaternius/Fantasy Props MegaKit[Standard]/Exports/glTF/Barrel.gltf" id="2_a0mbr"]
+[ext_resource type="PackedScene" uid="uid://bew536j4v6jn1" path="res://Assets/Quaternius/Fantasy Props MegaKit[Standard]/Exports/glTF/Crate_Wooden.gltf" id="3_fyrr5"]
+[ext_resource type="PackedScene" uid="uid://behj7wy2qu5kj" path="res://Assets/Quaternius/Survival Pack - Sept 2020/GLB/Bonfire.glb" id="4_dxep8"]
+[ext_resource type="PackedScene" uid="uid://b4tv44ot0bkiv" path="res://VFX/fire/FireVFX_1.tscn" id="5_w175j"]
+[ext_resource type="PackedScene" uid="uid://djo1va5j6jvom" path="res://Assets/Kenney/kenney_pirate-kit/Models/GLB format/bottle.glb" id="6_xiujb"]
+[ext_resource type="PackedScene" uid="uid://e5kv2us3ibmm" path="res://Assets/Kenney/kenney_pirate-kit/Models/GLB format/crate-bottles.glb" id="7_agmul"]
+[ext_resource type="PackedScene" uid="uid://cvkhjjtxb6qug" path="res://Assets/Kenney/kenney_survival-kit/Models/GLB format/bottle-large.glb" id="8_x3u7i"]
+[ext_resource type="PackedScene" uid="uid://cpoglahpjwa4x" path="res://Assets/Quaternius/Fantasy Props MegaKit[Standard]/Exports/glTF/Bag.gltf" id="9_g6csp"]
+[ext_resource type="PackedScene" uid="uid://bj7domdqphwg7" path="res://Assets/Quaternius/Fantasy Props MegaKit[Standard]/Exports/glTF/Bench.gltf" id="10_ek168"]
+[ext_resource type="PackedScene" uid="uid://dkgwtabq1rdvc" path="res://Assets/Quaternius/Fantasy Props MegaKit[Standard]/Exports/glTF/Cauldron.gltf" id="11_ckw7l"]
+[ext_resource type="PackedScene" uid="uid://bea7ndwvekctq" path="res://Assets/Quaternius/Fantasy Props MegaKit[Standard]/Exports/glTF/Stool.gltf" id="12_m3bmu"]
+[ext_resource type="PackedScene" uid="uid://bdenf4ijhi8yd" path="res://Assets/Quaternius/Fantasy Props MegaKit[Standard]/Exports/glTF/Table_Large.gltf" id="13_kk4in"]
+[ext_resource type="PackedScene" uid="uid://d2xqv2gikxv6m" path="res://Assets/iPoly3D/Signs pack/Wooden Sign-mxyDWLsKer.glb" id="14_fyrr5"]
+[ext_resource type="PackedScene" uid="uid://gae7y54ysk4u" path="res://Assets/iPoly3D/Signs pack/Wooden Sign-SzDPlKOhrH.glb" id="15_dxep8"]
+[ext_resource type="PackedScene" uid="uid://40mnncts2t8x" path="res://Assets/CircuitZ/Wood Frame Base Build Set (Modular) Part 1/Wood Base 3.glb" id="16_dxep8"]
+
+[node name="TentTavern1" type="Node3D" unique_id=1535012436]
+
+[node name="Tent2" parent="." unique_id=1577214377 instance=ExtResource("1_ce1ko")]
+transform = Transform3D(0.9999708, 0, 0.007644548, 0, 1, 0, -0.007644548, 0, 0.9999708, -0.021962762, 0, -3.70899)
+
+[node name="Barrel2" parent="." unique_id=1864501420 instance=ExtResource("2_a0mbr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9586818, 0, -2.0644593)
+
+[node name="Barrel3" parent="." unique_id=468710711 instance=ExtResource("2_a0mbr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1539729, 0, -3.0381017)
+
+[node name="Crate_Wooden2" parent="." unique_id=1554454500 instance=ExtResource("3_fyrr5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1012976, 4.7683716e-07, -3.5484262)
+
+[node name="Bonfire2" parent="." unique_id=837020677 instance=ExtResource("4_dxep8")]
+transform = Transform3D(0.58, 0, 0, 0, 0.58, 0, 0, 0, 0.58, -4.2625637, 0, 0.21029711)
+
+[node name="FireVfx1" parent="Bonfire2" unique_id=478299065 instance=ExtResource("5_w175j")]
+transform = Transform3D(0.44247788, 0, 0, 0, 0.44247788, 0, 0, 0, 0.44247788, 0, 0.57852566, 0)
+
+[node name="bottle2" parent="." unique_id=629901360 instance=ExtResource("6_xiujb")]
+transform = Transform3D(0.395, 0, 0, 0, 0.395, 0, 0, 0, 0.395, 2.0214276, 0, -2.4555886)
+
+[node name="crate-bottles2" parent="." unique_id=909539655 instance=ExtResource("7_agmul")]
+transform = Transform3D(0.475, 0, 0, 0, 0.475, 0, 0, 0, 0.475, 2.9397202, 0, -2.7272015)
+
+[node name="bottle-large2" parent="." unique_id=1797231303 instance=ExtResource("8_x3u7i")]
+transform = Transform3D(2.32, 0, 0, 0, 2.32, 0, 0, 0, 2.32, 2.300585, 0, -2.4026842)
+
+[node name="Bag2" parent="." unique_id=1127193791 instance=ExtResource("9_g6csp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.35676, 0, -4.0226803)
+
+[node name="Bench2" parent="." unique_id=2011269249 instance=ExtResource("10_ek168")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05246973, 0, 4.5836496)
+
+[node name="Tent3" parent="." unique_id=1249216102 instance=ExtResource("1_ce1ko")]
+transform = Transform3D(0.9999708, 0, 0.007644548, 0, 1, 0, -0.007644548, 0, 0.9999708, 5.13241, 0, -3.70899)
+
+[node name="Bench3" parent="." unique_id=1975822624 instance=ExtResource("10_ek168")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5987806, 0, 4.6171823)
+
+[node name="Cauldron2" parent="." unique_id=1033230712 instance=ExtResource("11_ckw7l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.888832, 0, -0.92592144)
+
+[node name="Stool2" parent="." unique_id=1679540283 instance=ExtResource("12_m3bmu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.470388, 0, 1.2586617)
+
+[node name="Table_Large2" parent="." unique_id=49979949 instance=ExtResource("13_kk4in")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18224607, 0, 3.5597734)
+
+[node name="Table_Large3" parent="." unique_id=1659813876 instance=ExtResource("13_kk4in")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7372203, 0, 3.5597734)
+
+[node name="Bench4" parent="." unique_id=1437554152 instance=ExtResource("10_ek168")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05246973, 0, 2.4622393)
+
+[node name="Bench5" parent="." unique_id=1791776581 instance=ExtResource("10_ek168")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5987806, 0, 2.4773817)
+
+[node name="bottle3" parent="." unique_id=837526334 instance=ExtResource("6_xiujb")]
+transform = Transform3D(0.395, 0, 0, 0, 0.395, 0, 0, 0, 0.395, 1.0456651, 0.81510794, 3.4820237)
+
+[node name="bottle4" parent="." unique_id=1382163473 instance=ExtResource("6_xiujb")]
+transform = Transform3D(0.395, 0, 0, 0, 0.395, 0, 0, 0, 0.395, -0.9110482, 0.81510794, 3.4820237)
+
+[node name="bottle5" parent="." unique_id=406072584 instance=ExtResource("6_xiujb")]
+transform = Transform3D(0.395, 0, 0, 0, 0.395, 0, 0, 0, 0.395, 4.7959185, 0.81510794, 3.4820237)
+
+[node name="bottle6" parent="." unique_id=1954240118 instance=ExtResource("6_xiujb")]
+transform = Transform3D(0.395, 0, 0, 0, 0.395, 0, 0, 0, 0.395, 4.408148, 0.81510794, 3.4820237)
+
+[node name="Root Scene" parent="." unique_id=750752417 instance=ExtResource("14_fyrr5")]
+transform = Transform3D(-0.48603034, 0, 0.87394196, 0, 1, 0, -0.87394196, 0, -0.48603034, 8.745456, -9.536743e-07, -3.0457544)
+
+[node name="Root Scene2" parent="." unique_id=11259164 instance=ExtResource("15_dxep8")]
+transform = Transform3D(-0.7133239, 0, -0.7008345, 0, 1, 0, 0.7008345, 0, -0.7133239, 8.008987, 0, 3.9175377)
+
+[node name="Root Scene3" parent="." unique_id=1472843120 instance=ExtResource("16_dxep8")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 4.548166, 0, 3.5336032)
+
+[node name="Root Scene4" parent="." unique_id=1743501171 instance=ExtResource("16_dxep8")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -0.05507517, 0, 3.5336032)
+
+[node name="Root Scene5" parent="." unique_id=1907594093 instance=ExtResource("16_dxep8")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -4.139631, 0, 0.12781596)

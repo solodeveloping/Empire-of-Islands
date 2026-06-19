@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://mqod6nntosa4"]
+
+[ext_resource type="PackedScene" uid="uid://xrgnluttda8x" path="res://Assets/Quaternius/Cute Fish Pack - Feb 2020/FBX/Boat.fbx" id="1_itoxf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_itoxf"]
+albedo_color = Color(0.29605782, 0.13978943, 4.813075e-08, 1)
+stencil_mode = 3
+stencil_flags = 2
+
+[node name="Boat" unique_id=1736626358 instance=ExtResource("1_itoxf")]
+
+[node name="Boat" parent="." index="0" unique_id=1706077595]
+transform = Transform3D(20, 0, 0, 0, -8.742278e-07, 20, 0, -20, -8.742278e-07, 0, 0, 0)
+surface_material_override/1 = SubResource("StandardMaterial3D_itoxf")

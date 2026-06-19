@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dnwpxbdjjk2h0"]
+
+[ext_resource type="Script" uid="uid://dsesufvw00cp2" path="res://3D/prefabs/buildings/sensors/ground_sensor_editable_1.gd" id="1_7wr8w"]
+[ext_resource type="PackedScene" uid="uid://eebgd3v8d7ul" path="res://3D/prefabs/buildings/sensors/SingleGroundSensorWithSprite1.tscn" id="1_sqgdw"]
+
+[node name="GroundSensorEditable1" type="Node3D" unique_id=1810008971]
+script = ExtResource("1_7wr8w")
+
+[node name="sensors" type="Node3D" parent="." unique_id=162158777]
+
+[node name="SingleGroundSensorWithSprite1" parent="sensors" unique_id=929189549 instance=ExtResource("1_sqgdw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -2)
+
+[node name="SingleGroundSensorWithSprite2" parent="sensors" unique_id=1293848132 instance=ExtResource("1_sqgdw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.1, 0)
+
+[node name="SingleGroundSensorWithSprite3" parent="sensors" unique_id=643648802 instance=ExtResource("1_sqgdw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 2)
+
+[node name="SingleGroundSensorWithSprite4" parent="sensors" unique_id=346344375 instance=ExtResource("1_sqgdw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.1, 0)
+
+[node name="UpdateSensorsTimer" type="Timer" parent="." unique_id=84390529]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="UpdateSensorsTimer" to="." method="_on_UpdateSensorsTimer_timeout"]

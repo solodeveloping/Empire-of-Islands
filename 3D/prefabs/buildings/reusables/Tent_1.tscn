@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dfrp0toqgk4uv"]
+
+[ext_resource type="PackedScene" uid="uid://2f86s67evf0e" path="res://Assets/Quaternius/Survival Pack - Sept 2020/GLB/Tent.glb" id="1_uuneb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iiqfj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2kv85"]
+albedo_color = Color(0.46618086, 0.4661808, 0.4661808, 1)
+
+[node name="Tent2" unique_id=1577214377 instance=ExtResource("1_uuneb")]
+
+[node name="Tent" parent="." index="0" unique_id=1262864923]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+surface_material_override/2 = SubResource("StandardMaterial3D_iiqfj")
+surface_material_override/3 = SubResource("StandardMaterial3D_2kv85")

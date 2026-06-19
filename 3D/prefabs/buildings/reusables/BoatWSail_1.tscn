@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cv6tvym2y2ful"]
+
+[ext_resource type="PackedScene" uid="uid://cvxaft23uq8b0" path="res://Assets/Quaternius/Ships by @Quaternius/FBX/BoatWSail.fbx" id="1_y1scs"]
+
+[node name="BoatWSail" unique_id=1552942388 instance=ExtResource("1_y1scs")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)

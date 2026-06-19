@@ -1,0 +1,667 @@
+[gd_scene format=3 uid="uid://dqynln5500771"]
+
+[ext_resource type="Script" uid="uid://c8vqt26xn0nv3" path="res://3D/game_3D.gd" id="1_6iho6"]
+[ext_resource type="PackedScene" uid="uid://b3s7eqy0blp6g" path="res://theLudovyc/GUI/GUI.tscn" id="1_d5f84"]
+[ext_resource type="Material" uid="uid://b770vfl4vul8p" path="res://addons/goshapes/samples/SampleAssets/SandMat.mat.tres" id="1_yf0hr"]
+[ext_resource type="PackedScene" uid="uid://cdwvtbtwmrqbn" path="res://RGT/PauseMenu/PauseMenu.tscn" id="2_20g1j"]
+[ext_resource type="Script" uid="uid://dmnir0dg3tym2" path="res://theLudovyc/EventBus.gd" id="3_20g1j"]
+[ext_resource type="Shader" uid="uid://dd7ybmpebmb0y" path="res://VFX/ocean/ocean_shader_1.gdshader" id="3_skiu2"]
+[ext_resource type="Script" uid="uid://dangexuy52p7f" path="res://theLudovyc/TheStorage.gd" id="4_xqrix"]
+[ext_resource type="Script" uid="uid://yx8hwfe28cir" path="res://Script/Music/AudioPlayer.gd" id="5_crkkd"]
+[ext_resource type="Script" uid="uid://87vqyamr3bco" path="res://addons/godotmarket/scripts/storage/gm_simple_storage.gd" id="5_malf7"]
+[ext_resource type="AudioStream" uid="uid://cnfqkilaophxh" path="res://Art/Sound/Music/Ambient/nightdream.ogg" id="6_crkkd"]
+[ext_resource type="Script" uid="uid://cdu5tlyk72uu4" path="res://addons/gecs/ecs/world.gd" id="6_viien"]
+[ext_resource type="Script" uid="uid://cf84mkp0nv2mk" path="res://addons/gecs/io/serialize_config.gd" id="7_5mqro"]
+[ext_resource type="PackedScene" uid="uid://c0crs07wbol7p" path="res://3D/prefabs/buildings/composed/sailors/HousingTent.tscn" id="7_61y8o"]
+[ext_resource type="AudioStream" uid="uid://b5ur6xrv55hpn" path="res://Art/Sound/Music/Ambient/waves.ogg" id="7_ufavn"]
+[ext_resource type="AudioStream" uid="uid://crmlaovke6o82" path="res://Art/Sound/Music/Ambient/newfrontier.ogg" id="8_ie2tq"]
+[ext_resource type="PackedScene" uid="uid://bwcqu7lunanpr" path="res://3D/prefabs/buildings/composed/sailors/Dock_1.tscn" id="8_w26l7"]
+[ext_resource type="Script" uid="uid://b3vi2ingux88g" path="res://addons/gecs/lib/system_group.gd" id="8_yf0hr"]
+[ext_resource type="Script" uid="uid://db6vw0iasnipd" path="res://3D/ECS/systems/s_production.gd" id="9_5mqro"]
+[ext_resource type="PackedScene" uid="uid://dgflhswvnmgx3" path="res://3D/prefabs/buildings/composed/sailors/FishermanTent_1.tscn" id="9_g7t4e"]
+[ext_resource type="AudioStream" uid="uid://dmf1nh1vw7ykm" path="res://Art/Sound/Music/Ambient/goldenvalley.ogg" id="9_k0lxy"]
+[ext_resource type="AudioStream" uid="uid://mbu7kx7ksu2y" path="res://Art/Sound/Music/Ambient/uh_gameplay2.ogg" id="10_1jmv0"]
+[ext_resource type="Script" uid="uid://kj6ciqldjrt1" path="res://3D/ECS/observers/o_building_added_observer.gd" id="10_4evuf"]
+[ext_resource type="PackedScene" uid="uid://bmde582hv8jwm" path="res://3D/prefabs/buildings/composed/sailors/CityCenter_1.tscn" id="10_txb88"]
+[ext_resource type="Script" uid="uid://bpnyku4wivd2w" path="res://3D/ECS/systems/s_simple_transfer_resources.gd" id="11_6uy4x"]
+[ext_resource type="AudioStream" uid="uid://dgc3s5qxrc6tf" path="res://Art/Sound/Music/Ambient/uh_gameplay3.ogg" id="11_dokig"]
+[ext_resource type="PackedScene" uid="uid://c0f7np4ixkd1x" path="res://3D/prefabs/buildings/composed/sailors/Lumberjack_1.tscn" id="11_xryh2"]
+[ext_resource type="AudioStream" uid="uid://cuoiainl75spf" path="res://Art/Sound/Music/Ambient/uh_gameplay4.ogg" id="12_nxbpq"]
+[ext_resource type="PackedScene" uid="uid://ci0jb4qptteg5" path="res://3D/prefabs/buildings/composed/sailors/TentTavern_1.tscn" id="12_pcvow"]
+[ext_resource type="AudioStream" uid="uid://c635jvpdrla5x" path="res://Art/Sound/Music/Ambient/irelands_coast.ogg" id="13_o1gnf"]
+[ext_resource type="AudioStream" uid="uid://cpyhs8nn2hucd" path="res://Art/Sound/Music/Ambient/beware_the_ships_kobold.ogg" id="14_hc4vk"]
+[ext_resource type="Shader" uid="uid://cnnu56rxnieut" path="res://3D/vfx/shaders/range_indicator_shader_3.tres" id="14_w2kdd"]
+[ext_resource type="PackedScene" uid="uid://dthmx62xw7kk4" path="res://3D/vfx/prefabs/RangeCylinderIndicator.tscn" id="15_17cjb"]
+[ext_resource type="AudioStream" uid="uid://cysg7fs7v5t3j" path="res://Art/Sound/ships_bell.ogg" id="15_ie2tq"]
+[ext_resource type="AudioStream" uid="uid://syr4yjxl05s4" path="res://Art/Sound/success.ogg" id="16_k0lxy"]
+[ext_resource type="PackedScene" uid="uid://cdefoo0ghsb74" path="res://3D/prefabs/buildings/composed/sailors/HunterTent_1.tscn" id="17_bvcfc"]
+[ext_resource type="PackedScene" uid="uid://ivwxaamrccv3" path="res://Assets/kaylousberg/KayKit_Adventurers_2.0_FREE/Characters/gltf/Barbarian.glb" id="19_dxwwv"]
+[ext_resource type="PackedScene" uid="uid://bw1iykk14irya" path="res://Assets/kaylousberg/KayKit_Adventurers_2.0_FREE/Characters/gltf/Ranger.glb" id="20_6iho6"]
+[ext_resource type="Script" uid="uid://dnmdvjs670ccj" path="res://3D/ECS/systems/ships/s_auto_find_closest_dock.gd" id="24_ws72x"]
+[ext_resource type="Script" uid="uid://cxj6bi3prlipt" path="res://3D/ECS/systems/navigation/s_navigation.gd" id="25_hc4vk"]
+[ext_resource type="Script" uid="uid://dcc46g6yx3cig" path="res://3D/ECS/observers/o_misc_observer.gd" id="25_r0xnc"]
+[ext_resource type="Script" uid="uid://bknr5cftxu2cy" path="res://3D/ECS/systems/ships/s_ship_waiting_at_dock.gd" id="25_tropj"]
+[ext_resource type="Script" uid="uid://dfu536m6alkp1" path="res://3D/ECS/systems/movement/s_node_3d_movement.gd" id="26_r0xnc"]
+[ext_resource type="Script" uid="uid://bfcfkv30j1ain" path="res://3D/ECS/observers/o_population_observer.gd" id="26_vr5bk"]
+[ext_resource type="Shader" uid="uid://c2bcg4e8ymnec" path="res://VFX/post_processing/test_drawing_1.gdshader" id="27_bpuvv"]
+[ext_resource type="Script" uid="uid://cr8q6muvwhowx" path="res://3D/ECS/systems/movement/s_character_body_3d_movement.gd" id="27_ws72x"]
+[ext_resource type="Script" uid="uid://1bta6sms7xv4" path="res://3D/ECS/misc/ge_map_ship_spawner.gd" id="29_hc4vk"]
+[ext_resource type="Script" uid="uid://b7xs0hemdgjhf" path="res://3D/ECS/misc/ge_travelling_ship_definition.gd" id="30_r0xnc"]
+[ext_resource type="Shader" uid="uid://bqb1v1s0nfoa2" path="res://VFX/ocean/visual_shaders/ocean_visual_shader_1/ocean_visual_shader_1_caustics_1.tres" id="30_tropj"]
+[ext_resource type="Shader" uid="uid://be50ph36peocc" path="res://VFX/ocean/visual_shaders/simple_ocean_visual_shader_1/simple_ocean_visual_shader_1.tres" id="38_ekic1"]
+[ext_resource type="Script" uid="uid://bbhr52k31vvcc" path="res://3D/ocean_node_1.gd" id="39_ekic1"]
+[ext_resource type="PackedScene" uid="uid://cj58mgwq0tw3b" path="res://3D/prefabs/islands/Island1_binary.scn" id="44_dokig"]
+[ext_resource type="PackedScene" uid="uid://dffby82byb5wv" path="res://3D/prefabs/ships/SailShip_1.tscn" id="47_tropj"]
+[ext_resource type="Script" uid="uid://dops2gkdonqlc" path="res://3D/ECS/entities/e_map_exit.gd" id="51_tk656"]
+
+[sub_resource type="Resource" id="Resource_w2kdd"]
+script = ExtResource("7_5mqro")
+metadata/_custom_type_script = "uid://cf84mkp0nv2mk"
+
+[sub_resource type="Resource" id="Resource_ws72x"]
+script = ExtResource("30_r0xnc")
+scene = ExtResource("47_tropj")
+population_min_capacity = 5
+metadata/_custom_type_script = "uid://b7xs0hemdgjhf"
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_dokig"]
+vertices = PackedVector3Array(-44.918457, 0.2903328, 10, 30.081543, 0.2903328, -20, 30.081543, 0.2903328, -4995, -49.918457, 0.2903328, 20, -5169.9185, 0.2903328, -4995, -5169.9185, 0.2903328, 35, 60.081543, 0.2903328, -15, 135.08154, 0.2903328, 70, 4820.0815, 0.2903328, 70, 4820.0815, 0.2903328, -4995, -39.918457, 0.2903328, 85, -39.918457, 0.2903328, 30, -9.918457, 0.2903328, 4995, -9.918457, 0.2903328, 115, -5169.9185, 0.2903328, 4995, 120.08154, 0.2903328, 90, 55.081543, 0.2903328, 100, 60.081543, 0.2903328, 4995, 4820.0815, 0.2903328, 4995)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(0, 3, 2), PackedInt32Array(2, 3, 5), PackedInt32Array(2, 5, 4), PackedInt32Array(8, 7, 6), PackedInt32Array(6, 1, 8), PackedInt32Array(8, 1, 2), PackedInt32Array(8, 2, 9), PackedInt32Array(3, 11, 10), PackedInt32Array(10, 13, 12), PackedInt32Array(10, 12, 3), PackedInt32Array(3, 12, 5), PackedInt32Array(5, 12, 14), PackedInt32Array(15, 7, 8), PackedInt32Array(15, 8, 16), PackedInt32Array(16, 8, 17), PackedInt32Array(17, 8, 18), PackedInt32Array(12, 13, 17), PackedInt32Array(17, 13, 16)]
+geometry_source_geometry_mode = 1
+geometry_source_group_name = &"ocean_surface_nav"
+cell_size = 5.0
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_r0xnc"]
+sky_top_color = Color(0.254902, 0.698039, 0.901961, 1)
+sky_horizon_color = Color(0.937255, 1, 0.992157, 1)
+ground_bottom_color = Color(0.2, 0.77254903, 1, 1)
+ground_horizon_color = Color(0.003921569, 0.06666667, 0.5921569, 1)
+sun_angle_max = 29.71
+
+[sub_resource type="Sky" id="Sky_c68or"]
+sky_material = SubResource("ProceduralSkyMaterial_r0xnc")
+
+[sub_resource type="Environment" id="Environment_ws72x"]
+background_mode = 2
+sky = SubResource("Sky_c68or")
+ambient_light_source = 3
+ambient_light_color = Color(0.376471, 0.572549, 0.639216, 1)
+ambient_light_sky_contribution = 0.3
+tonemap_mode = 2
+tonemap_white = 6.0
+ssao_radius = 0.91
+ssao_intensity = 2.53
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 0.08
+fog_enabled = true
+fog_mode = 1
+fog_sun_scatter = 0.24
+fog_density = 1.0
+fog_aerial_perspective = 1.0
+fog_depth_curve = 0.2773922
+fog_depth_begin = 50.0
+fog_depth_end = 1000.0
+volumetric_fog_density = 0.1
+volumetric_fog_length = 63.79
+
+[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_o1gnf"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vr5bk"]
+noise_type = 2
+frequency = 0.1
+fractal_type = 0
+cellular_distance_function = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_o1gnf"]
+width = 256
+height = 128
+noise = SubResource("FastNoiseLite_vr5bk")
+seamless = true
+seamless_blend_skirt = 1.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_imrfu"]
+noise_type = 2
+seed = 1
+frequency = 0.15
+fractal_type = 0
+cellular_distance_function = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hc4vk"]
+width = 256
+height = 128
+noise = SubResource("FastNoiseLite_imrfu")
+seamless = true
+seamless_blend_skirt = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hqty3"]
+render_priority = 0
+shader = ExtResource("30_tropj")
+shader_parameter/NoiseTexture1Panning = Vector2(0, 0)
+shader_parameter/NoiseTextureScale = Vector2(0.1, 0.1)
+shader_parameter/NoiseTexture = SubResource("NoiseTexture2D_o1gnf")
+shader_parameter/NoiseTexture1Panning2 = Vector2(0.001, 0.001)
+shader_parameter/NoiseTexture2 = SubResource("NoiseTexture2D_hc4vk")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_tropj"]
+material = ExtResource("1_yf0hr")
+size = Vector2(10000, 10000)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_61y8o"]
+render_priority = 0
+shader = ExtResource("3_skiu2")
+shader_parameter/absorption_color = Color(1, 0.35, 0, 1)
+shader_parameter/fresnel_radius = 2.0
+shader_parameter/fresnel_color = Color(0, 0.57, 0.72, 1)
+shader_parameter/roughness = 0.15
+shader_parameter/specular = 0.25
+shader_parameter/depth_distance = 25.0
+shader_parameter/beers_law = 4.5
+shader_parameter/displacement_strength = 0.3
+shader_parameter/displacement_scroll_speed = 0.1
+shader_parameter/displacement_scroll_offset = Vector2(-0.2, 0.3)
+shader_parameter/displacement_scale_offset = 0.5
+shader_parameter/displacement_scale = Vector2(0.04, 0.04)
+shader_parameter/edge_thickness = 0.3
+shader_parameter/edge_speed = 0.35
+shader_parameter/edge_noise_scale = Vector2(0.4, 0.4)
+shader_parameter/influence_size = 1.0
+shader_parameter/player_wave_frequenzy = 10.0
+shader_parameter/player_wave_speed = 5.0
+shader_parameter/caustic_size = 2.0
+shader_parameter/caustic_range = 40.0
+shader_parameter/caustic_strength = 0.08
+shader_parameter/ssr_mix_strength = 0.65
+shader_parameter/ssr_travel = 0.0
+shader_parameter/ssr_resolution_near = 1.0
+shader_parameter/ssr_resolution_far = 5.0
+shader_parameter/ssr_tolerance = 1.0
+shader_parameter/refraction_strength = 1.25
+shader_parameter/normal_map_strength = 1.0
+shader_parameter/scroll_speed = 0.3
+shader_parameter/scroll_offset = Vector2(0.1, -0.3)
+shader_parameter/scale_offset = 0.5
+shader_parameter/normal_map_scale = Vector2(0.1, 0.1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_w26l7"]
+size = Vector2(10000, 10000)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r0xnc"]
+size = Vector3(10000, 0.001, 10000)
+
+[sub_resource type="Gradient" id="Gradient_o1gnf"]
+colors = PackedColorArray(0.5370113, 0.5370113, 0.5370113, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tnibl"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_r0xnc"]
+width = 1024
+height = 1024
+noise = SubResource("FastNoiseLite_tnibl")
+color_ramp = SubResource("Gradient_o1gnf")
+
+[sub_resource type="Gradient" id="Gradient_r0xnc"]
+offsets = PackedFloat32Array(0, 0.24422443)
+colors = PackedColorArray(0, 0.59607846, 0.96862745, 1, 2.4065375e-07, 0.33822235, 0.56322634, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ws72x"]
+gradient = SubResource("Gradient_r0xnc")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cr17y"]
+render_priority = 0
+shader = ExtResource("38_ekic1")
+shader_parameter/ColorTexture = SubResource("GradientTexture2D_ws72x")
+shader_parameter/EdgeProximityFadeDistance = 2.185
+shader_parameter/AlbedoNoisePanningSpeed = Vector2(-0.01, -0.01)
+shader_parameter/AlbedoNoiseScale = Vector2(10, 10)
+shader_parameter/AlbedoNoiseDark = SubResource("NoiseTexture2D_r0xnc")
+shader_parameter/AlbedoNoiseStrngth = 0.315
+shader_parameter/MinAlpha = 0.9
+shader_parameter/Roughness = 0.2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1eclw"]
+size = Vector2(1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vr5bk"]
+size = Vector3(1, 0.001, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o1gnf"]
+albedo_color = Color(0.12941177, 0.53333336, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hc4vk"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_o1gnf"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tropj"]
+width = 1024
+height = 1024
+noise = SubResource("FastNoiseLite_o1gnf")
+seamless = true
+as_normal_map = true
+seamless_blend_skirt = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tk656"]
+noise = SubResource("FastNoiseLite_o1gnf")
+seamless = true
+as_normal_map = true
+seamless_blend_skirt = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vr5bk"]
+transparency = 1
+depth_draw_mode = 1
+albedo_color = Color(0.15661535, 0.5332383, 0.9999998, 0.8745098)
+roughness = 0.3
+normal_enabled = true
+normal_scale = 2.96
+normal_texture = SubResource("NoiseTexture2D_tropj")
+refraction_enabled = true
+refraction_texture = SubResource("NoiseTexture2D_tk656")
+uv1_scale = Vector3(0.02, 0.02, 0.02)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_ekic1"]
+size = Vector3(1000, 1, 1000)
+
+[sub_resource type="Animation" id="Animation_o1gnf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material_override:uv1_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hc4vk"]
+resource_name = "loop"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material_override:uv1_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-1, -1, -1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r0xnc"]
+_data = {
+&"RESET": SubResource("Animation_o1gnf"),
+&"loop": SubResource("Animation_hc4vk")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bpuvv"]
+render_priority = 0
+shader = ExtResource("14_w2kdd")
+shader_parameter/ColorParameter = Color(0.568056, 1.353256, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4evuf"]
+render_priority = 0
+shader = ExtResource("27_bpuvv")
+shader_parameter/outline_mode = 3
+shader_parameter/outline_intensity = 1.0
+shader_parameter/_round = false
+shader_parameter/outline_bias = 0.0
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_17cjb"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_hc4vk"]
+radius = 1.0
+height = 3.0
+
+[node name="MainScene" type="Node3D" unique_id=882781262]
+script = ExtResource("1_6iho6")
+buildings_collision_mask_for_ray = 4
+left_click_collision_mask_for_ray = 256
+right_click_collision_mask_for_ray = 2
+things_with_names_collision_mask_for_ray = 14
+
+[node name="GUI" parent="." unique_id=653385081 instance=ExtResource("1_d5f84")]
+layer = 0
+
+[node name="PauseMenu" parent="GUI" unique_id=1978842181 instance=ExtResource("2_20g1j")]
+unique_name_in_owner = true
+visible = false
+
+[node name="OptionsButton" parent="GUI/PauseMenu/MenuContainer/VBoxContainer/MenuButtons" index="3"]
+visible = false
+
+[node name="EventBus" type="Node" parent="." unique_id=1578861770]
+unique_name_in_owner = true
+script = ExtResource("3_20g1j")
+
+[node name="AudioPlayer" type="Node" parent="." unique_id=83041509]
+script = ExtResource("5_crkkd")
+in_game_music_tracks = Array[AudioStream]([ExtResource("6_crkkd"), ExtResource("7_ufavn"), ExtResource("8_ie2tq"), ExtResource("9_k0lxy"), ExtResource("10_1jmv0"), ExtResource("11_dokig"), ExtResource("12_nxbpq"), ExtResource("13_o1gnf"), ExtResource("14_hc4vk")])
+invalid_construction = ExtResource("15_ie2tq")
+valid_construction = ExtResource("16_k0lxy")
+metadata/_custom_type_script = "uid://yx8hwfe28cir"
+
+[node name="GMSimpleStorage" type="Node" parent="." unique_id=527105308]
+script = ExtResource("5_malf7")
+metadata/_custom_type_script = "uid://87vqyamr3bco"
+
+[node name="TheStorage" type="Node" parent="." unique_id=1012283282]
+unique_name_in_owner = true
+script = ExtResource("4_xqrix")
+
+[node name="World" type="Node" parent="." unique_id=1304554535]
+script = ExtResource("6_viien")
+entity_nodes_root = NodePath("Entities")
+system_nodes_root = NodePath("Systems")
+default_serialize_config = SubResource("Resource_w2kdd")
+metadata/_custom_type_script = "uid://cdu5tlyk72uu4"
+
+[node name="Entities" type="Node" parent="World" unique_id=1540302975]
+
+[node name="Systems" type="Node" parent="World" unique_id=2083285819]
+
+[node name="gameplay" type="Node" parent="World/Systems" unique_id=779744692]
+script = ExtResource("8_yf0hr")
+metadata/_custom_type_script = "uid://b3vi2ingux88g"
+
+[node name="SimpleTransferResourcesSystem" type="Node" parent="World/Systems/gameplay" unique_id=1626421095]
+script = ExtResource("11_6uy4x")
+group = &"gameplay"
+metadata/_custom_type_script = "uid://bpnyku4wivd2w"
+
+[node name="ProductionSystem" type="Node" parent="World/Systems/gameplay" unique_id=1587522906]
+script = ExtResource("9_5mqro")
+group = &"gameplay"
+metadata/_custom_type_script = "uid://db6vw0iasnipd"
+
+[node name="AutoFindClosestDockSystem" type="Node" parent="World/Systems/gameplay" unique_id=1271380539]
+script = ExtResource("24_ws72x")
+group = &"gameplay"
+metadata/_custom_type_script = "uid://dnmdvjs670ccj"
+
+[node name="ShipWaitingAtDockSystem" type="Node" parent="World/Systems/gameplay" unique_id=890382200]
+script = ExtResource("25_tropj")
+group = &"gameplay"
+metadata/_custom_type_script = "uid://bknr5cftxu2cy"
+
+[node name="O_PopulationObserver" type="Node" parent="World/Systems/gameplay" unique_id=725593895]
+script = ExtResource("26_vr5bk")
+metadata/_custom_type_script = "uid://bfcfkv30j1ain"
+
+[node name="O_BuildingAddedObserver" type="Node" parent="World/Systems/gameplay" unique_id=11878624]
+script = ExtResource("10_4evuf")
+metadata/_custom_type_script = "uid://kj6ciqldjrt1"
+
+[node name="O_MiscObserver" type="Node" parent="World/Systems/gameplay" unique_id=1523478068]
+script = ExtResource("25_r0xnc")
+metadata/_custom_type_script = "uid://dcc46g6yx3cig"
+
+[node name="physics" type="Node" parent="World/Systems" unique_id=1342665171]
+script = ExtResource("8_yf0hr")
+metadata/_custom_type_script = "uid://b3vi2ingux88g"
+
+[node name="NavigationSystem" type="Node" parent="World/Systems/physics" unique_id=1096000229]
+script = ExtResource("25_hc4vk")
+group = &"physics"
+metadata/_custom_type_script = "uid://cxj6bi3prlipt"
+
+[node name="Node3DMovementSystem" type="Node" parent="World/Systems/physics" unique_id=1758620978]
+script = ExtResource("26_r0xnc")
+group = &"physics"
+metadata/_custom_type_script = "uid://dfu536m6alkp1"
+
+[node name="CharacterBody3DMovementSystem" type="Node" parent="World/Systems/physics" unique_id=2101028342]
+script = ExtResource("27_ws72x")
+group = &"physics"
+metadata/_custom_type_script = "uid://cr8q6muvwhowx"
+
+[node name="misc" type="Node" parent="World/Systems" unique_id=278884283]
+script = ExtResource("8_yf0hr")
+metadata/_custom_type_script = "uid://b3vi2ingux88g"
+
+[node name="GE_MapShipSpawner" type="Node3D" parent="World" unique_id=1159284653 node_paths=PackedStringArray("ship_container", "entries_containers")]
+script = ExtResource("29_hc4vk")
+simultaneous_ship_max_count = 2
+ship_container = NodePath(".")
+entries_containers = [NodePath("../../Entries")]
+ship_definitions = Array[ExtResource("30_r0xnc")]([SubResource("Resource_ws72x")])
+metadata/_custom_type_script = "uid://1bta6sms7xv4"
+
+[node name="Navigation" type="Node3D" parent="." unique_id=1508062724]
+
+[node name="OceanNavigationRegion3D" type="NavigationRegion3D" parent="Navigation" unique_id=1041447829]
+navigation_mesh = SubResource("NavigationMesh_dokig")
+
+[node name="OceanObstacles" type="Node3D" parent="Navigation" unique_id=611560246 groups=["ocean_surface_nav"]]
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="Navigation/OceanObstacles" unique_id=1976186913]
+height = 10.0
+vertices = PackedVector3Array(55, 0, -12, 127.009094, 0, 59.990658, 129.60727, 0, 72.14773, 119.06945, 0, 83.25018, -9.568527, 0, 109.49705, -23.79117, 0, 100.73557, -32.55409, 0, 85.9305, -33.07885, 0, 29.676771, -38.4012, 0, 25.848042, -44.70326, 0, 25.121325, -44.55998, 0, 18.201014, -17, 0, 8, 16.361397, 0, -13.395407)
+affect_navigation_mesh = true
+
+[node name="NavigationObstacle3D2" type="NavigationObstacle3D" parent="Navigation/OceanObstacles" unique_id=1278888516]
+vertices = PackedVector3Array(-14, 0, 4, -14.439415, 0, -3.1710277, -17.95102, 0, -6.713973, -22.108225, 0, -0.42918015, -20, 0, 6)
+
+[node name="GameEnv" type="Node3D" parent="." unique_id=1015109037]
+metadata/_edit_lock_ = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="GameEnv" unique_id=2089074309]
+transform = Transform3D(1, 0, 0, 0, -0.11103433, 0.9938167, 0, -0.9938167, -0.11103433, -2.78427, 25.1767, 0)
+light_energy = 1.15
+light_bake_mode = 1
+shadow_enabled = true
+
+[node name="Environment" type="WorldEnvironment" parent="GameEnv" unique_id=1729118171]
+environment = SubResource("Environment_ws72x")
+camera_attributes = SubResource("CameraAttributesPhysical_o1gnf")
+
+[node name="OceanFloor" type="MeshInstance3D" parent="GameEnv" unique_id=1231806079]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10.9099, 0)
+material_override = ExtResource("1_yf0hr")
+material_overlay = SubResource("ShaderMaterial_hqty3")
+mesh = SubResource("PlaneMesh_tropj")
+skeleton = NodePath("")
+
+[node name="Ocean" type="MeshInstance3D" parent="GameEnv" unique_id=67450592 groups=["ocean_surface_nav"]]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -174.91823, 0, 0)
+visible = false
+material_override = SubResource("ShaderMaterial_61y8o")
+mesh = SubResource("PlaneMesh_w26l7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="GameEnv/Ocean" unique_id=953573881]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameEnv/Ocean/StaticBody3D" unique_id=2080754977]
+shape = SubResource("BoxShape3D_r0xnc")
+
+[node name="OceanSimpleVisualShader1" type="MeshInstance3D" parent="GameEnv" unique_id=1755691752 groups=["ocean_surface_nav"]]
+transform = Transform3D(10000, 0, 0, 0, 10000, 0, 0, 0, 10000, 0, -0.46805125, 0)
+material_override = SubResource("ShaderMaterial_cr17y")
+mesh = SubResource("PlaneMesh_1eclw")
+script = ExtResource("39_ekic1")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="GameEnv/OceanSimpleVisualShader1" unique_id=1773140916]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0004927301, 0)
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameEnv/OceanSimpleVisualShader1/StaticBody3D" unique_id=1517940950]
+shape = SubResource("BoxShape3D_vr5bk")
+debug_color = Color(0, 0.0001292147, 0.000322998, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GameEnv" unique_id=836690632]
+transform = Transform3D(10000, 0, 0, 0, 10000, 0, 0, 0, 10000, 0, 0, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_o1gnf")
+mesh = SubResource("PlaneMesh_hc4vk")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="GameEnv" unique_id=1124686894]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8662119, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_vr5bk")
+mesh = SubResource("BoxMesh_ekic1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameEnv/MeshInstance3D2" unique_id=569934866]
+libraries/ = SubResource("AnimationLibrary_r0xnc")
+speed_scale = 0.025
+
+[node name="RangeIndicator" type="CSGCombiner3D" parent="." unique_id=254034583]
+material_override = SubResource("ShaderMaterial_bpuvv")
+
+[node name="RangeCylinderIndicator" parent="RangeIndicator" unique_id=315133955 instance=ExtResource("15_17cjb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, 23)
+
+[node name="RangeCylinderIndicator2" parent="RangeIndicator" unique_id=1800925976 instance=ExtResource("15_17cjb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4222417, -0.8053384, 23)
+height = 2.0
+
+[node name="RangeCylinderIndicator3" parent="RangeIndicator" unique_id=251445967 instance=ExtResource("15_17cjb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6449232, 1.6343284, 38.489)
+height = 2.0
+
+[node name="RangeCylinderIndicator4" parent="RangeIndicator" unique_id=1751398769 instance=ExtResource("15_17cjb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.8117037, 1.6343284, 46.70984)
+height = 2.0
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="RangeIndicator" unique_id=1178674126]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.25157, 0, 62.069283)
+radius = 3.0
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="RangeIndicator" unique_id=1656487799]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.25157, 0, 65.25929)
+radius = 3.0
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="RangeIndicator" unique_id=228374909]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.25157, 0, 62.069283)
+operation = 2
+radius = 2.9
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="RangeIndicator" unique_id=699686182]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.25157, 0, 65.25929)
+operation = 2
+radius = 2.9
+
+[node name="Holes" type="Node3D" parent="RangeIndicator" unique_id=237824744]
+
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="RangeIndicator" unique_id=1335368670]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5875807, 1.5, 62.069283)
+radius = 3.0
+
+[node name="CSGCylinder3D6" type="CSGCylinder3D" parent="RangeIndicator" unique_id=166282462]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5875807, 1.5, 65.25929)
+radius = 3.0
+
+[node name="CSGCylinder3D7" type="CSGCylinder3D" parent="RangeIndicator" unique_id=1964630374]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5875807, 1.5, 62.069283)
+operation = 2
+radius = 2.9
+
+[node name="CSGCylinder3D8" type="CSGCylinder3D" parent="RangeIndicator" unique_id=263563834]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5875807, 1.5, 65.25929)
+operation = 2
+radius = 2.9
+
+[node name="CSGCylinder3D9" type="CSGCylinder3D" parent="RangeIndicator" unique_id=345763481]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, 23)
+operation = 2
+radius = 9.9
+height = 0.5
+sides = 30
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="RangeIndicator" unique_id=1800602931]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 12.916734)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="RangeIndicator/CSGCombiner3D" unique_id=581391633]
+radius = 3.0
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="RangeIndicator/CSGCombiner3D" unique_id=1236484000]
+operation = 2
+radius = 2.525
+
+[node name="Island1" parent="." unique_id=1967343092 groups=["ocean_surface_nav"] instance=ExtResource("44_dokig")]
+
+[node name="Buildings" type="Node3D" parent="." unique_id=975267479]
+
+[node name="HousingTent" parent="Buildings" unique_id=13075898 instance=ExtResource("7_61y8o")]
+transform = Transform3D(-0.05125533, 0, -0.9986856, 0, 1, 0, 0.9986856, 0, -0.05125533, -12.80324, 0, 45.570404)
+
+[node name="Dock1" parent="Buildings" unique_id=567939795 instance=ExtResource("8_w26l7")]
+transform = Transform3D(-0.06207637, 0, -0.99807143, 0, 1, 0, 0.99807143, 0, -0.06207637, -23.44688, 0, 23.0443)
+
+[node name="FishermanTent1" parent="Buildings" unique_id=1145789329 instance=ExtResource("9_g7t4e")]
+transform = Transform3D(0.21229698, 0, -0.9772052, 0, 1, 0, 0.9772052, 0, 0.21229698, -28.115309, 0, 36.250404)
+
+[node name="CityCenter1" parent="Buildings" unique_id=1391554778 instance=ExtResource("10_txb88")]
+transform = Transform3D(-0.01589927, 0, -0.9998736, 0, 1, 0, 0.9998736, 0, -0.01589927, 13, 1.413, 35.76505)
+
+[node name="Lumberjack1" parent="Buildings" unique_id=1826247262 instance=ExtResource("11_xryh2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.633343, 1.4859228, 70.47168)
+
+[node name="TentTavern1" parent="Buildings" unique_id=1535012436 instance=ExtResource("12_pcvow")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.138184, 0, 65.016846)
+
+[node name="HousingTent2" parent="Buildings" unique_id=1895649985 instance=ExtResource("7_61y8o")]
+transform = Transform3D(-0.05125533, 0, -0.9986856, 0, 1, 0, 0.9986856, 0, -0.05125533, 8.404318, 1.4240098, 53.148922)
+
+[node name="HunterTent1" parent="Buildings" unique_id=1037776830 instance=ExtResource("17_bvcfc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.162996, 1.4302037, 49.614365)
+
+[node name="Barbarian" parent="." unique_id=688221394 instance=ExtResource("19_dxwwv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.183526, -1.0285109e-07, 26.800787)
+
+[node name="Ranger" parent="." unique_id=2046298847 instance=ExtResource("20_6iho6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 25)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1490997966]
+transform = Transform3D(0.31143233, 0.44178241, -0.84133124, 0, 0.88536173, 0.46490282, 0.9502683, -0.14478576, 0.27573028, -84.43066, 43.904724, 77.539116)
+projection = 1
+size = 31.809
+near = 0.001
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D" unique_id=426494707]
+visible = false
+material_override = SubResource("ShaderMaterial_4evuf")
+mesh = SubResource("QuadMesh_17cjb")
+
+[node name="SailShip1" parent="." unique_id=382690978 instance=ExtResource("47_tropj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5054784, -39)
+
+[node name="RightClickTarget" type="Node3D" parent="." unique_id=164404130]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -33.321625)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RightClickTarget" unique_id=1331165822]
+mesh = SubResource("CapsuleMesh_hc4vk")
+
+[node name="LightmapGI" type="LightmapGI" parent="." unique_id=890456051]
+
+[node name="Entries" type="Node3D" parent="." unique_id=739051235]
+
+[node name="Entry_1" type="Marker3D" parent="Entries" unique_id=813696117]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 130.4914, 0, 217)
+
+[node name="Entry_2" type="Marker3D" parent="Entries" unique_id=327244345]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 137.83597, 0, -101.77725)
+
+[node name="Exits" type="Node3D" parent="." unique_id=1666521097]
+
+[node name="Exit_1" type="Marker3D" parent="Exits" unique_id=1119355227]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -362.40808, 0, 354.8305)
+script = ExtResource("51_tk656")
+
+[node name="Exit_2" type="Marker3D" parent="Exits" unique_id=340661049]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -362.40808, 0, -435.14334)
+script = ExtResource("51_tk656")
+
+[editable path="GUI/PauseMenu"]

@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://c0s2rtxuhxofl"]
+
+[ext_resource type="Script" uid="uid://wy8od74p4vnh" path="res://3D/vfx/ocean/simple_ocean_box_1/simple_ocean_box_1.gd" id="1_1860n"]
+[ext_resource type="Shader" uid="uid://xo2qm0th52e6" path="res://VFX/ocean/simple_box_ocean_shader_1.gdshader" id="1_p2tsk"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1860n"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_y2kty"]
+noise = SubResource("FastNoiseLite_1860n")
+seamless = true
+as_normal_map = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fw0a1"]
+noise = SubResource("FastNoiseLite_1860n")
+seamless = true
+as_normal_map = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fbpmi"]
+render_priority = 0
+shader = ExtResource("1_p2tsk")
+shader_parameter/albedo_texture_size = Vector2i(0, 0)
+shader_parameter/point_size = 1.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/texture_refraction = SubResource("NoiseTexture2D_fw0a1")
+shader_parameter/refraction_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/texture_normal = SubResource("NoiseTexture2D_y2kty")
+shader_parameter/normal_scale = 1.000000807500001
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(0.01, 0.01, 0.01)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dqpoi"]
+size = Vector3(10000, 1, 10000)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p2tsk"]
+size = Vector3(10000, 1, 10000)
+
+[node name="SimpleOceanBox1" type="Node3D" unique_id=764266183]
+script = ExtResource("1_1860n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1048052873]
+material_override = SubResource("ShaderMaterial_fbpmi")
+instance_shader_parameters/albedo = Color(0, 0.627451, 0.9019608, 0.5137255)
+instance_shader_parameters/refraction = 0.05000004987499995
+instance_shader_parameters/specular = 0.499999988824
+mesh = SubResource("BoxMesh_dqpoi")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=91875277]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" unique_id=1249553559]
+shape = SubResource("BoxShape3D_p2tsk")

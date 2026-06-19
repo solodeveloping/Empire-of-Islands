@@ -1,0 +1,169 @@
+[gd_scene format=3 uid="uid://bwcqu7lunanpr"]
+
+[ext_resource type="Script" uid="uid://b38h2jlw3ec1s" path="res://3D/ECS/entities/e_dock.gd" id="1_admh2"]
+[ext_resource type="PackedScene" uid="uid://cu1nu8l6isfi8" path="res://Assets/Quaternius/Cute Fish Pack - Feb 2020/FBX/Dock_Long.fbx" id="1_jqm8b"]
+[ext_resource type="PackedScene" uid="uid://xrerkr53fmqi" path="res://Assets/Quaternius/Fantasy Props MegaKit[Standard]/Exports/glTF/Bottle_1.gltf" id="3_scxgd"]
+[ext_resource type="PackedScene" uid="uid://bew536j4v6jn1" path="res://Assets/Quaternius/Fantasy Props MegaKit[Standard]/Exports/glTF/Crate_Wooden.gltf" id="4_t3gbd"]
+[ext_resource type="PackedScene" uid="uid://mqod6nntosa4" path="res://3D/prefabs/buildings/reusables/Boat_1.tscn" id="5_scxgd"]
+[ext_resource type="PackedScene" uid="uid://bd7vi50yrvxl0" path="res://Assets/iPoly3D/Signs pack/Wooden Sign-AsEgIQcQfw.glb" id="6_jvylk"]
+[ext_resource type="PackedScene" uid="uid://bkc237gogc7w5" path="res://Assets/CircuitZ/Wood Frame Base Build Set (Modular) Part 1/Wood Base 2.glb" id="7_admh2"]
+[ext_resource type="PackedScene" uid="uid://dx444yxl6i1je" path="res://Assets/iPoly3D/Signs pack/Wooden Sign-ir1ipUXgGE.glb" id="7_dfqwm"]
+[ext_resource type="PackedScene" uid="uid://br0mrrkar1ks2" path="res://Assets/CircuitZ/Wood Frame Base Build Set (Modular) Part 2/Wood Fence 1.glb" id="8_uk33t"]
+[ext_resource type="PackedScene" uid="uid://b8xj5m0xkumrc" path="res://3D/prefabs/buildings/sensors/BuildingMainArea1.tscn" id="10_i6m4v"]
+[ext_resource type="PackedScene" uid="uid://qlbuder6jx8f" path="res://3D/prefabs/buildings/sensors/BuildingWaterSensor1.tscn" id="11_pm28m"]
+[ext_resource type="PackedScene" uid="uid://dnwpxbdjjk2h0" path="res://3D/prefabs/buildings/sensors/GroundSensorEditable1.tscn" id="12_pm28m"]
+[ext_resource type="Script" uid="uid://b1ly1gc8mu6j5" path="res://3D/misc/multimesh_instances_remover.gd" id="13_sduf7"]
+[ext_resource type="PackedScene" uid="uid://dg458rcdnjioo" path="res://Assets/Kenney/kenney_watercraft-pack/Models/GLB format/buoy-flag.tscn" id="14_blk61"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sduf7"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_blk61"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6dc4s"]
+gradient = SubResource("Gradient_blk61")
+
+[node name="Dock1" type="Node3D" unique_id=567939795]
+script = ExtResource("1_admh2")
+ray_ground_layers = 4
+
+[node name="env" type="Node3D" parent="." unique_id=2108561579]
+
+[node name="Dock_Long" parent="env" unique_id=1501540518 instance=ExtResource("1_jqm8b")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.8679278, -0.967312, 0.7449579)
+
+[node name="Dock_Long2" parent="env" unique_id=1293353994 instance=ExtResource("1_jqm8b")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.8679278, -0.9662999, 7.2825203)
+
+[node name="Dock_Long3" parent="env" unique_id=182667206 instance=ExtResource("1_jqm8b")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.8073611, -0.87890446, 13.877391)
+
+[node name="Bottle_12" parent="env" unique_id=895531232 instance=ExtResource("3_scxgd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75889003, 0, -2.5060453)
+
+[node name="Crate_Wooden2" parent="env" unique_id=1554454500 instance=ExtResource("4_t3gbd")]
+transform = Transform3D(0.9982305, 0, 0.059463173, 0, 1, 0, -0.059463173, 0, 0.9982305, -3.1888433, 0, -4.2754993)
+
+[node name="Crate_Wooden3" parent="env" unique_id=2006784169 instance=ExtResource("4_t3gbd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0553727, 0, -5.376644)
+
+[node name="Crate_Wooden4" parent="env" unique_id=435693111 instance=ExtResource("4_t3gbd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9442692, 0, -5.132813)
+
+[node name="Crate_Wooden5" parent="env" unique_id=125689616 instance=ExtResource("4_t3gbd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6413865, 0.83451533, -5.2507515)
+
+[node name="Boat" parent="env" unique_id=1736626358 instance=ExtResource("5_scxgd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7418506, -0.7350601, 2.9872055)
+
+[node name="Bottle_13" parent="env" unique_id=548448067 instance=ExtResource("3_scxgd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21523178, 0.21315432, 3.5227008)
+
+[node name="Crate_Wooden6" parent="env" unique_id=944550626 instance=ExtResource("4_t3gbd")]
+transform = Transform3D(0.5041064, 0, 0.0300289, 0, 0.505, 0, -0.0300289, 0, 0.5041064, -1.2883973, 0.20227003, 2.9385247)
+
+[node name="Root Scene2" parent="env" unique_id=436642594 instance=ExtResource("6_jvylk")]
+transform = Transform3D(1.46, 0, 0, 0, 1.46, 0, 0, 0, 1.46, -1.9801598, 0, -2.752656)
+
+[node name="Root Scene" parent="env" unique_id=272397111 instance=ExtResource("7_dfqwm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.82728744, 0, -8.7648325)
+
+[node name="Root Scene3" parent="env" unique_id=246162883 instance=ExtResource("7_admh2")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 2.6318636, 0, -5.183229)
+
+[node name="Root Scene4" parent="env" unique_id=990086960 instance=ExtResource("8_uk33t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7645464, 0, -2.8368258)
+
+[node name="Root Scene5" parent="env" unique_id=1529786527 instance=ExtResource("8_uk33t")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.6581154, 0, -3.9521568)
+
+[node name="Root Scene6" parent="env" unique_id=108577257 instance=ExtResource("8_uk33t")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.6581154, 0, -5.8895025)
+
+[node name="Root Scene7" parent="env" unique_id=910978468 instance=ExtResource("8_uk33t")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.6581154, 0, -7.827096)
+
+[node name="Root Scene8" parent="env" unique_id=217440349 instance=ExtResource("8_uk33t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7645464, 0, -8.935628)
+
+[node name="BuildingMainArea1" parent="." unique_id=1324250880 instance=ExtResource("10_i6m4v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8412391, 0, -4.4561443)
+radius = 6.0
+
+[node name="BuildingWaterSensor1" parent="." unique_id=412115788 instance=ExtResource("11_pm28m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.824, 0, 8.179804)
+size = Vector3(5, 1, 1.775)
+
+[node name="SpriteIndicators" type="Node3D" parent="." unique_id=396260346]
+
+[node name="SpriteIndicator" type="Sprite3D" parent="SpriteIndicators" unique_id=1288366202]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+material_override = SubResource("StandardMaterial3D_sduf7")
+modulate = Color(1, 0.64705884, 0, 1)
+texture = SubResource("GradientTexture2D_6dc4s")
+
+[node name="WaterSensorSpriteIndicator" type="Sprite3D" parent="SpriteIndicators" unique_id=890470509]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6648793, 1.0141866, 2.9488502)
+material_override = SubResource("StandardMaterial3D_sduf7")
+modulate = Color(1, 0.64705884, 0, 1)
+texture = SubResource("GradientTexture2D_6dc4s")
+
+[node name="WaterSensorSpriteIndicator2" type="Sprite3D" parent="SpriteIndicators" unique_id=377144556]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6648793, 1.0141866, 15.079134)
+material_override = SubResource("StandardMaterial3D_sduf7")
+modulate = Color(1, 0.64705884, 0, 1)
+texture = SubResource("GradientTexture2D_6dc4s")
+
+[node name="WaterRayCast3D" type="RayCast3D" parent="." unique_id=1861307986]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0.56338155, 3)
+collision_mask = 4
+debug_shape_thickness = 5
+
+[node name="WaterRayCast3D2" type="RayCast3D" parent="." unique_id=1792086131]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0.56338155, 15.348911)
+collision_mask = 4
+debug_shape_thickness = 5
+
+[node name="UpdateWaterSensorTimer" type="Timer" parent="." unique_id=1136083407]
+wait_time = 0.1
+autostart = true
+
+[node name="GroundSensorEditable1" parent="." unique_id=1810008971 instance=ExtResource("12_pm28m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+
+[node name="SingleGroundSensorWithSprite1" parent="GroundSensorEditable1/sensors" parent_id_path=PackedInt32Array(1810008971, 162158777) index="0" unique_id=929189549]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -4)
+
+[node name="SingleGroundSensorWithSprite2" parent="GroundSensorEditable1/sensors" parent_id_path=PackedInt32Array(1810008971, 162158777) index="1" unique_id=1293848132]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.1, 0)
+
+[node name="SingleGroundSensorWithSprite3" parent="GroundSensorEditable1/sensors" parent_id_path=PackedInt32Array(1810008971, 162158777) index="2" unique_id=643648802]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 3)
+
+[node name="SingleGroundSensorWithSprite4" parent="GroundSensorEditable1/sensors" parent_id_path=PackedInt32Array(1810008971, 162158777) index="3" unique_id=346344375]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.1, 0)
+
+[node name="MultiMeshInstancesRemover" type="Node" parent="." unique_id=876547149]
+script = ExtResource("13_sduf7")
+metadata/_custom_type_script = "uid://b1ly1gc8mu6j5"
+
+[node name="Buoy" parent="." unique_id=954263499 instance=ExtResource("14_blk61")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 21)
+
+[connection signal="multimesh_instance_area_entered" from="BuildingMainArea1" to="." method="_on_BuildingMainArea1_multimesh_instance_area_entered"]
+[connection signal="multimesh_instance_area_exited" from="BuildingMainArea1" to="." method="_on_BuildingMainArea1_multimesh_instance_area_exited"]
+[connection signal="state_changed" from="BuildingMainArea1" to="." method="_on_BuildingMainArea1_state_changed"]
+[connection signal="state_changed" from="BuildingWaterSensor1" to="." method="_on_BuildingWaterSensor1_state_changed"]
+[connection signal="timeout" from="UpdateWaterSensorTimer" to="." method="_on_UpdateWaterSensorTimer_timeout"]
+[connection signal="state_changed" from="GroundSensorEditable1" to="." method="_on_GroundSensorEditable1_state_changed"]
+
+[editable path="GroundSensorEditable1"]

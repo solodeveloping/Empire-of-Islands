@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://eebgd3v8d7ul"]
+
+[ext_resource type="Material" uid="uid://3xkhw7iys5dx" path="res://VFX/common/materials/billboard_sprite_standard_material_3d_1.tres" id="1_j51c2"]
+[ext_resource type="Script" uid="uid://cu5j8dcymq8qx" path="res://3D/prefabs/buildings/sensors/single_ground_sensor_with_sprite_1.gd" id="1_x0gpo"]
+
+[sub_resource type="Gradient" id="Gradient_x0gpo"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_t2jdh"]
+gradient = SubResource("Gradient_x0gpo")
+
+[node name="SingleGroundSensorWithSprite1" type="Node3D" unique_id=929189549]
+script = ExtResource("1_x0gpo")
+
+[node name="Marker3D" type="Marker3D" parent="." unique_id=615763350]
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=220537809]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = ExtResource("1_j51c2")
+texture = SubResource("GradientTexture2D_t2jdh")

@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dffby82byb5wv"]
+
+[ext_resource type="Script" uid="uid://bo0bfvu5am13f" path="res://3D/ECS/entities/e_ship_3D.gd" id="1_3yy30"]
+[ext_resource type="PackedScene" uid="uid://c3udmaa1jjty2" path="res://Assets/Quaternius/Ships by @Quaternius/FBX/Sail ship.tscn" id="2_qdmei"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3yy30"]
+size = Vector3(1, 4.2248535, 5.003174)
+
+[node name="SailShip1" type="CharacterBody3D" unique_id=382690978]
+collision_mask = 13
+motion_mode = 1
+script = ExtResource("1_3yy30")
+
+[node name="Sail ship" parent="." unique_id=1968272076 instance=ExtResource("2_qdmei")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1192035380]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.612, 0)
+shape = SubResource("BoxShape3D_3yy30")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1908247547]
+path_height_offset = 1.0

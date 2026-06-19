@@ -1,0 +1,2 @@
+class_name R_BelongsTo
+extends Component

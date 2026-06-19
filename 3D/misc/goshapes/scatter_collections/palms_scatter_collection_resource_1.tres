@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="ScatterCollection" format=3 uid="uid://mxs77o76djtd"]
+
+[ext_resource type="Script" uid="uid://ckgwfi6j1txb1" path="res://addons/goshapes/ScatterShaper/ScatterCollection.gd" id="1_fi8io"]
+[ext_resource type="Script" uid="uid://b4e3yoyxudmdi" path="res://addons/goshapes/ScatterShaper/ScatterSource.gd" id="2_abqlk"]
+[ext_resource type="PackedScene" uid="uid://6a2rjfffr47f" path="res://3D/prefabs/nature/trees/PalmTree_1_1.tscn" id="3_w1ul7"]
+[ext_resource type="Script" uid="uid://8wiem7agfqd4" path="res://addons/goshapes/ScatterShaper/ScatterScene.gd" id="4_2m6er"]
+[ext_resource type="PackedScene" uid="uid://c6ppav6176piy" path="res://3D/prefabs/nature/trees/PalmTree_2_1.tscn" id="5_2m6er"]
+[ext_resource type="PackedScene" uid="uid://buqgult35naiv" path="res://3D/prefabs/nature/trees/PalmTree_3_1.tscn" id="6_y5h6q"]
+[ext_resource type="PackedScene" uid="uid://rulk11sah5gf" path="res://3D/prefabs/nature/trees/PalmTree_4_1.tscn" id="7_xx8sl"]
+
+[sub_resource type="Resource" id="Resource_y5h6q"]
+script = ExtResource("4_2m6er")
+resource = ExtResource("3_w1ul7")
+metadata/_custom_type_script = "uid://8wiem7agfqd4"
+
+[sub_resource type="Resource" id="Resource_75ofl"]
+script = ExtResource("4_2m6er")
+resource = ExtResource("5_2m6er")
+metadata/_custom_type_script = "uid://8wiem7agfqd4"
+
+[sub_resource type="Resource" id="Resource_4dyff"]
+script = ExtResource("4_2m6er")
+resource = ExtResource("6_y5h6q")
+metadata/_custom_type_script = "uid://8wiem7agfqd4"
+
+[sub_resource type="Resource" id="Resource_bx4ha"]
+script = ExtResource("4_2m6er")
+resource = ExtResource("7_xx8sl")
+metadata/_custom_type_script = "uid://8wiem7agfqd4"
+
+[resource]
+script = ExtResource("1_fi8io")
+sources = Array[ExtResource("2_abqlk")]([SubResource("Resource_y5h6q"), SubResource("Resource_75ofl"), SubResource("Resource_4dyff"), SubResource("Resource_bx4ha")])
+weights = Array[int]([1, 1, 1, 1])
+metadata/_custom_type_script = "uid://ckgwfi6j1txb1"

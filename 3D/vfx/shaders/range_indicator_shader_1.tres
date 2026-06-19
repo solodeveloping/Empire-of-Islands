@@ -1,0 +1,28 @@
+[gd_resource type="VisualShader" format=3 uid="uid://c584r2in7wyx"]
+
+[sub_resource type="VisualShaderNodeProximityFade" id="VisualShaderNodeProximityFade_p6lqs"]
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_p6lqs"]
+parameter_name = "ColorParameter"
+default_value_enabled = true
+default_value = Color(0.5680561, 1.353256, 0, 1)
+
+[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_xq84o"]
+function = 31
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_26hbn"]
+parameter_name = "ProximityFadeDist"
+default_value_enabled = true
+default_value = 1.0
+
+[resource]
+modes/cull = 2
+nodes/fragment/2/node = SubResource("VisualShaderNodeProximityFade_p6lqs")
+nodes/fragment/2/position = Vector2(-540, 520)
+nodes/fragment/3/node = SubResource("VisualShaderNodeColorParameter_p6lqs")
+nodes/fragment/3/position = Vector2(-560, 40)
+nodes/fragment/4/node = SubResource("VisualShaderNodeFloatFunc_xq84o")
+nodes/fragment/4/position = Vector2(-220, 460)
+nodes/fragment/5/node = SubResource("VisualShaderNodeFloatParameter_26hbn")
+nodes/fragment/5/position = Vector2(-940, 480)
+nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 2, 0, 4, 0, 4, 0, 0, 1, 5, 0, 2, 0)

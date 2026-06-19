@@ -1,0 +1,109 @@
+[gd_scene format=3 uid="uid://c0f7np4ixkd1x"]
+
+[ext_resource type="PackedScene" uid="uid://dfrp0toqgk4uv" path="res://3D/prefabs/buildings/reusables/Tent_1.tscn" id="1_lar2u"]
+[ext_resource type="Script" uid="uid://d2g425vt8irws" path="res://3D/prefabs/buildings/composed/sailors/lumberjack_1.gd" id="1_nfuca"]
+[ext_resource type="PackedScene" uid="uid://clj2wptu8nwud" path="res://Assets/Quaternius/Fantasy Props MegaKit[Standard]/Exports/glTF/Barrel.gltf" id="2_85kox"]
+[ext_resource type="PackedScene" uid="uid://bew536j4v6jn1" path="res://Assets/Quaternius/Fantasy Props MegaKit[Standard]/Exports/glTF/Crate_Wooden.gltf" id="3_u750b"]
+[ext_resource type="PackedScene" uid="uid://bjvucx5s6fc5e" path="res://Assets/Quaternius/Medieval Village Pack - Dec 2020/Props/FBX/Sawmill_saw.fbx" id="4_xe6h6"]
+[ext_resource type="PackedScene" uid="uid://d4gima6q20j31" path="res://Assets/Kenney/kenney_survival-kit/Models/GLB format/tree-log.glb" id="5_u750b"]
+[ext_resource type="PackedScene" uid="uid://dggn0v0yanq3v" path="res://Assets/Kenney/kenney_survival-kit/Models/GLB format/tree-trunk.glb" id="6_xe6h6"]
+[ext_resource type="Texture2D" uid="uid://co74utvaaoy7d" path="res://Assets/Solo/circle_transparent_bg_10_512.png" id="7_6e0t8"]
+[ext_resource type="PackedScene" uid="uid://b8xj5m0xkumrc" path="res://3D/prefabs/buildings/sensors/BuildingMainArea1.tscn" id="10_mgv2q"]
+[ext_resource type="PackedScene" uid="uid://dnwpxbdjjk2h0" path="res://3D/prefabs/buildings/sensors/GroundSensorEditable1.tscn" id="10_yii00"]
+[ext_resource type="Script" uid="uid://b1ly1gc8mu6j5" path="res://3D/misc/multimesh_instances_remover.gd" id="11_yii00"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mgv2q"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_3tk63"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yii00"]
+gradient = SubResource("Gradient_3tk63")
+
+[node name="Lumberjack1" type="Node3D" unique_id=1826247262]
+script = ExtResource("1_nfuca")
+ray_ground_layers = 4
+
+[node name="env" type="Node3D" parent="." unique_id=25801001]
+
+[node name="Tent2" parent="env" unique_id=1577214377 instance=ExtResource("1_lar2u")]
+transform = Transform3D(-0.0040141977, 0, -0.99999195, 0, 1, 0, 0.99999195, 0, -0.0040141977, 1.0614003, 0, -0.11269665)
+
+[node name="Barrel2" parent="env" unique_id=1864501420 instance=ExtResource("2_85kox")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.681384, 0, 2.380874)
+
+[node name="Crate_Wooden2" parent="env" unique_id=1554454500 instance=ExtResource("3_u750b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.299387, 4.7683716e-07, 1.5345254)
+
+[node name="Sawmill_saw" parent="env" unique_id=1041285077 instance=ExtResource("4_xe6h6")]
+transform = Transform3D(-0.05229342, 0, -1.9042821, 0, 1.905, 0, 1.9042821, 0, -0.05229342, 1.2550142, 0, 2.9913104)
+
+[node name="tree-log2" parent="env" unique_id=945484566 instance=ExtResource("5_u750b")]
+transform = Transform3D(1.98, 0, 0, 0, 1.98, 0, 0, 0, 1.98, 3.859066, -2.3841858e-07, 0.9761274)
+
+[node name="tree-trunk2" parent="env" unique_id=1074449934 instance=ExtResource("6_xe6h6")]
+transform = Transform3D(2.455, 0, 0, 0, 2.455, 0, 0, 0, 2.455, -3.4780946, 0, -0.5408621)
+
+[node name="tree-trunk3" parent="env" unique_id=69918986 instance=ExtResource("6_xe6h6")]
+transform = Transform3D(2.455, 0, 0, 0, 2.455, 0, 0, 0, 2.455, 5.6167903, 0, -0.5408621)
+
+[node name="tree-trunk4" parent="env" unique_id=234829082 instance=ExtResource("6_xe6h6")]
+transform = Transform3D(2.455, 0, 0, 0, 2.455, 0, 0, 0, 2.455, 0.84862137, 0, -3.3208332)
+
+[node name="tree-trunk5" parent="env" unique_id=293907663 instance=ExtResource("6_xe6h6")]
+transform = Transform3D(2.455, 0, 0, 0, 2.455, 0, 0, 0, 2.455, -2.6500273, 0, -3.2334223)
+
+[node name="Node3D" type="Node3D" parent="." unique_id=852878527]
+
+[node name="SpriteIndicator" type="Sprite3D" parent="Node3D" unique_id=1878171382]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+material_override = SubResource("StandardMaterial3D_mgv2q")
+modulate = Color(0, 1, 0, 1)
+texture = SubResource("GradientTexture2D_yii00")
+
+[node name="DecalIndicator" type="Decal" parent="." unique_id=701159534]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.052734375, 0, 0)
+size = Vector3(14.746094, 2, 14)
+texture_albedo = ExtResource("7_6e0t8")
+
+[node name="UpdateGroundSensorTimer" type="Timer" parent="." unique_id=1058966517]
+wait_time = 0.1
+autostart = true
+
+[node name="BuildingMainArea1" parent="." unique_id=1324250880 instance=ExtResource("10_mgv2q")]
+radius = 5.0
+
+[node name="GroundSensorEditable1" parent="." unique_id=1810008971 instance=ExtResource("10_yii00")]
+ray_ground_layers = 4
+
+[node name="SingleGroundSensorWithSprite1" parent="GroundSensorEditable1/sensors" parent_id_path=PackedInt32Array(1810008971, 162158777) index="0" unique_id=929189549]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -4)
+
+[node name="SingleGroundSensorWithSprite2" parent="GroundSensorEditable1/sensors" parent_id_path=PackedInt32Array(1810008971, 162158777) index="1" unique_id=1293848132]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.1, 0)
+
+[node name="SingleGroundSensorWithSprite3" parent="GroundSensorEditable1/sensors" parent_id_path=PackedInt32Array(1810008971, 162158777) index="2" unique_id=643648802]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 4.4)
+
+[node name="SingleGroundSensorWithSprite4" parent="GroundSensorEditable1/sensors" parent_id_path=PackedInt32Array(1810008971, 162158777) index="3" unique_id=346344375]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.011057, 0.1, 0)
+
+[node name="MultiMeshInstancesRemover" type="Node" parent="." unique_id=345645746]
+script = ExtResource("11_yii00")
+metadata/_custom_type_script = "uid://b1ly1gc8mu6j5"
+
+[connection signal="multimesh_instance_area_entered" from="BuildingMainArea1" to="." method="_on_BuildingMainArea1_multimesh_instance_area_entered"]
+[connection signal="multimesh_instance_area_exited" from="BuildingMainArea1" to="." method="_on_BuildingMainArea1_multimesh_instance_area_exited"]
+[connection signal="state_changed" from="BuildingMainArea1" to="." method="_on_BuildingMainArea1_state_changed"]
+[connection signal="state_changed" from="GroundSensorEditable1" to="." method="_on_GroundSensorEditable1_state_changed"]
+
+[editable path="GroundSensorEditable1"]

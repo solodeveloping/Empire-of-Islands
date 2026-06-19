@@ -1,0 +1,152 @@
+[gd_scene format=3 uid="uid://c0crs07wbol7p"]
+
+[ext_resource type="Script" uid="uid://cqmo86r63budp" path="res://3D/prefabs/buildings/composed/sailors/housing_tent.gd" id="1_3tk63"]
+[ext_resource type="PackedScene" uid="uid://dfrp0toqgk4uv" path="res://3D/prefabs/buildings/reusables/Tent_1.tscn" id="1_frdfe"]
+[ext_resource type="PackedScene" uid="uid://behj7wy2qu5kj" path="res://Assets/Quaternius/Survival Pack - Sept 2020/GLB/Bonfire.glb" id="2_mmbju"]
+[ext_resource type="PackedScene" uid="uid://b4tv44ot0bkiv" path="res://VFX/fire/FireVFX_1.tscn" id="3_fng27"]
+[ext_resource type="PackedScene" uid="uid://dexddqpxe3erd" path="res://Assets/Quaternius/Fantasy Props MegaKit[Standard]/Exports/glTF/FarmCrate_Empty.gltf" id="4_crdg6"]
+[ext_resource type="PackedScene" uid="uid://bew536j4v6jn1" path="res://Assets/Quaternius/Fantasy Props MegaKit[Standard]/Exports/glTF/Crate_Wooden.gltf" id="5_dg6p5"]
+[ext_resource type="PackedScene" uid="uid://xrerkr53fmqi" path="res://Assets/Quaternius/Fantasy Props MegaKit[Standard]/Exports/glTF/Bottle_1.gltf" id="6_2cgim"]
+[ext_resource type="PackedScene" uid="uid://clj2wptu8nwud" path="res://Assets/Quaternius/Fantasy Props MegaKit[Standard]/Exports/glTF/Barrel.gltf" id="7_3tk63"]
+[ext_resource type="PackedScene" uid="uid://cpoglahpjwa4x" path="res://Assets/Quaternius/Fantasy Props MegaKit[Standard]/Exports/glTF/Bag.gltf" id="8_62qyp"]
+[ext_resource type="PackedScene" uid="uid://bdotb5c0fufk4" path="res://Assets/Quaternius/Fantasy Props MegaKit[Standard]/Exports/glTF/Bucket_Metal.gltf" id="9_dg6p5"]
+[ext_resource type="PackedScene" uid="uid://cp6a634mch4nl" path="res://Assets/Quaternius/Fantasy Props MegaKit[Standard]/Exports/glTF/Bucket_Wooden_1.gltf" id="10_2cgim"]
+[ext_resource type="Texture2D" uid="uid://co74utvaaoy7d" path="res://Assets/Solo/circle_transparent_bg_10_512.png" id="12_62qyp"]
+[ext_resource type="PackedScene" uid="uid://b8xj5m0xkumrc" path="res://3D/prefabs/buildings/sensors/BuildingMainArea1.tscn" id="14_fm8xb"]
+[ext_resource type="PackedScene" uid="uid://dnwpxbdjjk2h0" path="res://3D/prefabs/buildings/sensors/GroundSensorEditable1.tscn" id="15_oayv0"]
+[ext_resource type="Script" uid="uid://b1ly1gc8mu6j5" path="res://3D/misc/multimesh_instances_remover.gd" id="15_pp68h"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2cgim"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_3tk63"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_62qyp"]
+gradient = SubResource("Gradient_3tk63")
+
+[node name="HousingTent" type="Node3D" unique_id=13075898]
+script = ExtResource("1_3tk63")
+ray_ground_layers = 4
+
+[node name="env" type="Node3D" parent="." unique_id=534725654]
+
+[node name="Tent2" parent="env" unique_id=1577214377 instance=ExtResource("1_frdfe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15898263, -1.1920929e-07, -3.604313)
+
+[node name="Tent3" parent="env" unique_id=830185212 instance=ExtResource("1_frdfe")]
+transform = Transform3D(0.3145392, 0, -0.9492445, 0, 1, 0, 0.9492445, 0, 0.3145392, 3.881271, -1.1920929e-07, -0.54414296)
+
+[node name="Tent4" parent="env" unique_id=1751373267 instance=ExtResource("1_frdfe")]
+transform = Transform3D(0.23178181, 0, 0.97276783, 0, 1, 0, -0.97276783, 0, 0.23178181, -4.092931, -1.1920929e-07, -0.61275816)
+
+[node name="Bonfire2" parent="env" unique_id=837020677 instance=ExtResource("2_mmbju")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.24458003, 0, 2.9275284)
+
+[node name="FireVfx1" parent="env/Bonfire2" unique_id=478299065 instance=ExtResource("3_fng27")]
+transform = Transform3D(0.44247788, 0, 0, 0, 0.44247788, 0, 0, 0, 0.44247788, 0, 0.57852566, 0)
+
+[node name="FarmCrate_Empty2" parent="env" unique_id=1662259383 instance=ExtResource("4_crdg6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.22692, 0, 1.8317511)
+
+[node name="Crate_Wooden2" parent="env" unique_id=1554454500 instance=ExtResource("5_dg6p5")]
+transform = Transform3D(0.05921922, 0, -0.998245, 0, 1, 0, 0.998245, 0, 0.05921922, 2.7813125, 0, 2.4034681)
+
+[node name="Crate_Wooden3" parent="env" unique_id=1568613016 instance=ExtResource("5_dg6p5")]
+transform = Transform3D(-0.023472473, 0, 0.99972445, 0, 1, 0, -0.99972445, 0, -0.023472473, -3.5786314, 0, 2.838439)
+
+[node name="Crate_Wooden4" parent="env" unique_id=251533293 instance=ExtResource("5_dg6p5")]
+transform = Transform3D(0.9976233, 0, -0.06890333, 0, 1, 0, 0.06890333, 0, 0.9976233, -0.6767924, 0, 5.744558)
+
+[node name="Bottle_12" parent="env" unique_id=895531232 instance=ExtResource("6_2cgim")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1982918, 0, 1.7755985)
+
+[node name="Bottle_13" parent="env" unique_id=792470937 instance=ExtResource("6_2cgim")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2313619, 0, -3.1670566)
+
+[node name="Bottle_14" parent="env" unique_id=954149084 instance=ExtResource("6_2cgim")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.832391, 0, 1.2734091)
+
+[node name="Barrel2" parent="env" unique_id=1864501420 instance=ExtResource("7_3tk63")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4937153, 0, -3.014183)
+
+[node name="Barrel3" parent="env" unique_id=2135357196 instance=ExtResource("7_3tk63")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3784814, 0, -3.4376502)
+
+[node name="Bag2" parent="env" unique_id=1127193791 instance=ExtResource("8_62qyp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1734624, 0, 0.54407024)
+
+[node name="Bag3" parent="env" unique_id=759218717 instance=ExtResource("8_62qyp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.080275, 0, -0.7548981)
+
+[node name="Bag4" parent="env" unique_id=1371400614 instance=ExtResource("8_62qyp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5658935, 0, -4.6938405)
+
+[node name="Bag5" parent="env" unique_id=788563326 instance=ExtResource("8_62qyp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9328938, 0, -1.7820244)
+
+[node name="Bucket_Metal2" parent="env" unique_id=1544050076 instance=ExtResource("9_dg6p5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1234412, 0, 2.0450196)
+
+[node name="Bucket_Wooden_12" parent="env" unique_id=633727780 instance=ExtResource("10_2cgim")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)
+
+[node name="Node3D" type="Node3D" parent="." unique_id=1192230426]
+
+[node name="SpriteIndicator" type="Sprite3D" parent="Node3D" unique_id=1339679411]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+material_override = SubResource("StandardMaterial3D_2cgim")
+modulate = Color(0, 1, 0, 1)
+texture = SubResource("GradientTexture2D_62qyp")
+
+[node name="DecalIndicator" type="Decal" parent="." unique_id=746925881]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.052734375, 0, 0)
+size = Vector3(14.746094, 2, 14)
+texture_albedo = ExtResource("12_62qyp")
+
+[node name="UpdateGroundSensorTimer" type="Timer" parent="." unique_id=9954462]
+wait_time = 0.1
+autostart = true
+
+[node name="BuildingMainArea1" parent="." unique_id=1324250880 instance=ExtResource("14_fm8xb")]
+radius = 7.815
+
+[node name="GroundSensorEditable1" parent="." unique_id=1810008971 instance=ExtResource("15_oayv0")]
+ray_ground_layers = 4
+
+[node name="SingleGroundSensorWithSprite1" parent="GroundSensorEditable1/sensors" parent_id_path=PackedInt32Array(1810008971, 162158777) index="0" unique_id=929189549]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -6.9819345)
+
+[node name="SingleGroundSensorWithSprite2" parent="GroundSensorEditable1/sensors" parent_id_path=PackedInt32Array(1810008971, 162158777) index="1" unique_id=1293848132]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5860577, 0.1, 0)
+
+[node name="SingleGroundSensorWithSprite3" parent="GroundSensorEditable1/sensors" parent_id_path=PackedInt32Array(1810008971, 162158777) index="2" unique_id=643648802]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 6.6272583)
+
+[node name="SingleGroundSensorWithSprite4" parent="GroundSensorEditable1/sensors" parent_id_path=PackedInt32Array(1810008971, 162158777) index="3" unique_id=346344375]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.1210704, 0.1, 0)
+
+[node name="MultiMeshInstancesRemover" type="Node" parent="." unique_id=35677859]
+script = ExtResource("15_pp68h")
+metadata/_custom_type_script = "uid://b1ly1gc8mu6j5"
+
+[node name="CheckAreasTimer" type="Timer" parent="." unique_id=164077744]
+wait_time = 0.3
+autostart = true
+
+[connection signal="timeout" from="UpdateGroundSensorTimer" to="." method="_on_UpdateGroundSensorTimer_timeout"]
+[connection signal="multimesh_instance_area_entered" from="BuildingMainArea1" to="." method="_on_BuildingMainArea1_multimesh_instance_area_entered"]
+[connection signal="multimesh_instance_area_exited" from="BuildingMainArea1" to="." method="_on_BuildingMainArea1_multimesh_instance_area_exited"]
+[connection signal="state_changed" from="BuildingMainArea1" to="." method="_on_BuildingMainArea1_state_changed"]
+[connection signal="state_changed" from="GroundSensorEditable1" to="." method="_on_GroundSensorEditable1_state_changed"]
+[connection signal="timeout" from="CheckAreasTimer" to="." method="_on_CheckAreasTimer_timeout"]
+
+[editable path="GroundSensorEditable1"]

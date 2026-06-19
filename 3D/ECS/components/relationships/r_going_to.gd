@@ -1,0 +1,2 @@
+class_name R_GoingTo
+extends Component
