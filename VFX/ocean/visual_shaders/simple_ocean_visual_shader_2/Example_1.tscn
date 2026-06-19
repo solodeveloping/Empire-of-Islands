@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://d2vt81ao0h1c"]
+
+[ext_resource type="Shader" uid="uid://cauck75q520gw" path="res://VFX/ocean/visual_shaders/simple_ocean_visual_shader_2/simple_ocean_visual_shader_2.tres" id="1_jog3q"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_g0y7w"]
+noise_type = 2
+frequency = 0.0108
+fractal_type = 2
+cellular_distance_function = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_px4tt"]
+width = 1024
+height = 1024
+noise = SubResource("FastNoiseLite_g0y7w")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ktnr7"]
+noise_type = 2
+seed = 1
+frequency = 0.0085
+fractal_type = 0
+cellular_distance_function = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_542tp"]
+width = 1024
+height = 1024
+noise = SubResource("FastNoiseLite_ktnr7")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x8b66"]
+render_priority = 0
+shader = ExtResource("1_jog3q")
+shader_parameter/FoamNoiseTexture3 = SubResource("NoiseTexture2D_px4tt")
+shader_parameter/FoamNoiseTexture4 = SubResource("NoiseTexture2D_542tp")
+shader_parameter/EdgeDisplancementStrength = 2.0
+shader_parameter/MainColor = Color(0.305969, 0.553834, 0.986658, 1)
+shader_parameter/DefaultAlpha = 0.8
+shader_parameter/Roughness = 0.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_so2ch"]
+size = Vector2(100, 100)
+subdivide_width = 100
+subdivide_depth = 100
+
+[node name="Example1" type="Node3D" unique_id=1926722849]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=136119260]
+material_override = SubResource("ShaderMaterial_x8b66")
+mesh = SubResource("PlaneMesh_so2ch")

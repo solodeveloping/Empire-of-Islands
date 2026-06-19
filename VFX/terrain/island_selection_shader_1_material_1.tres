@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bwrg8bct1tmd6"]
+
+[ext_resource type="Shader" uid="uid://rc3kucqegm21" path="res://VFX/terrain/island_selection_shader_1.tres" id="1_7wxy0"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_7wxy0")

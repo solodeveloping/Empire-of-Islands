@@ -1,0 +1,221 @@
+[gd_scene format=4 uid="uid://c0w2vrhuhd58x"]
+
+[ext_resource type="Shader" uid="uid://dprcyrlbatcj" path="res://VFX/terrain/simplest_outline_shader_1.gdshader" id="1_uo7tb"]
+[ext_resource type="Shader" uid="uid://g55p2l6dah8l" path="res://VFX/terrain/simplest_outline_shader_2.gdshader" id="2_qf0fh"]
+[ext_resource type="Shader" uid="uid://mnrjqjb5k6ib" path="res://VFX/terrain/fresnel_outline_shader_1.gdshader" id="3_ifqqh"]
+[ext_resource type="Shader" uid="uid://vth0q1gt7rg4" path="res://VFX/terrain/grid_shader_1.gdshader" id="4_wcm0l"]
+[ext_resource type="Material" uid="uid://b770vfl4vul8p" path="res://addons/goshapes/samples/SampleAssets/SandMat.mat.tres" id="5_lyvc5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qf0fh"]
+render_priority = 0
+shader = ExtResource("1_uo7tb")
+shader_parameter/color = Color(1, 0, 0, 1)
+shader_parameter/size = 1.4999999888239999
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ifqqh"]
+next_pass = SubResource("ShaderMaterial_qf0fh")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qf0fh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uo7tb"]
+render_priority = 0
+shader = ExtResource("1_uo7tb")
+shader_parameter/color = Color(1, 0, 0, 1)
+shader_parameter/size = 1.10999999754128
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qf0fh"]
+next_pass = SubResource("ShaderMaterial_uo7tb")
+
+[sub_resource type="BoxMesh" id="BoxMesh_wcm0l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ifqqh"]
+render_priority = 0
+shader = ExtResource("2_qf0fh")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/thickness = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wcm0l"]
+next_pass = SubResource("ShaderMaterial_ifqqh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lyvc5"]
+render_priority = 0
+shader = ExtResource("2_qf0fh")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/thickness = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ivd2m"]
+next_pass = SubResource("ShaderMaterial_lyvc5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lyvc5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ivd2m"]
+render_priority = 0
+shader = ExtResource("3_ifqqh")
+shader_parameter/outline_width = 6.30000009387756
+shader_parameter/base_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gymg5"]
+render_priority = 0
+shader = ExtResource("3_ifqqh")
+shader_parameter/outline_width = 0.30000000447036
+shader_parameter/base_color = Color(0, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f0eiu"]
+render_priority = 0
+shader = ExtResource("3_ifqqh")
+shader_parameter/outline_width = 0.40000000596048
+shader_parameter/base_color = Color(1, 0.22352941, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5w3nd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kxqpc"]
+render_priority = 0
+shader = ExtResource("3_ifqqh")
+shader_parameter/outline_width = 1.40000002086168
+shader_parameter/base_color = Color(1, 0.2901961, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_5uktt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5w3nd"]
+render_priority = 0
+shader = ExtResource("4_wcm0l")
+shader_parameter/subdivisions = 32.0
+shader_parameter/grid_width = 0.02
+shader_parameter/background_color = Color(0.4094572, 0.409658, 0.22988406, 1)
+shader_parameter/background_color_two = Color(0.16757053, 0.24956894, 0.24175492, 1)
+shader_parameter/grid_color = Color(0.6028568, 0.49038023, 0.033854015, 1)
+shader_parameter/dashed_scale_x = 0.02
+shader_parameter/dashed_scale_y = 0.02
+shader_parameter/dashed_count_x = 1.0
+shader_parameter/dashed_count_y = 1.0
+shader_parameter/point_width = 0.021
+shader_parameter/point_color = Color(0, 0, 0, 1)
+shader_parameter/point_scale_x = 0.05
+shader_parameter/point_scale_y = 0.05
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_subdivisions = 6.0
+shader_parameter/inside_color = Color(0.4, 0.4, 0.4, 1)
+shader_parameter/in_dashed_scale_x = 0.3
+shader_parameter/in_dashed_scale_y = 0.3
+shader_parameter/in_dashed_count_x = 6.0
+shader_parameter/in_dashed_count_y = 6.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5uktt"]
+render_priority = 0
+shader = ExtResource("4_wcm0l")
+shader_parameter/subdivisions = 32.0
+shader_parameter/grid_width = 0.02
+shader_parameter/background_color = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/background_color_two = Color(0.1, 0.1, 0.1, 1)
+shader_parameter/grid_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/dashed_scale_x = 0.02
+shader_parameter/dashed_scale_y = 0.02
+shader_parameter/dashed_count_x = 1.0
+shader_parameter/dashed_count_y = 1.0
+shader_parameter/point_width = 0.021
+shader_parameter/point_color = Color(0, 0, 0, 1)
+shader_parameter/point_scale_x = 0.05
+shader_parameter/point_scale_y = 0.05
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_subdivisions = 6.0
+shader_parameter/inside_color = Color(0.4, 0.4, 0.4, 1)
+shader_parameter/in_dashed_scale_x = 0.3
+shader_parameter/in_dashed_scale_y = 0.3
+shader_parameter/in_dashed_count_x = 6.0
+shader_parameter/in_dashed_count_y = 6.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l7p6b"]
+render_priority = 0
+shader = ExtResource("4_wcm0l")
+shader_parameter/subdivisions = 1.0
+shader_parameter/grid_width = 0.02
+shader_parameter/background_color = Color(0.7921569, 0.2, 0.2, 0.45882353)
+shader_parameter/background_color_two = Color(0.4509804, 0.60784316, 0.101960786, 0.33333334)
+shader_parameter/grid_color = Color(0.5019608, 0.5019608, 0.8509804, 1)
+shader_parameter/dashed_scale_x = 0.02
+shader_parameter/dashed_scale_y = 0.02
+shader_parameter/dashed_count_x = 1.0
+shader_parameter/dashed_count_y = 1.0
+shader_parameter/point_width = 0.021
+shader_parameter/point_color = Color(0, 0, 0, 1)
+shader_parameter/point_scale_x = 0.05
+shader_parameter/point_scale_y = 0.05
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_subdivisions = 6.0
+shader_parameter/inside_color = Color(0.4, 0.4, 0.4, 1)
+shader_parameter/in_dashed_scale_x = 0.3
+shader_parameter/in_dashed_scale_y = 0.3
+shader_parameter/in_dashed_count_x = 6.0
+shader_parameter/in_dashed_count_y = 6.0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_t1ybq"]
+resource_name = "SandBlockCap0"
+_surfaces = [{
+"aabb": AABB(-69.54113, 0, -53.918427, 158.01138, 1e-05, 114.74802),
+"attribute_data": PackedByteArray("DxWLwv0abkGs9IfCA9D7QQJ1gMKQEEFCsGVdwtAzaEJpXCXCf1FzQkbmoEITvQdCxfCwQn/01EGovqpC9LiBQW1Bk0HgXj3CYBQ3QHisV8KcQGDB8k5WwvxfNMKgvyTCv6towk2S98HtN4TCsMmNwSLWicKAXsK/"),
+"format": 34359742487,
+"index_count": 39,
+"index_data": PackedByteArray("AAAOAA0ADQAMAAsACwAKAAkACQAIAAcABwAGAAUABQAEAAMAAwACAAEAAQAAAA0ADQALAAkACQAHAAUABQADAAEAAQANAAkACQAFAAEA"),
+"material": ExtResource("5_lyvc5"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 15,
+"vertex_data": PackedByteArray("DxWLwgAAAAD9Gm5BrPSHwgAAAAAD0PtBAnWAwgAAAACQEEFCsGVdwgAAAADQM2hCaVwlwgAAAAB/UXNCRuagQgAAAAATvQdCxfCwQgAAAAB/9NRBqL6qQgAAAAD0uIFBbUGTQQAAAADgXj3CYBQ3QAAAAAB4rFfCnEBgwQAAAADyTlbC/F80wgAAAACgvyTCv6towgAAAABNkvfB7TeEwgAAAACwyY3BItaJwgAAAACAXsK//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+/")
+}]
+
+[node name="Playground1" type="Node3D" unique_id=1208377396]
+
+[node name="Plane1" type="MeshInstance3D" parent="." unique_id=1600333631]
+material_override = SubResource("StandardMaterial3D_ifqqh")
+mesh = SubResource("PlaneMesh_qf0fh")
+
+[node name="Cube1" type="MeshInstance3D" parent="." unique_id=2132173767]
+material_override = SubResource("StandardMaterial3D_qf0fh")
+mesh = SubResource("BoxMesh_wcm0l")
+skeleton = NodePath("../Plane1")
+
+[node name="Plane2" type="MeshInstance3D" parent="." unique_id=1777891903]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3654742, 0, 0)
+material_override = SubResource("StandardMaterial3D_wcm0l")
+mesh = SubResource("PlaneMesh_qf0fh")
+
+[node name="Cube2" type="MeshInstance3D" parent="." unique_id=1806651474]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3654742, 0, 0)
+material_override = SubResource("StandardMaterial3D_ivd2m")
+mesh = SubResource("BoxMesh_wcm0l")
+skeleton = NodePath("../Plane1")
+
+[node name="Plane3" type="MeshInstance3D" parent="." unique_id=1548422963]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.559702, 0, 0)
+material_override = SubResource("StandardMaterial3D_lyvc5")
+material_overlay = SubResource("ShaderMaterial_ivd2m")
+mesh = SubResource("PlaneMesh_qf0fh")
+
+[node name="Cube3" type="MeshInstance3D" parent="." unique_id=1831806968]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.559702, 0, 0)
+material_override = SubResource("ShaderMaterial_gymg5")
+material_overlay = SubResource("ShaderMaterial_f0eiu")
+mesh = SubResource("BoxMesh_wcm0l")
+skeleton = NodePath("../Plane1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1510535397]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -1)
+material_override = SubResource("StandardMaterial3D_5w3nd")
+material_overlay = SubResource("ShaderMaterial_kxqpc")
+mesh = SubResource("SphereMesh_5uktt")
+
+[node name="Plane4" type="MeshInstance3D" parent="." unique_id=1696696812]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.957064, 0, 0)
+material_override = SubResource("ShaderMaterial_5w3nd")
+mesh = SubResource("PlaneMesh_qf0fh")
+
+[node name="Cube4" type="MeshInstance3D" parent="." unique_id=110068078]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.957064, 0, 0)
+material_override = SubResource("ShaderMaterial_5uktt")
+mesh = SubResource("BoxMesh_wcm0l")
+skeleton = NodePath("../Plane1")
+
+[node name="SandBlockCap0Mesh" type="MeshInstance3D" parent="." unique_id=1674295465]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.262311, -2.9726624, 0)
+material_overlay = SubResource("ShaderMaterial_l7p6b")
+mesh = SubResource("ArrayMesh_t1ybq")
