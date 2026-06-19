@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnqrdwq0n5hic"]
+
+[sub_resource type="GDScript" id="GDScript_dqiak"]
+script/source = "extends Node
+
+@export
+var curve: Curve
+"
+
+[sub_resource type="Curve" id="Curve_iipma"]
+_data = [Vector2(0, 0.27376825), 0.0, 0.0, 0, 0, Vector2(0.50183153, 0.8285912), 0.0, 0.0, 0, 0, Vector2(1, 0.03920889), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="Test" type="Node"]
+script = SubResource("GDScript_dqiak")
+curve = SubResource("Curve_iipma")
