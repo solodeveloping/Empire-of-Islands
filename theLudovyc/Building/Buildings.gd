@@ -1,7 +1,7 @@
 extends Object
 class_name Buildings
 
-enum Types { Placeholder, Warehouse, Residential, Producing }
+enum Types { Placeholder, Warehouse, MainSquare, Residential, Producing }
 
 # WARN : if you change this order, you will have to modify the BuildingGridContainer
 # In the GUI because of the serialized ids
@@ -28,6 +28,7 @@ enum Ids {
 	ClayPit,
 	Brickyard,
 	StoneHouse,
+	MainSquare,
 }
 
 # FIXME : PopulationType is duplicated with the Recipes
@@ -56,6 +57,12 @@ const datas = {
 		Datas.Type: Types.Warehouse,
 		Datas.Max_Count: 1,
 		Datas.Is_Coastal: true,
+	},
+	Ids.MainSquare: {
+		Datas.Name: &"Main Square",
+		Datas.Type: Types.MainSquare,
+		Datas.Max_Count: 1,
+		Datas.Is_Coastal: false,
 	},
 	# Level 1
 	Ids.Tent:

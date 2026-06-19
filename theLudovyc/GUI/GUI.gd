@@ -3,10 +3,21 @@ class_name GUI
 
 @onready var rtl_info := $RichTextLabelInfo
 
+@onready var city_name_label: Label = $CityInfo/PanelContainer/HBoxContainer/CityNameLabel
+
 enum { ResourceButton }
 
 const scenes = {ResourceButton: preload("res://theLudovyc/GUI/ResourceButton.tscn")}
 
+func _ready():
+	var current_node = get_tree().current_scene
+
+	if current_node.has_node("EventBus"):
+		var event_bus: EventBus = current_node.get_node("EventBus")
+
+		event_bus.connect("send_city_name_changed", _on_EventBus_send_city_name_changed)
+	else:
+		push_error("could not find EventBus")
 
 func set_rtl_info_text(text: String):
 	rtl_info.text = text
@@ -51,3 +62,6 @@ func set_rtl_info_buiding_info(building_total_cost:Array):
 
 func set_rtl_visibility(b: bool):
 	rtl_info.visible = b
+
+func _on_EventBus_send_city_name_changed(new_city_name: String):
+	city_name_label.text = new_city_name

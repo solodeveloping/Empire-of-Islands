@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://b3s7eqy0blp6g"]
+[gd_scene format=3 uid="uid://b3s7eqy0blp6g"]
 
 [ext_resource type="Script" uid="uid://btleplsaibjwi" path="res://theLudovyc/GUI/GUI.gd" id="1_15w01"]
 [ext_resource type="Texture2D" uid="uid://5gbvga1bqpxa" path="res://Art/Image/Gui/Background/Widgets/map_bg.png" id="1_lis5v"]
@@ -111,10 +111,10 @@ texture_margin_top = 8.0
 texture_margin_right = 8.0
 texture_margin_bottom = 8.0
 
-[node name="GUI" type="CanvasLayer"]
+[node name="GUI" type="CanvasLayer" unique_id=873529647]
 script = ExtResource("1_15w01")
 
-[node name="Widget" type="Control" parent="."]
+[node name="Widget" type="Control" parent="." unique_id=174787049]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 1
@@ -128,7 +128,7 @@ grow_horizontal = 0
 mouse_filter = 1
 script = ExtResource("2_t3u17")
 
-[node name="BottomContainer" type="VBoxContainer" parent="Widget"]
+[node name="BottomContainer" type="VBoxContainer" parent="Widget" unique_id=1132474505]
 unique_name_in_owner = true
 visible = false
 clip_contents = true
@@ -144,11 +144,11 @@ grow_horizontal = 2
 theme_override_constants/separation = 0
 script = ExtResource("2_qugcm")
 
-[node name="Top" type="TextureRect" parent="Widget/BottomContainer"]
+[node name="Top" type="TextureRect" parent="Widget/BottomContainer" unique_id=1484680564]
 layout_mode = 2
 texture = ExtResource("6_gmmb2")
 
-[node name="PanelContainer" type="PanelContainer" parent="Widget/BottomContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Widget/BottomContainer" unique_id=54609295]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -156,191 +156,191 @@ size_flags_vertical = 3
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_q0br5")
 
-[node name="MenuContainer" type="TabContainer" parent="Widget/BottomContainer/PanelContainer"]
+[node name="MenuContainer" type="TabContainer" parent="Widget/BottomContainer/PanelContainer" unique_id=1881198739]
 layout_mode = 2
 current_tab = 2
 clip_tabs = false
 tabs_visible = false
 script = ExtResource("5_sjwej")
 
-[node name="MarketContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer" instance=ExtResource("7_d53ja")]
+[node name="MarketContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer" unique_id=457980682 instance=ExtResource("7_d53ja")]
 visible = false
 layout_mode = 2
 
-[node name="BuildGridContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer" instance=ExtResource("10_xddfq")]
+[node name="BuildGridContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer" unique_id=1102364941 instance=ExtResource("10_xddfq")]
 visible = false
 layout_mode = 2
 
-[node name="BuildingContainer" type="VBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer"]
+[node name="BuildingContainer" type="VBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer" unique_id=1516046629]
 layout_mode = 2
 script = ExtResource("18_nngab")
 metadata/_tab_index = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer" unique_id=932190539]
 layout_mode = 2
 alignment = 1
 
-[node name="NameLabel" type="Label" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/HBoxContainer"]
+[node name="NameLabel" type="Label" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/HBoxContainer" unique_id=2110857889]
 layout_mode = 2
 text = "BuildingName"
 horizontal_alignment = 1
 
-[node name="DeleteButton" type="TextureButton" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/HBoxContainer"]
+[node name="DeleteButton" type="TextureButton" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/HBoxContainer" unique_id=855203931]
 layout_mode = 2
 texture_normal = ExtResource("19_eef57")
 texture_pressed = ExtResource("20_70i8g")
 texture_hover = ExtResource("21_oyj7a")
 
-[node name="HSeparator" type="HSeparator" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer"]
+[node name="HSeparator" type="HSeparator" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer" unique_id=1631108787]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxFlat_or0xk")
 
-[node name="BuildingInfoContainer" type="TabContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer"]
+[node name="BuildingInfoContainer" type="TabContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer" unique_id=2059628719]
 layout_mode = 2
 current_tab = 0
 clip_tabs = false
 tabs_visible = false
 script = ExtResource("19_uroop")
 
-[node name="BuildingResidentialContainer" type="HBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer"]
+[node name="BuildingResidentialContainer" type="HBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer" unique_id=467837627]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 script = ExtResource("20_4inxt")
 metadata/_tab_index = 0
 
-[node name="ValueLabel" type="Label" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingResidentialContainer"]
+[node name="ValueLabel" type="Label" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingResidentialContainer" unique_id=237090478]
 layout_mode = 2
 text = "0"
 
-[node name="TextureRect" type="TextureRect" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingResidentialContainer"]
+[node name="TextureRect" type="TextureRect" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingResidentialContainer" unique_id=1219198264]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 texture = ExtResource("15_p3ujw")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="BuildingProducingContainer" type="VBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer"]
+[node name="BuildingProducingContainer" type="VBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer" unique_id=2112247415]
 visible = false
 layout_mode = 2
 script = ExtResource("20_6ni15")
 metadata/_tab_index = 1
 
-[node name="GridContainer" type="GridContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer"]
+[node name="GridContainer" type="GridContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer" unique_id=1900105391]
 layout_mode = 2
 size_flags_horizontal = 4
 columns = 3
 
-[node name="ResourceIn" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/GridContainer" instance=ExtResource("21_cprbo")]
+[node name="ResourceIn" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/GridContainer" unique_id=398425497 instance=ExtResource("21_cprbo")]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/GridContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/GridContainer" unique_id=867584481]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/GridContainer/MarginContainer"]
+[node name="TextureRect" type="TextureRect" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/GridContainer/MarginContainer" unique_id=676156718]
 layout_mode = 2
 texture = ExtResource("18_v5i80")
 stretch_mode = 3
 
-[node name="TextureButton" type="TextureButton" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/GridContainer/MarginContainer"]
+[node name="TextureButton" type="TextureButton" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/GridContainer/MarginContainer" unique_id=1921276332]
 layout_mode = 2
 texture_normal = ExtResource("19_ykl4j")
 texture_pressed = ExtResource("20_0fwfh")
 texture_hover = ExtResource("21_v44d5")
 stretch_mode = 5
 
-[node name="ResourceOut" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/GridContainer" instance=ExtResource("21_cprbo")]
+[node name="ResourceOut" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/GridContainer" unique_id=653558107 instance=ExtResource("21_cprbo")]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer" unique_id=641859995]
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="TicksContainer" type="HBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/HBoxContainer"]
+[node name="TicksContainer" type="HBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/HBoxContainer" unique_id=134247248]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="ValueLabel" type="Label" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/HBoxContainer/TicksContainer"]
+[node name="ValueLabel" type="Label" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/HBoxContainer/TicksContainer" unique_id=1912016234]
 layout_mode = 2
 text = "0"
 
-[node name="TextureRect" type="TextureRect" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/HBoxContainer/TicksContainer"]
+[node name="TextureRect" type="TextureRect" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/HBoxContainer/TicksContainer" unique_id=1070266094]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 texture = ExtResource("26_j0dpo")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="WorkerContainer" type="HBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/HBoxContainer"]
+[node name="WorkerContainer" type="HBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/HBoxContainer" unique_id=220817715]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="ValueLabel" type="Label" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/HBoxContainer/WorkerContainer"]
+[node name="ValueLabel" type="Label" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/HBoxContainer/WorkerContainer" unique_id=1208234206]
 layout_mode = 2
 text = "0"
 
-[node name="TextureRect" type="TextureRect" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/HBoxContainer/WorkerContainer"]
+[node name="TextureRect" type="TextureRect" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/HBoxContainer/WorkerContainer" unique_id=2060576785]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 texture = ExtResource("15_p3ujw")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="MoneyContainer" type="HBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/HBoxContainer"]
+[node name="MoneyContainer" type="HBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/HBoxContainer" unique_id=352339634]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 6
 alignment = 1
 
-[node name="ValueLabel" type="Label" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/HBoxContainer/MoneyContainer"]
+[node name="ValueLabel" type="Label" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/HBoxContainer/MoneyContainer" unique_id=291419513]
 layout_mode = 2
 text = "1"
 
-[node name="TextureRect" type="TextureRect" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/HBoxContainer/MoneyContainer"]
+[node name="TextureRect" type="TextureRect" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/HBoxContainer/MoneyContainer" unique_id=1406077879]
 custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
 texture = ExtResource("21_03oya")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="NaturalResourceContainer" type="VBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer"]
+[node name="NaturalResourceContainer" type="VBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer" unique_id=880590855]
 visible = false
 layout_mode = 2
 script = ExtResource("55_1wuat")
 metadata/_tab_index = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/NaturalResourceContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/NaturalResourceContainer" unique_id=818299355]
 layout_mode = 2
 alignment = 1
 
-[node name="NameLabel" type="Label" parent="Widget/BottomContainer/PanelContainer/MenuContainer/NaturalResourceContainer/HBoxContainer"]
+[node name="NameLabel" type="Label" parent="Widget/BottomContainer/PanelContainer/MenuContainer/NaturalResourceContainer/HBoxContainer" unique_id=1265232740]
 layout_mode = 2
 text = "BuildingName"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="Widget/BottomContainer/PanelContainer/MenuContainer/NaturalResourceContainer"]
+[node name="HSeparator" type="HSeparator" parent="Widget/BottomContainer/PanelContainer/MenuContainer/NaturalResourceContainer" unique_id=1954658338]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxFlat_or0xk")
 
-[node name="DescriptionLabel" type="RichTextLabel" parent="Widget/BottomContainer/PanelContainer/MenuContainer/NaturalResourceContainer"]
+[node name="DescriptionLabel" type="RichTextLabel" parent="Widget/BottomContainer/PanelContainer/MenuContainer/NaturalResourceContainer" unique_id=653427829]
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
 fit_content = true
 
-[node name="BuildingButtonsContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer" instance=ExtResource("25_cbh6h")]
+[node name="BuildingButtonsContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer" unique_id=744996513 instance=ExtResource("25_cbh6h")]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 4
 
-[node name="Bot" type="TextureRect" parent="Widget/BottomContainer"]
+[node name="Bot" type="TextureRect" parent="Widget/BottomContainer" unique_id=1760140408]
 layout_mode = 2
 texture = ExtResource("8_2h6rg")
 
-[node name="Map" type="TextureRect" parent="Widget"]
+[node name="Map" type="TextureRect" parent="Widget" unique_id=871893199]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -355,7 +355,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_lis5v")
 
-[node name="BuildMenuButton" parent="Widget" instance=ExtResource("14_iofba")]
+[node name="BuildMenuButton" parent="Widget" unique_id=1616749506 instance=ExtResource("14_iofba")]
 layout_mode = 1
 offset_left = 32.0
 offset_top = 69.0
@@ -363,7 +363,7 @@ offset_right = 64.0
 offset_bottom = 101.0
 tooltip_text = "Build"
 
-[node name="MarketMenuButton" parent="Widget" instance=ExtResource("14_iofba")]
+[node name="MarketMenuButton" parent="Widget" unique_id=1850444035 instance=ExtResource("14_iofba")]
 layout_mode = 1
 offset_left = -17.5
 offset_top = 75.0
@@ -376,7 +376,7 @@ texture_hover = ExtResource("17_kjgte")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="WidgetTooltip" type="PanelContainer" parent="Widget"]
+[node name="WidgetTooltip" type="PanelContainer" parent="Widget" unique_id=847924763]
 unique_name_in_owner = true
 visible = false
 layout_mode = 0
@@ -387,31 +387,31 @@ offset_bottom = 312.05023
 theme_override_styles/panel = SubResource("StyleBoxTexture_cggc7")
 script = ExtResource("18_divjp")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Widget/WidgetTooltip"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Widget/WidgetTooltip" unique_id=438064760]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="TextureRect" type="TextureRect" parent="Widget/WidgetTooltip/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Widget/WidgetTooltip/VBoxContainer" unique_id=1249756980]
 clip_contents = true
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 texture = ExtResource("17_lxyjn")
 
-[node name="PanelContainer" type="PanelContainer" parent="Widget/WidgetTooltip/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Widget/WidgetTooltip/VBoxContainer" unique_id=858837421]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxTexture_0aaya")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Widget/WidgetTooltip/VBoxContainer/PanelContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Widget/WidgetTooltip/VBoxContainer/PanelContainer" unique_id=2061660249]
 layout_mode = 2
 bbcode_enabled = true
 fit_content = true
 
-[node name="TextureRect2" type="TextureRect" parent="Widget/WidgetTooltip/VBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="Widget/WidgetTooltip/VBoxContainer" unique_id=158184173]
 layout_mode = 2
 texture = ExtResource("20_4xpap")
 
-[node name="BuildingTierButtonContainer" type="MarginContainer" parent="Widget"]
+[node name="BuildingTierButtonContainer" type="MarginContainer" parent="Widget" unique_id=242766364]
 visible = false
 layout_mode = 0
 offset_left = -162.08
@@ -419,35 +419,35 @@ offset_top = 109.0
 offset_right = -122.08
 offset_bottom = 247.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Widget/BuildingTierButtonContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Widget/BuildingTierButtonContainer" unique_id=1691838947]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Tier_1_MenuButton" parent="Widget/BuildingTierButtonContainer/VBoxContainer" instance=ExtResource("39_67fod")]
+[node name="Tier_1_MenuButton" parent="Widget/BuildingTierButtonContainer/VBoxContainer" unique_id=1352904404 instance=ExtResource("39_67fod")]
 layout_mode = 2
 texture_normal = ExtResource("40_skx8s")
 texture_pressed = ExtResource("37_ktgkj")
 texture_hover = ExtResource("38_81aao")
 
-[node name="Tier_2_MenuButton" parent="Widget/BuildingTierButtonContainer/VBoxContainer" instance=ExtResource("39_67fod")]
+[node name="Tier_2_MenuButton" parent="Widget/BuildingTierButtonContainer/VBoxContainer" unique_id=1400895836 instance=ExtResource("39_67fod")]
 layout_mode = 2
 texture_normal = ExtResource("40_rv8fv")
 texture_pressed = ExtResource("41_cbh6h")
 texture_hover = ExtResource("42_6xl0v")
 
-[node name="Tier_3_MenuButton" parent="Widget/BuildingTierButtonContainer/VBoxContainer" instance=ExtResource("39_67fod")]
+[node name="Tier_3_MenuButton" parent="Widget/BuildingTierButtonContainer/VBoxContainer" unique_id=1792343220 instance=ExtResource("39_67fod")]
 layout_mode = 2
 texture_normal = ExtResource("43_bo2ng")
 texture_pressed = ExtResource("44_qjjjt")
 texture_hover = ExtResource("45_qgjc7")
 
-[node name="Tier_4_MenuButton" parent="Widget/BuildingTierButtonContainer/VBoxContainer" instance=ExtResource("39_67fod")]
+[node name="Tier_4_MenuButton" parent="Widget/BuildingTierButtonContainer/VBoxContainer" unique_id=1483630630 instance=ExtResource("39_67fod")]
 layout_mode = 2
 texture_normal = ExtResource("47_bo2ng")
 texture_pressed = ExtResource("48_qjjjt")
 texture_hover = ExtResource("49_qgjc7")
 
-[node name="CityInfo" type="HBoxContainer" parent="."]
+[node name="CityInfo" type="HBoxContainer" parent="." unique_id=1937451629]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -458,158 +458,158 @@ offset_bottom = 60.0
 grow_horizontal = 2
 theme_override_constants/separation = 0
 
-[node name="TextureRect" type="TextureRect" parent="CityInfo"]
+[node name="TextureRect" type="TextureRect" parent="CityInfo" unique_id=1518015842]
 layout_mode = 2
 texture = ExtResource("13_s75r0")
 
-[node name="PanelContainer" type="PanelContainer" parent="CityInfo"]
+[node name="PanelContainer" type="PanelContainer" parent="CityInfo" unique_id=349216986]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("14_p6h2t")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CityInfo/PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CityInfo/PanelContainer" unique_id=1453676996]
 layout_mode = 2
 
-[node name="VSeparator" type="VSeparator" parent="CityInfo/PanelContainer/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="CityInfo/PanelContainer/HBoxContainer" unique_id=1186211586]
 layout_mode = 2
 theme_override_constants/separation = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_orjbh")
 
-[node name="TextureRect" type="TextureRect" parent="CityInfo/PanelContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="CityInfo/PanelContainer/HBoxContainer" unique_id=1692382105]
 layout_mode = 2
 texture = ExtResource("14_h5vqk")
 
-[node name="Label" type="Label" parent="CityInfo/PanelContainer/HBoxContainer"]
+[node name="CityNameLabel" type="Label" parent="CityInfo/PanelContainer/HBoxContainer" unique_id=866516341]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Unknow City Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="CityInfo/PanelContainer/HBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="CityInfo/PanelContainer/HBoxContainer" unique_id=1708515914]
 layout_mode = 2
 
-[node name="TextureRect2" type="TextureRect" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer3"]
+[node name="TextureRect2" type="TextureRect" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer3" unique_id=2028184979]
 layout_mode = 2
 tooltip_text = "Sailors"
 texture = ExtResource("15_p3ujw")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer3" unique_id=503387735]
 layout_mode = 2
 tooltip_text = "Sailors"
 theme_override_constants/separation = 0
 
-[node name="LabelPopulation" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer3/HBoxContainer"]
+[node name="LabelPopulation" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer3/HBoxContainer" unique_id=1748027368]
 layout_mode = 2
 text = "0"
 script = ExtResource("17_v0ai2")
 
-[node name="LabelWorkers" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer3/HBoxContainer"]
+[node name="LabelWorkers" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer3/HBoxContainer" unique_id=112138516]
 layout_mode = 2
 text = "(0)"
 script = ExtResource("18_xklsp")
 
-[node name="VSeparator3" type="VSeparator" parent="CityInfo/PanelContainer/HBoxContainer"]
+[node name="VSeparator3" type="VSeparator" parent="CityInfo/PanelContainer/HBoxContainer" unique_id=1755568684]
 layout_mode = 2
 theme_override_constants/separation = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_orjbh")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CityInfo/PanelContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CityInfo/PanelContainer/HBoxContainer" unique_id=914678553]
 layout_mode = 2
 
-[node name="TextureRect3" type="TextureRect" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer"]
+[node name="TextureRect3" type="TextureRect" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer" unique_id=965437550]
 layout_mode = 2
 tooltip_text = "Pioneers"
 texture = ExtResource("15_p3ujw")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer" unique_id=497411609]
 layout_mode = 2
 tooltip_text = "Pioneers"
 theme_override_constants/separation = 0
 
-[node name="LabelPopulation" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer/HBoxContainer2"]
+[node name="LabelPopulation" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer/HBoxContainer2" unique_id=1067529035]
 layout_mode = 2
 text = "0"
 script = ExtResource("17_v0ai2")
 population_type = 1
 
-[node name="LabelWorkers" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer/HBoxContainer2"]
+[node name="LabelWorkers" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer/HBoxContainer2" unique_id=119594121]
 layout_mode = 2
 text = "(0)"
 script = ExtResource("18_xklsp")
 population_type = 1
 
-[node name="VSeparator2" type="VSeparator" parent="CityInfo/PanelContainer/HBoxContainer"]
+[node name="VSeparator2" type="VSeparator" parent="CityInfo/PanelContainer/HBoxContainer" unique_id=872007400]
 layout_mode = 2
 theme_override_constants/separation = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_orjbh")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CityInfo/PanelContainer/HBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="CityInfo/PanelContainer/HBoxContainer" unique_id=1377668722]
 layout_mode = 2
 
-[node name="TextureRect3" type="TextureRect" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer2"]
+[node name="TextureRect3" type="TextureRect" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer2" unique_id=199131786]
 layout_mode = 2
 tooltip_text = "Pioneers"
 texture = ExtResource("15_p3ujw")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer2"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer2" unique_id=1367247318]
 layout_mode = 2
 tooltip_text = "Pioneers"
 theme_override_constants/separation = 0
 
-[node name="LabelPopulation" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer2/HBoxContainer2"]
+[node name="LabelPopulation" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer2/HBoxContainer2" unique_id=63295135]
 layout_mode = 2
 text = "0"
 script = ExtResource("17_v0ai2")
 population_type = 2
 
-[node name="LabelWorkers" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer2/HBoxContainer2"]
+[node name="LabelWorkers" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer2/HBoxContainer2" unique_id=1879606102]
 layout_mode = 2
 text = "(0)"
 script = ExtResource("18_xklsp")
 population_type = 2
 
-[node name="VSeparator4" type="VSeparator" parent="CityInfo/PanelContainer/HBoxContainer"]
+[node name="VSeparator4" type="VSeparator" parent="CityInfo/PanelContainer/HBoxContainer" unique_id=835955926]
 layout_mode = 2
 theme_override_constants/separation = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_orjbh")
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="CityInfo/PanelContainer/HBoxContainer"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="CityInfo/PanelContainer/HBoxContainer" unique_id=806952534]
 layout_mode = 2
 
-[node name="TextureRect3" type="TextureRect" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer4"]
+[node name="TextureRect3" type="TextureRect" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer4" unique_id=577534989]
 layout_mode = 2
 tooltip_text = "Pioneers"
 texture = ExtResource("15_p3ujw")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer4"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer4" unique_id=1320469107]
 layout_mode = 2
 tooltip_text = "Pioneers"
 theme_override_constants/separation = 0
 
-[node name="LabelPopulation" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer4/HBoxContainer2"]
+[node name="LabelPopulation" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer4/HBoxContainer2" unique_id=1455685458]
 layout_mode = 2
 text = "0"
 script = ExtResource("17_v0ai2")
 population_type = 3
 
-[node name="LabelWorkers" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer4/HBoxContainer2"]
+[node name="LabelWorkers" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer4/HBoxContainer2" unique_id=29065490]
 layout_mode = 2
 text = "(0)"
 script = ExtResource("18_xklsp")
 population_type = 3
 
-[node name="VSeparator5" type="VSeparator" parent="CityInfo/PanelContainer/HBoxContainer"]
+[node name="VSeparator5" type="VSeparator" parent="CityInfo/PanelContainer/HBoxContainer" unique_id=1881913636]
 layout_mode = 2
 theme_override_constants/separation = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_orjbh")
 
-[node name="TextureRect2" type="TextureRect" parent="CityInfo"]
+[node name="TextureRect2" type="TextureRect" parent="CityInfo" unique_id=2061286029]
 layout_mode = 2
 texture = ExtResource("14_flxif")
 
-[node name="MoneyAndResourcesContainer" parent="." instance=ExtResource("53_rv8fv")]
+[node name="MoneyAndResourcesContainer" parent="." unique_id=2106549093 instance=ExtResource("53_rv8fv")]
 
-[node name="RichTextLabelInfo" type="RichTextLabel" parent="."]
+[node name="RichTextLabelInfo" type="RichTextLabel" parent="." unique_id=321514513]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -629,7 +629,7 @@ fit_content = true
 autowrap_mode = 0
 script = ExtResource("33_hbac4")
 
-[node name="ResourcePopup" type="Window" parent="."]
+[node name="ResourcePopup" type="Window" parent="." unique_id=809039202]
 unique_name_in_owner = true
 initial_position = 4
 size = Vector2i(312, 200)
@@ -640,7 +640,7 @@ popup_window = true
 min_size = Vector2i(250, 0)
 script = ExtResource("40_c8vow")
 
-[node name="PanelContainer" type="PanelContainer" parent="ResourcePopup"]
+[node name="PanelContainer" type="PanelContainer" parent="ResourcePopup" unique_id=1814775317]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -650,18 +650,18 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxTexture_4s12p")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ResourcePopup/PanelContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="ResourcePopup/PanelContainer" unique_id=327597500]
 layout_mode = 2
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
-[node name="GridContainer" type="GridContainer" parent="ResourcePopup/PanelContainer/ScrollContainer"]
+[node name="GridContainer" type="GridContainer" parent="ResourcePopup/PanelContainer/ScrollContainer" unique_id=343500221]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 columns = 5
 
-[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="." unique_id=1955302596]
 unique_name_in_owner = true
 
 [connection signal="pressed" from="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/HBoxContainer/DeleteButton" to="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer" method="_on_DeleteButton_pressed"]

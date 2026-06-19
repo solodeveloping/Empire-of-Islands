@@ -19,7 +19,8 @@ func set_building_info(p_building_id: Buildings.Ids):
 
 	var building_cost = Buildings.get_building_cost(building_id)
 
-	if building_cost.is_empty() and p_building_id != Buildings.Ids.Warehouse:
+	if building_cost.is_empty() \
+		and (p_building_id != Buildings.Ids.Warehouse and p_building_id != Buildings.Ids.MainSquare):
 		push_warning("building of id '%d' cost is null" % building_id)
 		return
 

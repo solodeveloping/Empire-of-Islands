@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://b2i6uxb6o66dn"]
+[gd_scene format=3 uid="uid://b2i6uxb6o66dn"]
 
 [ext_resource type="Script" uid="uid://gnbihrn11iq2" path="res://theLudovyc/GUI/BuildMenu/tier_1_building_buttons_container.gd" id="1_5v8or"]
 [ext_resource type="Texture2D" uid="uid://bk6sk4bgpqvya" path="res://Art/Image/Gui/Icons/BuildMenu/002.png" id="2_jks57"]
@@ -7,9 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://ckotlmsd3us4u" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/002.png" id="5_secfl"]
 [ext_resource type="Script" uid="uid://dxo6pwnqt8tjp" path="res://theLudovyc/GUI/ButtonBuild.gd" id="6_2q3ia"]
 [ext_resource type="Texture2D" uid="uid://ddlgbu2x5p4tg" path="res://Art/Image/Gui/Icons/BuildMenu/003.png" id="7_n6vtb"]
+[ext_resource type="Texture2D" uid="uid://56ilapcigjvn" path="res://Art/Image/Gui/Icons/BuildMenu/004.png" id="7_secfl"]
+[ext_resource type="Texture2D" uid="uid://deyp6cd7q22dg" path="res://Art/Image/Gui/Icons/BuildMenu/004_d.png" id="8_2q3ia"]
 [ext_resource type="Texture2D" uid="uid://cwbtvjpicrocv" path="res://Art/Image/Gui/Icons/BuildMenu/003_d.png" id="8_ym7fx"]
+[ext_resource type="Texture2D" uid="uid://djf38b054w0jm" path="res://Art/Image/Gui/Icons/BuildMenu/004_h.png" id="9_n6vtb"]
 [ext_resource type="Texture2D" uid="uid://bnrw8bxew25wd" path="res://Art/Image/Gui/Icons/BuildMenu/003_h.png" id="9_qixeh"]
 [ext_resource type="Texture2D" uid="uid://c36pqi8rnvbl0" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/003.png" id="10_070du"]
+[ext_resource type="Texture2D" uid="uid://dc7nnxt6u1rpa" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/004.png" id="10_ym7fx"]
 [ext_resource type="Texture2D" uid="uid://d2a22cr70qsmg" path="res://Art/Image/Gui/Icons/BuildMenu/008.png" id="11_c80bs"]
 [ext_resource type="Texture2D" uid="uid://dxx4hctv3pcww" path="res://Art/Image/Gui/Icons/BuildMenu/008_d.png" id="12_x1o7n"]
 [ext_resource type="Texture2D" uid="uid://340ntgsok673" path="res://Art/Image/Gui/Icons/BuildMenu/008_h.png" id="13_0hdvq"]
@@ -29,7 +33,7 @@ grow_begin = -10.0
 grow_end = -10.0
 thickness = 5
 
-[node name="Tier1BuildingButtonsContainer" type="MarginContainer"]
+[node name="Tier1BuildingButtonsContainer" type="MarginContainer" unique_id=1586110652]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -37,32 +41,32 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5v8or")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1711810732]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=486143701]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Sailors"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=192556514]
 layout_mode = 2
 theme_override_constants/separation = 4
 theme_override_styles/separator = SubResource("StyleBoxLine_kcqtq")
 
-[node name="Label2" type="Label" parent="VBoxContainer"]
+[node name="Label2" type="Label" parent="VBoxContainer" unique_id=458750318]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Residents and infrastructure"
 vertical_alignment = 1
 
-[node name="InfrastructureGridContainer" type="GridContainer" parent="VBoxContainer"]
+[node name="InfrastructureGridContainer" type="GridContainer" parent="VBoxContainer" unique_id=2060318841]
 layout_mode = 2
 columns = 4
 
-[node name="BuildWarehouse" type="TextureButton" parent="VBoxContainer/InfrastructureGridContainer"]
+[node name="BuildWarehouse" type="TextureButton" parent="VBoxContainer/InfrastructureGridContainer" unique_id=1609261569]
 layout_mode = 2
 texture_normal = ExtResource("2_jks57")
 texture_pressed = ExtResource("3_awln2")
@@ -70,7 +74,16 @@ texture_hover = ExtResource("4_11sm8")
 texture_disabled = ExtResource("5_secfl")
 script = ExtResource("6_2q3ia")
 
-[node name="BuildResidential" type="TextureButton" parent="VBoxContainer/InfrastructureGridContainer"]
+[node name="BuildMainSquare" type="TextureButton" parent="VBoxContainer/InfrastructureGridContainer" unique_id=1998434986]
+layout_mode = 2
+texture_normal = ExtResource("7_secfl")
+texture_pressed = ExtResource("8_2q3ia")
+texture_hover = ExtResource("9_n6vtb")
+texture_disabled = ExtResource("10_ym7fx")
+script = ExtResource("6_2q3ia")
+building_id = 22
+
+[node name="BuildResidential" type="TextureButton" parent="VBoxContainer/InfrastructureGridContainer" unique_id=325197074]
 layout_mode = 2
 texture_normal = ExtResource("7_n6vtb")
 texture_pressed = ExtResource("8_ym7fx")
@@ -79,19 +92,19 @@ texture_disabled = ExtResource("10_070du")
 script = ExtResource("6_2q3ia")
 building_id = 1
 
-[node name="Label3" type="Label" parent="VBoxContainer"]
+[node name="Label3" type="Label" parent="VBoxContainer" unique_id=2022192049]
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Services"
 vertical_alignment = 1
 
-[node name="ServicesGridContainer" type="GridContainer" parent="VBoxContainer"]
+[node name="ServicesGridContainer" type="GridContainer" parent="VBoxContainer" unique_id=663532749]
 visible = false
 layout_mode = 2
 columns = 4
 
-[node name="BuildWarehouse" type="TextureButton" parent="VBoxContainer/ServicesGridContainer"]
+[node name="BuildWarehouse" type="TextureButton" parent="VBoxContainer/ServicesGridContainer" unique_id=553181504]
 layout_mode = 2
 texture_normal = ExtResource("2_jks57")
 texture_pressed = ExtResource("3_awln2")
@@ -99,7 +112,7 @@ texture_hover = ExtResource("4_11sm8")
 texture_disabled = ExtResource("5_secfl")
 script = ExtResource("6_2q3ia")
 
-[node name="BuildResidential" type="TextureButton" parent="VBoxContainer/ServicesGridContainer"]
+[node name="BuildResidential" type="TextureButton" parent="VBoxContainer/ServicesGridContainer" unique_id=278682077]
 layout_mode = 2
 texture_normal = ExtResource("7_n6vtb")
 texture_pressed = ExtResource("8_ym7fx")
@@ -108,17 +121,17 @@ texture_disabled = ExtResource("10_070du")
 script = ExtResource("6_2q3ia")
 building_id = 1
 
-[node name="Label4" type="Label" parent="VBoxContainer"]
+[node name="Label4" type="Label" parent="VBoxContainer" unique_id=701224340]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Companies"
 vertical_alignment = 1
 
-[node name="CompaniesGridContainer" type="GridContainer" parent="VBoxContainer"]
+[node name="CompaniesGridContainer" type="GridContainer" parent="VBoxContainer" unique_id=94686705]
 layout_mode = 2
 columns = 4
 
-[node name="BuildLumberjack" type="TextureButton" parent="VBoxContainer/CompaniesGridContainer"]
+[node name="BuildLumberjack" type="TextureButton" parent="VBoxContainer/CompaniesGridContainer" unique_id=1633778156]
 layout_mode = 2
 texture_normal = ExtResource("11_c80bs")
 texture_pressed = ExtResource("12_x1o7n")
@@ -127,7 +140,7 @@ texture_disabled = ExtResource("14_eudfw")
 script = ExtResource("6_2q3ia")
 building_id = 2
 
-[node name="BuildHunterTent" type="TextureButton" parent="VBoxContainer/CompaniesGridContainer"]
+[node name="BuildHunterTent" type="TextureButton" parent="VBoxContainer/CompaniesGridContainer" unique_id=296770623]
 layout_mode = 2
 texture_normal = ExtResource("15_w4gf3")
 texture_pressed = ExtResource("16_7xlhx")
@@ -136,7 +149,7 @@ texture_disabled = ExtResource("18_dvi3q")
 script = ExtResource("6_2q3ia")
 building_id = 3
 
-[node name="BuildFishery" type="TextureButton" parent="VBoxContainer/CompaniesGridContainer"]
+[node name="BuildFishery" type="TextureButton" parent="VBoxContainer/CompaniesGridContainer" unique_id=1207688436]
 layout_mode = 2
 texture_normal = ExtResource("19_n1w2m")
 texture_pressed = ExtResource("20_b2bxj")
@@ -145,19 +158,19 @@ texture_disabled = ExtResource("22_iv4uu")
 script = ExtResource("6_2q3ia")
 building_id = 18
 
-[node name="Label5" type="Label" parent="VBoxContainer"]
+[node name="Label5" type="Label" parent="VBoxContainer" unique_id=1013795081]
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Military"
 vertical_alignment = 1
 
-[node name="MilitaryGridContainer" type="GridContainer" parent="VBoxContainer"]
+[node name="MilitaryGridContainer" type="GridContainer" parent="VBoxContainer" unique_id=592925436]
 visible = false
 layout_mode = 2
 columns = 4
 
-[node name="BuildLumberjack" type="TextureButton" parent="VBoxContainer/MilitaryGridContainer"]
+[node name="BuildLumberjack" type="TextureButton" parent="VBoxContainer/MilitaryGridContainer" unique_id=30265925]
 layout_mode = 2
 texture_normal = ExtResource("11_c80bs")
 texture_pressed = ExtResource("12_x1o7n")

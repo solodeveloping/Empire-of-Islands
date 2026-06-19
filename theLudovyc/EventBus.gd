@@ -48,3 +48,6 @@ signal send_update_order_buy(resource_type, buy_amount)
 
 signal ask_update_order_sell(resource_type, sell_amount)
 signal send_update_order_sell(resource_type, sell_amount)
+
+## CITY
+signal send_city_name_changed(new_city_name)

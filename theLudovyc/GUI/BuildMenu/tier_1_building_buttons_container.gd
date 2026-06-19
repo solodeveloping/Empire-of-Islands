@@ -18,6 +18,7 @@ var event_bus: EventBus
 @onready
 var building_buttons = {
 	Buildings.Ids.Warehouse: $VBoxContainer/InfrastructureGridContainer/BuildWarehouse,
+	Buildings.Ids.MainSquare: $VBoxContainer/InfrastructureGridContainer/BuildMainSquare,
 	Buildings.Ids.Tent: $VBoxContainer/InfrastructureGridContainer/BuildResidential,
 	Buildings.Ids.Lumberjack: $VBoxContainer/CompaniesGridContainer/BuildLumberjack,
 	Buildings.Ids.HunterTent: $VBoxContainer/CompaniesGridContainer/BuildHunterTent,

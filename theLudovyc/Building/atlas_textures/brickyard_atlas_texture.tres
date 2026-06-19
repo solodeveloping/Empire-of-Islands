@@ -1,4 +1,4 @@
-[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://rhd3p7qblili"]
+[gd_resource type="AtlasTexture" format=3 uid="uid://rhd3p7qblili"]
 
 [ext_resource type="Texture2D" uid="uid://c10n07nyee45b" path="res://Art/Image/Buildings/Brickyard/Brickyard_idle.png" id="1_gsewj"]
 

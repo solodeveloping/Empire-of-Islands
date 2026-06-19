@@ -1,7 +1,6 @@
 extends Node
 class_name ThePopulation
 
-@onready var game: Game2D = get_parent()
 @onready var event_bus = $"../EventBus"
 @onready var the_factory = $"../TheFactory"
 
