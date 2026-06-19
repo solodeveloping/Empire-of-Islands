@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bdkhl6gjvxxsy"]
+
+[ext_resource type="Script" uid="uid://0yxk51oy5eso" path="res://addons/o_c_p_r/scene.gd" id="1_3hxoh"]
+
+[node name="Scene" type="Panel" unique_id=33650422]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+script = ExtResource("1_3hxoh")
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
