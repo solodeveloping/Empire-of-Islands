@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bs5w4muq0sweh"
+path="res://.godot/imported/Turnip.obj-ba76813ccf316453a5d384f9bc59c74d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Turnip.obj-ba76813ccf316453a5d384f9bc59c74d.mesh"]
+
+source_file="res://Assets/Quaternius/Ultimate Food Pack - Oct 2019/OBJ/Turnip.obj"
+dest_files=["res://.godot/imported/Turnip.obj-ba76813ccf316453a5d384f9bc59c74d.mesh", "res://.godot/imported/Turnip.obj-ba76813ccf316453a5d384f9bc59c74d.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

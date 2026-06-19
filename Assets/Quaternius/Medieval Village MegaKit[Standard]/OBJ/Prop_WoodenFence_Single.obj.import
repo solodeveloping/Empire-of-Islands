@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://boco8ravlmyhs"
+path="res://.godot/imported/Prop_WoodenFence_Single.obj-c1526b1842fd014cdc8482e859643507.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Prop_WoodenFence_Single.obj-c1526b1842fd014cdc8482e859643507.mesh"]
+
+source_file="res://Assets/Quaternius/Medieval Village MegaKit[Standard]/OBJ/Prop_WoodenFence_Single.obj"
+dest_files=["res://.godot/imported/Prop_WoodenFence_Single.obj-c1526b1842fd014cdc8482e859643507.mesh", "res://.godot/imported/Prop_WoodenFence_Single.obj-c1526b1842fd014cdc8482e859643507.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

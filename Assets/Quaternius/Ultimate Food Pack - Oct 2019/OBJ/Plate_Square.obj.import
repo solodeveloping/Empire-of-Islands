@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://g0werpbybg62"
+path="res://.godot/imported/Plate_Square.obj-4af473fff73dde70a6a00737cb10f981.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Plate_Square.obj-4af473fff73dde70a6a00737cb10f981.mesh"]
+
+source_file="res://Assets/Quaternius/Ultimate Food Pack - Oct 2019/OBJ/Plate_Square.obj"
+dest_files=["res://.godot/imported/Plate_Square.obj-4af473fff73dde70a6a00737cb10f981.mesh", "res://.godot/imported/Plate_Square.obj-4af473fff73dde70a6a00737cb10f981.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://d1ldratiay7xs"
+path="res://.godot/imported/Bush_Small_Flowers.obj-4a7015b71d2e35715a263e705c99307e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Bush_Small_Flowers.obj-4a7015b71d2e35715a263e705c99307e.mesh"]
+
+source_file="res://Assets/Quaternius/Ultimate Stylized Nature - May 2022/OBJ/Bush_Small_Flowers.obj"
+dest_files=["res://.godot/imported/Bush_Small_Flowers.obj-4a7015b71d2e35715a263e705c99307e.mesh", "res://.godot/imported/Bush_Small_Flowers.obj-4a7015b71d2e35715a263e705c99307e.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

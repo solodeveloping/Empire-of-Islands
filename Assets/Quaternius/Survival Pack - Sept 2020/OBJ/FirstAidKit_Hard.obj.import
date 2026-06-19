@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://su83y1ukc45d"
+path="res://.godot/imported/FirstAidKit_Hard.obj-7512d9a175c2f5e4edb00bbc7583bafa.mesh"
+
+[deps]
+
+files=["res://.godot/imported/FirstAidKit_Hard.obj-7512d9a175c2f5e4edb00bbc7583bafa.mesh"]
+
+source_file="res://Assets/Quaternius/Survival Pack - Sept 2020/OBJ/FirstAidKit_Hard.obj"
+dest_files=["res://.godot/imported/FirstAidKit_Hard.obj-7512d9a175c2f5e4edb00bbc7583bafa.mesh", "res://.godot/imported/FirstAidKit_Hard.obj-7512d9a175c2f5e4edb00bbc7583bafa.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dyh0y56j63l1"
+path="res://.godot/imported/Prop_Cannon.obj-7478b8ca33bd5146aa365843ccec3844.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Prop_Cannon.obj-7478b8ca33bd5146aa365843ccec3844.mesh"]
+
+source_file="res://Assets/Quaternius/Pirate Kit - Nov 2023/OBJ/Prop_Cannon.obj"
+dest_files=["res://.godot/imported/Prop_Cannon.obj-7478b8ca33bd5146aa365843ccec3844.mesh", "res://.godot/imported/Prop_Cannon.obj-7478b8ca33bd5146aa365843ccec3844.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

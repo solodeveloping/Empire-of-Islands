@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bqvvem587vv04"
+path="res://.godot/imported/Rock_Snow_7.obj-deb12a75fad3a7f0977c75f1af8866ce.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Rock_Snow_7.obj-deb12a75fad3a7f0977c75f1af8866ce.mesh"]
+
+source_file="res://Assets/Quaternius/Ultimate Nature Pack - Jun 2019/OBJ/Rock_Snow_7.obj"
+dest_files=["res://.godot/imported/Rock_Snow_7.obj-deb12a75fad3a7f0977c75f1af8866ce.mesh", "res://.godot/imported/Rock_Snow_7.obj-deb12a75fad3a7f0977c75f1af8866ce.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

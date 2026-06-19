@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://diase3xqaa36x"
+path="res://.godot/imported/Banner_2.obj-e0bcdd471fc9842cd22fb4780eac1245.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Banner_2.obj-e0bcdd471fc9842cd22fb4780eac1245.mesh"]
+
+source_file="res://Assets/Quaternius/Fantasy Props MegaKit[Standard]/Exports/OBJ/Banner_2.obj"
+dest_files=["res://.godot/imported/Banner_2.obj-e0bcdd471fc9842cd22fb4780eac1245.mesh", "res://.godot/imported/Banner_2.obj-e0bcdd471fc9842cd22fb4780eac1245.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

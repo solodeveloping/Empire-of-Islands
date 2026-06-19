@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bq1mal14i2a7s"
+path="res://.godot/imported/Characters_Captain_Barbarossa.obj-b93e902da2956c5fe6f2b7b456dd0d72.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Characters_Captain_Barbarossa.obj-b93e902da2956c5fe6f2b7b456dd0d72.mesh"]
+
+source_file="res://Assets/Quaternius/Pirate Kit - Nov 2023/OBJ/Characters_Captain_Barbarossa.obj"
+dest_files=["res://.godot/imported/Characters_Captain_Barbarossa.obj-b93e902da2956c5fe6f2b7b456dd0d72.mesh", "res://.godot/imported/Characters_Captain_Barbarossa.obj-b93e902da2956c5fe6f2b7b456dd0d72.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

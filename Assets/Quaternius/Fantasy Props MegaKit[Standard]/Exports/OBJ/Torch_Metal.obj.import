@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://s6fd4s4yg6uc"
+path="res://.godot/imported/Torch_Metal.obj-f0cb7ee3ee4a9ee05e69bf6381ab6c5a.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Torch_Metal.obj-f0cb7ee3ee4a9ee05e69bf6381ab6c5a.mesh"]
+
+source_file="res://Assets/Quaternius/Fantasy Props MegaKit[Standard]/Exports/OBJ/Torch_Metal.obj"
+dest_files=["res://.godot/imported/Torch_Metal.obj-f0cb7ee3ee4a9ee05e69bf6381ab6c5a.mesh", "res://.godot/imported/Torch_Metal.obj-f0cb7ee3ee4a9ee05e69bf6381ab6c5a.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

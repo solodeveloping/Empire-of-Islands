@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://docu5i7cla28b"
+path="res://.godot/imported/Flower_4.obj-69773e0f782cd6029e6da24c8e1863ca.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Flower_4.obj-69773e0f782cd6029e6da24c8e1863ca.mesh"]
+
+source_file="res://Assets/Quaternius/Nature Crops Pack - Jan 2020/OBJ/Flower_4.obj"
+dest_files=["res://.godot/imported/Flower_4.obj-69773e0f782cd6029e6da24c8e1863ca.mesh", "res://.godot/imported/Flower_4.obj-69773e0f782cd6029e6da24c8e1863ca.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

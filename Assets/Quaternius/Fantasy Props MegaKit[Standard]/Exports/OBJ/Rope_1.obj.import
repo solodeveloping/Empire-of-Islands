@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://4j3kxta0bgaj"
+path="res://.godot/imported/Rope_1.obj-39c5cf1223e9f7869975793ad33edaef.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Rope_1.obj-39c5cf1223e9f7869975793ad33edaef.mesh"]
+
+source_file="res://Assets/Quaternius/Fantasy Props MegaKit[Standard]/Exports/OBJ/Rope_1.obj"
+dest_files=["res://.godot/imported/Rope_1.obj-39c5cf1223e9f7869975793ad33edaef.mesh", "res://.godot/imported/Rope_1.obj-39c5cf1223e9f7869975793ad33edaef.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

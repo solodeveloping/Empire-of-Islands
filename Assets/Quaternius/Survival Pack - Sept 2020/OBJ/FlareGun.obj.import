@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cp0aplrsw5lrb"
+path="res://.godot/imported/FlareGun.obj-3dd4dc46cbef05d32943fb2c5f27efcb.mesh"
+
+[deps]
+
+files=["res://.godot/imported/FlareGun.obj-3dd4dc46cbef05d32943fb2c5f27efcb.mesh"]
+
+source_file="res://Assets/Quaternius/Survival Pack - Sept 2020/OBJ/FlareGun.obj"
+dest_files=["res://.godot/imported/FlareGun.obj-3dd4dc46cbef05d32943fb2c5f27efcb.mesh", "res://.godot/imported/FlareGun.obj-3dd4dc46cbef05d32943fb2c5f27efcb.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

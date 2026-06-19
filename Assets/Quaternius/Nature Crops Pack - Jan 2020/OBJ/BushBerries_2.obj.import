@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cfx6p5lu6rtbt"
+path="res://.godot/imported/BushBerries_2.obj-c75e5f8432ad7abddce1e578f6b78ff9.mesh"
+
+[deps]
+
+files=["res://.godot/imported/BushBerries_2.obj-c75e5f8432ad7abddce1e578f6b78ff9.mesh"]
+
+source_file="res://Assets/Quaternius/Nature Crops Pack - Jan 2020/OBJ/BushBerries_2.obj"
+dest_files=["res://.godot/imported/BushBerries_2.obj-c75e5f8432ad7abddce1e578f6b78ff9.mesh", "res://.godot/imported/BushBerries_2.obj-c75e5f8432ad7abddce1e578f6b78ff9.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

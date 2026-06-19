@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c1ud28l22g8cw"
+path="res://.godot/imported/Wall_Plaster_Straight_R.obj-a6d286136d1c839e51c3a6bb6ce8729e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Wall_Plaster_Straight_R.obj-a6d286136d1c839e51c3a6bb6ce8729e.mesh"]
+
+source_file="res://Assets/Quaternius/Medieval Village MegaKit[Standard]/OBJ/Wall_Plaster_Straight_R.obj"
+dest_files=["res://.godot/imported/Wall_Plaster_Straight_R.obj-a6d286136d1c839e51c3a6bb6ce8729e.mesh", "res://.godot/imported/Wall_Plaster_Straight_R.obj-a6d286136d1c839e51c3a6bb6ce8729e.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

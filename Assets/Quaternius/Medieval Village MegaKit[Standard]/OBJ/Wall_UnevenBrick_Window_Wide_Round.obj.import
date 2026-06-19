@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bfvke0hvf0hou"
+path="res://.godot/imported/Wall_UnevenBrick_Window_Wide_Round.obj-5f60a6dd971593941c40b73e616da77a.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Wall_UnevenBrick_Window_Wide_Round.obj-5f60a6dd971593941c40b73e616da77a.mesh"]
+
+source_file="res://Assets/Quaternius/Medieval Village MegaKit[Standard]/OBJ/Wall_UnevenBrick_Window_Wide_Round.obj"
+dest_files=["res://.godot/imported/Wall_UnevenBrick_Window_Wide_Round.obj-5f60a6dd971593941c40b73e616da77a.mesh", "res://.godot/imported/Wall_UnevenBrick_Window_Wide_Round.obj-5f60a6dd971593941c40b73e616da77a.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

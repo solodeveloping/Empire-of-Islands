@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c3q7e2gfvu1i7"
+path="res://.godot/imported/PalmTree_Harvested.obj-9eed1dfef0cc1c6e2ed4239b74a38999.mesh"
+
+[deps]
+
+files=["res://.godot/imported/PalmTree_Harvested.obj-9eed1dfef0cc1c6e2ed4239b74a38999.mesh"]
+
+source_file="res://Assets/Quaternius/Nature Crops Pack - Jan 2020/OBJ/PalmTree_Harvested.obj"
+dest_files=["res://.godot/imported/PalmTree_Harvested.obj-9eed1dfef0cc1c6e2ed4239b74a38999.mesh", "res://.godot/imported/PalmTree_Harvested.obj-9eed1dfef0cc1c6e2ed4239b74a38999.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

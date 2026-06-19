@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ptyhtcbn86dw"
+path="res://.godot/imported/Environment_Rock_4.obj-745a05e523a1312192410bd9ea116afb.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Environment_Rock_4.obj-745a05e523a1312192410bd9ea116afb.mesh"]
+
+source_file="res://Assets/Quaternius/Pirate Kit - Nov 2023/OBJ/Environment_Rock_4.obj"
+dest_files=["res://.godot/imported/Environment_Rock_4.obj-745a05e523a1312192410bd9ea116afb.mesh", "res://.godot/imported/Environment_Rock_4.obj-745a05e523a1312192410bd9ea116afb.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://n0263x47mu6m"
+path="res://.godot/imported/Candle_2.obj-a908449d0a225166d70d75fecaff2b49.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Candle_2.obj-a908449d0a225166d70d75fecaff2b49.mesh"]
+
+source_file="res://Assets/Quaternius/Fantasy Props MegaKit[Standard]/Exports/OBJ/Candle_2.obj"
+dest_files=["res://.godot/imported/Candle_2.obj-a908449d0a225166d70d75fecaff2b49.mesh", "res://.godot/imported/Candle_2.obj-a908449d0a225166d70d75fecaff2b49.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

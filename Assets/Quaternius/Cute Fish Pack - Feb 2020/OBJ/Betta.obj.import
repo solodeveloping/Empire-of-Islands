@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://btln0r7pscmg5"
+path="res://.godot/imported/Betta.obj-ab708d65a8f3beacac278838b17dae19.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Betta.obj-ab708d65a8f3beacac278838b17dae19.mesh"]
+
+source_file="res://Assets/Quaternius/Cute Fish Pack - Feb 2020/OBJ/Betta.obj"
+dest_files=["res://.godot/imported/Betta.obj-ab708d65a8f3beacac278838b17dae19.mesh", "res://.godot/imported/Betta.obj-ab708d65a8f3beacac278838b17dae19.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

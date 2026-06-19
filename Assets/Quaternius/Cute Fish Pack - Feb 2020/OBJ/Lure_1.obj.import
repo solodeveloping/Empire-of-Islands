@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://btj2ykikocmm"
+path="res://.godot/imported/Lure_1.obj-b372690a8067c5c65894604e94d84fdc.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Lure_1.obj-b372690a8067c5c65894604e94d84fdc.mesh"]
+
+source_file="res://Assets/Quaternius/Cute Fish Pack - Feb 2020/OBJ/Lure_1.obj"
+dest_files=["res://.godot/imported/Lure_1.obj-b372690a8067c5c65894604e94d84fdc.mesh", "res://.godot/imported/Lure_1.obj-b372690a8067c5c65894604e94d84fdc.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

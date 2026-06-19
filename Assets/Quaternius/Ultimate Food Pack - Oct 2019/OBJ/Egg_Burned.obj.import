@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cn8p8ab84t3uy"
+path="res://.godot/imported/Egg_Burned.obj-1812c50d7e23446767bffc3f25466380.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Egg_Burned.obj-1812c50d7e23446767bffc3f25466380.mesh"]
+
+source_file="res://Assets/Quaternius/Ultimate Food Pack - Oct 2019/OBJ/Egg_Burned.obj"
+dest_files=["res://.godot/imported/Egg_Burned.obj-1812c50d7e23446767bffc3f25466380.mesh", "res://.godot/imported/Egg_Burned.obj-1812c50d7e23446767bffc3f25466380.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

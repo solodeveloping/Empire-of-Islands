@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://c3udmaa1jjty2"]
+
+[ext_resource type="PackedScene" uid="uid://dbrqsyggx50xf" path="res://Assets/Quaternius/Ships by @Quaternius/FBX/Sail ship.fbx" id="1_giw22"]
+
+[node name="Sail ship" unique_id=1968272076 instance=ExtResource("1_giw22")]

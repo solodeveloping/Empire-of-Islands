@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bokr2kxxhxseb"
+path="res://.godot/imported/Wheat_Crop.obj-157fc41b2fbbcd6d50fde04daf57b719.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Wheat_Crop.obj-157fc41b2fbbcd6d50fde04daf57b719.mesh"]
+
+source_file="res://Assets/Quaternius/Nature Crops Pack - Jan 2020/OBJ/Wheat_Crop.obj"
+dest_files=["res://.godot/imported/Wheat_Crop.obj-157fc41b2fbbcd6d50fde04daf57b719.mesh", "res://.godot/imported/Wheat_Crop.obj-157fc41b2fbbcd6d50fde04daf57b719.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

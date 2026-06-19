@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://djp1apk6y663v"
+path="res://.godot/imported/Roof_RoundTiles_8x14.obj-811f8ec9c8bd21b3f9f4e2f5cf2315cb.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Roof_RoundTiles_8x14.obj-811f8ec9c8bd21b3f9f4e2f5cf2315cb.mesh"]
+
+source_file="res://Assets/Quaternius/Medieval Village MegaKit[Standard]/OBJ/Roof_RoundTiles_8x14.obj"
+dest_files=["res://.godot/imported/Roof_RoundTiles_8x14.obj-811f8ec9c8bd21b3f9f4e2f5cf2315cb.mesh", "res://.godot/imported/Roof_RoundTiles_8x14.obj-811f8ec9c8bd21b3f9f4e2f5cf2315cb.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

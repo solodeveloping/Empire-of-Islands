@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://tqt5j4j5476j"
+path="res://.godot/imported/Cage_Small.obj-c50cdeb81e0b752026f2c7d5b72d7067.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Cage_Small.obj-c50cdeb81e0b752026f2c7d5b72d7067.mesh"]
+
+source_file="res://Assets/Quaternius/Fantasy Props MegaKit[Standard]/Exports/OBJ/Cage_Small.obj"
+dest_files=["res://.godot/imported/Cage_Small.obj-c50cdeb81e0b752026f2c7d5b72d7067.mesh", "res://.godot/imported/Cage_Small.obj-c50cdeb81e0b752026f2c7d5b72d7067.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

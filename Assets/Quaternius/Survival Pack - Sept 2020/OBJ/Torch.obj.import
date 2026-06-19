@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://2e7fq2j4v4pe"
+path="res://.godot/imported/Torch.obj-9cec39efc38b1ee5519d057b9f73aa08.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Torch.obj-9cec39efc38b1ee5519d057b9f73aa08.mesh"]
+
+source_file="res://Assets/Quaternius/Survival Pack - Sept 2020/OBJ/Torch.obj"
+dest_files=["res://.godot/imported/Torch.obj-9cec39efc38b1ee5519d057b9f73aa08.mesh", "res://.godot/imported/Torch.obj-9cec39efc38b1ee5519d057b9f73aa08.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

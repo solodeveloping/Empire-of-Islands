@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://djuxtmcac55p3"
+path="res://.godot/imported/Sword_Bronze.obj-3f9ebcc676f9c48bb937c82955e17f9c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Sword_Bronze.obj-3f9ebcc676f9c48bb937c82955e17f9c.mesh"]
+
+source_file="res://Assets/Quaternius/Fantasy Props MegaKit[Standard]/Exports/OBJ/Sword_Bronze.obj"
+dest_files=["res://.godot/imported/Sword_Bronze.obj-3f9ebcc676f9c48bb937c82955e17f9c.mesh", "res://.godot/imported/Sword_Bronze.obj-3f9ebcc676f9c48bb937c82955e17f9c.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

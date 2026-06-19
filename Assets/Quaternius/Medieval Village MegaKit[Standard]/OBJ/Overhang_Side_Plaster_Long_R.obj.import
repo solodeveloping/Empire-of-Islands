@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://0ecq2et5iwb0"
+path="res://.godot/imported/Overhang_Side_Plaster_Long_R.obj-80520eaa2ce2fcec714eb42841e4b9dc.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Overhang_Side_Plaster_Long_R.obj-80520eaa2ce2fcec714eb42841e4b9dc.mesh"]
+
+source_file="res://Assets/Quaternius/Medieval Village MegaKit[Standard]/OBJ/Overhang_Side_Plaster_Long_R.obj"
+dest_files=["res://.godot/imported/Overhang_Side_Plaster_Long_R.obj-80520eaa2ce2fcec714eb42841e4b9dc.mesh", "res://.godot/imported/Overhang_Side_Plaster_Long_R.obj-80520eaa2ce2fcec714eb42841e4b9dc.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

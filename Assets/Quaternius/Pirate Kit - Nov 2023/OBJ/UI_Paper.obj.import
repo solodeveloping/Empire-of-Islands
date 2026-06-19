@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bprcpmm6lj8hx"
+path="res://.godot/imported/UI_Paper.obj-00692c46f8f1e2de1ba54fbbaea8eaec.mesh"
+
+[deps]
+
+files=["res://.godot/imported/UI_Paper.obj-00692c46f8f1e2de1ba54fbbaea8eaec.mesh"]
+
+source_file="res://Assets/Quaternius/Pirate Kit - Nov 2023/OBJ/UI_Paper.obj"
+dest_files=["res://.godot/imported/UI_Paper.obj-00692c46f8f1e2de1ba54fbbaea8eaec.mesh", "res://.godot/imported/UI_Paper.obj-00692c46f8f1e2de1ba54fbbaea8eaec.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

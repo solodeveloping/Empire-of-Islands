@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c08j8b2iy4frn"
+path="res://.godot/imported/Anvil.obj-3444c0701fe3afe106adc5d6f18a8b32.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Anvil.obj-3444c0701fe3afe106adc5d6f18a8b32.mesh"]
+
+source_file="res://Assets/Quaternius/Fantasy Props MegaKit[Standard]/Exports/OBJ/Anvil.obj"
+dest_files=["res://.godot/imported/Anvil.obj-3444c0701fe3afe106adc5d6f18a8b32.mesh", "res://.godot/imported/Anvil.obj-3444c0701fe3afe106adc5d6f18a8b32.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

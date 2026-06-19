@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://baxv1euitdmqg"
+path="res://.godot/imported/Wall_Plaster_WoodGrid.obj-d6bfc7d1f9d63b03306c7f21b7a2f241.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Wall_Plaster_WoodGrid.obj-d6bfc7d1f9d63b03306c7f21b7a2f241.mesh"]
+
+source_file="res://Assets/Quaternius/Medieval Village MegaKit[Standard]/OBJ/Wall_Plaster_WoodGrid.obj"
+dest_files=["res://.godot/imported/Wall_Plaster_WoodGrid.obj-d6bfc7d1f9d63b03306c7f21b7a2f241.mesh", "res://.godot/imported/Wall_Plaster_WoodGrid.obj-d6bfc7d1f9d63b03306c7f21b7a2f241.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

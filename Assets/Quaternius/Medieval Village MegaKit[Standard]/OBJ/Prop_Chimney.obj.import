@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bvy1oygojtsma"
+path="res://.godot/imported/Prop_Chimney.obj-36e21a8c17311ffc2323c8c641ab3dca.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Prop_Chimney.obj-36e21a8c17311ffc2323c8c641ab3dca.mesh"]
+
+source_file="res://Assets/Quaternius/Medieval Village MegaKit[Standard]/OBJ/Prop_Chimney.obj"
+dest_files=["res://.godot/imported/Prop_Chimney.obj-36e21a8c17311ffc2323c8c641ab3dca.mesh", "res://.godot/imported/Prop_Chimney.obj-36e21a8c17311ffc2323c8c641ab3dca.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

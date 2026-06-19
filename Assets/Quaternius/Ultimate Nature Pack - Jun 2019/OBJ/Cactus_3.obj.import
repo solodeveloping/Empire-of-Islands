@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://btmyiysyeawpt"
+path="res://.godot/imported/Cactus_3.obj-234cc820ed8bf459e1e022f00666064e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Cactus_3.obj-234cc820ed8bf459e1e022f00666064e.mesh"]
+
+source_file="res://Assets/Quaternius/Ultimate Nature Pack - Jun 2019/OBJ/Cactus_3.obj"
+dest_files=["res://.godot/imported/Cactus_3.obj-234cc820ed8bf459e1e022f00666064e.mesh", "res://.godot/imported/Cactus_3.obj-234cc820ed8bf459e1e022f00666064e.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

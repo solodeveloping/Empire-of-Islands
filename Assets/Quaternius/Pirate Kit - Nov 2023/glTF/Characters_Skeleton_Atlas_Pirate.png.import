@@ -1,0 +1,44 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://cel6yq0c6f0y4"
+path.s3tc="res://.godot/imported/Characters_Skeleton_Atlas_Pirate.png-e9c05c1d6a12697ebe9075e96f480129.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "ded30fae94133a9f89d11d00d0d5da0b"
+}
+
+[deps]
+
+source_file="res://Assets/Quaternius/Pirate Kit - Nov 2023/glTF/Characters_Skeleton_Atlas_Pirate.png"
+dest_files=["res://.godot/imported/Characters_Skeleton_Atlas_Pirate.png-e9c05c1d6a12697ebe9075e96f480129.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/uastc_level=0
+compress/rdo_quality_loss=0.0
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/channel_remap/red=0
+process/channel_remap/green=1
+process/channel_remap/blue=2
+process/channel_remap/alpha=3
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

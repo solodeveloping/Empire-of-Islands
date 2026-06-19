@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bmxtnpsxbjq23"
+path="res://.godot/imported/GoblinShark.obj-c6d8a9fcb8f297086f583d5ee6b8673e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/GoblinShark.obj-c6d8a9fcb8f297086f583d5ee6b8673e.mesh"]
+
+source_file="res://Assets/Quaternius/Cute Fish Pack - Feb 2020/OBJ/GoblinShark.obj"
+dest_files=["res://.godot/imported/GoblinShark.obj-c6d8a9fcb8f297086f583d5ee6b8673e.mesh", "res://.godot/imported/GoblinShark.obj-c6d8a9fcb8f297086f583d5ee6b8673e.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

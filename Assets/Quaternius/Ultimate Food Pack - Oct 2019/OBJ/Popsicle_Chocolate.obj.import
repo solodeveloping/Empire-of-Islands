@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://crgc2yfha7wdv"
+path="res://.godot/imported/Popsicle_Chocolate.obj-5171411b885a2e18e22595b85171be39.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Popsicle_Chocolate.obj-5171411b885a2e18e22595b85171be39.mesh"]
+
+source_file="res://Assets/Quaternius/Ultimate Food Pack - Oct 2019/OBJ/Popsicle_Chocolate.obj"
+dest_files=["res://.godot/imported/Popsicle_Chocolate.obj-5171411b885a2e18e22595b85171be39.mesh", "res://.godot/imported/Popsicle_Chocolate.obj-5171411b885a2e18e22595b85171be39.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
