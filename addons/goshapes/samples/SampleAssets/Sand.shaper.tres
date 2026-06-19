@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="BlockShaper" format=3 uid="uid://crmkyitge0fwa"]
+
+[ext_resource type="Script" uid="uid://o0lj8p6gukk1" path="res://addons/goshapes/MeshShaper/Shapers/CapFlatShaper.gd" id="2_dh0ri"]
+[ext_resource type="Material" uid="uid://b770vfl4vul8p" path="res://addons/goshapes/samples/SampleAssets/SandMat.mat.tres" id="2_yuv2d"]
+[ext_resource type="Script" uid="uid://biq3c5jussilu" path="res://addons/goshapes/MeshShaper/BlockShaper.gd" id="3_f6xbb"]
+[ext_resource type="ArrayMesh" uid="uid://cw715gq7kfsyf" path="res://addons/goshapes/samples/SampleAssets/CliffFaceModelLow.obj" id="4_bcs0t"]
+[ext_resource type="Material" uid="uid://c2cqyi3fjigxj" path="res://addons/goshapes/samples/SampleAssets/CliffMat.tres" id="5_2vd2m"]
+[ext_resource type="ArrayMesh" uid="uid://cprh1f8pbew4q" path="res://addons/goshapes/samples/SampleAssets/CliffFaceModel.obj" id="6_0j1gm"]
+[ext_resource type="Script" uid="uid://bp6og84pdsfs7" path="res://addons/goshapes/MeshShaper/Shapers/WallMeshSegmentShaper.gd" id="7_5chkv"]
+
+[sub_resource type="Resource" id="Resource_03q4f"]
+script = ExtResource("2_dh0ri")
+material = ExtResource("2_yuv2d")
+collision_layer = 8
+
+[sub_resource type="Resource" id="Resource_be5bj"]
+script = ExtResource("7_5chkv")
+mesh = ExtResource("6_0j1gm")
+overlap = 0.1
+material = ExtResource("5_2vd2m")
+low_poly_mesh = ExtResource("4_bcs0t")
+collision_layer = 8
+
+[resource]
+resource_name = "Sand.shaper.tres:BlockShaper"
+script = ExtResource("3_f6xbb")
+cap_shaper = SubResource("Resource_03q4f")
+wall_shaper = SubResource("Resource_be5bj")
+collider_type = 4

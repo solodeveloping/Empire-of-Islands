@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="WallMeshSegmentShaper" format=3 uid="uid://kgmarqqeputi"]
+
+[ext_resource type="ArrayMesh" uid="uid://cw715gq7kfsyf" path="res://addons/goshapes/samples/SampleAssets/CliffFaceModelLow.obj" id="1_gd0wx"]
+[ext_resource type="Material" uid="uid://c2cqyi3fjigxj" path="res://addons/goshapes/samples/SampleAssets/CliffMat.tres" id="1_ijhax"]
+[ext_resource type="ArrayMesh" uid="uid://cprh1f8pbew4q" path="res://addons/goshapes/samples/SampleAssets/CliffFaceModel.obj" id="2_lh2w6"]
+[ext_resource type="Script" uid="uid://bp6og84pdsfs7" path="res://addons/goshapes/MeshShaper/Shapers/WallMeshSegmentShaper.gd" id="4_v7w1j"]
+
+[resource]
+script = ExtResource("4_v7w1j")
+mesh = ExtResource("2_lh2w6")
+overlap = 0.1
+material = ExtResource("1_ijhax")
+low_poly_mesh = ExtResource("1_gd0wx")
+collision_layer = 8
