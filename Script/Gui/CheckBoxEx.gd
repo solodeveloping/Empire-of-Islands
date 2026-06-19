@@ -47,5 +47,6 @@ func _on_CheckBoxEx_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.is_action_released("alt_command"):
 			#print("Left click checked CheckBox")
-			Audio.play_snd_click()
+			# FIXME: comment
+			#Audio.play_snd_click()
 			check_box_node.button_pressed = !check_box_node.button_pressed

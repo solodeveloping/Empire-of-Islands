@@ -173,19 +173,20 @@ func _on_Area_input_event(camera: Node, event: InputEvent, position: Vector3, _n
 	#player_camera.hovered_object = self
 	pass
 
-func _on_Area_mouse_entered() -> void:
-	prints("WorldThing::_on_Area_mouse_entered()")
-	if Global.World.player and Global.World.player.camera:
-		Global.World.player.camera._on_WorldThing_mouse_entered(self)
-	#_billboard.alpha_cut = SpriteBase3D.ALPHA_CUT_OPAQUE_PREPASS
-	_outline.visible = true
-
-func _on_Area_mouse_exited() -> void:
-	print("WorldThing::_on_Area_mouse_exited()")
-	if Global.World.player and Global.World.player.camera:
-		Global.World.player.camera._on_WorldThing_mouse_exited(self)
-	#_billboard.alpha_cut = SpriteBase3D.ALPHA_CUT_DISABLED
-	_outline.visible = false
+# FIXME: I commented all of this
+#func _on_Area_mouse_entered() -> void:
+	#prints("WorldThing::_on_Area_mouse_entered()")
+	#if Global.World.player and Global.World.player.camera:
+		#Global.World.player.camera._on_WorldThing_mouse_entered(self)
+	##_billboard.alpha_cut = SpriteBase3D.ALPHA_CUT_OPAQUE_PREPASS
+	#_outline.visible = true
+#
+#func _on_Area_mouse_exited() -> void:
+	#print("WorldThing::_on_Area_mouse_exited()")
+	#if Global.World.player and Global.World.player.camera:
+		#Global.World.player.camera._on_WorldThing_mouse_exited(self)
+	##_billboard.alpha_cut = SpriteBase3D.ALPHA_CUT_DISABLED
+	#_outline.visible = false
 
 func _on_Billboard_frame_changed() -> void:
 	if _billboard == null:

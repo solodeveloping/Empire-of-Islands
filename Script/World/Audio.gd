@@ -1,4 +1,5 @@
 extends AudioStreamPlayer
+class_name Audio
 
 const SOUNDS = {
 	# Events/Scenario
@@ -95,11 +96,12 @@ func play_snd_fail() -> void:
 func play_snd_voice(voice_code: String) -> void:
 	play_snd("voice", SOUNDS[voice_code])
 
-func play_entry_snd() -> void:
-	asp_voice.stream = SOUNDS["{0}_{1}".format([Config.language, randi() % 4])]
-	if asp_voice.name.is_empty():
-		add_child(asp_voice)
-	asp_voice.play()
+# FIXME: comment
+#func play_entry_snd() -> void:
+	#asp_voice.stream = SOUNDS["{0}_{1}".format([Config.language, randi() % 4])]
+	#if asp_voice.name.is_empty():
+		#add_child(asp_voice)
+	#asp_voice.play()
 
 func set_volume(volume: float, bus_name: String) -> void:
 	var index = AudioServer.get_bus_index(bus_name)

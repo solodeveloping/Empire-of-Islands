@@ -40,7 +40,8 @@ func _process(_delta: float) -> void:
 
 func select() -> void:
 	prints("SELECT", self)
-	Audio.play_snd_click()
+	# FIXME : I commented this
+	#Audio.play_snd_click()
 	# TODO: Highlighting effect
 	_billboard.modulate = Color.GOLD
 
