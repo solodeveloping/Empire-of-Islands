@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dmnm3uowpnott"
+path="res://.godot/imported/mountain.obj-3945d85b92b0ab5b8136f7c496ddecb3.mesh"
+
+[deps]
+
+files=["res://.godot/imported/mountain.obj-3945d85b92b0ab5b8136f7c496ddecb3.mesh"]
+
+source_file="res://Assets/kaylousberg/KayKit Medieval Builder Pack 1.0/Models/objects/obj/mountain.obj"
+dest_files=["res://.godot/imported/mountain.obj-3945d85b92b0ab5b8136f7c496ddecb3.mesh", "res://.godot/imported/mountain.obj-3945d85b92b0ab5b8136f7c496ddecb3.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

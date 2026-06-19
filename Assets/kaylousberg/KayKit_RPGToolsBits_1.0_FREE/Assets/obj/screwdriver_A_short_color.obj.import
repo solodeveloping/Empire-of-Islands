@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c0n3ufupp0byg"
+path="res://.godot/imported/screwdriver_A_short_color.obj-eee72e3dd7bed7eea80406a441b82ed0.mesh"
+
+[deps]
+
+files=["res://.godot/imported/screwdriver_A_short_color.obj-eee72e3dd7bed7eea80406a441b82ed0.mesh"]
+
+source_file="res://Assets/kaylousberg/KayKit_RPGToolsBits_1.0_FREE/Assets/obj/screwdriver_A_short_color.obj"
+dest_files=["res://.godot/imported/screwdriver_A_short_color.obj-eee72e3dd7bed7eea80406a441b82ed0.mesh", "res://.godot/imported/screwdriver_A_short_color.obj-eee72e3dd7bed7eea80406a441b82ed0.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

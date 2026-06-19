@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bunrso3jpad01"
+path="res://.godot/imported/plaque.obj-39213bb0f2d84dd9f7e1a1fb50e865c2.mesh"
+
+[deps]
+
+files=["res://.godot/imported/plaque.obj-39213bb0f2d84dd9f7e1a1fb50e865c2.mesh"]
+
+source_file="res://Assets/kaylousberg/KayKit_HalloweenBits_1.0_FREE/Assets/obj/plaque.obj"
+dest_files=["res://.godot/imported/plaque.obj-39213bb0f2d84dd9f7e1a1fb50e865c2.mesh", "res://.godot/imported/plaque.obj-39213bb0f2d84dd9f7e1a1fb50e865c2.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

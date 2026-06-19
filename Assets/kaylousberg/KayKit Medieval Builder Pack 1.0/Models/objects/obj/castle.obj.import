@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cd6po26ag3xk6"
+path="res://.godot/imported/castle.obj-a2126a5f746a7101685156a77ba8016e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/castle.obj-a2126a5f746a7101685156a77ba8016e.mesh"]
+
+source_file="res://Assets/kaylousberg/KayKit Medieval Builder Pack 1.0/Models/objects/obj/castle.obj"
+dest_files=["res://.godot/imported/castle.obj-a2126a5f746a7101685156a77ba8016e.mesh", "res://.godot/imported/castle.obj-a2126a5f746a7101685156a77ba8016e.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

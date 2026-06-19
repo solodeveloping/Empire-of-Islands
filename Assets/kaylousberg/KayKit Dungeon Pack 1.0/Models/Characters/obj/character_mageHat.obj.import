@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dglujpvo6xsl8"
+path="res://.godot/imported/character_mageHat.obj-6b7be704e7f0550429123f831815d75f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/character_mageHat.obj-6b7be704e7f0550429123f831815d75f.mesh"]
+
+source_file="res://Assets/kaylousberg/KayKit Dungeon Pack 1.0/Models/Characters/obj/character_mageHat.obj"
+dest_files=["res://.godot/imported/character_mageHat.obj-6b7be704e7f0550429123f831815d75f.mesh", "res://.godot/imported/character_mageHat.obj-6b7be704e7f0550429123f831815d75f.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

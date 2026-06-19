@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cpbusbonx2w8r"
+path="res://.godot/imported/Bush_1_E_Color1.obj-d4ac1d42cc91f39ec794b7d210e8937e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Bush_1_E_Color1.obj-d4ac1d42cc91f39ec794b7d210e8937e.mesh"]
+
+source_file="res://Assets/kaylousberg/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/obj/Bush_1_E_Color1.obj"
+dest_files=["res://.godot/imported/Bush_1_E_Color1.obj-d4ac1d42cc91f39ec794b7d210e8937e.mesh", "res://.godot/imported/Bush_1_E_Color1.obj-d4ac1d42cc91f39ec794b7d210e8937e.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://kouirfgqc1y8"
+path="res://.godot/imported/Silver_Bars.obj-17c4ce0a22838f606fa77348990f709e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Silver_Bars.obj-17c4ce0a22838f606fa77348990f709e.mesh"]
+
+source_file="res://Assets/kaylousberg/KayKit_ResourceBits_1.0_FREE/Assets/obj/Silver_Bars.obj"
+dest_files=["res://.godot/imported/Silver_Bars.obj-17c4ce0a22838f606fa77348990f709e.mesh", "res://.godot/imported/Silver_Bars.obj-17c4ce0a22838f606fa77348990f709e.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

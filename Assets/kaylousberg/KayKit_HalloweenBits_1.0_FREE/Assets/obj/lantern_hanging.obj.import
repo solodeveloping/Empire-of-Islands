@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b2kmbqrvg3cep"
+path="res://.godot/imported/lantern_hanging.obj-3531f0ef8f9f2cd7dda335c090ddadbd.mesh"
+
+[deps]
+
+files=["res://.godot/imported/lantern_hanging.obj-3531f0ef8f9f2cd7dda335c090ddadbd.mesh"]
+
+source_file="res://Assets/kaylousberg/KayKit_HalloweenBits_1.0_FREE/Assets/obj/lantern_hanging.obj"
+dest_files=["res://.godot/imported/lantern_hanging.obj-3531f0ef8f9f2cd7dda335c090ddadbd.mesh", "res://.godot/imported/lantern_hanging.obj-3531f0ef8f9f2cd7dda335c090ddadbd.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

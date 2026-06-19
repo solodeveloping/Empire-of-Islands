@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://xy5fy1tfir4"
+path="res://.godot/imported/Fuel_C_Jerrycan.obj-7bf93f4717aab801f409e86bb6f7975c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Fuel_C_Jerrycan.obj-7bf93f4717aab801f409e86bb6f7975c.mesh"]
+
+source_file="res://Assets/kaylousberg/KayKit_ResourceBits_1.0_FREE/Assets/obj/Fuel_C_Jerrycan.obj"
+dest_files=["res://.godot/imported/Fuel_C_Jerrycan.obj-7bf93f4717aab801f409e86bb6f7975c.mesh", "res://.godot/imported/Fuel_C_Jerrycan.obj-7bf93f4717aab801f409e86bb6f7975c.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

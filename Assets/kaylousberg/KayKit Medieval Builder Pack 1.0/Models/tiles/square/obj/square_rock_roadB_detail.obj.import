@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b36ct71acp2pq"
+path="res://.godot/imported/square_rock_roadB_detail.obj-f845216270055a333b4a15dfb0a3a36c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/square_rock_roadB_detail.obj-f845216270055a333b4a15dfb0a3a36c.mesh"]
+
+source_file="res://Assets/kaylousberg/KayKit Medieval Builder Pack 1.0/Models/tiles/square/obj/square_rock_roadB_detail.obj"
+dest_files=["res://.godot/imported/square_rock_roadB_detail.obj-f845216270055a333b4a15dfb0a3a36c.mesh", "res://.godot/imported/square_rock_roadB_detail.obj-f845216270055a333b4a15dfb0a3a36c.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

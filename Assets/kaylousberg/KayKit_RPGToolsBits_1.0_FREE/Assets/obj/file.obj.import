@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://qnh1hsnibnbk"
+path="res://.godot/imported/file.obj-9c3e8f0050d22d496fb5f9d7cb7a1acc.mesh"
+
+[deps]
+
+files=["res://.godot/imported/file.obj-9c3e8f0050d22d496fb5f9d7cb7a1acc.mesh"]
+
+source_file="res://Assets/kaylousberg/KayKit_RPGToolsBits_1.0_FREE/Assets/obj/file.obj"
+dest_files=["res://.godot/imported/file.obj-9c3e8f0050d22d496fb5f9d7cb7a1acc.mesh", "res://.godot/imported/file.obj-9c3e8f0050d22d496fb5f9d7cb7a1acc.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

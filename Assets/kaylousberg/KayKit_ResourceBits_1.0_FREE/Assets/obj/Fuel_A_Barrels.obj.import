@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dht1lhl8my8d6"
+path="res://.godot/imported/Fuel_A_Barrels.obj-c651bc3d7a73f1a210e3f00e34a104fc.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Fuel_A_Barrels.obj-c651bc3d7a73f1a210e3f00e34a104fc.mesh"]
+
+source_file="res://Assets/kaylousberg/KayKit_ResourceBits_1.0_FREE/Assets/obj/Fuel_A_Barrels.obj"
+dest_files=["res://.godot/imported/Fuel_A_Barrels.obj-c651bc3d7a73f1a210e3f00e34a104fc.mesh", "res://.godot/imported/Fuel_A_Barrels.obj-c651bc3d7a73f1a210e3f00e34a104fc.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

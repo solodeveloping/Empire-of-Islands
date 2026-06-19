@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dw4wjde2n6ccm"
+path="res://.godot/imported/candyA.obj-069188a5307ec5d259c118a82c1fe63d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/candyA.obj-069188a5307ec5d259c118a82c1fe63d.mesh"]
+
+source_file="res://Assets/kaylousberg/KayKit Spooktober Seasonal Pack 1.1/Models/obj/candyA.obj"
+dest_files=["res://.godot/imported/candyA.obj-069188a5307ec5d259c118a82c1fe63d.mesh", "res://.godot/imported/candyA.obj-069188a5307ec5d259c118a82c1fe63d.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

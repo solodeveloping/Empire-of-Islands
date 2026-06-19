@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b7ryd76jhh30b"
+path="res://.godot/imported/Stone_Chunks_Large.obj-42dd81b7d2c523efe5065a7e0f85742c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Stone_Chunks_Large.obj-42dd81b7d2c523efe5065a7e0f85742c.mesh"]
+
+source_file="res://Assets/kaylousberg/KayKit_ResourceBits_1.0_FREE/Assets/obj/Stone_Chunks_Large.obj"
+dest_files=["res://.godot/imported/Stone_Chunks_Large.obj-42dd81b7d2c523efe5065a7e0f85742c.mesh", "res://.godot/imported/Stone_Chunks_Large.obj-42dd81b7d2c523efe5065a7e0f85742c.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

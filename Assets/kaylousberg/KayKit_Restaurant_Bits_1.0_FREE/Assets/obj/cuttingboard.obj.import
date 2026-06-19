@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bx0wkpgd8rt3d"
+path="res://.godot/imported/cuttingboard.obj-ccc16aeb51987c0c15701a8d2ed7132f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/cuttingboard.obj-ccc16aeb51987c0c15701a8d2ed7132f.mesh"]
+
+source_file="res://Assets/kaylousberg/KayKit_Restaurant_Bits_1.0_FREE/Assets/obj/cuttingboard.obj"
+dest_files=["res://.godot/imported/cuttingboard.obj-ccc16aeb51987c0c15701a8d2ed7132f.mesh", "res://.godot/imported/cuttingboard.obj-ccc16aeb51987c0c15701a8d2ed7132f.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

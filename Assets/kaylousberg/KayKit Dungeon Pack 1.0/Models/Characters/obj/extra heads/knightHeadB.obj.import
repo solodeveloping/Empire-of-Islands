@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://n8vdusmymedd"
+path="res://.godot/imported/knightHeadB.obj-22a4fc88282b07c2f44075eb6c282346.mesh"
+
+[deps]
+
+files=["res://.godot/imported/knightHeadB.obj-22a4fc88282b07c2f44075eb6c282346.mesh"]
+
+source_file="res://Assets/kaylousberg/KayKit Dungeon Pack 1.0/Models/Characters/obj/extra heads/knightHeadB.obj"
+dest_files=["res://.godot/imported/knightHeadB.obj-22a4fc88282b07c2f44075eb6c282346.mesh", "res://.godot/imported/knightHeadB.obj-22a4fc88282b07c2f44075eb6c282346.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dgimcidaj8evh"
+path="res://.godot/imported/bucket_metal_handle.obj-241306d3e5e9bd5cd366b4a8071783ca.mesh"
+
+[deps]
+
+files=["res://.godot/imported/bucket_metal_handle.obj-241306d3e5e9bd5cd366b4a8071783ca.mesh"]
+
+source_file="res://Assets/kaylousberg/KayKit_RPGToolsBits_1.0_FREE/Assets/obj/bucket_metal_handle.obj"
+dest_files=["res://.godot/imported/bucket_metal_handle.obj-241306d3e5e9bd5cd366b4a8071783ca.mesh", "res://.godot/imported/bucket_metal_handle.obj-241306d3e5e9bd5cd366b4a8071783ca.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b6v1k0yt3y54u"
+path="res://.godot/imported/Tree_3_B_Color1.obj-597468053c97c0116e270e7615cc510f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Tree_3_B_Color1.obj-597468053c97c0116e270e7615cc510f.mesh"]
+
+source_file="res://Assets/kaylousberg/KayKit_Forest_Nature_Pack_1.0_FREE/Assets/obj/Tree_3_B_Color1.obj"
+dest_files=["res://.godot/imported/Tree_3_B_Color1.obj-597468053c97c0116e270e7615cc510f.mesh", "res://.godot/imported/Tree_3_B_Color1.obj-597468053c97c0116e270e7615cc510f.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

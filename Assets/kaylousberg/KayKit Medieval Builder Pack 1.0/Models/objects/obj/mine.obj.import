@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dkplp3mfu7klj"
+path="res://.godot/imported/mine.obj-2e399d77894b55e877265a5684559a78.mesh"
+
+[deps]
+
+files=["res://.godot/imported/mine.obj-2e399d77894b55e877265a5684559a78.mesh"]
+
+source_file="res://Assets/kaylousberg/KayKit Medieval Builder Pack 1.0/Models/objects/obj/mine.obj"
+dest_files=["res://.godot/imported/mine.obj-2e399d77894b55e877265a5684559a78.mesh", "res://.godot/imported/mine.obj-2e399d77894b55e877265a5684559a78.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

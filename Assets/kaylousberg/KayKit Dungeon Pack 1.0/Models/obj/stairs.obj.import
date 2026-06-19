@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bpyucxjaxspdy"
+path="res://.godot/imported/stairs.obj-a417998656a5886d9a65674387a1b12d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/stairs.obj-a417998656a5886d9a65674387a1b12d.mesh"]
+
+source_file="res://Assets/kaylousberg/KayKit Dungeon Pack 1.0/Models/obj/stairs.obj"
+dest_files=["res://.godot/imported/stairs.obj-a417998656a5886d9a65674387a1b12d.mesh", "res://.godot/imported/stairs.obj-a417998656a5886d9a65674387a1b12d.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
