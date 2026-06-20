@@ -3,6 +3,11 @@ class_name GMSimpleStorage
 
 var storage: Dictionary[int, GMStorageRef] = {}
 
+func get_storage(
+	item_id: int,
+) -> GMStorageRef:
+	return storage.get(item_id, null)
+
 func set_storage(
 	item_id: int,
 	quantity: int,
@@ -115,6 +120,7 @@ func put_as_much_as_possible(item_id: int, quantity: int) -> GMPutResult:
 	var result := GMPutResult.new()
 	result.successful = true
 	result.quantity_put = quantity
+	result.item_id = item_id
 	
 	var storage_ref: GMStorageRef = storage.get(item_id)
 	if !storage_ref:

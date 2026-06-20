@@ -1,6 +1,18 @@
 class_name O_BuildingAddedObserver
 extends Observer
 
+signal housing_capacity_increased(
+	pop_type: int,
+	amount: int,
+)
+signal workers_capacity_increased(
+	pop_type: int,
+	amount: int,
+)
+signal pop_unit_found_work(
+	pop_type: int,
+)
+
 # FIXME: move all of this elsewhere
 class ClassForLambdaFunction:
 	var buildings_needing_workers: Array
@@ -11,68 +23,47 @@ class ClassForLambdaFunction:
 	var workers: C_Workers
 	var worker_quantity: WorkerQuantity
 
-
 func sub_observers() -> Array[Array]:
 	return [
 		# TODO: add building component
-		[q.with_all([C_Building]).on_event(&"housing_building_added"), _on_housing_building_added],
-		[q.with_all([C_Building]).on_event(&"production_building_added"), _on_production_building_added],
+		[
+			q.with_all([C_Building]).on_event(ECSEvents.HOUSING_BUILDING_ADDED),
+			_on_housing_building_added],
+		[
+			q.with_all([C_Building]).on_event(ECSEvents.PRODUCTION_BUILDING_ADDED),
+			_on_production_building_added],
 	]
 
 func _on_housing_building_added(_event: Variant, entity: Entity, _data: Variant) -> void:
-	#entity.get_component(C_Health).hp -= data.amount
 	var c_housing: C_HousingCapacity = entity.get_component(C_HousingCapacity)
-	#the_population.population_increase(
-	#population_increase(
-		#c_housing.pop_type, c_housing.current
-	#)
 	
-	var _b: ClassForLambdaFunction = ClassForLambdaFunction.new()
+	housing_capacity_increased.emit(
+		c_housing.pop_type,
+		c_housing.maximum,
+	)
 	
-	# TODO: optimize by filtering by city?
-	# TODO : we are duplicating because the array is Archetype.entities
-	# maybe we need to find a better way
-	_b.buildings_needing_workers = ECS.world.query.with_all(
-		[C_MissingWorkers]
-	).execute().duplicate()
+	# TODO : pop units without housing
+	var pop_needing_housing = ECS.world.query.with_all(
+		[C_LookingForHousing]
+	).execute()
+	if pop_needing_housing.size() == 0:
+		return
 	
-	_b.building = _b.buildings_needing_workers.pop_back()
-	
-	find_building_needing_workers(_b, c_housing)
-	#find_building_needing_workers.call(_b)
-	
-	for i in range(c_housing.current):
-		# TODO: add city relationship?
-		#var e_pop_unit = Entity.new()
-		#ECS.world.add_entity(e_pop_unit)
-		#var c_pop_unit = C_PopUnit.new(c_housing.pop_type)
-		#e_pop_unit.add_component(c_pop_unit)
+	for pop_unit: Entity in pop_needing_housing:
+		var c_pop_unit: C_PopUnit = pop_unit.get_component(C_PopUnit)
+		if !pop_unit:
+			printerr("not a pop_unit")
+			continue
+		if c_pop_unit.pop_type != c_housing.pop_type:
+			continue
 		
-		if _b.building_needing_workers_exist:
-			#e_pop_unit.add_relationship(
-				#Relationship.new(R_WorksAt.new(), _b.building)
-			#)
-			_b.worker_quantity.worker_count += 1
-			
-			if i < (c_housing.current - 1):
-				if _b.worker_quantity.worker_count >= _b.worker_requirement.worker_count:
-					
-					# FIXME: mutualize?
-					# Accessing if building is still missing workers
-					var is_one_missing = false
-					for req in _b.worker_requirements.requirements:
-						var current: WorkerQuantity = _b.workers.workers.get(req.worker_type)
-						if current.worker_count < req.worker_count:
-							is_one_missing = true
-					if is_one_missing == false:
-						#_b.building.remove_component(C_MissingWorkers)
-						cmd.remove_component(_b.building, C_MissingWorkers)
-					
-					_b.building = _b.buildings_needing_workers.pop_back()
-					find_building_needing_workers(_b, c_housing)
-		else:
-			pass
-			#e_pop_unit.add_component(C_JobLess.new())
+		c_housing.current += 1
+		
+		pop_unit.add_relationship(Rels.create_lives_in(entity))
+		cmd.remove_component(pop_unit, C_LookingForHousing)
+		
+		if c_housing.current >= c_housing.maximum:
+			break
 
 func find_building_needing_workers(b: ClassForLambdaFunction, c_housing: C_HousingCapacity):
 	b.building_needing_workers_exist =  false
@@ -112,6 +103,13 @@ func _on_production_building_added(_event: Variant, entity: Entity, _data: Varia
 		printerr("missing worker components")
 		# TODO : exit?
 		return
+	
+	for req in c_worker_requirements.requirements:
+		workers_capacity_increased.emit(
+			req.worker_type,
+			req.worker_count,
+		)
+		
 	# TODO: optimize by filtering by city?
 	var available_workers = ECS.world.query.with_all(
 		[C_JobLess]
@@ -133,6 +131,10 @@ func _on_production_building_added(_event: Variant, entity: Entity, _data: Varia
 				R_WorksAt.new(), entity
 			))
 			worker_quantity.worker_count += 1
+			
+			pop_unit.is_working = true
+			cmd.remove_component(worker, C_JobLess)
+			pop_unit_found_work.emit(pop_unit.pop_type)
 			
 			# TODO: early return if done
 		

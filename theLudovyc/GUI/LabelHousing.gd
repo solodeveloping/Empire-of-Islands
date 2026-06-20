@@ -9,12 +9,12 @@ func _ready():
 
 	if current_node.has_node("EventBus"):
 		current_node.get_node("EventBus").connect(
-			"population_updated", _on_EventBus_popupation_updated
+			"housing_capacity_updated", _on_EventBus_housing_capacity_updated
 		)
-
-	tooltip_text = "Current %s population" % [
+		
+	tooltip_text = "Current %s housing capacity" % [
 		Populations.get_population_name(population_type)
 	]
 
-func _on_EventBus_popupation_updated(population_count):
-	text = str(population_count[population_type])
+func _on_EventBus_housing_capacity_updated(housing_capacity):
+	text = str(housing_capacity[population_type])

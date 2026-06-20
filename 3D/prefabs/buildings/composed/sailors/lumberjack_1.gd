@@ -33,6 +33,7 @@ func define_components() -> Array:
 			1,
 			3.0
 		),
+		C_CollectionBuilding.new(),
 		C_WorkerRequirement.new(
 			[
 				Worker_Requirement.new(

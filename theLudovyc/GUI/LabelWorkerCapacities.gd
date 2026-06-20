@@ -11,20 +11,17 @@ func _ready():
 
 	if current_node.has_node("EventBus"):
 		current_node.get_node("EventBus").connect(
-			"available_workers_updated", _on_EventBus_available_workers_updated_updated
+			"worker_capacities_updated", _on_EventBus_worker_capacities_updated
 		)
 		
 	default_color = get_theme_color("font_color")
 	
-	tooltip_text = "Current %s workers" % [
+	tooltip_text = "%s worker capacities" % [
 		Populations.get_population_name(population_type)
 	]
 
-# TODO: fix this
-# it used to be green if everyting is alright and red if not
-func _on_EventBus_available_workers_updated_updated(available_workers_amount):
-	var pop = available_workers_amount[population_type]
-	#text = "(" + Helper.get_string_from_signed_int(pop) + ")"
+func _on_EventBus_worker_capacities_updated(worker_capacities):
+	var pop = worker_capacities[population_type]
 	text = str(pop)
 	if pop < 0:
 		add_theme_color_override("font_color", Color.RED)

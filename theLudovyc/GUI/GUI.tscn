@@ -58,7 +58,9 @@
 [ext_resource type="Texture2D" uid="uid://dlvlgbmmmq6bb" path="res://Art/Image/Gui/Icons/TabWidget/BuildMenu/Tier/tier4_d.png" id="48_qjjjt"]
 [ext_resource type="Texture2D" uid="uid://btaf7o8qcjwbd" path="res://Art/Image/Gui/Icons/TabWidget/BuildMenu/Tier/tier4_h.png" id="49_qgjc7"]
 [ext_resource type="PackedScene" uid="uid://b36bl6fmufdh" path="res://theLudovyc/GUI/MoneyAndResourcesContainer.tscn" id="53_rv8fv"]
+[ext_resource type="Script" uid="uid://k1ptg3ypq45y" path="res://theLudovyc/GUI/LabelHousing.gd" id="54_qjjjt"]
 [ext_resource type="Script" uid="uid://b0klc1fhrblng" path="res://theLudovyc/GUI/NaturalResourceContainer.gd" id="55_1wuat"]
+[ext_resource type="Script" uid="uid://cv6gq6sgnissw" path="res://theLudovyc/GUI/LabelWorkerCapacities.gd" id="56_qgjc7"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q0br5"]
 content_margin_left = 20.0
@@ -503,10 +505,32 @@ layout_mode = 2
 text = "0"
 script = ExtResource("17_v0ai2")
 
+[node name="LabelSlash" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer3/HBoxContainer" unique_id=545315462]
+layout_mode = 2
+text = "/"
+
+[node name="LabelHousingCapacity" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer3/HBoxContainer" unique_id=1001751679]
+layout_mode = 2
+text = "0"
+script = ExtResource("54_qjjjt")
+
+[node name="LabelWhitespace" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer3/HBoxContainer" unique_id=1155665006]
+layout_mode = 2
+text = "  "
+
 [node name="LabelWorkers" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer3/HBoxContainer" unique_id=112138516]
 layout_mode = 2
-text = "(0)"
+text = "0"
 script = ExtResource("18_xklsp")
+
+[node name="LabelSlash2" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer3/HBoxContainer" unique_id=226771620]
+layout_mode = 2
+text = "/"
+
+[node name="LabelWorkerCapacity" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer3/HBoxContainer" unique_id=122030241]
+layout_mode = 2
+text = "0"
+script = ExtResource("56_qgjc7")
 
 [node name="VSeparator3" type="VSeparator" parent="CityInfo/PanelContainer/HBoxContainer" unique_id=1755568684]
 layout_mode = 2
@@ -526,16 +550,40 @@ layout_mode = 2
 tooltip_text = "Pioneers"
 theme_override_constants/separation = 0
 
-[node name="LabelPopulation" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer/HBoxContainer2" unique_id=1067529035]
+[node name="LabelPopulation" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer/HBoxContainer2" unique_id=1301388774]
 layout_mode = 2
 text = "0"
 script = ExtResource("17_v0ai2")
 population_type = 1
 
-[node name="LabelWorkers" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer/HBoxContainer2" unique_id=119594121]
+[node name="LabelSlash" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer/HBoxContainer2" unique_id=1269866005]
 layout_mode = 2
-text = "(0)"
+text = "/"
+
+[node name="LabelHousingCapacity" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer/HBoxContainer2" unique_id=674904439]
+layout_mode = 2
+text = "0"
+script = ExtResource("54_qjjjt")
+population_type = 1
+
+[node name="LabelWhitespace" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer/HBoxContainer2" unique_id=68224413]
+layout_mode = 2
+text = "  "
+
+[node name="LabelWorkers" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer/HBoxContainer2" unique_id=1825377881]
+layout_mode = 2
+text = "0"
 script = ExtResource("18_xklsp")
+population_type = 1
+
+[node name="LabelSlash2" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer/HBoxContainer2" unique_id=910865995]
+layout_mode = 2
+text = "/"
+
+[node name="LabelWorkerCapacity" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer/HBoxContainer2" unique_id=757993457]
+layout_mode = 2
+text = "0"
+script = ExtResource("56_qgjc7")
 population_type = 1
 
 [node name="VSeparator2" type="VSeparator" parent="CityInfo/PanelContainer/HBoxContainer" unique_id=872007400]
@@ -556,16 +604,40 @@ layout_mode = 2
 tooltip_text = "Pioneers"
 theme_override_constants/separation = 0
 
-[node name="LabelPopulation" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer2/HBoxContainer2" unique_id=63295135]
+[node name="LabelPopulation" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer2/HBoxContainer2" unique_id=701814790]
 layout_mode = 2
 text = "0"
 script = ExtResource("17_v0ai2")
 population_type = 2
 
-[node name="LabelWorkers" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer2/HBoxContainer2" unique_id=1879606102]
+[node name="LabelSlash" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer2/HBoxContainer2" unique_id=1147975795]
 layout_mode = 2
-text = "(0)"
+text = "/"
+
+[node name="LabelHousingCapacity" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer2/HBoxContainer2" unique_id=1056491794]
+layout_mode = 2
+text = "0"
+script = ExtResource("54_qjjjt")
+population_type = 2
+
+[node name="LabelWhitespace" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer2/HBoxContainer2" unique_id=1876998810]
+layout_mode = 2
+text = "  "
+
+[node name="LabelWorkers" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer2/HBoxContainer2" unique_id=693620194]
+layout_mode = 2
+text = "0"
 script = ExtResource("18_xklsp")
+population_type = 2
+
+[node name="LabelSlash2" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer2/HBoxContainer2" unique_id=1311737303]
+layout_mode = 2
+text = "/"
+
+[node name="LabelWorkerCapacity" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer2/HBoxContainer2" unique_id=967824973]
+layout_mode = 2
+text = "0"
+script = ExtResource("56_qgjc7")
 population_type = 2
 
 [node name="VSeparator4" type="VSeparator" parent="CityInfo/PanelContainer/HBoxContainer" unique_id=835955926]
@@ -586,16 +658,40 @@ layout_mode = 2
 tooltip_text = "Pioneers"
 theme_override_constants/separation = 0
 
-[node name="LabelPopulation" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer4/HBoxContainer2" unique_id=1455685458]
+[node name="LabelPopulation" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer4/HBoxContainer2" unique_id=1876683619]
 layout_mode = 2
 text = "0"
 script = ExtResource("17_v0ai2")
 population_type = 3
 
-[node name="LabelWorkers" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer4/HBoxContainer2" unique_id=29065490]
+[node name="LabelSlash" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer4/HBoxContainer2" unique_id=1417668629]
 layout_mode = 2
-text = "(0)"
+text = "/"
+
+[node name="LabelHousingCapacity" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer4/HBoxContainer2" unique_id=962266952]
+layout_mode = 2
+text = "0"
+script = ExtResource("54_qjjjt")
+population_type = 3
+
+[node name="LabelWhitespace" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer4/HBoxContainer2" unique_id=1198512690]
+layout_mode = 2
+text = "  "
+
+[node name="LabelWorkers" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer4/HBoxContainer2" unique_id=908268720]
+layout_mode = 2
+text = "0"
 script = ExtResource("18_xklsp")
+population_type = 3
+
+[node name="LabelSlash2" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer4/HBoxContainer2" unique_id=842535811]
+layout_mode = 2
+text = "/"
+
+[node name="LabelWorkerCapacity" type="Label" parent="CityInfo/PanelContainer/HBoxContainer/HBoxContainer4/HBoxContainer2" unique_id=307084812]
+layout_mode = 2
+text = "0"
+script = ExtResource("56_qgjc7")
 population_type = 3
 
 [node name="VSeparator5" type="VSeparator" parent="CityInfo/PanelContainer/HBoxContainer" unique_id=1881913636]

@@ -21,7 +21,7 @@ func process_ships(entities: Array[Entity], _components: Array, delta: float):
 		c_ship_waiting_at_dock.time -= delta
 		if c_ship_waiting_at_dock.time > 0:
 			continue
-			
+		
 		# TODO: a sound or something
 		# TODO: can optimize?
 		

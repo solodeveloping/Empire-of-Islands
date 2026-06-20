@@ -57,6 +57,8 @@ var things_with_names_collision_mask_for_ray: int
 
 @onready var o_population_observer: O_PopulationObserver = $World/Systems/gameplay/O_PopulationObserver
 
+@onready var gm_simple_storage: GMSimpleStorage = $GMSimpleStorage
+
 var current_building: Entity
 var current_building_id: Buildings.Ids
 var current_building_angle: float = 0
@@ -68,6 +70,8 @@ var city: Entity
 
 var rtsCamera: RTSCamera
 
+# TODO: we'll have to make this per city / island
+
 # TODO : it's shit for now, worker does not work
 # Need population vs needed
 # FIXME: can't use population because of call to the_factory
@@ -75,30 +79,47 @@ var populations: Array[int] = [0, 0, 0, 0]:
 	set(value):
 		populations = value
 		notify_population_updated()
-		
+
+var housing_capacities: Array[int] = [0, 0, 0, 0]:
+	set(value):
+		housing_capacities = value
+		notify_housing_capacity_updated()
+
 var workers: Array[int] = [0, 0, 0, 0]:
 	set(value):
-		populations = value
+		workers = value
 		notify_workers_updated()
+
+var worker_capacities: Array[int] = [0, 0, 0, 0]:
+	set(value):
+		worker_capacities = value
+		notify_worker_capacities_updated()
 
 func population_increase(population_type: Populations.Types, amount: int):
 	populations[population_type] += amount
 	notify_population_updated()
-	
+
 func population_decrease(population_type: Populations.Types, amount: int):
 	populations[population_type] -= amount
 	notify_population_updated()
-	
+
 func notify_population_updated():
+	# FIXME: should we duplicate it
+	# just put a warning?
 	event_bus.population_updated.emit(populations)
-	#var arr = populations.duplicate()
-	##Helper.sub_each(arr, the_factory.workers)
-	#event_bus.available_workers_updated.emit(
-		#arr
-	#)
+
+func housing_capacity_increase(population_type: Populations.Types, amount: int):
+	housing_capacities[population_type] += amount
+	notify_housing_capacity_updated()
+
+func housing_capacityn_decrease(population_type: Populations.Types, amount: int):
+	housing_capacities[population_type] -= amount
+	notify_housing_capacity_updated()
+
+func notify_housing_capacity_updated():
+	event_bus.housing_capacity_updated.emit(housing_capacities)
 
 func workers_increase(population_type: Populations.Types, amount: int):
-	print("workers_increase")
 	workers[population_type] += amount
 	notify_workers_updated()
 
@@ -110,15 +131,54 @@ func notify_workers_updated():
 	event_bus.available_workers_updated.emit(
 		workers
 	)
-	
-func _on_population_observer_new_pop_unit_joined(pop_type: int):
-	print("_on_population_observer_new_pop_unit_joined")
+
+func worker_capacities_increase(population_type: Populations.Types, amount: int):
+	worker_capacities[population_type] += amount
+	notify_worker_capacities_updated()
+
+func worker_capacities_decrease(population_type: Populations.Types, amount: int):
+	worker_capacities[population_type] -= amount
+	notify_worker_capacities_updated()
+
+func notify_worker_capacities_updated():
+	event_bus.worker_capacities_updated.emit(
+		worker_capacities
+	)
+
+func _on_OPopulationObserver_new_pop_unit_joined(pop_type: int) -> void:
+	print("_on_OPopulationObserver_new_pop_unit_joined")
 	population_increase(pop_type, 1)
+
+func _on_OBuildingAddedObserver_housing_capacity_increased(
+	pop_type: int,
+	amount: int
+) -> void:
+	housing_capacity_increase(
+		pop_type,
+		amount,
+	)
+
+func _on_OPopulationObserver_pop_unit_found_work(pop_type: int) -> void:
+	workers_increase(pop_type, 1)
+
+func _on_OBuildingAddedObserver_workers_capacity_increased(
+	pop_type: int,
+	amount: int
+) -> void:
+	worker_capacities_increase(
+		pop_type,
+		amount,
+	)
 
 var production_building_ids: Array[int] = [
 	Buildings.Ids.Fishery,
 	Buildings.Ids.Lumberjack,
 	Buildings.Ids.HunterTent,
+]
+var housing_building_ids: Array[int] = [
+	Buildings.Ids.Tent,
+	Buildings.Ids.House,
+	Buildings.Ids.StoneHouse,
 ]
 
 func _ready() -> void:
@@ -172,10 +232,6 @@ func _ready() -> void:
 			ECS.world.add_entity(exit)
 		else:
 			push_error("exit is not an Entity")
-			
-	o_population_observer.new_pop_unit_joined.connect(
-		_on_population_observer_new_pop_unit_joined
-	)
 	
 	audio_player.start_in_game_music()
 	
@@ -212,7 +268,13 @@ func _physics_process(delta: float) -> void:
 
 		if !raycast_result.is_empty():
 				#print("position ", raycast_result.position)
-				#print("result ", raycast_result)
+				#print(
+					#"result.collider %s %s %s" % [
+						#raycast_result.collider.name,
+						#raycast_result.collider.get_parent().name,
+						#raycast_result.collider.get_parent().get_parent().name,
+					#]
+				#)
 				current_building.position = raycast_result.position
 		else:
 			#print("no result")
@@ -277,6 +339,7 @@ func _unhandled_input(event: InputEvent) -> void:
 												break
 								if !found_a_main_square:
 									printerr("did not find a main square in the right range")
+							
 							Buildings.Ids.Lumberjack:
 								pass
 							_:
@@ -291,26 +354,20 @@ func _unhandled_input(event: InputEvent) -> void:
 						
 						# Info: we don't have components before it's added to the world
 						match current_building_id:
-							Buildings.Ids.Tent:
-								pass
-								# TODO: duplicated with Observer?
-								# TODO : make it an option
-								#var c_housing: C_HousingCapacity = current_building.get_component(C_HousingCapacity)
-								#population_increase(
-									#c_housing.pop_type, c_housing.current
-								#)
-								#ECS.world.emit_event(
-									#&"housing_building_added", 
-									#current_building,
-									##{"some_data": 10}
-									#{}
-								#)
-									
+							Buildings.Ids.Tent,\
+							Buildings.Ids.House,\
+							Buildings.Ids.StoneHouse:
+								ECS.world.emit_event(
+									ECSEvents.HOUSING_BUILDING_ADDED, 
+									current_building,
+									{}
+								)
+							
 							Buildings.Ids.Lumberjack,\
 							Buildings.Ids.Fishery,\
 							Buildings.Ids.HunterTent:
 								ECS.world.emit_event(
-									&"production_building_added", 
+									ECSEvents.PRODUCTION_BUILDING_ADDED, 
 									current_building,
 									#{"my_data": 10}
 									{}
@@ -402,17 +459,14 @@ func finalize_existing_buildings():
 			var c_building: C_Building = building.get_component(C_Building)
 			if c_building:
 				if c_building.building_type in production_building_ids:
-					print("adding workers")
-					# TODO : better system
-					var c_req: C_WorkerRequirement = building.get_component(C_WorkerRequirement)
-					if c_req:
-						for req in c_req.requirements:
-							workers_increase(req.worker_type, req.worker_count)
-					else:
-						push_error("no worker requirements")
-					
 					ECS.world.emit_event(
-						&"production_building_added", 
+						ECSEvents.PRODUCTION_BUILDING_ADDED, 
+						building,
+						{}
+					)
+				elif c_building.building_type in housing_building_ids:
+					ECS.world.emit_event(
+						ECSEvents.HOUSING_BUILDING_ADDED, 
 						building,
 						{}
 					)
@@ -623,7 +677,7 @@ func right_click_at_mouse_pos():
 	var raycast_result = space.intersect_ray(params)
 
 	if !raycast_result.is_empty():
-		print("result", raycast_result)
+		#print("result", raycast_result)
 		var position_: Vector3 = raycast_result["position"]
 		var target: C_NavigationDestination = C_NavigationDestination.new(
 			position_
@@ -639,7 +693,7 @@ func right_click_at_mouse_pos():
 		)
 
 func identify_node_below_mouse():
-	print("identify_node_below_mouse")
+	#print("identify_node_below_mouse")
 	var camera = get_viewport().get_camera_3d()
 	var space = get_world_3d().direct_space_state
 	var mouse_pos = get_viewport().get_mouse_position()
@@ -658,20 +712,19 @@ func identify_node_below_mouse():
 
 	if !raycast_result.is_empty():
 			#print("pos ", raycast_result.position)
-			print("result ", raycast_result)
-			#print("parent", raycast_result.get_parent())
+			#print("result ", raycast_result)
 			
 			var collider: Node3D = raycast_result.collider
-			print("parent", collider.get_parent())
-			print("parent2", collider.get_parent().get_parent())
+			#print("parent", collider.get_parent())
+			#print("parent2", collider.get_parent().get_parent())
 			var island_parent: IslandGECS1 = SceneUtils.find_first_parent_of_type(
 				collider, 
 				IslandGECS1
 			)
 			if island_parent:
-				print("found island parent %s" % [
-					island_parent.name,
-				])
+				#print("found island parent %s" % [
+					#island_parent.name,
+				#])
 				var c_island: C_Island = island_parent.get_component(C_Island)
 				if c_island:
 					event_bus.send_city_name_changed.emit(
@@ -682,7 +735,7 @@ func identify_node_below_mouse():
 			else:
 				var collider_parent = collider.get_parent()
 				if collider_parent is OceanNode1:
-					print("found ocean")
+					#print("found ocean")
 					event_bus.send_city_name_changed.emit(
 						collider_parent.ocean_name
 					)
@@ -700,3 +753,18 @@ func _on_multimesh_instance_area_exited_main_area(area: MultiMeshInstanceArea):
 	pass
 
 #endregion
+
+func _on_ProductionSystem_produced_resources(changes: Dictionary[int, int]) -> void:
+	#print("_on_ProductionSystem_produced_resources %s" % [
+		#changes.size(),
+	#])
+	for key in changes.keys():
+		var quantity = gm_simple_storage.get_storage(key)
+		#print("has %s of %s (produced %s)" % [
+			#quantity.quantity,
+			#key,
+			#changes.get(key),
+		#])
+		event_bus.resource_updated.emit(
+			key, quantity.quantity
+		)

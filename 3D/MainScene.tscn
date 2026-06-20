@@ -381,9 +381,9 @@ script = ExtResource("11_6uy4x")
 group = &"gameplay"
 metadata/_custom_type_script = "uid://bpnyku4wivd2w"
 
-[node name="ProductionSystem" type="Node" parent="World/Systems/gameplay" unique_id=1587522906]
+[node name="ProductionSystem" type="Node" parent="World/Systems/gameplay" unique_id=1587522906 node_paths=PackedStringArray("the_storage")]
 script = ExtResource("9_5mqro")
-group = &"gameplay"
+the_storage = NodePath("../../../../GMSimpleStorage")
 metadata/_custom_type_script = "uid://db6vw0iasnipd"
 
 [node name="AutoFindClosestDockSystem" type="Node" parent="World/Systems/gameplay" unique_id=1271380539]
@@ -663,5 +663,11 @@ script = ExtResource("51_tk656")
 [node name="Exit_2" type="Marker3D" parent="Exits" unique_id=340661049]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -362.40808, 0, -435.14334)
 script = ExtResource("51_tk656")
+
+[connection signal="produced_resources" from="World/Systems/gameplay/ProductionSystem" to="." method="_on_ProductionSystem_produced_resources"]
+[connection signal="new_pop_unit_joined" from="World/Systems/gameplay/O_PopulationObserver" to="." method="_on_OPopulationObserver_new_pop_unit_joined"]
+[connection signal="pop_unit_found_work" from="World/Systems/gameplay/O_PopulationObserver" to="." method="_on_OPopulationObserver_pop_unit_found_work"]
+[connection signal="housing_capacity_increased" from="World/Systems/gameplay/O_BuildingAddedObserver" to="." method="_on_OBuildingAddedObserver_housing_capacity_increased"]
+[connection signal="workers_capacity_increased" from="World/Systems/gameplay/O_BuildingAddedObserver" to="." method="_on_OBuildingAddedObserver_workers_capacity_increased"]
 
 [editable path="GUI/PauseMenu"]

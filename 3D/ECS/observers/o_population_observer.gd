@@ -2,6 +2,7 @@ extends Observer
 class_name O_PopulationObserver
 
 signal new_pop_unit_joined(pop_type: int)
+signal pop_unit_found_work(pop_type: int)
 
 class ClassForLambdaFunction:
 	var buildings_needing_workers: Array
@@ -15,20 +16,26 @@ class ClassForLambdaFunction:
 func sub_observers() -> Array[Array]:
 	return [
 		[
-			q.with_all([C_PopUnit]).on_event(&"pop_unit_joined"),
+			q.with_all([C_PopUnit]).on_event(ECSEvents.POP_UNIT_JOINED),
 			_on_pop_unit_joined_island
 		],
 	]
-	
-# TOOD : find housing
 
 # TODO : notion of island and/or city
 # TODO: optimization
 # could query building once if we are using a custom event
 func _on_pop_unit_joined_island(event: Variant, entity: Entity, data: Variant) -> void:
+	print("O_PopulationObserver:_on_pop_unit_joined_island")
 	_find_and_assign_production_buildings(event, entity, data)
 	_find_assign_housing_building(event, entity, data)
+	
+	var c_pop_unit: C_PopUnit = entity.get_component(C_PopUnit)
+	if !c_pop_unit:
+		push_error("c_pop_unit is not present")
+		return
+	new_pop_unit_joined.emit(c_pop_unit.pop_type)
 
+# This is assigning a production building to the pop unit
 func _find_and_assign_production_buildings(_event: Variant, entity: Entity, _data: Variant):
 	var c_pop_unit: C_PopUnit = entity.get_component(C_PopUnit)
 	
@@ -56,7 +63,7 @@ func _find_and_assign_production_buildings(_event: Variant, entity: Entity, _dat
 			entity, Rels.create_works_at(_b.building)
 		)
 		
-		new_pop_unit_joined.emit(c_pop_unit.pop_type)
+		pop_unit_found_work.emit(c_pop_unit.pop_type)
 		
 		if _b.worker_quantity.worker_count >= _b.worker_requirement.worker_count:
 			
@@ -68,6 +75,11 @@ func _find_and_assign_production_buildings(_event: Variant, entity: Entity, _dat
 				if current.worker_count < req.worker_count:
 					is_one_missing = true
 			if is_one_missing == false:
+				print("building has enough workers %s %s" % [
+					_b.building.name,
+					_b.building.get_path(),
+				])
+				
 				#_b.building.remove_component(C_MissingWorkers)
 				cmd.remove_component(_b.building, C_MissingWorkers)
 			
@@ -75,7 +87,10 @@ func _find_and_assign_production_buildings(_event: Variant, entity: Entity, _dat
 			#_b.building = _b.buildings_needing_workers.pop_back()
 			#find_building_needing_workers(_b, c_pop_unit)
 	else:
+		# there are no buildings needing workers
 		pass
+		
+	#new_pop_unit_joined.emit(c_pop_unit.pop_type)
 
 func find_building_needing_workers(b: ClassForLambdaFunction, c_pop_unit: C_PopUnit):
 	b.building_needing_workers_exist =  false
@@ -108,6 +123,7 @@ func find_building_needing_workers(b: ClassForLambdaFunction, c_pop_unit: C_PopU
 		b.building_needing_workers_exist = true
 		break
 
+# This is assigning a housing building to the pop unit
 func _find_assign_housing_building(_event: Variant, entity: Entity, _data: Variant):
 	var housing_buildings = ECS.world.query.with_all(
 		[C_HousingCapacity, C_NotFullyOccupied]
