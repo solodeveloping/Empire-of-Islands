@@ -38,6 +38,7 @@ func define_components() -> Array:
 		C_Transform.new(),
 		C_Health.new(100),
 		C_HousingCapacity.new(4, 0),
+		C_Name.new("Tent"),
 	]
 
 func on_ready():

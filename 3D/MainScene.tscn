@@ -318,9 +318,9 @@ height = 3.0
 [node name="MainScene" type="Node3D" unique_id=882781262]
 script = ExtResource("1_6iho6")
 buildings_collision_mask_for_ray = 4
-left_click_collision_mask_for_ray = 256
+left_click_collision_mask_for_ray = 257
 right_click_collision_mask_for_ray = 2
-things_with_names_collision_mask_for_ray = 14
+things_with_names_collision_mask_for_ray = 271
 default_map = SubResource("Resource_ekic1")
 
 [node name="GUI" parent="." unique_id=653385081 instance=ExtResource("1_d5f84")]

@@ -61,6 +61,7 @@
 [ext_resource type="Script" uid="uid://k1ptg3ypq45y" path="res://theLudovyc/GUI/LabelHousing.gd" id="54_qjjjt"]
 [ext_resource type="Script" uid="uid://b0klc1fhrblng" path="res://theLudovyc/GUI/NaturalResourceContainer.gd" id="55_1wuat"]
 [ext_resource type="Script" uid="uid://cv6gq6sgnissw" path="res://theLudovyc/GUI/LabelWorkerCapacities.gd" id="56_qgjc7"]
+[ext_resource type="Script" uid="uid://bj1abtt2kvgfi" path="res://theLudovyc/GUI/debug_info_container.gd" id="60_30bwf"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q0br5"]
 content_margin_left = 20.0
@@ -394,8 +395,8 @@ layout_mode = 2
 theme_override_constants/separation = 0
 
 [node name="TextureRect" type="TextureRect" parent="Widget/WidgetTooltip/VBoxContainer" unique_id=1249756980]
-clip_contents = true
 custom_minimum_size = Vector2(0, 8)
+clip_contents = true
 layout_mode = 2
 texture = ExtResource("17_lxyjn")
 
@@ -724,6 +725,28 @@ text = "Blablabla"
 fit_content = true
 autowrap_mode = 0
 script = ExtResource("33_hbac4")
+
+[node name="DebugInfoContainer" type="VBoxContainer" parent="." unique_id=1643082770]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+script = ExtResource("60_30bwf")
+
+[node name="MouseOverObjectLabel" type="Label" parent="DebugInfoContainer" unique_id=1246921224]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 25
+text = "test"
+
+[node name="MouseOverObjectPathLabel" type="Label" parent="DebugInfoContainer" unique_id=1654876115]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "test"
 
 [node name="ResourcePopup" type="Window" parent="." unique_id=809039202]
 unique_name_in_owner = true

@@ -23,6 +23,7 @@ var is_constructed: bool = false
 func define_components() -> Array:
 	return [
 		C_Building.new(Buildings.Ids.HunterTent),
+		C_Name.new("Hunter tent"),
 		C_Transform.new(),
 		C_Health.new(100),
 		C_Production.new(
@@ -42,7 +43,7 @@ func define_components() -> Array:
 		),
 		C_Workers.new({
 			Populations.Types.Sailor: WorkerQuantity.new(Populations.Types.Sailor, 0)
-		})
+		}),
 	]
 
 func on_ready():

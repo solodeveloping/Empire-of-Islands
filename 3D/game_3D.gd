@@ -679,7 +679,7 @@ func left_click_at_mouse_pos():
 	var raycast_result = space.intersect_ray(params)
 
 	if !raycast_result.is_empty():
-		print("result", raycast_result)
+		print("left_click_at_mouse_pos", raycast_result)
 
 func right_click_at_mouse_pos():
 	var camera = get_viewport().get_camera_3d()
@@ -727,7 +727,8 @@ func identify_node_below_mouse():
 	var params = PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
 	
 	params.collide_with_bodies = true
-	params.collide_with_areas = false
+	#params.collide_with_areas = false
+	params.collide_with_areas = true
 	params.collision_mask = things_with_names_collision_mask_for_ray
 
 	var raycast_result = space.intersect_ray(params)
@@ -736,7 +737,18 @@ func identify_node_below_mouse():
 		#print("pos ", raycast_result.position)
 		#print("result ", raycast_result)
 		
+		# FIXME: all these things rely on their identity being associated
+		# with a proper object above
+		# example: collider with island as parent
+		# could be a rock but still result in "Island"
+		
 		var collider: Node3D = raycast_result.collider
+		if collider is MultiMeshInstanceCollider:
+			event_bus.send_mouse_over_object_changed.emit(
+				"Tree",
+				collider,
+			)
+			return
 		#print("parent", collider.get_parent())
 		#print("parent2", collider.get_parent().get_parent())
 		var island_parent: IslandGECS1 = SceneUtils.find_first_parent_of_type(
@@ -752,6 +764,10 @@ func identify_node_below_mouse():
 				event_bus.send_city_name_changed.emit(
 					c_island.island_name,
 				)
+				event_bus.send_mouse_over_object_changed.emit(
+					c_island.island_name,
+					collider,
+				)
 			else:
 				push_error(
 					"island %s does not have C_Island" % [
@@ -765,6 +781,35 @@ func identify_node_below_mouse():
 				event_bus.send_city_name_changed.emit(
 					collider_parent.ocean_name
 				)
+				event_bus.send_mouse_over_object_changed.emit(
+					collider_parent.ocean_name,
+					collider,
+				)
+			
+			else:
+				#print("something else %s %s" % [
+					#collider_parent.name,
+					#collider.get_path(),
+				#])
+				var entity_parent: Entity = SceneUtils.find_first_parent_of_type(
+					collider, 
+					Entity
+				)
+				if entity_parent:
+					var c_name: C_Name = entity_parent.get_component(C_Name)
+					if c_name:
+						event_bus.send_mouse_over_object_changed.emit(
+							c_name.name_,
+							collider,
+						)
+					else:
+						print("found something else")
+					# TODO: generate using other methods
+				else:
+					event_bus.send_mouse_over_object_changed.emit(
+						collider_parent.name,
+						collider,
+					)
 
 func add_current_building_to_tree():
 	#add_child(current_building)

@@ -37,6 +37,7 @@ var is_constructed: bool = false
 func define_components() -> Array:
 	return [
 		C_Building.new(Buildings.Ids.Warehouse),
+		C_Name.new("Dock"),
 		C_Health.new(100),
 		C_Storage.new(),
 		C_Range.new(100.0),

@@ -29,6 +29,7 @@ func define_components() -> Array:
 		C_Health.new(100),
 		C_Range.new(25.0),
 		C_Transform.new(),
+		C_Name.new("Main square"),
 	]
 
 func on_ready():

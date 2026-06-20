@@ -53,3 +53,9 @@ signal send_update_order_sell(resource_type, sell_amount)
 
 ## CITY
 signal send_city_name_changed(new_city_name)
+
+## MISC
+signal send_mouse_over_object_changed(
+	object_name: String,
+	object_: Node,
+)
