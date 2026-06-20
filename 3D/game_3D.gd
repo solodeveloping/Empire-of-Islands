@@ -27,25 +27,22 @@ var right_click_collision_mask_for_ray: int
 @export_flags_3d_physics
 var things_with_names_collision_mask_for_ray: int
 
+@export
+var default_map: MapDefinition
+
 @onready var event_bus: EventBus = %EventBus
 
 @onready var audio_player: AudioPlayer = $AudioPlayer
 
 @onready var world: World = $World
 
-@onready var city_center_1: MainSquare_ECS = $Buildings/CityCenter1
-@onready var dock_1: Dock_ECS = $Buildings/Dock1
+@onready var dynamic_buildings: Node3D = $DynamicBuildings
 
 @onready var range_indicator: CSGCombiner3D = $RangeIndicator
 
 @onready var camera_3d: Camera3D = $Camera3D
 
 @onready var gui: GUI = $GUI
-
-# TODO : detect which one
-@onready var island_1: IslandGECS1 = $Island1
-
-@onready var buildings: Node3D = $Buildings
 
 @onready var sail_ship_1: Ship3D_ECS = $SailShip1
 
@@ -66,6 +63,7 @@ var building_rotation_speed: float = 100
 
 var current_dock_buoy_id: int = 0
 
+var map: Node3D
 var city: Entity
 
 var rtsCamera: RTSCamera
@@ -183,7 +181,10 @@ var housing_building_ids: Array[int] = [
 
 func _ready() -> void:
 	ECS.world = world
-	#city = City_ECS.new()
+	
+	map = default_map.map_scene.instantiate()
+	add_child(map)
+	
 	city = Entity.new()
 	city.add_component(C_City.new(
 		"First city",
@@ -202,27 +203,6 @@ func _ready() -> void:
 	NodeUtils.remove_all_children(range_indicator)
 	range_indicator.hide()
 	
-	#dock_1.get_parent().remove_child(dock_1)
-	#ECS.world.add_entity(dock_1)
-	#dock_1.add_relationship(Rels.create_belongs_to(city))
-	
-	dock_1.buoy.add_relationship(
-		Rels.create_belongs_to(current_building)
-	)
-	var c_dock_buoy: C_DockBuoy = C_DockBuoy.new(0)
-	#var c_dock_buoy: C_DockBuoy = dock_1.buoy.get_component(C_DockBuoy)
-	#c_dock_buoy.id = 0
-	dock_1.buoy.add_component(c_dock_buoy)
-	ECS.world.add_entity(dock_1.buoy)
-	
-	#city_center_1.get_parent().remove_child(city_center_1)
-	#ECS.world.add_entity(city_center_1)
-	#city_center_1.add_relationship(Rels.create_belongs_to(city))
-	
-	island_1.add_component(C_Island.new("First island"))
-	ECS.world.add_entity(island_1)
-	island_1.add_to_ecs_world()
-	
 	event_bus.send_city_name_changed.emit("My First City")
 	
 	ECS.world.add_entity(sail_ship_1)
@@ -235,11 +215,27 @@ func _ready() -> void:
 	
 	audio_player.start_in_game_music()
 	
-	TimeUtils.call_at_interval(self, 0.1, identify_node_below_mouse)
+	#TimeUtils.call_at_interval(self, 0.1, identify_node_below_mouse)
 	
+	# FIXME: don't remember why we do this but was necessary?
 	await get_tree().create_timer(0.5).timeout
 	print("timeout done")
+	# TODO : system to queue stuff
 	call_deferred("finalize_existing_buildings")
+	call_deferred("call_after_init_is_done")
+
+func call_after_init_is_done():
+	# TODO: only do this once ECS and everything has started
+	TimeUtils.call_at_interval(self, 0.1, identify_node_below_mouse)
+	
+	#var buoys = ECS.world.query.with_all([C_DockBuoy]).execute()
+	#print("found %s buoys" % [
+		#buoys.size(),
+	#])
+	#for buoy in buoys:
+		#print("name %s" % [
+			#buoy.name,
+		#])
 
 func _process(delta: float) -> void:
 	world.process(delta, 'gameplay')
@@ -443,21 +439,33 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func finalize_existing_buildings():
 	print("finalize_existing_buildings")
-	for building in buildings.get_children():
-		if building.has_method("finalize_construction"):
-			building.finalize_construction()
-		else:
-			printerr("building %s does not have finalize_construction" % [
-				building.name
-			])
+	# TODO: maybe we should have a better system
+	var buildings = SceneUtils.find_all_child_of_type_depth_first(
+		map,
+		Entity,
+	)
+	for building in buildings:
 		
 		if building is Entity:
-			
 			ECS.world.add_entity(building)
-			building.add_relationship(Rels.create_belongs_to(city))
 			
 			var c_building: C_Building = building.get_component(C_Building)
+			
 			if c_building:
+				if building.has_method("finalize_construction"):
+					building.finalize_construction()
+				else:
+					printerr("building %s does not have finalize_construction" % [
+						building.name
+					])
+					push_error("building %s does not have finalize_construction" % [
+						building.name
+					])
+				
+				building.add_relationship(Rels.create_belongs_to(city))
+			
+			#var c_building: C_Building = building.get_component(C_Building)
+			#if c_building:
 				if c_building.building_type in production_building_ids:
 					ECS.world.emit_event(
 						ECSEvents.PRODUCTION_BUILDING_ADDED, 
@@ -470,10 +478,24 @@ func finalize_existing_buildings():
 						building,
 						{}
 					)
-			else:
-				push_error("building %s does not have C_Building" % [
-					building.name,
-				])
+			#else:
+				#push_error("building %s does not have C_Building" % [
+					#building.name,
+				#])
+
+		if building is Dock_ECS:
+			print("adding buoy of dock")
+			building.buoy.add_relationship(
+				# FIXME: part_of component?
+				Rels.create_belongs_to(building)
+			)
+			var c_dock_buoy: C_DockBuoy = C_DockBuoy.new(0)
+			building.buoy.add_component(c_dock_buoy)
+			# WARN: it's already added by the statement before
+			#ECS.world.add_entity(building.buoy)
+		
+		if building is IslandGECS1:
+			building.add_to_ecs_world()
 
 func _on_ask_create_building(building_id: Buildings.Ids):
 	
@@ -711,45 +733,51 @@ func identify_node_below_mouse():
 	var raycast_result = space.intersect_ray(params)
 
 	if !raycast_result.is_empty():
-			#print("pos ", raycast_result.position)
-			#print("result ", raycast_result)
-			
-			var collider: Node3D = raycast_result.collider
-			#print("parent", collider.get_parent())
-			#print("parent2", collider.get_parent().get_parent())
-			var island_parent: IslandGECS1 = SceneUtils.find_first_parent_of_type(
-				collider, 
-				IslandGECS1
-			)
-			if island_parent:
-				#print("found island parent %s" % [
-					#island_parent.name,
-				#])
-				var c_island: C_Island = island_parent.get_component(C_Island)
-				if c_island:
-					event_bus.send_city_name_changed.emit(
-						c_island.island_name,
-					)
-				else:
-					push_error("island does not have C_Island")
+		#print("pos ", raycast_result.position)
+		#print("result ", raycast_result)
+		
+		var collider: Node3D = raycast_result.collider
+		#print("parent", collider.get_parent())
+		#print("parent2", collider.get_parent().get_parent())
+		var island_parent: IslandGECS1 = SceneUtils.find_first_parent_of_type(
+			collider, 
+			IslandGECS1
+		)
+		if island_parent:
+			#print("found island parent %s" % [
+				#island_parent.name,
+			#])
+			var c_island: C_Island = island_parent.get_component(C_Island)
+			if c_island:
+				event_bus.send_city_name_changed.emit(
+					c_island.island_name,
+				)
 			else:
-				var collider_parent = collider.get_parent()
-				if collider_parent is OceanNode1:
-					#print("found ocean")
-					event_bus.send_city_name_changed.emit(
-						collider_parent.ocean_name
-					)
+				push_error(
+					"island %s does not have C_Island" % [
+						collider.name,
+					]
+				)
+		else:
+			var collider_parent = collider.get_parent()
+			if collider_parent is OceanNode1:
+				#print("found ocean")
+				event_bus.send_city_name_changed.emit(
+					collider_parent.ocean_name
+				)
 
 func add_current_building_to_tree():
 	#add_child(current_building)
-	buildings.add_child(current_building)
+	dynamic_buildings.add_child(current_building)
 
 #region "MultiMesh instance areas (trees etc)"
 
-func _on_multimesh_instance_area_entered_main_area(area: MultiMeshInstanceArea):
+# FIXME: unused
+
+func _on_multimesh_instance_area_entered_main_area(_area: MultiMeshInstanceArea):
 	pass
 
-func _on_multimesh_instance_area_exited_main_area(area: MultiMeshInstanceArea):
+func _on_multimesh_instance_area_exited_main_area(_area: MultiMeshInstanceArea):
 	pass
 
 #endregion

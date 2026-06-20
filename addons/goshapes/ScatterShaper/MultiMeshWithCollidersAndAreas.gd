@@ -159,8 +159,6 @@ func hide_instance(
 		#printerr("error when handling %s" % [
 			#area.name,
 		#])
-		var toto: Node3D
-		toto.name = ""
 		return
 	
 	if last_visible_id != area.instance_id:
@@ -268,9 +266,11 @@ func show_instance(
 	# If index is 5    : needs to switch
 	# If index is < 4  : bug
 	
+	# FIXME : there is a bug here
 	if area.instance_id < self.multimesh.visible_instance_count:
-		push_error("instance_id is < visible_instance_count %s %s %s" % [
+		push_error("instance_id is %s < visible_instance_count %s : %s %s" % [
 			area.instance_id,
+			self.multimesh.visible_instance_count,
 			area.name,
 			self.name,
 		])

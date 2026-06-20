@@ -1,0 +1,125 @@
+[gd_scene format=3 uid="uid://cmx3hrlpxvwav"]
+
+[ext_resource type="PackedScene" uid="uid://cj58mgwq0tw3b" path="res://3D/prefabs/islands/Island1_binary.scn" id="1_335pb"]
+[ext_resource type="PackedScene" uid="uid://c0crs07wbol7p" path="res://3D/prefabs/buildings/composed/sailors/HousingTent.tscn" id="2_oqpss"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_xmf88"]
+[ext_resource type="Script" uid="uid://ccfh5xaqdeycf" path="res://3D/ECS/components/gameplay/c_island.gd" id="3_0eks5"]
+[ext_resource type="PackedScene" uid="uid://bwcqu7lunanpr" path="res://3D/prefabs/buildings/composed/sailors/Dock_1.tscn" id="3_j162b"]
+[ext_resource type="PackedScene" uid="uid://dgflhswvnmgx3" path="res://3D/prefabs/buildings/composed/sailors/FishermanTent_1.tscn" id="4_ryuhc"]
+[ext_resource type="PackedScene" uid="uid://bmde582hv8jwm" path="res://3D/prefabs/buildings/composed/sailors/CityCenter_1.tscn" id="5_xmf88"]
+[ext_resource type="PackedScene" uid="uid://c0f7np4ixkd1x" path="res://3D/prefabs/buildings/composed/sailors/Lumberjack_1.tscn" id="6_0eks5"]
+[ext_resource type="PackedScene" uid="uid://ci0jb4qptteg5" path="res://3D/prefabs/buildings/composed/sailors/TentTavern_1.tscn" id="7_xayp1"]
+[ext_resource type="PackedScene" uid="uid://cdefoo0ghsb74" path="res://3D/prefabs/buildings/composed/sailors/HunterTent_1.tscn" id="8_j13b1"]
+[ext_resource type="Shader" uid="uid://be50ph36peocc" path="res://VFX/ocean/visual_shaders/simple_ocean_visual_shader_1/simple_ocean_visual_shader_1.tres" id="9_j162b"]
+[ext_resource type="Script" uid="uid://bbhr52k31vvcc" path="res://3D/ocean_node_1.gd" id="10_ryuhc"]
+
+[sub_resource type="Resource" id="Resource_tnibl"]
+script = ExtResource("3_0eks5")
+island_name = "First island"
+metadata/_custom_type_script = "uid://ccfh5xaqdeycf"
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_335pb"]
+vertices = PackedVector3Array(-44.918457, 0.2903328, 10, 30.081543, 0.2903328, -20, 30.081543, 0.2903328, -4995, -49.918457, 0.2903328, 20, -5169.9185, 0.2903328, -4995, -5169.9185, 0.2903328, 35, 60.081543, 0.2903328, -15, 135.08154, 0.2903328, 70, 4820.0815, 0.2903328, 70, 4820.0815, 0.2903328, -4995, -39.918457, 0.2903328, 85, -39.918457, 0.2903328, 30, -9.918457, 0.2903328, 4995, -9.918457, 0.2903328, 115, -5169.9185, 0.2903328, 4995, 120.08154, 0.2903328, 90, 55.081543, 0.2903328, 100, 60.081543, 0.2903328, 4995, 4820.0815, 0.2903328, 4995)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(0, 3, 2), PackedInt32Array(2, 3, 5), PackedInt32Array(2, 5, 4), PackedInt32Array(8, 7, 6), PackedInt32Array(6, 1, 8), PackedInt32Array(8, 1, 2), PackedInt32Array(8, 2, 9), PackedInt32Array(3, 11, 10), PackedInt32Array(10, 13, 12), PackedInt32Array(10, 12, 3), PackedInt32Array(3, 12, 5), PackedInt32Array(5, 12, 14), PackedInt32Array(15, 7, 8), PackedInt32Array(15, 8, 16), PackedInt32Array(16, 8, 17), PackedInt32Array(17, 8, 18), PackedInt32Array(12, 13, 17), PackedInt32Array(17, 13, 16)]
+geometry_source_geometry_mode = 1
+geometry_source_group_name = &"ocean_surface_nav"
+cell_size = 5.0
+
+[sub_resource type="Gradient" id="Gradient_xmf88"]
+colors = PackedColorArray(0.5370113, 0.5370113, 0.5370113, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0eks5"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_r0xnc"]
+width = 1024
+height = 1024
+noise = SubResource("FastNoiseLite_0eks5")
+color_ramp = SubResource("Gradient_xmf88")
+
+[sub_resource type="Gradient" id="Gradient_xayp1"]
+offsets = PackedFloat32Array(0, 0.24422443)
+colors = PackedColorArray(0, 0.59607846, 0.96862745, 1, 2.4065375e-07, 0.33822235, 0.56322634, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ws72x"]
+gradient = SubResource("Gradient_xayp1")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j13b1"]
+render_priority = 0
+shader = ExtResource("9_j162b")
+shader_parameter/ColorTexture = SubResource("GradientTexture2D_ws72x")
+shader_parameter/EdgeProximityFadeDistance = 2.185
+shader_parameter/AlbedoNoisePanningSpeed = Vector2(-0.01, -0.01)
+shader_parameter/AlbedoNoiseScale = Vector2(10, 10)
+shader_parameter/AlbedoNoiseDark = SubResource("NoiseTexture2D_r0xnc")
+shader_parameter/AlbedoNoiseStrngth = 0.315
+shader_parameter/MinAlpha = 0.9
+shader_parameter/Roughness = 0.2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_rihnk"]
+size = Vector2(1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dhic2"]
+size = Vector3(1, 0.001, 1)
+
+[node name="TestMap1" type="Node3D" unique_id=948608410]
+
+[node name="Island1" parent="." unique_id=1967343092 groups=["ocean_surface_nav"] instance=ExtResource("1_335pb")]
+component_resources = Array[ExtResource("2_xmf88")]([SubResource("Resource_tnibl")])
+
+[node name="Buildings" type="Node3D" parent="." unique_id=579642728]
+
+[node name="HousingTent" parent="Buildings" unique_id=13075898 instance=ExtResource("2_oqpss")]
+transform = Transform3D(-0.05125533, 0, -0.9986856, 0, 1, 0, 0.9986856, 0, -0.05125533, -12.80324, 0, 45.570404)
+
+[node name="Dock1" parent="Buildings" unique_id=567939795 instance=ExtResource("3_j162b")]
+transform = Transform3D(-0.06207637, 0, -0.99807143, 0, 1, 0, 0.99807143, 0, -0.06207637, -23.44688, 0, 23.0443)
+
+[node name="FishermanTent1" parent="Buildings" unique_id=1145789329 instance=ExtResource("4_ryuhc")]
+transform = Transform3D(0.21229698, 0, -0.9772052, 0, 1, 0, 0.9772052, 0, 0.21229698, -28.115309, 0, 36.250404)
+
+[node name="CityCenter1" parent="Buildings" unique_id=1391554778 instance=ExtResource("5_xmf88")]
+transform = Transform3D(-0.01589927, 0, -0.9998736, 0, 1, 0, 0.9998736, 0, -0.01589927, 13, 1.413, 35.76505)
+
+[node name="Lumberjack1" parent="Buildings" unique_id=1826247262 instance=ExtResource("6_0eks5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.633343, 1.4859228, 70.47168)
+
+[node name="TentTavern1" parent="Buildings" unique_id=1535012436 instance=ExtResource("7_xayp1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.138184, 0, 65.016846)
+
+[node name="HousingTent2" parent="Buildings" unique_id=313012898 instance=ExtResource("2_oqpss")]
+transform = Transform3D(-0.05125533, 0, -0.9986856, 0, 1, 0, 0.9986856, 0, -0.05125533, 8.404318, 1.4240098, 53.148922)
+
+[node name="HunterTent1" parent="Buildings" unique_id=1037776830 instance=ExtResource("8_j13b1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.162996, 1.4302037, 49.614365)
+
+[node name="Navigation" type="Node3D" parent="." unique_id=92227080]
+
+[node name="OceanNavigationRegion3D" type="NavigationRegion3D" parent="Navigation" unique_id=2084639235]
+navigation_mesh = SubResource("NavigationMesh_335pb")
+
+[node name="OceanObstacles" type="Node3D" parent="Navigation" unique_id=1152702318 groups=["ocean_surface_nav"]]
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="Navigation/OceanObstacles" unique_id=467344544]
+height = 10.0
+vertices = PackedVector3Array(55, 0, -12, 127.009094, 0, 59.990658, 129.60727, 0, 72.14773, 119.06945, 0, 83.25018, -9.568527, 0, 109.49705, -23.79117, 0, 100.73557, -32.55409, 0, 85.9305, -33.07885, 0, 29.676771, -38.4012, 0, 25.848042, -44.70326, 0, 25.121325, -44.55998, 0, 18.201014, -17, 0, 8, 16.361397, 0, -13.395407)
+affect_navigation_mesh = true
+
+[node name="NavigationObstacle3D2" type="NavigationObstacle3D" parent="Navigation/OceanObstacles" unique_id=334832619]
+vertices = PackedVector3Array(-14, 0, 4, -14.439415, 0, -3.1710277, -17.95102, 0, -6.713973, -22.108225, 0, -0.42918015, -20, 0, 6)
+
+[node name="OceanSimpleVisualShader1" type="MeshInstance3D" parent="." unique_id=1489363405 groups=["ocean_surface_nav"]]
+transform = Transform3D(10000, 0, 0, 0, 10000, 0, 0, 0, 10000, 0, -0.46805125, 0)
+material_override = SubResource("ShaderMaterial_j13b1")
+mesh = SubResource("PlaneMesh_rihnk")
+script = ExtResource("10_ryuhc")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="OceanSimpleVisualShader1" unique_id=1952854181]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0004927301, 0)
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OceanSimpleVisualShader1/StaticBody3D" unique_id=522360042]
+shape = SubResource("BoxShape3D_dhic2")
+debug_color = Color(0, 0.0001292147, 0.000322998, 1)

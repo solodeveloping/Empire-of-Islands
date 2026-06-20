@@ -8,7 +8,7 @@ var ray_ground_layers: int = 0
 
 @onready var sensors: Node3D = $sensors
 
-var is_valid := true
+var is_valid: bool = true
 
 func hide_sprites():
 	for sensor in sensors.get_children():
