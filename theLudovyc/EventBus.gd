@@ -13,6 +13,9 @@ signal send_building_limit_updated(building_id, limit_reached)
 signal send_building_selected(building_node)
 signal send_building_deselected(building_node)
 
+signal send_building_3D_selected(building_entity: Entity)
+signal send_building_3D_deselected(building_entity: Entity)
+
 signal ask_deselect_building
 signal ask_select_warehouse
 

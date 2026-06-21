@@ -46,7 +46,9 @@ func define_components() -> Array:
 		),
 		C_Workers.new({
 			Populations.Types.Sailor: WorkerQuantity.new(Populations.Types.Sailor, 0)
-		})
+		}),
+		# TODO: should it be done elsewhere?
+		C_MissingWorkers.new(),
 	]
 
 func on_ready():
@@ -87,6 +89,13 @@ func finalize_construction():
 	#])
 	is_constructed = true
 	multi_mesh_instances_remover.disable_instance_areas()
+
+# WARN: this could interact right back with the building's area
+func show_all_tree_hidden():
+	multi_mesh_instances_remover.show_all_instances()
+
+func get_hidden_trees() -> Array[MultiMeshInstanceArea]:
+	return multi_mesh_instances_remover.get_instances()
 
 func _on_BuildingMainArea1_multimesh_instance_area_entered(area: MultiMeshInstanceArea) -> void:
 	#print("Lumberjack:_on_BuildingMainArea1_multimesh_instance_area_entered %s" % [

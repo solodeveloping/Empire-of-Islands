@@ -1,0 +1,165 @@
+[gd_scene format=3 uid="uid://g7ucu7fgw6bl"]
+
+[ext_resource type="Script" uid="uid://b1kk66hos6qmw" path="res://theLudovyc/GUI/BuildingContainer_UI_3D.gd" id="1_yhyq5"]
+[ext_resource type="Texture2D" uid="uid://dapd765c0bvd8" path="res://Art/Image/Gui/Buttons/delete_small.png" id="2_2ml5l"]
+[ext_resource type="Texture2D" uid="uid://btewy0y3mrcwd" path="res://Art/Image/Gui/Buttons/delete_small_bw.png" id="3_7d64g"]
+[ext_resource type="Texture2D" uid="uid://cswhnjs5r8fkk" path="res://Art/Image/Gui/Buttons/delete_small_h.png" id="4_t1u26"]
+[ext_resource type="Script" uid="uid://78ndc7cpkntb" path="res://theLudovyc/GUI/BuildingInfoContainer_ECS.gd" id="5_yhyq5"]
+[ext_resource type="Script" uid="uid://ntvjybsi26o" path="res://theLudovyc/GUI/BuildingResidentialContainer_ECS.gd" id="6_yhyq5"]
+[ext_resource type="Texture2D" uid="uid://dry1ceb3p6yk1" path="res://Art/Image/Gui/Icons/Widgets/CityInfo/inhabitants.png" id="7_kbv0m"]
+[ext_resource type="Script" uid="uid://ch34m0bogmy6j" path="res://theLudovyc/GUI/BuildingProducingContainer_ECS.gd" id="8_yhyq5"]
+[ext_resource type="PackedScene" uid="uid://n6f00tsqpgrm" path="res://theLudovyc/GUI/ResourceTextureRect.tscn" id="9_6f5xu"]
+[ext_resource type="Texture2D" uid="uid://rqkqu27konps" path="res://Art/Image/Gui/Icons/Templates/Production/production_arrow.png" id="10_unwsu"]
+[ext_resource type="Texture2D" uid="uid://bntbwjpu7i64e" path="res://Art/Image/Gui/Icons/Templates/Production/toggle_active.png" id="11_hjblq"]
+[ext_resource type="Texture2D" uid="uid://bwf1wdtyfp4ll" path="res://Art/Image/Gui/Icons/Templates/Production/toggle_active_d.png" id="12_5box1"]
+[ext_resource type="Texture2D" uid="uid://cvaw1myityac7" path="res://Art/Image/Gui/Icons/Templates/Production/toggle_active_h.png" id="13_eujsb"]
+[ext_resource type="Texture2D" uid="uid://b6nuq70hohg0w" path="res://Art/Image/Gui/Icons/Widgets/MiniMap/speed_up.png" id="14_xfysm"]
+[ext_resource type="Texture2D" uid="uid://toeqa364p2tp" path="res://Art/Image/Gui/Icons/Resources/32/001.png" id="15_3urk3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_or0xk"]
+bg_color = Color(0.388235, 0.341176, 0.247059, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.388235, 0.345098, 0.25098, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[node name="BuildingContainer_UI_3D" type="VBoxContainer" unique_id=748671080]
+script = ExtResource("1_yhyq5")
+metadata/_tab_index = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=489517595]
+layout_mode = 2
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="HBoxContainer" unique_id=679909845]
+layout_mode = 2
+text = "BuildingName"
+horizontal_alignment = 1
+
+[node name="DeleteButton" type="TextureButton" parent="HBoxContainer" unique_id=641425484]
+layout_mode = 2
+texture_normal = ExtResource("2_2ml5l")
+texture_pressed = ExtResource("3_7d64g")
+texture_hover = ExtResource("4_t1u26")
+
+[node name="HSeparator" type="HSeparator" parent="." unique_id=1440464710]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxFlat_or0xk")
+
+[node name="BuildingInfoContainer" type="TabContainer" parent="." unique_id=1172860554]
+layout_mode = 2
+current_tab = 0
+clip_tabs = false
+tabs_visible = false
+script = ExtResource("5_yhyq5")
+
+[node name="BuildingResidentialContainer" type="HBoxContainer" parent="BuildingInfoContainer" unique_id=23200132]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("6_yhyq5")
+metadata/_tab_index = 0
+
+[node name="ValueLabel" type="Label" parent="BuildingInfoContainer/BuildingResidentialContainer" unique_id=1119018746]
+layout_mode = 2
+text = "0"
+
+[node name="TextureRect" type="TextureRect" parent="BuildingInfoContainer/BuildingResidentialContainer" unique_id=1952763763]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("7_kbv0m")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BuildingProducingContainer" type="VBoxContainer" parent="BuildingInfoContainer" unique_id=1276039287]
+visible = false
+layout_mode = 2
+script = ExtResource("8_yhyq5")
+metadata/_tab_index = 1
+
+[node name="GridContainer" type="GridContainer" parent="BuildingInfoContainer/BuildingProducingContainer" unique_id=1343140088]
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 3
+
+[node name="ResourceIn" parent="BuildingInfoContainer/BuildingProducingContainer/GridContainer" unique_id=457986508 instance=ExtResource("9_6f5xu")]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="BuildingInfoContainer/BuildingProducingContainer/GridContainer" unique_id=1006846562]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="BuildingInfoContainer/BuildingProducingContainer/GridContainer/MarginContainer" unique_id=264405555]
+layout_mode = 2
+texture = ExtResource("10_unwsu")
+stretch_mode = 3
+
+[node name="TextureButton" type="TextureButton" parent="BuildingInfoContainer/BuildingProducingContainer/GridContainer/MarginContainer" unique_id=644161749]
+layout_mode = 2
+texture_normal = ExtResource("11_hjblq")
+texture_pressed = ExtResource("12_5box1")
+texture_hover = ExtResource("13_eujsb")
+stretch_mode = 5
+
+[node name="ResourceOut" parent="BuildingInfoContainer/BuildingProducingContainer/GridContainer" unique_id=1281386697 instance=ExtResource("9_6f5xu")]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BuildingInfoContainer/BuildingProducingContainer" unique_id=1718518229]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="TicksContainer" type="HBoxContainer" parent="BuildingInfoContainer/BuildingProducingContainer/HBoxContainer" unique_id=932185261]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="ValueLabel" type="Label" parent="BuildingInfoContainer/BuildingProducingContainer/HBoxContainer/TicksContainer" unique_id=107364074]
+layout_mode = 2
+text = "0"
+
+[node name="TextureRect" type="TextureRect" parent="BuildingInfoContainer/BuildingProducingContainer/HBoxContainer/TicksContainer" unique_id=527727784]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+texture = ExtResource("14_xfysm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="WorkerContainer" type="HBoxContainer" parent="BuildingInfoContainer/BuildingProducingContainer/HBoxContainer" unique_id=1938494415]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="ValueLabel" type="Label" parent="BuildingInfoContainer/BuildingProducingContainer/HBoxContainer/WorkerContainer" unique_id=826250305]
+layout_mode = 2
+text = "0"
+
+[node name="TextureRect" type="TextureRect" parent="BuildingInfoContainer/BuildingProducingContainer/HBoxContainer/WorkerContainer" unique_id=1015868448]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("7_kbv0m")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MoneyContainer" type="HBoxContainer" parent="BuildingInfoContainer/BuildingProducingContainer/HBoxContainer" unique_id=1890540499]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="ValueLabel" type="Label" parent="BuildingInfoContainer/BuildingProducingContainer/HBoxContainer/MoneyContainer" unique_id=1825696214]
+layout_mode = 2
+text = "1"
+
+[node name="TextureRect" type="TextureRect" parent="BuildingInfoContainer/BuildingProducingContainer/HBoxContainer/MoneyContainer" unique_id=1839685297]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+texture = ExtResource("15_3urk3")
+expand_mode = 1
+stretch_mode = 5
+
+[connection signal="pressed" from="HBoxContainer/DeleteButton" to="." method="_on_DeleteButton_pressed"]

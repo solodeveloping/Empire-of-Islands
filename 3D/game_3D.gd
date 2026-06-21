@@ -61,6 +61,9 @@ var current_building_id: Buildings.Ids
 var current_building_angle: float = 0
 var building_rotation_speed: float = 100
 
+# FIXME: should it just be current_building?
+var selected_building: Entity
+
 var current_dock_buoy_id: int = 0
 
 var map: Node3D
@@ -680,6 +683,36 @@ func left_click_at_mouse_pos():
 
 	if !raycast_result.is_empty():
 		print("left_click_at_mouse_pos", raycast_result)
+		var collider: Node3D = raycast_result.collider
+		if !collider:
+			print("no collider")
+			deselect_selected_building()
+			return
+		
+		var entity_parent: Entity = SceneUtils.find_first_parent_of_type(
+			collider,
+			Entity,
+		)
+		if !entity_parent:
+			print("did not find an Entity parent")
+			deselect_selected_building()
+			return
+		
+		var c_building: C_Building = entity_parent.get_component(C_Building)
+		if !c_building:
+			print("clicked on something that is not a building %s %s" % [
+				collider.get_path(),
+				entity_parent.get_path(),
+			])
+			deselect_selected_building()
+			return
+		
+		print("selecting building")
+		
+		selected_building = entity_parent
+		event_bus.send_building_3D_selected.emit(entity_parent)
+	else:
+		deselect_selected_building()
 
 func right_click_at_mouse_pos():
 	var camera = get_viewport().get_camera_3d()
@@ -697,6 +730,10 @@ func right_click_at_mouse_pos():
 	params.collision_mask = right_click_collision_mask_for_ray
 
 	var raycast_result = space.intersect_ray(params)
+	
+	# TODO: rally points could be set here
+	if selected_building:
+		deselect_selected_building()
 
 	if !raycast_result.is_empty():
 		#print("result", raycast_result)
@@ -803,7 +840,7 @@ func identify_node_below_mouse():
 							collider,
 						)
 					else:
-						print("found something else")
+						Loggie.msg("found something else").color("orange").bold().warn()
 					# TODO: generate using other methods
 				else:
 					event_bus.send_mouse_over_object_changed.emit(
@@ -811,9 +848,18 @@ func identify_node_below_mouse():
 						collider,
 					)
 
+	else:
+		pass
+
 func add_current_building_to_tree():
 	#add_child(current_building)
 	dynamic_buildings.add_child(current_building)
+
+func deselect_selected_building():
+	if !selected_building:
+		return
+	event_bus.send_building_3D_deselected.emit(selected_building)
+	selected_building = null
 
 #region "MultiMesh instance areas (trees etc)"
 
@@ -841,3 +887,27 @@ func _on_ProductionSystem_produced_resources(changes: Dictionary[int, int]) -> v
 		event_bus.resource_updated.emit(
 			key, quantity.quantity
 		)
+
+func _on_EventBus_ask_demolish_current_building() -> void:
+	var trees: Array[MultiMeshInstanceArea] = []
+	if selected_building.has_method("get_hidden_trees"):
+		trees = selected_building.get_hidden_trees()
+		
+	# TODO : reassign pop_units
+	
+	ECS.world.remove_entity(selected_building)
+	selected_building = null
+	
+	if trees.is_empty() == false:
+		for area in trees:
+			var grid: GridMultiMesh = SceneUtils.find_first_parent_of_type(
+				area,
+				GridMultiMesh
+			)
+			
+			if grid:
+				grid.show_instance(area)
+				
+			area.process_mode = Node.PROCESS_MODE_INHERIT
+	
+	event_bus.send_current_building_demolished.emit()

@@ -611,6 +611,7 @@ script = ExtResource("51_tk656")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -362.40808, 0, -435.14334)
 script = ExtResource("51_tk656")
 
+[connection signal="ask_demolish_current_building" from="EventBus" to="." method="_on_EventBus_ask_demolish_current_building"]
 [connection signal="produced_resources" from="World/Systems/gameplay/ProductionSystem" to="." method="_on_ProductionSystem_produced_resources"]
 [connection signal="new_pop_unit_joined" from="World/Systems/gameplay/O_PopulationObserver" to="." method="_on_OPopulationObserver_new_pop_unit_joined"]
 [connection signal="pop_unit_found_work" from="World/Systems/gameplay/O_PopulationObserver" to="." method="_on_OPopulationObserver_pop_unit_found_work"]

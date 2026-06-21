@@ -12,7 +12,9 @@ extends VBoxContainer
 # the ones on the map, when clicked on
 # it does not display residential buildings information
 
-func update_infos(building_id: Buildings.Ids):
+func update_infos(
+	building_id: Buildings.Ids,
+):
 	var resource_type = Buildings.get_produce_resource(building_id)
 
 	resource_in.resource_type = Recipes.get_recipe_input_type(resource_type)

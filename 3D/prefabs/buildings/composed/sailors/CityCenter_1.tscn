@@ -147,10 +147,11 @@ size = Vector3(16, 0.5, 26)
 [node name="SpriteIndicator" type="Sprite3D" parent="SpriteIndicators" unique_id=29427667]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 material_override = SubResource("StandardMaterial3D_l444l")
-modulate = Color(1, 0.64705884, 0, 1)
+modulate = Color(1, 0, 0, 1)
 texture = SubResource("GradientTexture2D_vwhab")
 
 [node name="GroundSensorEditable1" parent="." unique_id=1810008971 instance=ExtResource("23_vwhab")]
+ray_ground_layers = 4
 
 [node name="SingleGroundSensorWithSprite1" parent="GroundSensorEditable1/sensors" parent_id_path=PackedInt32Array(1810008971, 162158777) index="0" unique_id=929189549]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -14)

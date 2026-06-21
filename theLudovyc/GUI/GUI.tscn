@@ -9,7 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://dna43527mnqgy" path="res://theLudovyc/GUI/MarketUI.tscn" id="7_d53ja"]
 [ext_resource type="Texture2D" uid="uid://budf74yum8w6e" path="res://Art/Image/Gui/TabWidget/main_bg_fill.png" id="7_srsy4"]
 [ext_resource type="Texture2D" uid="uid://c7f5k0k27nsh1" path="res://Art/Image/Gui/TabWidget/main_bg_bottom.png" id="8_2h6rg"]
+[ext_resource type="PackedScene" uid="uid://drvpewr8augpr" path="res://theLudovyc/GUI/BuildingContainer.tscn" id="9_2vp3c"]
 [ext_resource type="PackedScene" uid="uid://dy1b6i8egw0s7" path="res://theLudovyc/GUI/BuildUI.tscn" id="10_xddfq"]
+[ext_resource type="PackedScene" uid="uid://g7ucu7fgw6bl" path="res://theLudovyc/GUI/BuildingContainer_UI_3D.tscn" id="12_4hiv2"]
 [ext_resource type="Texture2D" uid="uid://b0gi4vdahasx6" path="res://Art/Image/Gui/Background/Widgets/cityinfo_left.png" id="13_s75r0"]
 [ext_resource type="Texture2D" uid="uid://dja8u81e6ge3k" path="res://Art/Image/Gui/Background/Widgets/cityinfo_right.png" id="14_flxif"]
 [ext_resource type="Texture2D" uid="uid://3hepoko6w1v" path="res://Art/Image/Gui/Icons/Widgets/CityInfo/settlement.png" id="14_h5vqk"]
@@ -22,25 +24,11 @@
 [ext_resource type="Texture2D" uid="uid://b8ks32vn2erej" path="res://Art/Image/Gui/Background/Widgets/tooltip_bg_top.png" id="17_lxyjn"]
 [ext_resource type="Script" uid="uid://dsx3fu508btra" path="res://theLudovyc/GUI/LabelPopulation.gd" id="17_v0ai2"]
 [ext_resource type="Script" uid="uid://vsr4im15elfs" path="res://theLudovyc/GUI/Tooltip.gd" id="18_divjp"]
-[ext_resource type="Script" uid="uid://c4yh2avcv6i48" path="res://theLudovyc/GUI/BuildingContainer.gd" id="18_nngab"]
-[ext_resource type="Texture2D" uid="uid://rqkqu27konps" path="res://Art/Image/Gui/Icons/Templates/Production/production_arrow.png" id="18_v5i80"]
 [ext_resource type="Script" uid="uid://bnsoappa76p8w" path="res://theLudovyc/GUI/LabelWorkers.gd" id="18_xklsp"]
 [ext_resource type="Texture2D" uid="uid://dx6qmely0bq45" path="res://Art/Image/Gui/Background/Widgets/tooltip_bg.png" id="18_yoese"]
 [ext_resource type="Texture2D" uid="uid://8immr7brv8eb" path="res://Art/Image/Gui/Background/Widgets/tooltip_bg_middle.png" id="19_28qxy"]
-[ext_resource type="Texture2D" uid="uid://dapd765c0bvd8" path="res://Art/Image/Gui/Buttons/delete_small.png" id="19_eef57"]
-[ext_resource type="Script" uid="uid://cdcwfqdo6vj8p" path="res://theLudovyc/GUI/BuildingInfoContainer.gd" id="19_uroop"]
-[ext_resource type="Texture2D" uid="uid://bntbwjpu7i64e" path="res://Art/Image/Gui/Icons/Templates/Production/toggle_active.png" id="19_ykl4j"]
-[ext_resource type="Texture2D" uid="uid://bwf1wdtyfp4ll" path="res://Art/Image/Gui/Icons/Templates/Production/toggle_active_d.png" id="20_0fwfh"]
-[ext_resource type="Script" uid="uid://b4x5j0fphwjmf" path="res://theLudovyc/GUI/BuildingResidentialContainer.gd" id="20_4inxt"]
 [ext_resource type="Texture2D" uid="uid://bjxpcfox7403j" path="res://Art/Image/Gui/Background/Widgets/tooltip_bg_bottom.png" id="20_4xpap"]
-[ext_resource type="Script" uid="uid://bm10utk6s3gk4" path="res://theLudovyc/GUI/BuildingProducingContainer.gd" id="20_6ni15"]
-[ext_resource type="Texture2D" uid="uid://btewy0y3mrcwd" path="res://Art/Image/Gui/Buttons/delete_small_bw.png" id="20_70i8g"]
-[ext_resource type="Texture2D" uid="uid://toeqa364p2tp" path="res://Art/Image/Gui/Icons/Resources/32/001.png" id="21_03oya"]
-[ext_resource type="PackedScene" uid="uid://n6f00tsqpgrm" path="res://theLudovyc/GUI/ResourceTextureRect.tscn" id="21_cprbo"]
-[ext_resource type="Texture2D" uid="uid://cswhnjs5r8fkk" path="res://Art/Image/Gui/Buttons/delete_small_h.png" id="21_oyj7a"]
-[ext_resource type="Texture2D" uid="uid://cvaw1myityac7" path="res://Art/Image/Gui/Icons/Templates/Production/toggle_active_h.png" id="21_v44d5"]
 [ext_resource type="PackedScene" uid="uid://bl4mr5p0h8uex" path="res://theLudovyc/GUI/BuildMenu/BuildingButtonsContainer.tscn" id="25_cbh6h"]
-[ext_resource type="Texture2D" uid="uid://b6nuq70hohg0w" path="res://Art/Image/Gui/Icons/Widgets/MiniMap/speed_up.png" id="26_j0dpo"]
 [ext_resource type="Script" uid="uid://bnuac7m47joom" path="res://theLudovyc/GUI/RichTextLabelInfo.gd" id="33_hbac4"]
 [ext_resource type="Texture2D" uid="uid://doygjtphv8h2l" path="res://Art/Image/Gui/Icons/TabWidget/BuildMenu/Tier/tier1_d.png" id="37_ktgkj"]
 [ext_resource type="Texture2D" uid="uid://csvhc12bxv7jn" path="res://Art/Image/Gui/Icons/TabWidget/BuildMenu/Tier/tier1_h.png" id="38_81aao"]
@@ -161,7 +149,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_q0br5")
 
 [node name="MenuContainer" type="TabContainer" parent="Widget/BottomContainer/PanelContainer" unique_id=1881198739]
 layout_mode = 2
-current_tab = 2
+current_tab = 3
 clip_tabs = false
 tabs_visible = false
 script = ExtResource("5_sjwej")
@@ -174,143 +162,11 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
-[node name="BuildingContainer" type="VBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer" unique_id=1516046629]
-layout_mode = 2
-script = ExtResource("18_nngab")
-metadata/_tab_index = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer" unique_id=932190539]
-layout_mode = 2
-alignment = 1
-
-[node name="NameLabel" type="Label" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/HBoxContainer" unique_id=2110857889]
-layout_mode = 2
-text = "BuildingName"
-horizontal_alignment = 1
-
-[node name="DeleteButton" type="TextureButton" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/HBoxContainer" unique_id=855203931]
-layout_mode = 2
-texture_normal = ExtResource("19_eef57")
-texture_pressed = ExtResource("20_70i8g")
-texture_hover = ExtResource("21_oyj7a")
-
-[node name="HSeparator" type="HSeparator" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer" unique_id=1631108787]
-layout_mode = 2
-theme_override_styles/separator = SubResource("StyleBoxFlat_or0xk")
-
-[node name="BuildingInfoContainer" type="TabContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer" unique_id=2059628719]
-layout_mode = 2
-current_tab = 0
-clip_tabs = false
-tabs_visible = false
-script = ExtResource("19_uroop")
-
-[node name="BuildingResidentialContainer" type="HBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer" unique_id=467837627]
-layout_mode = 2
-theme_override_constants/separation = 0
-alignment = 1
-script = ExtResource("20_4inxt")
-metadata/_tab_index = 0
-
-[node name="ValueLabel" type="Label" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingResidentialContainer" unique_id=237090478]
-layout_mode = 2
-text = "0"
-
-[node name="TextureRect" type="TextureRect" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingResidentialContainer" unique_id=1219198264]
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-texture = ExtResource("15_p3ujw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="BuildingProducingContainer" type="VBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer" unique_id=2112247415]
+[node name="BuildingContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer" unique_id=748671080 instance=ExtResource("9_2vp3c")]
 visible = false
 layout_mode = 2
-script = ExtResource("20_6ni15")
-metadata/_tab_index = 1
-
-[node name="GridContainer" type="GridContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer" unique_id=1900105391]
-layout_mode = 2
-size_flags_horizontal = 4
-columns = 3
-
-[node name="ResourceIn" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/GridContainer" unique_id=398425497 instance=ExtResource("21_cprbo")]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/GridContainer" unique_id=867584481]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/GridContainer/MarginContainer" unique_id=676156718]
-layout_mode = 2
-texture = ExtResource("18_v5i80")
-stretch_mode = 3
-
-[node name="TextureButton" type="TextureButton" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/GridContainer/MarginContainer" unique_id=1921276332]
-layout_mode = 2
-texture_normal = ExtResource("19_ykl4j")
-texture_pressed = ExtResource("20_0fwfh")
-texture_hover = ExtResource("21_v44d5")
-stretch_mode = 5
-
-[node name="ResourceOut" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/GridContainer" unique_id=653558107 instance=ExtResource("21_cprbo")]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer" unique_id=641859995]
-layout_mode = 2
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="TicksContainer" type="HBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/HBoxContainer" unique_id=134247248]
-layout_mode = 2
-theme_override_constants/separation = 0
-alignment = 1
-
-[node name="ValueLabel" type="Label" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/HBoxContainer/TicksContainer" unique_id=1912016234]
-layout_mode = 2
-text = "0"
-
-[node name="TextureRect" type="TextureRect" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/HBoxContainer/TicksContainer" unique_id=1070266094]
-custom_minimum_size = Vector2(22, 22)
-layout_mode = 2
-texture = ExtResource("26_j0dpo")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="WorkerContainer" type="HBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/HBoxContainer" unique_id=220817715]
-layout_mode = 2
-theme_override_constants/separation = 0
-alignment = 1
-
-[node name="ValueLabel" type="Label" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/HBoxContainer/WorkerContainer" unique_id=1208234206]
-layout_mode = 2
-text = "0"
-
-[node name="TextureRect" type="TextureRect" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/HBoxContainer/WorkerContainer" unique_id=2060576785]
-custom_minimum_size = Vector2(30, 30)
-layout_mode = 2
-texture = ExtResource("15_p3ujw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="MoneyContainer" type="HBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/HBoxContainer" unique_id=352339634]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = 6
-alignment = 1
-
-[node name="ValueLabel" type="Label" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/HBoxContainer/MoneyContainer" unique_id=291419513]
-layout_mode = 2
-text = "1"
-
-[node name="TextureRect" type="TextureRect" parent="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/BuildingInfoContainer/BuildingProducingContainer/HBoxContainer/MoneyContainer" unique_id=1406077879]
-custom_minimum_size = Vector2(18, 18)
-layout_mode = 2
-texture = ExtResource("21_03oya")
-expand_mode = 1
-stretch_mode = 5
 
 [node name="NaturalResourceContainer" type="VBoxContainer" parent="Widget/BottomContainer/PanelContainer/MenuContainer" unique_id=880590855]
-visible = false
 layout_mode = 2
 script = ExtResource("55_1wuat")
 metadata/_tab_index = 3
@@ -338,6 +194,11 @@ fit_content = true
 visible = false
 layout_mode = 2
 metadata/_tab_index = 4
+
+[node name="BuildingContainer_UI_3D" parent="Widget/BottomContainer/PanelContainer/MenuContainer" unique_id=233358451 instance=ExtResource("12_4hiv2")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 5
 
 [node name="Bot" type="TextureRect" parent="Widget/BottomContainer" unique_id=1760140408]
 layout_mode = 2
@@ -783,7 +644,6 @@ columns = 5
 [node name="ConfirmationDialog" type="ConfirmationDialog" parent="." unique_id=1955302596]
 unique_name_in_owner = true
 
-[connection signal="pressed" from="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer/HBoxContainer/DeleteButton" to="Widget/BottomContainer/PanelContainer/MenuContainer/BuildingContainer" method="_on_DeleteButton_pressed"]
 [connection signal="pressed" from="Widget/BuildMenuButton" to="Widget/BottomContainer/PanelContainer/MenuContainer" method="_on_BuildMenuButton_pressed"]
 [connection signal="pressed" from="Widget/MarketMenuButton" to="Widget/BottomContainer/PanelContainer/MenuContainer" method="_on_MarketMenuButton_pressed"]
 [connection signal="pressed" from="Widget/BuildingTierButtonContainer/VBoxContainer/Tier_1_MenuButton" to="Widget/BottomContainer/PanelContainer/MenuContainer" method="_on_Tier1MenuButton_pressed"]

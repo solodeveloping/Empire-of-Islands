@@ -125,6 +125,7 @@ func find_building_needing_workers(b: ClassForLambdaFunction, c_pop_unit: C_PopU
 
 # This is assigning a housing building to the pop unit
 func _find_assign_housing_building(_event: Variant, entity: Entity, _data: Variant):
+	print("_find_assign_housing_building")
 	var housing_buildings = ECS.world.query.with_all(
 		[C_HousingCapacity, C_NotFullyOccupied]
 	).execute()
@@ -148,14 +149,24 @@ func _find_assign_housing_building(_event: Variant, entity: Entity, _data: Varia
 			continue
 			
 		if c_housing_capacity.pop_type != c_pop_unit.pop_type:
+			print("wrong pop_type %s %s" % [
+				c_housing_capacity.pop_type,
+				c_pop_unit.pop_type,
+			])
 			continue
 			
 		found_housing = true
+		print("increasing capacity of %s"% [
+			housing.get_path(),
+		])
 		c_housing_capacity.current += 1
 		if c_housing_capacity.current >= c_housing_capacity.maximum:
 			cmd.remove_component(housing, C_NotFullyOccupied)
 			
 		cmd.add_relationship(entity, Rels.create_lives_in(housing))
+		
+		# WARN: important to stop looping once we found a housing
+		break
 	
 	if !found_housing:
 		cmd.add_component(entity, C_LookingForHousing.new())

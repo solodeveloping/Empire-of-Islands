@@ -7,5 +7,5 @@ extends Component
 
 func _init(maximum_: int = 4, pop_type_: int = 0):
 	maximum = maximum_
-	current = maximum_
+	current = 0
 	pop_type = pop_type_

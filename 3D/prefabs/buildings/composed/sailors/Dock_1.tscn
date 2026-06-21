@@ -108,13 +108,13 @@ size = Vector3(5, 1, 1.775)
 [node name="SpriteIndicator" type="Sprite3D" parent="SpriteIndicators" unique_id=1288366202]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 material_override = SubResource("StandardMaterial3D_sduf7")
-modulate = Color(1, 0.64705884, 0, 1)
+modulate = Color(1, 0, 0, 1)
 texture = SubResource("GradientTexture2D_6dc4s")
 
 [node name="WaterSensorSpriteIndicator" type="Sprite3D" parent="SpriteIndicators" unique_id=890470509]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6648793, 1.0141866, 2.9488502)
 material_override = SubResource("StandardMaterial3D_sduf7")
-modulate = Color(1, 0.64705884, 0, 1)
+modulate = Color(0, 1, 0, 1)
 texture = SubResource("GradientTexture2D_6dc4s")
 
 [node name="WaterSensorSpriteIndicator2" type="Sprite3D" parent="SpriteIndicators" unique_id=377144556]
@@ -139,6 +139,7 @@ autostart = true
 
 [node name="GroundSensorEditable1" parent="." unique_id=1810008971 instance=ExtResource("12_pm28m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+ray_ground_layers = 4
 
 [node name="SingleGroundSensorWithSprite1" parent="GroundSensorEditable1/sensors" parent_id_path=PackedInt32Array(1810008971, 162158777) index="0" unique_id=929189549]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -4)
