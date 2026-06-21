@@ -4,6 +4,7 @@ class_name Resources
 # WARN : if you change the order or insert something
 # You will have to modify the resources indicators in the GUI as of now
 enum Types {
+	# WARN: do not use Wood for now, use Plank instead
 	Wood,
 	Textile,
 	GameMeat,
@@ -20,6 +21,7 @@ enum Types {
 	Fish,
 	Clay,
 	ClayBrick,
+	Gold,
 }
 
 const Icons = {

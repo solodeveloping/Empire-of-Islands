@@ -27,10 +27,20 @@ enum WidgetMenus {
 
 var event_bus: EventBus
 
+# FIXME: should it be here?
+# Maybe we should unify any interface the UI could need into one node
+# Or maybe not
+var the_buildings_cost: TheBuildingsCost
+var the_storage: GMSimpleStorage
+
+var USE_ECS: bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	event_bus = get_tree().current_scene.get_node_or_null("EventBus")
+	var current_scene: Node = get_tree().current_scene
+	event_bus = current_scene.get_node_or_null("EventBus")
+	the_buildings_cost = current_scene.get_node_or_null("TheBuildingsCost")
+	the_storage = current_scene.get_node_or_null("GMSimpleStorage")
 
 	if event_bus != null:
 		event_bus.send_building_selected.connect(_on_receive_building_selected)
@@ -45,11 +55,13 @@ func _ready():
 
 		event_bus.send_building_created.connect(_on_building_event.unbind(1))
 		event_bus.send_building_creation_aborted.connect(_on_building_event.unbind(1))
+		
+		# Info: this allow to request to show the buildings button list programmatically
+		event_bus.send_show_buildings_button_ui.connect(_on_event_bus_send_show_buildings_button_ui)
 	
 	building_buttons_container.mouse_entered_building.connect(_on_mouse_entered_building)
 	building_buttons_container.mouse_exited_building.connect(_on_mouse_exited_building)
 	building_buttons_container.clicked_on_building.connect(_on_clicked_on_building)
-
 
 func on_MenuButton_pressed(menu: WidgetMenus):
 	if current_tab != menu:
@@ -77,15 +89,15 @@ func on_MenuButton_pressed(menu: WidgetMenus):
 		else:
 			building_tier_button_container.hide()
 
-
+# Info: this is called when we click on the button to build any building
 func _on_BuildMenuButton_pressed():
+	print("_on_BuildMenuButton_pressed")
 	# TODO: remove it once we are sure it's not needed anymore
 	# on_MenuButton_pressed(WidgetMenus.Build)
 	on_MenuButton_pressed(WidgetMenus.Buildings)
 
 	if tooltip.visible:
 		tooltip.visible = false
-
 
 func _on_MarketMenuButton_pressed():
 	on_MenuButton_pressed(WidgetMenus.Market)
@@ -103,8 +115,13 @@ func _on_MarketMenuButton_pressed():
 
 		tooltip.visible = false
 
+func _on_event_bus_send_show_buildings_button_ui():
+	print("_on_event_bus_send_show_buildings_button_ui")
+	_on_BuildMenuButton_pressed()
 
+# Info: this is called when the user select a building on the map
 func _on_receive_building_selected(building: Building2D):
+	print("_on_receive_building_selected")
 	bottom_container.set_menu_visibility(true)
 
 	if Buildings.get_building_type(building.building_id) == Buildings.Types.Warehouse:
@@ -144,6 +161,7 @@ func _on_receive_current_building_demolished():
 	if current_tab == WidgetMenus.Building or current_tab == WidgetMenus.Building3D:
 		bottom_container.set_menu_visibility(false)
 
+# Info: this is called when the user select a building on the map
 func _on_receive_building_3D_selected(building: Entity):
 	print("_on_receive_building_3D_selected")
 	bottom_container.set_menu_visibility(true)
@@ -211,8 +229,33 @@ func _on_receive_send_natural_resource_deselected(natural_resource: NaturalResou
 	if building_tier_button_container.visible:
 		building_tier_button_container.hide()
 
+# Info: this is called when the mouse is over a button of a building
 func _on_mouse_entered_building(building_id: Buildings.Ids):
-	tooltip.set_building_info(building_id)
+	print("_on_mouse_entered_building %s" % [
+		building_id,
+	])
+	if USE_ECS:
+		# FIX%E: we are modifying the array
+		# It's duplicated in the method
+		# what would be the best?
+		var costs = the_buildings_cost.get_building_costs(building_id)
+		for cost: Array in costs:
+			var has_resouce = the_storage.has_at_least(
+				cost[0],
+				cost[1]
+			)
+			cost.push_back(
+				has_resouce
+			)
+		# TODO: hard coding is not good
+		var building_name = Buildings.get_building_name(building_id)
+		tooltip._set_building_info(
+			building_id,
+			building_name,
+			costs,
+		)
+	else:
+		tooltip.set_building_info(building_id)
 	tooltip.visible = true
 
 func _on_mouse_exited_building():
@@ -220,17 +263,22 @@ func _on_mouse_exited_building():
 	tooltip.building_id = -1
 	
 func _on_clicked_on_building(building_id: Buildings.Ids):
+	print("TabContainer:_on_clicked_on_building")
 	if event_bus:
 		event_bus.ask_create_building.emit(building_id)
+		
+	# FIXME: I can't make a version of the code where we hide
+	# the ui once we click to work
 	
 	# TODO : make it an option
-	widget.disable_buttons(true)
+	#widget.disable_buttons(true)
 
-	bottom_container.set_menu_visibility(false)
+	#bottom_container.set_menu_visibility(false)
 	
-	building_tier_button_container.hide()
+	#building_tier_button_container.hide()
 
 func _on_building_event():
+	print("_on_building_event")
 	# TODO : make it an option
 	widget.disable_buttons(false)
 

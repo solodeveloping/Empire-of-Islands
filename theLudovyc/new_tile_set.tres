@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bhin7dsw4tvvl"]
+[gd_resource type="TileSet" format=3 uid="uid://bhin7dsw4tvvl"]
 
 [ext_resource type="Texture2D" uid="uid://7c4ox3ucr5vn" path="res://theLudovyc/terrain0.png" id="1_plq3n"]
 

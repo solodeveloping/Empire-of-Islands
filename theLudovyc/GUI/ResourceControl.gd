@@ -26,6 +26,7 @@ func _ready():
 
 func _on_EventBus_resource_updated(type, amount):
 	if type == resource_type:
+		print("updating resource UI")
 		label_amount.text = str(amount)
 
 func _on_EventBus_resource_production_rate_updated(type, rate):

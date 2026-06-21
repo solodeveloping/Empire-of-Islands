@@ -4,15 +4,6 @@ const SAMPLE_CAMERA = preload("uid://de8asbx0dukri")
 const SAMPLE_PLAYER = preload("uid://wilkunqqgl4")
 const RTSCAM = preload("uid://cf7brgwaxlmud")
 
-# Sailors
-const HOUSING_TENT = preload("uid://c0crs07wbol7p")
-const LUMBERJACK_1 = preload("uid://c0f7np4ixkd1x")
-const FISHERMAN_TENT_1 = preload("uid://dgflhswvnmgx3")
-const HUNTER_TENT_1 = preload("uid://cdefoo0ghsb74")
-const DOCK_1 = preload("uid://bwcqu7lunanpr")
-const CITY_CENTER_1 = preload("uid://bmde582hv8jwm")
-
-
 const RANGE_CYLINDER_INDICATOR = preload("uid://dthmx62xw7kk4")
 
 @export_flags_3d_physics
@@ -29,6 +20,16 @@ var things_with_names_collision_mask_for_ray: int
 
 @export
 var default_map: MapDefinition
+
+@export
+var building_list_definition: BuildingListDefinition
+
+# TODO: this should go to ship or storage
+@export
+var initial_resources: ResourceCollectionDefinition
+
+@export
+var use_initial_resources: bool = true
 
 @onready var event_bus: EventBus = %EventBus
 
@@ -56,9 +57,12 @@ var default_map: MapDefinition
 
 @onready var gm_simple_storage: GMSimpleStorage = $GMSimpleStorage
 
+@onready var the_buildings_cost: TheBuildingsCost = $TheBuildingsCost
+
 var current_building: Entity
 var current_building_id: Buildings.Ids
 var current_building_angle: float = 0
+var current_building_def: BuildingDefinition = null
 var building_rotation_speed: float = 100
 
 # FIXME: should it just be current_building?
@@ -218,6 +222,12 @@ func _ready() -> void:
 	
 	audio_player.start_in_game_music()
 	
+	the_buildings_cost.set_costs(
+		building_list_definition,
+	)
+	
+	initialize_storage()
+	
 	#TimeUtils.call_at_interval(self, 0.1, identify_node_below_mouse)
 	
 	# FIXME: don't remember why we do this but was necessary?
@@ -294,124 +304,10 @@ func _unhandled_input(event: InputEvent) -> void:
 				match event.button_index:
 					# cancel the construction
 					MOUSE_BUTTON_RIGHT:
-						current_building.get_parent().remove_child(current_building)
-						current_building = null
-						event_bus.send_building_creation_aborted.emit(current_building_id)
-						rtsCamera.changing_distance_enabled = true
+						cancel_build_current_building()
 					# attempt to build
 					MOUSE_BUTTON_LEFT:
-						if !current_building.is_constructible:
-							# TODO: a sound
-							audio_player.play_invalid_construction()
-							if current_building_id == Buildings.Ids.Warehouse:
-								current_building._print_state()
-							elif current_building_id == Buildings.Ids.Tent:
-								current_building._print_state()
-							return
-						
-						print("")
-						print("finalizing building construction")
-						
-						range_indicator.hide()
-						# FIXME : should be done all the time?
-						# FIXME : cant convert? when using Node3D
-						#var building_as_entity = current_building as Entity
-						#var building_as_entity: Entity = current_building
-						var buildings = ECS.world.query.with_all(
-							[C_Transform])\
-							.with_relationship([Rels.create_belongs_to(city)])\
-							.execute()
-						# TODO : continue this
-						match current_building_id:
-							Buildings.Ids.Tent:
-								var found_a_main_square = false
-								for building: Entity in buildings:
-									if building.has_component(C_MainSquare):
-										if building.has_component(C_Range):
-											var trans: C_Transform = building.get_component(C_Transform)
-											var range_: C_Range = building.get_component(C_Range)
-											var dist = current_building.global_position.distance_to(trans.transform.origin)
-											if dist <= range_.value:
-												print("found a main square")
-												found_a_main_square = true
-												current_building.add_relationship(Rels.create_belongs_to(building))
-												break
-								if !found_a_main_square:
-									printerr("did not find a main square in the right range")
-							
-							Buildings.Ids.Lumberjack:
-								pass
-							_:
-								print("current_building_id:", current_building_id)
-						
-						#print("removing building")
-						# TODO : might want to disable handling of trees etc
-						# Info: This will trigger physics events
-						#current_building.get_parent().remove_child(current_building)
-						print("adding building to ECS world")
-						ECS.world.add_entity(current_building, null, false)
-						
-						# Info: we don't have components before it's added to the world
-						match current_building_id:
-							Buildings.Ids.Tent,\
-							Buildings.Ids.House,\
-							Buildings.Ids.StoneHouse:
-								ECS.world.emit_event(
-									ECSEvents.HOUSING_BUILDING_ADDED, 
-									current_building,
-									{}
-								)
-							
-							Buildings.Ids.Lumberjack,\
-							Buildings.Ids.Fishery,\
-							Buildings.Ids.HunterTent:
-								ECS.world.emit_event(
-									ECSEvents.PRODUCTION_BUILDING_ADDED, 
-									current_building,
-									#{"my_data": 10}
-									{}
-								)
-							Buildings.Ids.Warehouse:
-								var buoy: Entity = current_building.buoy
-								buoy.add_relationship(
-									Rels.create_belongs_to(current_building)
-								)
-								ECS.world.add_entity(buoy)
-							Buildings.Ids.MainSquare:
-								pass
-							_:
-								print("current_building_id:", current_building_id)
-						
-						# Info: this allows to be able to click on the building creation button again
-						# FIXME: maybe do not disable the button, not sure why this is done
-						event_bus.send_building_created.emit(current_building_id)
-						
-						if current_building.has_method("finalize_construction"):
-							current_building.finalize_construction()
-						else:
-							printerr("building does not have method finalize_construction")
-						
-						# TODO : maybe can disable completely the thing?
-						if current_building.has_signal("multimesh_instance_area_entered_main_area"):
-							if current_building.multimesh_instance_area_entered_main_area.is_connected(
-								_on_multimesh_instance_area_entered_main_area
-							):
-								current_building.multimesh_instance_area_entered_main_area.disconnect(
-									_on_multimesh_instance_area_entered_main_area
-								)
-						if current_building.has_signal("multimesh_instance_area_exited_main_area"):
-							if current_building.multimesh_instance_area_entered_main_area.is_connected(
-								_on_multimesh_instance_area_exited_main_area
-							):
-								current_building.multimesh_instance_area_entered_main_area.connect(
-									_on_multimesh_instance_area_exited_main_area
-								)
-						
-						current_building = null
-						
-						rtsCamera.changing_distance_enabled = true
-						
-						audio_player.play_valid_construction()
+						attempt_build_current_building()
 					# rotate the building
 					MOUSE_BUTTON_WHEEL_UP:
 						current_building_angle += building_rotation_speed * get_process_delta_time()
@@ -439,6 +335,147 @@ func _unhandled_input(event: InputEvent) -> void:
 						right_click_at_mouse_pos()
 			else:
 				pass
+
+func cancel_build_current_building():
+	current_building.get_parent().remove_child(current_building)
+	current_building = null
+	event_bus.send_building_creation_aborted.emit(current_building_id)
+	rtsCamera.changing_distance_enabled = true
+
+func attempt_build_current_building():
+	if !current_building.is_constructible:
+		# TODO: a sound
+		audio_player.play_invalid_construction()
+		if current_building_id == Buildings.Ids.Warehouse:
+			current_building._print_state()
+		elif current_building_id == Buildings.Ids.Tent:
+			current_building._print_state()
+		return
+	
+	if !has_resources_to_construct_building(current_building_def):
+		audio_player.play_invalid_construction()
+		return
+	
+	for cost: CostDefinition in current_building_def.costs:
+		var result: GMTakeResult = gm_simple_storage.take_at_least(
+			cost.resource,
+			cost.cost,
+		)
+		if !result.successful:
+			push_error("could not take the resources %s %s" % [
+				cost.resource,
+				cost.cost,
+			])
+		var storage: GMStorageRef = gm_simple_storage.get_storage(cost.resource)
+		event_bus.resource_updated.emit(
+			storage.item_id,
+			storage.quantity,
+		)
+	
+	print("")
+	print("finalizing building construction")
+	
+	range_indicator.hide()
+	# FIXME : should be done all the time?
+	# FIXME : cant convert? when using Node3D
+	#var building_as_entity = current_building as Entity
+	#var building_as_entity: Entity = current_building
+	var buildings = ECS.world.query.with_all(
+		[C_Transform])\
+		.with_relationship([Rels.create_belongs_to(city)])\
+		.execute()
+	# TODO : continue this
+	match current_building_id:
+		Buildings.Ids.Tent:
+			var found_a_main_square = false
+			for building: Entity in buildings:
+				if building.has_component(C_MainSquare):
+					if building.has_component(C_Range):
+						var trans: C_Transform = building.get_component(C_Transform)
+						var range_: C_Range = building.get_component(C_Range)
+						var dist = current_building.global_position.distance_to(trans.transform.origin)
+						if dist <= range_.value:
+							print("found a main square")
+							found_a_main_square = true
+							current_building.add_relationship(Rels.create_belongs_to(building))
+							break
+			if !found_a_main_square:
+				printerr("did not find a main square in the right range")
+		
+		Buildings.Ids.Lumberjack:
+			pass
+		_:
+			print("current_building_id:", current_building_id)
+	
+	#print("removing building")
+	# TODO : might want to disable handling of trees etc
+	# Info: This will trigger physics events
+	#current_building.get_parent().remove_child(current_building)
+	print("adding building to ECS world")
+	ECS.world.add_entity(current_building, null, false)
+	
+	# Info: we don't have components before it's added to the world
+	match current_building_id:
+		Buildings.Ids.Tent,\
+		Buildings.Ids.House,\
+		Buildings.Ids.StoneHouse:
+			ECS.world.emit_event(
+				ECSEvents.HOUSING_BUILDING_ADDED, 
+				current_building,
+				{}
+			)
+		
+		Buildings.Ids.Lumberjack,\
+		Buildings.Ids.Fishery,\
+		Buildings.Ids.HunterTent:
+			ECS.world.emit_event(
+				ECSEvents.PRODUCTION_BUILDING_ADDED, 
+				current_building,
+				#{"my_data": 10}
+				{}
+			)
+		Buildings.Ids.Warehouse:
+			var buoy: Entity = current_building.buoy
+			buoy.add_relationship(
+				Rels.create_belongs_to(current_building)
+			)
+			ECS.world.add_entity(buoy)
+		Buildings.Ids.MainSquare:
+			pass
+		_:
+			print("current_building_id:", current_building_id)
+	
+	# Info: this allows to be able to click on the building creation button again
+	# FIXME: maybe do not disable the button, not sure why this is done
+	event_bus.send_building_created.emit(current_building_id)
+	
+	if current_building.has_method("finalize_construction"):
+		current_building.finalize_construction()
+	else:
+		printerr("building does not have method finalize_construction")
+	
+	# TODO : maybe can disable completely the thing?
+	if current_building.has_signal("multimesh_instance_area_entered_main_area"):
+		if current_building.multimesh_instance_area_entered_main_area.is_connected(
+			_on_multimesh_instance_area_entered_main_area
+		):
+			current_building.multimesh_instance_area_entered_main_area.disconnect(
+				_on_multimesh_instance_area_entered_main_area
+			)
+	if current_building.has_signal("multimesh_instance_area_exited_main_area"):
+		if current_building.multimesh_instance_area_entered_main_area.is_connected(
+			_on_multimesh_instance_area_exited_main_area
+		):
+			current_building.multimesh_instance_area_entered_main_area.connect(
+				_on_multimesh_instance_area_exited_main_area
+			)
+	
+	current_building = null
+	current_building_def = null
+	
+	rtsCamera.changing_distance_enabled = true
+	
+	audio_player.play_valid_construction()
 
 func finalize_existing_buildings():
 	print("finalize_existing_buildings")
@@ -502,8 +539,37 @@ func finalize_existing_buildings():
 
 func _on_ask_create_building(building_id: Buildings.Ids):
 	
-	# TODO: check resources
 	# TODO: queue system
+	
+	if !building_list_definition.builtin_buildings.has(building_id):
+		if !building_list_definition.extra_buildings.has(building_id):
+			printerr("building %s is not present" % [
+				building_id,
+			])
+			#event_bus.send_building_creation_aborted.emit(building_id)
+			#event_bus.send_show_buildings_button_ui.emit()
+			return
+		current_building_def = building_list_definition.extra_buildings.get(building_id)
+	else:
+		current_building_def = building_list_definition.builtin_buildings.get(building_id)
+	
+	if current_building_def.scene == null:
+		push_error("scene of building definition is null for %s" % [
+			building_id
+		])
+		#event_bus.send_building_creation_aborted.emit(building_id)
+		#event_bus.send_show_buildings_button_ui.emit()
+		return
+	
+	# TODO : make this an option
+	if !has_resources_to_construct_building(current_building_def):
+		audio_player.play_invalid_construction()
+		# FIXME: without this it won't allow us to click back on button
+		#event_bus.send_building_creation_aborted.emit(building_id)
+		#event_bus.send_show_buildings_button_ui.emit()
+		return
+	
+	current_building = current_building_def.scene.instantiate()
 	
 	NodeUtils.remove_all_children(range_indicator)
 	range_indicator.show()
@@ -539,9 +605,7 @@ func _on_ask_create_building(building_id: Buildings.Ids):
 				range_indicator.add_child(new_indicator)
 						
 				new_indicator.global_position = indicator.global_position# + Vector3(0, 0.0, 0)
-						
-			current_building = HOUSING_TENT.instantiate()
-			add_current_building_to_tree()
+			
 			
 			# FIXME: should not be done here
 			#current_building.add_relationship(Rels.create_belongs_to(city))
@@ -570,9 +634,7 @@ func _on_ask_create_building(building_id: Buildings.Ids):
 				range_indicator.add_child(new_indicator)
 						
 				new_indicator.global_position = indicator.global_position# + Vector3(0, 0.0, 0)
-						
-			current_building = LUMBERJACK_1.instantiate()
-			add_current_building_to_tree()
+			
 			
 			#current_building.add_relationship(Rels.create_belongs_to(city))
 			
@@ -601,9 +663,7 @@ func _on_ask_create_building(building_id: Buildings.Ids):
 				range_indicator.add_child(new_indicator)
 						
 				new_indicator.global_position = indicator.global_position# + Vector3(0, 0.0, 0)
-						
-			current_building = FISHERMAN_TENT_1.instantiate()
-			add_current_building_to_tree()
+			
 			
 		Buildings.Ids.HunterTent:
 			var buildings_ = ECS.world.query.with_relationship([Rels.create_belongs_to(city)])\
@@ -630,22 +690,21 @@ func _on_ask_create_building(building_id: Buildings.Ids):
 				range_indicator.add_child(new_indicator)
 						
 				new_indicator.global_position = indicator.global_position# + Vector3(0, 0.0, 0)
-						
-			current_building = HUNTER_TENT_1.instantiate()
-			add_current_building_to_tree()
+			
 			
 		# TODO: should be something else?
 		Buildings.Ids.Warehouse:
-			current_building = DOCK_1.instantiate()
-			add_current_building_to_tree()
+			pass
 			
 		Buildings.Ids.MainSquare:
-			current_building = CITY_CENTER_1.instantiate()
-			add_current_building_to_tree()
+			pass
 			
 		_:
 			printerr("building not handled", building_id)
-			
+			return
+	
+	add_current_building_to_tree()
+	
 	if current_building.has_signal("multimesh_instance_area_entered_main_area"):
 		print("connecting _on_multimesh_instance_area_entered_main_area")
 		current_building.multimesh_instance_area_entered_main_area.connect(
@@ -892,8 +951,33 @@ func _on_EventBus_ask_demolish_current_building() -> void:
 	var trees: Array[MultiMeshInstanceArea] = []
 	if selected_building.has_method("get_hidden_trees"):
 		trees = selected_building.get_hidden_trees()
-		
-	# TODO : reassign pop_units
+	
+	selected_building.enabled = false
+	
+	# FIXME: if there is a disconnect, this could break
+	var c_housing: C_HousingCapacity = selected_building.get_component(C_HousingCapacity)
+	if c_housing and c_housing.current > 0:
+		var pop_units = ECS.world.query\
+			#.with_all([C_PopUnit])\
+			.with_relationship([Rels.create_lives_in(selected_building)])\
+			.execute()
+		if !pop_units.is_empty():
+			o_population_observer.find_and_assign_housing_to_pop_units(
+				pop_units,
+				selected_building,
+			)
+	
+	var c_production: C_Production = selected_building.get_component(C_Production)
+	if c_production:
+		var pop_units = ECS.world.query\
+			#.with_all([C_PopUnit])\
+			.with_relationship([Rels.create_works_at(selected_building)])\
+			.execute()
+		if !pop_units.is_empty():
+			o_population_observer.find_and_assign_production_building_to_pop_units(
+				pop_units,
+				selected_building,
+			)
 	
 	ECS.world.remove_entity(selected_building)
 	selected_building = null
@@ -911,3 +995,45 @@ func _on_EventBus_ask_demolish_current_building() -> void:
 			area.process_mode = Node.PROCESS_MODE_INHERIT
 	
 	event_bus.send_current_building_demolished.emit()
+
+func initialize_storage():
+	print("initialize_storage")
+	if !use_initial_resources:
+		Loggie.msg("not using inital resources").color("blue")
+		return
+	for res: BuiltinResourceQuantityDefinition in initial_resources.builtin_resources.values():
+		print("setting storage for %s %s" % [
+			res.resource_type,
+			res.quantity,
+		])
+		gm_simple_storage.set_storage(
+			res.resource_type,
+			res.quantity,
+			-1
+		)
+		event_bus.resource_updated.emit(
+			res.resource_type,
+			res.quantity,
+		)
+	for res: ResourceQuantityDefinition in initial_resources.custom_resources.values():
+		gm_simple_storage.set_storage(
+			res.resource_type,
+			res.quantity,
+			-1
+		)
+		event_bus.resource_updated.emit(
+			res.resource_type,
+			res.quantity,
+		)
+
+func has_resources_to_construct_building(def: BuildingDefinition) -> bool:
+	var has_resources: bool = true
+	for cost in def.costs:
+		if gm_simple_storage.has_at_least(
+			cost.resource,
+			cost.cost,
+		):
+			continue
+		has_resources = false
+		break
+	return has_resources

@@ -28,10 +28,12 @@ func sub_observers() -> Array[Array]:
 		# TODO: add building component
 		[
 			q.with_all([C_Building]).on_event(ECSEvents.HOUSING_BUILDING_ADDED),
-			_on_housing_building_added],
+			_on_housing_building_added
+		],
 		[
 			q.with_all([C_Building]).on_event(ECSEvents.PRODUCTION_BUILDING_ADDED),
-			_on_production_building_added],
+			_on_production_building_added
+		],
 	]
 
 func _on_housing_building_added(_event: Variant, entity: Entity, _data: Variant) -> void:

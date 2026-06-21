@@ -1,6 +1,8 @@
 extends Observer
 class_name O_PopulationObserver
 
+# FIXME: poorly designed script
+
 signal new_pop_unit_joined(pop_type: int)
 signal pop_unit_found_work(pop_type: int)
 
@@ -19,12 +21,20 @@ func sub_observers() -> Array[Array]:
 			q.with_all([C_PopUnit]).on_event(ECSEvents.POP_UNIT_JOINED),
 			_on_pop_unit_joined_island
 		],
+		#[
+			#q.with_all([C_PopUnit]).on_event(ECSEvents.POP_UNIT_LEFT_HOUSING),
+			#_on_pop_unit_left_housing
+		#],
 	]
 
 # TODO : notion of island and/or city
 # TODO: optimization
 # could query building once if we are using a custom event
-func _on_pop_unit_joined_island(event: Variant, entity: Entity, data: Variant) -> void:
+func _on_pop_unit_joined_island(
+	event: Variant,
+	entity: Entity,
+	data: Variant
+) -> void:
 	print("O_PopulationObserver:_on_pop_unit_joined_island")
 	_find_and_assign_production_buildings(event, entity, data)
 	_find_assign_housing_building(event, entity, data)
@@ -34,6 +44,13 @@ func _on_pop_unit_joined_island(event: Variant, entity: Entity, data: Variant) -
 		push_error("c_pop_unit is not present")
 		return
 	new_pop_unit_joined.emit(c_pop_unit.pop_type)
+
+#func _on_pop_unit_left_housing(
+	#event: Variant,
+	#entity: Entity,
+	#data: Variant
+#) -> void:
+	#_find_assign_housing_building(event, entity, data)
 
 # This is assigning a production building to the pop unit
 func _find_and_assign_production_buildings(_event: Variant, entity: Entity, _data: Variant):
@@ -46,11 +63,11 @@ func _find_and_assign_production_buildings(_event: Variant, entity: Entity, _dat
 	# maybe we need to find a better way
 	_b.buildings_needing_workers = ECS.world.query.with_all(
 		[C_MissingWorkers]
-	).execute().duplicate()
+	).enabled().execute().duplicate()
 	
 	_b.building = _b.buildings_needing_workers.pop_back()
 	
-	find_building_needing_workers(_b, c_pop_unit)
+	_find_building_needing_workers(_b, c_pop_unit)
 	
 	if _b.building_needing_workers_exist:
 		#e_pop_unit.add_relationship(
@@ -92,7 +109,7 @@ func _find_and_assign_production_buildings(_event: Variant, entity: Entity, _dat
 		
 	#new_pop_unit_joined.emit(c_pop_unit.pop_type)
 
-func find_building_needing_workers(b: ClassForLambdaFunction, c_pop_unit: C_PopUnit):
+func _find_building_needing_workers(b: ClassForLambdaFunction, c_pop_unit: C_PopUnit):
 	b.building_needing_workers_exist =  false
 	while true:
 		if !b.building:
@@ -128,12 +145,23 @@ func _find_assign_housing_building(_event: Variant, entity: Entity, _data: Varia
 	print("_find_assign_housing_building")
 	var housing_buildings = ECS.world.query.with_all(
 		[C_HousingCapacity, C_NotFullyOccupied]
-	).execute()
+	).enabled().execute()
 	
+	var found_housing = _find_and_assign_housing_to_pop_unit(
+		entity,
+		housing_buildings,
+	)
+	if !found_housing:
+		cmd.add_component(entity, C_LookingForHousing.new())
+
+func _find_and_assign_housing_to_pop_unit(
+	entity: Entity,
+	housing_buildings: Array,
+) -> bool:
 	var c_pop_unit: C_PopUnit = entity.get_component(C_PopUnit)
 	if !c_pop_unit:
 		push_error("c_pop_unit is not present")
-		return
+		return false
 	
 	var found_housing: bool = false
 	for housing: Entity in housing_buildings:
@@ -142,10 +170,11 @@ func _find_assign_housing_building(_event: Variant, entity: Entity, _data: Varia
 			push_error("c_housing_capacity is not present")
 			continue
 		if c_housing_capacity.current >= c_housing_capacity.maximum:
-			push_error("c_housing_capacity.current %s >= c_housing_capacity.maximum %s" % [
-				c_housing_capacity.current,
-				c_housing_capacity.maximum,
-			])
+			#push_error("c_housing_capacity.current %s >= c_housing_capacity.maximum %s" % [
+				#c_housing_capacity.current,
+				#c_housing_capacity.maximum,
+			#])
+			housing_buildings.erase(housing)
 			continue
 			
 		if c_housing_capacity.pop_type != c_pop_unit.pop_type:
@@ -162,11 +191,76 @@ func _find_assign_housing_building(_event: Variant, entity: Entity, _data: Varia
 		c_housing_capacity.current += 1
 		if c_housing_capacity.current >= c_housing_capacity.maximum:
 			cmd.remove_component(housing, C_NotFullyOccupied)
+			housing_buildings.erase(housing)
 			
 		cmd.add_relationship(entity, Rels.create_lives_in(housing))
 		
 		# WARN: important to stop looping once we found a housing
 		break
 	
-	if !found_housing:
-		cmd.add_component(entity, C_LookingForHousing.new())
+	#if !found_housing:
+		#cmd.add_component(entity, C_LookingForHousing.new())
+
+	return found_housing
+
+func find_and_assign_housing_to_pop_units(
+	entities: Array,
+	existing_building: Entity = null
+):
+	var housing_buildings = ECS.world.query.with_all(
+		[C_HousingCapacity, C_NotFullyOccupied]
+	).enabled().execute()
+	for entity: Entity in entities:
+		if existing_building:
+			cmd.remove_relationship(entity, Rels.create_lives_in(existing_building))
+		
+		if housing_buildings.is_empty():
+			if !entity.has_component(C_LookingForHousing):
+				cmd.add_component(entity, C_LookingForHousing.new())
+			continue
+		
+		var found_housing = _find_and_assign_housing_to_pop_unit(
+			entity,
+			housing_buildings,
+		)
+		if !found_housing:
+			if !entity.has_component(C_LookingForHousing):
+				cmd.add_component(entity, C_LookingForHousing.new())
+
+# Info: this is called when we need to reassign a batch of units
+func find_and_assign_production_building_to_pop_units(
+	entities: Array,
+	existing_building: Entity = null
+):
+	var buildings = ECS.world.query.with_all(
+		[C_MissingWorkers, C_WorkerRequirement, C_Workers]
+	).enabled().execute().duplicate()
+	
+	for entity: Entity in entities:
+		if existing_building:
+			cmd.remove_relationship(entity, Rels.create_works_at(existing_building))
+		
+		var c_pop_unit: C_PopUnit = entity.get_component(C_PopUnit)
+		
+		var found_building: bool = false
+		for building: Entity in buildings:
+			var c_req: C_WorkerRequirement = building.get_component(C_WorkerRequirement)
+			var c_workers: C_Workers = building.get_component(C_Workers)
+			if c_workers.workers.has(c_pop_unit.pop_type):
+				var worker: WorkerQuantity = c_workers.workers.get(c_pop_unit.pop_type)
+				var req: Worker_Requirement = c_req.requirements.get(c_pop_unit.pop_type)
+				if worker.worker_count >= req.worker_count:
+					continue
+				
+				found_building = true
+				worker.worker_count += 1
+				cmd.add_relationship(entity, Rels.create_works_at(building))
+				
+				# Info: we are removing the building if we can assess it's full
+				if c_workers.workers.size() == 1 and worker.worker_count >= req.worker_count:
+					buildings.erase(building)
+				
+		if !found_building:
+			c_pop_unit.is_working = false
+			if !entity.has_component(C_JobLess):
+				cmd.add_component(entity, C_JobLess.new())

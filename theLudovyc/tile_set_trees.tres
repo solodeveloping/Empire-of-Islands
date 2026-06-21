@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dprvpcto8mhgv"]
+[gd_resource type="TileSet" format=3 uid="uid://dprvpcto8mhgv"]
 
 [ext_resource type="Texture2D" uid="uid://c2jfvq6ggiwyi" path="res://Art/Image/Trees/Spruce1_idle_full.png" id="1_j6s44"]
 

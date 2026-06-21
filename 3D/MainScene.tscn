@@ -6,28 +6,40 @@
 [ext_resource type="PackedScene" uid="uid://cdwvtbtwmrqbn" path="res://RGT/PauseMenu/PauseMenu.tscn" id="2_20g1j"]
 [ext_resource type="PackedScene" uid="uid://cmx3hrlpxvwav" path="res://3D/prefabs/maps/TestMap_1.tscn" id="2_tnibl"]
 [ext_resource type="Script" uid="uid://dmnir0dg3tym2" path="res://theLudovyc/EventBus.gd" id="3_20g1j"]
-[ext_resource type="Script" uid="uid://kecodyx5fobi" path="res://3D/misc/map_definition.gd" id="3_hqty3"]
+[ext_resource type="Script" uid="uid://kecodyx5fobi" path="res://3D/misc/definitions/map_definition.gd" id="3_hqty3"]
 [ext_resource type="Shader" uid="uid://dd7ybmpebmb0y" path="res://VFX/ocean/ocean_shader_1.gdshader" id="3_skiu2"]
+[ext_resource type="Script" uid="uid://c5basxvhkxhgh" path="res://3D/misc/definitions/building_definition.gd" id="4_hc4vk"]
 [ext_resource type="Script" uid="uid://dangexuy52p7f" path="res://theLudovyc/TheStorage.gd" id="4_xqrix"]
 [ext_resource type="Script" uid="uid://yx8hwfe28cir" path="res://Script/Music/AudioPlayer.gd" id="5_crkkd"]
 [ext_resource type="Script" uid="uid://87vqyamr3bco" path="res://addons/godotmarket/scripts/storage/gm_simple_storage.gd" id="5_malf7"]
+[ext_resource type="Script" uid="uid://dfmexpqbio71u" path="res://3D/misc/definitions/building_list_definition.gd" id="5_r0xnc"]
+[ext_resource type="Script" uid="uid://cpht101lc1jh1" path="res://3D/misc/definitions/cost_definition.gd" id="5_tropj"]
 [ext_resource type="AudioStream" uid="uid://cnfqkilaophxh" path="res://Art/Sound/Music/Ambient/nightdream.ogg" id="6_crkkd"]
+[ext_resource type="PackedScene" uid="uid://c0crs07wbol7p" path="res://3D/prefabs/buildings/composed/sailors/HousingTent.tscn" id="6_tk656"]
 [ext_resource type="Script" uid="uid://cdu5tlyk72uu4" path="res://addons/gecs/ecs/world.gd" id="6_viien"]
 [ext_resource type="Script" uid="uid://cf84mkp0nv2mk" path="res://addons/gecs/io/serialize_config.gd" id="7_5mqro"]
 [ext_resource type="AudioStream" uid="uid://b5ur6xrv55hpn" path="res://Art/Sound/Music/Ambient/waves.ogg" id="7_ufavn"]
+[ext_resource type="PackedScene" uid="uid://bwcqu7lunanpr" path="res://3D/prefabs/buildings/composed/sailors/Dock_1.tscn" id="7_vr5bk"]
 [ext_resource type="AudioStream" uid="uid://crmlaovke6o82" path="res://Art/Sound/Music/Ambient/newfrontier.ogg" id="8_ie2tq"]
+[ext_resource type="PackedScene" uid="uid://c0f7np4ixkd1x" path="res://3D/prefabs/buildings/composed/sailors/Lumberjack_1.tscn" id="8_vr5bk"]
 [ext_resource type="Script" uid="uid://b3vi2ingux88g" path="res://addons/gecs/lib/system_group.gd" id="8_yf0hr"]
 [ext_resource type="Script" uid="uid://db6vw0iasnipd" path="res://3D/ECS/systems/s_production.gd" id="9_5mqro"]
+[ext_resource type="PackedScene" uid="uid://cdefoo0ghsb74" path="res://3D/prefabs/buildings/composed/sailors/HunterTent_1.tscn" id="9_ekic1"]
 [ext_resource type="AudioStream" uid="uid://dmf1nh1vw7ykm" path="res://Art/Sound/Music/Ambient/goldenvalley.ogg" id="9_k0lxy"]
 [ext_resource type="AudioStream" uid="uid://mbu7kx7ksu2y" path="res://Art/Sound/Music/Ambient/uh_gameplay2.ogg" id="10_1jmv0"]
 [ext_resource type="Script" uid="uid://kj6ciqldjrt1" path="res://3D/ECS/observers/o_building_added_observer.gd" id="10_4evuf"]
+[ext_resource type="PackedScene" uid="uid://bmde582hv8jwm" path="res://3D/prefabs/buildings/composed/sailors/CityCenter_1.tscn" id="10_imrfu"]
 [ext_resource type="Script" uid="uid://bpnyku4wivd2w" path="res://3D/ECS/systems/s_simple_transfer_resources.gd" id="11_6uy4x"]
 [ext_resource type="AudioStream" uid="uid://dgc3s5qxrc6tf" path="res://Art/Sound/Music/Ambient/uh_gameplay3.ogg" id="11_dokig"]
+[ext_resource type="PackedScene" uid="uid://dgflhswvnmgx3" path="res://3D/prefabs/buildings/composed/sailors/FishermanTent_1.tscn" id="11_tnibl"]
 [ext_resource type="AudioStream" uid="uid://cuoiainl75spf" path="res://Art/Sound/Music/Ambient/uh_gameplay4.ogg" id="12_nxbpq"]
 [ext_resource type="AudioStream" uid="uid://c635jvpdrla5x" path="res://Art/Sound/Music/Ambient/irelands_coast.ogg" id="13_o1gnf"]
+[ext_resource type="Script" uid="uid://b2majk3tlsr2v" path="res://3D/misc/definitions/builtin_resource_quantity_definition.gd" id="13_sh8ai"]
+[ext_resource type="Script" uid="uid://do80cmvl4p40w" path="res://3D/misc/definitions/resource_quantity_definition.gd" id="14_06bce"]
 [ext_resource type="AudioStream" uid="uid://cpyhs8nn2hucd" path="res://Art/Sound/Music/Ambient/beware_the_ships_kobold.ogg" id="14_hc4vk"]
 [ext_resource type="Shader" uid="uid://cnnu56rxnieut" path="res://3D/vfx/shaders/range_indicator_shader_3.tres" id="14_w2kdd"]
 [ext_resource type="PackedScene" uid="uid://dthmx62xw7kk4" path="res://3D/vfx/prefabs/RangeCylinderIndicator.tscn" id="15_17cjb"]
+[ext_resource type="Script" uid="uid://ugs07ideknah" path="res://3D/misc/definitions/resource_collection_definition.gd" id="15_cr17y"]
 [ext_resource type="AudioStream" uid="uid://cysg7fs7v5t3j" path="res://Art/Sound/ships_bell.ogg" id="15_ie2tq"]
 [ext_resource type="AudioStream" uid="uid://syr4yjxl05s4" path="res://Art/Sound/success.ogg" id="16_k0lxy"]
 [ext_resource type="Script" uid="uid://dnmdvjs670ccj" path="res://3D/ECS/systems/ships/s_auto_find_closest_dock.gd" id="24_ws72x"]
@@ -39,6 +51,7 @@
 [ext_resource type="Shader" uid="uid://c2bcg4e8ymnec" path="res://VFX/post_processing/test_drawing_1.gdshader" id="27_bpuvv"]
 [ext_resource type="Script" uid="uid://cr8q6muvwhowx" path="res://3D/ECS/systems/movement/s_character_body_3d_movement.gd" id="27_ws72x"]
 [ext_resource type="Script" uid="uid://1bta6sms7xv4" path="res://3D/ECS/misc/ge_map_ship_spawner.gd" id="29_hc4vk"]
+[ext_resource type="Script" uid="uid://brbq51ujpbd5p" path="res://3D/misc/the_buildings_cost.gd" id="29_tnibl"]
 [ext_resource type="Script" uid="uid://b7xs0hemdgjhf" path="res://3D/ECS/misc/ge_travelling_ship_definition.gd" id="30_r0xnc"]
 [ext_resource type="Shader" uid="uid://bqb1v1s0nfoa2" path="res://VFX/ocean/visual_shaders/ocean_visual_shader_1/ocean_visual_shader_1_caustics_1.tres" id="30_tropj"]
 [ext_resource type="Shader" uid="uid://be50ph36peocc" path="res://VFX/ocean/visual_shaders/simple_ocean_visual_shader_1/simple_ocean_visual_shader_1.tres" id="38_ekic1"]
@@ -51,11 +64,145 @@ script = ExtResource("3_hqty3")
 map_scene = ExtResource("2_tnibl")
 metadata/_custom_type_script = "uid://kecodyx5fobi"
 
+[sub_resource type="Resource" id="Resource_imrfu"]
+script = ExtResource("5_tropj")
+resource = 3
+cost = 50
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_tnibl"]
+script = ExtResource("5_tropj")
+resource = 1
+cost = 50
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_vr5bk"]
+script = ExtResource("4_hc4vk")
+scene = ExtResource("7_vr5bk")
+costs = Array[ExtResource("5_tropj")]([SubResource("Resource_imrfu"), SubResource("Resource_tnibl")])
+metadata/_custom_type_script = "uid://c5basxvhkxhgh"
+
+[sub_resource type="Resource" id="Resource_tropj"]
+script = ExtResource("5_tropj")
+resource = 3
+cost = 5
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_tk656"]
+script = ExtResource("5_tropj")
+resource = 1
+cost = 10
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_ws72x"]
+script = ExtResource("4_hc4vk")
+scene = ExtResource("6_tk656")
+costs = Array[ExtResource("5_tropj")]([SubResource("Resource_tropj"), SubResource("Resource_tk656")])
+metadata/_custom_type_script = "uid://c5basxvhkxhgh"
+
+[sub_resource type="Resource" id="Resource_06bce"]
+script = ExtResource("5_tropj")
+resource = 1
+cost = 5
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_xvjc2"]
+script = ExtResource("4_hc4vk")
+scene = ExtResource("8_vr5bk")
+costs = Array[ExtResource("5_tropj")]([SubResource("Resource_06bce")])
+metadata/_custom_type_script = "uid://c5basxvhkxhgh"
+
+[sub_resource type="Resource" id="Resource_waljl"]
+script = ExtResource("5_tropj")
+resource = 3
+cost = 10
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_kg5sq"]
+script = ExtResource("5_tropj")
+resource = 1
+cost = 5
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_hqty3"]
+script = ExtResource("4_hc4vk")
+scene = ExtResource("9_ekic1")
+costs = Array[ExtResource("5_tropj")]([SubResource("Resource_waljl"), SubResource("Resource_kg5sq")])
+metadata/_custom_type_script = "uid://c5basxvhkxhgh"
+
+[sub_resource type="Resource" id="Resource_m2a3m"]
+script = ExtResource("5_tropj")
+resource = 3
+cost = 25
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_d3h78"]
+script = ExtResource("5_tropj")
+resource = 1
+cost = 5
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_fhx1l"]
+script = ExtResource("4_hc4vk")
+scene = ExtResource("11_tnibl")
+costs = Array[ExtResource("5_tropj")]([SubResource("Resource_m2a3m"), SubResource("Resource_d3h78")])
+metadata/_custom_type_script = "uid://c5basxvhkxhgh"
+
+[sub_resource type="Resource" id="Resource_sh8ai"]
+script = ExtResource("5_tropj")
+resource = 3
+cost = 150
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_cr17y"]
+script = ExtResource("5_tropj")
+resource = 1
+cost = 100
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_1eclw"]
+script = ExtResource("4_hc4vk")
+scene = ExtResource("10_imrfu")
+costs = Array[ExtResource("5_tropj")]([SubResource("Resource_sh8ai"), SubResource("Resource_cr17y")])
+metadata/_custom_type_script = "uid://c5basxvhkxhgh"
+
+[sub_resource type="Resource" id="Resource_nxbpq"]
+script = ExtResource("5_r0xnc")
+builtin_buildings = Dictionary[int, ExtResource("4_hc4vk")]({
+0: SubResource("Resource_vr5bk"),
+1: SubResource("Resource_ws72x"),
+2: SubResource("Resource_xvjc2"),
+3: SubResource("Resource_hqty3"),
+18: SubResource("Resource_fhx1l"),
+22: SubResource("Resource_1eclw")
+})
+metadata/_custom_type_script = "uid://dfmexpqbio71u"
+
+[sub_resource type="Resource" id="Resource_ek21l"]
+script = ExtResource("13_sh8ai")
+resource_type = 1
+quantity = 150
+metadata/_custom_type_script = "uid://b2majk3tlsr2v"
+
+[sub_resource type="Resource" id="Resource_di3ws"]
+script = ExtResource("13_sh8ai")
+resource_type = 3
+quantity = 150
+metadata/_custom_type_script = "uid://b2majk3tlsr2v"
+
+[sub_resource type="Resource" id="Resource_ke3o1"]
+script = ExtResource("15_cr17y")
+builtin_resources = Dictionary[int, ExtResource("13_sh8ai")]({
+1: SubResource("Resource_ek21l"),
+3: SubResource("Resource_di3ws")
+})
+metadata/_custom_type_script = "uid://ugs07ideknah"
+
 [sub_resource type="Resource" id="Resource_w2kdd"]
 script = ExtResource("7_5mqro")
 metadata/_custom_type_script = "uid://cf84mkp0nv2mk"
 
-[sub_resource type="Resource" id="Resource_ws72x"]
+[sub_resource type="Resource" id="Resource_pgpx8"]
 script = ExtResource("30_r0xnc")
 scene = ExtResource("47_tropj")
 population_min_capacity = 5
@@ -322,6 +469,8 @@ left_click_collision_mask_for_ray = 257
 right_click_collision_mask_for_ray = 2
 things_with_names_collision_mask_for_ray = 271
 default_map = SubResource("Resource_ekic1")
+building_list_definition = SubResource("Resource_nxbpq")
+initial_resources = SubResource("Resource_ke3o1")
 
 [node name="GUI" parent="." unique_id=653385081 instance=ExtResource("1_d5f84")]
 layer = 0
@@ -345,8 +494,14 @@ valid_construction = ExtResource("16_k0lxy")
 metadata/_custom_type_script = "uid://yx8hwfe28cir"
 
 [node name="GMSimpleStorage" type="Node" parent="." unique_id=527105308]
+unique_name_in_owner = true
 script = ExtResource("5_malf7")
 metadata/_custom_type_script = "uid://87vqyamr3bco"
+
+[node name="TheBuildingsCost" type="Node" parent="." unique_id=1177126666]
+unique_name_in_owner = true
+script = ExtResource("29_tnibl")
+metadata/_custom_type_script = "uid://brbq51ujpbd5p"
 
 [node name="TheStorage" type="Node" parent="." unique_id=1012283282]
 unique_name_in_owner = true
@@ -428,7 +583,7 @@ script = ExtResource("29_hc4vk")
 simultaneous_ship_max_count = 2
 ship_container = NodePath(".")
 entries_containers = [NodePath("../../Entries")]
-ship_definitions = Array[ExtResource("30_r0xnc")]([SubResource("Resource_ws72x")])
+ship_definitions = Array[ExtResource("30_r0xnc")]([SubResource("Resource_pgpx8")])
 metadata/_custom_type_script = "uid://1bta6sms7xv4"
 
 [node name="GameEnv" type="Node3D" parent="." unique_id=1015109037]

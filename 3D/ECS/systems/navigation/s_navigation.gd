@@ -35,7 +35,10 @@ func move_agents(entities: Array[Entity], _components: Array, delta: float):
 			nav_agent.set_target_position(dest.target)
 		
 		if nav_agent.is_navigation_finished():
-			print("navigation finished")
+			print("navigation finished %s %s" % [
+				entity.get_path(),
+				dest.target,
+			])
 			# TODO : handle moving to dock, moving to exit
 			cmd.remove_components(entity, [
 				C_NavigationDestination,

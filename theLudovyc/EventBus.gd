@@ -9,6 +9,7 @@ signal ask_create_building(building_id)
 signal send_building_created(building_id)
 signal send_building_creation_aborted(building_id)
 signal send_building_limit_updated(building_id, limit_reached)
+signal send_show_buildings_button_ui()
 
 signal send_building_selected(building_node)
 signal send_building_deselected(building_node)
