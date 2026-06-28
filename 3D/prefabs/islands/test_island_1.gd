@@ -68,6 +68,7 @@ func _process(_delta: float) -> void:
 	
 
 func draw_multimesh():
+	Loggie.msg("test_island_1:draw_multimesh").info()
 	if do_many_multimeshes == false:
 		NodeUtils.remove_all_children(many_multi_meshes)
 		colors = []

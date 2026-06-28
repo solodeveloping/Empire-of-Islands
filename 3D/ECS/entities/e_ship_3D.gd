@@ -5,6 +5,7 @@ class_name Ship3D_ECS
 func define_components() -> Array:
 	return [
 		C_Ship.new(),
+		C_Name.new("Ship"),
 		C_Health.new(100.0),
 		C_Movement.new(10.0),
 		C_Transform.new(),

@@ -80,9 +80,13 @@ static func find_first_parent_of_type(node: Node, type: Variant) -> Node:
 		parent_ = parent_.get_parent()
 	return null
 
-static func find_all_child_of_type_depth_first(parent: Node, type: Variant) -> Array[Node]:
+static func find_all_child_of_type_depth_first(
+	parent: Node,
+	type: Variant,
+	include_internal: bool = false,
+) -> Array[Node]:
 	var result: Array[Node] = []
-	for child in parent.get_children():
+	for child in parent.get_children(include_internal):
 		if is_instance_of(child, type):
 			result.push_back(child)
 		var children = find_all_child_of_type_depth_first(child, type)

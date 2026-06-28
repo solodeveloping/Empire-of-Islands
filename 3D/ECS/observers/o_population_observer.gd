@@ -3,8 +3,9 @@ class_name O_PopulationObserver
 
 # FIXME: poorly designed script
 
-signal new_pop_unit_joined(pop_type: int)
-signal pop_unit_found_work(pop_type: int)
+# FIXME: should we keep this?
+signal new_pop_unit_joined(pop_type: int, island: Entity)
+signal pop_unit_found_work(pop_type: int, island: Entity)
 
 class ClassForLambdaFunction:
 	var buildings_needing_workers: Array
@@ -36,14 +37,35 @@ func _on_pop_unit_joined_island(
 	data: Variant
 ) -> void:
 	print("O_PopulationObserver:_on_pop_unit_joined_island")
-	_find_and_assign_production_buildings(event, entity, data)
+	var island: Entity = data.island
+	if !island:
+		push_error("island not present")
+	
+	cmd.add_relationship(
+		entity,
+		Rels.create_is_on_island(island)
+	)
+	
+	_find_and_assign_production_buildings(event, entity, data, island)
 	_find_assign_housing_building(event, entity, data)
 	
 	var c_pop_unit: C_PopUnit = entity.get_component(C_PopUnit)
 	if !c_pop_unit:
 		push_error("c_pop_unit is not present")
 		return
-	new_pop_unit_joined.emit(c_pop_unit.pop_type)
+	
+	if island.has_component(C_PopulationSummary):
+		var c_pop_summary: C_PopulationSummary = island.get_component(
+			C_PopulationSummary
+		)
+		c_pop_summary.population_increase(c_pop_unit.pop_type, 1)
+	else:
+		push_error("island does not have C_PopulationSummary")
+	
+	new_pop_unit_joined.emit(
+		c_pop_unit.pop_type,
+		island,
+	)
 
 #func _on_pop_unit_left_housing(
 	#event: Variant,
@@ -53,7 +75,12 @@ func _on_pop_unit_joined_island(
 	#_find_assign_housing_building(event, entity, data)
 
 # This is assigning a production building to the pop unit
-func _find_and_assign_production_buildings(_event: Variant, entity: Entity, _data: Variant):
+func _find_and_assign_production_buildings(
+	_event: Variant,
+	entity: Entity,
+	data: Variant,
+	island: Entity,
+):
 	var c_pop_unit: C_PopUnit = entity.get_component(C_PopUnit)
 	
 	var _b: ClassForLambdaFunction = ClassForLambdaFunction.new()
@@ -63,6 +90,10 @@ func _find_and_assign_production_buildings(_event: Variant, entity: Entity, _dat
 	# maybe we need to find a better way
 	_b.buildings_needing_workers = ECS.world.query.with_all(
 		[C_MissingWorkers]
+	).with_relationship(
+		[
+			Rels.create_built_on(island)
+		]
 	).enabled().execute().duplicate()
 	
 	_b.building = _b.buildings_needing_workers.pop_back()
@@ -80,7 +111,18 @@ func _find_and_assign_production_buildings(_event: Variant, entity: Entity, _dat
 			entity, Rels.create_works_at(_b.building)
 		)
 		
-		pop_unit_found_work.emit(c_pop_unit.pop_type)
+		if island.has_component(C_PopulationSummary):
+			var c_pop_summary: C_PopulationSummary = island.get_component(
+				C_PopulationSummary
+			)
+			c_pop_summary.workers_increase(
+				c_pop_unit.pop_type,
+				1,
+			)
+		pop_unit_found_work.emit(
+			c_pop_unit.pop_type,
+			island,
+		)
 		
 		if _b.worker_quantity.worker_count >= _b.worker_requirement.worker_count:
 			
@@ -141,10 +183,14 @@ func _find_building_needing_workers(b: ClassForLambdaFunction, c_pop_unit: C_Pop
 		break
 
 # This is assigning a housing building to the pop unit
-func _find_assign_housing_building(_event: Variant, entity: Entity, _data: Variant):
+func _find_assign_housing_building(_event: Variant, entity: Entity, data: Variant):
 	print("_find_assign_housing_building")
 	var housing_buildings = ECS.world.query.with_all(
 		[C_HousingCapacity, C_NotFullyOccupied]
+	).with_relationship(
+		[
+			Rels.create_built_on(data.island)
+		]
 	).enabled().execute()
 	
 	var found_housing = _find_and_assign_housing_to_pop_unit(

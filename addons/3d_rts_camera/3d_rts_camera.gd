@@ -77,10 +77,19 @@ func _process(delta: float) -> void:
 	# Shift boost (make sure you added 'ui_shift' in Input Map)
 	var speed_multiplier := 2.0 if Input.is_action_pressed("ui_shift") else 1.0
 
+	var altitude_factor = remap(
+		global_position.y,
+		0,
+		500,
+		0.1,
+		1,
+	)
+	altitude_factor *= 10
+
 	# Move orbit center in camera's yaw frame
 	if movement.length() > 0.0:
 		movement = movement.normalized().rotated(Vector3.UP, _yaw)
-		orbit_center += movement * camera_speed * speed_multiplier * delta
+		orbit_center += movement * camera_speed * speed_multiplier * delta * altitude_factor
 		_update_camera_position()
 
 func _unhandled_input(event: InputEvent) -> void:

@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://ddfn8pjvtgnta"]
+
+[ext_resource type="Script" uid="uid://ymdubobxnalb" path="res://3D/misc/tests/test_colliders/test_1.gd" id="1_4nbtr"]
+
+[node name="Test1" type="Node3D" unique_id=632358259]
+script = ExtResource("1_4nbtr")
+x_count = 20
+y_count = 20
+
+[node name="container" type="Node3D" parent="." unique_id=638596523]

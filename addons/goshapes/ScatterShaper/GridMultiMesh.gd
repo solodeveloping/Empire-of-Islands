@@ -23,6 +23,7 @@ var multimesh_aabb_debug_colors: Dictionary[Vector3i, Color] = {}
 var visual_container: Node3D
 
 func _ready() -> void:
+	Loggie.msg("GridMultiMesh:_ready").info()
 	if !has_node("visual_container"):
 		visual_container = Node3D.new()
 		visual_container.name = "visual_container"
@@ -33,6 +34,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if debug_aabbs:
+		Loggie.msg("GridMultiMesh:_process:debug_aabbs").info()
 		for key in coord_to_multimesh.keys():
 			var mm: MultiMeshInstance3D = coord_to_multimesh.get(key)
 			var color = multimesh_aabb_debug_colors.get(key)
@@ -57,47 +59,48 @@ func add_instance(
 		multimesh = MultiMeshInstance3D.new()
 		multimesh.set_script(MultiMeshWithCollidersAndAreas)
 		SceneUtils.add_child(self.visual_container, multimesh)
+		if multimesh is MultiMeshWithCollidersAndAreas:
 		
-		#multimesh.position = Vector3(
-			#coords * grid_size
-		#)
-		multimesh.name = "_MM__%s_%s_%s" % [
-			coords.x,
-			coords.y,
-			coords.z,
-		]
-		multimesh.coords = coords
-		multimesh.multimesh = MultiMesh.new()
-		multimesh.multimesh.mesh = mesh
-		multimesh.multimesh.transform_format = MultiMesh.TRANSFORM_3D
-		multimesh.multimesh.instance_count = max_instance_count_per_multimesh
-		multimesh.multimesh.visible_instance_count = 1
-		#multimesh.multimesh.custom_aabb = AABB(
-			#Vector3.ZERO,
-			#Vector3(grid_size)
-		#)
-		multimesh.multimesh.set_instance_transform(
-			0,
-			transform_
-		)
-		
-		coord_to_multimesh.set(coords, multimesh)
-		
-		multimesh_aabb_debug_colors.set(
-			coords, 
-			Color(
-				randf_range(0, 1),
-				randf_range(0, 1),
-				randf_range(0, 1),
+			#multimesh.position = Vector3(
+				#coords * grid_size
+			#)
+			multimesh.name = "_MM__%s_%s_%s" % [
+				coords.x,
+				coords.y,
+				coords.z,
+			]
+			multimesh.coords = coords
+			multimesh.multimesh = MultiMesh.new()
+			multimesh.multimesh.mesh = mesh
+			multimesh.multimesh.transform_format = MultiMesh.TRANSFORM_3D
+			multimesh.multimesh.instance_count = max_instance_count_per_multimesh
+			multimesh.multimesh.visible_instance_count = 1
+			#multimesh.multimesh.custom_aabb = AABB(
+				#Vector3.ZERO,
+				#Vector3(grid_size)
+			#)
+			multimesh.multimesh.set_instance_transform(
+				0,
+				transform_
 			)
-		)
-		
-		multimesh.add_instance(
-			0,
-			transform_,
-			collider,
-			area,
-		)
+			
+			coord_to_multimesh.set(coords, multimesh)
+			
+			multimesh_aabb_debug_colors.set(
+				coords, 
+				Color(
+					randf_range(0, 1),
+					randf_range(0, 1),
+					randf_range(0, 1),
+				)
+			)
+			
+			multimesh.add_instance(
+				0,
+				transform_,
+				collider,
+				area,
+			)
 	else:
 		# if we already have the multimesh for the grid coord
 		if multimesh.multimesh.visible_instance_count == multimesh.multimesh.instance_count:
@@ -106,19 +109,20 @@ func add_instance(
 				multimesh.multimesh.instance_count
 			])
 			return
-		var id = multimesh.multimesh.visible_instance_count
-		multimesh.multimesh.visible_instance_count += 1
-		multimesh.multimesh.set_instance_transform(
-			id,
-			transform_
-		)
-		
-		multimesh.add_instance(
-			id,
-			transform_,
-			collider,
-			area,
-		)
+		if multimesh is MultiMeshWithCollidersAndAreas:
+			var id = multimesh.multimesh.visible_instance_count
+			multimesh.multimesh.visible_instance_count += 1
+			multimesh.multimesh.set_instance_transform(
+				id,
+				transform_
+			)
+			
+			multimesh.add_instance(
+				id,
+				transform_,
+				collider,
+				area,
+			)
 
 func assign_aabbs():
 	for key in coord_to_multimesh.keys():

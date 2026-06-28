@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://mk2th34j416s"]
+
+[ext_resource type="Script" uid="uid://cic4ch0fodnp7" path="res://3D/misc/tests/test_colliders/cube_with_static_body_and_tool_script.gd" id="1_1sm3q"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_sfkqh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xa724"]
+
+[node name="CubeWithStaticBody" type="Node3D" unique_id=669389168]
+script = ExtResource("1_1sm3q")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1286007297]
+mesh = SubResource("BoxMesh_sfkqh")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=175762547]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" unique_id=448772837]
+shape = SubResource("BoxShape3D_xa724")

@@ -1,2 +1,2 @@
-class_name R_BelongsTo
 extends Component
+class_name R_BelongsTo

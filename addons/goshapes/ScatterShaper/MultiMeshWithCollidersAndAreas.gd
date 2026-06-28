@@ -14,6 +14,7 @@ var areas: Array[MultiMeshInstanceArea] = []
 var colliders: Array[MultiMeshInstanceCollider] = []
 
 func _ready() -> void:
+	Loggie.msg("MultiMeshWithCollidersAndAreas:_ready").info()
 	if !has_node("colliders_container"):
 		colliders_container = Node3D.new()
 		colliders_container.name = "colliders_container"
@@ -76,6 +77,9 @@ func add_instance(
 	# Info: we consider we have added the instance for now
 	var collider_id = -1
 	if collider:
+		# Info: we do this because of a Godot bug
+		# https://github.com/godotengine/godot/issues/120619
+		collider.hide()
 		collider_id = colliders_container.get_child_count()
 		collider.set_script(MultiMeshInstanceCollider)
 		#if collider is MultiMeshInstanceCollider:

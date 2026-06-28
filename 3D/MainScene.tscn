@@ -56,7 +56,11 @@
 [ext_resource type="Shader" uid="uid://bqb1v1s0nfoa2" path="res://VFX/ocean/visual_shaders/ocean_visual_shader_1/ocean_visual_shader_1_caustics_1.tres" id="30_tropj"]
 [ext_resource type="Shader" uid="uid://be50ph36peocc" path="res://VFX/ocean/visual_shaders/simple_ocean_visual_shader_1/simple_ocean_visual_shader_1.tres" id="38_ekic1"]
 [ext_resource type="Script" uid="uid://bbhr52k31vvcc" path="res://3D/ocean_node_1.gd" id="39_ekic1"]
+[ext_resource type="Script" uid="uid://g8evd6jpepr5" path="res://3D/ECS/observers/o_ship_misc_observer.gd" id="43_cr17y"]
+[ext_resource type="Script" uid="uid://b3ds2b80817im" path="res://3D/ECS/observers/o_building_misc_observer.gd" id="44_1eclw"]
 [ext_resource type="PackedScene" uid="uid://dffby82byb5wv" path="res://3D/prefabs/ships/SailShip_1.tscn" id="47_tropj"]
+[ext_resource type="Script" uid="uid://bjxsot7jvcnyj" path="res://3D/ECS/systems/debug/s_building_should_be_on_island.gd" id="50_d3h78"]
+[ext_resource type="PackedScene" uid="uid://d8kf3fs8iy37" path="res://3D/prefabs/debug/InformationDebugDisplay_1.tscn" id="50_fhx1l"]
 [ext_resource type="Script" uid="uid://dops2gkdonqlc" path="res://3D/ECS/entities/e_map_exit.gd" id="51_tk656"]
 
 [sub_resource type="Resource" id="Resource_ekic1"]
@@ -471,6 +475,8 @@ things_with_names_collision_mask_for_ray = 271
 default_map = SubResource("Resource_ekic1")
 building_list_definition = SubResource("Resource_nxbpq")
 initial_resources = SubResource("Resource_ke3o1")
+enable_debug_display = true
+information_debug_scene = ExtResource("50_fhx1l")
 
 [node name="GUI" parent="." unique_id=653385081 instance=ExtResource("1_d5f84")]
 layer = 0
@@ -551,6 +557,14 @@ metadata/_custom_type_script = "uid://bfcfkv30j1ain"
 script = ExtResource("10_4evuf")
 metadata/_custom_type_script = "uid://kj6ciqldjrt1"
 
+[node name="O_ShipMiscObserver" type="Node" parent="World/Systems/gameplay" unique_id=1311237721]
+script = ExtResource("43_cr17y")
+metadata/_custom_type_script = "uid://g8evd6jpepr5"
+
+[node name="O_BuildingMiscObserver" type="Node" parent="World/Systems/gameplay" unique_id=94676317]
+script = ExtResource("44_1eclw")
+metadata/_custom_type_script = "uid://b3ds2b80817im"
+
 [node name="O_MiscObserver" type="Node" parent="World/Systems/gameplay" unique_id=1523478068]
 script = ExtResource("25_r0xnc")
 metadata/_custom_type_script = "uid://dcc46g6yx3cig"
@@ -577,6 +591,15 @@ metadata/_custom_type_script = "uid://cr8q6muvwhowx"
 [node name="misc" type="Node" parent="World/Systems" unique_id=278884283]
 script = ExtResource("8_yf0hr")
 metadata/_custom_type_script = "uid://b3vi2ingux88g"
+
+[node name="debug" type="Node" parent="World/Systems" unique_id=1302108725]
+script = ExtResource("8_yf0hr")
+metadata/_custom_type_script = "uid://b3vi2ingux88g"
+
+[node name="BuildingShouldBeOnIslandSystem" type="Node" parent="World/Systems/debug" unique_id=1353164815]
+script = ExtResource("50_d3h78")
+group = &"debug"
+metadata/_custom_type_script = "uid://bjxsot7jvcnyj"
 
 [node name="GE_MapShipSpawner" type="Node3D" parent="World" unique_id=1159284653 node_paths=PackedStringArray("ship_container", "entries_containers")]
 script = ExtResource("29_hc4vk")
@@ -763,7 +786,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -362.40808, 0, 354.8305)
 script = ExtResource("51_tk656")
 
 [node name="Exit_2" type="Marker3D" parent="Exits" unique_id=340661049]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -362.40808, 0, -435.14334)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1114.6724, 0, -435.14334)
 script = ExtResource("51_tk656")
 
 [connection signal="ask_demolish_current_building" from="EventBus" to="." method="_on_EventBus_ask_demolish_current_building"]

@@ -14,7 +14,7 @@ func _ready():
 	update_stats()
 
 func update_stats():
-	print("update_stats")
+	print("MeshInspectorControl:update_stats")
 	# Clear previous stats
 	for child in main_container.get_children():
 		child.queue_free()
@@ -22,7 +22,7 @@ func update_stats():
 	if not object or not object is MeshInstance3D:
 		print("ignore node")
 		if object is Node:
-			print("obj is node", object)
+			print("MeshInspectorControl:obj is node", object)
 			var stats_fold = FoldableContainer.new()
 			var stats_vbox = VBoxContainer.new()
 

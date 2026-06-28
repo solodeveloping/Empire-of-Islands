@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://d8kf3fs8iy37"]
+
+[ext_resource type="Script" uid="uid://deteeu41maka5" path="res://3D/prefabs/debug/information_debug_display_1.gd" id="1_bj0uk"]
+
+[node name="InformationDebugDisplay1" type="Node3D" unique_id=416206691]
+script = ExtResource("1_bj0uk")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=338755129]
+billboard = 1
+modulate = Color(0, 0, 0, 1)
+text = "a relatively long text"
+font_size = 250
+outline_size = 0

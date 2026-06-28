@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cmx3hrlpxvwav"]
 
 [ext_resource type="PackedScene" uid="uid://cj58mgwq0tw3b" path="res://3D/prefabs/islands/Island1_binary.scn" id="1_335pb"]
+[ext_resource type="Script" uid="uid://xgubx3pgy3pn" path="res://3D/prefabs/maps/test_map_1.gd" id="1_xayp1"]
 [ext_resource type="PackedScene" uid="uid://c0crs07wbol7p" path="res://3D/prefabs/buildings/composed/sailors/HousingTent.tscn" id="2_oqpss"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_xmf88"]
 [ext_resource type="Script" uid="uid://ccfh5xaqdeycf" path="res://3D/ECS/components/gameplay/c_island.gd" id="3_0eks5"]
@@ -12,15 +13,21 @@
 [ext_resource type="PackedScene" uid="uid://cdefoo0ghsb74" path="res://3D/prefabs/buildings/composed/sailors/HunterTent_1.tscn" id="8_j13b1"]
 [ext_resource type="Shader" uid="uid://be50ph36peocc" path="res://VFX/ocean/visual_shaders/simple_ocean_visual_shader_1/simple_ocean_visual_shader_1.tres" id="9_j162b"]
 [ext_resource type="Script" uid="uid://bbhr52k31vvcc" path="res://3D/ocean_node_1.gd" id="10_ryuhc"]
+[ext_resource type="PackedScene" uid="uid://cghuwsaf6jv75" path="res://3D/prefabs/islands/Island2_binary.scn" id="13_0eks5"]
 
 [sub_resource type="Resource" id="Resource_tnibl"]
 script = ExtResource("3_0eks5")
 island_name = "First island"
 metadata/_custom_type_script = "uid://ccfh5xaqdeycf"
 
+[sub_resource type="Resource" id="Resource_sh8ai"]
+script = ExtResource("3_0eks5")
+island_name = "Island 2"
+metadata/_custom_type_script = "uid://ccfh5xaqdeycf"
+
 [sub_resource type="NavigationMesh" id="NavigationMesh_335pb"]
-vertices = PackedVector3Array(-44.918457, 0.2903328, 10, 30.081543, 0.2903328, -20, 30.081543, 0.2903328, -4995, -49.918457, 0.2903328, 20, -5169.9185, 0.2903328, -4995, -5169.9185, 0.2903328, 35, 60.081543, 0.2903328, -15, 135.08154, 0.2903328, 70, 4820.0815, 0.2903328, 70, 4820.0815, 0.2903328, -4995, -39.918457, 0.2903328, 85, -39.918457, 0.2903328, 30, -9.918457, 0.2903328, 4995, -9.918457, 0.2903328, 115, -5169.9185, 0.2903328, 4995, 120.08154, 0.2903328, 90, 55.081543, 0.2903328, 100, 60.081543, 0.2903328, 4995, 4820.0815, 0.2903328, 4995)
-polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(0, 3, 2), PackedInt32Array(2, 3, 5), PackedInt32Array(2, 5, 4), PackedInt32Array(8, 7, 6), PackedInt32Array(6, 1, 8), PackedInt32Array(8, 1, 2), PackedInt32Array(8, 2, 9), PackedInt32Array(3, 11, 10), PackedInt32Array(10, 13, 12), PackedInt32Array(10, 12, 3), PackedInt32Array(3, 12, 5), PackedInt32Array(5, 12, 14), PackedInt32Array(15, 7, 8), PackedInt32Array(15, 8, 16), PackedInt32Array(16, 8, 17), PackedInt32Array(17, 8, 18), PackedInt32Array(12, 13, 17), PackedInt32Array(17, 13, 16)]
+vertices = PackedVector3Array(-185, 0.040332794, -905, -155, 0.040332794, -910, -155, 0.040332794, -4995, -330, 0.040332794, -825, -375, 0.040332794, -725, -4995, 0.040332794, -4995, -4995, 0.040332794, -685, -375, 0.040332794, -685, -125, 0.040332794, -900, -80, 0.040332794, -830, -30, 0.040332794, -620, 4995, 0.040332794, -630, 4995, 0.040332794, -4995, -4995, 0.040332794, -500, -375, 0.040332794, -500, -15, 0.040332794, -545, 4995, 0.040332794, -545, -15, 0.040332794, -540, 35, 0.040332794, -20, 60, 0.040332794, -15, 135, 0.040332794, 60, 135, 0.040332794, 70, 4995, 0.040332794, 70, -75, 0.040332794, -5, -50, 0.040332794, 20, 15, 0.040332794, -20, -35, 0.040332794, -515, -80, 0.040332794, -505, -40, 0.040332794, 85, -40, 0.040332794, 30, -180, 0.040332794, -480, -350, 0.040332794, -440, -375, 0.040332794, -460, -4995, 0.040332794, 4995, -10, 0.040332794, 4995, -10, 0.040332794, 115, 120, 0.040332794, 90, 55, 0.2903328, 100, 60, 0.040332794, 4995, 4995, 0.040332794, 4995)
+polygons = [PackedInt32Array(0, 2, 1), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 4, 2), PackedInt32Array(2, 4, 6), PackedInt32Array(2, 6, 5), PackedInt32Array(4, 7, 6), PackedInt32Array(8, 1, 2), PackedInt32Array(9, 8, 2), PackedInt32Array(9, 2, 10), PackedInt32Array(10, 2, 11), PackedInt32Array(11, 2, 12), PackedInt32Array(6, 7, 13), PackedInt32Array(13, 7, 14), PackedInt32Array(16, 15, 11), PackedInt32Array(11, 15, 10), PackedInt32Array(17, 15, 18), PackedInt32Array(18, 15, 19), PackedInt32Array(22, 21, 20), PackedInt32Array(19, 15, 20), PackedInt32Array(20, 15, 16), PackedInt32Array(20, 16, 22), PackedInt32Array(24, 23, 25), PackedInt32Array(25, 23, 27), PackedInt32Array(25, 27, 26), PackedInt32Array(25, 26, 18), PackedInt32Array(18, 26, 17), PackedInt32Array(24, 29, 28), PackedInt32Array(24, 28, 23), PackedInt32Array(31, 30, 23), PackedInt32Array(32, 31, 23), PackedInt32Array(23, 28, 32), PackedInt32Array(32, 28, 13), PackedInt32Array(13, 28, 34), PackedInt32Array(13, 34, 33), PackedInt32Array(13, 14, 32), PackedInt32Array(28, 35, 34), PackedInt32Array(30, 27, 23), PackedInt32Array(36, 21, 22), PackedInt32Array(37, 36, 38), PackedInt32Array(38, 36, 22), PackedInt32Array(38, 22, 39), PackedInt32Array(34, 35, 38), PackedInt32Array(38, 35, 37)]
 geometry_source_geometry_mode = 1
 geometry_source_group_name = &"ocean_surface_nav"
 cell_size = 5.0
@@ -65,9 +72,14 @@ size = Vector2(1, 1)
 size = Vector3(1, 0.001, 1)
 
 [node name="TestMap1" type="Node3D" unique_id=948608410]
+script = ExtResource("1_xayp1")
 
 [node name="Island1" parent="." unique_id=1967343092 groups=["ocean_surface_nav"] instance=ExtResource("1_335pb")]
 component_resources = Array[ExtResource("2_xmf88")]([SubResource("Resource_tnibl")])
+
+[node name="Island2Binary" parent="." unique_id=640821926 instance=ExtResource("13_0eks5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -343.01007, 0, -602.57666)
+component_resources = Array[ExtResource("2_xmf88")]([SubResource("Resource_sh8ai")])
 
 [node name="Buildings" type="Node3D" parent="." unique_id=579642728]
 

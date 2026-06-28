@@ -4,8 +4,7 @@ class_name DockBuoy_ECS
 
 func define_components() -> Array:
 	return [
-		# TODO: why is it commented?
-		#C_DockBuoy.new(),
+		C_DockBuoy.new(0),
 		C_Transform.new(),
 	]
 

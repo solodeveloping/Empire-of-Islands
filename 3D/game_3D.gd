@@ -31,11 +31,24 @@ var initial_resources: ResourceCollectionDefinition
 @export
 var use_initial_resources: bool = true
 
+@export_category("Debug")
+
+@export
+var enable_debug_display: bool = false
+
+@export
+var debug_display_names: bool = false
+
+@export
+var information_debug_scene: PackedScene
+
 @onready var event_bus: EventBus = %EventBus
 
 @onready var audio_player: AudioPlayer = $AudioPlayer
 
 @onready var world: World = $World
+
+@onready var debug: SystemGroup = $World/Systems/debug
 
 @onready var dynamic_buildings: Node3D = $DynamicBuildings
 
@@ -59,11 +72,14 @@ var use_initial_resources: bool = true
 
 @onready var the_buildings_cost: TheBuildingsCost = $TheBuildingsCost
 
+
+
 var current_building: Entity
 var current_building_id: Buildings.Ids
 var current_building_angle: float = 0
 var current_building_def: BuildingDefinition = null
 var building_rotation_speed: float = 100
+var current_island_for_building: IslandGECS1
 
 # FIXME: should it just be current_building?
 var selected_building: Entity
@@ -72,6 +88,8 @@ var current_dock_buoy_id: int = 0
 
 var map: Node3D
 var city: Entity
+
+var current_island: IslandGECS1
 
 var rtsCamera: RTSCamera
 
@@ -83,26 +101,26 @@ var rtsCamera: RTSCamera
 var populations: Array[int] = [0, 0, 0, 0]:
 	set(value):
 		populations = value
-		notify_population_updated()
+		#notify_population_updated()
 
 var housing_capacities: Array[int] = [0, 0, 0, 0]:
 	set(value):
 		housing_capacities = value
-		notify_housing_capacity_updated()
+		#notify_housing_capacity_updated()
 
 var workers: Array[int] = [0, 0, 0, 0]:
 	set(value):
 		workers = value
-		notify_workers_updated()
+		#notify_workers_updated()
 
 var worker_capacities: Array[int] = [0, 0, 0, 0]:
 	set(value):
 		worker_capacities = value
-		notify_worker_capacities_updated()
+		#notify_worker_capacities_updated()
 
 func population_increase(population_type: Populations.Types, amount: int):
 	populations[population_type] += amount
-	notify_population_updated()
+	#notify_population_updated()
 
 func population_decrease(population_type: Populations.Types, amount: int):
 	populations[population_type] -= amount
@@ -115,9 +133,9 @@ func notify_population_updated():
 
 func housing_capacity_increase(population_type: Populations.Types, amount: int):
 	housing_capacities[population_type] += amount
-	notify_housing_capacity_updated()
+	#notify_housing_capacity_updated()
 
-func housing_capacityn_decrease(population_type: Populations.Types, amount: int):
+func housing_capacity_decrease(population_type: Populations.Types, amount: int):
 	housing_capacities[population_type] -= amount
 	notify_housing_capacity_updated()
 
@@ -126,7 +144,7 @@ func notify_housing_capacity_updated():
 
 func workers_increase(population_type: Populations.Types, amount: int):
 	workers[population_type] += amount
-	notify_workers_updated()
+	#notify_workers_updated()
 
 func workers_decrease(population_type: Populations.Types, amount: int):
 	workers[population_type] -= amount
@@ -139,7 +157,7 @@ func notify_workers_updated():
 
 func worker_capacities_increase(population_type: Populations.Types, amount: int):
 	worker_capacities[population_type] += amount
-	notify_worker_capacities_updated()
+	#notify_worker_capacities_updated()
 
 func worker_capacities_decrease(population_type: Populations.Types, amount: int):
 	worker_capacities[population_type] -= amount
@@ -150,30 +168,116 @@ func notify_worker_capacities_updated():
 		worker_capacities
 	)
 
-func _on_OPopulationObserver_new_pop_unit_joined(pop_type: int) -> void:
+func _on_OPopulationObserver_new_pop_unit_joined(
+	pop_type: int,
+	island: Entity,
+) -> void:
 	print("_on_OPopulationObserver_new_pop_unit_joined")
+	if island == current_island:
+		var summary: C_PopulationSummary = island.get_component(
+			C_PopulationSummary
+		)
+		if summary:
+			event_bus.population_updated.emit(
+				summary.populations
+			)
 	population_increase(pop_type, 1)
 
 func _on_OBuildingAddedObserver_housing_capacity_increased(
 	pop_type: int,
-	amount: int
+	amount: int,
+	island: Entity,
 ) -> void:
+	if island == current_island:
+		print("current island housing_capacity_increased")
+		var summary: C_PopulationSummary = island.get_component(
+			C_PopulationSummary
+		)
+		if summary:
+			event_bus.housing_capacity_updated.emit(
+				summary.housing_capacities
+			)
+			
 	housing_capacity_increase(
 		pop_type,
 		amount,
 	)
 
-func _on_OPopulationObserver_pop_unit_found_work(pop_type: int) -> void:
+func _on_OPopulationObserver_pop_unit_found_work(
+	pop_type: int,
+	island: Entity,
+) -> void:
+	if island == current_island:
+		print("current island workers_capacity_increased")
+		var summary: C_PopulationSummary = island.get_component(
+			C_PopulationSummary
+		)
+		if summary:
+			event_bus.available_workers_updated.emit(
+				summary.workers
+			)
 	workers_increase(pop_type, 1)
 
 func _on_OBuildingAddedObserver_workers_capacity_increased(
 	pop_type: int,
-	amount: int
+	amount: int,
+	island: Entity,
 ) -> void:
+	if island == current_island:
+		print("current island workers_capacity_increased")
+		var summary: C_PopulationSummary = island.get_component(
+			C_PopulationSummary
+		)
+		if summary:
+			event_bus.worker_capacities_updated.emit(
+				summary.worker_capacities
+			)
+		
 	worker_capacities_increase(
 		pop_type,
 		amount,
 	)
+
+func notify_summary_changed():
+	if current_island:
+		var summary: C_PopulationSummary = current_island.get_component(
+			C_PopulationSummary
+		)
+		if summary:
+			event_bus.population_updated.emit(
+				summary.populations
+			)
+			event_bus.housing_capacity_updated.emit(
+				summary.housing_capacities
+			)
+			event_bus.available_workers_updated.emit(
+				summary.workers
+			)
+			event_bus.worker_capacities_updated.emit(
+				summary.worker_capacities
+			)
+		var c_island: C_Island = current_island.get_component(C_Island)
+		if c_island:
+			event_bus.send_city_name_changed.emit(
+				c_island.island_name,
+			)
+			event_bus.send_mouse_over_object_changed.emit(
+				c_island.island_name,
+				current_island,
+			)
+	else:
+		event_bus.population_updated.emit(
+			[0,0,0,0]
+		)
+		event_bus.housing_capacity_updated.emit(
+			[0,0,0,0]
+		)
+		event_bus.available_workers_updated.emit(
+			[0,0,0,0]
+		)
+		event_bus.worker_capacities_updated.emit(
+			[0,0,0,0]
+		)
 
 var production_building_ids: Array[int] = [
 	Buildings.Ids.Fishery,
@@ -189,6 +293,16 @@ var housing_building_ids: Array[int] = [
 func _ready() -> void:
 	ECS.world = world
 	
+	if enable_debug_display:
+		var instance = Node.new()
+		instance.set_script(MiscDebugSystem)
+		if instance is MiscDebugSystem:
+			print("Adding MiscDebugSystem")
+			instance.information_debug_scene = information_debug_scene
+			instance.group = "debug"
+			debug.add_child(instance)
+			ECS.world.add_system(instance)
+	
 	map = default_map.map_scene.instantiate()
 	add_child(map)
 	
@@ -201,7 +315,11 @@ func _ready() -> void:
 	
 	# TODO : a prefab so that we can customize it
 	camera_3d.get_parent().remove_child(camera_3d)
+	# TODO: adjust zoom speed based on altitude
 	rtsCamera = RTSCAM.instantiate()
+	rtsCamera.camera_speed = 50.0
+	rtsCamera.camera_zoom_speed = 500.0
+	rtsCamera.camera_zoom_max = 500.0
 	add_child(rtsCamera)
 	#instance.projection = Camera3D.PROJECTION_ORTHOGONAL
 	
@@ -252,6 +370,7 @@ func call_after_init_is_done():
 
 func _process(delta: float) -> void:
 	world.process(delta, 'gameplay')
+	world.process(delta, 'debug')
 
 func _physics_process(delta: float) -> void:
 	world.process(delta, 'physics')
@@ -284,7 +403,18 @@ func _physics_process(delta: float) -> void:
 						#raycast_result.collider.get_parent().get_parent().name,
 					#]
 				#)
-				current_building.position = raycast_result.position
+				
+				var island_parent: IslandGECS1 = SceneUtils.find_first_parent_of_type(
+					raycast_result.collider, 
+					IslandGECS1
+				)
+				if island_parent:
+					#print("found island")
+					current_building.position = raycast_result.position
+					current_island_for_building = island_parent
+				else:
+					#print("no island")
+					pass
 		else:
 			#print("no result")
 			pass
@@ -350,6 +480,10 @@ func attempt_build_current_building():
 			current_building._print_state()
 		elif current_building_id == Buildings.Ids.Tent:
 			current_building._print_state()
+		return
+		
+	if !current_island_for_building:
+		audio_player.play_invalid_construction()
 		return
 	
 	if !has_resources_to_construct_building(current_building_def):
@@ -422,7 +556,9 @@ func attempt_build_current_building():
 			ECS.world.emit_event(
 				ECSEvents.HOUSING_BUILDING_ADDED, 
 				current_building,
-				{}
+				{
+					"island": current_island_for_building,
+				}
 			)
 		
 		Buildings.Ids.Lumberjack,\
@@ -431,10 +567,12 @@ func attempt_build_current_building():
 			ECS.world.emit_event(
 				ECSEvents.PRODUCTION_BUILDING_ADDED, 
 				current_building,
-				#{"my_data": 10}
-				{}
+				{
+					"island": current_island_for_building,
+				}
 			)
 		Buildings.Ids.Warehouse:
+			print("adding buoy to world")
 			var buoy: Entity = current_building.buoy
 			buoy.add_relationship(
 				Rels.create_belongs_to(current_building)
@@ -444,6 +582,14 @@ func attempt_build_current_building():
 			pass
 		_:
 			print("current_building_id:", current_building_id)
+	
+	ECS.world.emit_event(
+		ECSEvents.GENERIC_BUILDING_ADDED, 
+		current_building,
+		{
+			"island": current_island_for_building,
+		}
+	)
 	
 	# Info: this allows to be able to click on the building creation button again
 	# FIXME: maybe do not disable the button, not sure why this is done
@@ -469,9 +615,12 @@ func attempt_build_current_building():
 			current_building.multimesh_instance_area_entered_main_area.connect(
 				_on_multimesh_instance_area_exited_main_area
 			)
+			
+	
 	
 	current_building = null
 	current_building_def = null
+	current_island_for_building = null
 	
 	rtsCamera.changing_distance_enabled = true
 	
@@ -479,67 +628,13 @@ func attempt_build_current_building():
 
 func finalize_existing_buildings():
 	print("finalize_existing_buildings")
-	# TODO: maybe we should have a better system
-	var buildings = SceneUtils.find_all_child_of_type_depth_first(
-		map,
-		Entity,
-	)
-	for building in buildings:
-		
-		if building is Entity:
-			ECS.world.add_entity(building)
-			
-			var c_building: C_Building = building.get_component(C_Building)
-			
-			if c_building:
-				if building.has_method("finalize_construction"):
-					building.finalize_construction()
-				else:
-					printerr("building %s does not have finalize_construction" % [
-						building.name
-					])
-					push_error("building %s does not have finalize_construction" % [
-						building.name
-					])
-				
-				building.add_relationship(Rels.create_belongs_to(city))
-			
-			#var c_building: C_Building = building.get_component(C_Building)
-			#if c_building:
-				if c_building.building_type in production_building_ids:
-					ECS.world.emit_event(
-						ECSEvents.PRODUCTION_BUILDING_ADDED, 
-						building,
-						{}
-					)
-				elif c_building.building_type in housing_building_ids:
-					ECS.world.emit_event(
-						ECSEvents.HOUSING_BUILDING_ADDED, 
-						building,
-						{}
-					)
-			#else:
-				#push_error("building %s does not have C_Building" % [
-					#building.name,
-				#])
-
-		if building is Dock_ECS:
-			print("adding buoy of dock")
-			building.buoy.add_relationship(
-				# FIXME: part_of component?
-				Rels.create_belongs_to(building)
-			)
-			var c_dock_buoy: C_DockBuoy = C_DockBuoy.new(0)
-			building.buoy.add_component(c_dock_buoy)
-			# WARN: it's already added by the statement before
-			#ECS.world.add_entity(building.buoy)
-		
-		if building is IslandGECS1:
-			building.add_to_ecs_world()
+	map.add_buildings_to_ecs(city)
 
 func _on_ask_create_building(building_id: Buildings.Ids):
 	
-	# TODO: queue system
+	# TODO: queue system?
+	if current_building:
+		cancel_build_current_building()
 	
 	if !building_list_definition.builtin_buildings.has(building_id):
 		if !building_list_definition.extra_buildings.has(building_id):
@@ -803,7 +898,7 @@ func right_click_at_mouse_pos():
 		right_click_target.global_position = position_
 		#sail_ship_1.add_component(target)
 		ECS.world.emit_event(
-			&"add_component_to_entity_requested", 
+			ECSEvents.ADD_COMPONENT_TO_ENTITY_REQUESTED,
 			sail_ship_1,
 			{
 				"component": target,
@@ -857,23 +952,22 @@ func identify_node_below_mouse():
 			#])
 			var c_island: C_Island = island_parent.get_component(C_Island)
 			if c_island:
-				event_bus.send_city_name_changed.emit(
-					c_island.island_name,
-				)
-				event_bus.send_mouse_over_object_changed.emit(
-					c_island.island_name,
-					collider,
-				)
+				if island_parent != current_island:
+					current_island = island_parent
+					notify_summary_changed()
 			else:
 				push_error(
-					"island %s does not have C_Island" % [
+					"island %s does not have C_Island %s" % [
 						collider.name,
+						collider.get_path(),
 					]
 				)
 		else:
 			var collider_parent = collider.get_parent()
 			if collider_parent is OceanNode1:
 				#print("found ocean")
+				current_island = null
+				notify_summary_changed()
 				event_bus.send_city_name_changed.emit(
 					collider_parent.ocean_name
 				)

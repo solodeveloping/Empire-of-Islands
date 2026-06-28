@@ -63,10 +63,7 @@ var timer: Timer
 var curve_has_changes_since_last_time = false
 
 func _ready() -> void:
-	if curve == null:
-		curve = Curve3D.new()
-	if not ResourceUtils.is_local(curve):
-		curve = curve.duplicate(true)
+	print("Goshape:_ready")
 	
 	if !has_node("container"):
 		container = Node3D.new()
@@ -93,8 +90,14 @@ func _ready() -> void:
 		
 	timer.start()
 	
+	if curve == null:
+		curve = Curve3D.new()
+	if not ResourceUtils.is_local(curve):
+		curve = curve.duplicate(true)
+	
 
 func _enter_tree() -> void:
+	print("goshape:_enter_tree")
 	set_display_folded(true)
 	set_meta("_edit_group_", true)
 	
@@ -105,12 +108,12 @@ func _exit_tree() -> void:
 
 func _get_is_editing() -> bool:
 	return Engine.is_editor_hint() and self.edit_proxy != null
-	
-		
+
 func _edit_begin(edit_proxy) -> void:
-	print("_edit_begin")
+	print("goshape:_edit_begin")
 	if _get_is_editing():
 		return
+	print("goshape:_edit_begin:2")
 	self.edit_proxy = edit_proxy
 	#_edit_update()
 	
@@ -123,7 +126,7 @@ func _edit_begin(edit_proxy) -> void:
 	
 	
 func _edit_update() -> void:
-	print("_edit_update")
+	print("goshape:_edit_update")
 	if not Engine.is_editor_hint():
 		return
 	set_display_folded(true)
@@ -153,6 +156,7 @@ func _edit_end() -> void:
 	
 	
 func _init_curve() -> void:
+	print("goshape:_init_curve")
 	if curve == null:
 		curve = GoCurve3D.new()
 	curve.clear_points()
@@ -188,7 +192,7 @@ func recenter_points():
 	
 
 func on_curve_changed():
-	print("on_curve_changed")
+	print("goshape:on_curve_changed")
 	curve_has_changes_since_last_time = true
 	
 #func on_curve_changed():
@@ -207,9 +211,9 @@ func _check_curve_changed():
 		return
 		
 	if is_dirty:
-		print("dirty")
+		print("is_dirty")
 		return
-	print("yo")
+	print("_check_curve_changed:1")
 	# manual curve change detection
 	var has_change = false
 	var edited_point_changed = false
@@ -228,7 +232,7 @@ func _check_curve_changed():
 		print("no changes")
 		return
 	
-	print("yu")
+	print("_check_curve_changed:2")
 	is_dirty = true
 	curve.updating = true
 		
@@ -284,7 +288,7 @@ func _check_curve_changed():
 	if not path_options.flatten:
 		PathUtils.twist_curve(curve)
 		
-	print("yi")
+	print("_check_curve_changed:3")
 		
 	curve.updating = false
 	mark_dirty()
@@ -305,34 +309,38 @@ func _process(delta: float) -> void:
 	
 	# FIXME : this is working in the editor too
 	if debug_areas_at_runtime:
-		var mm: GridMultiMesh = SceneUtils.find_first_child_of_type_depth_first(
-			self,
-			GridMultiMesh
+		draw_areas_at_runtime()
+	
+func draw_areas_at_runtime():
+	print("goshape:draw_areas_at_runtime")
+	var mm: GridMultiMesh = SceneUtils.find_first_child_of_type_depth_first(
+		self,
+		GridMultiMesh
+	)
+	if mm:
+		var areas = SceneUtils.find_all_child_of_type_depth_first(
+			mm,
+			Area3D
 		)
-		if mm:
-			var areas = SceneUtils.find_all_child_of_type_depth_first(
-				mm,
-				Area3D
-			)
-			for area: Area3D in areas:
-				var collider = area.get_child(0)
-				var shape = collider.shape
-				if shape is CylinderShape3D:
-					var color = Color.BLUE
-					if area.process_mode == ProcessMode.PROCESS_MODE_DISABLED:
-						if area.is_hidden == false:
-							color = Color.RED
-						else:
-							color = Color.ORANGE
+		for area: Area3D in areas:
+			var collider = area.get_child(0)
+			var shape = collider.shape
+			if shape is CylinderShape3D:
+				var color = Color.BLUE
+				if area.process_mode == ProcessMode.PROCESS_MODE_DISABLED:
+					if area.is_hidden == false:
+						color = Color.RED
 					else:
-						if area.is_hidden == true:
-							color = Color.WEB_GREEN
-					DebugDraw3D.draw_cylinder_ab(
-						collider.global_position - Vector3(0, shape.height / 2, 0),
-						collider.global_position + Vector3(0, shape.height / 2, 0),
-						shape.radius,
-						color
-					)
+						color = Color.ORANGE
+				else:
+					if area.is_hidden == true:
+						color = Color.WEB_GREEN
+				DebugDraw3D.draw_cylinder_ab(
+					collider.global_position - Vector3(0, shape.height / 2, 0),
+					collider.global_position + Vector3(0, shape.height / 2, 0),
+					shape.radius,
+					color
+				)
 
 func _update() -> void:	
 	if not _get_is_editing():
@@ -343,6 +351,8 @@ func _update() -> void:
 		return
 	if not is_dirty:
 		return
+		
+	print("goshape:_update")
 		
 	if not edit_proxy.mouse_down:
 		pass#axis_match_index = -1
@@ -356,11 +366,14 @@ func _update() -> void:
 	build()
 
 func regenerate():
+	print("goshape:regenerate")
 	build()
 
 func build() -> void:
 	if not shaper:
-		return	
+		return
+		
+	print("goshape:build")
 	
 	var runner = edit_proxy.runner
 	if BLOCKING and runner.is_busy:
@@ -398,6 +411,7 @@ func build_clear(runner: GoshapeRunner) -> void:
 	
 	
 func build_run(runner: GoshapeRunner, rebuild := false) -> void:
+	print("goshape:build_run")
 	build_clear(runner)
 	var data = GoshapeBuildData.new()
 	data.parent = self.container

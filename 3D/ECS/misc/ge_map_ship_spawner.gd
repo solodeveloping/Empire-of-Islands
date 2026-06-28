@@ -109,7 +109,7 @@ func _on_timer_timeout():
 		])
 	
 	#ECS.world.emit_event(
-		#&"add_component_to_entity_requested", 
+		#ECSEvents.ADD_COMPONENT_TO_ENTITY_REQUESTED, 
 		#sail_ship_1,
 		#{
 			#"component": target,

@@ -193,7 +193,7 @@ class ScatterBuilder extends ShapeBuilder:
 
 
 	func build(data: GoshapeBuildData) -> void:
-		print("build")
+		print("ScatterBuilder:build")
 		var path := data.path
 		if not style.model_source or not style.model_source.has_resource():
 			printerr("No scene(s) attached to ScatterShaper.")
@@ -270,6 +270,7 @@ class ScatterBuilder extends ShapeBuilder:
 				
 				
 	func commit(data: GoshapeBuildData) -> void:
+		Loggie.msg("ScatterBuilder:commit").info()
 		var path := data.path
 		var parent := data.parent
 		var place_on_ground := style.place_on_ground

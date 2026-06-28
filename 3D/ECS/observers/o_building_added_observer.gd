@@ -4,10 +4,12 @@ extends Observer
 signal housing_capacity_increased(
 	pop_type: int,
 	amount: int,
+	island: Entity,
 )
 signal workers_capacity_increased(
 	pop_type: int,
 	amount: int,
+	island: Entity,
 )
 signal pop_unit_found_work(
 	pop_type: int,
@@ -34,19 +36,45 @@ func sub_observers() -> Array[Array]:
 			q.with_all([C_Building]).on_event(ECSEvents.PRODUCTION_BUILDING_ADDED),
 			_on_production_building_added
 		],
+		[
+			q.with_all([C_Building]).on_event(ECSEvents.GENERIC_BUILDING_ADDED),
+			_on_generic_building_added
+		],
 	]
 
-func _on_housing_building_added(_event: Variant, entity: Entity, _data: Variant) -> void:
-	var c_housing: C_HousingCapacity = entity.get_component(C_HousingCapacity)
+func _on_housing_building_added(_event: Variant, entity: Entity, data: Variant) -> void:
+	var island: Entity = data.island
+	if !island:
+		push_error("island is not present in data")
+	
+	var c_housing: C_HousingCapacity = entity.get_component(
+		C_HousingCapacity
+	)
+	
+	var c_pop_summary: C_PopulationSummary = island.get_component(
+		C_PopulationSummary
+	)
+	if c_pop_summary:
+		c_pop_summary.housing_capacity_increase(
+			c_housing.pop_type,
+			c_housing.maximum,
+		)
+	else:
+		push_error("island does not have C_PopulationSummary")
 	
 	housing_capacity_increased.emit(
 		c_housing.pop_type,
 		c_housing.maximum,
+		island,
 	)
 	
 	# TODO : pop units without housing
 	var pop_needing_housing = ECS.world.query.with_all(
 		[C_LookingForHousing]
+	).with_relationship(
+		[
+			Rels.create_is_on_island(data.island)
+		]
 	).execute()
 	if pop_needing_housing.size() == 0:
 		return
@@ -98,7 +126,15 @@ func find_building_needing_workers(b: ClassForLambdaFunction, c_housing: C_Housi
 		b.building_needing_workers_exist = true
 		break
 
-func _on_production_building_added(_event: Variant, entity: Entity, _data: Variant) -> void:
+func _on_production_building_added(
+	_event: Variant,
+	entity: Entity,
+	data: Variant,
+) -> void:
+	var island: Entity = data.island
+	if !island:
+		push_error("island is not present in data")
+	
 	var c_worker_requirements: C_WorkerRequirement = entity.get_component(C_WorkerRequirement)
 	var c_workers: C_Workers = entity.get_component(C_Workers)
 	if !c_worker_requirements or !c_workers:
@@ -106,15 +142,31 @@ func _on_production_building_added(_event: Variant, entity: Entity, _data: Varia
 		# TODO : exit?
 		return
 	
+	var c_pop_summary: C_PopulationSummary = island.get_component(
+		C_PopulationSummary
+	)
 	for req in c_worker_requirements.requirements:
+		if c_pop_summary:
+			c_pop_summary.worker_capacities_increase(
+				req.worker_type,
+				req.worker_count,
+			)
+		else:
+			push_error("island does not have C_PopulationSummary")
+		
 		workers_capacity_increased.emit(
 			req.worker_type,
 			req.worker_count,
+			island,
 		)
 		
 	# TODO: optimize by filtering by city?
 	var available_workers = ECS.world.query.with_all(
 		[C_JobLess]
+	).with_relationship(
+		[
+			Rels.create_is_on_island(data.island)
+		]
 	).execute()
 	if available_workers.size() > 0:
 		for worker: Entity in available_workers:
@@ -136,7 +188,10 @@ func _on_production_building_added(_event: Variant, entity: Entity, _data: Varia
 			
 			pop_unit.is_working = true
 			cmd.remove_component(worker, C_JobLess)
-			pop_unit_found_work.emit(pop_unit.pop_type)
+			pop_unit_found_work.emit(
+				pop_unit.pop_type,
+				data.island,
+			)
 			
 			# TODO: early return if done
 		
@@ -151,3 +206,10 @@ func _on_production_building_added(_event: Variant, entity: Entity, _data: Varia
 	if is_one_missing == true:
 		#entity.add_component(C_MissingWorkers.new())
 		cmd.add_component(entity, C_MissingWorkers.new())
+
+func _on_generic_building_added(_event: Variant, entity: Entity, data: Variant) -> void:
+	if !data.island:
+		push_error("no island provided")
+		return
+
+	cmd.add_relationship(entity, Rels.create_built_on(data.island))

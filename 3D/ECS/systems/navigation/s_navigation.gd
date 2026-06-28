@@ -49,62 +49,44 @@ func move_agents(entities: Array[Entity], _components: Array, delta: float):
 			if entity.has_component(C_ShipMovingToDock):
 				var c_docks_visited: C_DocksVisited = entity.get_component(C_DocksVisited)
 				var r_going_to = entity.get_relationship(Rels.going_to)
-				var target_entity = r_going_to.target as Entity
-				var c_dock_buoy: C_DockBuoy = target_entity.get_component(C_DockBuoy)
-				c_docks_visited.visited_dock_buoy_ids.push_back(c_dock_buoy.id)
+				var buoy = r_going_to.target as Entity
+				#var c_dock_buoy: C_DockBuoy = buoy.get_component(C_DockBuoy)
+				c_docks_visited.visited_dock_buoy_ids.push_back(
+					#c_dock_buoy.id
+					buoy.id,
+				)
 				cmd.add_component(entity, C_ShipWaitingAtDock.new(10.0))
 				
-				# TODO : move it to another system?
-				if entity.has_component(C_ShipPopulation):
-					var c_ship_population: C_ShipPopulation = entity.get_component(C_ShipPopulation)
-					if !c_ship_population:
-						continue
-						
-					if c_ship_population.current <= 0:
-						continue
+				var r_dock: Relationship = buoy.get_relationship(
+					Relationship.new(
+						R_BelongsTo.new()
+					)
+				)
+				if !r_dock:
+					push_error("dock not found")
 					
-					# FIXME: better system
-					# Info: we have to duplicate because we receive a copy
-					var pop_units: Array = ECS.world.query.with_relationship([
-						Relationship.new(R_TravelsIn.new(), entity),
-					]).execute().duplicate()
-					
-					print("found %s - %s pop_units travelling in ship" % [
-						pop_units.size(),
-						c_ship_population.current,
-					])
-					
-					if pop_units.is_empty():
-						printerr("no pop units travelling in ship found")
-						#continue
-					
-					if pop_units.size() != c_ship_population.current:
-						push_error("c_pop_units.size() %s != c_ship_population.current %s" % [
-							pop_units.size(),
-							c_ship_population.current,
-						])
-					
-					# Info: this can break before the loop is done
-					# If it's not a duplicated array
-					#for pop_unit in pop_units:
-					for i in pop_units.size():
-						print("emitting POP_UNIT_JOINED %s" % [
-							i,
-						])
-						# Info: this is synchronous, the event will be processed before moving on
-						# to the next loop
-						ECS.world.emit_event(
-							ECSEvents.POP_UNIT_JOINED, 
-							#pop_unit,
-							pop_units[i],
-							{}
-						)
-						
-						cmd.remove_relationship(pop_units[i], Rels.travels_in)
-					
-					#print("done iterating %s" % [
-						#pop_units.size()
-					#])
+				var dock: Entity = r_dock.target
+				var r_island: Relationship = dock.get_relationship(
+					Relationship.new(
+						R_BuiltOn.new()
+					)
+				)
+				if !r_island:
+					push_error("island not found")
+				
+				var island: Entity = r_island.target
+				if !island:
+					push_error("island is null")
+				
+				ECS.world.emit_event(
+					ECSEvents.SHIP_UNLOAD_REQUESTED,
+					entity,
+					{
+						"buoy": buoy,
+						"dock": dock,
+						"island": island,
+					}
+				)
 			
 			# Info: we are arriving at an exut
 			if entity.has_component(C_ShipMovingToExit):

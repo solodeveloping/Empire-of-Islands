@@ -36,9 +36,8 @@ extends WallShaper
 			
 			
 func on_curve_changed() -> void:
-	print("curve changed", Time.get_datetime_string_from_system())
+	print("WallCurveShaper: curve changed ", Time.get_datetime_string_from_system())
 	emit_changed()
-			
 
 func create_builders() -> Array[ShapeBuilder]:
 	return [WallCurveBuilder.new(self)]

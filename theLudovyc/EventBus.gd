@@ -30,6 +30,7 @@ signal send_natural_resource_deselected(natural_resource)
 ## POPULATION / WORKER
 signal population_updated(population_count)
 signal housing_capacity_updated(housing_capacity)
+# FIXME: we are using it as "people_with_a_job" currently, in 3D
 signal available_workers_updated(available_workers_amount)
 signal worker_capacities_updated(available_worker_capacities_amount)
 

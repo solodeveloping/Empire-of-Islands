@@ -278,7 +278,7 @@ func modify_selected(method: String = "", arg = null) -> void:
 	
 	
 func _on_selection_changed() -> void:
-	print("_on_selection_changed")
+	print("goshape:_on_selection_changed")
 	if reselecting:
 		return
 		

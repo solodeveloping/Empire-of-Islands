@@ -1,0 +1,2 @@
+extends Component
+class_name R_BuiltOn

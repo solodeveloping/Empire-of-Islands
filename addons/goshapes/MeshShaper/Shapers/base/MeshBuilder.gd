@@ -57,6 +57,9 @@ func apply_collider(parent: Node3D, collision_mesh: ArrayMesh) -> StaticBody3D:
 	var collider_body := StaticBody3D.new()
 	collider_body.name = "%sBody" % collision_mesh.resource_name
 	collider_body.collision_layer = base_style.collision_layer
+	# Info: we do this because of a Godot bug
+	# https://github.com/godotengine/godot/issues/120619
+	collider_body.hide()
 	SceneUtils.add_child(parent, collider_body)
 	var collider_shape := CollisionShape3D.new()
 	collider_shape.name = "%sCollider" % collision_mesh.resource_name
