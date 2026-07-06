@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://dynkyuovl2t76"]
+
+[ext_resource type="PackedScene" uid="uid://cj58mgwq0tw3b" path="res://3D/prefabs/islands/Island1_binary.scn" id="1_qm2bw"]
+[ext_resource type="Shader" uid="uid://d34owjk0phptk" path="res://VFX/ocean/visual_shaders/ocean_visual_shader_2/ocean_visual_shader_2.tres" id="2_ccgi3"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ccgi3"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_6x2l5"]
+sky_material = SubResource("ProceduralSkyMaterial_ccgi3")
+
+[sub_resource type="Environment" id="Environment_5jw3s"]
+background_mode = 2
+sky = SubResource("Sky_6x2l5")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_fyo8i"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_38lkd"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ccgi3"]
+noise = SubResource("FastNoiseLite_38lkd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5mvnw"]
+render_priority = 0
+shader = ExtResource("2_ccgi3")
+shader_parameter/BaseColor = Color(3e-06, 0.695316, 0.979321, 1)
+shader_parameter/OceanSize = 1000
+shader_parameter/AbyssWorldSize = 10
+shader_parameter/AbyssTexture = SubResource("NoiseTexture2D_ccgi3")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_sfkqh"]
+size = Vector2(1000, 1000)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sfkqh"]
+
+[node name="Test1" type="Node3D" unique_id=1820604178]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=260448933]
+environment = SubResource("Environment_5jw3s")
+camera_attributes = SubResource("CameraAttributesPractical_fyo8i")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=37747371]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_max_distance = 1.0
+
+[node name="Island1Binary" parent="." unique_id=1967343092 instance=ExtResource("1_qm2bw")]
+
+[node name="Ocean" type="MeshInstance3D" parent="." unique_id=660476261]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9798012, 0)
+material_override = SubResource("ShaderMaterial_5mvnw")
+mesh = SubResource("PlaneMesh_sfkqh")
+
+[node name="Something" type="MeshInstance3D" parent="." unique_id=1508310369]
+material_override = SubResource("StandardMaterial3D_sfkqh")

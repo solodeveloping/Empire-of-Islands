@@ -2,6 +2,7 @@ extends Node3D
 
 @onready var island_1: IslandGECS1 = $Island1
 @onready var buildings: Node3D = $Buildings
+@onready var oceans: Node3D = $Oceans
 
 # FIXME: duplicated
 var production_building_ids: Array[int] = [
@@ -15,8 +16,14 @@ var housing_building_ids: Array[int] = [
 	Buildings.Ids.StoneHouse,
 ]
 
+var current_ocean: Node3D
+
 func _ready() -> void:
 	Loggie.msg("TestMap1:_ready").info()
+	
+	for child in oceans.get_children():
+		child.hide()
+	select_ocean_visual(0)
 
 func add_buildings_to_ecs(city: Entity):
 	# TODO: maybe we should have a better system
@@ -76,7 +83,9 @@ func add_buildings_to_ecs(city: Entity):
 				Rels.create_belongs_to(building)
 			)
 			# FIXME: id is 0, how do we handle more ids
-			building.id
+			# We are using the builting string id
+			# But it's more expansive
+			# Like 8 * 32 times more expansive
 			var c_dock_buoy: C_DockBuoy = C_DockBuoy.new(0)
 			building.buoy.add_component(c_dock_buoy)
 			# WARN: it's already added by the statement before
@@ -100,3 +109,9 @@ func add_buildings_to_ecs(city: Entity):
 					"island": island_1,
 				}
 			)
+
+func select_ocean_visual(id: int):
+	if current_ocean:
+		current_ocean.hide()
+	current_ocean = oceans.get_child(id)
+	current_ocean.show()

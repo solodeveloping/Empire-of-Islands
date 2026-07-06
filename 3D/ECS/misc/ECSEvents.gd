@@ -16,5 +16,12 @@ static var ASSIGN_BUILDING_TO_ISLAND_REQUESTED: StringName = &"assign_building_t
 static var POP_UNIT_JOINED: StringName = &"pop_unit_joined"
 static var POP_UNIT_LEFT_HOUSING: StringName = &"pop_unit_left_housing"
 static var POP_UNIT_LEFT_PRODUCTION_BUILDING: StringName = &"pop_unit_left_production_building"
+static var POP_UNIT_REACHED_MOVE_TARGET = &"pop_unit_reached_move_target"
+static var POP_UNIT_LEAVE_WORKPLACE_REQUESTED = &"pop_unit_leave_workplace_requested"
+static var POP_UNIT_LEAVE_HOUSING_REQUESTED = &"pop_unit_leave_housing_requested"
+## Used by [O_PopulationObserver]
+static var PRODUCTION_BUILDING_REASSIGN_POP_UNITS_REQUESTED = &"production_building_reassign_pop_units_requested"
+## Used by [O_PopulationObserver]
+static var HOUSING_BUILDING_REASSIGN_POP_UNITS_REQUESTED = &"housing_building_reassign_pop_units_requested"
 
 static var SHIP_UNLOAD_REQUESTED: StringName = &"ship_unload_requested"

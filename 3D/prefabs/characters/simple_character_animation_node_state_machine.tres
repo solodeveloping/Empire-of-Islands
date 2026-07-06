@@ -1,0 +1,41 @@
+[gd_resource type="AnimationNodeStateMachine" format=3 uid="uid://5bofmgsoesfl"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p1dkg"]
+animation = &"animation_library_standard/Walk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_aalxw"]
+animation = &"animation_library_standard/Sprint"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_os8by"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_p1dkg")
+blend_point_0/pos = 0.0
+blend_point_0/name = &"animation_library_standard_Walk"
+blend_point_1/node = SubResource("AnimationNodeAnimation_aalxw")
+blend_point_1/pos = 1.0
+blend_point_1/name = &"animation_library_standard_Sprint"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_abx2t"]
+animation = &"animation_library_standard/Idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ajk0u"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wm8e7"]
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6y54u"]
+advance_mode = 2
+advance_condition = &"walk_run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vco0o"]
+advance_mode = 2
+advance_condition = &"stop_walk_run"
+
+[resource]
+states/Start/position = Vector2(253, 100)
+states/WalkRun/node = SubResource("AnimationNodeBlendSpace1D_os8by")
+states/WalkRun/position = Vector2(569, -23)
+states/animation_library_standard_Idle/node = SubResource("AnimationNodeAnimation_abx2t")
+states/animation_library_standard_Idle/position = Vector2(569, 95)
+transitions = ["Start", "animation_library_standard_Idle", SubResource("AnimationNodeStateMachineTransition_ajk0u"), "animation_library_standard_Idle", "End", SubResource("AnimationNodeStateMachineTransition_wm8e7"), "animation_library_standard_Idle", "WalkRun", SubResource("AnimationNodeStateMachineTransition_6y54u"), "WalkRun", "animation_library_standard_Idle", SubResource("AnimationNodeStateMachineTransition_vco0o")]
+graph_offset = Vector2(-7, -88)

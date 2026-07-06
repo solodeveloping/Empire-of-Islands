@@ -6,6 +6,9 @@ class_name O_PopulationObserver
 # FIXME: should we keep this?
 signal new_pop_unit_joined(pop_type: int, island: Entity)
 signal pop_unit_found_work(pop_type: int, island: Entity)
+signal pop_unit_left_work(pop_type: int, island: Entity)
+
+# TODO: event for leave housing
 
 class ClassForLambdaFunction:
 	var buildings_needing_workers: Array
@@ -19,9 +22,45 @@ class ClassForLambdaFunction:
 func sub_observers() -> Array[Array]:
 	return [
 		[
-			q.with_all([C_PopUnit]).on_event(ECSEvents.POP_UNIT_JOINED),
+			q.with_all([C_PopUnit]).on_event(
+				ECSEvents.POP_UNIT_JOINED
+			),
 			_on_pop_unit_joined_island
 		],
+		[
+			q.with_all([C_PopUnit]).on_event(
+				ECSEvents.POP_UNIT_LEAVE_WORKPLACE_REQUESTED
+			),
+			_on_pop_unit_leave_workplace_requested
+		],
+		[
+			q.with_all([C_PopUnit]).on_event(
+				ECSEvents.POP_UNIT_LEAVE_HOUSING_REQUESTED
+			),
+			_on_pop_unit_leave_housing_requested
+		],
+		# FIXME: maybe move this elsewhere
+		[
+			q.with_all([C_Building]).on_event(
+				ECSEvents.PRODUCTION_BUILDING_REASSIGN_POP_UNITS_REQUESTED
+			),
+			_on_production_building_reassign_pop_units_requested
+		],
+		[
+			q.with_all([C_Building]).on_event(
+				ECSEvents.HOUSING_BUILDING_REASSIGN_POP_UNITS_REQUESTED
+			),
+			_on_housing_building_reassign_pop_units_requested
+		],
+		# Info: not possible
+		#[
+			#q.with_all([
+				#C_PopUnit,
+				## Info: we are using cmd so it does have the component yet
+				##C_LookingForMoveTarget,
+			#]).on_event("looking_for_move_target"),
+			#_on_pop_unit_looking_for_move_target
+		#],
 		#[
 			#q.with_all([C_PopUnit]).on_event(ECSEvents.POP_UNIT_LEFT_HOUSING),
 			#_on_pop_unit_left_housing
@@ -61,6 +100,11 @@ func _on_pop_unit_joined_island(
 		c_pop_summary.population_increase(c_pop_unit.pop_type, 1)
 	else:
 		push_error("island does not have C_PopulationSummary")
+		
+	spawn_pop_unit_visual(
+		entity,
+		data.dock,
+	)
 	
 	new_pop_unit_joined.emit(
 		c_pop_unit.pop_type,
@@ -78,7 +122,7 @@ func _on_pop_unit_joined_island(
 func _find_and_assign_production_buildings(
 	_event: Variant,
 	entity: Entity,
-	data: Variant,
+	_data: Variant,
 	island: Entity,
 ):
 	var c_pop_unit: C_PopUnit = entity.get_component(C_PopUnit)
@@ -238,7 +282,10 @@ func _find_and_assign_housing_to_pop_unit(
 		if c_housing_capacity.current >= c_housing_capacity.maximum:
 			cmd.remove_component(housing, C_NotFullyOccupied)
 			housing_buildings.erase(housing)
-			
+		
+		print("adding lives_in relationship %s" % [
+			entity.name,
+		])
 		cmd.add_relationship(entity, Rels.create_lives_in(housing))
 		
 		# WARN: important to stop looping once we found a housing
@@ -249,44 +296,108 @@ func _find_and_assign_housing_to_pop_unit(
 
 	return found_housing
 
-func find_and_assign_housing_to_pop_units(
-	entities: Array,
+func _on_housing_building_reassign_pop_units_requested(
+	_event: Variant,
+	building: Entity,
+	data: Variant,
+):
+	_find_and_assign_housing_to_pop_units(
+		data.pop_units,
+		building,
+	)
+
+# Info: this is called when deleting an existing housing building
+# FIXME: maybe semantic should be different
+func _find_and_assign_housing_to_pop_units(
+	pop_units: Array,
 	existing_building: Entity = null
 ):
 	var housing_buildings = ECS.world.query.with_all(
 		[C_HousingCapacity, C_NotFullyOccupied]
 	).enabled().execute()
-	for entity: Entity in entities:
+	for pop_unit: Entity in pop_units:
 		if existing_building:
-			cmd.remove_relationship(entity, Rels.create_lives_in(existing_building))
+			cmd.remove_relationship(
+				pop_unit,
+				Rels.create_lives_in(existing_building)
+			)
 		
 		if housing_buildings.is_empty():
-			if !entity.has_component(C_LookingForHousing):
-				cmd.add_component(entity, C_LookingForHousing.new())
+			if !pop_unit.has_component(C_LookingForHousing):
+				cmd.add_component(pop_unit, C_LookingForHousing.new())
 			continue
 		
+		var c_loc: C_PopUnitLocation = pop_unit.get_component(
+			C_PopUnitLocation
+		)
+		if c_loc.location == C_PopUnitLocation.LOCATION.HOUSING:
+			c_loc.location = C_PopUnitLocation.LOCATION.IDLE_ON_LAND
+		
 		var found_housing = _find_and_assign_housing_to_pop_unit(
-			entity,
+			pop_unit,
 			housing_buildings,
 		)
 		if !found_housing:
-			if !entity.has_component(C_LookingForHousing):
-				cmd.add_component(entity, C_LookingForHousing.new())
+			if !pop_unit.has_component(C_LookingForHousing):
+				cmd.add_component(
+					pop_unit,
+					C_LookingForHousing.new()
+				)
+			if !pop_unit.visible:
+				pop_unit.show()
+				pop_unit.set_deferred("disabled", false)
+		else:
+			# FIXME: prolly should not be here
+			# the notion to know where to go
+			
+			# if not at work, find a new loc to go to
+			if c_loc.location != C_PopUnitLocation.LOCATION.WORKPLACE:
+				if !pop_unit.visible:
+					print("showing pop_unit")
+					pop_unit.show()
+					pop_unit.set_deferred("disabled", false)
+				
+				print("adding C_LookingForMoveTarget %s" % [
+					pop_unit.name,
+				])
+				cmd.add_component(
+					pop_unit,
+					C_LookingForMoveTarget.new(),
+				)
+
+func _on_production_building_reassign_pop_units_requested(
+	_event: Variant,
+	building: Entity,
+	data: Variant,
+):
+	_find_and_assign_production_building_to_pop_units(
+		data.pop_units,
+		building,
+	)
 
 # Info: this is called when we need to reassign a batch of units
-func find_and_assign_production_building_to_pop_units(
+func _find_and_assign_production_building_to_pop_units(
 	entities: Array,
 	existing_building: Entity = null
 ):
+	Loggie.msg("find_and_assign_production_building_to_pop_units %s %s" % [
+		existing_building.name,
+		entities.size(),
+	]).color(Color.CYAN).info()
 	var buildings = ECS.world.query.with_all(
 		[C_MissingWorkers, C_WorkerRequirement, C_Workers]
 	).enabled().execute().duplicate()
 	
-	for entity: Entity in entities:
-		if existing_building:
-			cmd.remove_relationship(entity, Rels.create_works_at(existing_building))
+	for pop_unit: Entity in entities:
+		LogMonitor.add(pop_unit.name)
 		
-		var c_pop_unit: C_PopUnit = entity.get_component(C_PopUnit)
+		if existing_building:
+			cmd.remove_relationship(
+				pop_unit,
+				Rels.create_works_at(existing_building)
+			)
+		
+		var c_pop_unit: C_PopUnit = pop_unit.get_component(C_PopUnit)
 		
 		var found_building: bool = false
 		for building: Entity in buildings:
@@ -298,15 +409,176 @@ func find_and_assign_production_building_to_pop_units(
 				if worker.worker_count >= req.worker_count:
 					continue
 				
+				print("found workplace for %s %s"% [
+					pop_unit.name,
+					building.name,
+				])
 				found_building = true
 				worker.worker_count += 1
-				cmd.add_relationship(entity, Rels.create_works_at(building))
+				cmd.add_relationship(
+					pop_unit,
+					Rels.create_works_at(building)
+				)
 				
 				# Info: we are removing the building if we can assess it's full
 				if c_workers.workers.size() == 1 and worker.worker_count >= req.worker_count:
 					buildings.erase(building)
 				
 		if !found_building:
+			print("did not find workplace for %s" % [
+				pop_unit.name,
+			])
 			c_pop_unit.is_working = false
-			if !entity.has_component(C_JobLess):
-				cmd.add_component(entity, C_JobLess.new())
+			if !pop_unit.has_component(C_JobLess):
+				cmd.add_component(pop_unit, C_JobLess.new())
+		
+		# FIXME: maybe C_LookingForMoveTarget could do that
+		var c_loc: C_PopUnitLocation = pop_unit.get_component(
+			C_PopUnitLocation
+		)
+		if c_loc.location == C_PopUnitLocation.LOCATION.WORKPLACE:
+			c_loc.location = C_PopUnitLocation.LOCATION.IDLE_ON_LAND
+		
+		if !pop_unit.visible:
+			print("showing pop_unit")
+			pop_unit.show()
+			pop_unit.set_deferred("disabled", false)
+		
+		print("adding C_LookingForMoveTarget %s %s" % [
+			pop_unit.name,
+			existing_building.name,
+		])
+		cmd.add_component(
+			pop_unit,
+			C_LookingForMoveTarget.new(),
+		)
+		
+
+func spawn_pop_unit_visual(
+	pop_unit: Entity,
+	dock: Entity,
+):
+	if !pop_unit.has_component(C_PopUnitWithVisual):
+		return
+	
+	var spawn_point = dock.get_spawn_point()
+	
+	pop_unit.set_deferred("disabled", false)
+	pop_unit.show()
+	
+	var offset = Vector3(
+		randf_range(0, 3),
+		0,
+		randf_range(0, 3)
+	)
+	
+	pop_unit.global_position = spawn_point.global_position + offset
+	
+	var c_loc: C_PopUnitLocation = pop_unit.get_component(C_PopUnitLocation)
+	if c_loc:
+		c_loc.location = C_PopUnitLocation.LOCATION.IDLE_ON_LAND
+	else:
+		printerr("could not find C_PopUnitLocation")
+		
+	cmd.add_component(pop_unit, C_LookingForMoveTarget.new())
+	
+	# Info: we are adding those with cmd so they're not present yet
+	#var has_housing = pop_unit.has_relationship(Rels.lives_in)
+	#print("has_housing: %s" % [
+		#has_housing,
+	#])
+	
+	# Info: we do not have the components because the events are sync
+	#ECS.world.emit_event(
+		#"looking_for_move_target", 
+		#pop_unit,
+		#{
+		#}
+	#)
+
+#func _on_pop_unit_looking_for_move_target(
+	#event: Variant,
+	#entity: Entity,
+	#data: Variant
+#):
+	#var has_housing = entity.has_relationship(Rels.lives_in)
+	#print("has_housing: %s" % [
+		#has_housing,
+	#])
+
+
+
+func _on_pop_unit_leave_workplace_requested(
+	_event: Variant,
+	pop_unit: Entity,
+	data: Variant,
+):
+	print("_on_pop_unit_leave_workplace_requested")
+	var building: Entity = data.building
+	var c_workers: C_Workers = building.get_component(C_Workers)
+	var c_pop_unit: C_PopUnit = pop_unit.get_component(C_PopUnit)
+	
+	if c_workers and c_pop_unit:
+		var workers: WorkerQuantity = c_workers.workers.get(c_pop_unit.pop_type)
+		if workers:
+			workers.worker_count -= 1
+		else:
+			printerr("could not find workers for pop_type %s" % [
+				c_pop_unit.pop_type,
+			])
+	else:
+		printerr("C_Workers %s or C_PopUnit %s missing" % [
+			c_workers,
+			c_pop_unit,
+		])
+	
+	cmd.remove_relationship(
+		pop_unit,
+		Rels.works_at
+	)
+	
+	var r_built_on: Relationship = building.get_relationship(Rels.built_on)
+	if !r_built_on:
+		printerr("r_built_on not found")
+		return
+	
+	if !r_built_on.target:
+		printerr("!r_built_on.target")
+		return
+	
+	# FIXME: could be moved elsewhere?
+	var summary: C_PopulationSummary = r_built_on.target.get_component(
+		C_PopulationSummary
+	)
+	if summary:
+		summary.workers_decrease(
+			c_pop_unit.pop_type,
+			1
+		)
+	else:
+		printerr("C_PopulationSummary not found")
+	
+	pop_unit_left_work.emit(
+		c_pop_unit.pop_type,
+		r_built_on.target
+	)
+
+func _on_pop_unit_leave_housing_requested(
+	_event: Variant,
+	pop_unit: Entity,
+	data: Variant,
+):
+	print("_on_pop_unit_leave_housing_requested")
+	var building: Entity = data.building
+	var c_housing: C_HousingCapacity = building.get_component(
+		C_HousingCapacity
+	)
+	if c_housing:
+		c_housing.current -= 1
+	else:
+		printerr("C_HousingCapacity not found")
+	
+	cmd.remove_relationship(
+		pop_unit,
+		Rels.lives_in,
+	)

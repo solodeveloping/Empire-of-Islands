@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://d1mf0u5qb8iwc"]
+
+[ext_resource type="PackedScene" uid="uid://cj58mgwq0tw3b" path="res://3D/prefabs/islands/Island1_binary.scn" id="1_l2uxx"]
+[ext_resource type="Shader" uid="uid://be50ph36peocc" path="res://VFX/ocean/visual_shaders/simple_ocean_visual_shader_1/simple_ocean_visual_shader_1.tres" id="2_7givh"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_givq1"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_6x2l5"]
+sky_material = SubResource("ProceduralSkyMaterial_givq1")
+
+[sub_resource type="Environment" id="Environment_r27wg"]
+background_mode = 2
+sky = SubResource("Sky_6x2l5")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ojm1m"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_sivhc"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cmqjj"]
+noise = SubResource("FastNoiseLite_sivhc")
+seamless = true
+
+[sub_resource type="Gradient" id="Gradient_uabk6"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(2.9841065e-06, 0.5720001, 0.77269435, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_syd0k"]
+gradient = SubResource("Gradient_uabk6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d66px"]
+render_priority = 0
+shader = ExtResource("2_7givh")
+shader_parameter/ColorTexture = SubResource("GradientTexture1D_syd0k")
+shader_parameter/EdgeProximityFadeDistance = 1.0
+shader_parameter/AlbedoNoisePanningSpeed = Vector2(-0.005, -0.001)
+shader_parameter/AlbedoNoiseScale = Vector2(1, 1)
+shader_parameter/AlbedoNoiseDark = SubResource("NoiseTexture2D_cmqjj")
+shader_parameter/AlbedoNoiseStrngth = 0.8
+shader_parameter/MinAlpha = 0.8
+shader_parameter/Roughness = 0.2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_sfkqh"]
+size = Vector2(1000, 1000)
+
+[node name="Test1" type="Node3D" unique_id=686878714]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=802941859]
+environment = SubResource("Environment_r27wg")
+camera_attributes = SubResource("CameraAttributesPractical_ojm1m")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=666444406]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_max_distance = 1.0
+
+[node name="Island1Binary" parent="." unique_id=1967343092 instance=ExtResource("1_l2uxx")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=781499780]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+material_override = SubResource("ShaderMaterial_d66px")
+mesh = SubResource("PlaneMesh_sfkqh")

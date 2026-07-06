@@ -11,12 +11,16 @@ func sub_observers() -> Array[Array]:
 			),
 			_on_ship_unload_requested
 		],
+		
 	]
 
 func _on_ship_unload_requested(
 	_event: Variant,
 	entity: Entity,
 	data: Variant,
+	#"buoy": buoy,
+	#"dock": dock,
+	#"island": island,
 ) -> void:
 	if !entity.has_component(C_ShipPopulation):
 		push_error("_on_ship_waiting_for_unloading: entity does not has C_ShipPopulation")
@@ -24,9 +28,11 @@ func _on_ship_unload_requested(
 	
 	var c_ship_population: C_ShipPopulation = entity.get_component(C_ShipPopulation)
 	if !c_ship_population:
+		printerr("C_ShipPopulation not found")
 		return
 		
 	if c_ship_population.current <= 0:
+		printerr("c_ship_population.current <= 0")
 		return
 	
 	# FIXME: better system
@@ -99,8 +105,113 @@ func _on_ship_unload_requested(
 			pop_units[i],
 			{
 				"island": data.island,
+				"dock": data.dock,
+				"buoy": data.buoy,
 			}
 		)
 		
 		cmd.remove_relationship(pop_units[i], Rels.travels_in)
 	
+	# FIXME: semantic is not nice
+	# it's inside unload
+	# but the event is called from navigation
+	# maybe we need intermediary
+	load_ship(
+		entity,
+		c_ship_population,
+		data,
+	)
+
+func load_ship(
+	ship: Entity,
+	c_ship_population: C_ShipPopulation,
+	data: Variant,
+):
+	var pop_units: Array = ECS.world.query.with_all([
+		C_PopUnit,
+		C_LookingToLeaveIsland,
+	]).with_relationship([
+		Relationship.new(R_IsOnIsland.new(), data.island),
+	]).execute().duplicate()
+	
+	if pop_units.is_empty():
+		print("did not find pop units looking to leave the island")
+		return
+		
+	for pop_unit: Entity in pop_units:
+		# FIXME : maybe a method for this "is_full"
+		if c_ship_population.is_full():
+			break
+		
+		# hiding the unit and disabling physics
+		pop_unit.hide()
+		pop_unit.set_deferred("disabled", true)
+		
+		# removing the component
+		cmd.remove_component(
+			pop_unit,
+			C_LookingToLeaveIsland,
+		)
+		
+		# adding the unit to the ship
+		c_ship_population.current += 1
+		cmd.add_relationship(
+			pop_unit,
+			Rels.create_travels_in(
+				ship
+			)
+		)
+		
+		# making the unit leave the workplace
+		var r_work_at: Relationship = pop_unit.get_relationship(
+			Rels.works_at
+		)
+		if r_work_at:
+			if r_work_at.target:
+				ECS.world.emit_event(
+					ECSEvents.POP_UNIT_LEAVE_WORKPLACE_REQUESTED, 
+					pop_unit,
+					{
+						"building": r_work_at.target,
+					}
+				)
+			else:
+				printerr("!r_work_at.target")
+		
+		# making the unit leave the housing
+		var r_lives_in: Relationship = pop_unit.get_relationship(
+			Rels.lives_in
+		)
+		if r_lives_in:
+			if r_lives_in.target:
+				ECS.world.emit_event(
+					ECSEvents.POP_UNIT_LEAVE_HOUSING_REQUESTED, 
+					pop_unit,
+					{
+						"building": r_lives_in.target,
+					}
+				)
+			else:
+				printerr("!r_lives_in.target")
+		
+		# leave island
+		var r_is_on: Relationship = pop_unit.get_relationship(
+			Rels.is_on_island
+		)
+		if r_is_on:
+			if r_is_on.target:
+				cmd.remove_relationship(
+					pop_unit,
+					Rels.is_on_island,
+				)
+			else:
+				printerr("!r_is_on.target")
+		else:
+			printerr("!r_is_on")
+		
+		# add relationship with ship
+		cmd.add_relationship(
+			pop_unit,
+			Rels.create_travels_in(ship)
+		)
+		

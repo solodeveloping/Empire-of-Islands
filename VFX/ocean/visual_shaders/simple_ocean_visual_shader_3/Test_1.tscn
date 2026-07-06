@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://b3w8d7anxl44f"]
+
+[ext_resource type="PackedScene" uid="uid://cj58mgwq0tw3b" path="res://3D/prefabs/islands/Island1_binary.scn" id="1_iup5w"]
+[ext_resource type="Shader" uid="uid://c8q2dk870h4xv" path="res://VFX/ocean/visual_shaders/simple_ocean_visual_shader_3/simple_ocean_visual_shader_3.tres" id="2_4t70d"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_oq6tw"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_6x2l5"]
+sky_material = SubResource("ProceduralSkyMaterial_oq6tw")
+
+[sub_resource type="Environment" id="Environment_84plo"]
+background_mode = 2
+sky = SubResource("Sky_6x2l5")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_guf5o"]
+
+[sub_resource type="Gradient" id="Gradient_iup5w"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.007142857, 0.18571429, 0.6857143)
+colors = PackedColorArray(1, 1, 1, 1, 0.25681156, 0.69858474, 0.99999994, 1, 8.663535e-07, 0.49730903, 0.7609819, 1, 4.813075e-07, 0.5593595, 0.8526551, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_syd0k"]
+gradient = SubResource("Gradient_iup5w")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d66px"]
+render_priority = 0
+shader = ExtResource("2_4t70d")
+shader_parameter/ColorRamp = SubResource("GradientTexture2D_syd0k")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_sfkqh"]
+size = Vector2(1000, 1000)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6dves"]
+albedo_color = Color(0.67283773, 0.6101641, 3.85046e-07, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_d66px"]
+size = Vector2(1000, 1000)
+
+[node name="Test1" type="Node3D" unique_id=1288246456]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=212589924]
+environment = SubResource("Environment_84plo")
+camera_attributes = SubResource("CameraAttributesPractical_guf5o")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1020864500]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_max_distance = 1.0
+
+[node name="Island1Binary" parent="." unique_id=1967343092 instance=ExtResource("1_iup5w")]
+
+[node name="Ocean" type="MeshInstance3D" parent="." unique_id=1431578452]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.453333, 0)
+material_override = SubResource("ShaderMaterial_d66px")
+mesh = SubResource("PlaneMesh_sfkqh")
+
+[node name="Ground" type="MeshInstance3D" parent="." unique_id=721234097]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20, 0)
+material_override = SubResource("StandardMaterial3D_6dves")
+mesh = SubResource("PlaneMesh_d66px")

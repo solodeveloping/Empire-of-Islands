@@ -78,7 +78,7 @@ naming/scene_name_casing=0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg", "res://addons/gaea/plugin.cfg", "res://addons/gdUnit4/plugin.cfg", "res://addons/gecs/plugin.cfg", "res://addons/godotmarket/plugin.cfg", "res://addons/goshapes/plugin.cfg", "res://addons/loggie/plugin.cfg", "res://addons/mesh_inspector/plugin.cfg", "res://addons/o_c_p_r/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/rakugo_game_template/plugin.cfg", "res://addons/rich_text_3d/plugin.cfg", "res://addons/sound_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg", "res://addons/gaea/plugin.cfg", "res://addons/gdUnit4/plugin.cfg", "res://addons/gecs/plugin.cfg", "res://addons/godotmarket/plugin.cfg", "res://addons/goshapes/plugin.cfg", "res://addons/loggie/plugin.cfg", "res://addons/mesh_inspector/plugin.cfg", "res://addons/o_c_p_r/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/rakugo_game_template/plugin.cfg", "res://addons/sound_manager/plugin.cfg")
 
 [global_group]
 

@@ -27,7 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://cdefoo0ghsb74" path="res://3D/prefabs/buildings/composed/sailors/HunterTent_1.tscn" id="9_ekic1"]
 [ext_resource type="AudioStream" uid="uid://dmf1nh1vw7ykm" path="res://Art/Sound/Music/Ambient/goldenvalley.ogg" id="9_k0lxy"]
 [ext_resource type="AudioStream" uid="uid://mbu7kx7ksu2y" path="res://Art/Sound/Music/Ambient/uh_gameplay2.ogg" id="10_1jmv0"]
-[ext_resource type="Script" uid="uid://kj6ciqldjrt1" path="res://3D/ECS/observers/o_building_added_observer.gd" id="10_4evuf"]
+[ext_resource type="Script" uid="uid://kj6ciqldjrt1" path="res://3D/ECS/observers/building/o_building_added_observer.gd" id="10_4evuf"]
 [ext_resource type="PackedScene" uid="uid://bmde582hv8jwm" path="res://3D/prefabs/buildings/composed/sailors/CityCenter_1.tscn" id="10_imrfu"]
 [ext_resource type="Script" uid="uid://bpnyku4wivd2w" path="res://3D/ECS/systems/s_simple_transfer_resources.gd" id="11_6uy4x"]
 [ext_resource type="AudioStream" uid="uid://dgc3s5qxrc6tf" path="res://Art/Sound/Music/Ambient/uh_gameplay3.ogg" id="11_dokig"]
@@ -47,7 +47,7 @@
 [ext_resource type="Script" uid="uid://dcc46g6yx3cig" path="res://3D/ECS/observers/o_misc_observer.gd" id="25_r0xnc"]
 [ext_resource type="Script" uid="uid://bknr5cftxu2cy" path="res://3D/ECS/systems/ships/s_ship_waiting_at_dock.gd" id="25_tropj"]
 [ext_resource type="Script" uid="uid://dfu536m6alkp1" path="res://3D/ECS/systems/movement/s_node_3d_movement.gd" id="26_r0xnc"]
-[ext_resource type="Script" uid="uid://bfcfkv30j1ain" path="res://3D/ECS/observers/o_population_observer.gd" id="26_vr5bk"]
+[ext_resource type="Script" uid="uid://bfcfkv30j1ain" path="res://3D/ECS/observers/population/o_population_observer.gd" id="26_vr5bk"]
 [ext_resource type="Shader" uid="uid://c2bcg4e8ymnec" path="res://VFX/post_processing/test_drawing_1.gdshader" id="27_bpuvv"]
 [ext_resource type="Script" uid="uid://cr8q6muvwhowx" path="res://3D/ECS/systems/movement/s_character_body_3d_movement.gd" id="27_ws72x"]
 [ext_resource type="Script" uid="uid://1bta6sms7xv4" path="res://3D/ECS/misc/ge_map_ship_spawner.gd" id="29_hc4vk"]
@@ -56,12 +56,17 @@
 [ext_resource type="Shader" uid="uid://bqb1v1s0nfoa2" path="res://VFX/ocean/visual_shaders/ocean_visual_shader_1/ocean_visual_shader_1_caustics_1.tres" id="30_tropj"]
 [ext_resource type="Shader" uid="uid://be50ph36peocc" path="res://VFX/ocean/visual_shaders/simple_ocean_visual_shader_1/simple_ocean_visual_shader_1.tres" id="38_ekic1"]
 [ext_resource type="Script" uid="uid://bbhr52k31vvcc" path="res://3D/ocean_node_1.gd" id="39_ekic1"]
+[ext_resource type="Script" uid="uid://bc1h6qk6bfh34" path="res://3D/ECS/systems/population/s_population_misc.gd" id="42_pgpx8"]
 [ext_resource type="Script" uid="uid://g8evd6jpepr5" path="res://3D/ECS/observers/o_ship_misc_observer.gd" id="43_cr17y"]
-[ext_resource type="Script" uid="uid://b3ds2b80817im" path="res://3D/ECS/observers/o_building_misc_observer.gd" id="44_1eclw"]
+[ext_resource type="Script" uid="uid://b3ds2b80817im" path="res://3D/ECS/observers/building/o_building_misc_observer.gd" id="44_1eclw"]
+[ext_resource type="Script" uid="uid://d0kb8ba4r3r77" path="res://3D/ECS/observers/population/o_populaton_movement_observer.gd" id="44_waljl"]
 [ext_resource type="PackedScene" uid="uid://dffby82byb5wv" path="res://3D/prefabs/ships/SailShip_1.tscn" id="47_tropj"]
 [ext_resource type="Script" uid="uid://bjxsot7jvcnyj" path="res://3D/ECS/systems/debug/s_building_should_be_on_island.gd" id="50_d3h78"]
 [ext_resource type="PackedScene" uid="uid://d8kf3fs8iy37" path="res://3D/prefabs/debug/InformationDebugDisplay_1.tscn" id="50_fhx1l"]
 [ext_resource type="Script" uid="uid://dops2gkdonqlc" path="res://3D/ECS/entities/e_map_exit.gd" id="51_tk656"]
+[ext_resource type="Script" uid="uid://c6uubs6rymqd2" path="res://3D/ECS/systems/debug/s_population_debug.gd" id="53_kg5sq"]
+[ext_resource type="Script" uid="uid://cwylchpo1y2x8" path="res://3D/ECS/misc/ge_pop_unit_definition.gd" id="54_m2a3m"]
+[ext_resource type="PackedScene" uid="uid://tsduyw7d1heh" path="res://3D/prefabs/characters/SimpleCharacter_1.tscn" id="63_fhx1l"]
 
 [sub_resource type="Resource" id="Resource_ekic1"]
 script = ExtResource("3_hqty3")
@@ -211,6 +216,11 @@ script = ExtResource("30_r0xnc")
 scene = ExtResource("47_tropj")
 population_min_capacity = 5
 metadata/_custom_type_script = "uid://b7xs0hemdgjhf"
+
+[sub_resource type="Resource" id="Resource_26owp"]
+script = ExtResource("54_m2a3m")
+scene = ExtResource("63_fhx1l")
+metadata/_custom_type_script = "uid://cwylchpo1y2x8"
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_r0xnc"]
 sky_top_color = Color(0.254902, 0.698039, 0.901961, 1)
@@ -549,9 +559,18 @@ script = ExtResource("25_tropj")
 group = &"gameplay"
 metadata/_custom_type_script = "uid://bknr5cftxu2cy"
 
+[node name="PopulationMiscSystem" type="Node" parent="World/Systems/gameplay" unique_id=976179836]
+script = ExtResource("42_pgpx8")
+group = &"gameplay"
+metadata/_custom_type_script = "uid://bc1h6qk6bfh34"
+
 [node name="O_PopulationObserver" type="Node" parent="World/Systems/gameplay" unique_id=725593895]
 script = ExtResource("26_vr5bk")
 metadata/_custom_type_script = "uid://bfcfkv30j1ain"
+
+[node name="O_PopulationMovementObserver" type="Node" parent="World/Systems/gameplay" unique_id=1822217736]
+script = ExtResource("44_waljl")
+metadata/_custom_type_script = "uid://d0kb8ba4r3r77"
 
 [node name="O_BuildingAddedObserver" type="Node" parent="World/Systems/gameplay" unique_id=11878624]
 script = ExtResource("10_4evuf")
@@ -575,12 +594,11 @@ metadata/_custom_type_script = "uid://b3vi2ingux88g"
 
 [node name="NavigationSystem" type="Node" parent="World/Systems/physics" unique_id=1096000229]
 script = ExtResource("25_hc4vk")
-group = &"physics"
 metadata/_custom_type_script = "uid://cxj6bi3prlipt"
 
 [node name="Node3DMovementSystem" type="Node" parent="World/Systems/physics" unique_id=1758620978]
 script = ExtResource("26_r0xnc")
-group = &"physics"
+group = "physics"
 metadata/_custom_type_script = "uid://dfu536m6alkp1"
 
 [node name="CharacterBody3DMovementSystem" type="Node" parent="World/Systems/physics" unique_id=2101028342]
@@ -601,12 +619,17 @@ script = ExtResource("50_d3h78")
 group = &"debug"
 metadata/_custom_type_script = "uid://bjxsot7jvcnyj"
 
+[node name="PopulationDebugSystem" type="Node" parent="World/Systems/debug" unique_id=1533244214]
+script = ExtResource("53_kg5sq")
+metadata/_custom_type_script = "uid://c6uubs6rymqd2"
+
 [node name="GE_MapShipSpawner" type="Node3D" parent="World" unique_id=1159284653 node_paths=PackedStringArray("ship_container", "entries_containers")]
 script = ExtResource("29_hc4vk")
 simultaneous_ship_max_count = 2
 ship_container = NodePath(".")
 entries_containers = [NodePath("../../Entries")]
 ship_definitions = Array[ExtResource("30_r0xnc")]([SubResource("Resource_pgpx8")])
+pop_unit_definitions = Array[ExtResource("54_m2a3m")]([SubResource("Resource_26owp")])
 metadata/_custom_type_script = "uid://1bta6sms7xv4"
 
 [node name="GameEnv" type="Node3D" parent="." unique_id=1015109037]
@@ -789,10 +812,16 @@ script = ExtResource("51_tk656")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1114.6724, 0, -435.14334)
 script = ExtResource("51_tk656")
 
+[node name="SimpleCharacter_1" parent="." unique_id=612195686 instance=ExtResource("63_fhx1l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8636951, 0)
+
+[connection signal="ask_change_ocean_visual" from="EventBus" to="." method="_on_EventBus_ask_change_ocean_visual"]
+[connection signal="ask_debug_spawn_ship" from="EventBus" to="." method="_on_EventBus_ask_debug_spawn_ship"]
 [connection signal="ask_demolish_current_building" from="EventBus" to="." method="_on_EventBus_ask_demolish_current_building"]
 [connection signal="produced_resources" from="World/Systems/gameplay/ProductionSystem" to="." method="_on_ProductionSystem_produced_resources"]
 [connection signal="new_pop_unit_joined" from="World/Systems/gameplay/O_PopulationObserver" to="." method="_on_OPopulationObserver_new_pop_unit_joined"]
 [connection signal="pop_unit_found_work" from="World/Systems/gameplay/O_PopulationObserver" to="." method="_on_OPopulationObserver_pop_unit_found_work"]
+[connection signal="pop_unit_left_work" from="World/Systems/gameplay/O_PopulationObserver" to="." method="_on_OPopulationObserver_pop_unit_left_work"]
 [connection signal="housing_capacity_increased" from="World/Systems/gameplay/O_BuildingAddedObserver" to="." method="_on_OBuildingAddedObserver_housing_capacity_increased"]
 [connection signal="workers_capacity_increased" from="World/Systems/gameplay/O_BuildingAddedObserver" to="." method="_on_OBuildingAddedObserver_workers_capacity_increased"]
 

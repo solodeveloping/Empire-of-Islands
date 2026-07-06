@@ -10,3 +10,6 @@ var maximum: int = 0
 func _init(current_: int = 0, maximum_: int = 0) -> void:
 	current = current_
 	maximum = maximum_
+
+func is_full() -> bool:
+	return current >= maximum

@@ -31,6 +31,20 @@ var initial_resources: ResourceCollectionDefinition
 @export
 var use_initial_resources: bool = true
 
+@export_category("Systems")
+
+@export
+var pop_unit_work_system: O_PopulationMovementObserver.POP_UNIT_WORK_SYSTEM = O_PopulationMovementObserver.POP_UNIT_WORK_SYSTEM.TIMER_BASED_HIDE_POP
+
+@export
+var pop_unit_home_idling_system: O_PopulationMovementObserver.POP_UNIT_HOME_IDLING_SYSTEM = O_PopulationMovementObserver.POP_UNIT_HOME_IDLING_SYSTEM.HIDE
+
+@export
+var jobless_leave_island_time: float = 30.0
+
+@export
+var looking_for_housing_leave_island_time: float = 30.0
+
 @export_category("Debug")
 
 @export
@@ -68,10 +82,15 @@ var information_debug_scene: PackedScene
 
 @onready var o_population_observer: O_PopulationObserver = $World/Systems/gameplay/O_PopulationObserver
 
+@onready var o_population_movement_observer: O_PopulationMovementObserver = $World/Systems/gameplay/O_PopulationMovementObserver
+
+@onready var population_misc_system: PopulationMiscSystem = $World/Systems/gameplay/PopulationMiscSystem
+
 @onready var gm_simple_storage: GMSimpleStorage = $GMSimpleStorage
 
 @onready var the_buildings_cost: TheBuildingsCost = $TheBuildingsCost
 
+@onready var ge_map_ship_spawner: GE_MapShipSpawner = $World/GE_MapShipSpawner
 
 
 var current_building: Entity
@@ -208,7 +227,7 @@ func _on_OPopulationObserver_pop_unit_found_work(
 	island: Entity,
 ) -> void:
 	if island == current_island:
-		print("current island workers_capacity_increased")
+		print("current island workers increased")
 		var summary: C_PopulationSummary = island.get_component(
 			C_PopulationSummary
 		)
@@ -217,6 +236,22 @@ func _on_OPopulationObserver_pop_unit_found_work(
 				summary.workers
 			)
 	workers_increase(pop_type, 1)
+
+# FIXME: could pass the C_PopulationSummary
+func _on_OPopulationObserver_pop_unit_left_work(
+	pop_type: int,
+	island: Entity
+) -> void:
+	if island == current_island:
+		print("current island workers decreased")
+		var summary: C_PopulationSummary = island.get_component(
+			C_PopulationSummary
+		)
+		if summary:
+			event_bus.available_workers_updated.emit(
+				summary.workers
+			)
+	workers_decrease(pop_type, 1)
 
 func _on_OBuildingAddedObserver_workers_capacity_increased(
 	pop_type: int,
@@ -302,6 +337,28 @@ func _ready() -> void:
 			instance.group = "debug"
 			debug.add_child(instance)
 			ECS.world.add_system(instance)
+	
+	# TODO: implement the others
+	o_population_movement_observer.pop_unit_work_system = pop_unit_work_system
+	match pop_unit_work_system:
+		O_PopulationMovementObserver.POP_UNIT_WORK_SYSTEM.TIMER_BASED_HIDE_POP:
+			pass
+		_:
+			printerr("pop_unit_work_system %s is not implemented" % [
+				pop_unit_work_system,
+			])
+	o_population_movement_observer.pop_unit_home_idling_system = pop_unit_home_idling_system
+	match pop_unit_home_idling_system:
+		O_PopulationMovementObserver.POP_UNIT_HOME_IDLING_SYSTEM.HIDE,\
+		O_PopulationMovementObserver.POP_UNIT_HOME_IDLING_SYSTEM.IDLE:
+			pass
+		_:
+			printerr("pop_unit_home_idling_system %s is not implemented" % [
+				pop_unit_home_idling_system,
+			])
+	
+	population_misc_system.jobless_leave_island_time = jobless_leave_island_time
+	population_misc_system.looking_for_housing_leave_island_time = looking_for_housing_leave_island_time
 	
 	map = default_map.map_scene.instantiate()
 	add_child(map)
@@ -1042,6 +1099,8 @@ func _on_ProductionSystem_produced_resources(changes: Dictionary[int, int]) -> v
 		)
 
 func _on_EventBus_ask_demolish_current_building() -> void:
+	# Info: destroy / demolish / remove building
+	print("_on_EventBus_ask_demolish_current_building")
 	var trees: Array[MultiMeshInstanceArea] = []
 	if selected_building.has_method("get_hidden_trees"):
 		trees = selected_building.get_hidden_trees()
@@ -1054,11 +1113,19 @@ func _on_EventBus_ask_demolish_current_building() -> void:
 		var pop_units = ECS.world.query\
 			#.with_all([C_PopUnit])\
 			.with_relationship([Rels.create_lives_in(selected_building)])\
-			.execute()
+			.execute()\
+			.duplicate()
 		if !pop_units.is_empty():
-			o_population_observer.find_and_assign_housing_to_pop_units(
-				pop_units,
+			#o_population_observer.find_and_assign_housing_to_pop_units(
+				#pop_units,
+				#selected_building,
+			#)
+			ECS.world.emit_event(
+				ECSEvents.HOUSING_BUILDING_REASSIGN_POP_UNITS_REQUESTED,
 				selected_building,
+				{
+					"pop_units": pop_units,
+				}
 			)
 	
 	var c_production: C_Production = selected_building.get_component(C_Production)
@@ -1066,12 +1133,24 @@ func _on_EventBus_ask_demolish_current_building() -> void:
 		var pop_units = ECS.world.query\
 			#.with_all([C_PopUnit])\
 			.with_relationship([Rels.create_works_at(selected_building)])\
-			.execute()
+			.execute()\
+			.duplicate()
 		if !pop_units.is_empty():
-			o_population_observer.find_and_assign_production_building_to_pop_units(
-				pop_units,
+			#o_population_observer.find_and_assign_production_building_to_pop_units(
+				#pop_units,
+				#selected_building,
+			#)
+			ECS.world.emit_event(
+				ECSEvents.PRODUCTION_BUILDING_REASSIGN_POP_UNITS_REQUESTED,
 				selected_building,
+				{
+					"pop_units": pop_units,
+				}
 			)
+		else:
+			print("building %s does not have workers" % [
+				selected_building.name,
+			])
 	
 	ECS.world.remove_entity(selected_building)
 	selected_building = null
@@ -1131,3 +1210,9 @@ func has_resources_to_construct_building(def: BuildingDefinition) -> bool:
 		has_resources = false
 		break
 	return has_resources
+
+func _on_EventBus_ask_change_ocean_visual(selected_ocean_visual_id: int) -> void:
+	map.select_ocean_visual(selected_ocean_visual_id)
+
+func _on_EventBus_ask_debug_spawn_ship() -> void:
+	ge_map_ship_spawner.try_spawn_ship()

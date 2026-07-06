@@ -1,0 +1,202 @@
+[gd_resource type="VisualShader" format=3 uid="uid://d34owjk0phptk"]
+
+[sub_resource type="VisualShaderNodeRemap" id="VisualShaderNodeRemap_2fo3v"]
+default_input_values = [1, 0.0, 2, 1.0, 3, 0.32, 4, 1.0]
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_2fo3v"]
+default_input_values = [1, Vector2(2, 2), 2, Vector2(0, 0)]
+function = 1
+
+[sub_resource type="VisualShaderNodeIntParameter" id="VisualShaderNodeIntParameter_j4kfa"]
+parameter_name = "OceanSize"
+default_value_enabled = true
+default_value = 1000
+
+[sub_resource type="VisualShaderNodeIntParameter" id="VisualShaderNodeIntParameter_6xyl8"]
+parameter_name = "AbyssWorldSize"
+default_value_enabled = true
+default_value = 50
+
+[sub_resource type="VisualShaderNodeGlobalExpression" id="VisualShaderNodeGlobalExpression_1vivj"]
+size = Vector2(580, 260)
+expression = "// take size
+// and divide by the text size you want
+// 100
+// want 20
+// gives 5 repeats"
+
+[sub_resource type="VisualShaderNodeIntOp" id="VisualShaderNodeIntOp_sfo1w"]
+operator = 3
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_mq4e0"]
+default_input_values = [0, 0.0, 1, 4.885]
+operator = 5
+
+[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_7j4eg"]
+function = 31
+
+[sub_resource type="VisualShaderNodeColorFunc" id="VisualShaderNodeColorFunc_j4kfa"]
+expanded_output_ports = [0]
+function = 2
+
+[sub_resource type="VisualShaderNodeProximityFade" id="VisualShaderNodeProximityFade_2fo3v"]
+default_input_values = [0, 4.825]
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_j4kfa"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeClamp" id="VisualShaderNodeClamp_2fo3v"]
+default_input_values = [0, 0.0, 1, 0.8, 2, 1.0]
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_j4kfa"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_j4kfa"]
+noise_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2fo3v"]
+noise = SubResource("FastNoiseLite_j4kfa")
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_6xyl8"]
+expanded_output_ports = [0]
+texture = SubResource("NoiseTexture2D_2fo3v")
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_2fo3v"]
+constant = 0.2
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_sfo1w"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1vivj"]
+noise = SubResource("FastNoiseLite_sfo1w")
+seamless = true
+as_normal_map = true
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_j4kfa"]
+texture = SubResource("NoiseTexture2D_1vivj")
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_6xyl8"]
+default_input_values = [1, Vector2(2, 2), 2, Vector2(0, 0)]
+function = 1
+
+[sub_resource type="VisualShaderNodeReroute" id="VisualShaderNodeReroute_1vivj"]
+port_type = 1
+
+[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_sfo1w"]
+function = 31
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_6xyl8"]
+parameter_name = "BaseColor"
+default_value_enabled = true
+default_value = Color(0, 0.69411767, 0.98039216, 1)
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_mq4e0"]
+
+[sub_resource type="VisualShaderNodeRemap" id="VisualShaderNodeRemap_j4kfa"]
+default_input_values = [1, 0.0, 2, 1.0, 3, 0.0, 4, 0.27]
+
+[sub_resource type="VisualShaderNodeGlobalExpression" id="VisualShaderNodeGlobalExpression_2fo3v"]
+size = Vector2(250, 150)
+expression = "// nice ice effect"
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_1vivj"]
+default_input_values = [1, Vector2(-0.001, 0.001), 2, Vector2(0, 0)]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_sfo1w"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeColorFunc" id="VisualShaderNodeColorFunc_1vivj"]
+function = 1
+
+[sub_resource type="VisualShaderNodeColorOp" id="VisualShaderNodeColorOp_sfo1w"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(0.195, 0.735, 0.42)]
+operator = 2
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_mq4e0"]
+constant = 0.518
+
+[sub_resource type="VisualShaderNodeVectorCompose" id="VisualShaderNodeVectorCompose_7j4eg"]
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_h7kbi"]
+parameter_name = "AbyssTexture"
+texture_repeat = 1
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_757no"]
+expanded_output_ports = [0]
+source = 5
+
+[resource]
+nodes/fragment/0/position = Vector2(1220, 80)
+nodes/fragment/2/node = SubResource("VisualShaderNodeColorFunc_j4kfa")
+nodes/fragment/2/position = Vector2(-860, 160)
+nodes/fragment/3/node = SubResource("VisualShaderNodeColorParameter_6xyl8")
+nodes/fragment/3/position = Vector2(-1340, 140)
+nodes/fragment/4/node = SubResource("VisualShaderNodeColorFunc_1vivj")
+nodes/fragment/4/position = Vector2(100, 160)
+nodes/fragment/5/node = SubResource("VisualShaderNodeColorOp_sfo1w")
+nodes/fragment/5/position = Vector2(-760, 520)
+nodes/fragment/6/node = SubResource("VisualShaderNodeFloatConstant_mq4e0")
+nodes/fragment/6/position = Vector2(-760, 420)
+nodes/fragment/7/node = SubResource("VisualShaderNodeVectorCompose_7j4eg")
+nodes/fragment/7/position = Vector2(-220, 200)
+nodes/fragment/8/node = SubResource("VisualShaderNodeTexture2DParameter_h7kbi")
+nodes/fragment/8/position = Vector2(-2080, 1020)
+nodes/fragment/9/node = SubResource("VisualShaderNodeTexture_757no")
+nodes/fragment/9/position = Vector2(-1660, 880)
+nodes/fragment/10/node = SubResource("VisualShaderNodeRemap_2fo3v")
+nodes/fragment/10/position = Vector2(-1200, 840)
+nodes/fragment/12/node = SubResource("VisualShaderNodeUVFunc_2fo3v")
+nodes/fragment/12/position = Vector2(-2840, 460)
+nodes/fragment/13/node = SubResource("VisualShaderNodeIntParameter_j4kfa")
+nodes/fragment/13/position = Vector2(-3760, 40)
+nodes/fragment/14/node = SubResource("VisualShaderNodeIntParameter_6xyl8")
+nodes/fragment/14/position = Vector2(-3760, 300)
+nodes/fragment/15/node = SubResource("VisualShaderNodeGlobalExpression_1vivj")
+nodes/fragment/15/position = Vector2(-3880, 580)
+nodes/fragment/15/size = Vector2(580, 260)
+nodes/fragment/15/input_ports = ""
+nodes/fragment/15/output_ports = ""
+nodes/fragment/15/expression = "// take size
+// and divide by the text size you want
+// 100
+// want 20
+// gives 5 repeats"
+nodes/fragment/17/node = SubResource("VisualShaderNodeIntOp_sfo1w")
+nodes/fragment/17/position = Vector2(-3200, 280)
+nodes/fragment/18/node = SubResource("VisualShaderNodeFloatOp_mq4e0")
+nodes/fragment/18/position = Vector2(-840, 840)
+nodes/fragment/19/node = SubResource("VisualShaderNodeFloatFunc_7j4eg")
+nodes/fragment/19/position = Vector2(-540, 780)
+nodes/fragment/20/node = SubResource("VisualShaderNodeProximityFade_2fo3v")
+nodes/fragment/20/position = Vector2(-740, -260)
+nodes/fragment/21/node = SubResource("VisualShaderNodeVectorOp_j4kfa")
+nodes/fragment/21/position = Vector2(620, 140)
+nodes/fragment/22/node = SubResource("VisualShaderNodeClamp_2fo3v")
+nodes/fragment/22/position = Vector2(-480, -140)
+nodes/fragment/23/node = SubResource("VisualShaderNodeUVFunc_j4kfa")
+nodes/fragment/23/position = Vector2(-2280, 680)
+nodes/fragment/24/node = SubResource("VisualShaderNodeTexture_6xyl8")
+nodes/fragment/24/position = Vector2(-2839.2292, 883.4127)
+nodes/fragment/25/node = SubResource("VisualShaderNodeFloatConstant_2fo3v")
+nodes/fragment/25/position = Vector2(640, 620)
+nodes/fragment/26/node = SubResource("VisualShaderNodeTexture_j4kfa")
+nodes/fragment/26/position = Vector2(520, 820)
+nodes/fragment/27/node = SubResource("VisualShaderNodeUVFunc_6xyl8")
+nodes/fragment/27/position = Vector2(-40, 1120)
+nodes/fragment/28/node = SubResource("VisualShaderNodeReroute_1vivj")
+nodes/fragment/28/position = Vector2(-176.13773, 1293.5452)
+nodes/fragment/29/node = SubResource("VisualShaderNodeFloatFunc_sfo1w")
+nodes/fragment/29/position = Vector2(-240, -300)
+nodes/fragment/30/node = SubResource("VisualShaderNodeVectorOp_mq4e0")
+nodes/fragment/30/position = Vector2(640, -80)
+nodes/fragment/31/node = SubResource("VisualShaderNodeRemap_j4kfa")
+nodes/fragment/31/position = Vector2(200, -360)
+nodes/fragment/32/node = SubResource("VisualShaderNodeGlobalExpression_2fo3v")
+nodes/fragment/32/position = Vector2(580, 360)
+nodes/fragment/32/size = Vector2(250, 150)
+nodes/fragment/32/input_ports = ""
+nodes/fragment/32/output_ports = ""
+nodes/fragment/32/expression = "// nice ice effect"
+nodes/fragment/33/node = SubResource("VisualShaderNodeUVFunc_1vivj")
+nodes/fragment/33/position = Vector2(-520, 1060)
+nodes/fragment/34/node = SubResource("VisualShaderNodeInput_sfo1w")
+nodes/fragment/34/position = Vector2(-900, 1380)
+nodes/fragment/connections = PackedInt32Array(3, 0, 2, 0, 3, 0, 5, 0, 6, 0, 5, 1, 7, 0, 4, 0, 2, 2, 7, 1, 2, 1, 7, 0, 8, 0, 9, 2, 13, 0, 17, 0, 17, 0, 12, 1, 14, 0, 17, 1, 19, 0, 7, 2, 9, 1, 10, 0, 10, 0, 18, 0, 18, 0, 19, 0, 20, 0, 22, 0, 4, 0, 21, 0, 12, 0, 23, 0, 23, 0, 9, 0, 25, 0, 0, 3, 26, 0, 0, 9, 17, 0, 28, 0, 28, 0, 27, 1, 27, 0, 26, 0, 29, 0, 21, 1, 4, 0, 30, 0, 30, 0, 0, 0, 20, 0, 29, 0, 29, 0, 31, 0, 22, 0, 0, 1, 31, 0, 30, 1, 33, 0, 27, 0)

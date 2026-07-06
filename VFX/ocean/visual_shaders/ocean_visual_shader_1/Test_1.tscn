@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://bhgngoghjehdc"]
+
+[ext_resource type="PackedScene" uid="uid://cj58mgwq0tw3b" path="res://3D/prefabs/islands/Island1_binary.scn" id="1_ljo8f"]
+[ext_resource type="Shader" uid="uid://ixydgwo0pw7u" path="res://VFX/ocean/visual_shaders/ocean_visual_shader_1/ocean_visual_shader_1.tres" id="2_y7vyl"]
+[ext_resource type="Shader" uid="uid://bqb1v1s0nfoa2" path="res://VFX/ocean/visual_shaders/ocean_visual_shader_1/ocean_visual_shader_1_caustics_1.tres" id="3_2l5ho"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1erja"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_6x2l5"]
+sky_material = SubResource("ProceduralSkyMaterial_1erja")
+
+[sub_resource type="Environment" id="Environment_gy1pf"]
+background_mode = 2
+sky = SubResource("Sky_6x2l5")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_l0v22"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1erja"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ljo8f"]
+noise = SubResource("FastNoiseLite_1erja")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2l5ho"]
+frequency = 0.0312
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_y7vyl"]
+noise = SubResource("FastNoiseLite_2l5ho")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ef8tu"]
+render_priority = 0
+shader = ExtResource("2_y7vyl")
+shader_parameter/ColorParameter = Color(0.192157, 0.607843, 1, 1)
+shader_parameter/NoiseTexture1Scale = Vector2(4, 4)
+shader_parameter/NoiseTexturePanningSpeed = Vector2(0.01, -0.01)
+shader_parameter/NoiseTexture = SubResource("NoiseTexture2D_ljo8f")
+shader_parameter/NoiseTexture2Scale = Vector2(4, 4)
+shader_parameter/NoiseTexture2PanningSpeed = Vector2(0.05, 0.01)
+shader_parameter/NoiseTexture_2 = SubResource("NoiseTexture2D_y7vyl")
+shader_parameter/HighlightsThreshold = 0.5
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_sfkqh"]
+size = Vector2(1000, 1000)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_cmqjj"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_syd0k"]
+noise = SubResource("FastNoiseLite_cmqjj")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fqsyf"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sivhc"]
+noise = SubResource("FastNoiseLite_fqsyf")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6dves"]
+render_priority = 0
+shader = ExtResource("3_2l5ho")
+shader_parameter/NoiseTexture1Panning = Vector2(0.001, 0.001)
+shader_parameter/NoiseTextureScale = Vector2(10, 10)
+shader_parameter/NoiseTexture = SubResource("NoiseTexture2D_syd0k")
+shader_parameter/NoiseTexture1Panning2 = Vector2(0.001, 0.001)
+shader_parameter/NoiseTexture2 = SubResource("NoiseTexture2D_sivhc")
+
+[node name="Test1" type="Node3D" unique_id=1737628454]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1882518364]
+environment = SubResource("Environment_gy1pf")
+camera_attributes = SubResource("CameraAttributesPractical_l0v22")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=124949210]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_max_distance = 1.0
+
+[node name="Island1Binary" parent="." unique_id=1967343092 instance=ExtResource("1_ljo8f")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1649452170]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+material_override = SubResource("ShaderMaterial_ef8tu")
+mesh = SubResource("PlaneMesh_sfkqh")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1327076359]
+visible = false
+material_override = SubResource("ShaderMaterial_6dves")
+mesh = SubResource("PlaneMesh_sfkqh")

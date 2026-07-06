@@ -35,10 +35,10 @@ func move_agents(entities: Array[Entity], _components: Array, delta: float):
 			nav_agent.set_target_position(dest.target)
 		
 		if nav_agent.is_navigation_finished():
-			print("navigation finished %s %s" % [
-				entity.get_path(),
-				dest.target,
-			])
+			#print("navigation finished %s %s" % [
+				#entity.get_path(),
+				#dest.target,
+			#])
 			# TODO : handle moving to dock, moving to exit
 			cmd.remove_components(entity, [
 				C_NavigationDestination,
@@ -92,6 +92,15 @@ func move_agents(entities: Array[Entity], _components: Array, delta: float):
 			if entity.has_component(C_ShipMovingToExit):
 				print("ship exited the map")
 				cmd.remove_entity(entity)
+				
+			if entity.has_component(C_PopUnit):
+				#print("pop_unit arrived at destination")
+				ECS.world.emit_event(
+					ECSEvents.POP_UNIT_REACHED_MOVE_TARGET,
+					entity,
+					{}
+				)
+			
 			continue
 
 		var next_path_position: Vector3 = nav_agent.get_next_path_position()

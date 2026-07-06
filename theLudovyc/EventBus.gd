@@ -64,3 +64,7 @@ signal send_mouse_over_object_changed(
 	object_name: String,
 	object_: Node,
 )
+
+## DEBUG
+signal ask_change_ocean_visual(selected_ocean_visual_id: int)
+signal ask_debug_spawn_ship()

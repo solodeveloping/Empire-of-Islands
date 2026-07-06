@@ -26,6 +26,8 @@ var ray_ground_layers: int = 0
 
 @onready var buoy: DockBuoy_ECS = $Buoy
 
+@onready var spawn_point_container: Node3D = $SpawnPointContainer
+
 var is_constructible: bool:
 	get:
 		return building_main_area_1.is_empty \
@@ -33,6 +35,13 @@ var is_constructible: bool:
 			and ground_sensor_editable_1.is_valid
 
 var is_constructed: bool = false
+
+func get_spawn_point() -> Node3D:
+	var id_ = randi_range(
+		0,
+		spawn_point_container.get_child_count() - 1
+	)
+	return spawn_point_container.get_child(id_)
 
 func define_components() -> Array:
 	return [
@@ -42,6 +51,7 @@ func define_components() -> Array:
 		C_Storage.new(),
 		C_Range.new(100.0),
 		C_Transform.new(),
+		C_Dock.new(),
 	]
 
 func on_ready():

@@ -50,6 +50,9 @@ func _ready() -> void:
 	_update_camera_position()
 
 func _process(delta: float) -> void:
+	if get_window().has_focus() == false:
+		return
+	
 	var movement := Vector3.ZERO
 
 	# Keyboard movement (uses default ui_* actions)

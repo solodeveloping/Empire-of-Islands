@@ -196,26 +196,14 @@ frequency = 0.5
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hqty3"]
 noise = SubResource("FastNoiseLite_d8dra")
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_63lat"]
-noise_type = 2
-fractal_type = 0
-cellular_distance_function = 1
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_06bce"]
-noise = SubResource("FastNoiseLite_63lat")
-seamless = true
-seamless_blend_skirt = 1.0
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pmmr6"]
 render_priority = 0
 shader = ExtResource("10_ju7sj")
-shader_parameter/MainColor = Color(0.243137, 0.72549, 1, 1)
-shader_parameter/EdgeTextureScaling = Vector2(1, 1)
-shader_parameter/EdgeNoiseTexture = SubResource("NoiseTexture2D_06bce")
 shader_parameter/EdgeProximityFadeDistance = 1.0
-shader_parameter/EdgeStep = 0.2
+shader_parameter/AlbedoNoisePanningSpeed = Vector2(-0.005, -0.001)
 shader_parameter/AlbedoNoiseScale = Vector2(1, 1)
 shader_parameter/AlbedoNoiseDark = SubResource("NoiseTexture2D_hqty3")
+shader_parameter/AlbedoNoiseStrngth = 0.8
 shader_parameter/MinAlpha = 0.9
 shader_parameter/Roughness = 0.2
 
@@ -233,7 +221,6 @@ skeleton = NodePath("")
 
 [node name="Ocean" type="MeshInstance3D" parent="." unique_id=788054879 groups=["ocean_surface_nav"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -174.91823, 0, 0)
-visible = false
 material_override = SubResource("ShaderMaterial_4ku0f")
 mesh = SubResource("PlaneMesh_nt8cj")
 
@@ -293,6 +280,7 @@ mesh = ExtResource("9_hsh66")
 
 [node name="OceanSimpleVisualShader1" type="MeshInstance3D" parent="." unique_id=661178363]
 transform = Transform3D(10000, 0, 0, 0, 10000, 0, 0, 0, 10000, 0, -0.46805125, 0)
+visible = false
 material_override = SubResource("ShaderMaterial_pmmr6")
 mesh = SubResource("PlaneMesh_0gkq8")
 

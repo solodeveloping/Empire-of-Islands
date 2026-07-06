@@ -86,6 +86,12 @@ func debug_nodes(
 				entity.global_position.z,
 			)
 		
+		# FIXME: something more optimized
+		if entity.visible:
+			relationship.target.visible = true
+		else:
+			relationship.target.visible = false
+		
 		if entity.has_component(C_HousingCapacity):
 			var c_housing: C_HousingCapacity = entity.get_component(C_HousingCapacity)
 			relationship.target.set_text(
@@ -102,6 +108,28 @@ func debug_nodes(
 					c_name.name_,
 					c_pop.current,
 					c_pop.maximum,
+				]
+			)
+		elif entity.has_component(C_PopUnit):
+			var c_pop_unit: C_PopUnit = entity.get_component(
+				C_PopUnit
+			)
+			var has_housing = entity.has_relationship(Rels.lives_in)
+			var has_work = entity.has_relationship(Rels.works_at)
+			var suffix = ""
+			suffix += str(c_pop_unit.pop_type) + " "
+			if has_housing:
+				suffix += "H "
+			else:
+				suffix += "NH "
+			if has_work:
+				suffix += "W "
+			else:
+				suffix += "NW "
+			relationship.target.set_text(
+				"%s %s" % [
+					c_name.name_,
+					suffix,
 				]
 			)
 		else:
