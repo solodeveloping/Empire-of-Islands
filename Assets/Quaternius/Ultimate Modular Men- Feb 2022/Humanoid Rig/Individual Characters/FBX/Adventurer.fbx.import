@@ -1,0 +1,54 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://cs6aruh6at8p0"
+path="res://.godot/imported/Adventurer.fbx-478824918975d334fefda99af92c3504.scn"
+
+[deps]
+
+source_file="res://Assets/Quaternius/Ultimate Modular Men- Feb 2022/Humanoid Rig/Individual Characters/FBX/Adventurer.fbx"
+dest_files=["res://.godot/imported/Adventurer.fbx-478824918975d334fefda99af92c3504.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/root_script=null
+mesh_library/use_node_names_as_mesh_names=false
+array_mesh/deduplicate_surfaces=true
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=true
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path=""
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
+_subresources={
+"nodes": {
+"PATH:CharacterArmature/Skeleton3D": {
+"retarget/bone_map": Object(BoneMap,"resource_local_to_scene":false,"resource_name":"","profile":Object(SkeletonProfileHumanoid,"resource_local_to_scene":false,"resource_name":"","root_bone":&"Root","scale_base_bone":&"Hips","group_size":4,"bone_size":56,"script":null)
+,"bonemap":null,"bone_map/Root":&"Root","bone_map/Hips":&"Hips","bone_map/Spine":&"Abdomen","bone_map/Chest":&"Torso","bone_map/UpperChest":&"Chest","bone_map/Neck":&"Neck","bone_map/Head":&"Head","bone_map/LeftEye":&"","bone_map/RightEye":&"","bone_map/Jaw":&"","bone_map/LeftShoulder":&"Shoulder.L","bone_map/LeftUpperArm":&"UpperArm.L","bone_map/LeftLowerArm":&"LowerArm.L","bone_map/LeftHand":&"Hand.L","bone_map/LeftThumbMetacarpal":&"Thumb2.L","bone_map/LeftThumbProximal":&"Thumb3.L","bone_map/LeftThumbDistal":&"Thumb3.L_end","bone_map/LeftIndexProximal":&"Index3.L","bone_map/LeftIndexIntermediate":&"Index4.L","bone_map/LeftIndexDistal":&"Index4.L_end","bone_map/LeftMiddleProximal":&"Middle3.L","bone_map/LeftMiddleIntermediate":&"Middle4.L","bone_map/LeftMiddleDistal":&"Middle4.L_end","bone_map/LeftRingProximal":&"Ring3.L","bone_map/LeftRingIntermediate":&"Ring4.L","bone_map/LeftRingDistal":&"Ring4.L_end","bone_map/LeftLittleProximal":&"Pinky3.L","bone_map/LeftLittleIntermediate":&"Pinky4.L","bone_map/LeftLittleDistal":&"Pinky4.L_end","bone_map/RightShoulder":&"Shoulder.R","bone_map/RightUpperArm":&"UpperArm.R","bone_map/RightLowerArm":&"LowerArm.R","bone_map/RightHand":&"Hand.R","bone_map/RightThumbMetacarpal":&"Thumb2.R","bone_map/RightThumbProximal":&"Thumb3.R","bone_map/RightThumbDistal":&"Thumb3.R_end","bone_map/RightIndexProximal":&"Index3.R","bone_map/RightIndexIntermediate":&"Index4.R","bone_map/RightIndexDistal":&"Index4.R_end","bone_map/RightMiddleProximal":&"Middle3.R","bone_map/RightMiddleIntermediate":&"Middle4.R","bone_map/RightMiddleDistal":&"Middle4.R_end","bone_map/RightRingProximal":&"Ring3.R","bone_map/RightRingIntermediate":&"Ring4.R","bone_map/RightRingDistal":&"Ring4.R_end","bone_map/RightLittleProximal":&"Pinky3.R","bone_map/RightLittleIntermediate":&"Pinky4.R","bone_map/RightLittleDistal":&"Pinky4.R_end","bone_map/LeftUpperLeg":&"UpperLeg.L","bone_map/LeftLowerLeg":&"LowerLeg.L","bone_map/LeftFoot":&"Foot.L","bone_map/LeftToes":&"Foot.L_end","bone_map/RightUpperLeg":&"UpperLeg.R","bone_map/RightLowerLeg":&"LowerLeg.R","bone_map/RightFoot":&"Foot.R","bone_map/RightToes":&"Foot.R_end","script":null)
+
+}
+}
+}
+fbx/importer=0
+fbx/allow_geometry_helper_nodes=false
+fbx/embedded_image_handling=1
+fbx/naming_version=2

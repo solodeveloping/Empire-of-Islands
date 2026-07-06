@@ -1,0 +1,1 @@
+- Produce GLTF/GLB with a humanoid rig
