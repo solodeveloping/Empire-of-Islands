@@ -25,5 +25,14 @@ func _on_event_bus_send_mouse_over_object_changed(
 func _on_OptionButton_item_selected(index: int) -> void:
 	event_bus.ask_change_ocean_visual.emit(index)
 
-func _on_Button_button_up() -> void:
+func _on_SpawnShipButton_button_up() -> void:
 	event_bus.ask_debug_spawn_ship.emit()
+
+func _on_OpenSettingsButton_button_up() -> void:
+	var path = ProjectSettings.globalize_path("user://")
+	print("_on_OpenSettingsButton_button_up %s" % [
+		path,
+	])
+	OS.shell_open(
+		path
+	)

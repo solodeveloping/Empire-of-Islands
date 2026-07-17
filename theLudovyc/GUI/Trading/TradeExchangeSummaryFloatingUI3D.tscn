@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://ot8co8rxmvb2"]
+
+[ext_resource type="PackedScene" uid="uid://dy76qyj72jc56" path="res://theLudovyc/GUI/Trading/TradeExchangeSummaryFloatingUI.tscn" id="1_4k4r6"]
+[ext_resource type="Script" uid="uid://cs5h6eos8f5ew" path="res://theLudovyc/GUI/Trading/trade_exchange_summary_floating_ui_3d.gd" id="1_6duan"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_sfkqh"]
+viewport_path = NodePath("SubViewport")
+
+[node name="TradeExchangeSummaryFloatingUi3d" type="Node3D" unique_id=1989830556]
+script = ExtResource("1_6duan")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=405722997]
+transparent_bg = true
+
+[node name="TradeExchangeSummaryFloatingUi" parent="SubViewport" unique_id=24407110 instance=ExtResource("1_4k4r6")]
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1197429237]
+billboard = 1
+texture = SubResource("ViewportTexture_sfkqh")

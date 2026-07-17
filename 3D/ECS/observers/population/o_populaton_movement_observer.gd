@@ -48,7 +48,14 @@ func _on_pop_unit_reached_move_target(
 				match pop_unit_work_system:
 					POP_UNIT_WORK_SYSTEM.TIMER_BASED_HIDE_POP:
 						entity.hide()
-						entity.set_deferred("disabled", true)
+						entity.disable_physics()
+						var works_at = entity.get_relationship(Rels.works_at)
+						if !works_at:
+							printerr("!works_at but reached workplace")
+						var c_workers: C_Workers = works_at.target.get_component(C_Workers)
+						var c_unit: C_PopUnit = entity.get_component(C_PopUnit)
+						var workers: WorkerQuantity = c_workers.present_workers.get(c_unit.pop_type)
+						workers.worker_count += 1
 					_:
 						printerr("pop_unit_work_system %s is not implemented" % [
 							pop_unit_work_system,
@@ -58,7 +65,7 @@ func _on_pop_unit_reached_move_target(
 				match pop_unit_home_idling_system:
 					POP_UNIT_HOME_IDLING_SYSTEM.HIDE:
 						entity.hide()
-						entity.set_deferred("disabled", true)
+						entity.disable_physics()
 					POP_UNIT_HOME_IDLING_SYSTEM.IDLE:
 						pass
 						# TODO: implement an idling sytem
@@ -70,7 +77,7 @@ func _on_pop_unit_reached_move_target(
 				# TODO: option choose to hide or not
 				c_loc.location = C_PopUnitLocation.LOCATION.DOCK
 				entity.hide()
-				entity.set_deferred("disabled", true)
+				entity.disable_physics()
 			C_PopMovingToTarget.MOVE_TARGET_TYPE.IDLING:
 				pass
 				# TODO: implement something better
@@ -78,6 +85,10 @@ func _on_pop_unit_reached_move_target(
 					#entity,
 					#C_LookingForMoveTarget.new(),
 				#)
+			C_PopMovingToTarget.MOVE_TARGET_TYPE.ORDER:
+				pass
+				# TODO: implement something
+				# return to work after some time for instance
 			_:
 				printerr("move_target_type %s is not implemented" % [
 					c_moving.move_target_type,
@@ -90,4 +101,4 @@ func _on_pop_unit_reached_move_target(
 	else:
 		printerr("pop_unit does not have C_PopMovingToTarget")
 		entity.hide()
-		entity.set_deferred("disabled", true)
+		entity.disable_physics()

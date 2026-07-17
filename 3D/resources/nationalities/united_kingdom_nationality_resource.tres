@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Nationality" format=3 uid="uid://dvlu8xd6l7xoq"]
+
+[ext_resource type="Script" uid="uid://b3g48xbfohfv3" path="res://3D/ECS/data_scripts/nationality.gd" id="1_16c07"]
+[ext_resource type="Texture2D" uid="uid://nfu5dyfbk7u1" path="res://Assets/dafluffypotato/flags/uk.png" id="1_f8qjy"]
+
+[resource]
+script = ExtResource("1_16c07")
+name = "United Kingdom"
+flag_texture = ExtResource("1_f8qjy")
+male_first_names = Array[String](["James", "Michael", "John", "Robert", "William", "Richard", "Thomas", "Christopher", "Charles", "Daniel", "Matthew", "Anthony", "Mark", "Steven", "Andrew", "Joshua", "Paul", "Kevin", "Kenneth", "Brian"])
+female_first_names = Array[String](["Olivia", "Emily", "Chloe", "Jessica", "Sophie", "Amelia", "Charlotte", "Grace", "Lily", "Megan"])
+last_names = Array[String](["Smith", "Jones", "Brown", "Taylor", "Wilson", "Davies", "Evans", "Johnson", "Thomas", "Roberts"])
+metadata/_custom_type_script = "uid://b3g48xbfohfv3"

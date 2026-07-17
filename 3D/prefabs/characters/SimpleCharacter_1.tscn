@@ -6,6 +6,9 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sfkqh"]
 radius = 0.21289063
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_sfkqh"]
+size = Vector3(1, 2.0984192, 1)
+
 [node name="SimpleCharacter_1" type="CharacterBody3D" unique_id=612195686]
 script = ExtResource("1_26owp")
 
@@ -18,4 +21,12 @@ shape = SubResource("CapsuleShape3D_sfkqh")
 [node name="CharacterVisual" parent="CharacterVisualContainer" unique_id=1079158951 instance=ExtResource("2_26owp")]
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1825648919]
+target_desired_distance = 3.0
 navigation_layers = 2
+
+[node name="Area3D" type="Area3D" parent="." unique_id=177099360]
+collision_layer = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=888978215]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0622406, 0)
+shape = SubResource("BoxShape3D_sfkqh")

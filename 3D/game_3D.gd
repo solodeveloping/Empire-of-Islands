@@ -6,6 +6,8 @@ const RTSCAM = preload("uid://cf7brgwaxlmud")
 
 const RANGE_CYLINDER_INDICATOR = preload("uid://dthmx62xw7kk4")
 
+const TRADE_EXCHANGE_SUMMARY_FLOATING_UI_3D = preload("uid://ot8co8rxmvb2")
+
 @export_flags_3d_physics
 var buildings_collision_mask_for_ray: int
 
@@ -31,6 +33,27 @@ var initial_resources: ResourceCollectionDefinition
 @export
 var use_initial_resources: bool = true
 
+@export
+var resource_list_definition: ResourceListDefinition
+
+var resource_list_definition_dict: Dictionary[int, ResourceDefinition] = {}
+
+@export
+var initial_factions: Array[FactionDef] = []
+
+# TODO: make sure it can't be higher than initial_factions
+@export
+var local_player_faction_index: int = 0
+
+@export
+var faction_storage_prefab: PackedScene
+
+@export
+var default_builtin_resources_space_weight_ref_def: BuiltinResourcesSpaceWeightRefList
+
+@export
+var default_basic_trade_system_prices: BuiltinTradePriceList
+
 @export_category("Systems")
 
 @export
@@ -53,6 +76,12 @@ var enable_debug_display: bool = false
 @export
 var debug_display_names: bool = false
 
+# FIXME: maybe a World scene would be better
+# Allows to customize more easily
+# And access stuff
+# Maybe
+# But need something that allows to detect if everything needed
+# is present
 @export
 var information_debug_scene: PackedScene
 
@@ -84,14 +113,25 @@ var information_debug_scene: PackedScene
 
 @onready var o_population_movement_observer: O_PopulationMovementObserver = $World/Systems/gameplay/O_PopulationMovementObserver
 
+@onready var faction_misc_system: FactionMiscSystem = $World/Systems/gameplay/FactionMiscSystem
+@onready var o_faction_misc_observer: O_FactionMiscObserver = $World/Systems/gameplay/O_FactionMiscObserver
+
 @onready var population_misc_system: PopulationMiscSystem = $World/Systems/gameplay/PopulationMiscSystem
 
-@onready var gm_simple_storage: GMSimpleStorage = $GMSimpleStorage
+@onready var o_ship_trading_observer: O_ShipTradingObserver = $World/Systems/gameplay/O_ShipTradingObserver
+
+@onready var the_storages: Node = $TheStorages
 
 @onready var the_buildings_cost: TheBuildingsCost = $TheBuildingsCost
 
 @onready var ge_map_ship_spawner: GE_MapShipSpawner = $World/GE_MapShipSpawner
 
+@onready var ship_bell_audio_stream_player_3d: AudioStreamPlayer3D = $ShipBellAudioStreamPlayer3D
+
+var faction_entities: Array[Entity] = []
+var local_player_faction: Faction_ECS
+var local_player_c_faction: C_Faction
+var local_player_storage: GMSimpleStorage
 
 var current_building: Entity
 var current_building_id: Buildings.Ids
@@ -102,6 +142,9 @@ var current_island_for_building: IslandGECS1
 
 # FIXME: should it just be current_building?
 var selected_building: Entity
+# FIXME: should it be the same?
+var selected_unit: Entity
+var selected_ship: Entity
 
 var current_dock_buoy_id: int = 0
 
@@ -111,6 +154,9 @@ var city: Entity
 var current_island: IslandGECS1
 
 var rtsCamera: RTSCamera
+
+# FIXME: have to update it all the time
+# If forget: it breaks
 
 # TODO: we'll have to make this per city / island
 
@@ -143,7 +189,7 @@ func population_increase(population_type: Populations.Types, amount: int):
 
 func population_decrease(population_type: Populations.Types, amount: int):
 	populations[population_type] -= amount
-	notify_population_updated()
+	#notify_population_updated()
 
 func notify_population_updated():
 	# FIXME: should we duplicate it
@@ -156,7 +202,7 @@ func housing_capacity_increase(population_type: Populations.Types, amount: int):
 
 func housing_capacity_decrease(population_type: Populations.Types, amount: int):
 	housing_capacities[population_type] -= amount
-	notify_housing_capacity_updated()
+	#notify_housing_capacity_updated()
 
 func notify_housing_capacity_updated():
 	event_bus.housing_capacity_updated.emit(housing_capacities)
@@ -167,7 +213,7 @@ func workers_increase(population_type: Populations.Types, amount: int):
 
 func workers_decrease(population_type: Populations.Types, amount: int):
 	workers[population_type] -= amount
-	notify_workers_updated()
+	#notify_workers_updated()
 
 func notify_workers_updated():
 	event_bus.available_workers_updated.emit(
@@ -180,7 +226,7 @@ func worker_capacities_increase(population_type: Populations.Types, amount: int)
 
 func worker_capacities_decrease(population_type: Populations.Types, amount: int):
 	worker_capacities[population_type] -= amount
-	notify_worker_capacities_updated()
+	#notify_worker_capacities_updated()
 
 func notify_worker_capacities_updated():
 	event_bus.worker_capacities_updated.emit(
@@ -360,6 +406,91 @@ func _ready() -> void:
 	population_misc_system.jobless_leave_island_time = jobless_leave_island_time
 	population_misc_system.looking_for_housing_leave_island_time = looking_for_housing_leave_island_time
 	
+	ge_map_ship_spawner.initial_factions = initial_factions
+	var faction_id = 0
+	for faction in initial_factions:
+		var faction_entity: Faction_ECS = Faction_ECS.new()
+		faction_entity.add_component(
+			C_Faction.new(faction, faction_id)
+		)
+		ECS.world.add_entity(faction_entity)
+		faction_entities.push_back(faction_entity)
+		faction_id += 1
+		
+		var storage: GMSimpleStorage = faction_storage_prefab.instantiate()
+		storage.has_infinite_resources = faction.has_infinite_resources
+		the_storages.add_child(storage)
+		
+		faction_entity.storage_node = storage
+	
+	ge_map_ship_spawner.set_faction_entities(faction_entities)
+	ge_map_ship_spawner.default_basic_trade_system_prices = default_basic_trade_system_prices
+	
+	faction_misc_system.faction_entities = faction_entities
+	o_faction_misc_observer.faction_entities = faction_entities
+	
+	local_player_faction = faction_entities.get(local_player_faction_index)
+	local_player_storage = the_storages.get_child(
+		local_player_faction_index
+	)
+	local_player_c_faction = local_player_faction.get_component(
+		C_Faction
+	)
+	
+	if resource_list_definition.list.is_empty():
+		printerr("resource_list_definition.list is empty")
+	
+	var trades: Array[TradeResourceDefinition] = []
+	for resource_def in resource_list_definition.list:
+		var trade: TradeResourceDefinition = TradeResourceDefinition.new()
+		trade.resource_id = resource_def.builtin_resource_id
+		trade.item_name = Resources.get_resource_name(
+			trade.resource_id
+		)
+		trade.enabled = false
+		trade.res_icon_normal = resource_def.normal_icon
+		trade.res_icon_disabled = resource_def.grey_icon
+		
+		trades.push_back(
+			trade
+		)
+		
+		# push inside the dict
+		resource_list_definition_dict.set(
+			resource_def.builtin_resource_id,
+			resource_def,
+		)
+	
+	if trades.is_empty() \
+		or trades.size() != resource_list_definition.list.size():
+			printerr("trades.size() is bad %s %s" % [
+				trades.size(),
+				resource_list_definition.list.size(),
+			])
+	
+	var local_c_faction: C_Faction = local_player_faction.get_component(
+		C_Faction
+	)
+	local_c_faction.set_global_trades(trades)
+	
+	if local_c_faction.global_trades.is_empty() \
+		or local_c_faction.global_trades_as_dict.is_empty():
+			printerr("local faction global_trades is empty")
+	
+	event_bus.send_trades_updated.emit(
+		local_c_faction.global_trades
+	)
+	
+	o_ship_trading_observer.set_default_builtin_resources_space_weight_ref_def(
+		default_builtin_resources_space_weight_ref_def
+	)
+	ge_map_ship_spawner.set_default_builtin_resources_space_weight_ref_def(
+		default_builtin_resources_space_weight_ref_def
+	)
+	
+	# TODO: other global_trades for factions
+	# use the ref
+	
 	map = default_map.map_scene.instantiate()
 	add_child(map)
 	
@@ -415,6 +546,15 @@ func _ready() -> void:
 func call_after_init_is_done():
 	# TODO: only do this once ECS and everything has started
 	TimeUtils.call_at_interval(self, 0.1, identify_node_below_mouse)
+	
+	# Info: we have to do this after because UI is not init otherwise
+	var local_c_faction: C_Faction = local_player_faction.get_component(
+		C_Faction
+	)
+	
+	event_bus.send_trades_updated.emit(
+		local_c_faction.global_trades
+	)
 	
 	#var buoys = ECS.world.query.with_all([C_DockBuoy]).execute()
 	#print("found %s buoys" % [
@@ -548,7 +688,7 @@ func attempt_build_current_building():
 		return
 	
 	for cost: CostDefinition in current_building_def.costs:
-		var result: GMTakeResult = gm_simple_storage.take_at_least(
+		var result: GMTakeResult = local_player_storage.take_at_least(
 			cost.resource,
 			cost.cost,
 		)
@@ -557,8 +697,10 @@ func attempt_build_current_building():
 				cost.resource,
 				cost.cost,
 			])
-		var storage: GMStorageRef = gm_simple_storage.get_storage(cost.resource)
-		event_bus.resource_updated.emit(
+		var storage: GMStorageRef = local_player_storage.get_storage(
+			cost.resource
+		)
+		event_bus.send_resource_updated.emit(
 			storage.item_id,
 			storage.quantity,
 		)
@@ -686,6 +828,17 @@ func attempt_build_current_building():
 func finalize_existing_buildings():
 	print("finalize_existing_buildings")
 	map.add_buildings_to_ecs(city)
+	# FIXME: this is terrible
+	# but we have to
+	var entity: Entity = Entity.new()
+	entity.add_component(C_Island.new())
+	ECS.world.add_entity(entity)
+	ECS.world.emit_event(
+		ECSEvents.ASSIGN_FACTION_TO_ENTITIES_REQUESTED,
+		entity,
+		{}
+	)
+	ECS.world.remove_entity(entity)
 
 func _on_ask_create_building(building_id: Buildings.Ids):
 	
@@ -768,7 +921,7 @@ func _on_ask_create_building(building_id: Buildings.Ids):
 				printerr("did not find a building")
 			# TODO : could do other cities in another color
 			for building: Entity in buildings_:
-				if building.has_component(C_Storage):
+				if building.has_component(C_IsStorage):
 					if building.has_component(C_Range):
 						var range_: C_Range = building.get_component(C_Range)
 						var indicator: CSGCylinder3D = RANGE_CYLINDER_INDICATOR.instantiate()
@@ -797,7 +950,7 @@ func _on_ask_create_building(building_id: Buildings.Ids):
 				printerr("did not find a building")
 			# TODO : could do other cities in another color
 			for building: Entity in buildings_:
-				if building.has_component(C_Storage):
+				if building.has_component(C_IsStorage):
 					if building.has_component(C_Range):
 						var range_: C_Range = building.get_component(C_Range)
 						var indicator: CSGCylinder3D = RANGE_CYLINDER_INDICATOR.instantiate()
@@ -824,7 +977,7 @@ func _on_ask_create_building(building_id: Buildings.Ids):
 				printerr("did not find a building")
 			# TODO : could do other cities in another color
 			for building: Entity in buildings_:
-				if building.has_component(C_Storage):
+				if building.has_component(C_IsStorage):
 					if building.has_component(C_Range):
 						var range_: C_Range = building.get_component(C_Range)
 						var indicator: CSGCylinder3D = RANGE_CYLINDER_INDICATOR.instantiate()
@@ -875,6 +1028,8 @@ func _on_ask_create_building(building_id: Buildings.Ids):
 			current_building.get_signal_list()
 		)
 
+#region "raycasting"
+
 func left_click_at_mouse_pos():
 	var camera = get_viewport().get_camera_3d()
 	var space = get_world_3d().direct_space_state
@@ -897,33 +1052,47 @@ func left_click_at_mouse_pos():
 		var collider: Node3D = raycast_result.collider
 		if !collider:
 			print("no collider")
-			deselect_selected_building()
+			deselect_selected_entity()
 			return
 		
+		# FIXME: would probably endup finding an entity if it's an island
 		var entity_parent: Entity = SceneUtils.find_first_parent_of_type(
 			collider,
 			Entity,
 		)
 		if !entity_parent:
 			print("did not find an Entity parent")
-			deselect_selected_building()
+			deselect_selected_entity()
 			return
 		
 		var c_building: C_Building = entity_parent.get_component(C_Building)
-		if !c_building:
-			print("clicked on something that is not a building %s %s" % [
-				collider.get_path(),
-				entity_parent.get_path(),
-			])
-			deselect_selected_building()
+		if c_building:
+			print("selecting building")
+			selected_building = entity_parent
+			event_bus.send_building_3D_selected.emit(entity_parent)
 			return
 		
-		print("selecting building")
+		var c_pop_unit: C_PopUnit = entity_parent.get_component(C_PopUnit)
+		if c_pop_unit:
+			print("selecting C_PopUnit")
+			selected_unit = entity_parent
+			event_bus.send_unit_3D_selected.emit(entity_parent)
+			return
+			
+		var c_ship: C_Ship = entity_parent.get_component(C_Ship)
+		if c_ship:
+			print("selecting C_Ship")
+			selected_ship = entity_parent
+			event_bus.send_ship_3D_selected.emit(entity_parent)
+			return
 		
-		selected_building = entity_parent
-		event_bus.send_building_3D_selected.emit(entity_parent)
+		print("clicked on something that is not a building nor an unit %s %s" % [
+			collider.get_path(),
+			entity_parent.get_path(),
+		])
+		deselect_selected_entity()
 	else:
-		deselect_selected_building()
+		deselect_selected_entity()
 
 func right_click_at_mouse_pos():
 	var camera = get_viewport().get_camera_3d()
@@ -954,13 +1123,70 @@ func right_click_at_mouse_pos():
 		)
 		right_click_target.global_position = position_
 		#sail_ship_1.add_component(target)
-		ECS.world.emit_event(
-			ECSEvents.ADD_COMPONENT_TO_ENTITY_REQUESTED,
-			sail_ship_1,
-			{
-				"component": target,
-			}
-		)
+		if selected_unit:
+			print("moving selected_unit")
+			var array: Array = []
+			var dest: C_NavigationDestination = selected_unit.get_component(
+				C_NavigationDestination
+			)
+			if dest:
+				dest.target = position_
+			else:
+				array.push_back(target)
+			
+			var c_move: C_PopMovingToTarget = selected_unit.get_component(C_PopMovingToTarget)
+			if c_move:
+				c_move.move_target_type = C_PopMovingToTarget.MOVE_TARGET_TYPE.ORDER
+			
+			else:
+				array.push_back(
+					C_PopMovingToTarget.new(
+						C_PopMovingToTarget.MOVE_TARGET_TYPE.ORDER
+					)
+				)
+			ECS.world.emit_event(
+				ECSEvents.ADD_COMPONENTS_TO_ENTITY_REQUESTED,
+				selected_unit,
+				{
+					"components": array,
+				}
+			)
+		elif selected_ship:
+			# TODO : verify faction here
+			var array: Array = []
+			var dest: C_NavigationDestination = selected_ship.get_component(
+				C_NavigationDestination
+			)
+			if dest:
+				dest.target = position_
+			else:
+				array.push_back(target)
+			
+			var c_move: C_PopMovingToTarget = selected_ship.get_component(C_PopMovingToTarget)
+			if c_move:
+				c_move.move_target_type = C_PopMovingToTarget.MOVE_TARGET_TYPE.ORDER
+			
+			else:
+				array.push_back(
+					C_PopMovingToTarget.new(
+						C_PopMovingToTarget.MOVE_TARGET_TYPE.ORDER
+					)
+				)
+			ECS.world.emit_event(
+				ECSEvents.ADD_COMPONENTS_TO_ENTITY_REQUESTED,
+				selected_ship,
+				{
+					"components": array,
+				}
+			)
+		else:
+			ECS.world.emit_event(
+				ECSEvents.ADD_COMPONENT_TO_ENTITY_REQUESTED,
+				sail_ship_1,
+				{
+					"component": target,
+				}
+			)
 
 func identify_node_below_mouse():
 	#print("identify_node_below_mouse")
@@ -1032,7 +1258,6 @@ func identify_node_below_mouse():
 					collider_parent.ocean_name,
 					collider,
 				)
-			
 			else:
 				#print("something else %s %s" % [
 					#collider_parent.name,
@@ -1061,9 +1286,21 @@ func identify_node_below_mouse():
 	else:
 		pass
 
+#endregion
+
 func add_current_building_to_tree():
 	#add_child(current_building)
 	dynamic_buildings.add_child(current_building)
+
+func deselect_selected_entity():
+	if selected_building:
+		deselect_selected_building()
+	if selected_unit:
+		event_bus.send_unit_3D_deselected.emit(selected_unit)
+		selected_unit = null
+	if selected_ship:
+		event_bus.send_ship_3D_deselected.emit(selected_ship)
+		selected_ship = null
 
 func deselect_selected_building():
 	if !selected_building:
@@ -1083,18 +1320,25 @@ func _on_multimesh_instance_area_exited_main_area(_area: MultiMeshInstanceArea):
 
 #endregion
 
-func _on_ProductionSystem_produced_resources(changes: Dictionary[int, int]) -> void:
-	#print("_on_ProductionSystem_produced_resources %s" % [
-		#changes.size(),
-	#])
+func _on_ProductionSystem_produced_resources(
+	changes_per_faction: Dictionary[int, Dictionary]
+) -> void:
+	print("_on_ProductionSystem_produced_resources %s" % [
+		changes_per_faction.size(),
+	])
+	var changes: Dictionary[int, int] = changes_per_faction.get(
+		local_player_faction_index,
+	)
+	if !changes:
+		return
 	for key in changes.keys():
-		var quantity = gm_simple_storage.get_storage(key)
+		var quantity = local_player_storage.get_storage(key)
 		#print("has %s of %s (produced %s)" % [
 			#quantity.quantity,
 			#key,
 			#changes.get(key),
 		#])
-		event_bus.resource_updated.emit(
+		event_bus.send_resource_updated.emit(
 			key, quantity.quantity
 		)
 
@@ -1179,30 +1423,35 @@ func initialize_storage():
 			res.resource_type,
 			res.quantity,
 		])
-		gm_simple_storage.set_storage(
+		local_player_storage.set_storage(
 			res.resource_type,
 			res.quantity,
 			-1
 		)
-		event_bus.resource_updated.emit(
+		event_bus.send_resource_updated.emit(
 			res.resource_type,
 			res.quantity,
 		)
 	for res: ResourceQuantityDefinition in initial_resources.custom_resources.values():
-		gm_simple_storage.set_storage(
+		local_player_storage.set_storage(
 			res.resource_type,
 			res.quantity,
 			-1
 		)
-		event_bus.resource_updated.emit(
+		event_bus.send_resource_updated.emit(
 			res.resource_type,
 			res.quantity,
 		)
+	
+	local_player_c_faction.gold_count = initial_resources.gold_count
+	event_bus.money_updated.emit(
+		local_player_c_faction.gold_count
+	)
 
 func has_resources_to_construct_building(def: BuildingDefinition) -> bool:
 	var has_resources: bool = true
 	for cost in def.costs:
-		if gm_simple_storage.has_at_least(
+		if local_player_storage.has_at_least(
 			cost.resource,
 			cost.cost,
 		):
@@ -1216,3 +1465,224 @@ func _on_EventBus_ask_change_ocean_visual(selected_ocean_visual_id: int) -> void
 
 func _on_EventBus_ask_debug_spawn_ship() -> void:
 	ge_map_ship_spawner.try_spawn_ship()
+
+func _on_NavigationSystem_ship_arrived_at_dock(
+	_ship: Entity,
+	dock: Entity
+) -> void:
+	# TODO: find another sound
+	ship_bell_audio_stream_player_3d.global_position = dock.global_position
+	ship_bell_audio_stream_player_3d.play()
+
+func _on_FeedSystem_consumed_resources(changes_per_faction: Dictionary[int, Dictionary]) -> void:
+	print("_on_FeedSystem_consumed_resources")
+	if changes_per_faction.is_empty():
+		printerr("_on_FeedSystem_consumed_resources changes is empty")
+		return
+	if !changes_per_faction.has(local_player_faction_index):
+		return
+	var changes: Dictionary[int, int] = changes_per_faction.get(
+		local_player_faction_index,
+	)
+	if !changes:
+		return
+	for key in changes.keys():
+		var quantity = local_player_storage.get_storage(key)
+		if quantity == null:
+			# FIXME: can be null if its neutral entity with infinite resources
+			printerr("initialize resources")
+			continue
+		event_bus.send_resource_updated.emit(
+			key, quantity.quantity
+		)
+
+func _on_FeedSystem_pop_units_died(
+	changes_per_faction: Dictionary[int, Dictionary]
+) -> void:
+	print("_on_FeedSystem_pop_units_died")
+	for changes: Dictionary[int, int] in changes_per_faction.values():
+		for key in changes.keys():
+			population_decrease(
+				key,
+				changes.get(key)
+			)
+
+func _on_FeedSystem_workers_died(
+	changes_per_faction: Dictionary[int, Dictionary]
+) -> void:
+	print("_on_FeedSystem_workers_died")
+	for changes: Dictionary[int, int] in changes_per_faction.values():
+		for key in changes.keys():
+			workers_decrease(
+				key,
+				changes.get(key)
+			)
+
+func _on_FeedSystem_island_population_changed(
+	islands: Dictionary[Entity, int]
+) -> void:
+	for island: Entity in islands.keys():
+		if island == current_island:
+			print("current island workers decreased")
+			var summary: C_PopulationSummary = island.get_component(
+				C_PopulationSummary
+			)
+			if summary:
+				event_bus.available_workers_updated.emit(
+					summary.workers
+				)
+				event_bus.population_updated.emit(
+					summary.populations
+				)
+
+func _on_PaySystem_gold_count_changed(
+	changes_per_faction: Dictionary[int, int]
+) -> void:
+	print("_on_PaySystem_gold_count_changed")
+	if changes_per_faction.has(local_player_faction_index):
+		#var c_storage: C_Storage = local_player_faction.get_component(
+			#C_Storage
+		#)
+		event_bus.money_updated.emit(
+			local_player_c_faction.gold_count
+		)
+
+func _on_OShipMiscObserver_island_population_changed(island: Entity) -> void:
+	print("_on_OShipMiscObserver_island_population_changed")
+	if island == current_island:
+		print("current island workers decreased")
+		var summary: C_PopulationSummary = island.get_component(
+			C_PopulationSummary
+		)
+		if summary:
+			#event_bus.available_workers_updated.emit(
+				#summary.workers
+			#)
+			event_bus.population_updated.emit(
+				summary.populations
+			)
+
+func _on_EventBus_notify_market_menu_closed() -> void:
+	rtsCamera.is_movement_disabled = false
+
+func _on_EventBus_notify_market_menu_opened() -> void:
+	rtsCamera.is_movement_disabled = true
+
+func _on_OShipTradingObserver_exchange_realized(
+	dock_changes: StorageChangeDef,
+	ship_changes: StorageChangeDef,
+	dock: Entity,
+	ship: Entity,
+) -> void:
+	print("_on_OShipTradingObserver_exchange_realized dock %s" % [
+		JSON.stringify(JSON.from_native(dock_changes, true)),
+	])
+	print("_on_OShipTradingObserver_exchange_realized ship %s" % [
+		JSON.stringify(JSON.from_native(ship_changes, true)),
+	])
+	# TODO: emit gold instance too
+	if dock_changes.faction_id == local_player_faction_index \
+		or ship_changes.faction_id == local_player_faction_index:
+		#var c_storage: C_Storage = local_player_faction.get_component(
+			#C_Storage
+		#)
+		event_bus.money_updated.emit(local_player_c_faction.gold_count)
+	else:
+		print("exchange is not for local player")
+		# TODO: could have an option for this
+		return
+	
+	var offset_limit: int = 5
+	
+	if true:
+		var instance: TradeExchangeSummaryFloatingUI3D = TRADE_EXCHANGE_SUMMARY_FLOATING_UI_3D.instantiate()
+		var offset: Vector3 = Vector3(
+			randi_range(-offset_limit, offset_limit),
+			5,
+			randi_range(-offset_limit, offset_limit),
+		)
+		instance.global_position = dock.global_position + offset
+		add_child(instance)
+		var res_def: ResourceDefinition = resource_list_definition_dict.get(
+			Resources.Types.Gold,
+		)
+		instance.set_content(
+			res_def.normal_icon,
+			str(dock_changes.gold_change),
+		)
+		instance.start_tween()
+		
+	if true:
+		var instance: TradeExchangeSummaryFloatingUI3D = TRADE_EXCHANGE_SUMMARY_FLOATING_UI_3D.instantiate()
+		var offset: Vector3 = Vector3(
+			randi_range(-offset_limit, offset_limit),
+			5,
+			randi_range(-offset_limit, offset_limit),
+		)
+		instance.global_position = ship.global_position + offset
+		add_child(instance)
+		var res_def: ResourceDefinition = resource_list_definition_dict.get(
+			Resources.Types.Gold,
+		)
+		instance.set_content(
+			res_def.normal_icon,
+			str(ship_changes.gold_change),
+		)
+		instance.start_tween()
+	
+	# TODO : emit money sound
+	#if dock_changes.faction_id == local_player_faction_index:
+	print("dock_changes.faction_id == local_player_faction_index")
+	for key in dock_changes.resources_changes.keys():
+		var quantity = local_player_storage.get_storage(key)
+		event_bus.send_resource_updated.emit(
+			key, quantity.quantity
+		)
+		
+		var value = dock_changes.resources_changes.get(
+			key
+		)
+		var instance: TradeExchangeSummaryFloatingUI3D = TRADE_EXCHANGE_SUMMARY_FLOATING_UI_3D.instantiate()
+		var offset: Vector3 = Vector3(
+			randi_range(-offset_limit, offset_limit),
+			5,
+			randi_range(-offset_limit, offset_limit),
+		)
+		instance.global_position = dock.global_position + offset
+		add_child(instance)
+		var res_def: ResourceDefinition = resource_list_definition_dict.get(
+			key
+		)
+		instance.set_content(
+			res_def.normal_icon,
+			str(value),
+		)
+		instance.start_tween()
+	
+	#if ship_changes.faction_id == local_player_faction_index:
+	print("ship_changes.faction_id == local_player_faction_index")
+	for key in ship_changes.resources_changes.keys():
+		var quantity = local_player_storage.get_storage(key)
+		event_bus.send_resource_updated.emit(
+			key, quantity.quantity
+		)
+		
+		var value = ship_changes.resources_changes.get(
+			key
+		)
+		var instance: TradeExchangeSummaryFloatingUI3D = TRADE_EXCHANGE_SUMMARY_FLOATING_UI_3D.instantiate()
+		var offset: Vector3 = Vector3(
+			randi_range(-offset_limit, offset_limit),
+			5,
+			randi_range(-offset_limit, offset_limit),
+		)
+		instance.global_position = ship.global_position + offset
+		add_child(instance)
+		var res_def: ResourceDefinition = resource_list_definition_dict.get(
+			key
+		)
+		instance.set_content(
+			res_def.normal_icon,
+			str(value),
+		)
+		instance.start_tween()

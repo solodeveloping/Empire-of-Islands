@@ -7,7 +7,7 @@ script = ExtResource("1_bj0uk")
 
 [node name="Label3D" type="Label3D" parent="." unique_id=338755129]
 billboard = 1
-modulate = Color(0, 0, 0, 1)
+modulate = Color(0.46165466, 0.8, 0.2797741, 1)
 text = "a relatively long text"
 font_size = 250
 outline_size = 0

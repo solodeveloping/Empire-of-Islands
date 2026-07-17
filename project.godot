@@ -267,11 +267,19 @@ ui_shift={
 
 [layer_names]
 
+2d_navigation/layer_1="ships"
 3d_physics/layer_1="player"
+3d_navigation/layer_1="ships"
+2d_navigation/layer_2="land_units"
 3d_physics/layer_2="water"
+3d_navigation/layer_2="land_units"
 3d_physics/layer_3="constructible_ground"
 3d_physics/layer_4="not_constructible_ground"
+3d_physics/layer_5="units"
+3d_physics/layer_6="buildings"
 3d_physics/layer_9="trees"
+avoidance/layer_1="ships"
+avoidance/layer_2="land_units"
 
 [logging]
 

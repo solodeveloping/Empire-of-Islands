@@ -43,6 +43,8 @@ var _is_mmb_rotating := false
 var _yaw: float = 0.0
 var _pitch: float = 0.8              # radians (~45° initial)
 
+var is_movement_disabled: bool = false
+
 func _ready() -> void:
 	var pmin := deg_to_rad(pitch_min_deg)
 	var pmax := deg_to_rad(pitch_max_deg)
@@ -51,6 +53,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if get_window().has_focus() == false:
+		return
+	if is_movement_disabled:
 		return
 	
 	var movement := Vector3.ZERO
@@ -96,6 +100,8 @@ func _process(delta: float) -> void:
 		_update_camera_position()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if is_movement_disabled:
+		return
 	# Mouse wheel zoom (changes orbit_distance)
 	if event is InputEventMouseButton:
 		if changing_distance_enabled:

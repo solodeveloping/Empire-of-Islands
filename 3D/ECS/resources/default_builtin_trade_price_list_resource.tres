@@ -1,0 +1,152 @@
+[gd_resource type="Resource" script_class="BuiltinTradePriceList" format=3 uid="uid://dtdg83wo8e36x"]
+
+[ext_resource type="Script" uid="uid://to15tmro3nc6" path="res://3D/ECS/data_scripts/builtin_default_resource_trade_price.gd" id="1_nj44d"]
+[ext_resource type="Script" uid="uid://m3kikw27jqnm" path="res://3D/ECS/data_scripts/builtin_trade_price_list.gd" id="2_owdie"]
+
+[sub_resource type="Resource" id="Resource_245iv"]
+script = ExtResource("1_nj44d")
+initial_sell_price = 10
+max_sell_price_variation = 1
+initial_buy_price = 5
+max_buy_price_variation = 1
+metadata/_custom_type_script = "uid://to15tmro3nc6"
+
+[sub_resource type="Resource" id="Resource_efsv7"]
+script = ExtResource("1_nj44d")
+builtin_resource_id = 1
+initial_sell_price = 30
+max_sell_price_variation = 3
+initial_buy_price = 25
+max_buy_price_variation = 3
+metadata/_custom_type_script = "uid://to15tmro3nc6"
+
+[sub_resource type="Resource" id="Resource_n3oqw"]
+script = ExtResource("1_nj44d")
+builtin_resource_id = 2
+initial_sell_price = 10
+max_sell_price_variation = 1
+initial_buy_price = 5
+max_buy_price_variation = 1
+metadata/_custom_type_script = "uid://to15tmro3nc6"
+
+[sub_resource type="Resource" id="Resource_bry1t"]
+script = ExtResource("1_nj44d")
+builtin_resource_id = 3
+initial_sell_price = 20
+max_sell_price_variation = 2
+initial_buy_price = 15
+max_buy_price_variation = 2
+metadata/_custom_type_script = "uid://to15tmro3nc6"
+
+[sub_resource type="Resource" id="Resource_cqqty"]
+script = ExtResource("1_nj44d")
+builtin_resource_id = 4
+initial_sell_price = 10
+max_sell_price_variation = 1
+initial_buy_price = 5
+max_buy_price_variation = 1
+metadata/_custom_type_script = "uid://to15tmro3nc6"
+
+[sub_resource type="Resource" id="Resource_igr1f"]
+script = ExtResource("1_nj44d")
+builtin_resource_id = 5
+initial_sell_price = 20
+max_sell_price_variation = 2
+initial_buy_price = 15
+max_buy_price_variation = 2
+metadata/_custom_type_script = "uid://to15tmro3nc6"
+
+[sub_resource type="Resource" id="Resource_mc2sr"]
+script = ExtResource("1_nj44d")
+builtin_resource_id = 6
+initial_sell_price = 30
+max_sell_price_variation = 3
+initial_buy_price = 25
+max_buy_price_variation = 3
+metadata/_custom_type_script = "uid://to15tmro3nc6"
+
+[sub_resource type="Resource" id="Resource_pkadk"]
+script = ExtResource("1_nj44d")
+builtin_resource_id = 7
+initial_sell_price = 10
+max_sell_price_variation = 1
+initial_buy_price = 15
+max_buy_price_variation = 1
+metadata/_custom_type_script = "uid://to15tmro3nc6"
+
+[sub_resource type="Resource" id="Resource_og528"]
+script = ExtResource("1_nj44d")
+builtin_resource_id = 8
+initial_sell_price = 20
+max_sell_price_variation = 2
+initial_buy_price = 15
+max_buy_price_variation = 2
+metadata/_custom_type_script = "uid://to15tmro3nc6"
+
+[sub_resource type="Resource" id="Resource_xej2v"]
+script = ExtResource("1_nj44d")
+builtin_resource_id = 9
+initial_sell_price = 20
+max_sell_price_variation = 2
+initial_buy_price = 15
+max_buy_price_variation = 2
+metadata/_custom_type_script = "uid://to15tmro3nc6"
+
+[sub_resource type="Resource" id="Resource_x265o"]
+script = ExtResource("1_nj44d")
+builtin_resource_id = 10
+initial_sell_price = 10
+max_sell_price_variation = 1
+initial_buy_price = 5
+max_buy_price_variation = 1
+metadata/_custom_type_script = "uid://to15tmro3nc6"
+
+[sub_resource type="Resource" id="Resource_4rk3d"]
+script = ExtResource("1_nj44d")
+builtin_resource_id = 11
+initial_sell_price = 20
+max_sell_price_variation = 2
+initial_buy_price = 15
+max_buy_price_variation = 2
+metadata/_custom_type_script = "uid://to15tmro3nc6"
+
+[sub_resource type="Resource" id="Resource_ngjoy"]
+script = ExtResource("1_nj44d")
+builtin_resource_id = 12
+initial_sell_price = 30
+max_sell_price_variation = 3
+initial_buy_price = 25
+max_buy_price_variation = 3
+metadata/_custom_type_script = "uid://to15tmro3nc6"
+
+[sub_resource type="Resource" id="Resource_56ujn"]
+script = ExtResource("1_nj44d")
+builtin_resource_id = 13
+initial_sell_price = 10
+max_sell_price_variation = 1
+initial_buy_price = 5
+max_buy_price_variation = 1
+metadata/_custom_type_script = "uid://to15tmro3nc6"
+
+[sub_resource type="Resource" id="Resource_opf2b"]
+script = ExtResource("1_nj44d")
+builtin_resource_id = 14
+initial_sell_price = 10
+max_sell_price_variation = 1
+initial_buy_price = 5
+max_buy_price_variation = 1
+metadata/_custom_type_script = "uid://to15tmro3nc6"
+
+[sub_resource type="Resource" id="Resource_2whpa"]
+script = ExtResource("1_nj44d")
+builtin_resource_id = 15
+initial_sell_price = 20
+max_sell_price_variation = 2
+initial_buy_price = 15
+max_buy_price_variation = 2
+metadata/_custom_type_script = "uid://to15tmro3nc6"
+
+[resource]
+script = ExtResource("2_owdie")
+list = Array[ExtResource("1_nj44d")]([SubResource("Resource_245iv"), SubResource("Resource_efsv7"), SubResource("Resource_n3oqw"), SubResource("Resource_bry1t"), SubResource("Resource_cqqty"), SubResource("Resource_igr1f"), SubResource("Resource_mc2sr"), SubResource("Resource_pkadk"), SubResource("Resource_og528"), SubResource("Resource_xej2v"), SubResource("Resource_x265o"), SubResource("Resource_4rk3d"), SubResource("Resource_ngjoy"), SubResource("Resource_56ujn"), SubResource("Resource_opf2b"), SubResource("Resource_2whpa")])
+metadata/_custom_type_script = "uid://m3kikw27jqnm"

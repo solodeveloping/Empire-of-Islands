@@ -1,0 +1,161 @@
+[gd_resource type="Resource" script_class="ResourceListDefinition" format=3 uid="uid://d0t4vweyfw7py"]
+
+[ext_resource type="Script" uid="uid://d3ildill70jlw" path="res://3D/misc/definitions/resource_definition.gd" id="1_jsmmv"]
+[ext_resource type="Script" uid="uid://b45m4ksfiq6pi" path="res://3D/misc/definitions/resource_list_definition.gd" id="2_enmub"]
+[ext_resource type="Texture2D" uid="uid://bjqtiksnb10uc" path="res://Art/Image/Gui/Icons/Resources/32/greyscale/008.png" id="2_hofyb"]
+[ext_resource type="Texture2D" uid="uid://dof6fekq0by1d" path="res://Art/Image/Gui/Icons/Resources/32/008.png" id="3_32fcy"]
+[ext_resource type="Texture2D" uid="uid://5o16gqmpuc5v" path="res://Art/Image/Gui/Icons/Resources/32/greyscale/003.png" id="4_fkylx"]
+[ext_resource type="Texture2D" uid="uid://bw4yhq42d3fsm" path="res://Art/Image/Gui/Icons/Resources/32/003.png" id="5_sh21v"]
+[ext_resource type="Texture2D" uid="uid://dwv46pcnya1uq" path="res://Art/Image/Gui/Icons/Resources/32/greyscale/005.png" id="6_0ty5a"]
+[ext_resource type="Texture2D" uid="uid://c61386efpk8p5" path="res://Art/Image/Gui/Icons/Resources/32/greyscale/013.png" id="6_tl6j5"]
+[ext_resource type="Texture2D" uid="uid://ch25qcjivrsl4" path="res://Art/Image/Gui/Icons/Resources/32/013.png" id="7_p2eyb"]
+[ext_resource type="Texture2D" uid="uid://b5efxca8qbywm" path="res://Art/Image/Gui/Icons/Resources/32/greyscale/004.png" id="8_61pt4"]
+[ext_resource type="Texture2D" uid="uid://dw84wlw36s6q5" path="res://Art/Image/Gui/Icons/Resources/32/004.png" id="9_qdt4y"]
+[ext_resource type="Texture2D" uid="uid://c2ewvfsg2dqmj" path="res://Art/Image/Gui/Icons/Resources/32/greyscale/015.png" id="10_aqqyl"]
+[ext_resource type="Texture2D" uid="uid://duv56eck70d7r" path="res://Art/Image/Gui/Icons/Resources/32/015.png" id="11_p7doh"]
+[ext_resource type="Texture2D" uid="uid://xsql24udu3vg" path="res://Art/Image/Gui/Icons/Resources/32/036.png" id="12_ojm5f"]
+[ext_resource type="Texture2D" uid="uid://dppa5mdurfmqo" path="res://Art/Image/Gui/Icons/Resources/32/greyscale/036.png" id="12_tjbne"]
+[ext_resource type="Texture2D" uid="uid://brmfkn8sfum3n" path="res://Art/Image/Gui/Icons/Resources/32/005.png" id="13_4g82j"]
+[ext_resource type="Texture2D" uid="uid://7frjg8stybw" path="res://Art/Image/Gui/Icons/Resources/32/051.png" id="14_qs53i"]
+[ext_resource type="Texture2D" uid="uid://cqic5y8gp3dps" path="res://Art/Image/Gui/Icons/Resources/32/052.png" id="15_tl6j5"]
+[ext_resource type="Texture2D" uid="uid://cujhs5ue6h2su" path="res://Art/Image/Gui/Icons/Resources/32/greyscale/051.png" id="16_66ofi"]
+[ext_resource type="Texture2D" uid="uid://bo1vtxvg45u84" path="res://Art/Image/Gui/Icons/Resources/32/010.png" id="16_tjbne"]
+[ext_resource type="Texture2D" uid="uid://t5dee8wldsjk" path="res://Art/Image/Gui/Icons/Resources/32/042.png" id="17_66ofi"]
+[ext_resource type="Texture2D" uid="uid://c05xnwsi6rdb0" path="res://Art/Image/Gui/Icons/Resources/32/044.png" id="18_1p5nr"]
+[ext_resource type="Texture2D" uid="uid://bav6yxkij8yia" path="res://Art/Image/Gui/Icons/Resources/32/greyscale/052.png" id="18_qvw63"]
+[ext_resource type="Texture2D" uid="uid://dr7odda4oc7dm" path="res://Art/Temp/cc0-food-icons/bread.png" id="19_qvw63"]
+[ext_resource type="Texture2D" uid="uid://b53mo4egq4nx0" path="res://Art/Image/Gui/Icons/Resources/32/greyscale/010.png" id="20_k184i"]
+[ext_resource type="Texture2D" uid="uid://do3sqmd2ouq5q" path="res://Art/Temp/cc0-food-icons/fish_tail.png" id="20_s82v1"]
+[ext_resource type="Texture2D" uid="uid://2qdy4eer16gl" path="res://Art/Image/Gui/Icons/Resources/32/021.png" id="21_k184i"]
+[ext_resource type="Texture2D" uid="uid://v37mssr8s4kt" path="res://Art/Image/Gui/Icons/Resources/32/greyscale/042.png" id="22_v0gtl"]
+[ext_resource type="Texture2D" uid="uid://dsygngmoe081d" path="res://Art/Image/Gui/Icons/Resources/32/007.png" id="22_yj0we"]
+[ext_resource type="Texture2D" uid="uid://daqqcmsaxxyn" path="res://Art/Image/Gui/Icons/Resources/32/greyscale/044.png" id="24_ifm0k"]
+[ext_resource type="Texture2D" uid="uid://bry4yo74jjcbr" path="res://Art/Temp/cc0-food-icons/bread_grey.png" id="26_66ofi"]
+[ext_resource type="Texture2D" uid="uid://bvgjr3ssfbo1i" path="res://Art/Temp/cc0-food-icons/fish_tail_grey.png" id="28_1p5nr"]
+[ext_resource type="Texture2D" uid="uid://b2vmssgq5e5k0" path="res://Art/Image/Gui/Icons/Resources/32/greyscale/021.png" id="28_fe2v1"]
+[ext_resource type="Texture2D" uid="uid://dmu5dytfsywh5" path="res://Art/Image/Gui/Icons/Resources/32/greyscale/007.png" id="30_mtjaa"]
+[ext_resource type="Texture2D" uid="uid://dk30d5n6rym6f" path="res://Art/Image/Gui/Icons/Resources/32/greyscale/001.png" id="34_qvw63"]
+[ext_resource type="Texture2D" uid="uid://toeqa364p2tp" path="res://Art/Image/Gui/Icons/Resources/32/001.png" id="35_s82v1"]
+
+[sub_resource type="Resource" id="Resource_hofyb"]
+script = ExtResource("1_jsmmv")
+normal_icon = ExtResource("3_32fcy")
+grey_icon = ExtResource("2_hofyb")
+metadata/_custom_type_script = "uid://d3ildill70jlw"
+
+[sub_resource type="Resource" id="Resource_n4y2n"]
+script = ExtResource("1_jsmmv")
+builtin_resource_id = 1
+normal_icon = ExtResource("5_sh21v")
+grey_icon = ExtResource("4_fkylx")
+metadata/_custom_type_script = "uid://d3ildill70jlw"
+
+[sub_resource type="Resource" id="Resource_ooua1"]
+script = ExtResource("1_jsmmv")
+builtin_resource_id = 2
+normal_icon = ExtResource("7_p2eyb")
+grey_icon = ExtResource("6_tl6j5")
+metadata/_custom_type_script = "uid://d3ildill70jlw"
+
+[sub_resource type="Resource" id="Resource_8px35"]
+script = ExtResource("1_jsmmv")
+builtin_resource_id = 3
+normal_icon = ExtResource("9_qdt4y")
+grey_icon = ExtResource("8_61pt4")
+metadata/_custom_type_script = "uid://d3ildill70jlw"
+
+[sub_resource type="Resource" id="Resource_0xwtv"]
+script = ExtResource("1_jsmmv")
+builtin_resource_id = 4
+normal_icon = ExtResource("11_p7doh")
+grey_icon = ExtResource("10_aqqyl")
+metadata/_custom_type_script = "uid://d3ildill70jlw"
+
+[sub_resource type="Resource" id="Resource_hvk1t"]
+script = ExtResource("1_jsmmv")
+builtin_resource_id = 5
+normal_icon = ExtResource("12_ojm5f")
+grey_icon = ExtResource("12_tjbne")
+metadata/_custom_type_script = "uid://d3ildill70jlw"
+
+[sub_resource type="Resource" id="Resource_op373"]
+script = ExtResource("1_jsmmv")
+builtin_resource_id = 6
+normal_icon = ExtResource("13_4g82j")
+grey_icon = ExtResource("6_0ty5a")
+metadata/_custom_type_script = "uid://d3ildill70jlw"
+
+[sub_resource type="Resource" id="Resource_rkxgr"]
+script = ExtResource("1_jsmmv")
+builtin_resource_id = 7
+normal_icon = ExtResource("14_qs53i")
+grey_icon = ExtResource("16_66ofi")
+metadata/_custom_type_script = "uid://d3ildill70jlw"
+
+[sub_resource type="Resource" id="Resource_8iiqs"]
+script = ExtResource("1_jsmmv")
+builtin_resource_id = 8
+normal_icon = ExtResource("15_tl6j5")
+grey_icon = ExtResource("18_qvw63")
+metadata/_custom_type_script = "uid://d3ildill70jlw"
+
+[sub_resource type="Resource" id="Resource_xi7jg"]
+script = ExtResource("1_jsmmv")
+builtin_resource_id = 9
+normal_icon = ExtResource("16_tjbne")
+grey_icon = ExtResource("20_k184i")
+metadata/_custom_type_script = "uid://d3ildill70jlw"
+
+[sub_resource type="Resource" id="Resource_aqb6m"]
+script = ExtResource("1_jsmmv")
+builtin_resource_id = 10
+normal_icon = ExtResource("17_66ofi")
+grey_icon = ExtResource("22_v0gtl")
+metadata/_custom_type_script = "uid://d3ildill70jlw"
+
+[sub_resource type="Resource" id="Resource_mmxq7"]
+script = ExtResource("1_jsmmv")
+builtin_resource_id = 11
+normal_icon = ExtResource("18_1p5nr")
+grey_icon = ExtResource("24_ifm0k")
+metadata/_custom_type_script = "uid://d3ildill70jlw"
+
+[sub_resource type="Resource" id="Resource_lkysh"]
+script = ExtResource("1_jsmmv")
+builtin_resource_id = 12
+normal_icon = ExtResource("19_qvw63")
+grey_icon = ExtResource("26_66ofi")
+metadata/_custom_type_script = "uid://d3ildill70jlw"
+
+[sub_resource type="Resource" id="Resource_1wivi"]
+script = ExtResource("1_jsmmv")
+builtin_resource_id = 13
+normal_icon = ExtResource("20_s82v1")
+grey_icon = ExtResource("28_1p5nr")
+metadata/_custom_type_script = "uid://d3ildill70jlw"
+
+[sub_resource type="Resource" id="Resource_gmyf8"]
+script = ExtResource("1_jsmmv")
+builtin_resource_id = 14
+normal_icon = ExtResource("21_k184i")
+grey_icon = ExtResource("28_fe2v1")
+metadata/_custom_type_script = "uid://d3ildill70jlw"
+
+[sub_resource type="Resource" id="Resource_pdh61"]
+script = ExtResource("1_jsmmv")
+builtin_resource_id = 15
+normal_icon = ExtResource("22_yj0we")
+grey_icon = ExtResource("30_mtjaa")
+metadata/_custom_type_script = "uid://d3ildill70jlw"
+
+[sub_resource type="Resource" id="Resource_n3oqw"]
+script = ExtResource("1_jsmmv")
+builtin_resource_id = 16
+normal_icon = ExtResource("35_s82v1")
+grey_icon = ExtResource("34_qvw63")
+metadata/_custom_type_script = "uid://d3ildill70jlw"
+
+[resource]
+script = ExtResource("2_enmub")
+list = Array[ExtResource("1_jsmmv")]([SubResource("Resource_hofyb"), SubResource("Resource_n4y2n"), SubResource("Resource_ooua1"), SubResource("Resource_8px35"), SubResource("Resource_0xwtv"), SubResource("Resource_hvk1t"), SubResource("Resource_op373"), SubResource("Resource_rkxgr"), SubResource("Resource_8iiqs"), SubResource("Resource_xi7jg"), SubResource("Resource_aqb6m"), SubResource("Resource_mmxq7"), SubResource("Resource_lkysh"), SubResource("Resource_1wivi"), SubResource("Resource_gmyf8"), SubResource("Resource_pdh61"), SubResource("Resource_n3oqw")])
+metadata/_custom_type_script = "uid://b45m4ksfiq6pi"

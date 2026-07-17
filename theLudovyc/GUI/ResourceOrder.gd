@@ -26,7 +26,9 @@ func _ready():
 	if current_scene.has_node("EventBus"):
 		event_bus = current_scene.get_node("EventBus") as EventBus
 
-		event_bus.resource_prodution_rate_updated.connect(_on_resource_prodution_rate_updated)
+		event_bus.send_resource_prodution_rate_updated.connect(
+			_on_resource_prodution_rate_updated
+		)
 
 
 func _on_BuySpinBox_value_changed(value):

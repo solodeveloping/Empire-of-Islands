@@ -2,6 +2,7 @@ extends Node
 class_name EventBus
 
 # ask UI -> MODEL
+# notify UI -> MODEL
 # send MODEL -> UI
 
 ## BUILDING
@@ -34,9 +35,16 @@ signal housing_capacity_updated(housing_capacity)
 signal available_workers_updated(available_workers_amount)
 signal worker_capacities_updated(available_worker_capacities_amount)
 
+signal send_unit_3D_selected(unit: Entity)
+signal send_unit_3D_deselected(unit: Entity)
+
+# FIXME: should it be the same as unit?
+signal send_ship_3D_selected(unit: Entity)
+signal send_ship_3D_deselected(unit: Entity)
+
 ## RESOURCES
-signal resource_updated(resource_type, resource_amount)
-signal resource_prodution_rate_updated(resource_type, production_rate)
+signal send_resource_updated(resource_type, resource_amount)
+signal send_resource_prodution_rate_updated(resource_type, production_rate)
 
 ## MONEY
 signal money_updated(money_amount)
@@ -55,6 +63,10 @@ signal send_update_order_buy(resource_type, buy_amount)
 
 signal ask_update_order_sell(resource_type, sell_amount)
 signal send_update_order_sell(resource_type, sell_amount)
+
+signal send_trades_updated(trades: Array[TradeResourceDefinition])
+signal notify_market_menu_opened()
+signal notify_market_menu_closed()
 
 ## CITY
 signal send_city_name_changed(new_city_name)

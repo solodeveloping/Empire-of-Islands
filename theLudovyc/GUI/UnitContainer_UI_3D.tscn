@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://dyrugpomrlo2q"]
+
+[ext_resource type="Script" uid="uid://bljvmgp72laxe" path="res://theLudovyc/GUI/UnitContainer_UI_3D.gd" id="1_2ihwr"]
+[ext_resource type="Texture2D" uid="uid://cg01wdpe7802i" path="res://Assets/dafluffypotato/flags/fr.png" id="2_5x48c"]
+[ext_resource type="Texture2D" uid="uid://dapd765c0bvd8" path="res://Art/Image/Gui/Buttons/delete_small.png" id="2_uw6kx"]
+[ext_resource type="Texture2D" uid="uid://btewy0y3mrcwd" path="res://Art/Image/Gui/Buttons/delete_small_bw.png" id="3_nl8x4"]
+[ext_resource type="Texture2D" uid="uid://cswhnjs5r8fkk" path="res://Art/Image/Gui/Buttons/delete_small_h.png" id="4_cbxav"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_or0xk"]
+bg_color = Color(0.388235, 0.341176, 0.247059, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.388235, 0.345098, 0.25098, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[node name="UnitContainer_UI_3D" type="VBoxContainer" unique_id=748671080]
+script = ExtResource("1_2ihwr")
+metadata/_tab_index = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=489517595]
+layout_mode = 2
+alignment = 1
+
+[node name="FlagTextureRect" type="TextureRect" parent="HBoxContainer" unique_id=303404572]
+layout_mode = 2
+texture = ExtResource("2_5x48c")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="NameLabel" type="Label" parent="HBoxContainer" unique_id=679909845]
+layout_mode = 2
+text = "UnitName"
+horizontal_alignment = 1
+
+[node name="DeleteButton" type="TextureButton" parent="HBoxContainer" unique_id=641425484]
+visible = false
+layout_mode = 2
+texture_normal = ExtResource("2_uw6kx")
+texture_pressed = ExtResource("3_nl8x4")
+texture_hover = ExtResource("4_cbxav")
+
+[node name="HSeparator" type="HSeparator" parent="." unique_id=1440464710]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxFlat_or0xk")
+
+[node name="UnitInfoContainer" type="TabContainer" parent="." unique_id=1172860554]
+layout_mode = 2
+current_tab = 0
+clip_tabs = false
+tabs_visible = false
+
+[node name="UnitDefaultContainer" type="VBoxContainer" parent="UnitInfoContainer" unique_id=1703771399]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="TypeLabel" type="Label" parent="UnitInfoContainer/UnitDefaultContainer" unique_id=1066846283]
+layout_mode = 2
+text = "Type: something"
+
+[node name="HealthLabel" type="Label" parent="UnitInfoContainer/UnitDefaultContainer" unique_id=348636229]
+layout_mode = 2
+text = "Health: 10/10"
+
+[node name="LocationLabel" type="Label" parent="UnitInfoContainer/UnitDefaultContainer" unique_id=1522752802]
+layout_mode = 2
+text = "Health: 10/10"
+
+[node name="WorkLabel" type="Label" parent="UnitInfoContainer/UnitDefaultContainer" unique_id=1050670377]
+layout_mode = 2
+text = "Health: 10/10"
+
+[node name="HousingLabel" type="Label" parent="UnitInfoContainer/UnitDefaultContainer" unique_id=1467254015]
+layout_mode = 2
+text = "Health: 10/10"
+
+[node name="EatingLabel" type="Label" parent="UnitInfoContainer/UnitDefaultContainer" unique_id=410347828]
+layout_mode = 2
+text = "Health: 10/10"
+
+[node name="PayLabel" type="Label" parent="UnitInfoContainer/UnitDefaultContainer" unique_id=1374034737]
+layout_mode = 2
+text = "Health: 10/10"
+
+[node name="MovingLabel" type="Label" parent="UnitInfoContainer/UnitDefaultContainer" unique_id=2020536120]
+layout_mode = 2
+text = "Health: 10/10"
+
+[node name="DeadLabel" type="Label" parent="UnitInfoContainer/UnitDefaultContainer" unique_id=250505682]
+layout_mode = 2
+text = "Is dead"
+
+[node name="LeavingIslandLabel" type="Label" parent="UnitInfoContainer/UnitDefaultContainer" unique_id=1075355875]
+layout_mode = 2
+text = "Health: 10/10"
+
+[node name="GoldLabel" type="Label" parent="UnitInfoContainer/UnitDefaultContainer" unique_id=1374160738]
+layout_mode = 2
+text = "Health: 10/10"
+
+[connection signal="pressed" from="HBoxContainer/DeleteButton" to="." method="_on_DeleteButton_pressed"]

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b8ybgxk2h25gw"]
+
+[ext_resource type="Script" uid="uid://87vqyamr3bco" path="res://addons/godotmarket/scripts/storage/gm_simple_storage.gd" id="1_qv6ql"]
+
+[node name="GmSimpleStorage" type="Node" unique_id=973286268]
+script = ExtResource("1_qv6ql")

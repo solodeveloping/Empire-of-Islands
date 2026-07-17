@@ -48,7 +48,7 @@ func define_components() -> Array:
 		C_Building.new(Buildings.Ids.Warehouse),
 		C_Name.new("Dock"),
 		C_Health.new(100),
-		C_Storage.new(),
+		C_IsStorage.new(),
 		C_Range.new(100.0),
 		C_Transform.new(),
 		C_Dock.new(),

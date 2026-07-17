@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://ceglfko76qrea"]
+
+[ext_resource type="Texture2D" uid="uid://b20x8ulvxiwqi" path="res://Art/Image/Gui/book.png" id="1_jf4td"]
+[ext_resource type="Texture2D" uid="uid://c354d2kmuckka" path="res://Art/Image/Gui/ResbarStats/sell.png" id="2_4gqge"]
+[ext_resource type="Script" uid="uid://ctxuhy5mpnsnk" path="res://theLudovyc/GUI/Trading/market_ui.gd" id="2_jf4td"]
+[ext_resource type="Texture2D" uid="uid://dlwi4tqas1vl0" path="res://Art/Image/Gui/ResbarStats/buy.png" id="3_jf4td"]
+[ext_resource type="PackedScene" uid="uid://caesee1t2e4as" path="res://theLudovyc/GUI/Trading/ResourceTradingItemUI.tscn" id="4_4gqge"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sfkqh"]
+texture = ExtResource("1_jf4td")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 3.0
+
+[node name="MarketUI" type="PanelContainer" unique_id=281317628]
+offset_right = 816.0
+offset_bottom = 84.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_sfkqh")
+script = ExtResource("2_jf4td")
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=531817911]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=918670505]
+layout_mode = 2
+
+[node name="Title" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=246614037]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Title" unique_id=177831063]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_jf4td")
+stretch_mode = 5
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/Title" unique_id=1034661913]
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/Title" unique_id=221336937]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_4gqge")
+stretch_mode = 5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer" unique_id=2110221496]
+custom_minimum_size = Vector2(1000, 700)
+layout_mode = 2
+
+[node name="TradeListContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer" unique_id=649128166]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="ResourceTradingItemUi" parent="MarginContainer/VBoxContainer/ScrollContainer/TradeListContainer" unique_id=1786308434 instance=ExtResource("4_4gqge")]
+layout_mode = 2
+
+[node name="ResourceTradingItemUi2" parent="MarginContainer/VBoxContainer/ScrollContainer/TradeListContainer" unique_id=2029257339 instance=ExtResource("4_4gqge")]
+layout_mode = 2
+
+[node name="ResourceTradingItemUi3" parent="MarginContainer/VBoxContainer/ScrollContainer/TradeListContainer" unique_id=1919597726 instance=ExtResource("4_4gqge")]
+layout_mode = 2
+
+[node name="ResourceTradingItemUi4" parent="MarginContainer/VBoxContainer/ScrollContainer/TradeListContainer" unique_id=866126060 instance=ExtResource("4_4gqge")]
+layout_mode = 2
+
+[node name="ResourceTradingItemUi5" parent="MarginContainer/VBoxContainer/ScrollContainer/TradeListContainer" unique_id=877684468 instance=ExtResource("4_4gqge")]
+layout_mode = 2
+
+[node name="ResourceTradingItemUi6" parent="MarginContainer/VBoxContainer/ScrollContainer/TradeListContainer" unique_id=1952699016 instance=ExtResource("4_4gqge")]
+layout_mode = 2
+
+[node name="ResourceTradingItemUi7" parent="MarginContainer/VBoxContainer/ScrollContainer/TradeListContainer" unique_id=1656198337 instance=ExtResource("4_4gqge")]
+layout_mode = 2
+
+[node name="ResourceTradingItemUi8" parent="MarginContainer/VBoxContainer/ScrollContainer/TradeListContainer" unique_id=697634207 instance=ExtResource("4_4gqge")]
+layout_mode = 2
+
+[node name="ResourceTradingItemUi9" parent="MarginContainer/VBoxContainer/ScrollContainer/TradeListContainer" unique_id=1309633291 instance=ExtResource("4_4gqge")]
+layout_mode = 2
+
+[node name="ResourceTradingItemUi10" parent="MarginContainer/VBoxContainer/ScrollContainer/TradeListContainer" unique_id=1010520826 instance=ExtResource("4_4gqge")]
+layout_mode = 2
+
+[node name="ResourceTradingItemUi11" parent="MarginContainer/VBoxContainer/ScrollContainer/TradeListContainer" unique_id=616802412 instance=ExtResource("4_4gqge")]
+layout_mode = 2
+
+[node name="ResourceTradingItemUi12" parent="MarginContainer/VBoxContainer/ScrollContainer/TradeListContainer" unique_id=428453980 instance=ExtResource("4_4gqge")]
+layout_mode = 2
+
+[node name="ResourceTradingItemUi13" parent="MarginContainer/VBoxContainer/ScrollContainer/TradeListContainer" unique_id=1746923761 instance=ExtResource("4_4gqge")]
+layout_mode = 2

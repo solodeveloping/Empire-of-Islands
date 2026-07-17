@@ -6,6 +6,7 @@ enum MOVE_TARGET_TYPE {
 	HOUSING,
 	DOCK,
 	IDLING,
+	ORDER,
 }
 
 @export

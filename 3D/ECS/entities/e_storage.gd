@@ -4,7 +4,7 @@ extends Entity
 
 func define_components() -> Array:
 	return [
-		C_Storage.new(),
+		C_IsStorage.new(),
 		C_Health.new(100),
 		C_Range.new(100.0)
 	]

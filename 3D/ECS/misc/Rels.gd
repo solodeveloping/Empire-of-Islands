@@ -7,6 +7,7 @@ static var travels_in: Relationship = Relationship.new(R_TravelsIn.new(), null)
 static var lives_in: Relationship = Relationship.new(R_LivesIn.new(), null)
 static var built_on: Relationship = Relationship.new(R_BuiltOn.new(), null)
 static var is_on_island: Relationship = Relationship.new(R_IsOnIsland.new(), null)
+static var belongs_to_faction: Relationship = Relationship.new(R_BelongsToFaction.new(), null)
 
 static var information_is_being_debugged_by: Relationship = Relationship.new(
 	R_InformationIsBeingDebuggedBy.new(), null
@@ -37,3 +38,6 @@ static func create_information_is_being_debugged_by(parent: Entity) -> Relations
 	return Relationship.new(
 		R_InformationIsBeingDebuggedBy.new(), parent
 	)
+
+static func create_belongs_to_faction(parent: Entity) -> Relationship:
+	return Relationship.new(R_BelongsToFaction.new(), parent)

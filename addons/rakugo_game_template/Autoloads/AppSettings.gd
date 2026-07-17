@@ -19,6 +19,7 @@ var config_file := ConfigFile.new()
 var busses_volume := {}
 
 func _ready():
+	print("AppSettings.gd:_ready")
 	var err = config_file.load(CONFIG_FILE_LOCATION)
 	
 	if err != OK:

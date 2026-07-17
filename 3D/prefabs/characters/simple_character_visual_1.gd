@@ -21,3 +21,6 @@ func play_idle():
 		return
 	animation_tree.set("parameters/conditions/walk_run", false)
 	animation_tree.set("parameters/conditions/stop_walk_run", true)
+
+func play_death():
+	animation_tree.set("parameters/conditions/is_dead", true)

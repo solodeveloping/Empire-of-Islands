@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b1kk66hos6qmw" path="res://theLudovyc/GUI/BuildingContainer_UI_3D.gd" id="1_yhyq5"]
 [ext_resource type="Texture2D" uid="uid://dapd765c0bvd8" path="res://Art/Image/Gui/Buttons/delete_small.png" id="2_2ml5l"]
+[ext_resource type="Texture2D" uid="uid://nvllfmr40fbx" path="res://Assets/dafluffypotato/flags/es.png" id="2_7d64g"]
 [ext_resource type="Texture2D" uid="uid://btewy0y3mrcwd" path="res://Art/Image/Gui/Buttons/delete_small_bw.png" id="3_7d64g"]
 [ext_resource type="Texture2D" uid="uid://cswhnjs5r8fkk" path="res://Art/Image/Gui/Buttons/delete_small_h.png" id="4_t1u26"]
 [ext_resource type="Script" uid="uid://78ndc7cpkntb" path="res://theLudovyc/GUI/BuildingInfoContainer_ECS.gd" id="5_yhyq5"]
@@ -31,6 +32,22 @@ corner_radius_bottom_left = 1
 [node name="BuildingContainer_UI_3D" type="VBoxContainer" unique_id=748671080]
 script = ExtResource("1_yhyq5")
 metadata/_tab_index = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1964112204]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer" unique_id=2039047784]
+layout_mode = 2
+
+[node name="FactionTextureRect" type="TextureRect" parent="CenterContainer/HBoxContainer2" unique_id=1422074175]
+layout_mode = 2
+texture = ExtResource("2_7d64g")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="FactionNameLabel" type="Label" parent="CenterContainer/HBoxContainer2" unique_id=1346967959]
+layout_mode = 2
+text = "Spain"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=489517595]
 layout_mode = 2

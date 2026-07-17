@@ -3,6 +3,9 @@ class_name GMSimpleStorage
 
 var storage: Dictionary[int, GMStorageRef] = {}
 
+# TODO: not sure how the other methods should behave related to this
+var has_infinite_resources: bool = false
+
 func get_storage(
 	item_id: int,
 ) -> GMStorageRef:
@@ -30,6 +33,9 @@ func set_storage_ref(ref: GMStorageRef) -> GMSetStorageResult:
 	return result
 
 func has_at_least(item_id: int, quantity: int) -> bool:
+	if has_infinite_resources:
+		return true
+	
 	if !storage.has(item_id):
 		return false
 		
@@ -43,6 +49,14 @@ func has_at_least(item_id: int, quantity: int) -> bool:
 func take_at_least(item_id: int, quantity: int) -> GMTakeResult:
 	var result := GMTakeResult.new()
 	
+	if has_infinite_resources:
+		result.quantity_taken = quantity
+		result.item_id = item_id
+		result.successful = true
+		return result
+	
+	# TODO: make an option related to has_infinite_quantities
+	# if not present, don't return true
 	if !storage.has(item_id):
 		result.successful = false
 		return result

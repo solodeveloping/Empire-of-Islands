@@ -4,6 +4,9 @@ class_name SimpleCharacter1
 
 @onready var character_visual: SimpleCharacterVisual1 = $CharacterVisualContainer/CharacterVisual
 
+@onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
+@onready var area_collision_shape_3d: CollisionShape3D = $Area3D/CollisionShape3D
+
 # FIXME : could be done in ECS
 # should it be done in ECS?
 var update_time: float = 0.1
@@ -19,6 +22,7 @@ func define_components() -> Array:
 		C_Transform.new(),
 		C_NavigationAgent3D.new("NavigationAgent3D"),
 		#C_PopUnitLocation.new(),
+		C_CharacterBody3D.new(),
 	]
 
 func on_ready():
@@ -40,6 +44,17 @@ func _process(delta: float) -> void:
 			character_visual.play_idle()
 		
 		last_position = self.global_position
+
+func enable_physics():
+	collision_shape_3d.set_deferred("disabled", false)
+	area_collision_shape_3d.set_deferred("disabled", false)
+
+func disable_physics():
+	collision_shape_3d.set_deferred("disabled", true)
+	area_collision_shape_3d.set_deferred("disabled", true)
+
+func play_death():
+	character_visual.play_death()
 
 func _print_all():
 	_print_all_components()

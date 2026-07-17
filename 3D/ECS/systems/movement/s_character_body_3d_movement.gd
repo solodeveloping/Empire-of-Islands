@@ -17,9 +17,9 @@ func move_bodies(entities: Array[Entity], _components: Array, _delta: float):
 	if entities.size() == 0:
 		return
 	
-	print("move_bodies %s" % [
-		entities.size(),
-	])
+	#print("move_bodies %s" % [
+		#entities.size(),
+	#])
 	
 	for entity in entities:
 		# TODO: open issues in github for godot

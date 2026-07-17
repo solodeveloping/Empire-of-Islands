@@ -1,6 +1,8 @@
 extends Observer
 class_name O_ShipMiscObserver
 
+signal island_population_changed(island: Entity)
+
 # Info: add generic ship commands here
 
 func sub_observers() -> Array[Array]:
@@ -16,12 +18,38 @@ func sub_observers() -> Array[Array]:
 
 func _on_ship_unload_requested(
 	_event: Variant,
-	entity: Entity,
+	ship: Entity,
 	data: Variant,
 	#"buoy": buoy,
 	#"dock": dock,
 	#"island": island,
 ) -> void:
+	unload_passengers(
+		_event,
+		ship,
+		data,
+	)
+	
+	# FIXME: semantic is not nice
+	# it's inside unload
+	# but the event is called from navigation
+	# maybe we need intermediary
+	load_ship(
+		ship,
+		data,
+	)
+	
+	ECS.world.emit_event(
+		ECSEvents.SHIP_TRADING_REQUESTED,
+		ship,
+		data,
+	)
+	
+func unload_passengers(
+	_event: Variant,
+	entity: Entity,
+	data: Variant,
+):
 	if !entity.has_component(C_ShipPopulation):
 		push_error("_on_ship_waiting_for_unloading: entity does not has C_ShipPopulation")
 		return
@@ -112,21 +140,18 @@ func _on_ship_unload_requested(
 		
 		cmd.remove_relationship(pop_units[i], Rels.travels_in)
 	
-	# FIXME: semantic is not nice
-	# it's inside unload
-	# but the event is called from navigation
-	# maybe we need intermediary
-	load_ship(
-		entity,
-		c_ship_population,
-		data,
-	)
 
 func load_ship(
 	ship: Entity,
-	c_ship_population: C_ShipPopulation,
 	data: Variant,
 ):
+	var c_ship_population: C_ShipPopulation = ship.get_component(
+		C_ShipPopulation
+	)
+	if !c_ship_population:
+		printerr("C_ShipPopulation not found")
+		return
+	
 	var pop_units: Array = ECS.world.query.with_all([
 		C_PopUnit,
 		C_LookingToLeaveIsland,
@@ -145,7 +170,7 @@ func load_ship(
 		
 		# hiding the unit and disabling physics
 		pop_unit.hide()
-		pop_unit.set_deferred("disabled", true)
+		pop_unit.disable_physics()
 		
 		# removing the component
 		cmd.remove_component(
@@ -194,12 +219,21 @@ func load_ship(
 			else:
 				printerr("!r_lives_in.target")
 		
+		# TODO: maybe should be done elsewhere
 		# leave island
 		var r_is_on: Relationship = pop_unit.get_relationship(
 			Rels.is_on_island
 		)
 		if r_is_on:
 			if r_is_on.target:
+				var c_pop_summary: C_PopulationSummary = r_is_on.target.get_component(C_PopulationSummary)
+				var c_pop_unit: C_PopUnit = pop_unit.get_component(
+					C_PopUnit
+				)
+				c_pop_summary.population_decrease(
+					c_pop_unit.pop_type,
+					1,
+				)
 				cmd.remove_relationship(
 					pop_unit,
 					Rels.is_on_island,
@@ -215,3 +249,4 @@ func load_ship(
 			Rels.create_travels_in(ship)
 		)
 		
+	island_population_changed.emit(data.island)

@@ -345,7 +345,7 @@ func _find_and_assign_housing_to_pop_units(
 				)
 			if !pop_unit.visible:
 				pop_unit.show()
-				pop_unit.set_deferred("disabled", false)
+				pop_unit.enable_physics()
 		else:
 			# FIXME: prolly should not be here
 			# the notion to know where to go
@@ -355,7 +355,7 @@ func _find_and_assign_housing_to_pop_units(
 				if !pop_unit.visible:
 					print("showing pop_unit")
 					pop_unit.show()
-					pop_unit.set_deferred("disabled", false)
+					pop_unit.enable_physics()
 				
 				print("adding C_LookingForMoveTarget %s" % [
 					pop_unit.name,
@@ -442,7 +442,7 @@ func _find_and_assign_production_building_to_pop_units(
 		if !pop_unit.visible:
 			print("showing pop_unit")
 			pop_unit.show()
-			pop_unit.set_deferred("disabled", false)
+			pop_unit.enable_physics()
 		
 		print("adding C_LookingForMoveTarget %s %s" % [
 			pop_unit.name,
@@ -463,8 +463,8 @@ func spawn_pop_unit_visual(
 	
 	var spawn_point = dock.get_spawn_point()
 	
-	pop_unit.set_deferred("disabled", false)
 	pop_unit.show()
+	pop_unit.enable_physics()
 	
 	var offset = Vector3(
 		randf_range(0, 3),

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Nationality" format=3 uid="uid://dvh37mkpu438o"]
+
+[ext_resource type="Script" uid="uid://b3g48xbfohfv3" path="res://3D/ECS/data_scripts/nationality.gd" id="1_db5j5"]
+[ext_resource type="Texture2D" uid="uid://cg01wdpe7802i" path="res://Assets/dafluffypotato/flags/fr.png" id="1_o2rep"]
+
+[resource]
+script = ExtResource("1_db5j5")
+name = "France"
+flag_texture = ExtResource("1_o2rep")
+male_first_names = Array[String](["Noah", "Arthur", "Jules", "Sacha", "Jean", "Romain", "Marceau", "Gabin", "Hugo", "Paul"])
+female_first_names = Array[String](["Ambre", "Alba", "Rose", "Alma", "Romy", "Alice", "Olivia", "Anna", "Lou", "Victoria"])
+last_names = Array[String](["Martin", "Bernard", "Dubois", "Thomas", "Robert", "Richard", "Petit", "Durand", "Leroy", "Moreau"])
+metadata/_custom_type_script = "uid://b3g48xbfohfv3"

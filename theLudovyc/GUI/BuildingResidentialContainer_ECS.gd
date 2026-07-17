@@ -12,7 +12,9 @@ func update_infos(
 	_building_id: Buildings.Ids,
 	building: Entity,
 ):
-	var c_housing: C_HousingCapacity = building.get_component(C_HousingCapacity)
+	var c_housing: C_HousingCapacity = building.get_component(
+		C_HousingCapacity
+	)
 	if c_housing:
 		resident_label.text = "%s / %s" % [
 			c_housing.current,

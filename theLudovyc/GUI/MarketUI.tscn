@@ -1,43 +1,43 @@
-[gd_scene load_steps=4 format=3 uid="uid://dna43527mnqgy"]
+[gd_scene format=3 uid="uid://dna43527mnqgy"]
 
 [ext_resource type="Script" uid="uid://cswh30732up6p" path="res://theLudovyc/GUI/MarketContainer.gd" id="1_h6353"]
 [ext_resource type="Texture2D" uid="uid://c354d2kmuckka" path="res://Art/Image/Gui/ResbarStats/sell.png" id="2_66epx"]
 [ext_resource type="Texture2D" uid="uid://dlwi4tqas1vl0" path="res://Art/Image/Gui/ResbarStats/buy.png" id="3_yeq0w"]
 
-[node name="MarketContainer" type="VBoxContainer"]
+[node name="MarketContainer" type="VBoxContainer" unique_id=363218639]
 script = ExtResource("1_h6353")
 metadata/_tab_index = 0
 
-[node name="Title" type="HBoxContainer" parent="."]
+[node name="Title" type="HBoxContainer" parent="." unique_id=725598393]
 layout_mode = 2
 
-[node name="TextureRect2" type="TextureRect" parent="Title"]
+[node name="TextureRect2" type="TextureRect" parent="Title" unique_id=242037868]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("2_66epx")
 stretch_mode = 5
 
-[node name="VSeparator" type="VSeparator" parent="Title"]
+[node name="VSeparator" type="VSeparator" parent="Title" unique_id=1042730817]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Title"]
+[node name="TextureRect" type="TextureRect" parent="Title" unique_id=967543189]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("3_yeq0w")
 stretch_mode = 5
 
-[node name="NewOrderButton" type="Button" parent="."]
+[node name="NewOrderButton" type="Button" parent="." unique_id=1020579812]
 layout_mode = 2
 text = "New Order"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=2126750564]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 vertical_scroll_mode = 2
 
-[node name="OrderContainer" type="VBoxContainer" parent="ScrollContainer"]
+[node name="OrderContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=909185871]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6

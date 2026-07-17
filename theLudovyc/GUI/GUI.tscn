@@ -12,10 +12,12 @@
 [ext_resource type="PackedScene" uid="uid://drvpewr8augpr" path="res://theLudovyc/GUI/BuildingContainer.tscn" id="9_2vp3c"]
 [ext_resource type="PackedScene" uid="uid://dy1b6i8egw0s7" path="res://theLudovyc/GUI/BuildUI.tscn" id="10_xddfq"]
 [ext_resource type="PackedScene" uid="uid://g7ucu7fgw6bl" path="res://theLudovyc/GUI/BuildingContainer_UI_3D.tscn" id="12_4hiv2"]
+[ext_resource type="PackedScene" uid="uid://dyrugpomrlo2q" path="res://theLudovyc/GUI/UnitContainer_UI_3D.tscn" id="13_4hiv2"]
 [ext_resource type="Texture2D" uid="uid://b0gi4vdahasx6" path="res://Art/Image/Gui/Background/Widgets/cityinfo_left.png" id="13_s75r0"]
 [ext_resource type="Texture2D" uid="uid://dja8u81e6ge3k" path="res://Art/Image/Gui/Background/Widgets/cityinfo_right.png" id="14_flxif"]
 [ext_resource type="Texture2D" uid="uid://3hepoko6w1v" path="res://Art/Image/Gui/Icons/Widgets/CityInfo/settlement.png" id="14_h5vqk"]
 [ext_resource type="PackedScene" uid="uid://uwtq6pqqc8lm" path="res://theLudovyc/GUI/WidgetMenuButton.tscn" id="14_iofba"]
+[ext_resource type="PackedScene" uid="uid://dbarlrcr66v3" path="res://theLudovyc/GUI/ShipContainer_UI_3D.tscn" id="14_ktgkj"]
 [ext_resource type="StyleBox" uid="uid://c337qd1xlk4yw" path="res://theLudovyc/GUI/PanelCityInfo.tres" id="14_p6h2t"]
 [ext_resource type="Texture2D" uid="uid://dry1ceb3p6yk1" path="res://Art/Image/Gui/Icons/Widgets/CityInfo/inhabitants.png" id="15_p3ujw"]
 [ext_resource type="Texture2D" uid="uid://cd61sgi3bblm7" path="res://Art/Image/Gui/Icons/TabWidget/Warehouse/buysell_u.png" id="15_t1pbn"]
@@ -45,6 +47,7 @@
 [ext_resource type="Texture2D" uid="uid://1jvqu2r1u5bb" path="res://Art/Image/Gui/Icons/TabWidget/BuildMenu/Tier/tier4_u.png" id="47_bo2ng"]
 [ext_resource type="Texture2D" uid="uid://dlvlgbmmmq6bb" path="res://Art/Image/Gui/Icons/TabWidget/BuildMenu/Tier/tier4_d.png" id="48_qjjjt"]
 [ext_resource type="Texture2D" uid="uid://btaf7o8qcjwbd" path="res://Art/Image/Gui/Icons/TabWidget/BuildMenu/Tier/tier4_h.png" id="49_qgjc7"]
+[ext_resource type="PackedScene" uid="uid://ceglfko76qrea" path="res://theLudovyc/GUI/Trading/MarketUI.tscn" id="51_81aao"]
 [ext_resource type="PackedScene" uid="uid://b36bl6fmufdh" path="res://theLudovyc/GUI/MoneyAndResourcesContainer.tscn" id="53_rv8fv"]
 [ext_resource type="Script" uid="uid://k1ptg3ypq45y" path="res://theLudovyc/GUI/LabelHousing.gd" id="54_qjjjt"]
 [ext_resource type="Script" uid="uid://b0klc1fhrblng" path="res://theLudovyc/GUI/NaturalResourceContainer.gd" id="55_1wuat"]
@@ -199,6 +202,16 @@ metadata/_tab_index = 4
 visible = false
 layout_mode = 2
 metadata/_tab_index = 5
+
+[node name="UnitContainer_UI_3D" parent="Widget/BottomContainer/PanelContainer/MenuContainer" unique_id=1249347952 instance=ExtResource("13_4hiv2")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 6
+
+[node name="ShipContainer_UI_3D" parent="Widget/BottomContainer/PanelContainer/MenuContainer" unique_id=710107487 instance=ExtResource("14_ktgkj")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 7
 
 [node name="Bot" type="TextureRect" parent="Widget/BottomContainer" unique_id=1760140408]
 layout_mode = 2
@@ -622,7 +635,7 @@ text = "Ocean shader"
 layout_mode = 2
 size_flags_horizontal = 0
 selected = 0
-item_count = 9
+item_count = 10
 popup/item_0/text = "flat_1"
 popup/item_0/id = 0
 popup/item_1/text = "flat_2"
@@ -641,11 +654,29 @@ popup/item_7/text = "flat_normals"
 popup/item_7/id = 6
 popup/item_8/text = "caustics_3"
 popup/item_8/id = 8
+popup/item_9/text = "caustics_3_no_refraction"
+popup/item_9/id = 9
 
-[node name="Button" type="Button" parent="DebugInfoContainer" unique_id=700754089]
+[node name="SpawnShipButton" type="Button" parent="DebugInfoContainer" unique_id=700754089]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Request spawn ship"
+
+[node name="OpenSettingsButton" type="Button" parent="DebugInfoContainer" unique_id=779736101]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Open settings dir"
+
+[node name="MarketUI" parent="." unique_id=281317628 instance=ExtResource("51_81aao")]
+unique_name_in_owner = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -605.0
+offset_top = 100.0
+offset_right = 605.0
+offset_bottom = 872.0
+grow_horizontal = 2
 
 [node name="ResourcePopup" type="Window" parent="." unique_id=809039202]
 unique_name_in_owner = true
@@ -690,4 +721,5 @@ unique_name_in_owner = true
 [connection signal="pressed" from="Widget/BuildingTierButtonContainer/VBoxContainer/Tier_4_MenuButton" to="Widget/BottomContainer/PanelContainer/MenuContainer" method="_on_Tier4MenuButton_pressed"]
 [connection signal="visibility_changed" from="RichTextLabelInfo" to="RichTextLabelInfo" method="_on_visibility_changed"]
 [connection signal="item_selected" from="DebugInfoContainer/OptionButton" to="DebugInfoContainer" method="_on_OptionButton_item_selected"]
-[connection signal="button_up" from="DebugInfoContainer/Button" to="DebugInfoContainer" method="_on_Button_button_up"]
+[connection signal="button_up" from="DebugInfoContainer/SpawnShipButton" to="DebugInfoContainer" method="_on_SpawnShipButton_button_up"]
+[connection signal="button_up" from="DebugInfoContainer/OpenSettingsButton" to="DebugInfoContainer" method="_on_OpenSettingsButton_button_up"]

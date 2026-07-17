@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Nationality" format=3 uid="uid://oh84ocwombvy"]
+
+[ext_resource type="Texture2D" uid="uid://drrjqoiiitgnp" path="res://Assets/dafluffypotato/flags/nl.png" id="1_73ex7"]
+[ext_resource type="Script" uid="uid://b3g48xbfohfv3" path="res://3D/ECS/data_scripts/nationality.gd" id="1_o060x"]
+
+[resource]
+script = ExtResource("1_o060x")
+name = "Dutch"
+flag_texture = ExtResource("1_73ex7")
+male_first_names = Array[String](["Jan", "Hendrik", "Pieter", "Willem", "Jacob", "Dirk", "Arie", "Johan", "Kees", "Wouter"])
+female_first_names = Array[String](["Anna", "Johanna", "Elisabeth", "Adriana", "Helena", "Lena", "Els", "Maria", "Anke", "Femke"])
+last_names = Array[String](["De Jong", "Jansen", "De Vries", "Van den Berg", "Van Dyk", "Bakker", "Janssen", "Visser", "Smit", "Meijer"])
+metadata/_custom_type_script = "uid://b3g48xbfohfv3"

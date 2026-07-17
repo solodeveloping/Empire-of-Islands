@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dy76qyj72jc56"]
+
+[ext_resource type="Script" uid="uid://brg8qxdvrsrva" path="res://theLudovyc/GUI/Trading/trade_exchange_summary_floating_ui.gd" id="1_yui3a"]
+[ext_resource type="Texture2D" uid="uid://brmfkn8sfum3n" path="res://Art/Image/Gui/Icons/Resources/32/005.png" id="2_fnbtt"]
+
+[node name="TradeExchangeSummaryFloatingUi" type="MarginContainer" unique_id=24407110]
+offset_right = 363.0
+offset_bottom = 143.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("1_yui3a")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=195999361]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=819647237]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1111311670]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1019754651]
+layout_mode = 2
+theme_override_font_sizes/font_size = 125
+text = "+ 20"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1205531114]
+layout_mode = 2
+texture = ExtResource("2_fnbtt")
+expand_mode = 3

@@ -1,0 +1,133 @@
+[gd_scene format=3 uid="uid://dbarlrcr66v3"]
+
+[ext_resource type="Script" uid="uid://d2wf6c8gawf5i" path="res://theLudovyc/GUI/ShipContainer_UI_3D.gd" id="1_npcs1"]
+[ext_resource type="Texture2D" uid="uid://dapd765c0bvd8" path="res://Art/Image/Gui/Buttons/delete_small.png" id="2_d2a73"]
+[ext_resource type="Texture2D" uid="uid://cg01wdpe7802i" path="res://Assets/dafluffypotato/flags/fr.png" id="2_efvge"]
+[ext_resource type="Texture2D" uid="uid://btewy0y3mrcwd" path="res://Art/Image/Gui/Buttons/delete_small_bw.png" id="3_efvge"]
+[ext_resource type="Texture2D" uid="uid://cswhnjs5r8fkk" path="res://Art/Image/Gui/Buttons/delete_small_h.png" id="4_2noaw"]
+[ext_resource type="PackedScene" uid="uid://c4ff10n77vegm" path="res://theLudovyc/GUI/Ship/ShipStorageItemUI.tscn" id="6_efvge"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_or0xk"]
+bg_color = Color(0.388235, 0.341176, 0.247059, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.388235, 0.345098, 0.25098, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[node name="ShipContainer_UI_3D" type="VBoxContainer" unique_id=748671080]
+script = ExtResource("1_npcs1")
+metadata/_tab_index = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=489517595]
+layout_mode = 2
+alignment = 1
+
+[node name="FlagTextureRect" type="TextureRect" parent="HBoxContainer" unique_id=79147693]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_efvge")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="NameLabel" type="Label" parent="HBoxContainer" unique_id=679909845]
+layout_mode = 2
+size_flags_vertical = 1
+text = "UnitName"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NameRichTextLabel" type="RichTextLabel" parent="HBoxContainer" unique_id=855327186]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+bbcode_enabled = true
+text = "[center]UnitName [img]res://Assets/dafluffypotato/flags/fr.png[/img][/center]"
+fit_content = true
+autowrap_mode = 0
+
+[node name="DeleteButton" type="TextureButton" parent="HBoxContainer" unique_id=641425484]
+visible = false
+layout_mode = 2
+texture_normal = ExtResource("2_d2a73")
+texture_pressed = ExtResource("3_efvge")
+texture_hover = ExtResource("4_2noaw")
+
+[node name="HSeparator" type="HSeparator" parent="." unique_id=1440464710]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxFlat_or0xk")
+
+[node name="UnitInfoContainer" type="TabContainer" parent="." unique_id=1172860554]
+layout_mode = 2
+current_tab = 0
+clip_tabs = false
+tabs_visible = false
+
+[node name="UnitDefaultContainer" type="VBoxContainer" parent="UnitInfoContainer" unique_id=1703771399]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="HealthLabel" type="Label" parent="UnitInfoContainer/UnitDefaultContainer" unique_id=348636229]
+layout_mode = 2
+text = "Health: 10/10"
+
+[node name="PopulationLabel" type="Label" parent="UnitInfoContainer/UnitDefaultContainer" unique_id=1522752802]
+layout_mode = 2
+text = "Passengers: 10/10"
+
+[node name="WeightLabel" type="Label" parent="UnitInfoContainer/UnitDefaultContainer" unique_id=1911571386]
+layout_mode = 2
+text = "Space: 10/10"
+
+[node name="SpaceLabel" type="Label" parent="UnitInfoContainer/UnitDefaultContainer" unique_id=216138352]
+layout_mode = 2
+text = "Weight: 10/10"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1487541196]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1696151948]
+layout_mode = 2
+text = "Cargo"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=625397258]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxFlat_or0xk")
+
+[node name="GoldLabel" type="Label" parent="VBoxContainer" unique_id=2129999240]
+layout_mode = 2
+text = "Gold: 100"
+
+[node name="CargoGridContainer" type="GridContainer" parent="VBoxContainer" unique_id=791382842]
+layout_mode = 2
+columns = 4
+
+[node name="ShipStorageItem" parent="VBoxContainer/CargoGridContainer" unique_id=66771534 instance=ExtResource("6_efvge")]
+layout_mode = 2
+
+[node name="ShipStorageItem2" parent="VBoxContainer/CargoGridContainer" unique_id=1237252842 instance=ExtResource("6_efvge")]
+layout_mode = 2
+
+[node name="ShipStorageItem3" parent="VBoxContainer/CargoGridContainer" unique_id=1408834849 instance=ExtResource("6_efvge")]
+layout_mode = 2
+
+[node name="ShipStorageItem4" parent="VBoxContainer/CargoGridContainer" unique_id=2030054278 instance=ExtResource("6_efvge")]
+layout_mode = 2
+
+[node name="ShipStorageItem5" parent="VBoxContainer/CargoGridContainer" unique_id=1465066728 instance=ExtResource("6_efvge")]
+layout_mode = 2
+
+[node name="ShipStorageItem6" parent="VBoxContainer/CargoGridContainer" unique_id=1812008772 instance=ExtResource("6_efvge")]
+layout_mode = 2
+
+[node name="ShipStorageItem7" parent="VBoxContainer/CargoGridContainer" unique_id=417594538 instance=ExtResource("6_efvge")]
+layout_mode = 2
+
+[node name="ShipStorageItem8" parent="VBoxContainer/CargoGridContainer" unique_id=296133197 instance=ExtResource("6_efvge")]
+layout_mode = 2
+
+[connection signal="pressed" from="HBoxContainer/DeleteButton" to="." method="_on_DeleteButton_pressed"]

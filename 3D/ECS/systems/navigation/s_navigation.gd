@@ -1,6 +1,8 @@
 class_name NavigationSystem
 extends System
 
+signal ship_arrived_at_dock(ship: Entity, dock: Entity)
+
 func sub_systems():
 	return [
 		[
@@ -86,6 +88,11 @@ func move_agents(entities: Array[Entity], _components: Array, delta: float):
 						"dock": dock,
 						"island": island,
 					}
+				)
+				
+				ship_arrived_at_dock.emit(
+					entity,
+					dock,
 				)
 			
 			# Info: we are arriving at an exut

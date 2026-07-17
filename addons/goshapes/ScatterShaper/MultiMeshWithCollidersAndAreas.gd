@@ -239,6 +239,7 @@ func hide_instance(
 		if collider is StaticBody3D:
 			collider.process_mode = Node.PROCESS_MODE_DISABLED
 			#print("mode", collider.process_mode)
+			# could disable the collision shape
 			#collider.set_deferred("disabled", true)
 
 func show_instance(

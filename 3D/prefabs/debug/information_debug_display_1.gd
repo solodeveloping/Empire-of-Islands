@@ -2,6 +2,8 @@
 extends Entity
 class_name InformationDebugDisplay1
 
+# TODO: display flag of the entity if there is one
+
 @onready var label_3d: Label3D = $Label3D
 
 func _ready() -> void:

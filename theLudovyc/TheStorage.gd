@@ -25,7 +25,7 @@ func add_resource(resource_type: Resources.Types, amount: int):
 		else:
 			storage[resource_type] = amount
 
-	event_bus.resource_updated.emit(resource_type, storage[resource_type])
+	event_bus.send_resource_updated.emit(resource_type, storage[resource_type])
 
 	if storage[resource_type] == 0:
 		storage.erase(resource_type)
@@ -45,7 +45,7 @@ func try_to_sell_resource(resource_type: Resources.Types, amount: int) -> bool:
 	if storage[resource_type] >= amount:
 		storage[resource_type] -= amount
 
-		event_bus.resource_updated.emit(resource_type, storage[resource_type])
+		event_bus.send_resource_updated.emit(resource_type, storage[resource_type])
 
 		if storage[resource_type] == 0:
 			storage.erase(resource_type)
@@ -65,7 +65,7 @@ func try_to_remove_resource(
 	if storage[resource_type] >= amount:
 		storage[resource_type] -= amount
 
-		event_bus.resource_updated.emit(resource_type, storage[resource_type])
+		event_bus.send_resource_updated.emit(resource_type, storage[resource_type])
 
 		if storage[resource_type] == 0:
 			storage.erase(resource_type)
@@ -86,14 +86,14 @@ func try_to_consume_resource(resource_type: Resources.Types, amount: int) -> Arr
 		var remaining = abs(storage[resource_type])
 		storage[resource_type] = 0
 		
-		event_bus.resource_updated.emit(resource_type, storage[resource_type])
+		event_bus.send_resource_updated.emit(resource_type, storage[resource_type])
 		
 		if storage[resource_type] == 0:
 			storage.erase(resource_type)
 		
 		return [remaining, resource_cost * (amount - remaining)]
 	
-	event_bus.resource_updated.emit(resource_type, storage[resource_type])
+	event_bus.send_resource_updated.emit(resource_type, storage[resource_type])
 	
 	return [0, resource_cost * amount]
 
@@ -139,7 +139,7 @@ func update_global_production_rate(resource_type: Resources.Types):
 	var amount = factory_per_cycle + the_market.get_production_rate_per_cycle(resource_type)
 	amount -= the_builder.get_consumption_per_cycle(resource_type)
 
-	event_bus.resource_prodution_rate_updated.emit(
+	event_bus.send_resource_prodution_rate_updated.emit(
 		resource_type, amount
 	)
 

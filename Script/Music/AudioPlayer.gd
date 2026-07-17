@@ -27,14 +27,15 @@ func _on_music_done_playing():
 	play_current_music()
 	
 func play_current_music():
+	print("play_current_music")
 	var player: AudioStreamPlayer = SoundManager.play_music(
 		in_game_music_tracks[current_music_index], 0, "Music"
 	)
 	
-	print("bus", player.bus)
-	print("volume", player.volume_db)
-	print("volume", player.volume_linear)
-	print("bus volume", AudioServer.get_bus_volume_db(0))
+	print("bus ", player.bus)
+	print("volume ", player.volume_db)
+	print("volume ", player.volume_linear)
+	print("bus volume ", AudioServer.get_bus_volume_db(0))
 	
 	player.finished.connect(_on_music_done_playing)
 

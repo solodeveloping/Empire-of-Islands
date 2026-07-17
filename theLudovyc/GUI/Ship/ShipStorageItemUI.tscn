@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://c4ff10n77vegm"]
+
+[ext_resource type="Script" uid="uid://br2tgsyyihcv5" path="res://theLudovyc/GUI/Ship/ship_storage_item_ui.gd" id="1_anfc7"]
+[ext_resource type="Texture2D" uid="uid://bhmhs27fjux2p" path="res://Art/Image/Gui/ResbarStats/gold_icon.png" id="2_fw50a"]
+
+[node name="ShipStorageItemUI" type="MarginContainer" unique_id=66771534]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_anfc7")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1958472041]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+texture = ExtResource("2_fw50a")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="QuantityLabel" type="Label" parent="." unique_id=1817441428]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 20
+text = "10"

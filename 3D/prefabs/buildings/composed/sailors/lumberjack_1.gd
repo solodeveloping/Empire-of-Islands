@@ -45,7 +45,7 @@ func define_components() -> Array:
 			]
 		),
 		C_Workers.new({
-			Populations.Types.Sailor: WorkerQuantity.new(Populations.Types.Sailor, 0)
+			Populations.Types.Sailor: WorkerQuantity.new(Populations.Types.Sailor, 0),
 		}),
 		# TODO: should it be done elsewhere?
 		C_MissingWorkers.new(),

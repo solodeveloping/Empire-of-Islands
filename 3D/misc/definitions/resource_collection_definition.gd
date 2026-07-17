@@ -6,3 +6,6 @@ var builtin_resources: Dictionary[Resources.Types, BuiltinResourceQuantityDefini
 
 @export
 var custom_resources: Dictionary[int, ResourceQuantityDefinition] = {}
+
+@export
+var gold_count: int = 0

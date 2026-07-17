@@ -1,0 +1,195 @@
+[gd_scene format=3 uid="uid://caesee1t2e4as"]
+
+[ext_resource type="Texture2D" uid="uid://3mmetdaeiip0" path="res://Art/Image/Gui/Icons/Resources/32/002.png" id="1_j0xgr"]
+[ext_resource type="Texture2D" uid="uid://dlwi4tqas1vl0" path="res://Art/Image/Gui/ResbarStats/buy.png" id="1_lhufx"]
+[ext_resource type="Script" uid="uid://eeu7lnk2g46n" path="res://theLudovyc/GUI/Trading/resource_trading_item_ui.gd" id="1_yewyx"]
+[ext_resource type="Texture2D" uid="uid://toeqa364p2tp" path="res://Art/Image/Gui/Icons/Resources/32/001.png" id="2_n0q62"]
+[ext_resource type="Texture2D" uid="uid://brmfkn8sfum3n" path="res://Art/Image/Gui/Icons/Resources/32/005.png" id="4_n0q62"]
+[ext_resource type="Texture2D" uid="uid://c354d2kmuckka" path="res://Art/Image/Gui/ResbarStats/sell.png" id="5_as26g"]
+[ext_resource type="Texture2D" uid="uid://dwv46pcnya1uq" path="res://Art/Image/Gui/Icons/Resources/32/greyscale/005.png" id="5_j0xgr"]
+[ext_resource type="Texture2D" uid="uid://cfmttmtqjdk3s" path="res://Art/Image/Gui/Buttons/up_15_h.png" id="7_tlpwd"]
+[ext_resource type="Texture2D" uid="uid://cpl57sqxg60o4" path="res://Art/Image/Gui/Buttons/up_15.png" id="8_yewyx"]
+[ext_resource type="Texture2D" uid="uid://cob13olyyn323" path="res://Art/Image/Gui/Buttons/down_15_h.png" id="9_oxgtq"]
+[ext_resource type="Texture2D" uid="uid://dluuf8nag8n0t" path="res://Art/Image/Gui/Buttons/down_15.png" id="10_pmk2o"]
+
+[node name="ResourceTradingItemUi" type="MarginContainer" unique_id=1786308434]
+custom_maximum_size = Vector2(-1, 100)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yewyx")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1322093430]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=479252879]
+custom_minimum_size = Vector2(0, 50)
+custom_maximum_size = Vector2(-1, 50)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("1_j0xgr")
+expand_mode = 3
+
+[node name="SellMinQuantityTextEdit" type="LineEdit" parent="HBoxContainer" unique_id=85990277]
+custom_minimum_size = Vector2(100, 30)
+custom_maximum_size = Vector2(-1, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Start selling if the quantity is above this quantity, if the value is inferior or equal to 0, always sell if possible"
+theme_override_constants/caret_width = 50
+text = "100"
+
+[node name="SellMinQuantityButtons" type="VBoxContainer" parent="HBoxContainer" unique_id=1891477685]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="UpTextureButton" type="TextureButton" parent="HBoxContainer/SellMinQuantityButtons" unique_id=647539622]
+layout_mode = 2
+texture_normal = ExtResource("7_tlpwd")
+texture_pressed = ExtResource("8_yewyx")
+
+[node name="DownTextureButton" type="TextureButton" parent="HBoxContainer/SellMinQuantityButtons" unique_id=1775400583]
+layout_mode = 2
+texture_normal = ExtResource("9_oxgtq")
+texture_pressed = ExtResource("10_pmk2o")
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer" unique_id=958326663]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("2_n0q62")
+expand_mode = 3
+
+[node name="SellMinPriceTextEdit" type="LineEdit" parent="HBoxContainer" unique_id=549034093]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Only sell at a price higher or equal to this"
+text = "100"
+
+[node name="SellMinPriceButtons" type="VBoxContainer" parent="HBoxContainer" unique_id=1325986017]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="UpTextureButton" type="TextureButton" parent="HBoxContainer/SellMinPriceButtons" unique_id=75457820]
+layout_mode = 2
+texture_normal = ExtResource("7_tlpwd")
+texture_pressed = ExtResource("8_yewyx")
+
+[node name="DownTextureButton" type="TextureButton" parent="HBoxContainer/SellMinPriceButtons" unique_id=602699453]
+layout_mode = 2
+texture_normal = ExtResource("9_oxgtq")
+texture_pressed = ExtResource("10_pmk2o")
+
+[node name="TextureRect4" type="TextureRect" parent="HBoxContainer" unique_id=598133374]
+visible = false
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("1_lhufx")
+expand_mode = 3
+
+[node name="ResourceIconTextureButton" type="TextureButton" parent="HBoxContainer" unique_id=1152544657]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("4_n0q62")
+texture_disabled = ExtResource("5_j0xgr")
+stretch_mode = 5
+
+[node name="WarnLabel" type="Label" parent="HBoxContainer/ResourceIconTextureButton" unique_id=930430986]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 58.0
+grow_horizontal = 0
+tooltip_text = "The buying price is above the selling price"
+theme_override_colors/font_color = Color(0.94, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.9411765, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 50
+text = "!"
+horizontal_alignment = 2
+
+[node name="TextureRect5" type="TextureRect" parent="HBoxContainer" unique_id=1710159484]
+visible = false
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("5_as26g")
+expand_mode = 3
+
+[node name="TextureRect6" type="TextureRect" parent="HBoxContainer" unique_id=1991305818]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("1_j0xgr")
+expand_mode = 3
+
+[node name="BuyMaxQuantityTextEdit" type="LineEdit" parent="HBoxContainer" unique_id=902354256]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Start buying if the quantity is below this quantity, if the value is inferior or equal to 0, always buy if possible"
+text = "100"
+
+[node name="BuyMaxQuantityButtons" type="VBoxContainer" parent="HBoxContainer" unique_id=1939596975]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="UpTextureButton" type="TextureButton" parent="HBoxContainer/BuyMaxQuantityButtons" unique_id=727783430]
+layout_mode = 2
+texture_normal = ExtResource("7_tlpwd")
+texture_pressed = ExtResource("8_yewyx")
+
+[node name="DownTextureButton" type="TextureButton" parent="HBoxContainer/BuyMaxQuantityButtons" unique_id=1245335938]
+layout_mode = 2
+texture_normal = ExtResource("9_oxgtq")
+texture_pressed = ExtResource("10_pmk2o")
+
+[node name="TextureRect7" type="TextureRect" parent="HBoxContainer" unique_id=1883402484]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("2_n0q62")
+expand_mode = 3
+
+[node name="BuyMaxPriceTextEdit" type="LineEdit" parent="HBoxContainer" unique_id=2117900953]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Only buy at a price below or equal to this"
+text = "100"
+
+[node name="BuyMaxPriceButtons" type="VBoxContainer" parent="HBoxContainer" unique_id=591306848]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="UpTextureButton" type="TextureButton" parent="HBoxContainer/BuyMaxPriceButtons" unique_id=1332916727]
+layout_mode = 2
+texture_normal = ExtResource("7_tlpwd")
+texture_pressed = ExtResource("8_yewyx")
+
+[node name="DownTextureButton" type="TextureButton" parent="HBoxContainer/BuyMaxPriceButtons" unique_id=135933397]
+layout_mode = 2
+texture_normal = ExtResource("9_oxgtq")
+texture_pressed = ExtResource("10_pmk2o")
+
+[connection signal="text_changed" from="HBoxContainer/SellMinQuantityTextEdit" to="." method="_on_SellMinQuantityTextEdit_text_changed"]
+[connection signal="button_up" from="HBoxContainer/SellMinQuantityButtons/UpTextureButton" to="." method="_on_SellMinQuantityButtons_UpTextureButton_button_up"]
+[connection signal="button_up" from="HBoxContainer/SellMinQuantityButtons/DownTextureButton" to="." method="_on_SellMinQuantityButtons_DownTextureButton_button_up"]
+[connection signal="text_changed" from="HBoxContainer/SellMinPriceTextEdit" to="." method="_on_SellMinPriceTextEdit_text_changed"]
+[connection signal="button_up" from="HBoxContainer/SellMinPriceButtons/UpTextureButton" to="." method="_on_SellMinPriceButtons_UpTextureButton_button_up"]
+[connection signal="button_up" from="HBoxContainer/SellMinPriceButtons/DownTextureButton" to="." method="_on_SellMinPriceButtons_DownTextureButton_button_up"]
+[connection signal="button_up" from="HBoxContainer/ResourceIconTextureButton" to="." method="_on_ResourceIconTextureButton_button_up"]
+[connection signal="text_changed" from="HBoxContainer/BuyMaxQuantityTextEdit" to="." method="_on_BuyMaxQuantityTextEdit_text_changed"]
+[connection signal="button_up" from="HBoxContainer/BuyMaxQuantityButtons/UpTextureButton" to="." method="_on_BuyMaxQuantityButtons_UpTextureButton_button_up"]
+[connection signal="button_up" from="HBoxContainer/BuyMaxQuantityButtons/DownTextureButton" to="." method="_on_BuyMaxQuantityButtons_DownTextureButton_button_up"]
+[connection signal="text_changed" from="HBoxContainer/BuyMaxPriceTextEdit" to="." method="_on_BuyMaxPriceTextEdit_text_changed"]
+[connection signal="button_up" from="HBoxContainer/BuyMaxPriceButtons/UpTextureButton" to="." method="_on_BuyMaxPriceButtons_UpTextureButton_button_up"]
+[connection signal="button_up" from="HBoxContainer/BuyMaxPriceButtons/DownTextureButton" to="." method="_on_BuyMaxPriceButtons_DownTextureButton_button_up"]

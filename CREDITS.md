@@ -26,6 +26,8 @@ Coral Reef Kit by MiniPoly [CC-BY], [CC0] via [Poly Pizza](https://poly.pizza/bu
 
 All the [Quaternius](https://quaternius.com/) are provided under the CC0 license
 
+[Flag](https://dafluffypotato.itch.io/pixel-country-flags) by dafluffypotato, provided under the CC0 license
+
 ## shaders
 
 Credits for the shaders, when present, are in their respective scripts.

@@ -7,6 +7,8 @@ enum WidgetMenus {
 	NaturalResource,
 	Buildings,
 	Building3D,
+	Unit3D,
+	Ship3D,
 }
 
 @onready var widget := %Widget
@@ -24,6 +26,12 @@ enum WidgetMenus {
 @onready var building_tier_button_container: MarginContainer = $"../../../BuildingTierButtonContainer"
 
 @onready var building_buttons_container: BuildingButtonsContainer = $BuildingButtonsContainer
+
+@onready var unit_container_ui_3d: UnitContainerUI3D = $UnitContainer_UI_3D
+
+@onready var ship_container_ui_3d: ShipContainerUI3D = $ShipContainer_UI_3D
+
+@onready var market_ui: MarketUI = %MarketUI
 
 var event_bus: EventBus
 
@@ -50,6 +58,12 @@ func _ready():
 		event_bus.send_building_3D_selected.connect(_on_receive_building_3D_selected)
 		event_bus.send_building_3D_deselected.connect(_on_receive_building_3D_deselected)
 		
+		event_bus.send_unit_3D_selected.connect(_on_receive_unit_3D_selected)
+		event_bus.send_unit_3D_deselected.connect(_on_receive_unit_3D_deselected)
+		
+		event_bus.send_ship_3D_selected.connect(_on_receive_ship_3D_selected)
+		event_bus.send_ship_3D_deselected.connect(_on_receive_ship_3D_deselected)
+		
 		event_bus.send_natural_resource_selected.connect(_on_receive_send_natural_resource_selected)
 		event_bus.send_natural_resource_deselected.connect(_on_receive_send_natural_resource_deselected)
 
@@ -59,9 +73,17 @@ func _ready():
 		# Info: this allow to request to show the buildings button list programmatically
 		event_bus.send_show_buildings_button_ui.connect(_on_event_bus_send_show_buildings_button_ui)
 	
+		event_bus.send_trades_updated.connect(
+			_on_event_bus_send_trades_updated
+		)
+	
 	building_buttons_container.mouse_entered_building.connect(_on_mouse_entered_building)
 	building_buttons_container.mouse_exited_building.connect(_on_mouse_exited_building)
 	building_buttons_container.clicked_on_building.connect(_on_clicked_on_building)
+
+	
+
+	market_ui.hide()
 
 func on_MenuButton_pressed(menu: WidgetMenus):
 	if current_tab != menu:
@@ -100,20 +122,33 @@ func _on_BuildMenuButton_pressed():
 		tooltip.visible = false
 
 func _on_MarketMenuButton_pressed():
-	on_MenuButton_pressed(WidgetMenus.Market)
+	if !USE_ECS:
+		on_MenuButton_pressed(WidgetMenus.Market)
 
-	if bottom_container.visible:
-		if event_bus != null:
-			event_bus.ask_select_warehouse.emit()
+		if bottom_container.visible:
+			if event_bus != null:
+				event_bus.ask_select_warehouse.emit()
 
-		tooltip.visible = true
+			tooltip.visible = true
 
-		tooltip.set_money_production_rate_info()
+			tooltip.set_money_production_rate_info()
+		else:
+			if event_bus != null:
+				event_bus.ask_deselect_building.emit()
+
+			tooltip.visible = false
 	else:
-		if event_bus != null:
-			event_bus.ask_deselect_building.emit()
+		handle_display_market_ecs_ui()
 
-		tooltip.visible = false
+func handle_display_market_ecs_ui():
+	tooltip.visible = false
+	market_ui.visible = !market_ui.visible
+	
+	if market_ui.visible:
+		event_bus.notify_market_menu_opened.emit()
+	else:
+		event_bus.notify_market_menu_closed.emit()
+		
 
 func _on_event_bus_send_show_buildings_button_ui():
 	print("_on_event_bus_send_show_buildings_button_ui")
@@ -123,7 +158,7 @@ func _on_event_bus_send_show_buildings_button_ui():
 func _on_receive_building_selected(building: Building2D):
 	print("_on_receive_building_selected")
 	bottom_container.set_menu_visibility(true)
-
+	
 	if Buildings.get_building_type(building.building_id) == Buildings.Types.Warehouse:
 		if current_tab != WidgetMenus.Market:
 			current_tab = WidgetMenus.Market
@@ -169,6 +204,11 @@ func _on_receive_building_3D_selected(building: Entity):
 	var c_building: C_Building = building.get_component(C_Building)
 
 	if Buildings.get_building_type(c_building.building_type) == Buildings.Types.Warehouse:
+		# FIXME: this is kinda bad
+		if USE_ECS:
+			handle_display_market_ecs_ui()
+			return
+		
 		if current_tab != WidgetMenus.Market:
 			current_tab = WidgetMenus.Market
 
@@ -194,6 +234,66 @@ func _on_receive_building_3D_selected(building: Entity):
 	building_container_ui_3d.update_infos(building)
 
 func _on_receive_building_3D_deselected(building: Entity):
+	print("_on_receive_building_3D_deselected")
+	
+	bottom_container.set_menu_visibility(false)
+	
+	if tooltip.visible:
+		tooltip.visible = false
+		
+	if building_tier_button_container.visible:
+		building_tier_button_container.hide()
+	
+	# FIXME: this is kinda bad
+	var c_building: C_Building = building.get_component(C_Building)
+	if Buildings.get_building_type(c_building.building_type) == Buildings.Types.Warehouse:
+		# FIXME: this is kinda bad
+		if USE_ECS:
+			handle_display_market_ecs_ui()
+			return
+
+# Info: this is called when the user select an unit on the map
+func _on_receive_unit_3D_selected(unit: Entity):
+	print("_on_receive_building_3D_selected")
+	bottom_container.set_menu_visibility(true)
+
+	if current_tab != WidgetMenus.Unit3D:
+		current_tab = WidgetMenus.Unit3D
+
+	if tooltip.visible:
+		tooltip.visible = false
+	
+	if building_tier_button_container.visible:
+		building_tier_button_container.hide()
+
+	unit_container_ui_3d.update_infos(unit)
+
+func _on_receive_unit_3D_deselected(unit: Entity):
+	bottom_container.set_menu_visibility(false)
+	
+	if tooltip.visible:
+		tooltip.visible = false
+		
+	if building_tier_button_container.visible:
+		building_tier_button_container.hide()
+
+# Info: this is called when the user select an ship on the map
+func _on_receive_ship_3D_selected(unit: Entity):
+	print("_on_receive_building_3D_selected")
+	bottom_container.set_menu_visibility(true)
+
+	if current_tab != WidgetMenus.Ship3D:
+		current_tab = WidgetMenus.Ship3D
+
+	if tooltip.visible:
+		tooltip.visible = false
+	
+	if building_tier_button_container.visible:
+		building_tier_button_container.hide()
+
+	ship_container_ui_3d.update_infos(unit)
+
+func _on_receive_ship_3D_deselected(unit: Entity):
 	bottom_container.set_menu_visibility(false)
 	
 	if tooltip.visible:
@@ -297,3 +397,10 @@ func _on_Tier3MenuButton3_pressed() -> void:
 
 func _on_Tier4MenuButton_pressed() -> void:
 	building_buttons_container.show_tier(3)
+
+func _on_event_bus_send_trades_updated(
+	trades: Array[TradeResourceDefinition]
+):
+	market_ui.update_trades(
+		trades
+	)

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Nationality" format=3 uid="uid://bg2tlt7laij6p"]
+
+[ext_resource type="Texture2D" uid="uid://bajfcaqxax3ly" path="res://Assets/dafluffypotato/flags/pt.png" id="1_q8p03"]
+[ext_resource type="Script" uid="uid://b3g48xbfohfv3" path="res://3D/ECS/data_scripts/nationality.gd" id="1_xttub"]
+
+[resource]
+script = ExtResource("1_xttub")
+name = "Portugal"
+flag_texture = ExtResource("1_q8p03")
+male_first_names = Array[String](["Pedro", "Miguel", "Francisco", "Carlos", "Diogo", "Daniel", "Joaquim", "Jorge", "Afonso", "Martim"])
+female_first_names = Array[String](["Maria", "Ana", "Leonor", "Mariana", "Sofia", "Matilde", "Beatriz", "Joana", "Margarida", "Diana"])
+last_names = Array[String](["Silva", "Santos", "Ferreira", "Pereira", "Oliveira", "Costa", "Rodrigues", "Martins", "Jesus", "Sousa"])
+metadata/_custom_type_script = "uid://b3g48xbfohfv3"
