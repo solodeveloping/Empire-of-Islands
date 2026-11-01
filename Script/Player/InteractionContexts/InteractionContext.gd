@@ -53,7 +53,7 @@ signal context_aborted
 @onready var _player_camera := owner as Node3D
 
 @export var _context_name: String = "Basic Interaction Context"
-@export var valid_actions: PackedStringArray = ["main_command", "alt_command"]
+@export var valid_actions: PackedStringArray = ["right_click", "left_click"]
 
 func interact(event: InputEvent, target: Node, position: Vector2) -> void:
 	if event.is_action_type():

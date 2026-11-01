@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cd0jbh4metflb"]
+[gd_scene format=3 uid="uid://cd0jbh4metflb"]
 
 [ext_resource type="Script" uid="uid://tye6a0m2geny" path="res://RGT/LoadingScreen/LoadingScreen.gd" id="1_gbk34"]
 
@@ -40,7 +40,7 @@ _data = {
 &"RESET": SubResource("Animation_2tmr4")
 }
 
-[node name="LoadingScreen" type="MarginContainer"]
+[node name="LoadingScreen" type="MarginContainer" unique_id=550255460]
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -52,30 +52,28 @@ theme_override_constants/margin_left = 16
 theme_override_constants/margin_right = 16
 script = ExtResource("1_gbk34")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1701519016]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="StatusLabel" type="Label" parent="VBoxContainer"]
+[node name="StatusLabel" type="Label" parent="VBoxContainer" unique_id=509721359]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Loading..."
 horizontal_alignment = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer" unique_id=36083735]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 1
 max_value = 1.0
 
-[node name="ContinueLabel" type="Label" parent="VBoxContainer"]
+[node name="ContinueLabel" type="Label" parent="VBoxContainer" unique_id=541692051]
 unique_name_in_owner = true
 layout_mode = 2
 horizontal_alignment = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1647559186]
 unique_name_in_owner = true
-libraries = {
-"": SubResource("AnimationLibrary_pf4xo")
-}
+libraries/ = SubResource("AnimationLibrary_pf4xo")

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dqtserweejky0"]
+
+[ext_resource type="Script" uid="uid://b1gydyyj8cxqm" path="res://3D/prefabs/buildings_2D/pioneers/pigsty_2d.gd" id="1_qvkef"]
+
+[node name="Pigsty2d" type="Node2D" unique_id=1237261915]
+script = ExtResource("1_qvkef")

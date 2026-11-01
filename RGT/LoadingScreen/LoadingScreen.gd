@@ -9,12 +9,14 @@ const CONTINUE_LABEL_TEXT = "Press any key to continue..."
 @onready var flash_label = %AnimationPlayer
 
 func _show_scene_switching_error_message():
+	# TODO: check this, ErrorMessage
 	if %ErrorMessage.visible:
 		return
 	%ErrorMessage.dialog_text = "Loading Error: Failed to switch scenes."
 	%ErrorMessage.popup_centered()
 
 func _ready():
+	print("LoadingScreen:_ready")
 	if SceneLoader._scene_loading_complete:
 		progress_bar.value = progress_bar.max_value
 		status_label.text = LOADING_COMPLETE_TEXT

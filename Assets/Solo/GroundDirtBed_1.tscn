@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://b565ef57wbu2d"]
+
+[ext_resource type="PackedScene" uid="uid://dfnhm3yovk76d" path="res://Assets/Solo/GroundDirtBed_1.glb" id="1_xnd7v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vim42"]
+albedo_color = Color(0.38639513, 0.15600607, 0, 1)
+
+[node name="GroundDirtBed_1" unique_id=1147417601 instance=ExtResource("1_xnd7v")]
+
+[node name="Cube" parent="." index="0" unique_id=1388431970]
+material_override = SubResource("StandardMaterial3D_vim42")

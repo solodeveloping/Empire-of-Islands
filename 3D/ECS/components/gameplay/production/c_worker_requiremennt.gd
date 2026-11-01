@@ -1,12 +1,15 @@
 class_name C_WorkerRequirement
 extends Component
 
-# TODO: maybe a C_Consumption
-
 @export 
-var requirements: Array[Worker_Requirement] = []
+var requirements: Dictionary[int, Worker_Requirement] = {}
 
 func _init(
 	requirements_: Array[Worker_Requirement] = [],
 ):
-	requirements = requirements_
+	# Info: transforming to Dictionary
+	for requirement in requirements_:
+		requirements.set(
+			requirement.worker_type,
+			requirement
+		)

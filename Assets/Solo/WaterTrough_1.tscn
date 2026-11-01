@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cyt4bpielswlk"]
+
+[ext_resource type="PackedScene" uid="uid://bdokwrp77ynb1" path="res://Assets/Solo/WaterTrough_1.glb" id="1_sqskg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppaeb"]
+shading_mode = 2
+albedo_color = Color(0.292122, 0.17685941, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d66px"]
+shading_mode = 2
+albedo_color = Color(0, 0.517463, 0.85888386, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_sfkqh"]
+
+[node name="WaterTrough_1" unique_id=320606243 instance=ExtResource("1_sqskg")]
+
+[node name="Plane" parent="." index="0" unique_id=387200787]
+material_override = SubResource("StandardMaterial3D_ppaeb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1" unique_id=118477046]
+transform = Transform3D(0.99, 0, 0, 0, 1, 0, 0, 0, 0.205, 0, 0.34446406, 0)
+material_override = SubResource("StandardMaterial3D_d66px")
+mesh = SubResource("PlaneMesh_sfkqh")

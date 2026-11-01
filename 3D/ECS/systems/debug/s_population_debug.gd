@@ -1,6 +1,10 @@
 extends System
 class_name PopulationDebugSystem
 
+# TODO:
+# Add a way to debug islands
+# Elsewhere
+
 func sub_systems():
 	return [
 		[

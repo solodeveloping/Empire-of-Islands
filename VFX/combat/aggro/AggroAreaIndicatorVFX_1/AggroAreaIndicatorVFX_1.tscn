@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bfe5mkyvv4exw"]
+
+[ext_resource type="Material" uid="uid://cmd7j3wdll7s3" path="res://VFX/combat/aggro/AggroAreaIndicatorVFX_1/aggro_area_indicator_vfx_1_shader_material_1.tres" id="1_rnfwq"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_sfkqh"]
+radius = 10.0
+height = 20.0
+
+[node name="AggroAreaIndicatorVfx1" type="Node3D" unique_id=1724196544]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1013711596]
+material_override = ExtResource("1_rnfwq")
+cast_shadow = 0
+mesh = SubResource("SphereMesh_sfkqh")
+
+[node name="DoesNotWorkWithTransparentObject" type="Node3D" parent="." unique_id=42030588]

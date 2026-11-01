@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://cg0xotfa2m0hl"]
+
+[ext_resource type="Script" uid="uid://bkhysryhhjen5" path="res://3D/prefabs/buildings/sensors/square_extension_1.gd" id="1_tcmcw"]
+[ext_resource type="Material" uid="uid://3xkhw7iys5dx" path="res://VFX/common/materials/billboard_sprite_standard_material_3d_1.tres" id="2_plabg"]
+[ext_resource type="PackedScene" uid="uid://dnwpxbdjjk2h0" path="res://3D/prefabs/buildings/sensors/GroundSensorEditable1.tscn" id="3_xie00"]
+[ext_resource type="PackedScene" uid="uid://bh85y8tbctf56" path="res://3D/prefabs/buildings/sensors/BuildingEditableChildrenArea.tscn" id="4_bni21"]
+
+[sub_resource type="Gradient" id="Gradient_72ysu"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xie00"]
+gradient = SubResource("Gradient_72ysu")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oi6ny"]
+size = Vector3(13.04364, 1.427, 13.023804)
+
+[node name="SquareExtension1" type="Node3D" unique_id=803607134]
+script = ExtResource("1_tcmcw")
+
+[node name="Marker3D" type="Marker3D" parent="." unique_id=805071511]
+gizmo_extents = 1.0
+
+[node name="SpriteIndicator" type="Sprite3D" parent="Marker3D" unique_id=1397782958]
+transform = Transform3D(0.7137439, 0, 0.7004068, 0, 1, 0, -0.7004068, 0, 0.7137439, 0, 5, 0)
+material_override = ExtResource("2_plabg")
+modulate = Color(1, 0, 0, 1)
+texture = SubResource("GradientTexture2D_xie00")
+
+[node name="GroundSensorEditable1" parent="." unique_id=1810008971 instance=ExtResource("3_xie00")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+ray_ground_layers = 4
+
+[node name="SingleGroundSensorWithSprite1" parent="GroundSensorEditable1/sensors" parent_id_path=PackedInt32Array(1810008971, 162158777) index="0" unique_id=929189549]
+transform = Transform3D(0.7137439, 0, 0.7004068, 0, 1, 0, -0.7004068, 0, 0.7137439, -5.4202757, 0.099999994, -1.9284682)
+
+[node name="SingleGroundSensorWithSprite2" parent="GroundSensorEditable1/sensors" parent_id_path=PackedInt32Array(1810008971, 162158777) index="1" unique_id=1293848132]
+transform = Transform3D(0.7137439, 0, 0.7004068, 0, 1, 0, -0.7004068, 0, 0.7137439, 4.970593, 0.099999994, -1.2469654)
+
+[node name="SingleGroundSensorWithSprite3" parent="GroundSensorEditable1/sensors" parent_id_path=PackedInt32Array(1810008971, 162158777) index="2" unique_id=643648802]
+transform = Transform3D(0.7137439, 0, 0.7004068, 0, 1, 0, -0.7004068, 0, 0.7137439, 4.8291645, 0.099999994, 8.174878)
+
+[node name="SingleGroundSensorWithSprite4" parent="GroundSensorEditable1/sensors" parent_id_path=PackedInt32Array(1810008971, 162158777) index="3" unique_id=346344375]
+transform = Transform3D(0.7137439, 0, 0.7004068, 0, 1, 0, -0.7004068, 0, 0.7137439, -5.784593, 0.099999994, 7.441056)
+
+[node name="BuildingEditableChildrenArea" parent="." unique_id=101001046 instance=ExtResource("4_bni21")]
+collision_layer = 4096
+
+[node name="CollisionShape3D" parent="BuildingEditableChildrenArea" index="0" unique_id=1710548322]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02052319, 1, 0.005963385)
+shape = SubResource("BoxShape3D_oi6ny")
+
+[connection signal="state_changed" from="GroundSensorEditable1" to="." method="_on_GroundSensorEditable1_state_changed"]
+[connection signal="state_changed" from="BuildingEditableChildrenArea" to="." method="_on_BuildingEditableChildrenArea_state_changed"]
+
+[editable path="GroundSensorEditable1"]
+[editable path="BuildingEditableChildrenArea"]

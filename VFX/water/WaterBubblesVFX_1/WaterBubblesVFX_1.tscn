@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://b0t2r2edix4ww"]
+
+[ext_resource type="Script" uid="uid://cu028g25ugmsw" path="res://VFX/common/start_one_shot_particle_vfx_1.gd" id="1_6272s"]
+[ext_resource type="Shader" uid="uid://cuij8ityawoxr" path="res://VFX/water/WaterBubblesVFX_1/water_bubbles_vfx_1_shader_1.tres" id="1_mf8dy"]
+
+[sub_resource type="Gradient" id="Gradient_6272s"]
+offsets = PackedFloat32Array(0.5139665, 0.5586592, 0.65363127)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_svjwe"]
+gradient = SubResource("Gradient_6272s")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d66px"]
+render_priority = 0
+shader = ExtResource("1_mf8dy")
+shader_parameter/MaskTexture = SubResource("GradientTexture2D_svjwe")
+
+[sub_resource type="Curve" id="Curve_sh4ij"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.746114, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_rfu60"]
+curve = SubResource("Curve_sh4ij")
+
+[sub_resource type="Curve" id="Curve_kym7t"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xmavv"]
+curve = SubResource("Curve_kym7t")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2tqpj"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+gravity = Vector3(0, 3, 0)
+scale_min = 2.0
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_xmavv")
+alpha_curve = SubResource("CurveTexture_rfu60")
+
+[sub_resource type="QuadMesh" id="QuadMesh_sfkqh"]
+
+[node name="WaterBubblesVfx1" type="Node3D" unique_id=1521234068]
+script = ExtResource("1_6272s")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=477045324]
+material_override = SubResource("ShaderMaterial_d66px")
+cast_shadow = 0
+emitting = false
+amount = 5
+lifetime = 3.0
+process_material = SubResource("ParticleProcessMaterial_2tqpj")
+draw_pass_1 = SubResource("QuadMesh_sfkqh")

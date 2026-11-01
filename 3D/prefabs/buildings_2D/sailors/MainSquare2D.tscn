@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c2ra35dpj6pv0"]
+
+[ext_resource type="Script" uid="uid://dw3j500nfn8vm" path="res://3D/prefabs/buildings_2D/sailors/main_square_2D.gd" id="1_vl83f"]
+
+[node name="MainSquare2d" type="Node2D" unique_id=133303001]
+script = ExtResource("1_vl83f")

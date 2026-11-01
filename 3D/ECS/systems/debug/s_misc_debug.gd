@@ -1,6 +1,9 @@
 extends System
 class_name MiscDebugSystem
 
+# TODO: a system for drawing
+# and another for other stuff
+
 @export
 var information_debug_scene: PackedScene
 
@@ -26,6 +29,15 @@ func sub_systems():
 			]),
 			debug_nodes
 		],
+		[
+			ECS.world.query.with_all([
+				C_NavigationDestination,
+			])\
+			.iterate([
+				C_NavigationDestination,
+			]),\
+			debug_pathing
+		],
 	]
 
 func add_debug_information(
@@ -33,6 +45,10 @@ func add_debug_information(
 	_components: Array,
 	_delta: float
 ):
+	# FIXME: this is causing issues
+	# Entities that have this are iterated one by one
+	# Because the archetype become unique per entity
+	return
 	if entities.is_empty():
 		return
 	#print("MiscDebugSystem:add_debug_information %s" % [
@@ -138,4 +154,57 @@ func debug_nodes(
 					c_name.name_,
 				]
 			)
+
+func debug_pathing(
+	entities: Array[Entity],
+	components: Array,
+	_delta: float
+):
+	return;
+	#print("debug_pathing %s" % [
+		#entities.size(),
+	#])
+	
+	# FIXME: might be useless
+	if entities.is_empty():
+		return
+	
+	var C_NavigationDestination_Index: int = 0
+	
+	for i in entities.size():
+		var entity: Entity = entities[i]
+		var c_dest: C_NavigationDestination = components[C_NavigationDestination_Index][i]
 		
+		#var dist: float = Vector3.ZERO.distance_to(
+			#c_dest.target,
+		#)
+		#if dist > 200:
+			#printerr("dist is big %s %s %s" % [
+				#entity.get_path(),
+				#c_dest.target,
+				#dist,
+			#])
+		#
+		#if Engine.get_physics_frames() % 10 == 0:
+			#print("debug stuff %s %s %s" % [
+				#entity.get_path(),
+				#c_dest.target,
+				#dist,
+			#])
+		
+		DebugDraw3D.draw_line(
+			entity.global_position,
+			c_dest.target,
+			Color.PURPLE,
+		)
+		DebugDraw3D.draw_sphere(
+			c_dest.target,
+			4,
+			Color.PURPLE,
+		)
+		#DebugDraw3D.draw_arrow(
+			#entity.global_position,
+			#c_dest.target,
+			#Color.PURPLE,
+			#0.1,
+		#)

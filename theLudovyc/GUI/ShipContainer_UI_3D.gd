@@ -18,6 +18,7 @@ const SHIP_STORAGE_ITEM_UI = preload("uid://c4ff10n77vegm")
 
 @onready var cargo_grid_container: GridContainer = $VBoxContainer/CargoGridContainer
 
+# FIXME: unused
 @onready var event_bus: EventBus
 
 # FIXME: could be an option eventually
@@ -27,6 +28,7 @@ func _ready():
 	event_bus = get_tree().current_scene.get_node_or_null("EventBus")
 
 func update_infos(unit: Entity):
+	print("ShipContainerUI3D:update_infos")
 	var c_name: C_Name = unit.get_component(C_Name)
 
 	name_label.text = c_name.name_
@@ -42,8 +44,9 @@ func update_infos(unit: Entity):
 			var c_faction: C_Faction = r_faction.target.get_component(C_Faction)
 			flag_texture_rect.show()
 			# TODO: faction flag
+			# FIXME: make something better
 			#flag_texture_rect.texture = c_faction.def.nationality.flag_texture
-			flag_texture_rect.tooltip_text = c_faction.def.nationality.name
+			flag_texture_rect.tooltip_text = c_faction.def.nationalities[0].name
 		else:
 			flag_texture_rect.hide()
 	
@@ -69,6 +72,7 @@ func update_infos(unit: Entity):
 	)
 	if !c_storage:
 		printerr("C_CargoStorage is not present")
+		return
 	
 	# TODO: better UI with icons
 	weight_label.text = "Weight: %s/%s" % [

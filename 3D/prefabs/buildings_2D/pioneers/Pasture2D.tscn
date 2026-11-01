@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://44oev2b24w2e"]
+
+[ext_resource type="Script" uid="uid://2atourx30evq" path="res://3D/prefabs/buildings_2D/pioneers/pasture_2d.gd" id="1_vbej4"]
+
+[node name="Pasture2d" type="Node2D" unique_id=1134736479]
+script = ExtResource("1_vbej4")

@@ -1,0 +1,147 @@
+#[compute]
+#version 450
+
+// This is just the backup of the first version
+
+// This is workgroup size
+// Not warp/wavefronts
+// 8*8 = 64 invocations
+layout(local_size_x = 8, local_size_y = 8, local_size_z = 1) in;
+
+// r8: 8 bit per channel, 1 channel
+// rgba8: 8 bit per channel, 4 channels
+// r8ui, r32f, R8_UINT, R32_UINT, rgba8
+layout(rgba8, set = 0, binding = 0) uniform image2D previous_texture;
+layout(rgba8, set = 0, binding = 1) uniform image2D current_texture;
+layout(rgba8, set = 0, binding = 2) uniform writeonly image2D output_texture;
+
+// Has to be a multiple of 16 in size
+// vec4 has to be on it's own 16 aligned range
+struct Node2D {
+  int id;
+  uint type;
+  float radius;
+  float padding;
+  // vec2 data_padding;
+  vec4 position;
+};
+
+layout(set = 0, binding = 3, std430) readonly buffer Node2Ds {
+    Node2D node_2ds[];
+} node_2ds;
+
+layout(push_constant, std430) uniform Parameters {
+    int texture_width;
+    int texture_height;
+    int map_width;
+    int map_height;
+    ivec2 map_origin;
+    int object_count;
+} params;
+
+void _do_double_store(ivec2 position, vec4 new_color) {
+  imageStore(current_texture, position, new_color);
+  imageStore(output_texture, position, new_color);
+}
+
+float sdCircle(vec2 p, float r)
+{
+    return length(p) - r;
+}
+
+float remap(float value, float input_b, float input_e, float output_b, float output_e) {
+	return(value - input_b) / (input_e - input_b) * (output_e - output_b) + output_b;
+}
+
+const float EPSILON = 0.0001;
+
+bool isEqual(float value_a, float value_b) {
+  return abs(value_a - value_b) < EPSILON;
+}
+
+void main() {
+  ivec2 position = ivec2(gl_GlobalInvocationID.xy);
+
+  if (position.x >= params.texture_width ||
+      position.y >= params.texture_height) {
+      return;
+  }
+
+  // We have to write the value, otherwise they don't synchronize
+  float existing_value = imageLoad(previous_texture, position).r;
+  if (existing_value >= 0.9) {
+    _do_double_store(position, vec4(existing_value, existing_value, 0.0, 1.0));
+    return;
+  }
+
+  float pixel_world_pos_x = remap(
+    position.x,
+    0,
+    params.texture_width,
+    params.map_origin.x,
+    params.map_origin.x + params.map_width
+  );
+  float pixel_world_pos_y = remap(
+    position.y,
+    0,
+    params.texture_height,
+    params.map_origin.y,
+    params.map_origin.y + params.map_height
+  );
+  vec2 world_pos = vec2(
+    pixel_world_pos_x,
+    pixel_world_pos_y
+  );
+
+  float color = 0.0;
+  // uint count = node_2ds.node_2ds.length();
+  // for (int i = 0; i < params.object_count; i++) {
+  for (int i = 0; i < 1; i++) {
+    vec2 object_position = vec2(
+      node_2ds.node_2ds[i].position.x,
+      node_2ds.node_2ds[i].position.y
+    );
+    // When I thought I was doing pos to pixel pos
+    // If the node is outside on the left
+    // if (center.x < params.map_origin.x) {
+    //   continue;
+    // }
+    // if (center.y < params.map_origin.y) {
+    //   continue;
+    // }
+    // // outside on the other sides
+    // if (center.x > params.map_origin.x +  params.map_width) {
+    //   continue;
+    // }
+    // if (center.y > params.map_origin.y +  params.map_height) {
+    //   continue;
+    // }
+    // remap x and y
+
+    vec2 dist = world_pos - object_position;
+    // vec2 dist = object_position - world_pos;
+
+    // Gives    0 if on surface
+    // Gives    < 0 if inside
+    // Gives    > 0 if outside
+    float d = sdCircle(
+      dist,
+      node_2ds.node_2ds[i].radius
+      // 500.0
+    );
+    // color = d;
+    if (d <= 0.001) {
+      // inside
+      color = 1.0;
+      break;
+    } else {
+      continue;
+    }
+  }
+  // color = clamp(color, 0.0, 0.5);
+  // _do_double_store(position, vec4(color, color, color, 1.0));
+  if (isEqual(color, 1.0)) {
+    _do_double_store(position, vec4(color, color, color, 1.0));
+  }
+
+}

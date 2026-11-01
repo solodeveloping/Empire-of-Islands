@@ -1,0 +1,154 @@
+[gd_scene format=3 uid="uid://bsfhkyly5nydm"]
+
+[ext_resource type="Shader" uid="uid://b8d28eg2am442" path="res://VFX/area/RotatingDashedArea3DVFX_1/rotating_dashed_area_3D_vfx_1_shader_1.gdshader" id="1_hfsw5"]
+[ext_resource type="Shader" uid="uid://ccsllxb7riab7" path="res://VFX/area/RotatingDashedArea3DVFX_1/rotating_dashed_area_3D_vfx_1_shader_2.gdshader" id="2_6tgyu"]
+[ext_resource type="Shader" uid="uid://dq546tkfmtioc" path="res://VFX/area/RotatingDashedArea3DVFX_1/rotating_dashed_area_3D_vfx_1_shader_3.gdshader" id="3_6tgyu"]
+[ext_resource type="Shader" uid="uid://c5a2ctxc7y7bx" path="res://VFX/area/RotatingDashedArea3DVFX_1/rotating_dashed_area_3D_vfx_1_shader_4.gdshader" id="4_en28f"]
+[ext_resource type="Shader" uid="uid://0e03t7wytpmw" path="res://VFX/area/RotatingDashedArea3DVFX_1/rotating_dashed_area_3D_vfx_1_shader_5.gdshader" id="4_usm33"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_en28f"]
+render_priority = 0
+shader = ExtResource("1_hfsw5")
+shader_parameter/border_thickness = 0.05
+shader_parameter/dot_spacing = 10.0
+shader_parameter/opacity = 1.0
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/rotation_speed = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_usm33"]
+orientation = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sfkqh"]
+render_priority = 0
+shader = ExtResource("2_6tgyu")
+shader_parameter/border_thickness = 0.05
+shader_parameter/dot_spacing = 5.0
+shader_parameter/opacity = 1.0
+shader_parameter/line_color = Color(0.06999999, 0.47300005, 1, 1)
+shader_parameter/rotation_speed = 1.0
+shader_parameter/direction = 1.0
+shader_parameter/radius = 1.0
+shader_parameter/frequency = 15.0
+shader_parameter/speed = 3.0
+shader_parameter/zoom = 0.6
+shader_parameter/rotate_all = 0.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dhc4m"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hfsw5"]
+render_priority = 0
+shader = ExtResource("3_6tgyu")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/direction = -1.0
+shader_parameter/frequency = 9.90000014752188
+shader_parameter/speed = 6.0
+shader_parameter/radius = 1.0
+shader_parameter/line_thickness = 0.03
+
+[sub_resource type="QuadMesh" id="QuadMesh_en28f"]
+orientation = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_usm33"]
+render_priority = 0
+shader = ExtResource("3_6tgyu")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/direction = -1.0
+shader_parameter/frequency = 15.0
+shader_parameter/speed = 3.0
+shader_parameter/radius = 1.0
+shader_parameter/line_thickness = 0.03
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6dves"]
+top_radius = 3.0
+bottom_radius = 3.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d66px"]
+render_priority = 0
+shader = ExtResource("4_en28f")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/direction = -1.0
+shader_parameter/frequency = 15.0
+shader_parameter/speed = 3.0
+shader_parameter/radius = 1.0
+shader_parameter/line_thickness = 0.03
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_en28f"]
+top_radius = 3.0
+bottom_radius = 3.0
+height = 0.2
+cap_top = false
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_usm33"]
+top_radius = 3.0
+bottom_radius = 3.0
+height = 0.001
+cap_top = false
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_en28f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dhc4m"]
+render_priority = 0
+shader = ExtResource("4_usm33")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/direction = -1.0
+shader_parameter/frequency = 15.0
+shader_parameter/speed = 3.0
+shader_parameter/radius = 0.499999988824
+shader_parameter/line_thickness = 0.03
+
+[node name="Test1" type="Node3D" unique_id=65861610]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=818439603]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.945626, 0, 0)
+material_override = SubResource("ShaderMaterial_en28f")
+mesh = SubResource("QuadMesh_usm33")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=2134527275]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.29184884, 0, 0)
+material_override = SubResource("ShaderMaterial_sfkqh")
+mesh = SubResource("QuadMesh_usm33")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=270270739]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1058617, 0, 0)
+material_override = SubResource("ShaderMaterial_sfkqh")
+mesh = SubResource("PlaneMesh_dhc4m")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="." unique_id=2021846082]
+transform = Transform3D(1.18, 0, 0, 0, 1.18, 0, 0, 0, 1.18, 4.524893, 0, 0)
+material_override = SubResource("ShaderMaterial_hfsw5")
+mesh = SubResource("PlaneMesh_dhc4m")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="." unique_id=693072845]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.8624377, 0, 0)
+material_override = SubResource("ShaderMaterial_hfsw5")
+mesh = SubResource("QuadMesh_en28f")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="." unique_id=152420171]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.331256, 0, -5.1934004)
+material_override = SubResource("ShaderMaterial_usm33")
+mesh = SubResource("CylinderMesh_6dves")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="." unique_id=2137481852]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.770756, 0, 0)
+material_override = SubResource("ShaderMaterial_d66px")
+mesh = SubResource("CylinderMesh_6dves")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="." unique_id=722243208]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.6748295, 0, -7.7809315)
+material_override = SubResource("ShaderMaterial_d66px")
+mesh = SubResource("CylinderMesh_en28f")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="." unique_id=1896523947]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.6748295, 0, 8.426163)
+material_override = SubResource("ShaderMaterial_d66px")
+mesh = SubResource("CylinderMesh_usm33")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="." unique_id=411340239]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.770756, 0, 5.2289257)
+material_override = SubResource("ShaderMaterial_d66px")
+mesh = SubResource("PlaneMesh_en28f")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="." unique_id=20770751]
+transform = Transform3D(1.555, 0, 0, 0, 1.555, 0, 0, 0, 1.555, 22.837084, 0, 0)
+material_override = SubResource("ShaderMaterial_dhc4m")
+mesh = SubResource("PlaneMesh_dhc4m")

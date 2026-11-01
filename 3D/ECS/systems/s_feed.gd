@@ -32,33 +32,49 @@ var food_consumptions: Dictionary[Populations.Types, ConsumptionList] = {}
 func sub_systems():
 	return [
 		[
-			ECS.world.query.with_all([C_ConsumeResources,]),
+			ECS.world.query.with_all([
+				C_ConsumeResources,
+				C_PopUnit,
+			]).enabled().iterate([
+				C_ConsumeResources,
+				C_PopUnit,
+			]),
 			feed_entities
 		],
 		[
-			ECS.world.query.with_all([C_IsStarving,]),
+			ECS.world.query.with_all([
+				C_IsStarving,
+				C_PopUnit,
+			]).with_none([
+				C_IsDead,
+			]).enabled().iterate([
+				C_IsStarving,
+				C_PopUnit,
+			]),
 			process_starving_entities
 		],
 	]
 
 func feed_entities(
 	entities: Array[Entity],
-	_components: Array,
+	components: Array,
 	delta: float
 ):
 	#print("feed_entities %s" % [
 		#entities.size(),
 	#])
+	var C_ConsumeResources_Index: int = 0
+	var C_PopUnit_Index: int = 1
 	var changes_per_faction: Dictionary[int, Dictionary] = {}
 	
-	for entity: Entity in entities:
-		var c_consume_resources: C_ConsumeResources = entity.get_component(
-			C_ConsumeResources
-		)
+	for i in entities.size():
+		var entity: Entity = entities[i]
+		var c_consume_resources: C_ConsumeResources = components[C_ConsumeResources_Index][i]
 		c_consume_resources.time += delta
 		if c_consume_resources.time <= consume_resources_time_limit:
 			continue
 		
+		# TODO: optimize this
 		match feed_system_option:
 			FeedSystemOption.USE_UNIT_FACTION_GLOBAL_FOOD:
 				var r_faction = entity.get_relationship(
@@ -85,9 +101,8 @@ func feed_entities(
 						# TODO: option to take housing if present
 						pass
 					
-				var c_pop_unit: C_PopUnit = entity.get_component(
-					C_PopUnit
-				)
+				var c_pop_unit: C_PopUnit = components[C_PopUnit_Index][i]
+				
 				var consumption_list: ConsumptionList = food_consumptions.get(
 					c_pop_unit.pop_type
 				)
@@ -124,6 +139,10 @@ func feed_entities(
 							)
 						
 					else:
+						if c_faction.def.is_neutral_faction:
+							printerr("neutral faction does not have food %s" % [
+								c_faction.faction_id,
+							])
 						found_all = false
 						break
 				
@@ -189,27 +208,34 @@ func feed_entities(
 
 func process_starving_entities(
 	entities: Array[Entity],
-	_components: Array,
+	components: Array,
 	delta: float,
 ):
 	#print("process_starving_entities %s" % [
 		#entities.size(),
 	#])
+	var C_IsStarving_Index: int = 0
+	# TODO: ask discord about that, maybe update
+	# things that we don't necessarily use
+	# I had errors multiple times
+	var C_PopUnit_Index: int = 1
+	
 	var pop_units_died_per_faction: Dictionary[int, Dictionary] = {}
 	var workers_died_per_faction: Dictionary[int, Dictionary] = {}
 	var islands: Dictionary[Entity, int] = {}
-	for entity: Entity in entities:
-		var c_starving: C_IsStarving = entity.get_component(
-			C_IsStarving
-		)
+	for i in entities.size():
+		var entity: Entity = entities[i]
+		var c_starving: C_IsStarving = components[C_IsStarving_Index][i]
+		
 		c_starving.starving_time += delta
 		
 		if c_starving.starving_time <= starving_death_time_limit:
 			continue
 		
-		var c_pop_unit: C_PopUnit = entity.get_component(
-			C_PopUnit
-		)
+		#var c_pop_unit: C_PopUnit = entity.get_component(
+			#C_PopUnit
+		#)
+		var c_pop_unit: C_PopUnit = components[C_PopUnit_Index][i]
 		
 		var r_works_at = entity.get_relationship(Rels.works_at)
 		if r_works_at:
@@ -251,7 +277,8 @@ func process_starving_entities(
 					c_pop_unit.pop_type,
 					1
 				)
-				
+			
+			#print("remove_relationship")
 			cmd.remove_relationship(
 				entity,
 				Rels.works_at
@@ -264,6 +291,7 @@ func process_starving_entities(
 			)
 			c_housing.current -= 1
 			
+			#print("remove_relationship")
 			cmd.remove_relationship(
 				entity,
 				Rels.lives_in
@@ -278,6 +306,7 @@ func process_starving_entities(
 			)
 			c_ship_population.current -= 1
 			
+			#print("remove_relationship")
 			cmd.remove_relationship(
 				entity,
 				Rels.travels_in
@@ -309,12 +338,18 @@ func process_starving_entities(
 			C_IsStarving
 		)
 		
-		if !entity.visible:
-			entity.show()
+		if "visible" in entity:
+			if !entity.visible:
+				entity.show()
 		
-		entity.disable_physics()
-		entity.play_death()
+		if entity.has_method("disable_physics"):
+			entity.disable_physics()
 		
+		if entity.has_method("play_death"):
+			entity.play_death()
+		
+		#print("ask to remove entity")
+		# TODO: should be a setting of sort
 		cmd.add_component(
 			entity,
 			C_RemoveEntity.new(
@@ -339,7 +374,7 @@ func process_starving_entities(
 		)
 		var changes: Dictionary[int, int]
 		if pop_units_died_per_faction.has(pop_unit_faction.faction_id):
-			changes = workers_died_per_faction.get(pop_unit_faction.faction_id)
+			changes = pop_units_died_per_faction.get(pop_unit_faction.faction_id)
 			if changes.has(c_pop_unit.pop_type):
 				changes[c_pop_unit.pop_type] += 1
 			else:

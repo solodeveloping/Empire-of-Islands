@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://fn8a8t8l6w3w"]
+
+[ext_resource type="Script" uid="uid://yqrlgs8ry32s" path="res://VFX/2D/art/mask_1.gd" id="1_y4m3h"]
+[ext_resource type="Shader" uid="uid://cfp55vcypdn7i" path="res://VFX/2D/art/Mask1.gdshader" id="2_jxmwh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sfkqh"]
+shader = ExtResource("2_jxmwh")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sfkqh"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_5qbto"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.6798246, 0.7280702)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sfkqh"]
+gradient = SubResource("Gradient_5qbto")
+width = 256
+height = 256
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 1)
+
+[node name="Mask1" type="Node2D" unique_id=222295197]
+script = ExtResource("1_y4m3h")
+
+[node name="CHECK_VIEWPORT_TO_SEE_SHAPE" type="Node2D" parent="." unique_id=572113100]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=86872065]
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer" unique_id=1291848301]
+transparent_bg = true
+render_target_update_mode = 1
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer/SubViewport" unique_id=180340115]
+material = SubResource("ShaderMaterial_sfkqh")
+offset_right = 512.0
+offset_bottom = 512.0
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewport/SubViewportContainer" unique_id=1756244431]
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="Panel" type="Panel" parent="CanvasLayer/SubViewport/SubViewportContainer/SubViewport" unique_id=1226082915]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sfkqh")
+
+[node name="Polygon2D" type="Polygon2D" parent="CanvasLayer/SubViewport/SubViewportContainer/SubViewport" unique_id=1488245164]
+position = Vector2(256, 256)
+scale = Vector2(550, 550)
+antialiased = true
+texture = SubResource("GradientTexture2D_sfkqh")
+polygon = PackedVector2Array(-0.5, 0, 0, -0.25, 0.5, 0, 0, 0.25)
+uv = PackedVector2Array(0, 0, 255.99997, 0, 255.99997, 256, 0, 256)
+
+[node name="Camera2D" type="Camera2D" parent="CanvasLayer/SubViewport/SubViewportContainer/SubViewport" unique_id=701114233]

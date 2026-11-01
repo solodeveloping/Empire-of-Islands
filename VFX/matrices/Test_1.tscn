@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://dji8qaokwpvwi"]
+
+[ext_resource type="Shader" uid="uid://d361n6c7nk8ba" path="res://VFX/matrices/world_pos_shader_1.gdshader" id="1_a4h7v"]
+[ext_resource type="Shader" uid="uid://dsiupc8uxgdj0" path="res://VFX/matrices/model_pos_shader_1.gdshader" id="2_xik45"]
+[ext_resource type="Shader" uid="uid://48rkj136e1m2" path="res://VFX/matrices/model_pos_shader_2.gdshader" id="3_deuug"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d66px"]
+render_priority = 0
+shader = ExtResource("1_a4h7v")
+
+[sub_resource type="QuadMesh" id="QuadMesh_sfkqh"]
+orientation = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a4h7v"]
+render_priority = 0
+shader = ExtResource("2_xik45")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oinvl"]
+render_priority = 0
+shader = ExtResource("3_deuug")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6tgyu"]
+
+[node name="Test1" type="Node3D" unique_id=290855169]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1221284554]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19151717, 0, 0)
+material_override = SubResource("ShaderMaterial_d66px")
+mesh = SubResource("QuadMesh_sfkqh")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1593079577]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2075953, 0, 0)
+material_override = SubResource("ShaderMaterial_a4h7v")
+mesh = SubResource("QuadMesh_sfkqh")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=279747017]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7445607, 0, 0)
+material_override = SubResource("ShaderMaterial_oinvl")
+mesh = SubResource("QuadMesh_sfkqh")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="." unique_id=1293242403]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2918262, 0, 0)
+material_override = SubResource("ShaderMaterial_oinvl")
+mesh = SubResource("CylinderMesh_6tgyu")

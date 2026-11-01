@@ -5,6 +5,12 @@ signal island_population_changed(island: Entity)
 
 # Info: add generic ship commands here
 
+var event_bus: EventBus
+
+func _ready() -> void:
+	var current_scene = get_tree().current_scene
+	event_bus = current_scene.get_node("%EventBus")
+
 func sub_observers() -> Array[Array]:
 	return [
 		[
@@ -13,7 +19,20 @@ func sub_observers() -> Array[Array]:
 			),
 			_on_ship_unload_requested
 		],
-		
+		[
+			q.with_all([C_Ship]).on_event(
+				ECSEvents.SHIP_UNLOAD_AT_SEA_REQUESTED
+			),
+			_on_ship_unload_at_sea_requested
+		],
+		[
+			q.with_any([C_Ship,]).on_match(),
+			_on_ship_match
+		],
+		[
+			q.with_any([C_Ship,]).on_unmatch(),
+			_on_ship_unmatch
+		],
 	]
 
 func _on_ship_unload_requested(
@@ -116,9 +135,9 @@ func unload_passengers(
 	# If it's not a duplicated array
 	#for pop_unit in pop_units:
 	for i in pop_units.size():
-		print("emitting POP_UNIT_JOINED %s" % [
-			i,
-		])
+		#print("emitting POP_UNIT_JOINED %s" % [
+			#i,
+		#])
 		
 		if i >= quantity_unload:
 			break
@@ -138,8 +157,8 @@ func unload_passengers(
 			}
 		)
 		
+		#print("remove_relationship")
 		cmd.remove_relationship(pop_units[i], Rels.travels_in)
-	
 
 func load_ship(
 	ship: Entity,
@@ -169,8 +188,10 @@ func load_ship(
 			break
 		
 		# hiding the unit and disabling physics
-		pop_unit.hide()
-		pop_unit.disable_physics()
+		if pop_unit.has_method("hide"):
+			pop_unit.hide()
+		if pop_unit.has_method("disable_physics"):
+			pop_unit.disable_physics()
 		
 		# removing the component
 		cmd.remove_component(
@@ -234,6 +255,7 @@ func load_ship(
 					c_pop_unit.pop_type,
 					1,
 				)
+				print("remove_relationship")
 				cmd.remove_relationship(
 					pop_unit,
 					Rels.is_on_island,
@@ -250,3 +272,89 @@ func load_ship(
 		)
 		
 	island_population_changed.emit(data.island)
+
+func _on_ship_unload_at_sea_requested(
+	_event: Variant,
+	ship: Entity,
+	_data: Variant,
+	#"buoy": buoy,
+	#"dock": dock,
+	#"island": island,
+) -> void:
+	if !ship.has_component(C_ShipPopulation):
+		push_error("_on_ship_waiting_for_unloading: entity does not has C_ShipPopulation")
+		return
+	
+	var c_ship_population: C_ShipPopulation = ship.get_component(C_ShipPopulation)
+	if !c_ship_population:
+		printerr("C_ShipPopulation not found")
+		return
+		
+	if c_ship_population.current <= 0:
+		printerr("c_ship_population.current <= 0")
+		return
+	
+	var pop_units: Array = ECS.world.query.with_relationship([
+		Rels.create_travels_in(ship),
+	]).execute().duplicate()
+	
+	print("found %s - %s pop_units travelling in ship" % [
+		pop_units.size(),
+		c_ship_population.current,
+	])
+	
+	if pop_units.is_empty():
+		printerr("no pop units travelling in ship found")
+		#continue
+	
+	if pop_units.size() != c_ship_population.current:
+		push_error("c_pop_units.size() %s != c_ship_population.current %s" % [
+			pop_units.size(),
+			c_ship_population.current,
+		])
+	
+	for pop_unit: Entity in pop_units:
+		c_ship_population.current -= 1
+		var offset: Vector3 = Vector3(
+			randf_range(-5, 5),
+			# FIXME: kinda terrible to hard code the water level
+			-0.8,
+			randf_range(-5, 5)
+		)
+		pop_unit.global_position = ship.global_position + offset
+		
+		# TODO: check for Godot and compile warning
+		cmd.add_component(
+			pop_unit,
+			C_HasWaterEndurance.new(15),
+		)
+		cmd.remove_relationship(
+			pop_unit,
+			Rels.travels_in
+		)
+	
+		# Info: one check to differentiate "just entities" and entities
+		# with graphics
+		if pop_unit.has_method("show"):
+			pop_unit.show()
+			pop_unit.is_in_water = true
+			pop_unit.play_swim_idle()
+			pop_unit.enable_physics()
+	
+func _on_ship_match(
+	_event: Variant,
+	entity: Entity,
+	_data: Variant,
+):
+	event_bus.send_ecs_ship_appeared.emit(
+		entity
+	)
+
+func _on_ship_unmatch(
+	_event: Variant,
+	entity: Entity,
+	_data: Variant,
+):
+	event_bus.send_ecs_ship_disappeared.emit(
+		entity
+	)

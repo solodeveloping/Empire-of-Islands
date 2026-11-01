@@ -2,26 +2,35 @@
 
 [ext_resource type="Script" uid="uid://bo0bfvu5am13f" path="res://3D/ECS/entities/e_ship_3D.gd" id="1_3yy30"]
 [ext_resource type="PackedScene" uid="uid://c3udmaa1jjty2" path="res://Assets/Quaternius/Ships by @Quaternius/FBX/Sail ship.tscn" id="2_qdmei"]
+[ext_resource type="AudioStream" uid="uid://bnqwakhq4kpfx" path="res://Assets/OpenGameArt/Independent_nu/wood_impact/impactwood01.mp3.ogg" id="3_qdmei"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3yy30"]
-size = Vector3(1, 4.2248535, 5.003174)
+size = Vector3(2, 8.45, 10.006)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sfkqh"]
-size = Vector3(1.9940796, 4.447754, 6)
+size = Vector3(3.988, 8.896, 12)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_sfkqh"]
+height = 3.0
+radius = 6.0
 
 [node name="SailShip1" type="CharacterBody3D" unique_id=382690978]
+collision_layer = 16
 collision_mask = 13
 motion_mode = 1
 script = ExtResource("1_3yy30")
-
-[node name="Sail ship" parent="." unique_id=1968272076 instance=ExtResource("2_qdmei")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1192035380]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.612, 0)
 shape = SubResource("BoxShape3D_3yy30")
 
+[node name="Sail ship" parent="." unique_id=1968272076 instance=ExtResource("2_qdmei")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1908247547]
-path_height_offset = 1.0
+path_desired_distance = 5.0
+target_desired_distance = 3.0
+path_height_offset = 0.5
 
 [node name="Area3D" type="Area3D" parent="." unique_id=2086037759]
 collision_layer = 16
@@ -29,3 +38,24 @@ collision_layer = 16
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=482095716]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.046783447, 1.723877, 0.5)
 shape = SubResource("BoxShape3D_sfkqh")
+
+[node name="UpdateFloatingUITimer" type="Timer" parent="." unique_id=1121993757]
+wait_time = 0.5
+autostart = true
+
+[node name="LootDetectionArea3D2" type="Area3D" parent="." unique_id=915269640]
+collision_layer = 0
+collision_mask = 128
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LootDetectionArea3D2" unique_id=1892626861]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("CylinderShape3D_sfkqh")
+
+[node name="DestructionAudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=475517301]
+stream = ExtResource("3_qdmei")
+max_distance = 100.0
+bus = &"Effects"
+
+[connection signal="timeout" from="UpdateFloatingUITimer" to="." method="_on_UpdateFloatingUiTimer_timeout"]
+[connection signal="body_entered" from="LootDetectionArea3D2" to="." method="_on_LootDetectionArea3d2_body_entered"]
+[connection signal="body_exited" from="LootDetectionArea3D2" to="." method="_on_LootDetectionArea3d2_body_exited"]

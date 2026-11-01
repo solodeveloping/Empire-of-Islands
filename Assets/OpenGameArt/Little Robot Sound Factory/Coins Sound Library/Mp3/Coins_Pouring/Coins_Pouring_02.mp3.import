@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://5dux8fnam1sa"
+path="res://.godot/imported/Coins_Pouring_02.mp3-e7cad924caf026bd8650e0aa2e8f6594.mp3str"
+
+[deps]
+
+source_file="res://Assets/OpenGameArt/Little Robot Sound Factory/Coins Sound Library/Mp3/Coins_Pouring/Coins_Pouring_02.mp3"
+dest_files=["res://.godot/imported/Coins_Pouring_02.mp3-e7cad924caf026bd8650e0aa2e8f6594.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

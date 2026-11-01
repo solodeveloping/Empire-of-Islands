@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dbxbmrnml36xp"]
+
+[ext_resource type="Script" uid="uid://crb4dwm7v8ox7" path="res://VFX/combat/floating_text/basic_floating_text_indicator_1.gd" id="1_yjjci"]
+[ext_resource type="FontFile" uid="uid://c7mf5eos0ogry" path="res://Art/Fonts/LinLibertineB.ttf" id="2_iyhe4"]
+
+[node name="BasicFloatingTextIndicator1" type="Node3D" unique_id=1783943023]
+script = ExtResource("1_yjjci")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=654517918]
+billboard = 1
+modulate = Color(1, 0, 0, 1)
+text = "100"
+font = ExtResource("2_iyhe4")
+font_size = 300
+outline_size = 0

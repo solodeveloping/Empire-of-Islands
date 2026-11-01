@@ -1,0 +1,99 @@
+[gd_scene format=3 uid="uid://3ujl0jo8802v"]
+
+[ext_resource type="Script" uid="uid://cayvvrgtqd5is" path="res://theLudovyc/GUI/build_position_rotation_ui.gd" id="1_gg6r5"]
+[ext_resource type="Texture2D" uid="uid://c10rdt4lk2ffm" path="res://Art/Image/Gui/Icons/Widgets/MiniMap/rotate_left.png" id="2_jaq6r"]
+[ext_resource type="Texture2D" uid="uid://cognjairb53p1" path="res://Art/Image/Gui/Icons/Widgets/MiniMap/rotate_left_d.png" id="3_b6nma"]
+[ext_resource type="Texture2D" uid="uid://b5wiq5b8m86mo" path="res://Art/Image/Gui/Icons/Widgets/MiniMap/rotate_left_h.png" id="4_6vgpu"]
+[ext_resource type="Texture2D" uid="uid://cjg2lud3m4061" path="res://Art/Image/Gui/Icons/Widgets/MiniMap/rotate_right.png" id="5_m2w6t"]
+[ext_resource type="Texture2D" uid="uid://js38iq4x278w" path="res://Art/Image/Gui/Icons/Widgets/MiniMap/rotate_right_d.png" id="6_pqp8h"]
+[ext_resource type="Texture2D" uid="uid://c04irh4r8gb1q" path="res://Art/Image/Gui/Icons/Widgets/MiniMap/rotate_right_h.png" id="7_y232p"]
+[ext_resource type="Texture2D" uid="uid://bnmivvdrmidt4" path="res://Art/Image/Gui/Background/button_64.png" id="8_b6nma"]
+[ext_resource type="Texture2D" uid="uid://dnteop5iseq6w" path="res://Assets/Godot/Snap.svg" id="9_6vgpu"]
+[ext_resource type="Texture2D" uid="uid://djhh36ghgk7n2" path="res://Assets/Godot/SnapDisable.svg" id="10_6vgpu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d66px"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sfkqh"]
+texture = ExtResource("8_b6nma")
+
+[node name="BuildPositionRotationUi" type="PanelContainer" unique_id=83469618]
+offset_right = 132.0
+offset_bottom = 28.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_d66px")
+script = ExtResource("1_gg6r5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1147473005]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1816273234]
+layout_mode = 2
+
+[node name="RotateLeftTextureButton" type="TextureButton" parent="VBoxContainer/HBoxContainer" unique_id=2066099839]
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+tooltip_text = "Rotate left"
+action_mode = 0
+texture_normal = ExtResource("2_jaq6r")
+texture_pressed = ExtResource("3_b6nma")
+texture_hover = ExtResource("4_6vgpu")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/HBoxContainer" unique_id=1830290982]
+layout_mode = 2
+
+[node name="RotationHSlider" type="HSlider" parent="VBoxContainer/HBoxContainer/CenterContainer" unique_id=948998660]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+min_value = -360.0
+max_value = 360.0
+
+[node name="RotateRightTextureButton" type="TextureButton" parent="VBoxContainer/HBoxContainer" unique_id=656258574]
+custom_minimum_size = Vector2(40, 30)
+layout_mode = 2
+tooltip_text = "Rotate right"
+action_mode = 0
+texture_normal = ExtResource("5_m2w6t")
+texture_pressed = ExtResource("6_pqp8h")
+texture_hover = ExtResource("7_y232p")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="CenterContainer2" type="CenterContainer" parent="VBoxContainer/HBoxContainer" unique_id=407900592]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/CenterContainer2" unique_id=730314946]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_sfkqh")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/CenterContainer2/PanelContainer" unique_id=48937557]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="ObjectSnapTextureButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/CenterContainer2/PanelContainer/MarginContainer" unique_id=708822379]
+modulate = Color(7.2196127e-07, 0.4404875, 0.5266761, 1)
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("9_6vgpu")
+texture_pressed = ExtResource("10_6vgpu")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=299151873]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9854869, 0.9271902, 0.8294433, 1)
+text = "You can press <F> to freeze/unfreeze the emplacement"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_down" from="VBoxContainer/HBoxContainer/RotateLeftTextureButton" to="." method="_on_RotateLeftTextureButton_button_down"]
+[connection signal="button_up" from="VBoxContainer/HBoxContainer/RotateLeftTextureButton" to="." method="_on_RotateLeftTextureButton_button_up"]
+[connection signal="drag_ended" from="VBoxContainer/HBoxContainer/CenterContainer/RotationHSlider" to="." method="_on_RotationHSlider_drag_ended"]
+[connection signal="drag_started" from="VBoxContainer/HBoxContainer/CenterContainer/RotationHSlider" to="." method="_on_RotationHSlider_drag_started"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/CenterContainer/RotationHSlider" to="." method="_on_RotationHSlider_value_changed"]
+[connection signal="button_down" from="VBoxContainer/HBoxContainer/RotateRightTextureButton" to="." method="_on_RotateRightTextureButton_button_down"]
+[connection signal="button_up" from="VBoxContainer/HBoxContainer/RotateRightTextureButton" to="." method="_on_RotateRightTextureButton_button_up"]
+[connection signal="button_up" from="VBoxContainer/HBoxContainer/CenterContainer2/PanelContainer/MarginContainer/ObjectSnapTextureButton" to="." method="_on_ObjectSnapTextureButton_button_up"]

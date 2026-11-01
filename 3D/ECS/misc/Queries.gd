@@ -12,3 +12,8 @@ static func find_main_squares_of_island(island: Entity) -> Array:
 		.with_relationship([Rels.create_built_on(island)])\
 		.execute()
 	return entities
+	
+static func find_spawns() -> Array:
+	var entities = ECS.world.query.with_all([C_SpawnByTag])\
+		.execute()
+	return entities

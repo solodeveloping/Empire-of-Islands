@@ -1,6 +1,6 @@
 extends Node
-# FIXME: I added this, class_name, I also commented the whole thing
-class_name Global
+# FIXME: comments
+
 #
 #enum WindowMode {
 	#WINDOWED,
@@ -286,7 +286,7 @@ class_name Global
 ## Game variables
 #var game_type := "FreePlay"
 #var faction := 1
-#var map: PackedScene
+var map: PackedScene
 #var ai_players := 0 # default should be 3 once AI is functional
 #var resource_density := 1.0
 #var has_traders := false
@@ -295,7 +295,9 @@ class_name Global
 #
 #var World: Node3D = null
 #var PlayerStart: Node3D = null
-#
+
+var physics_building_layers_2d: int = 0
+
 #@warning_ignore("unused_private_class_variable")
 #var _warning := false # DEBUG
 #

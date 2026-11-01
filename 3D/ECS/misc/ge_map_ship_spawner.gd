@@ -3,6 +3,9 @@ class_name GE_MapShipSpawner
 
 # Info: GE is for GodotEconomics
 
+@export
+var is_timer_enabled: bool = true
+
 @export var simultaneous_ship_max_count: int = 5
 
 @export var spawn_ship_timer: float = 10.0
@@ -31,10 +34,7 @@ var default_basic_trade_system_prices: BuiltinTradePriceList
 @export_category("Pop units")
 
 @export
-var spawn_pop_unit_visuals: bool = true
-
-@export
-var pop_unit_definitions: Array[GE_PopUnitDefinition] = []
+var pop_unit_spawner: GE_PopUnitSpawner
 
 var entries: Array[Node3D] = []
 
@@ -50,7 +50,14 @@ var default_builtin_resources_space_weight_ref_def: BuiltinResourcesSpaceWeightR
 
 var space_weight_red_def_dict: Dictionary[int, BuiltinResourceSpaceWeightRefDef] = {}
 
+var disabled_physics_space_rid: RID
+
+var event_bus: EventBus
+
 func _ready() -> void:
+	if get_tree().current_scene.has_node("EventBus"):
+		event_bus = get_tree().current_scene.get_node("EventBus")
+	
 	for container in entries_containers:
 		for entry in container.get_children():
 			entries.push_back(entry)
@@ -66,15 +73,33 @@ func _ready() -> void:
 		timer.name = "timer"
 		timer.timeout.connect(_on_timer_timeout)
 		add_child(timer)
-	timer.start()
+	if is_timer_enabled:
+		timer.start()
+	
+	# Info: I think it does something but not sure
+	disabled_physics_space_rid = PhysicsServer3D.space_create()
+	PhysicsServer3D.space_set_active(
+		disabled_physics_space_rid,
+		false,
+	)
 
 func _on_timer_timeout():
 	print("GE_MapShipSpawner:_on_timer_timeout")
+	if is_timer_enabled == false:
+		return
 	try_spawn_ship()
 
 func try_spawn_ship():
 	if ship_container.get_child_count() >= simultaneous_ship_max_count:
 		print("too many ships")
+		return
+	
+	var docks = ECS.world.query.with_all([
+		C_DockBuoy
+	]).execute()
+	
+	if docks.is_empty():
+		print("no docks found")
 		return
 	
 	print("spawning ship")
@@ -83,7 +108,9 @@ func try_spawn_ship():
 	
 	# TODO: make it an option
 	var faction: Entity = neutral_faction_entities.pick_random()
-	var c_faction: C_Faction = faction.get_component(C_Faction)
+	var c_faction: C_Faction = faction.get_component(
+		C_Faction
+	)
 	
 	var ship: Entity = def.scene.instantiate()
 	ship.name = "ship_%s" % [
@@ -96,10 +123,14 @@ func try_spawn_ship():
 	else:
 		nationality = c_faction.def.nationalities[0]
 	
-	var population = randi_range(
-		def.population_min_capacity,
-		def.population_max_capacity,
-	)
+	var population: int = 0
+	if def.forced_population_count >= 0:
+		population = def.forced_population_count
+	else:
+		population = randi_range(
+			def.population_min_capacity,
+			def.population_max_capacity,
+		)
 	
 	var docks_to_visit: int = randi_range(
 		visited_docks_per_ship_min_count,
@@ -165,6 +196,10 @@ func try_spawn_ship():
 				res_def.quantity = 1
 				res_def.weight = weight_space_ref.weight_per_quantity
 				res_def.space = weight_space_ref.space_per_quantity
+				
+				res_def.weight_per_quantity = weight_space_ref.weight_per_quantity
+				res_def.space_per_quantity = weight_space_ref.space_per_quantity
+				
 				c_storage.storage.set(
 					res_def.item_id,
 					res_def
@@ -232,6 +267,13 @@ func try_spawn_ship():
 	var entry = entries.pick_random()
 	
 	ship.global_position = entry.global_position
+	var y_offset: float = 0
+	if ship.has_node("NavigationAgent3D"):
+		print("has NavigationAgent3D")
+		var nav_agent: NavigationAgent3D = ship.get_node("NavigationAgent3D")
+		y_offset = -nav_agent.path_height_offset
+	
+	ship.global_position.y += y_offset
 	
 	var sailor_count = max(0, def.population_min_capacity - 1)
 	var not_sailor_count = population - sailor_count
@@ -244,7 +286,7 @@ func try_spawn_ship():
 	
 	# TODO: curves or shares instead?
 	for i in sailor_count:
-		spawn_pop_unit(
+		pop_unit_spawner.spawn_pop_unit_with_ship_3D(
 			ship,
 			0,
 			faction,
@@ -253,7 +295,7 @@ func try_spawn_ship():
 		)
 	
 	for i in not_sailor_count:
-		spawn_pop_unit(
+		pop_unit_spawner.spawn_pop_unit_with_ship_3D(
 			ship,
 			randi_range(1, 3),
 			faction,
@@ -261,6 +303,11 @@ func try_spawn_ship():
 			nationality,
 		)
 	
+	event_bus.send_ecs_ship_spawned.emit(
+		ship
+	)
+	
+	# FIXME: remove this?
 	#ECS.world.emit_event(
 		#ECSEvents.ADD_COMPONENT_TO_ENTITY_REQUESTED, 
 		#sail_ship_1,
@@ -268,94 +315,6 @@ func try_spawn_ship():
 			#"component": target,
 		#}
 	#)
-
-func spawn_pop_unit(
-	ship: Entity,
-	pop_unit_type: int,
-	faction: Entity,
-	_c_faction: C_Faction,
-	# TODO: could have different nationalities
-	ship_nationality: Nationality,
-):
-	var pop_unit: Entity
-	if spawn_pop_unit_visuals:
-		print("GE_MapShipSpawner: spawning instance")
-		var visual = pop_unit_definitions.pick_random()
-		pop_unit = visual.scene.instantiate()
-		# FIXME: does not guarantee unique names
-		pop_unit.name = "instantiated_pop_unit_%s" % [
-			randi(),
-		]
-		pop_unit.hide()
-		# TODO: find a better system
-		# that handles MMs
-		#pop_unit.disable_physics()
-		pop_unit.add_component(C_PopUnitWithVisual.new())
-		
-		# WARN: can't use get_component before it's added to the world
-		
-	else:
-		pop_unit = Entity.new()
-		pop_unit.name = "entity_pop_unit_%s" % [
-			randi(),
-		]
-	
-	var first_name: String = ""
-	var gender = randi_range(0, 1)
-	if gender == 0:
-		first_name = ship_nationality.male_first_names.pick_random()
-	else:
-		first_name = ship_nationality.female_first_names.pick_random()
-	
-	var last_name = ship_nationality.last_names.pick_random()
-	
-	pop_unit.add_component(
-		C_PersonName.new(
-			first_name,
-			last_name,
-		)
-	)
-	pop_unit.add_component(
-		C_Name.new(
-			"%s %s" % [
-				first_name,
-				last_name,
-			]
-		)
-	)
-	pop_unit.add_component(
-		C_PopUnitLocation.new(C_PopUnitLocation.LOCATION.IN_SHIP)
-	)
-	pop_unit.add_component(
-		C_ConsumeResources.new(),
-	)
-	pop_unit.add_component(
-		C_Nationality.new(ship_nationality),
-	)
-	# TODO: could have a more complicated system
-	pop_unit.add_component(
-		C_Storage.new(
-			randi_range(10, 30)
-		)
-	)
-	
-	var c_pop_unit: C_PopUnit = C_PopUnit.new(
-		pop_unit_type,
-		false
-	)
-	pop_unit.add_component(c_pop_unit)
-	pop_unit.add_relationship(Rels.create_travels_in(
-		ship,
-	))
-	pop_unit.add_relationship(
-		Rels.create_belongs_to_faction(
-			faction
-		)
-	)
-	
-	ECS.world.add_entity(pop_unit)
-	
-	pop_unit.disable_physics()
 
 func set_initial_factions(initial_factions_: Array[FactionDef]):
 	initial_factions = initial_factions_
@@ -366,10 +325,14 @@ func set_faction_entities(faction_entities_: Array[Entity]):
 	neutral_faction_entities.clear()
 	for faction_entity in faction_entities:
 		var c_faction: C_Faction = faction_entity.get_component(C_Faction)
-		if c_faction.def.is_neutral_faction:
-			neutral_faction_entities.push_back(
-				faction_entity
-			)
+		if !c_faction.def.is_neutral_faction:
+			continue
+		if !c_faction.def.can_spawn_ships:
+			continue
+		
+		neutral_faction_entities.push_back(
+			faction_entity
+		)
 
 # FIXME: duplicated with trade observer
 func set_default_builtin_resources_space_weight_ref_def(

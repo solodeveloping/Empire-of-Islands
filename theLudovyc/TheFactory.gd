@@ -1,10 +1,14 @@
 extends Node
 class_name TheFactory
 
-@onready var game: Game2D = get_parent()
-@onready var storage = $"../TheStorage"
-@onready var the_population = $"../ThePopulation"
-@onready var event_bus = $"../EventBus"
+@onready var game: Game2D = SceneUtils.find_first_parent_of_type(
+	self,
+	Game2D
+)
+
+@onready var event_bus: EventBus = %EventBus
+@onready var the_storage: TheStorage = %TheStorage
+@onready var the_population: ThePopulation = %ThePopulation
 
 enum Production_Line {
 	current_workers,
@@ -128,9 +132,9 @@ func create_or_update_line(resource_type: Resources.Types, workers_amount: int):
 		if input_type != -1:
 			resources_consumption[input_type][resource_type] = input_consumption_rate
 
-	storage.update_global_production_rate(resource_type)
+	the_storage.update_global_production_rate(resource_type)
 	if production_lines_per_level[level][resource_type][Production_Line.input_resource_type] != -1:
-		storage.update_global_production_rate(production_lines_per_level[level][resource_type][Production_Line.input_resource_type])
+		the_storage.update_global_production_rate(production_lines_per_level[level][resource_type][Production_Line.input_resource_type])
 
 
 func add_workers(
@@ -205,9 +209,9 @@ func rem_workers(
 		line[Production_Line.input_consumption_rate] = input_count * production_rate
 		resources_consumption[line[Production_Line.input_resource_type]][resource_type] = line[Production_Line.input_consumption_rate]
 
-		storage.update_global_production_rate(resource_type)
+		the_storage.update_global_production_rate(resource_type)
 		if line[Production_Line.input_resource_type] != -1:
-			storage.update_global_production_rate(line[Production_Line.input_resource_type])
+			the_storage.update_global_production_rate(line[Production_Line.input_resource_type])
 
 
 func population_increase(population_type: Populations.Types, amount: int):
@@ -292,9 +296,9 @@ func population_decrease(population_type: Populations.Types, amount: int):
 			resources_consumption[line[Production_Line.input_resource_type]][resource_type] = line[Production_Line.input_consumption_rate]
 			
 		if line[Production_Line.input_resource_type] != -1:
-			storage.update_global_production_rate(line[Production_Line.input_resource_type])
+			the_storage.update_global_production_rate(line[Production_Line.input_resource_type])
 
-		storage.update_global_production_rate(resource_type)
+		the_storage.update_global_production_rate(resource_type)
 
 		if population_pool <= 0:
 			break
@@ -316,21 +320,21 @@ func _on_TheTicker_tick():
 				
 				if input_type == -1 or input_amount == 0:
 					line[Production_Line.current_ticks] = 0
-					storage.add_resource(resource_type, line[Production_Line.production_count])
+					the_storage.add_resource(resource_type, line[Production_Line.production_count])
 				else:
 					if line[Production_Line.is_active] == false:
-						if !storage.try_to_remove_resource(input_type, input_amount):
+						if !the_storage.try_to_remove_resource(input_type, input_amount):
 							line[Production_Line.is_active] = false
 						else:
 							line[Production_Line.is_active] = true
-							storage.update_global_production_rate(resource_type)
+							the_storage.update_global_production_rate(resource_type)
 					else:
 						line[Production_Line.current_ticks] = 0
-						storage.add_resource(resource_type, line[Production_Line.production_count])
+						the_storage.add_resource(resource_type, line[Production_Line.production_count])
 						
-						if !storage.try_to_remove_resource(input_type, input_amount):
+						if !the_storage.try_to_remove_resource(input_type, input_amount):
 							line[Production_Line.is_active] = false
-							storage.update_global_production_rate(resource_type)
+							the_storage.update_global_production_rate(resource_type)
 
 func get_factory_save() -> Dictionary:
 	return {"Factory":[workers, production_lines_per_level, waiting_lines]}
@@ -351,10 +355,10 @@ func load_factory_save() -> Error:
 	for level in range(production_lines_per_level.size()):
 		for resource_type in production_lines_per_level[level]:
 			var line = production_lines_per_level[level][resource_type]
-			storage.update_global_production_rate(resource_type)
+			the_storage.update_global_production_rate(resource_type)
 			if line[Production_Line.input_resource_type] != -1:
 				resources_consumption[line[Production_Line.input_resource_type]][resource_type] = line[Production_Line.input_consumption_rate]
-				storage.update_global_production_rate(line[Production_Line.input_resource_type])
+				the_storage.update_global_production_rate(line[Production_Line.input_resource_type])
 	
 	# QUESTION : this should be an object since we take it from json no ?
 	#for line:String in factory_data[1]:

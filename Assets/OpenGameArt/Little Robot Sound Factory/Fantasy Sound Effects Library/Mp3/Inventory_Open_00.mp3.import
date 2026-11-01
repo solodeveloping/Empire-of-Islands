@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bcwux1boxcmot"
+path="res://.godot/imported/Inventory_Open_00.mp3-aec92e57f635bca78e5b9252be66cbd6.mp3str"
+
+[deps]
+
+source_file="res://Assets/OpenGameArt/Little Robot Sound Factory/Fantasy Sound Effects Library/Mp3/Inventory_Open_00.mp3"
+dest_files=["res://.godot/imported/Inventory_Open_00.mp3-aec92e57f635bca78e5b9252be66cbd6.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

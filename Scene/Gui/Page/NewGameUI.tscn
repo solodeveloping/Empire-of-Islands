@@ -1,12 +1,28 @@
-[gd_scene load_steps=4 format=3 uid="uid://b80iac7a57ox3"]
+[gd_scene format=3 uid="uid://b80iac7a57ox3"]
 
 [ext_resource type="PackedScene" uid="uid://fsa8lbk4l5p2" path="res://Scene/Gui/Page/NewGameUIFreePlay.tscn" id="1"]
 [ext_resource type="Script" uid="uid://bepnkiv1ljbvc" path="res://Script/Gui/Page/NewGameUI.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://bpimcst1geibt" path="res://Scene/Gui/BookMenu/BookMenu.tscn" id="3"]
 
-[node name="NewGameUI" instance=ExtResource("3")]
-script = ExtResource("2")
-has_cancel_button = true
+[sub_resource type="ButtonGroup" id="ButtonGroup_sweyc"]
 
-[node name="FreePlay" parent="Pages" index="1" instance=ExtResource("1")]
+[node name="NewGameUI" unique_id=1716488289 instance=ExtResource("3")]
+script = ExtResource("2")
+
+[node name="Pages" parent="." index="0" unique_id=9491894]
+current_tab = 0
+
+[node name="FreePlay" parent="Pages" index="1" unique_id=26066612 instance=ExtResource("1")]
 layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Scenario" parent="Pages/FreePlay/TextureRect/MarginContainer/VBoxContainer/HBoxContainer/LeftPage/MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(26066612, 622927142) index="0" unique_id=213059758]
+button_group = SubResource("ButtonGroup_sweyc")
+
+[node name="RandomMap" parent="Pages/FreePlay/TextureRect/MarginContainer/VBoxContainer/HBoxContainer/LeftPage/MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(26066612, 622927142) index="1" unique_id=1999560111]
+button_group = SubResource("ButtonGroup_sweyc")
+
+[node name="FreePlay" parent="Pages/FreePlay/TextureRect/MarginContainer/VBoxContainer/HBoxContainer/LeftPage/MarginContainer/VBoxContainer" parent_id_path=PackedInt32Array(26066612, 622927142) index="2" unique_id=1104434567]
+button_group = SubResource("ButtonGroup_sweyc")
+
+[editable path="Pages/FreePlay"]

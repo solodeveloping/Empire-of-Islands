@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dxtgs8fjyw8jv"
+path="res://.godot/imported/Inventory_Open_01.mp3-48ac4f4a7588734f8c860c2ff0f3f70f.mp3str"
+
+[deps]
+
+source_file="res://Assets/OpenGameArt/Little Robot Sound Factory/Fantasy Sound Effects Library/Mp3/Inventory_Open_01.mp3"
+dest_files=["res://.godot/imported/Inventory_Open_01.mp3-48ac4f4a7588734f8c860c2ff0f3f70f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,5 +1,7 @@
 extends PanelContainer
 
+# FIXME: what does it do?
+
 @onready var rtl := $VBoxContainer/PanelContainer/RichTextLabel
 
 var the_storage: TheStorage
@@ -9,10 +11,10 @@ var building_id = -1
 func _ready() -> void:
 	var current_node = get_tree().current_scene
 
-	if current_node.has_node("TheStorage"):
-		the_storage = current_node.get_node("TheStorage")
+	if current_node.has_node("%TheStorage"):
+		the_storage = current_node.get_node("%TheStorage")
 	else:
-		printerr("TheStorage is not present")
+		push_error("TheStorage is not present")
 
 func set_building_info(p_building_id: Buildings.Ids):
 	rtl.clear()
@@ -40,16 +42,22 @@ func _set_building_info(
 	building_name: String,
 	building_cost: Array,
 ):
+	print("_set_building_info")
 	rtl.clear()
 	
 	building_id = p_building_id
 
+	rtl.add_text("%s\n" % building_name)
+	
 	if building_cost.is_empty() \
 		and (p_building_id != Buildings.Ids.Warehouse and p_building_id != Buildings.Ids.MainSquare):
-		push_warning("building of id '%d' cost is null" % building_id)
+		push_warning(
+			"building cost is null '%s' '%s'" % [
+				building_name,
+				building_id,
+			]
+		)
 		return
-
-	rtl.add_text("%s\n" % building_name)
 	
 	if !building_cost.is_empty():
 		rtl.add_text("Cost :\n")

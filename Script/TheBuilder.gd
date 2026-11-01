@@ -8,14 +8,14 @@ var warehouse: Building2D
 @onready var node_buildings_preview:Node = %BuildingsPreview
 
 @onready var tilemap:TileMap = %TileMap
-@onready var ground_layer: TileMapLayer = $"../ZSorter/TileMap/GroundLayer"
+# TODO: find a way to make it not relative
+@onready var ground_layer: TileMapLayer = $"../../ZSorter/TileMap/GroundLayer"
 
-@onready var event_bus = $"../EventBus"
-
-@onready var the_storage = $"../TheStorage"
-@onready var the_population = $"../ThePopulation"
-@onready var the_bank = $"../TheBank"
-@onready var the_factory = $"../TheFactory"
+@onready var event_bus: EventBus = %EventBus
+@onready var the_storage: TheStorage = %TheStorage
+@onready var the_population: ThePopulation = %ThePopulation
+@onready var the_bank: TheBank = %TheBank
+@onready var the_factory: TheFactory = %TheFactory
 
 
 var buildings_count = {
@@ -79,19 +79,19 @@ func conclude_building_construction(building: Building2D):
 			
 	maintenance_cost += Buildings.get_maintenance_cost(building.building_id)
 	
-	var range = Buildings.get_dependency_max_range(building.building_id)
-	if range != -1:
+	var range_ = Buildings.get_dependency_max_range(building.building_id)
+	if range_ != -1:
 		var deps = Buildings.get_building_dependencies(building.building_id)
 		var dependencies = get_building_dependencies(
 			building,
-			range,
+			range_,
 			deps
 		)
 		for dep in dependencies:
 			if dep.is_active == false:
 				var tile_center = tilemap.ground_layer.local_to_map(tilemap.ground_layer.to_local(dep.global_position))
 				var top_left_tile = tilemap.entityStatic_get_top_left_tile(dep, tile_center)
-				var polygon = tilemap.get_polygon_range_of_building(building, range)
+				var polygon = tilemap.get_polygon_range_of_building(building, range_)
 				var is_in_range = tilemap.is_in_range_of_polygon(
 					dep, polygon, top_left_tile
 				)
@@ -130,12 +130,12 @@ func get_buildings_of_id(building_id: Buildings.Ids) -> Array[Building2D]:
 
 func get_building_dependencies(
 	building: Building2D,
-	range: int,
+	range_: int,
 	deps_ids: Array[Buildings.Ids]
 ) -> Array[Building2D]:
 	var result: Array[Building2D]
 	var buildings: Array[Node] = get_buildings()
-	var polygon = tilemap.get_polygon_range_of_building(building, range)
+	var polygon = tilemap.get_polygon_range_of_building(building, range_)
 	for dep in buildings:
 		if dep is Building2D:
 			if dep.building_id in deps_ids:

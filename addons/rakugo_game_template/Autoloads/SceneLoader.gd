@@ -94,6 +94,10 @@ func reload_current_scene() -> void:
 	get_tree().reload_current_scene()
 
 func load_scene_in_background(scene_path : String):
+	print("load_scene_in_background %s %s" % [
+		scene_path,
+		ResourceUID.uid_to_path(scene_path),
+	])
 	if scene_path == null or scene_path.is_empty():
 		push_error("no path given to load")
 		return
@@ -108,6 +112,12 @@ func load_scene_in_background(scene_path : String):
 	set_process(true)
 
 func change_scene(scene_path : String, force_wait_after_load : bool = true, open_transition:bool = true) -> void:
+	print("change_scene %s %s" % [
+		scene_path,
+		ResourceUID.uid_to_path(scene_path),
+	])
+	#print_stack()
+	
 	if scene_path == null or scene_path.is_empty():
 		push_error("no path given to load")
 		return

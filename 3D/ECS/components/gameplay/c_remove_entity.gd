@@ -4,11 +4,9 @@ class_name C_RemoveEntity
 @export
 var remove_immediatly: bool = false
 
+## This is decremented
 @export
 var time_limit: float = 0
-
-@export
-var time: float = 0
 
 func _init(
 	remove_immediatly_: bool = false,

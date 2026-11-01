@@ -3,12 +3,14 @@ extends EditorPlugin
 
 
 func _enter_tree():
+	print("rakugo_game_template.gd:_enter_tree")
+	
 	add_autoload_singleton("AppSettings", "res://addons/rakugo_game_template/Autoloads/AppSettings.gd")
 	add_autoload_singleton("SceneLoader", "res://addons/rakugo_game_template/Autoloads/SceneLoader.gd")
 	add_autoload_singleton("ProjectMusicController", "res://addons/rakugo_game_template/Autoloads/ProjectMusicController.tscn")
 	add_autoload_singleton("UISoundManager", "res://addons/rakugo_game_template/Autoloads/UISoundManager/UISoundManager.tscn")
 	add_autoload_singleton("Transitions", "res://addons/rakugo_game_template/Autoloads/Transitions/transitions.tscn")
-
+	
 	PluginHelper.create_or_init_settings_if_empty(
 		RGT_Globals.loading_scene_setting_path,
 		"res://scenes/LoadingScreen/LoadingScreen.tscn"

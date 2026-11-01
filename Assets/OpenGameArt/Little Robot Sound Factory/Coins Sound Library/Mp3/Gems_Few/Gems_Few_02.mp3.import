@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://banps651135dn"
+path="res://.godot/imported/Gems_Few_02.mp3-091a909ce96dc83466486d95a28ccf80.mp3str"
+
+[deps]
+
+source_file="res://Assets/OpenGameArt/Little Robot Sound Factory/Coins Sound Library/Mp3/Gems_Few/Gems_Few_02.mp3"
+dest_files=["res://.godot/imported/Gems_Few_02.mp3-091a909ce96dc83466486d95a28ccf80.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

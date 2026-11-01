@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://th0itnceyalk"
+path="res://.godot/imported/permanent_fow_blocky_1.glsl-1ec854203ac1922f1946d9eb0cf6144d.res"
+
+[deps]
+
+source_file="res://VFX/fog_of_war/compute_shaders/permanent_fow_blocky_1.glsl"
+dest_files=["res://.godot/imported/permanent_fow_blocky_1.glsl-1ec854203ac1922f1946d9eb0cf6144d.res"]
+
+[params]
+

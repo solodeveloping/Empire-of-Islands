@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://sx5ahboa8iuh"]
+
+[ext_resource type="Script" uid="uid://drndyswa6b7ju" path="res://theLudovyc/GUI/Ship/simple_ship_floating_ui_1.gd" id="1_f75rl"]
+[ext_resource type="Texture2D" uid="uid://bvj1vmbiadc85" path="res://Assets/Openclipart/SpainFlag.svg" id="2_k6cr7"]
+[ext_resource type="FontFile" uid="uid://c7mf5eos0ogry" path="res://Art/Fonts/LinLibertineB.ttf" id="3_4vqcp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f75rl"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k6cr7"]
+bg_color = Color(0.114, 0.6, 0.20310003, 1)
+
+[node name="SimpleShipFloatingUi3d1" type="CenterContainer" unique_id=571156401]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -71.0
+offset_top = -9.5
+offset_right = 71.0
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+use_top_left = true
+script = ExtResource("1_f75rl")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1713410977]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=876721940]
+layout_mode = 2
+
+[node name="FactionFlagTextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=1722048482]
+layout_mode = 2
+texture = ExtResource("2_k6cr7")
+expand_mode = 3
+
+[node name="NameLabel" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=2015341994]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_4vqcp")
+text = "The Something"
+
+[node name="HealthProgressBar" type="ProgressBar" parent="VBoxContainer" unique_id=1179740459]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+tooltip_text = "50/100"
+theme_override_styles/background = SubResource("StyleBoxFlat_f75rl")
+theme_override_styles/fill = SubResource("StyleBoxFlat_k6cr7")
+value = 50.0
+show_percentage = false

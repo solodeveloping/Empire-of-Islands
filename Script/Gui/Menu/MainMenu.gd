@@ -1,6 +1,12 @@
 extends MainMenu
 
+# TODO: remove RGT here?
+# The buttons link to a RGT node
+
 @onready var panel_menu = %PanelMenu
+
+func _ready():
+	print("MainMenu:_ready")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -10,7 +16,6 @@ func _process(_delta):
 		animation_player.seek(animation_player.current_animation_length)
 
 		set_process(false)
-		
 		
 func _open_sub_menu(menu : Control):
 	panel_menu.visible = true

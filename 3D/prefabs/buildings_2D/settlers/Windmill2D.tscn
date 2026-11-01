@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://w67s82ud7ovv"]
+
+[ext_resource type="Script" uid="uid://x1t5p50fwcxl" path="res://3D/prefabs/buildings_2D/settlers/windmill_2d.gd" id="1_vxosh"]
+
+[node name="Windmill2d" type="Node2D" unique_id=1045156937]
+script = ExtResource("1_vxosh")

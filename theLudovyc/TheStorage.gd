@@ -3,16 +3,11 @@ class_name TheStorage
 
 var storage := {}
 
-@onready var event_bus = $"../EventBus"
-
-@onready var the_factory := $"../TheFactory"
-
-@onready var the_market := $"../TheMarket"
-
-@onready var the_builder = $"../TheBuilder"
-
-@onready var the_ticker := $"../TheTicker"
-
+@onready var event_bus: EventBus = %EventBus
+@onready var the_factory: TheFactory = %TheFactory
+@onready var the_market: Node = %TheMarket
+@onready var the_builder: Node = %TheBuilder
+@onready var the_ticker: Timer = %TheTicker
 
 func add_resource(resource_type: Resources.Types, amount: int):
 	if sign(amount) < 0 and abs(amount) > storage[resource_type]:

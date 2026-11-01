@@ -17,6 +17,9 @@ var gold_count: int = 0
 @export
 var global_trades: Array[TradeResourceDefinition] = []
 
+@export
+var relationships: Array[FactionRelationDef] = []
+
 var global_trades_as_dict: Dictionary[int, TradeResourceDefinition] = {}
 
 func _init(def_: FactionDef = null, faction_id_: int = 0) -> void:
@@ -33,3 +36,6 @@ func set_global_trades(
 			trade.resource_id,
 			trade
 		)
+
+func get_relationship(faction_id: int) -> FactionRelationDef:
+	return relationships[faction_id]

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://u2whwuywx2cq"]
+
+[ext_resource type="Script" uid="uid://de5exfo5rh13h" path="res://3D/prefabs/buildings_2D/pioneers/clay_pit_2d.gd" id="1_u4o0d"]
+
+[node name="ClayPit2d" type="Node2D" unique_id=746133025]
+script = ExtResource("1_u4o0d")

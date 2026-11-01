@@ -12,8 +12,3 @@ func set_resource_icon(type: Resources.Types):
 func _ready():
 	set_resource_icon(_type)
 	pass  # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass

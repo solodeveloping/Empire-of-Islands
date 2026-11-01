@@ -7,6 +7,8 @@ var height := 0
 
 var height_offset := 0
 
+var width_offset := 0
+
 func update_offset():
 	if texture == null:
 		return

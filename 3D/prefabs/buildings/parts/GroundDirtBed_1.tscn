@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://deg51rym5txo0"]
+
+[ext_resource type="PackedScene" uid="uid://b565ef57wbu2d" path="res://Assets/Solo/GroundDirtBed_1.tscn" id="1_koegw"]
+[ext_resource type="Script" uid="uid://i2234al8ntka" path="res://3D/prefabs/buildings/parts/ground_dirt_bed_1.gd" id="1_l0f6o"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sfkqh"]
+size = Vector3(1, 0.5161133, 5)
+
+[node name="GroundDirtBed1" type="Node3D" unique_id=935183704]
+script = ExtResource("1_l0f6o")
+
+[node name="GroundDirtBed_1" parent="." unique_id=1147417601 instance=ExtResource("1_koegw")]
+
+[node name="PlantLocations" type="Node3D" parent="." unique_id=834415798]
+
+[node name="Marker3D" type="Marker3D" parent="PlantLocations" unique_id=1330064140]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.152, 1.5)
+
+[node name="Marker3D2" type="Marker3D" parent="PlantLocations" unique_id=1885109804]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.152, 0.7)
+
+[node name="Marker3D3" type="Marker3D" parent="PlantLocations" unique_id=1537865936]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.152, 0)
+
+[node name="Marker3D4" type="Marker3D" parent="PlantLocations" unique_id=1019182036]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.152, -0.7)
+
+[node name="Marker3D5" type="Marker3D" parent="PlantLocations" unique_id=697159695]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.152, -1.5)
+
+[node name="SelectionArea3D" type="Area3D" parent="." unique_id=1889867481]
+collision_layer = 2048
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SelectionArea3D" unique_id=1449719490]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24194336, 0)
+shape = SubResource("BoxShape3D_sfkqh")
+debug_color = Color(0.7704646, 0.15718156, 1, 0.41960785)

@@ -3,13 +3,10 @@ class_name TheBank
 
 const money_icon = preload("res://Art/Image/Gui/Icons/Resources/32/001.png")
 
-@onready var event_bus := $"../EventBus"
-
-@onready var the_market := $"../TheMarket"
-
-@onready var the_storage := $"../TheStorage"
-
-@onready var the_builder := $"../TheBuilder"
+@onready var event_bus: EventBus = %EventBus
+@onready var the_market: Node = %TheMarket
+@onready var the_storage: TheStorage = %TheStorage
+@onready var the_builder: Node = %TheBuilder
 
 var money := 0:
 	set(value):

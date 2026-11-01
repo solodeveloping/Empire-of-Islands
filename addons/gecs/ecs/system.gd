@@ -404,7 +404,6 @@ func _process_parallel(entities: Array[Entity], components: Array, delta: float)
 func _process_batch_callable(entities: Array[Entity], components: Array, delta: float) -> void:
 	process(entities, components, delta)
 
-
 ## Called by World.process() each frame - main entry point for system execution
 ## [param delta] The time elapsed since the last frame
 func _handle(delta: float) -> void:

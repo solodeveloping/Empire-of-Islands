@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" format=3 uid="uid://2243rtdnpc0f"]
+
+[ext_resource type="Texture2D" uid="uid://beoosv8bgkjxr" path="res://Art/Image/Buildings/Buoy/Buoy_idle_full.png" id="1_u51yf"]
+
+[resource]
+atlas = ExtResource("1_u51yf")
+region = Rect2(0, 0, 32, 32)

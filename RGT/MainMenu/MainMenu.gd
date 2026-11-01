@@ -51,6 +51,7 @@ func _on_continue_button_pressed() -> void:
 	SceneLoader.change_scene(RGT_Globals.first_game_scene_setting)
 
 func _on_play_button_pressed():
+	print("_on_play_button_pressed")
 	SaveHelper.save_file_name_to_load = ""
 	
 	SceneLoader.change_scene(RGT_Globals.first_game_scene_setting)

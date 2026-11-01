@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bc2q3mq0btbll"
+path="res://.godot/imported/Coins_Several_14.wav-bd34b287090c6c6895a6f85f9c30b95c.sample"
+
+[deps]
+
+source_file="res://Assets/OpenGameArt/Little Robot Sound Factory/Coins Sound Library/Wav/Coins_Several/Coins_Several_14.wav"
+dest_files=["res://.godot/imported/Coins_Several_14.wav-bd34b287090c6c6895a6f85f9c30b95c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

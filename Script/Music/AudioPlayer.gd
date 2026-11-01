@@ -1,6 +1,8 @@
 extends Node
 class_name AudioPlayer
 
+# TODO: make it a resource instead
+
 @export
 var in_game_music_tracks: Array[AudioStream] = []
 

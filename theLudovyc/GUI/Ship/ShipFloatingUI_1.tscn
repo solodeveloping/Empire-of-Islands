@@ -1,0 +1,170 @@
+[gd_scene format=3 uid="uid://c3qw45jy0uvau"]
+
+[ext_resource type="Script" uid="uid://ckopbog6i7d6t" path="res://theLudovyc/GUI/Ship/ship_floating_ui_1.gd" id="1_gursu"]
+[ext_resource type="Texture2D" uid="uid://nvllfmr40fbx" path="res://Assets/dafluffypotato/flags/es.png" id="2_j6ujf"]
+[ext_resource type="Texture2D" uid="uid://toeqa364p2tp" path="res://Art/Image/Gui/Icons/Resources/32/001.png" id="3_44cgk"]
+[ext_resource type="FontFile" uid="uid://c7mf5eos0ogry" path="res://Art/Fonts/LinLibertineB.ttf" id="3_v2b51"]
+[ext_resource type="Texture2D" uid="uid://3mmetdaeiip0" path="res://Art/Image/Gui/Icons/Resources/32/002.png" id="4_e5s0a"]
+[ext_resource type="Texture2D" uid="uid://bvj1vmbiadc85" path="res://Assets/Openclipart/SpainFlag.svg" id="4_lh7qj"]
+[ext_resource type="Texture2D" uid="uid://o3aikxwqsv82" path="res://Art/Image/Gui/Icons/Widgets/CityInfo/inhabitants_small.png" id="5_v2b51"]
+[ext_resource type="Texture2D" uid="uid://bjvjocnxnlysr" path="res://Art/Image/Gui/Icons/Resources/32/040.png" id="8_lh7qj"]
+[ext_resource type="Texture2D" uid="uid://c8h3klxjdh1ma" path="res://Art/External/game-icons/knot.svg" id="8_pg2uv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n4y2n"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sfkqh"]
+bg_color = Color(0.114, 0.6, 0.20310003, 1)
+
+[node name="ShipFloatingUI_1" type="CenterContainer" unique_id=1657159826]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -800.0
+offset_top = -450.0
+offset_right = -800.0
+offset_bottom = -450.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+use_top_left = true
+script = ExtResource("1_gursu")
+text_font_size = 25
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=195999361]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=819647237]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer" unique_id=493603848]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer" unique_id=638407990]
+layout_mode = 2
+
+[node name="FlagTextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer" unique_id=1659423987]
+visible = false
+layout_mode = 2
+texture = ExtResource("2_j6ujf")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer" unique_id=387115291]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_v2b51")
+theme_override_font_sizes/font_size = 25
+text = "The Something"
+
+[node name="CenterContainer2" type="CenterContainer" parent="MarginContainer/VBoxContainer" unique_id=1472401634]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer2" unique_id=526349054]
+layout_mode = 2
+
+[node name="FactionFlagTextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer2/HBoxContainer" unique_id=288951807]
+layout_mode = 2
+texture = ExtResource("4_lh7qj")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="FactionNameLabel" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer2/HBoxContainer" unique_id=513878506]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_v2b51")
+theme_override_font_sizes/font_size = 25
+text = "< Something >"
+
+[node name="HealthProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer" unique_id=1746811253]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+tooltip_text = "50/100"
+theme_override_styles/background = SubResource("StyleBoxFlat_n4y2n")
+theme_override_styles/fill = SubResource("StyleBoxFlat_sfkqh")
+value = 50.0
+show_percentage = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1111311670]
+layout_mode = 2
+
+[node name="GoldLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1019754651]
+layout_mode = 2
+tooltip_text = "Gold"
+mouse_filter = 0
+theme_override_fonts/font = ExtResource("3_v2b51")
+theme_override_font_sizes/font_size = 25
+text = " 20"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1205531114]
+layout_mode = 2
+tooltip_text = "Gold"
+texture = ExtResource("3_44cgk")
+expand_mode = 3
+
+[node name="CurrentStorageLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=973942283]
+layout_mode = 2
+tooltip_text = "Cargo"
+mouse_filter = 0
+theme_override_fonts/font = ExtResource("3_v2b51")
+theme_override_font_sizes/font_size = 25
+text = "20"
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1773751494]
+layout_mode = 2
+tooltip_text = "Cargo"
+texture = ExtResource("4_e5s0a")
+expand_mode = 3
+
+[node name="PassengerLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1349585868]
+layout_mode = 2
+tooltip_text = "Passengers"
+mouse_filter = 0
+theme_override_fonts/font = ExtResource("3_v2b51")
+theme_override_font_sizes/font_size = 25
+text = " 20"
+
+[node name="TextureRect4" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1753939982]
+layout_mode = 2
+tooltip_text = "Passengers"
+texture = ExtResource("5_v2b51")
+expand_mode = 3
+
+[node name="SpeedLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=770470127]
+layout_mode = 2
+tooltip_text = "Speed"
+mouse_filter = 0
+theme_override_fonts/font = ExtResource("3_v2b51")
+theme_override_font_sizes/font_size = 25
+text = "0"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1782735196]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="TextureRect3" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/MarginContainer" unique_id=661133736]
+modulate = Color(0.513946, 0.39693797, 0.3613202, 1)
+layout_mode = 2
+tooltip_text = "Speed"
+texture = ExtResource("8_pg2uv")
+expand_mode = 3
+
+[node name="CannonCountLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1253963724]
+layout_mode = 2
+tooltip_text = "Cannons"
+mouse_filter = 0
+theme_override_fonts/font = ExtResource("3_v2b51")
+theme_override_font_sizes/font_size = 25
+text = "0"
+
+[node name="TextureRect5" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=494776638]
+layout_mode = 2
+tooltip_text = "Cannons"
+texture = ExtResource("8_lh7qj")
+expand_mode = 3

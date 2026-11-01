@@ -2,6 +2,10 @@
 
 [ext_resource type="Script" uid="uid://dtljki76wuw7w" path="res://3D/prefabs/characters/simple_character_1.gd" id="1_26owp"]
 [ext_resource type="PackedScene" uid="uid://dswlj24hxiork" path="res://Assets/Quaternius/Ultimate Modular Men- Feb 2022/Humanoid Rig/Individual Characters/FBX/Adventurer_rig_1.tscn" id="2_26owp"]
+[ext_resource type="PackedScene" uid="uid://ds8xooia0mc42" path="res://Assets/Quaternius/Ultimate Modular Men- Feb 2022/Humanoid Rig/Individual Characters/FBX/Adventurer_rig_no_animation_tree_1.tscn" id="3_tqcp5"]
+[ext_resource type="PackedScene" uid="uid://dy0ilqyokqgup" path="res://VFX/combat/endurance/EnduranceProgressBar_1/EndurangeProgressBar_1.tscn" id="4_xmd6q"]
+[ext_resource type="PackedScene" uid="uid://dmq44gxqxwdvs" path="res://VFX/combat/health/HealthProgressBar_1/HealthProgressBar_1.tscn" id="5_i6khh"]
+[ext_resource type="PackedScene" uid="uid://b0t2r2edix4ww" path="res://VFX/water/WaterBubblesVFX_1/WaterBubblesVFX_1.tscn" id="6_yjgjm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sfkqh"]
 radius = 0.21289063
@@ -10,6 +14,8 @@ radius = 0.21289063
 size = Vector3(1, 2.0984192, 1)
 
 [node name="SimpleCharacter_1" type="CharacterBody3D" unique_id=612195686]
+collision_layer = 16
+collision_mask = 16
 script = ExtResource("1_26owp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=676782430]
@@ -19,6 +25,9 @@ shape = SubResource("CapsuleShape3D_sfkqh")
 [node name="CharacterVisualContainer" type="Node3D" parent="." unique_id=1546891783]
 
 [node name="CharacterVisual" parent="CharacterVisualContainer" unique_id=1079158951 instance=ExtResource("2_26owp")]
+visible = false
+
+[node name="Adventurer" parent="CharacterVisualContainer" unique_id=923434508 instance=ExtResource("3_tqcp5")]
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1825648919]
 target_desired_distance = 3.0
@@ -26,7 +35,16 @@ navigation_layers = 2
 
 [node name="Area3D" type="Area3D" parent="." unique_id=177099360]
 collision_layer = 16
+collision_mask = 16
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=888978215]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0622406, 0)
 shape = SubResource("BoxShape3D_sfkqh")
+
+[node name="EndurangeProgressBar1" parent="." unique_id=1478552112 instance=ExtResource("4_xmd6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="HealthProgressBar1" parent="." unique_id=371070924 instance=ExtResource("5_i6khh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1159203, 0)
+
+[node name="WaterBubblesVfx1" parent="." unique_id=1521234068 instance=ExtResource("6_yjgjm")]

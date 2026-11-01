@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://byce3l57l0wt7"]
+
+[ext_resource type="Shader" uid="uid://64yhebemdce8" path="res://VFX/combat/blood/BlootHitVFX_1/blood_hit_vfx_1_shader_1.tres" id="1_40dxw"]
+[ext_resource type="Script" uid="uid://cu028g25ugmsw" path="res://VFX/common/start_one_shot_particle_vfx_1.gd" id="1_jsqed"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u2wyx"]
+render_priority = 0
+shader = ExtResource("1_40dxw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_227l8"]
+particle_flag_align_y = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 2.0
+radial_velocity_min = 2.9999776
+radial_velocity_max = 3.9999776
+scale_min = 0.099999994
+scale_max = 0.19999999
+color = Color(1, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_sfkqh"]
+bottom_radius = 0.1
+radial_segments = 16
+
+[sub_resource type="Animation" id="Animation_40dxw"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_jsqed"]
+resource_name = "auto_remove"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n80h2"]
+_data = {
+&"RESET": SubResource("Animation_40dxw"),
+&"auto_remove": SubResource("Animation_jsqed")
+}
+
+[node name="BloodHitVfx1" type="Node3D" unique_id=154191822]
+script = ExtResource("1_jsqed")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1010578912]
+material_override = SubResource("ShaderMaterial_u2wyx")
+emitting = false
+amount = 15
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_227l8")
+draw_pass_1 = SubResource("CylinderMesh_sfkqh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=572145255]
+libraries/ = SubResource("AnimationLibrary_n80h2")
+autoplay = &"auto_remove"

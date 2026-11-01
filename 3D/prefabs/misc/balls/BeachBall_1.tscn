@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://bejal4ieqcdkm"]
+
+[ext_resource type="Script" uid="uid://dnx1nmbtp7j62" path="res://3D/prefabs/misc/balls/beach_ball_1.gd" id="1_26lhk"]
+[ext_resource type="PackedScene" uid="uid://c8pq5eds7psqu" path="res://Assets/Sketchfab/Riku_Tatsu/beach_ball_free_download.glb" id="2_2b0o3"]
+[ext_resource type="Shader" uid="uid://dclhu857kdryt" path="res://VFX/common/simple_mask_particle_no_billboard_shader_1_shader.tres" id="3_2b0o3"]
+[ext_resource type="AudioStream" uid="uid://dcckm4gsmnps1" path="res://Assets/OpenGameArt/rubberduck/water-splash-slime-sfx/splash_11.ogg" id="4_4ysjd"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_sfkqh"]
+radius = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_d66px"]
+radius = 1.0
+
+[sub_resource type="Gradient" id="Gradient_4ysjd"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.41157556, 0.4630225)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2b0o3"]
+gradient = SubResource("Gradient_4ysjd")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8yw0i"]
+render_priority = 0
+shader = ExtResource("3_2b0o3")
+shader_parameter/MaskTexture = SubResource("GradientTexture2D_2b0o3")
+
+[sub_resource type="Curve" id="Curve_t0tvn"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.68, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_4ysjd"]
+curve = SubResource("Curve_t0tvn")
+
+[sub_resource type="Curve" id="Curve_wcibt"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_1idbx"]
+curve = SubResource("Curve_wcibt")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d66px"]
+gravity = Vector3(0, 0, 0)
+scale_min = 7.0
+scale_max = 7.0
+scale_curve = SubResource("CurveTexture_1idbx")
+alpha_curve = SubResource("CurveTexture_4ysjd")
+
+[sub_resource type="QuadMesh" id="QuadMesh_sfkqh"]
+orientation = 1
+
+[node name="BeachBall1" type="RigidBody3D" unique_id=378522781]
+collision_layer = 1024
+collision_mask = 2045
+script = ExtResource("1_26lhk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1270759031]
+shape = SubResource("SphereShape3D_sfkqh")
+
+[node name="Sketchfab_Scene" parent="." unique_id=1847965621 instance=ExtResource("2_2b0o3")]
+
+[node name="Area3D" type="Area3D" parent="." unique_id=524173200]
+collision_layer = 1024
+collision_mask = 512
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=842700596]
+shape = SubResource("SphereShape3D_d66px")
+
+[node name="RipplesGPUParticles3D" type="GPUParticles3D" parent="." unique_id=1429120247]
+visible = false
+material_override = SubResource("ShaderMaterial_8yw0i")
+emitting = false
+amount = 10
+amount_ratio = 0.1
+one_shot = true
+explosiveness = 0.5
+process_material = SubResource("ParticleProcessMaterial_d66px")
+draw_pass_1 = SubResource("QuadMesh_sfkqh")
+
+[node name="SplashAudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1657115031]
+stream = ExtResource("4_4ysjd")
+max_distance = 25.0
+bus = &"Effects"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="area_entered" from="Area3D" to="." method="_on_Area3d_area_entered"]
+[connection signal="area_exited" from="Area3D" to="." method="_on_Area3d_area_exited"]

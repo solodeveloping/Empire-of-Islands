@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://d0hcgqss38vq2"]
+
+[ext_resource type="Shader" uid="uid://cmo4ov5cmbvhp" path="res://VFX/2D/art/TestRhombus.gdshader" id="1_godi3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d66px"]
+shader = ExtResource("1_godi3")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/half_size = Vector2(0.5, 0.25)
+shader_parameter/uv_position = Vector2(0, 0)
+shader_parameter/border_width = 0.6
+shader_parameter/grow_outer = 0.0
+shader_parameter/grow_inner = 0.275
+shader_parameter/border_color = Color(0.05, 0.1, 0.2, 1)
+shader_parameter/fill_color = Color(0, 0, 0, 0)
+
+[sub_resource type="Gradient" id="Gradient_kk8n5"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sfkqh"]
+gradient = SubResource("Gradient_kk8n5")
+
+[node name="TestRhombus" type="Node2D" unique_id=1330049440]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1737170534]
+material = SubResource("ShaderMaterial_d66px")
+texture = SubResource("GradientTexture2D_sfkqh")

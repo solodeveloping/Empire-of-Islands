@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://yorsmmvo413u"]
+
+[ext_resource type="Script" uid="uid://cq04f50n4x35h" path="res://3D/prefabs/buildings_2D/pioneers/potato_field_2d.gd" id="1_8ngy3"]
+
+[node name="PotatoField2d" type="Node2D" unique_id=801674816]
+script = ExtResource("1_8ngy3")

@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bh85y8tbctf56"]
+
+[ext_resource type="Script" uid="uid://cnmtryccvvfff" path="res://3D/prefabs/buildings/sensors/building_editable_children_area.gd" id="1_vjwb0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sfkqh"]
+size = Vector3(10, 1.427, 10)
+
+[node name="BuildingEditableChildrenArea" type="Area3D" unique_id=101001046]
+collision_layer = 32
+collision_mask = 8447
+script = ExtResource("1_vjwb0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1710548322]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.472, 1, -0.394)
+shape = SubResource("BoxShape3D_sfkqh")
+debug_color = Color(0, 0.6, 0.69803923, 1)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

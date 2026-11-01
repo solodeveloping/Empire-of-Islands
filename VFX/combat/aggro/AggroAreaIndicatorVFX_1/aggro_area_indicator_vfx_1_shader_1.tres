@@ -1,0 +1,27 @@
+[gd_resource type="VisualShader" format=3 uid="uid://cgtb7k5eqvdjm"]
+
+[sub_resource type="VisualShaderNodeProximityFade" id="VisualShaderNodeProximityFade_qnfii"]
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_vumjr"]
+parameter_name = "Color"
+default_value_enabled = true
+default_value = Color(1, 0, 0, 1)
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_034ya"]
+constant = 0.5
+
+[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_qnfii"]
+function = 31
+
+[resource]
+flags/unshaded = true
+flags/shadows_disabled = true
+nodes/fragment/2/node = SubResource("VisualShaderNodeProximityFade_qnfii")
+nodes/fragment/2/position = Vector2(-440, 460)
+nodes/fragment/3/node = SubResource("VisualShaderNodeColorParameter_vumjr")
+nodes/fragment/3/position = Vector2(-560, 160)
+nodes/fragment/4/node = SubResource("VisualShaderNodeFloatConstant_034ya")
+nodes/fragment/4/position = Vector2(0, 780)
+nodes/fragment/5/node = SubResource("VisualShaderNodeFloatFunc_qnfii")
+nodes/fragment/5/position = Vector2(-60, 380)
+nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 2, 0, 5, 0, 5, 0, 0, 1, 4, 0, 0, 19)

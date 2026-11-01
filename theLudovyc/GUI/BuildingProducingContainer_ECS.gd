@@ -1,4 +1,5 @@
 extends VBoxContainer
+class_name BuildingProducingContainer_ECS
 
 @onready var resource_in = $GridContainer/ResourceIn
 
@@ -23,7 +24,12 @@ func update_infos(
 	#resource_in.resource_type = Recipes.get_recipe_input_type(resource_type)
 
 	var c_production: C_Production = building.get_component(C_Production)
-	resource_out.resource_type = c_production.production_type
+	if c_production:
+		resource_out.resource_type = c_production.production_type
+	else:
+		printerr("did not find C_Production on building %s" % [
+			building.get_path(),
+		])
 	#resource_out.resource_type = resource_type
 	
 	# TODO : show the right resources

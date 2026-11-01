@@ -1,6 +1,17 @@
 class_name Rels
 
-static var belongs_to: Relationship = Relationship.new(R_BelongsTo.new(), null)
+static var belongs_to: Relationship = Relationship.new(
+	R_BelongsTo.new(),
+	null
+)
+static var is_extension_of: Relationship = Relationship.new(
+	R_IsExtensionOf.new(),
+	null
+)
+static var is_possible_extension_of: Relationship = Relationship.new(
+	R_IsPossibleExtensionOf.new(),
+	null
+)
 static var going_to: Relationship = Relationship.new(R_GoingTo.new(), null)
 static var works_at: Relationship = Relationship.new(R_WorksAt.new(), null)
 static var travels_in: Relationship = Relationship.new(R_TravelsIn.new(), null)
@@ -15,7 +26,13 @@ static var information_is_being_debugged_by: Relationship = Relationship.new(
 
 static func create_belongs_to(parent: Entity) -> Relationship:
 	return Relationship.new(R_BelongsTo.new(), parent)
-	
+
+static func create_is_extension_of(parent: Entity) -> Relationship:
+	return Relationship.new(R_IsExtensionOf.new(), parent)
+
+static func create_is_possible_extension_of(parent: Entity) -> Relationship:
+	return Relationship.new(R_IsPossibleExtensionOf.new(), parent)
+
 static func create_going_to(parent: Entity) -> Relationship:
 	return Relationship.new(R_GoingTo.new(), parent)
 	

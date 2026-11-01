@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://b8xj5m0xkumrc" path="res://3D/prefabs/buildings/sensors/BuildingMainArea1.tscn" id="10_mgv2q"]
 [ext_resource type="PackedScene" uid="uid://dnwpxbdjjk2h0" path="res://3D/prefabs/buildings/sensors/GroundSensorEditable1.tscn" id="10_yii00"]
 [ext_resource type="Script" uid="uid://b1ly1gc8mu6j5" path="res://3D/misc/multimesh_instances_remover.gd" id="11_yii00"]
+[ext_resource type="Material" uid="uid://c2188w3x5w5op" path="res://VFX/common/materials/simple_instance_color_shader_1_material_1.tres" id="12_1d833"]
+[ext_resource type="Script" uid="uid://063chpxin8a2" path="res://3D/minimap/minimap_entity_display_handler.gd" id="13_nvfos"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mgv2q"]
 shading_mode = 0
@@ -28,6 +30,10 @@ colors = PackedColorArray(1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_yii00"]
 gradient = SubResource("Gradient_3tk63")
+
+[sub_resource type="QuadMesh" id="QuadMesh_nvfos"]
+size = Vector2(8, 8)
+orientation = 1
 
 [node name="Lumberjack1" type="Node3D" unique_id=1826247262]
 script = ExtResource("1_nfuca")
@@ -100,6 +106,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.011057, 0.1, 0)
 [node name="MultiMeshInstancesRemover" type="Node" parent="." unique_id=345645746]
 script = ExtResource("11_yii00")
 metadata/_custom_type_script = "uid://b1ly1gc8mu6j5"
+
+[node name="WhiteIconMain" type="MeshInstance3D" parent="." unique_id=2013209305]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -1.2040124)
+layers = 524288
+material_override = ExtResource("12_1d833")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_nvfos")
+
+[node name="MinimapEntityDisplayHandler" type="Node3D" parent="." unique_id=837273563 node_paths=PackedStringArray("white_icon")]
+script = ExtResource("13_nvfos")
+white_icon = NodePath("../WhiteIconMain")
 
 [connection signal="multimesh_instance_area_entered" from="BuildingMainArea1" to="." method="_on_BuildingMainArea1_multimesh_instance_area_entered"]
 [connection signal="multimesh_instance_area_exited" from="BuildingMainArea1" to="." method="_on_BuildingMainArea1_multimesh_instance_area_exited"]

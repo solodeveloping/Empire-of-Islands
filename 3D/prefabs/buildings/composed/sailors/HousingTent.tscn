@@ -15,6 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://b8xj5m0xkumrc" path="res://3D/prefabs/buildings/sensors/BuildingMainArea1.tscn" id="14_fm8xb"]
 [ext_resource type="PackedScene" uid="uid://dnwpxbdjjk2h0" path="res://3D/prefabs/buildings/sensors/GroundSensorEditable1.tscn" id="15_oayv0"]
 [ext_resource type="Script" uid="uid://b1ly1gc8mu6j5" path="res://3D/misc/multimesh_instances_remover.gd" id="15_pp68h"]
+[ext_resource type="Material" uid="uid://c2188w3x5w5op" path="res://VFX/common/materials/simple_instance_color_shader_1_material_1.tres" id="16_pp68h"]
+[ext_resource type="Script" uid="uid://063chpxin8a2" path="res://3D/minimap/minimap_entity_display_handler.gd" id="17_0dlhd"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2cgim"]
 shading_mode = 0
@@ -32,6 +34,10 @@ colors = PackedColorArray(1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_62qyp"]
 gradient = SubResource("Gradient_3tk63")
+
+[sub_resource type="QuadMesh" id="QuadMesh_oayv0"]
+size = Vector2(12, 12)
+orientation = 1
 
 [node name="HousingTent" type="Node3D" unique_id=13075898]
 script = ExtResource("1_3tk63")
@@ -141,6 +147,17 @@ metadata/_custom_type_script = "uid://b1ly1gc8mu6j5"
 [node name="CheckAreasTimer" type="Timer" parent="." unique_id=164077744]
 wait_time = 0.3
 autostart = true
+
+[node name="WhiteIconMain" type="MeshInstance3D" parent="." unique_id=81600703]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3035245, 4, 0.32677507)
+layers = 524288
+material_override = ExtResource("16_pp68h")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_oayv0")
+
+[node name="MinimapEntityDisplayHandler" type="Node3D" parent="." unique_id=1235286432 node_paths=PackedStringArray("white_icon")]
+script = ExtResource("17_0dlhd")
+white_icon = NodePath("../WhiteIconMain")
 
 [connection signal="timeout" from="UpdateGroundSensorTimer" to="." method="_on_UpdateGroundSensorTimer_timeout"]
 [connection signal="multimesh_instance_area_entered" from="BuildingMainArea1" to="." method="_on_BuildingMainArea1_multimesh_instance_area_entered"]

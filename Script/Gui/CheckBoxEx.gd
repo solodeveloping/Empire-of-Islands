@@ -45,7 +45,7 @@ func _notification(what: int) -> void:
 
 func _on_CheckBoxEx_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
-		if event.is_action_released("alt_command"):
+		if event.is_action_released("left_click"):
 			#print("Left click checked CheckBox")
 			# FIXME: comment
 			#Audio.play_snd_click()

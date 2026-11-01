@@ -6,8 +6,6 @@ class_name Building2D
 # Info : this is the script used to display all buildings
 # the other scenes are not used
 
-signal selected(type)
-
 @onready var starving_sprite_2d: Sprite2D = $StarvingSprite2D
 @onready var production_stopped_sprite_2d: Sprite2D = $ProductionStoppedSprite2D
 
@@ -16,6 +14,7 @@ enum Datas {
 	Width,
 	Height,
 	HeightOffset,
+	WidthOffset,
 	TextureNorthWest,
 	TextureNorthEast,
 	TextureSouthEast,
@@ -28,6 +27,8 @@ enum Datas {
 # Or we can delete them and replace the placeholder texture with the right one
 # In this case, we need to modify the number of VFrames in Building2D.tscn
 
+# TOIMPROVE: replace these by uids
+
 const datas = {
 	Buildings.Ids.Warehouse: {
 		#Datas.Texture: preload("res://theLudovyc/Building/warehouse.png"),
@@ -39,6 +40,18 @@ const datas = {
 		Datas.Width: 3,
 		Datas.Height: 3,
 	},
+	Buildings.Ids.MainSquare: {
+		Datas.Texture: preload("uid://vw6fdakry6tx"),
+		Datas.TextureNorthWest: preload("uid://vw6fdakry6tx"),
+		Datas.TextureNorthEast: preload("uid://bkxc38w8uo67u"),
+		Datas.TextureSouthEast: preload("uid://7kv3o4mkiv5e"),
+		Datas.TextureSouthWest: preload("uid://bbxap58py7q56"),
+		Datas.Width: 5,
+		Datas.Height: 5,
+		Datas.HeightOffset: 0,
+		Datas.WidthOffset: 1,
+	},
+	
 	# Level 1
 	Buildings.Ids.Tent: {
 		#Datas.Texture: preload("res://theLudovyc/Building/residential.png"),
@@ -125,7 +138,7 @@ const datas = {
 		Datas.Height: 2,
 	},
 	Buildings.Ids.Bakery: {
-		Datas.Texture: preload("res://theLudovyc/Building/atlas_textures/stonemason_atlas_texture.tres"),
+		Datas.Texture: preload("uid://dhbpe31urgkfc"),
 		Datas.Width: 2,
 		Datas.Height: 2,
 	},
@@ -165,12 +178,19 @@ var building_id: Buildings.Ids = -1:
 			var building_data = datas.get(building_id)
 			
 			if building_data == null:
-				push_error("Cannot find datas for this id: " + str(building_id))
+				var building_name = Buildings.get_building_name(building_id)
+				push_error(
+					"Cannot find datas for this id: %s %s" % [
+						building_id,
+						building_name,
+					]
+				)
 				return
 			
 			width = building_data[Datas.Width]
 			height = building_data[Datas.Height]
 			height_offset = get_height_offset()
+			width_offset = get_width_offset()
 			
 			var is_coastal = Buildings.get_is_coastal(building_id)
 			if !is_coastal:
@@ -190,12 +210,20 @@ var is_starving := false
 var is_active := true
 var is_build := false
 
+enum FaceDirection {
+	NorthWest,
+	NorthEast,
+	SouthEast,
+	SouthWest,
+}
+
+var face_direction: FaceDirection = FaceDirection.SouthEast
+
 func build():
 	var current_scene = get_tree().current_scene
 	if current_scene.has_node("EventBus"):
 		event_bus = current_scene.get_node("EventBus")
-		event_bus.send_building_selected.connect(_on_building_selected)
-		event_bus.send_natural_resource_selected.connect(_on_natural_resource_selected)
+		event_bus.send_selection_changed.connect(_on_event_bus_send_selection_changed)
 		
 	var area2d := $Area2D
 	area2d.input_event.connect(_on_Area2d_input_event)
@@ -223,11 +251,16 @@ func build():
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.pressed:
-			if is_build:
+			if is_build and is_selected:
 				deselect()
 
-func _on_Area2d_input_event(viewport, event, shape_idx):
-	if not is_selected and event.is_action_pressed("alt_command"):
+func _on_Area2d_input_event(
+	_viewport,
+	event,
+	_shape_idx
+):
+	if not is_selected and event.is_action_pressed("left_click"):
+		print("selecting building")
 		is_selected = true
 		modulate = Color.YELLOW
 		if event_bus != null:
@@ -237,19 +270,16 @@ func _on_Area2d_mouse_entered():
 	if not is_selected:
 		modulate = Color.YELLOW
 
-
 func _on_Area2d_mouse_exited():
 	if not is_selected:
 		modulate = Color.WHITE
 
-
-func _on_building_selected(building_node: Building2D):
-	if is_selected and building_node != self:
-		deselect()
-
-func _on_natural_resource_selected(_natural_resource):
-	if is_selected:
-		deselect()
+func _on_event_bus_send_selection_changed(node):
+	if !is_selected:
+		return
+	if node == self:
+		return
+	deselect()
 
 func select():
 	is_selected = true
@@ -278,23 +308,47 @@ func hide_production_stoppped_indicator():
 	is_active = true
 
 func switch_to_north_west_texture():
+	#print("switch_to_north_west_texture")
 	var building_data = datas.get(building_id)
 	texture = building_data[Datas.TextureNorthWest]
+	face_direction = FaceDirection.NorthWest
 	
 func switch_to_north_east_texture():
+	#print("switch_to_north_east_texture")
 	var building_data = datas.get(building_id)
 	texture = building_data[Datas.TextureNorthEast]
+	face_direction = FaceDirection.NorthEast
 	
 func switch_to_south_east_texture():
+	#print("switch_to_south_east_texture")
 	var building_data = datas.get(building_id)
 	texture = building_data[Datas.TextureSouthEast]
+	face_direction = FaceDirection.SouthEast
 	
 func switch_to_south_west_texture():
+	#print("switch_to_south_west_texture")
 	var building_data = datas.get(building_id)
 	texture = building_data[Datas.TextureSouthWest]
+	face_direction = FaceDirection.SouthWest
 
 func get_height_offset() -> int:
 	var building_data = datas.get(building_id)
 	if building_data.has(Datas.HeightOffset):
 		return building_data[Datas.HeightOffset]
 	return 0
+
+func get_width_offset() -> int:
+	var building_data = datas.get(building_id)
+	if building_data.has(Datas.WidthOffset):
+		return building_data[Datas.WidthOffset]
+	return 0
+
+# This is for ECS
+# FIXME: I'm not sure if this is the best
+# The other node also keeps a reference
+# But this way, we don't have to code a fetch method
+var entity_node: Node
+func set_entity_node(node: Node):
+	entity_node = node
+func get_entity_node() -> Node:
+	return entity_node

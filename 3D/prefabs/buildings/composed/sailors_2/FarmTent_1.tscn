@@ -1,0 +1,210 @@
+[gd_scene format=3 uid="uid://dp3fd01pq1aha"]
+
+[ext_resource type="Script" uid="uid://cwri0tafpiyxy" path="res://3D/prefabs/buildings/composed/sailors_2/farm_tent_1.gd" id="1_d6l6l"]
+[ext_resource type="PackedScene" uid="uid://dfrp0toqgk4uv" path="res://3D/prefabs/buildings/reusables/Tent_1.tscn" id="2_srfb1"]
+[ext_resource type="PackedScene" uid="uid://c8a2e3ste8csy" path="res://Assets/Kenney/kenney_fantasy-town-kit_2.0/Models/GLB format/fence-curved.glb" id="5_6vpq4"]
+[ext_resource type="PackedScene" uid="uid://7bicd1fb0rym" path="res://Assets/Quaternius/Medieval Village Pack - Dec 2020/Props/FBX/Hay.fbx" id="6_6vpq4"]
+[ext_resource type="PackedScene" uid="uid://clj2wptu8nwud" path="res://Assets/Quaternius/Fantasy Props MegaKit[Standard]/Exports/glTF/Barrel.gltf" id="6_plu0r"]
+[ext_resource type="PackedScene" uid="uid://xlwxth3fw1yh" path="res://Assets/Quaternius/Medieval Village Pack - Dec 2020/Props/FBX/Bags.fbx" id="7_1mccj"]
+[ext_resource type="PackedScene" uid="uid://bew536j4v6jn1" path="res://Assets/Quaternius/Fantasy Props MegaKit[Standard]/Exports/glTF/Crate_Wooden.gltf" id="7_t6wlp"]
+[ext_resource type="PackedScene" uid="uid://bh85y8tbctf56" path="res://3D/prefabs/buildings/sensors/BuildingEditableChildrenArea.tscn" id="8_p7khg"]
+[ext_resource type="Material" uid="uid://3xkhw7iys5dx" path="res://VFX/common/materials/billboard_sprite_standard_material_3d_1.tres" id="12_5b76x"]
+[ext_resource type="PackedScene" uid="uid://dnwpxbdjjk2h0" path="res://3D/prefabs/buildings/sensors/GroundSensorEditable1.tscn" id="13_ccp2f"]
+[ext_resource type="Shader" uid="uid://dq546tkfmtioc" path="res://VFX/area/RotatingDashedArea3DVFX_1/rotating_dashed_area_3D_vfx_1_shader_3.gdshader" id="13_hi4tu"]
+[ext_resource type="PackedScene" uid="uid://cg0xotfa2m0hl" path="res://3D/prefabs/buildings/sensors/SquareExtension_1.tscn" id="14_p7khg"]
+[ext_resource type="Script" uid="uid://b1ly1gc8mu6j5" path="res://3D/misc/multimesh_instances_remover.gd" id="14_vc0pi"]
+[ext_resource type="Material" uid="uid://c2188w3x5w5op" path="res://VFX/common/materials/simple_instance_color_shader_1_material_1.tres" id="15_h6hd1"]
+[ext_resource type="Script" uid="uid://063chpxin8a2" path="res://3D/minimap/minimap_entity_display_handler.gd" id="16_ri8bi"]
+[ext_resource type="PackedScene" uid="uid://deg51rym5txo0" path="res://3D/prefabs/buildings/parts/GroundDirtBed_1.tscn" id="16_xdasp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hi4tu"]
+size = Vector3(13.04364, 1.427, 13.023804)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sfkqh"]
+size = Vector3(6.995117, 2.5791016, 6.527405)
+
+[sub_resource type="Gradient" id="Gradient_3tk63"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5yfdv"]
+gradient = SubResource("Gradient_3tk63")
+
+[sub_resource type="QuadMesh" id="QuadMesh_dx0o0"]
+size = Vector2(15, 15)
+orientation = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xdasp"]
+render_priority = 0
+shader = ExtResource("13_hi4tu")
+shader_parameter/color = Color(0.24961445, 0.7863597, 0, 1)
+shader_parameter/direction = 1.0
+shader_parameter/frequency = 15.000000223518
+shader_parameter/speed = 2.0
+shader_parameter/radius = 1.0
+shader_parameter/line_thickness = 0.00999999977648
+
+[sub_resource type="QuadMesh" id="QuadMesh_xdasp"]
+size = Vector2(15, 15)
+orientation = 1
+
+[node name="FarmTent1" type="Node3D" unique_id=1145789329]
+script = ExtResource("1_d6l6l")
+ray_ground_layers = 4
+
+[node name="env" type="Node3D" parent="." unique_id=964185578]
+
+[node name="Tent2" parent="env" unique_id=1577214377 instance=ExtResource("2_srfb1")]
+transform = Transform3D(0.697536, 0, -0.71654975, 0, 1, 0, 0.71654975, 0, 0.697536, 3.9151378, 0, -3.8315341)
+
+[node name="Barrel2" parent="env" unique_id=1864501420 instance=ExtResource("6_plu0r")]
+transform = Transform3D(0.7137439, 0, 0.7004068, 0, 1, 0, -0.7004068, 0, 0.7137439, 2.8898673, 0, -6.0439773)
+
+[node name="Barrel4" parent="env" unique_id=706311613 instance=ExtResource("6_plu0r")]
+transform = Transform3D(0.7137439, 0, 0.7004068, 0, 1, 0, -0.7004068, 0, 0.7137439, 2.8246527, 0, 6.260682)
+
+[node name="Crate_Wooden2" parent="env" unique_id=1554454500 instance=ExtResource("7_t6wlp")]
+transform = Transform3D(0.7137439, 0, 0.7004068, 0, 1, 0, -0.7004068, 0, 0.7137439, 0.4615804, 4.7683716e-07, -2.1910357)
+
+[node name="fence-curved2" parent="env" unique_id=757597741 instance=ExtResource("5_6vpq4")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 5, 0, -5)
+
+[node name="fence-curved3" parent="env" unique_id=765042239 instance=ExtResource("5_6vpq4")]
+transform = Transform3D(-1.3113416e-07, 0, 2.9999998, 0, 3, 0, -2.9999998, 0, -1.3113416e-07, -5, 0, -5)
+
+[node name="fence-curved4" parent="env" unique_id=1025621185 instance=ExtResource("5_6vpq4")]
+transform = Transform3D(-2.9999998, 0, -2.6226832e-07, 0, 3.0000005, 0, 2.6226832e-07, 0, -2.9999998, -5, 0, 5)
+
+[node name="fence-curved5" parent="env" unique_id=2144810684 instance=ExtResource("5_6vpq4")]
+transform = Transform3D(-1.3113416e-07, 0, -2.9999998, 0, 3.0000014, 0, 2.9999998, 0, -1.3113416e-07, 5, 0, 5)
+
+[node name="Hay" parent="env" unique_id=533080129 instance=ExtResource("6_6vpq4")]
+transform = Transform3D(4.9994206, 0.064596385, -0.04019165, -0.06465184, 4.999577, -0.006648253, 0.04010237, 0.0071671037, 4.9998336, 5.759283, 0, -2.1059449)
+
+[node name="Hay2" parent="env" unique_id=388727860 instance=ExtResource("6_6vpq4")]
+transform = Transform3D(4.9994206, 0.064596385, -0.04019165, -0.06465184, 4.999577, -0.006648253, 0.04010237, 0.0071671037, 4.9998336, 4.9645085, 0, -1.8509326)
+
+[node name="Hay3" parent="env" unique_id=779373401 instance=ExtResource("6_6vpq4")]
+transform = Transform3D(4.9994206, 0.064596385, -0.04019165, -0.06465184, 4.999577, -0.006648253, 0.04010237, 0.0071671037, 4.9998336, 4.851196, 0, -0.93866444)
+
+[node name="Hay4" parent="env" unique_id=1629274971 instance=ExtResource("6_6vpq4")]
+transform = Transform3D(4.9994206, 0.064596385, -0.04019165, -0.06465184, 4.999577, -0.006648253, 0.04010237, 0.0071671037, 4.9998336, 5.696029, 0, -1.26348)
+
+[node name="Bags" parent="env" unique_id=1034157227 instance=ExtResource("7_1mccj")]
+transform = Transform3D(5.192399, 0, 4.6945705, 0, 7, 0, -4.6945705, 0, 5.192399, 1.5890355, 0, -5.3061643)
+
+[node name="BuildingEditableChildrenArea" parent="." unique_id=101001046 instance=ExtResource("8_p7khg")]
+collision_layer = 8192
+
+[node name="CollisionShape3D" parent="BuildingEditableChildrenArea" index="0" unique_id=1710548322]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02052319, 1, 0.005963385)
+shape = SubResource("BoxShape3D_hi4tu")
+
+[node name="SelectionArea3D" type="Area3D" parent="." unique_id=504061749]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -4)
+collision_layer = 2048
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SelectionArea3D" unique_id=1557742720]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6850586, 0.7895508, 0.7051697)
+shape = SubResource("BoxShape3D_sfkqh")
+debug_color = Color(0.6269538, 0.3624369, 0.97552353, 0.41960785)
+
+[node name="SpriteIndicators" type="Node3D" parent="." unique_id=774123317]
+
+[node name="SpriteIndicator" type="Sprite3D" parent="SpriteIndicators" unique_id=891395293]
+transform = Transform3D(0.7137439, 0, 0.7004068, 0, 1, 0, -0.7004068, 0, 0.7137439, 3.4829817, 5, 2.7814512)
+material_override = ExtResource("12_5b76x")
+modulate = Color(1, 0, 0, 1)
+texture = SubResource("GradientTexture2D_5yfdv")
+
+[node name="GroundSensorEditable1" parent="." unique_id=1810008971 instance=ExtResource("13_ccp2f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+ray_ground_layers = 4
+
+[node name="SingleGroundSensorWithSprite1" parent="GroundSensorEditable1/sensors" parent_id_path=PackedInt32Array(1810008971, 162158777) index="0" unique_id=929189549]
+transform = Transform3D(0.7137439, 0, 0.7004068, 0, 1, 0, -0.7004068, 0, 0.7137439, -6.622014, 0.099999994, -3.5370388)
+
+[node name="SingleGroundSensorWithSprite2" parent="GroundSensorEditable1/sensors" parent_id_path=PackedInt32Array(1810008971, 162158777) index="1" unique_id=1293848132]
+transform = Transform3D(0.7137439, 0, 0.7004068, 0, 1, 0, -0.7004068, 0, 0.7137439, 6.4821835, 0.099999994, -3.2361107)
+
+[node name="SingleGroundSensorWithSprite3" parent="GroundSensorEditable1/sensors" parent_id_path=PackedInt32Array(1810008971, 162158777) index="2" unique_id=643648802]
+transform = Transform3D(0.7137439, 0, 0.7004068, 0, 1, 0, -0.7004068, 0, 0.7137439, 6.1295667, 0.099999994, 9.418754)
+
+[node name="SingleGroundSensorWithSprite4" parent="GroundSensorEditable1/sensors" parent_id_path=PackedInt32Array(1810008971, 162158777) index="3" unique_id=346344375]
+transform = Transform3D(0.7137439, 0, 0.7004068, 0, 1, 0, -0.7004068, 0, 0.7137439, -6.204898, 0.099999994, 9.366943)
+
+[node name="MultiMeshInstancesRemover" type="Node" parent="." unique_id=263208076]
+script = ExtResource("14_vc0pi")
+metadata/_custom_type_script = "uid://b1ly1gc8mu6j5"
+
+[node name="WhiteIconMain" type="MeshInstance3D" parent="." unique_id=1700097829]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7180042, 4, 0.3689766)
+visible = false
+layers = 524288
+material_override = ExtResource("15_h6hd1")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_dx0o0")
+
+[node name="GroundIndicator" type="MeshInstance3D" parent="." unique_id=1664873062]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+visible = false
+layers = 524288
+material_override = SubResource("ShaderMaterial_xdasp")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_xdasp")
+
+[node name="MinimapEntityDisplayHandler" type="Node3D" parent="." unique_id=1761932653 node_paths=PackedStringArray("white_icon")]
+script = ExtResource("16_ri8bi")
+white_icon = NodePath("../WhiteIconMain")
+
+[node name="Extensions" type="Node3D" parent="." unique_id=438756569]
+
+[node name="SquareExtension1" parent="Extensions" unique_id=803607134 instance=ExtResource("14_p7khg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 0, 0)
+
+[node name="SquareExtension2" parent="Extensions" unique_id=1728462118 instance=ExtResource("14_p7khg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13.5)
+
+[node name="SquareExtension3" parent="Extensions" unique_id=1656865870 instance=ExtResource("14_p7khg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, 0)
+
+[node name="SquareExtension4" parent="Extensions" unique_id=1980585924 instance=ExtResource("14_p7khg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13.5)
+
+[node name="GroundBeds" type="Node3D" parent="." unique_id=460775858]
+
+[node name="GroundDirtBed1" parent="GroundBeds" unique_id=935183704 instance=ExtResource("16_xdasp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 3.4893055)
+
+[node name="GroundDirtBed2" parent="GroundBeds" unique_id=1104662305 instance=ExtResource("16_xdasp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7721834, 0, 3.4893055)
+
+[node name="GroundDirtBed3" parent="GroundBeds" unique_id=253855586 instance=ExtResource("16_xdasp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5786161, 0, 3.4893055)
+
+[node name="GroundDirtBed7" parent="GroundBeds" unique_id=1499089062 instance=ExtResource("16_xdasp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -3.5680223)
+
+[node name="GroundDirtBed8" parent="GroundBeds" unique_id=232648403 instance=ExtResource("16_xdasp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7721834, 0, -3.5680223)
+
+[node name="GroundDirtBed9" parent="GroundBeds" unique_id=1035217360 instance=ExtResource("16_xdasp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5786161, 0, -3.5680223)
+
+[node name="GroundDirtBed4" parent="GroundBeds" unique_id=1186963138 instance=ExtResource("16_xdasp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.653144, 0, 3.4893055)
+
+[node name="GroundDirtBed5" parent="GroundBeds" unique_id=1686344009 instance=ExtResource("16_xdasp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8809605, 0, 3.4893055)
+
+[node name="GroundDirtBed6" parent="GroundBeds" unique_id=1742295763 instance=ExtResource("16_xdasp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0745277, 0, 3.4893055)
+
+[connection signal="multimesh_instance_area_entered" from="BuildingEditableChildrenArea" to="." method="_on_BuildingEditableChildrenArea_multimesh_instance_area_entered"]
+[connection signal="multimesh_instance_area_exited" from="BuildingEditableChildrenArea" to="." method="_on_BuildingEditableChildrenArea_multimesh_instance_area_exited"]
+[connection signal="state_changed" from="BuildingEditableChildrenArea" to="." method="_on_BuildingEditableChildrenArea_state_changed"]
+[connection signal="state_changed" from="GroundSensorEditable1" to="." method="_on_GroundSensorEditable1_state_changed"]
+
+[editable path="BuildingEditableChildrenArea"]
+[editable path="GroundSensorEditable1"]

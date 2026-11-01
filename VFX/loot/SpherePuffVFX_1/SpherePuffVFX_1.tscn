@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://dky77phg25hh7"]
+
+[ext_resource type="Script" uid="uid://cu028g25ugmsw" path="res://VFX/common/start_one_shot_particle_vfx_1.gd" id="1_d2l6p"]
+[ext_resource type="Shader" uid="uid://vo1bl83riwl2" path="res://VFX/loot/SpherePuffVFX_1/sphere_puff_vfx_shader_1.tres" id="1_unclu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6dves"]
+render_priority = 0
+shader = ExtResource("1_unclu")
+
+[sub_resource type="Curve" id="Curve_et7wx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.18974361, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_uvfdj"]
+curve = SubResource("Curve_et7wx")
+
+[sub_resource type="Curve" id="Curve_d2l6p"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.23595512), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_unclu"]
+curve = SubResource("Curve_d2l6p")
+
+[sub_resource type="Curve" id="Curve_unclu"]
+_data = [Vector2(0, 0.30337083), 0.0, 0.0, 0, 0, Vector2(0.15897438, 0.8314607), 0.0, 0.0, 0, 0, Vector2(1, 0.28089893), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_81bqg"]
+curve = SubResource("Curve_unclu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sfkqh"]
+angle_min = -179.99998
+angle_max = 180.00002
+radial_velocity_min = 0.99997765
+radial_velocity_max = 1.9999776
+radial_velocity_curve = SubResource("CurveTexture_unclu")
+gravity = Vector3(0, 0, 0)
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_81bqg")
+alpha_curve = SubResource("CurveTexture_uvfdj")
+
+[sub_resource type="SphereMesh" id="SphereMesh_d66px"]
+
+[node name="SpherePuffVfx1" type="Node3D" unique_id=93410627]
+script = ExtResource("1_d2l6p")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1763583990]
+material_override = SubResource("ShaderMaterial_6dves")
+emitting = false
+amount = 10
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_sfkqh")
+draw_pass_1 = SubResource("SphereMesh_d66px")

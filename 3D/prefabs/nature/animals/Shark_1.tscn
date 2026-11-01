@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://bnrr4giwfthe8"]
+
+[ext_resource type="Script" uid="uid://l6lnknw7rftn" path="res://3D/prefabs/nature/animals/shark_1.gd" id="1_ekkti"]
+[ext_resource type="PackedScene" uid="uid://i804yl7m8qiy" path="res://Assets/Quaternius/Pirate Kit - Nov 2023/glTF/Characters_Shark_1.tscn" id="2_svt5d"]
+[ext_resource type="Texture2D" uid="uid://dpfbllcy3d133" path="res://Art/External/game-icons/evil-eyes.png" id="3_afyx3"]
+[ext_resource type="PackedScene" uid="uid://2d3sio3wnelc" path="res://VFX/combat/hits/hit_1/HitVFX_1.tscn" id="4_q8fxu"]
+[ext_resource type="AudioStream" uid="uid://4ayuivmiwioy" path="res://Assets/OpenGameArt/Independent_nu/wood_impact/crack01.mp3.ogg" id="5_tmgxq"]
+[ext_resource type="PackedScene" uid="uid://bn54ls1uvhrup" path="res://VFX/combat/aggro/AggroAreaIndicatorVFX_2/AggroAreaIndicatorVFX_2.tscn" id="6_kkp4x"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_svt5d"]
+radius = 0.58203125
+height = 5.5786133
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_afyx3"]
+size = Vector3(1.7982941, 1.6126575, 5.4282837)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_sfkqh"]
+radius = 50.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_d66px"]
+radius = 2.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6dves"]
+radius = 3.0
+
+[node name="Shark1" type="CharacterBody3D" unique_id=1402273207]
+motion_mode = 1
+script = ExtResource("1_ekkti")
+target_physics_layer = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2048407770]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.20621228, -0.07495117)
+shape = SubResource("CapsuleShape3D_svt5d")
+
+[node name="CharacterVisualContainer" type="Node3D" parent="." unique_id=1700770579]
+
+[node name="Characters_Shark" parent="CharacterVisualContainer" unique_id=1180440561 instance=ExtResource("2_svt5d")]
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=24314332]
+path_desired_distance = 3.0
+target_desired_distance = 3.0
+path_height_offset = 1.0
+
+[node name="Area3D" type="Area3D" parent="." unique_id=29914691]
+collision_layer = 16
+collision_mask = 16
+
+[node name="AreaCollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=140565167]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.095466614, 0.29586887, 0.077423096)
+shape = SubResource("BoxShape3D_afyx3")
+
+[node name="AggroArea3D" type="Area3D" parent="." unique_id=547543734]
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+
+[node name="AggroCollisionShape3D" type="CollisionShape3D" parent="AggroArea3D" unique_id=2079916296]
+shape = SubResource("SphereShape3D_sfkqh")
+
+[node name="AggroSprite3D" type="Sprite3D" parent="." unique_id=980773419]
+transform = Transform3D(0.355, 0, 0, 0, 0.355, 0, 0, 0, 0.355, 0, 2, 2)
+visible = false
+modulate = Color(1, 0, 0, 1)
+billboard = 1
+texture = ExtResource("3_afyx3")
+
+[node name="VerifyAggroValidityTimer" type="Timer" parent="." unique_id=1911445694]
+wait_time = 5.0
+autostart = true
+
+[node name="HitVfx1" parent="." unique_id=267299478 instance=ExtResource("4_q8fxu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.0392256)
+
+[node name="WoodHitAudioStreamPlayer3D_1" type="AudioStreamPlayer3D" parent="." unique_id=1590907189]
+stream = ExtResource("5_tmgxq")
+max_distance = 100.0
+bus = &"Effects"
+
+[node name="CanAttackArea3D" type="Area3D" parent="." unique_id=1797095966]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CanAttackArea3D" unique_id=1037090121]
+shape = SubResource("SphereShape3D_d66px")
+
+[node name="AggroAreaIndicatorVfx2" parent="." unique_id=2070641419 instance=ExtResource("6_kkp4x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+
+[node name="ForSelectionArea3D2" type="Area3D" parent="." unique_id=1137928958]
+collision_layer = 2048
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ForSelectionArea3D2" unique_id=132520728]
+shape = SubResource("SphereShape3D_6dves")
+
+[connection signal="area_entered" from="AggroArea3D" to="." method="_on_AggroArea3d_area_entered"]
+[connection signal="area_exited" from="AggroArea3D" to="." method="_on_AggroArea3d_area_exited"]
+[connection signal="timeout" from="VerifyAggroValidityTimer" to="." method="_on_VerifyAggroValidityTimer_timeout"]
+[connection signal="area_entered" from="CanAttackArea3D" to="." method="_on_CanAttackArea3d_area_entered"]
+[connection signal="area_exited" from="CanAttackArea3D" to="." method="_on_CanAttackArea3d_area_exited"]

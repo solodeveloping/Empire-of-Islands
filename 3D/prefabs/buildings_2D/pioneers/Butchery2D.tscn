@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://drsbsh2yl3tbf"]
+
+[ext_resource type="Script" uid="uid://dtx7xdeems4fr" path="res://3D/prefabs/buildings_2D/pioneers/butchery_2d.gd" id="1_gybc4"]
+
+[node name="Butchery2d" type="Node2D" unique_id=1999053479]
+script = ExtResource("1_gybc4")

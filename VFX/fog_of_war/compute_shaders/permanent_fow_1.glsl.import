@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://bcqp2k7udvdte"
+path="res://.godot/imported/permanent_fow_1.glsl-d997813c43faefbda0abc2b7d15650aa.res"
+
+[deps]
+
+source_file="res://VFX/fog_of_war/compute_shaders/permanent_fow_1.glsl"
+dest_files=["res://.godot/imported/permanent_fow_1.glsl-d997813c43faefbda0abc2b7d15650aa.res"]
+
+[params]
+

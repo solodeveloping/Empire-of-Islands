@@ -1,0 +1,108 @@
+[gd_resource type="Resource" script_class="FactionListDefinition" format=3 uid="uid://cxpu1r8wgneq3"]
+
+[ext_resource type="Script" uid="uid://bf5e6vbxjnyas" path="res://3D/ECS/data_scripts/factions/faction_def.gd" id="1_yllkw"]
+[ext_resource type="Script" uid="uid://cblulh06w85n" path="res://3D/misc/definitions/faction_list_definition.gd" id="2_0t7je"]
+[ext_resource type="Texture2D" uid="uid://bb6qfrv5brr5j" path="res://Art/External/game-icons/earth-africa-europe_1.svg" id="2_8k1bl"]
+[ext_resource type="Script" uid="uid://b3g48xbfohfv3" path="res://3D/ECS/data_scripts/factions/nationality.gd" id="3_uk00f"]
+[ext_resource type="Resource" uid="uid://bnn5ntdvjawdy" path="res://3D/resources/nationalities/gaia_nationality_resource.tres" id="4_avtbn"]
+[ext_resource type="Texture2D" uid="uid://bif862e7whqeu" path="res://Art/External/game-icons/shark-fin.png" id="5_xnxwp"]
+[ext_resource type="Script" uid="uid://jlsb3wncufra" path="res://3D/ECS/data_scripts/factions/faction_relation_def.gd" id="6_hgyxj"]
+[ext_resource type="Resource" uid="uid://d0hkn6e4cu3na" path="res://3D/resources/nationalities/dum_dum_maneaters_nationality_resource.tres" id="7_iv1wo"]
+[ext_resource type="Resource" uid="uid://oh84ocwombvy" path="res://3D/resources/nationalities/dutch_nationality_resource.tres" id="8_tc4mf"]
+[ext_resource type="Resource" uid="uid://dvh37mkpu438o" path="res://3D/resources/nationalities/france_nationality_resource.tres" id="9_rrnd0"]
+[ext_resource type="Resource" uid="uid://bg2tlt7laij6p" path="res://3D/resources/nationalities/portugal_nationality_resource.tres" id="10_ocox7"]
+[ext_resource type="Resource" uid="uid://bo4t054m25s8p" path="res://3D/resources/nationalities/spain_nationality_resource.tres" id="11_y8rk2"]
+[ext_resource type="Resource" uid="uid://dvlu8xd6l7xoq" path="res://3D/resources/nationalities/united_kingdom_nationality_resource.tres" id="12_tlmu7"]
+
+[sub_resource type="Resource" id="Resource_wamd4"]
+script = ExtResource("1_yllkw")
+faction_name = "Gaia"
+nationalities = Array[ExtResource("3_uk00f")]([ExtResource("4_avtbn")])
+is_player_faction = false
+has_infinite_resources = true
+can_spawn_ships = false
+custom_flag = ExtResource("2_8k1bl")
+metadata/_custom_type_script = "uid://bf5e6vbxjnyas"
+
+[sub_resource type="Resource" id="Resource_og528"]
+script = ExtResource("6_hgyxj")
+metadata/_custom_type_script = "uid://jlsb3wncufra"
+
+[sub_resource type="Resource" id="Resource_6qrqc"]
+script = ExtResource("1_yllkw")
+faction_name = "Dum Dum Maneaters"
+faction_alias = "shark"
+nationalities = Array[ExtResource("3_uk00f")]([ExtResource("7_iv1wo")])
+initial_default_faction_relationship = SubResource("Resource_og528")
+is_player_faction = false
+has_infinite_resources = true
+can_spawn_ships = false
+custom_flag = ExtResource("5_xnxwp")
+color = 1
+metadata/_custom_type_script = "uid://bf5e6vbxjnyas"
+
+[sub_resource type="Resource" id="Resource_rdbhx"]
+script = ExtResource("1_yllkw")
+faction_name = "Neutral faction"
+nationalities = Array[ExtResource("3_uk00f")]([ExtResource("8_tc4mf"), ExtResource("9_rrnd0"), ExtResource("10_ocox7"), ExtResource("11_y8rk2"), ExtResource("12_tlmu7")])
+is_player_faction = false
+has_infinite_resources = true
+is_neutral_faction = true
+metadata/_custom_type_script = "uid://bf5e6vbxjnyas"
+
+[sub_resource type="Resource" id="Resource_6wanv"]
+script = ExtResource("1_yllkw")
+faction_name = "The Netherlands"
+nationalities = Array[ExtResource("3_uk00f")]([ExtResource("8_tc4mf")])
+is_player_faction = false
+has_infinite_resources = true
+is_neutral_faction = true
+metadata/_custom_type_script = "uid://bf5e6vbxjnyas"
+
+[sub_resource type="Resource" id="Resource_unhy0"]
+script = ExtResource("1_yllkw")
+faction_name = "France"
+nationalities = Array[ExtResource("3_uk00f")]([ExtResource("9_rrnd0")])
+is_player_faction = false
+has_infinite_resources = true
+is_neutral_faction = true
+metadata/_custom_type_script = "uid://bf5e6vbxjnyas"
+
+[sub_resource type="Resource" id="Resource_mw7xt"]
+script = ExtResource("1_yllkw")
+faction_name = "Portugal"
+nationalities = Array[ExtResource("3_uk00f")]([ExtResource("10_ocox7")])
+is_player_faction = false
+has_infinite_resources = true
+is_neutral_faction = true
+metadata/_custom_type_script = "uid://bf5e6vbxjnyas"
+
+[sub_resource type="Resource" id="Resource_4vxnj"]
+script = ExtResource("1_yllkw")
+faction_name = "Spain"
+nationalities = Array[ExtResource("3_uk00f")]([ExtResource("11_y8rk2")])
+is_player_faction = false
+has_infinite_resources = true
+is_neutral_faction = true
+metadata/_custom_type_script = "uid://bf5e6vbxjnyas"
+
+[sub_resource type="Resource" id="Resource_f7sr8"]
+script = ExtResource("1_yllkw")
+faction_name = "United Kingdom"
+nationalities = Array[ExtResource("3_uk00f")]([ExtResource("12_tlmu7")])
+is_player_faction = false
+has_infinite_resources = true
+is_neutral_faction = true
+metadata/_custom_type_script = "uid://bf5e6vbxjnyas"
+
+[sub_resource type="Resource" id="Resource_n4y2n"]
+script = ExtResource("1_yllkw")
+faction_name = "Player 1"
+faction_alias = "Player 1"
+nationalities = Array[ExtResource("3_uk00f")]([ExtResource("11_y8rk2")])
+metadata/_custom_type_script = "uid://bf5e6vbxjnyas"
+
+[resource]
+script = ExtResource("2_0t7je")
+factions = Array[ExtResource("1_yllkw")]([SubResource("Resource_wamd4"), SubResource("Resource_6qrqc"), SubResource("Resource_rdbhx"), SubResource("Resource_6wanv"), SubResource("Resource_unhy0"), SubResource("Resource_mw7xt"), SubResource("Resource_4vxnj"), SubResource("Resource_f7sr8"), SubResource("Resource_n4y2n")])
+metadata/_custom_type_script = "uid://cblulh06w85n"

@@ -2,6 +2,14 @@
 
 [ext_resource type="Script" uid="uid://brg8qxdvrsrva" path="res://theLudovyc/GUI/Trading/trade_exchange_summary_floating_ui.gd" id="1_yui3a"]
 [ext_resource type="Texture2D" uid="uid://brmfkn8sfum3n" path="res://Art/Image/Gui/Icons/Resources/32/005.png" id="2_fnbtt"]
+[ext_resource type="Texture2D" uid="uid://blo2v78psec72" path="res://Art/Image/Gui/Background/book.png" id="2_ufesu"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sfkqh"]
+texture = ExtResource("2_ufesu")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
 
 [node name="TradeExchangeSummaryFloatingUi" type="MarginContainer" unique_id=24407110]
 offset_right = 363.0
@@ -10,23 +18,31 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 script = ExtResource("1_yui3a")
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=195999361]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=852716890]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_sfkqh")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=195999361]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=819647237]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=819647237]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1111311670]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1111311670]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1019754651]
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1019754651]
 layout_mode = 2
 theme_override_font_sizes/font_size = 125
 text = "+ 20"
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1205531114]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1205531114]
 layout_mode = 2
 texture = ExtResource("2_fnbtt")
 expand_mode = 3

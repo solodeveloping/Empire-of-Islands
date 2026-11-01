@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cj1ndgx7cwqh1"]
+
+[ext_resource type="Script" uid="uid://ng3nw8xqhjyf" path="res://3D/prefabs/buildings_2D/settlers/bakery_2d.gd" id="1_41vq5"]
+
+[node name="Bakery2d" type="Node2D" unique_id=868049434]
+script = ExtResource("1_41vq5")

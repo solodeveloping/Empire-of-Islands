@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d3giagib800vi"]
+
+[ext_resource type="Script" uid="uid://b3wh4iu3c1wi" path="res://3D/prefabs/buildings_2D/settlers/weaver_2d.gd" id="1_d1khb"]
+
+[node name="Weaver2d" type="Node2D" unique_id=1285969923]
+script = ExtResource("1_d1khb")

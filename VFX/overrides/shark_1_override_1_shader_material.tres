@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://du2urrnsye8o2"]
+
+[ext_resource type="Shader" uid="uid://b0wbx6yy8blpl" path="res://VFX/overrides/shark_1_override_shader.tres" id="1_6y6sm"]
+[ext_resource type="Texture2D" uid="uid://bpk6p2j6icds" path="res://Assets/Quaternius/Pirate Kit - Nov 2023/glTF/Characters_Mako_Atlas_Pirate.png" id="2_cnl3e"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_6y6sm")
+shader_parameter/AlbedoTexture = ExtResource("2_cnl3e")

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d35clewbnor7u"]
+
+[ext_resource type="Script" uid="uid://ck4mtc7846r8e" path="res://3D/prefabs/buildings_2D/settlers/stonepit_2d.gd" id="1_3j1du"]
+
+[node name="Stonepit2d" type="Node2D" unique_id=1437834015]
+script = ExtResource("1_3j1du")

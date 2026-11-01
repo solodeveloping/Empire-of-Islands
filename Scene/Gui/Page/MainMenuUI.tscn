@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cyb8jqt6k3y2b"]
+[gd_scene format=3 uid="uid://cyb8jqt6k3y2b"]
 
 [ext_resource type="Theme" uid="uid://lyx8kydf373j" path="res://Art/Theme/MenuTheme.tres" id="1"]
 [ext_resource type="Script" uid="uid://bf8ok7m4dob16" path="res://Script/Gui/Page/MainMenuUI.gd" id="2"]
@@ -160,7 +160,7 @@ _data = {
 &"intro": SubResource("1")
 }
 
-[node name="MainMenuUI" type="Control"]
+[node name="MainMenuUI" type="Control" unique_id=1873815637]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -170,7 +170,7 @@ grow_vertical = 2
 theme = ExtResource("1")
 script = ExtResource("2")
 
-[node name="Decoration" type="TextureRect" parent="."]
+[node name="Decoration" type="TextureRect" parent="." unique_id=756472875]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 1
 anchors_preset = 8
@@ -190,7 +190,7 @@ texture = ExtResource("3")
 expand_mode = 1
 stretch_mode = 3
 
-[node name="MenuItems" type="Control" parent="Decoration"]
+[node name="MenuItems" type="Control" parent="Decoration" unique_id=508594325]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -200,7 +200,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SinglePlayerButton" parent="Decoration/MenuItems" instance=ExtResource("4")]
+[node name="SinglePlayerButton" parent="Decoration/MenuItems" unique_id=1923247329 instance=ExtResource("4")]
 layout_mode = 0
 anchors_preset = 0
 anchor_left = 0.0
@@ -215,7 +215,7 @@ alignment = "top"
 text = "Single Player"
 texture = ExtResource("5")
 
-[node name="LoadGameButton" parent="Decoration/MenuItems" instance=ExtResource("4")]
+[node name="LoadGameButton" parent="Decoration/MenuItems" unique_id=1390663707 instance=ExtResource("4")]
 layout_mode = 0
 anchors_preset = 0
 anchor_left = 0.0
@@ -229,7 +229,7 @@ offset_bottom = -60.0
 text = "Load Game"
 texture = ExtResource("6")
 
-[node name="CreditsButton" parent="Decoration/MenuItems" instance=ExtResource("4")]
+[node name="CreditsButton" parent="Decoration/MenuItems" unique_id=218223723 instance=ExtResource("4")]
 layout_mode = 0
 anchors_preset = 0
 anchor_left = 0.0
@@ -243,7 +243,7 @@ offset_bottom = 48.892
 text = "Credits"
 texture = ExtResource("7")
 
-[node name="EditorButton" parent="Decoration/MenuItems" instance=ExtResource("4")]
+[node name="EditorButton" parent="Decoration/MenuItems" unique_id=1116430468 instance=ExtResource("4")]
 layout_mode = 0
 anchors_preset = 0
 anchor_left = 0.0
@@ -257,7 +257,7 @@ offset_bottom = 157.0
 text = "Editor"
 texture = ExtResource("8")
 
-[node name="QuitButton" parent="Decoration/MenuItems" instance=ExtResource("4")]
+[node name="QuitButton" parent="Decoration/MenuItems" unique_id=1057207240 instance=ExtResource("4")]
 layout_mode = 0
 anchors_preset = 0
 anchor_left = 0.0
@@ -272,7 +272,7 @@ alignment = "bottom"
 text = "Quit"
 texture = ExtResource("9")
 
-[node name="HelpButton" parent="Decoration/MenuItems" instance=ExtResource("4")]
+[node name="HelpButton" parent="Decoration/MenuItems" unique_id=345652281 instance=ExtResource("4")]
 layout_mode = 0
 anchors_preset = 0
 anchor_left = 0.0
@@ -286,7 +286,7 @@ offset_bottom = 157.0
 alignment = "right"
 text = "Help"
 
-[node name="OptionsButton" parent="Decoration/MenuItems" instance=ExtResource("4")]
+[node name="OptionsButton" parent="Decoration/MenuItems" unique_id=307134828 instance=ExtResource("4")]
 layout_mode = 0
 anchors_preset = 0
 anchor_left = 0.0
@@ -301,7 +301,7 @@ alignment = "right"
 text = "Options"
 texture = ExtResource("10")
 
-[node name="ConnectButton" parent="Decoration/MenuItems" instance=ExtResource("4")]
+[node name="ConnectButton" parent="Decoration/MenuItems" unique_id=239448642 instance=ExtResource("4")]
 layout_mode = 0
 anchors_preset = 0
 anchor_left = 0.0
@@ -316,7 +316,7 @@ alignment = "right"
 text = "Connect"
 texture = ExtResource("11")
 
-[node name="Logo" type="Control" parent="."]
+[node name="Logo" type="Control" parent="." unique_id=699217034]
 custom_minimum_size = Vector2(40, 40)
 anchors_preset = 0
 anchor_left = 0.5
@@ -328,7 +328,7 @@ offset_top = -20.0
 offset_right = 20.0
 offset_bottom = 20.0
 
-[node name="LogoEmblem" type="TextureRect" parent="Logo"]
+[node name="LogoEmblem" type="TextureRect" parent="Logo" unique_id=1344613240]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 anchor_left = 0.5
@@ -344,7 +344,7 @@ texture = ExtResource("12")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="LogoTitle" type="TextureRect" parent="Logo"]
+[node name="LogoTitle" type="TextureRect" parent="Logo" unique_id=1973575940]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -359,7 +359,7 @@ texture = ExtResource("13")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Fade" type="ColorRect" parent="."]
+[node name="Fade" type="ColorRect" parent="." unique_id=462475626]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 anchor_right = 1.0
@@ -367,14 +367,6 @@ anchor_bottom = 1.0
 mouse_filter = 2
 color = Color(0.137255, 0.137255, 0.137255, 1)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "intro"
-libraries = {
-"": SubResource("AnimationLibrary_hgqkq")
-}
-
-[connection signal="pressed" from="Decoration/MenuItems/SinglePlayerButton" to="." method="_go_to_scene" binds= ["sp_game"]]
-[connection signal="pressed" from="Decoration/MenuItems/LoadGameButton" to="." method="_go_to_scene" binds= ["load_game"]]
-[connection signal="pressed" from="Decoration/MenuItems/QuitButton" to="." method="_go_to_scene" binds= ["exit"]]
-[connection signal="pressed" from="Decoration/MenuItems/HelpButton" to="." method="_go_to_scene" binds= ["help"]]
-[connection signal="pressed" from="Decoration/MenuItems/OptionsButton" to="." method="_go_to_scene" binds= ["options"]]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1230729729]
+libraries/ = SubResource("AnimationLibrary_hgqkq")
+autoplay = &"intro"

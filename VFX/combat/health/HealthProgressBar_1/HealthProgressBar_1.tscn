@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dmq44gxqxwdvs"]
+
+[ext_resource type="Shader" uid="uid://osuym1hi0kfo" path="res://VFX/combat/endurance/EnduranceProgressBar_1/endurange_progress_bar_1_shader_1.gdshader" id="1_f8pyq"]
+[ext_resource type="Script" uid="uid://hqcneec1bu70" path="res://VFX/combat/health/HealthProgressBar_1/health_progress_bar_1.gd" id="1_nmwae"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nmwae"]
+render_priority = 0
+shader = ExtResource("1_f8pyq")
+shader_parameter/use_billboard = true
+shader_parameter/color = Color(0.24743846, 0.7377979, 0.34066162, 1)
+shader_parameter/background_color = Color(0.63, 0.63, 0.63, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_nkukb"]
+size = Vector2(1, 0.1)
+
+[node name="HealthProgressBar1" type="Node3D" unique_id=371070924]
+script = ExtResource("1_nmwae")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=315118764]
+material_override = SubResource("ShaderMaterial_nmwae")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_nkukb")

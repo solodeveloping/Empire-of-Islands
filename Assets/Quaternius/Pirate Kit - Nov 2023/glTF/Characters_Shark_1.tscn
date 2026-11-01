@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://i804yl7m8qiy"]
+
+[ext_resource type="PackedScene" uid="uid://b15ogpwjw3nli" path="res://Assets/Quaternius/Pirate Kit - Nov 2023/glTF/Characters_Shark.gltf" id="1_bbb2u"]
+[ext_resource type="Script" uid="uid://7n1bfw7fi4ln" path="res://3D/prefabs/nature/animals/characters_shark_visual_1.gd" id="2_22hmc"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bbb2u"]
+animation = &"Swim"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_22hmc"]
+animation = &"Swim_Bite"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mhc8g"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2ouk3"]
+advance_mode = 2
+advance_condition = &"attack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mr3uj"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ogg6n"]
+advance_mode = 2
+advance_condition = &"is_dead"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_sfkqh"]
+states/Swim/node = SubResource("AnimationNodeAnimation_bbb2u")
+states/Swim/position = Vector2(493, 8)
+states/Swim_Bite/node = SubResource("AnimationNodeAnimation_22hmc")
+states/Swim_Bite/position = Vector2(716, 8)
+transitions = ["Start", "Swim", SubResource("AnimationNodeStateMachineTransition_mhc8g"), "Swim", "Swim_Bite", SubResource("AnimationNodeStateMachineTransition_2ouk3"), "Swim_Bite", "Swim", SubResource("AnimationNodeStateMachineTransition_mr3uj"), "Swim", "End", SubResource("AnimationNodeStateMachineTransition_ogg6n")]
+graph_offset = Vector2(66, -74)
+
+[node name="Characters_Shark" unique_id=1180440561 instance=ExtResource("1_bbb2u")]
+script = ExtResource("2_22hmc")
+
+[node name="Skeleton3D" parent="SharkArmature" parent_id_path=PackedInt32Array(1007285944) index="0" unique_id=949867806]
+bones/1/rotation = Quaternion(-0.7328197, 0.032234475, 0.034801394, 0.6787674)
+bones/2/rotation = Quaternion(0.028243246, -0.0021273713, 0.044036414, 0.99862844)
+bones/3/rotation = Quaternion(-0.01281597, -0.00018858103, 0.0057449196, 0.9999014)
+bones/4/rotation = Quaternion(0.006516006, 0.0005237956, -0.01338476, 0.99988914)
+bones/5/rotation = Quaternion(0.007906613, 0.0013988978, -0.05668012, 0.99836016)
+bones/6/rotation = Quaternion(0.048964977, 0.7461554, 0.6616687, -0.05521909)
+bones/7/rotation = Quaternion(0.027223444, -0.0014654271, -0.009889484, 0.99957937)
+bones/8/rotation = Quaternion(-0.04350888, 0.00475489, 0.0361499, 0.9983876)
+bones/9/rotation = Quaternion(-0.19458796, -0.00080666185, 0.037266474, 0.9801766)
+bones/10/rotation = Quaternion(-0.13137823, -0.13671005, 0.8106905, 0.55392337)
+bones/11/rotation = Quaternion(-0.011866984, -0.09074112, 0.25109744, 0.96362615)
+bones/12/rotation = Quaternion(-0.13185641, 0.13657585, -0.8095213, 0.55555034)
+bones/13/rotation = Quaternion(-0.011847878, 0.091011226, -0.25166357, 0.9634533)
+
+[node name="Shark" parent="SharkArmature/Skeleton3D" index="0" unique_id=915132244]
+transform = Transform3D(0.9938642, 0.110607654, 0, -0.110607654, 0.9938642, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2" unique_id=279037009]
+tree_root = SubResource("AnimationNodeStateMachine_sfkqh")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/attack = false
+parameters/conditions/is_dead = false

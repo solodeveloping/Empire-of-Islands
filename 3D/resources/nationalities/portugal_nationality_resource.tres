@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Nationality" format=3 uid="uid://bg2tlt7laij6p"]
 
 [ext_resource type="Texture2D" uid="uid://bajfcaqxax3ly" path="res://Assets/dafluffypotato/flags/pt.png" id="1_q8p03"]
-[ext_resource type="Script" uid="uid://b3g48xbfohfv3" path="res://3D/ECS/data_scripts/nationality.gd" id="1_xttub"]
+[ext_resource type="Script" uid="uid://b3g48xbfohfv3" path="res://3D/ECS/data_scripts/factions/nationality.gd" id="1_xttub"]
 
 [resource]
 script = ExtResource("1_xttub")

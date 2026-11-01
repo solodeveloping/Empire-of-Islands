@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://c8evbn2f6ohyf"]
+
+[ext_resource type="Texture2D" uid="uid://nrp4xkogand" path="res://Art/Image/Gui/Background/MainMenu/bg_4.png" id="1_lx4ik"]
+[ext_resource type="PackedScene" uid="uid://b80iac7a57ox3" path="res://Scene/Gui/Page/NewGameUI.tscn" id="2_fx4ub"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sfkqh"]
+
+[node name="NewGameUiContainer" type="PanelContainer" unique_id=857519263]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_sfkqh")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1605773210]
+layout_mode = 2
+texture = ExtResource("1_lx4ik")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NewGameUI" parent="." unique_id=1716488289 instance=ExtResource("2_fx4ub")]
+layout_mode = 2

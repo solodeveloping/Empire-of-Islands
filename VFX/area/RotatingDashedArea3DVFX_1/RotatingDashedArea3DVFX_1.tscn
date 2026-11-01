@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dtivgk571x511"]
+
+[ext_resource type="Shader" uid="uid://dq546tkfmtioc" path="res://VFX/area/RotatingDashedArea3DVFX_1/rotating_dashed_area_3D_vfx_1_shader_3.gdshader" id="1_b273q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d66px"]
+render_priority = 0
+shader = ExtResource("1_b273q")
+shader_parameter/color = Color(0, 0.71, 0.05916661, 1)
+shader_parameter/direction = 1.0
+shader_parameter/frequency = 20.000000298024
+shader_parameter/speed = 3.0
+shader_parameter/radius = 1.0
+shader_parameter/line_thickness = 0.03
+
+[sub_resource type="QuadMesh" id="QuadMesh_sfkqh"]
+orientation = 1
+
+[node name="RotatingDashedArea3dvfx1" type="Node3D" unique_id=1470050402]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=138239312]
+material_override = SubResource("ShaderMaterial_d66px")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_sfkqh")

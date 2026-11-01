@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://bhlpcluydrncx"]
+
+[ext_resource type="Texture2D" uid="uid://j5fojp38nr6b" path="res://Art/Image/Gui/Icons/Resources/32/030.png" id="1_4ra53"]
+[ext_resource type="Script" uid="uid://0gomvmy7minj" path="res://theLudovyc/GUI/Loot/simple_one_item_loot_ui.gd" id="1_qgoi4"]
+[ext_resource type="Texture2D" uid="uid://cmaobd6boqksw" path="res://Art/Image/Gui/Background/MainMenu/selected_color_border.png" id="2_fvihx"]
+[ext_resource type="FontFile" uid="uid://c7mf5eos0ogry" path="res://Art/Fonts/LinLibertineB.ttf" id="2_sw1j7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6dves"]
+bg_color = Color(0.9745223, 0.93782926, 0.8872396, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sfkqh"]
+texture = ExtResource("2_fvihx")
+
+[node name="SimpleOneItemLootUi" type="MarginContainer" unique_id=1548222802]
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("1_qgoi4")
+
+[node name="Panel2" type="Panel" parent="." unique_id=595751115]
+modulate = Color(0.8666667, 0.8392157, 0.76862746, 1)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6dves")
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=1457135881]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_sfkqh")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=40302407]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ResourceTextureRect" type="TextureRect" parent="Panel/MarginContainer" unique_id=675046328]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+texture = ExtResource("1_4ra53")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="QuantityLabel" type="Label" parent="Panel/MarginContainer/ResourceTextureRect" unique_id=1095291045]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -19.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_sw1j7")
+theme_override_font_sizes/font_size = 20
+text = "10"
+horizontal_alignment = 2
+vertical_alignment = 2

@@ -20,6 +20,9 @@ animation = &"animation_library_standard/Death01"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_abx2t"]
 animation = &"animation_library_standard/Idle"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j83s6"]
+animation = &"animation_library_standard/Swim_Idle"
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ajk0u"]
 advance_mode = 2
 
@@ -42,6 +45,14 @@ advance_condition = &"is_dead"
 advance_mode = 2
 advance_condition = &"is_dead"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ly38o"]
+advance_mode = 2
+advance_condition = &"swim_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rp6nv"]
+advance_mode = 2
+advance_condition = &"stop_swim_idle"
+
 [resource]
 states/Start/position = Vector2(253, 100)
 states/WalkRun/node = SubResource("AnimationNodeBlendSpace1D_os8by")
@@ -50,5 +61,7 @@ states/animation_library_standard_Death01/node = SubResource("AnimationNodeAnima
 states/animation_library_standard_Death01/position = Vector2(883, -23)
 states/animation_library_standard_Idle/node = SubResource("AnimationNodeAnimation_abx2t")
 states/animation_library_standard_Idle/position = Vector2(569, 95)
-transitions = ["Start", "animation_library_standard_Idle", SubResource("AnimationNodeStateMachineTransition_ajk0u"), "animation_library_standard_Idle", "End", SubResource("AnimationNodeStateMachineTransition_wm8e7"), "animation_library_standard_Idle", "WalkRun", SubResource("AnimationNodeStateMachineTransition_6y54u"), "WalkRun", "animation_library_standard_Idle", SubResource("AnimationNodeStateMachineTransition_vco0o"), "animation_library_standard_Idle", "animation_library_standard_Death01", SubResource("AnimationNodeStateMachineTransition_j83s6"), "WalkRun", "animation_library_standard_Death01", SubResource("AnimationNodeStateMachineTransition_sdcw7")]
-graph_offset = Vector2(-7, -88)
+states/animation_library_standard_Swim_Idle/node = SubResource("AnimationNodeAnimation_j83s6")
+states/animation_library_standard_Swim_Idle/position = Vector2(253, -42)
+transitions = ["Start", "animation_library_standard_Idle", SubResource("AnimationNodeStateMachineTransition_ajk0u"), "animation_library_standard_Idle", "End", SubResource("AnimationNodeStateMachineTransition_wm8e7"), "animation_library_standard_Idle", "WalkRun", SubResource("AnimationNodeStateMachineTransition_6y54u"), "WalkRun", "animation_library_standard_Idle", SubResource("AnimationNodeStateMachineTransition_vco0o"), "animation_library_standard_Idle", "animation_library_standard_Death01", SubResource("AnimationNodeStateMachineTransition_j83s6"), "WalkRun", "animation_library_standard_Death01", SubResource("AnimationNodeStateMachineTransition_sdcw7"), "animation_library_standard_Idle", "animation_library_standard_Swim_Idle", SubResource("AnimationNodeStateMachineTransition_ly38o"), "animation_library_standard_Swim_Idle", "animation_library_standard_Idle", SubResource("AnimationNodeStateMachineTransition_rp6nv")]
+graph_offset = Vector2(-38, -85)

@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://bpbicfti7i3ar"]
+
+[ext_resource type="Shader" uid="uid://dclhu857kdryt" path="res://VFX/common/simple_mask_particle_no_billboard_shader_1_shader.tres" id="1_465e4"]
+[ext_resource type="Script" uid="uid://cnod0btfy3mja" path="res://3D/vfx/prefabs/own_one_shot_gpu_particles_3D.gd" id="2_jcqre"]
+
+[sub_resource type="Gradient" id="Gradient_iphge"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.41157556, 0.4630225)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jgf1r"]
+gradient = SubResource("Gradient_iphge")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_to0eh"]
+render_priority = 0
+shader = ExtResource("1_465e4")
+shader_parameter/MaskTexture = SubResource("GradientTexture2D_jgf1r")
+
+[sub_resource type="Curve" id="Curve_idweh"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.73333335, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_maxo4"]
+curve = SubResource("Curve_idweh")
+
+[sub_resource type="Curve" id="Curve_hcjs7"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 0.94382024), 0.0, 0.0, 0, 0, Vector2(1, 3), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_6dves"]
+curve = SubResource("Curve_hcjs7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7iyc4"]
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_6dves")
+alpha_curve = SubResource("CurveTexture_maxo4")
+
+[sub_resource type="QuadMesh" id="QuadMesh_afj4n"]
+orientation = 1
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_sfkqh"]
+radius = 0.27490234
+height = 8.0
+
+[node name="RipplesGPUParticles3D" type="GPUParticles3D" unique_id=1488329677]
+material_override = SubResource("ShaderMaterial_to0eh")
+emitting = false
+amount = 1
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_7iyc4")
+draw_pass_1 = SubResource("QuadMesh_afj4n")
+script = ExtResource("2_jcqre")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1363457091]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_sfkqh")

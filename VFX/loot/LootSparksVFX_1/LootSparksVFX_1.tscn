@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://p3i2cqq3qu6g"]
+
+[ext_resource type="Shader" uid="uid://bifvp4f4s7wdo" path="res://VFX/loot/LootSparksVFX_1/loot_sparks_vfx_1_shader_1.tres" id="1_l3auc"]
+[ext_resource type="Texture2D" uid="uid://d0d0j6cp6cy07" path="res://Art/External/game-icons/round-star.svg" id="2_ojs1c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_edgqg"]
+render_priority = 0
+shader = ExtResource("1_l3auc")
+shader_parameter/AlphaTexture = ExtResource("2_ojs1c")
+
+[sub_resource type="Curve" id="Curve_ojs1c"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_l3auc"]
+curve = SubResource("Curve_ojs1c")
+
+[sub_resource type="Curve" id="Curve_l3auc"]
+_data = [Vector2(0, 0.060150385), 0.0, 0.0, 0, 0, Vector2(0.1707317, 0.27067667), 0.0, 0.0, 0, 0, Vector2(0.35365853, 0.097744346), 0.0, 0.0, 0, 0, Vector2(0.6219512, 0.1654135), 0.0, 0.0, 0, 0, Vector2(0.804878, 0.06766915), 0.0, 0.0, 0, 0, Vector2(1, 0.15789473), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="CurveTexture" id="CurveTexture_ei0he"]
+curve = SubResource("Curve_l3auc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d66px"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 1.0
+emission_ring_radius = 0.5
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 1, 0)
+spread = 15.0
+initial_velocity_min = 1.0
+initial_velocity_max = 1.5
+gravity = Vector3(0, 0, 0)
+scale_min = 0.099999994
+scale_curve = SubResource("CurveTexture_ei0he")
+color = Color(0.91, 0.83416665, 0, 1)
+emission_curve = SubResource("CurveTexture_l3auc")
+
+[sub_resource type="QuadMesh" id="QuadMesh_sfkqh"]
+
+[node name="LootSparksVfx1" type="Node3D" unique_id=1448021691]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1710328610]
+material_override = SubResource("ShaderMaterial_edgqg")
+cast_shadow = 0
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_d66px")
+draw_pass_1 = SubResource("QuadMesh_sfkqh")

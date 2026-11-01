@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cxnlyh32i278d"]
+
+[ext_resource type="Script" uid="uid://b5lky5288p6h2" path="res://3D/prefabs/ocean/ocean_area_3d.gd" id="1_jdr1h"]
+[ext_resource type="PackedScene" uid="uid://bpbicfti7i3ar" path="res://3D/vfx/prefabs/RipplesGPUParticles3D.tscn" id="2_x3u44"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sfkqh"]
+size = Vector3(10000, 60.1958, 10000)
+
+[node name="OceanArea3D" type="Area3D" unique_id=256397017]
+collision_layer = 512
+collision_mask = 1024
+script = ExtResource("1_jdr1h")
+metadata/is_ocean = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1451625741]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -30.182861, 0)
+shape = SubResource("BoxShape3D_sfkqh")
+
+[node name="RipplesGPUParticles3D" parent="." unique_id=1488329677 instance=ExtResource("2_x3u44")]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

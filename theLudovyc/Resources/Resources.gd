@@ -22,10 +22,12 @@ enum Types {
 	Clay,
 	ClayBrick,
 	Gold,
+	Tomato,
 }
 
 const Icons = {
 	# Level 1
+	Types.Gold: preload("uid://toeqa364p2tp"),
 	Types.Wood: preload("res://Art/Image/Gui/Icons/Resources/32/008.png"),
 	Types.GameMeat: preload("res://Art/Image/Gui/Icons/Resources/32/013.png"),
 	Types.Fish: preload("res://Art/Temp/cc0-food-icons/fish_tail.png"),
@@ -45,6 +47,8 @@ const Icons = {
 	Types.Stone: preload("res://Art/Image/Gui/Icons/Resources/32/051.png"),
 	Types.StoneBrick: preload("res://Art/Image/Gui/Icons/Resources/32/052.png"),
 	# Level 4
+	# Others
+	Types.Tomato: preload("uid://dsu42ubiaxcqq"),
 }
 
 enum Datas { Name, Type, Level, }
@@ -54,6 +58,10 @@ const datas = {
 	Types.Wood: {
 		Datas.Name: &"Wood", 
 		Datas.Type: Types.Wood,
+	},
+	Types.Gold: {
+		Datas.Name: &"Gold", 
+		Datas.Type: Types.Gold,
 	},
 	Types.GameMeat:
 	{
@@ -79,6 +87,11 @@ const datas = {
 	{
 		Datas.Name: &"Wheat",
 		Datas.Type: Types.Wheat,
+	},
+	Types.Tomato:
+	{
+		Datas.Name: &"Tomato",
+		Datas.Type: Types.Tomato,
 	},
 	# Level 2
 	Types.Textile:
@@ -141,6 +154,9 @@ static func get_resource_icon(resource_type: Types) -> Texture2D:
 static func get_resource_name(resource_type: Types) -> StringName:
 	if not datas.has(resource_type):
 		push_warning('resource of id "%d" was not found ' % resource_type)
+		for enum_name in Types:
+			var enum_value: int = Types[enum_name]
+			print("resource %s = %d" % [enum_name, enum_value])
 		return StringName()
 	return datas[resource_type][Datas.Name]
 
@@ -156,6 +172,7 @@ const Levels = {
 	Types.Potato: LevelTypes.Gathered,
 	Types.Wool: LevelTypes.Gathered,
 	Types.Wheat: LevelTypes.Gathered,
+	Types.Tomato: LevelTypes.Gathered,
 	# Transformed once
 	Types.Pig: LevelTypes.TransformedOnce,
 	Types.Plank: LevelTypes.TransformedOnce,

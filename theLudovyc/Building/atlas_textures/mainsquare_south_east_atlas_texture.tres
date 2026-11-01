@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" format=3 uid="uid://7kv3o4mkiv5e"]
+
+[ext_resource type="Texture2D" uid="uid://bfnurmfudtern" path="res://Art/Image/Buildings/MainSquare/MainSquareWooden_idle.png" id="1_g1y5x"]
+
+[resource]
+atlas = ExtResource("1_g1y5x")
+region = Rect2(0, 224, 352, 224)

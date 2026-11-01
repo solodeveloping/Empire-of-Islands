@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dqj8qnshpfhtq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xgkwr"]
+render_priority = 1
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.9405001, 0.99, 0, 1)
+grow = true
+grow_amount = 0.069
+stencil_mode = 3
+stencil_flags = 1
+stencil_compare = 5
+metadata/_stencil_owned = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d66px"]
+next_pass = SubResource("StandardMaterial3D_xgkwr")
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_color = Color(1, 1, 1, 0.48235294)
+stencil_mode = 1
+stencil_flags = 2
+stencil_color = Color(0.9405001, 0.99, 0, 1)
+stencil_outline_thickness = 0.069
+
+[sub_resource type="SphereMesh" id="SphereMesh_sfkqh"]
+
+[node name="SphereOutlineVfx1" type="Node3D" unique_id=1955500930]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1698421634]
+material_override = SubResource("StandardMaterial3D_d66px")
+mesh = SubResource("SphereMesh_sfkqh")

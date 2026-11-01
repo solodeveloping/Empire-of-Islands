@@ -1,4 +1,8 @@
 extends TabContainer
+## This is the class that controls which UI is displayed
+## On the right, below the minimap
+
+# FIXME: too many things are in this
 
 enum WidgetMenus { 
 	Market,
@@ -9,6 +13,7 @@ enum WidgetMenus {
 	Building3D,
 	Unit3D,
 	Ship3D,
+	Animal3D,
 }
 
 @onready var widget := %Widget
@@ -31,7 +36,16 @@ enum WidgetMenus {
 
 @onready var ship_container_ui_3d: ShipContainerUI3D = $ShipContainer_UI_3D
 
+@onready var animal_container_ui_3d: AnimalContainerUI3D = $AnimalContainer_UI_3D
+
+@onready var build_position_rotation_ui: BuildPositionRotationUI = $"../../../../BuildPositionRotationUi"
+
+@onready var plant_bed_ui: PlantBedUI = $"../../../../PlantBedUi"
+
 @onready var market_ui: MarketUI = %MarketUI
+
+@onready var zoom_in_menu_button: TextureButton = $"../../../ZoomInMenuButton"
+@onready var zoom_out_menu_button: TextureButton = $"../../../ZoomOutMenuButton"
 
 var event_bus: EventBus
 
@@ -40,50 +54,144 @@ var event_bus: EventBus
 # Or maybe not
 var the_buildings_cost: TheBuildingsCost
 var the_storage: GMSimpleStorage
+# FIXME: it's not very good?
+var faction: Faction_ECS
+var c_faction: C_Faction
 
 var USE_ECS: bool = true
+
+var local_player_faction_id: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var current_scene: Node = get_tree().current_scene
 	event_bus = current_scene.get_node_or_null("EventBus")
-	the_buildings_cost = current_scene.get_node_or_null("TheBuildingsCost")
-	the_storage = current_scene.get_node_or_null("GMSimpleStorage")
+	the_buildings_cost = current_scene.get_node_or_null("%TheBuildingsCost")
+	
+	# FIXME: this does way too much?
 
 	if event_bus != null:
-		event_bus.send_building_selected.connect(_on_receive_building_selected)
-		event_bus.send_building_deselected.connect(_on_receive_building_deselected)
-		event_bus.send_current_building_demolished.connect(_on_receive_current_building_demolished)
+		event_bus.send_use_ecs_changed.connect(
+			_on_send_use_ecs_changed
+		)
 		
-		event_bus.send_building_3D_selected.connect(_on_receive_building_3D_selected)
-		event_bus.send_building_3D_deselected.connect(_on_receive_building_3D_deselected)
+		event_bus.send_building_selected.connect(
+			_on_receive_building_selected_2d
+		)
+		event_bus.send_building_deselected.connect(
+			_on_receive_building_deselected_2d
+		)
+		event_bus.send_current_building_demolished.connect(
+			_on_receive_current_building_demolished
+		)
 		
-		event_bus.send_unit_3D_selected.connect(_on_receive_unit_3D_selected)
-		event_bus.send_unit_3D_deselected.connect(_on_receive_unit_3D_deselected)
+		event_bus.send_building_3D_selected.connect(
+			_on_receive_building_selected_3D
+		)
+		event_bus.send_building_3D_deselected.connect(
+			_on_receive_building_selected_3D
+		)
 		
-		event_bus.send_ship_3D_selected.connect(_on_receive_ship_3D_selected)
-		event_bus.send_ship_3D_deselected.connect(_on_receive_ship_3D_deselected)
+		event_bus.send_unit_3D_selected.connect(
+			_on_receive_unit_3D_selected
+		)
+		event_bus.send_unit_3D_deselected.connect(
+			_on_receive_unit_3D_deselected
+		)
 		
-		event_bus.send_natural_resource_selected.connect(_on_receive_send_natural_resource_selected)
-		event_bus.send_natural_resource_deselected.connect(_on_receive_send_natural_resource_deselected)
+		# TODO: replace properly?
+		event_bus.send_ship_3D_selected.connect(
+			_on_receive_ship_3D_selected
+		)
+		event_bus.send_ship_3D_deselected.connect(
+			_on_receive_ship_3D_deselected
+		)
+		event_bus.send_ecs_ship_selected.connect(
+			_on_receive_ship_3D_selected
+		)
+		event_bus.send_ecs_ship_deselected.connect(
+			_on_receive_ship_3D_deselected
+		)
+		
+		event_bus.send_animal_3D_selected.connect(
+			_on_receive_animal_3D_selected
+		)
+		event_bus.send_animal_3D_deselected.connect(
+			_on_receive_animal_3D_deselected
+		)
+		
+		event_bus.send_natural_resource_selected.connect(
+			_on_receive_send_natural_resource_selected
+		)
+		event_bus.send_natural_resource_deselected.connect(
+			_on_receive_send_natural_resource_deselected
+		)
 
-		event_bus.send_building_created.connect(_on_building_event.unbind(1))
-		event_bus.send_building_creation_aborted.connect(_on_building_event.unbind(1))
+		event_bus.send_building_created.connect(
+			_on_building_event.unbind(1)
+		)
+		event_bus.send_building_creation_aborted.connect(
+			_on_building_event.unbind(1)
+		)
+		
+		event_bus.send_ground_bed_3D_selected.connect(
+			_on_event_bus_send_ground_bed_3D_selected
+		)
+		event_bus.send_ground_bed_3D_deselected.connect(
+			_on_event_bus_send_ground_bed_3D_deselected
+		)
 		
 		# Info: this allow to request to show the buildings button list programmatically
-		event_bus.send_show_buildings_button_ui.connect(_on_event_bus_send_show_buildings_button_ui)
+		event_bus.send_show_buildings_button_ui.connect(
+			_on_event_bus_send_show_buildings_button_ui
+		)
 	
 		event_bus.send_trades_updated.connect(
 			_on_event_bus_send_trades_updated
 		)
+		
+		event_bus.send_local_player_faction_id_changed.connect(
+			_on_event_bus_send_local_player_faction_id_changed
+		)
+		event_bus.send_local_player_faction_storage_changed.connect(
+			_on_event_bus_send_local_player_faction_storage_changed
+		)
+		event_bus.send_local_player_faction_changed.connect(
+			_on_event_bus_send_local_player_faction_changed
+		)
+		
+		event_bus.send_minimap_enable_zoom_in.connect(
+			_on_event_bus_send_minimap_enable_zoom_in
+		)
+		event_bus.send_minimap_disable_zoom_in.connect(
+			_on_event_bus_send_minimap_disable_zoom_in
+		)
+		event_bus.send_minimap_enable_zoom_out.connect(
+			_on_event_bus_send_minimap_enable_zoom_out
+		)
+		event_bus.send_minimap_disable_zoom_out.connect(
+			_on_event_bus_send_minimap_disable_zoom_out
+		)
+		
 	
-	building_buttons_container.mouse_entered_building.connect(_on_mouse_entered_building)
-	building_buttons_container.mouse_exited_building.connect(_on_mouse_exited_building)
-	building_buttons_container.clicked_on_building.connect(_on_clicked_on_building)
+	building_buttons_container.mouse_entered_building.connect(
+		_on_mouse_entered_building
+	)
+	building_buttons_container.mouse_exited_building.connect(
+		_on_mouse_exited_building
+	)
+	building_buttons_container.clicked_on_building.connect(
+		_on_clicked_on_building
+	)
 
-	
+	plant_bed_ui.selected_resource_id.connect(
+		_on_plant_bed_ui_selected_resource_id
+	)
 
 	market_ui.hide()
+
+func _on_send_use_ecs_changed(use_ecs_: bool):
+	USE_ECS = use_ecs_
 
 func on_MenuButton_pressed(menu: WidgetMenus):
 	if current_tab != menu:
@@ -155,23 +263,43 @@ func _on_event_bus_send_show_buildings_button_ui():
 	_on_BuildMenuButton_pressed()
 
 # Info: this is called when the user select a building on the map
-func _on_receive_building_selected(building: Building2D):
-	print("_on_receive_building_selected")
+func _on_receive_building_selected_2d(building: Building2D):
+	print("_on_receive_building_selected_2d")
 	bottom_container.set_menu_visibility(true)
 	
-	if Buildings.get_building_type(building.building_id) == Buildings.Types.Warehouse:
-		if current_tab != WidgetMenus.Market:
-			current_tab = WidgetMenus.Market
+	if USE_ECS:
+		#var entity: Entity = building.entity_node
+		if Buildings.get_building_type(building.building_id) == Buildings.Types.Warehouse:
+			handle_display_market_ecs_ui()
+			return
+		
+		if current_tab != WidgetMenus.Building3D:
+			current_tab = WidgetMenus.Building3D
 
-		if tooltip.visible == false:
-			tooltip.visible = true
-			tooltip.set_money_production_rate_info()
-			
+		if tooltip.visible:
+			tooltip.visible = false
+		
 		if building_tier_button_container.visible:
 			building_tier_button_container.hide()
 
-		return
+		building_container_ui_3d.update_infos(building.entity_node)
+		
+	else:
+		if Buildings.get_building_type(building.building_id) == Buildings.Types.Warehouse:
+			if current_tab != WidgetMenus.Market:
+				current_tab = WidgetMenus.Market
 
+			if tooltip.visible == false:
+				tooltip.visible = true
+				tooltip.set_money_production_rate_info()
+				
+			if building_tier_button_container.visible:
+				building_tier_button_container.hide()
+
+			return
+	
+	# TODO: make sure buildings get hidden when clicking
+	# on market and stuff
 	if current_tab != WidgetMenus.Building:
 		current_tab = WidgetMenus.Building
 
@@ -183,7 +311,7 @@ func _on_receive_building_selected(building: Building2D):
 
 	building_container.update_infos(building)
 
-func _on_receive_building_deselected(building: Building2D):
+func _on_receive_building_deselected_2d(_building: Building2D):
 	bottom_container.set_menu_visibility(false)
 	
 	if tooltip.visible:
@@ -197,8 +325,8 @@ func _on_receive_current_building_demolished():
 		bottom_container.set_menu_visibility(false)
 
 # Info: this is called when the user select a building on the map
-func _on_receive_building_3D_selected(building: Entity):
-	print("_on_receive_building_3D_selected")
+func _on_receive_building_selected_3D(building: Entity):
+	print("_on_receive_building_selected_3D")
 	bottom_container.set_menu_visibility(true)
 	
 	var c_building: C_Building = building.get_component(C_Building)
@@ -268,7 +396,8 @@ func _on_receive_unit_3D_selected(unit: Entity):
 
 	unit_container_ui_3d.update_infos(unit)
 
-func _on_receive_unit_3D_deselected(unit: Entity):
+func _on_receive_unit_3D_deselected(_unit: Entity):
+	print("_on_receive_unit_3D_deselected")
 	bottom_container.set_menu_visibility(false)
 	
 	if tooltip.visible:
@@ -293,7 +422,34 @@ func _on_receive_ship_3D_selected(unit: Entity):
 
 	ship_container_ui_3d.update_infos(unit)
 
-func _on_receive_ship_3D_deselected(unit: Entity):
+func _on_receive_ship_3D_deselected(
+	_unit: Entity
+):
+	print("_on_receive_ship_3D_deselected")
+	bottom_container.set_menu_visibility(false)
+	
+	if tooltip.visible:
+		tooltip.visible = false
+		
+	if building_tier_button_container.visible:
+		building_tier_button_container.hide()
+
+func _on_receive_animal_3D_selected(unit: Entity):
+	print("_on_receive_animal_3D_selected")
+	bottom_container.set_menu_visibility(true)
+
+	if current_tab != WidgetMenus.Animal3D:
+		current_tab = WidgetMenus.Animal3D
+
+	if tooltip.visible:
+		tooltip.visible = false
+	
+	if building_tier_button_container.visible:
+		building_tier_button_container.hide()
+
+	animal_container_ui_3d.update_infos(unit, local_player_faction_id)
+
+func _on_receive_animal_3D_deselected(_unit: Entity):
 	bottom_container.set_menu_visibility(false)
 	
 	if tooltip.visible:
@@ -320,7 +476,9 @@ func _on_receive_send_natural_resource_selected(natural_resource: NaturalResourc
 
 	natural_resource_container.update_infos(natural_resource)
 
-func _on_receive_send_natural_resource_deselected(natural_resource: NaturalResource):
+func _on_receive_send_natural_resource_deselected(
+	_natural_resource: NaturalResource
+):
 	bottom_container.set_menu_visibility(false)
 	
 	if tooltip.visible:
@@ -340,15 +498,27 @@ func _on_mouse_entered_building(building_id: Buildings.Ids):
 		# what would be the best?
 		var costs = the_buildings_cost.get_building_costs(building_id)
 		for cost: Array in costs:
-			var has_resouce = the_storage.has_at_least(
-				cost[0],
-				cost[1]
-			)
+			var has_resource: bool = false
+			if cost[0] == Resources.Types.Gold:
+				has_resource = cost[1] <= c_faction.gold_count
+			else:
+				has_resource = the_storage.has_at_least(
+					cost[0],
+					cost[1]
+				)
 			cost.push_back(
-				has_resouce
+				has_resource
 			)
-		# TODO: hard coding is not good
+		
+		# TODO: hard coding the names and all that is not good
 		var building_name = Buildings.get_building_name(building_id)
+		
+		if costs.is_empty():
+			printerr("costs are empty for %s %s" % [
+				building_id,
+				building_name,
+			])
+		
 		tooltip._set_building_info(
 			building_id,
 			building_name,
@@ -403,4 +573,65 @@ func _on_event_bus_send_trades_updated(
 ):
 	market_ui.update_trades(
 		trades
+	)
+
+func _on_event_bus_send_local_player_faction_id_changed(
+	local_player_faction_id_: int,
+):
+	local_player_faction_id = local_player_faction_id_
+	
+func _on_event_bus_send_local_player_faction_storage_changed(
+	storage: GMSimpleStorage
+):
+	the_storage = storage
+
+func _on_event_bus_send_local_player_faction_changed(
+	faction_: Faction_ECS,
+	c_faction_: C_Faction,
+):
+	faction = faction_
+	c_faction = c_faction_
+
+func _on_ZoomInMenuButton_pressed() -> void:
+	event_bus.ask_minimap_zoom_in.emit()
+
+func _on_ZoomOutMenuButton_pressed() -> void:
+	event_bus.ask_minimap_zoom_out.emit()
+
+func _on_event_bus_send_minimap_enable_zoom_in():
+	zoom_in_menu_button.disabled = false
+
+func _on_event_bus_send_minimap_disable_zoom_in():
+	zoom_in_menu_button.disabled = true
+	
+func _on_event_bus_send_minimap_enable_zoom_out():
+	zoom_out_menu_button.disabled = false
+
+func _on_event_bus_send_minimap_disable_zoom_out():
+	zoom_out_menu_button.disabled = true
+
+func _on_event_bus_send_ground_bed_3D_deselected(
+	_ground_bed: GroundDirtBed_1,
+	_selected_ground_bed_id: int,
+	_building_entity: Entity,
+):
+	print("_on_event_bus_send_ground_bed_3D_deselected hide")
+	plant_bed_ui.hide()
+
+func _on_event_bus_send_ground_bed_3D_selected(
+	ground_bed: GroundDirtBed_1,
+	_selected_ground_bed_id: int,
+	_building_entity: Entity,
+):
+	plant_bed_ui.update_display(
+		ground_bed.current_resource_id
+	)
+	
+	plant_bed_ui.show()
+
+func _on_plant_bed_ui_selected_resource_id(
+	resource_id: int
+):
+	event_bus.ask_change_ground_bed_resource_id.emit(
+		resource_id
 	)

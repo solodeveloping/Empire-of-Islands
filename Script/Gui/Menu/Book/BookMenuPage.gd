@@ -1,4 +1,4 @@
-@icon("res://Editor/rename_feather.png")
+@icon("uid://csfavrloxsapx")
 extends TabBar
 class_name BookMenuPage
 

@@ -1,6 +1,6 @@
 extends Node
 # FIXME: I added this, class_name, I also commented the whole thing
-class_name Config
+
 #
 #const CONFIG_FILE = "user://unknown_horizons.ini"
 #
@@ -12,7 +12,7 @@ class_name Config
 #var screen_resolution := "1600x900"
 #
 ## Game variables
-#var player_name := "Unknown Traveller"
+var player_name := "Unknown Traveller"
 #var language = "en"
 #
 ## Autosave

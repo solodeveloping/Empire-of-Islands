@@ -20,6 +20,8 @@ var ray_ground_layers: int = 0
 
 @onready var multi_mesh_instances_remover: MultiMeshInstancesRemover = $MultiMeshInstancesRemover
 
+@onready var minimap_entity_display_handler: MinimapEntityDisplayHandler = $MinimapEntityDisplayHandler
+
 var is_constructible: bool:
 	get:
 		return building_main_area_1.is_empty \
@@ -102,6 +104,12 @@ func finalize_construction():
 	])
 	is_constructed = true
 	multi_mesh_instances_remover.disable_instance_areas()
+
+func update_minimap_display():
+	#print("update_minimap_display")
+	minimap_entity_display_handler.update_display(
+		self,
+	)
 
 # WARN: this could interact right back with the building's area
 func show_all_tree_hidden():

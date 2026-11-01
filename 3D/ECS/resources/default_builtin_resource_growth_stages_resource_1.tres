@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BuiltinResourceGrowthStagesArray" format=3 uid="uid://brhbya3gutdoy"]
+
+[ext_resource type="Script" uid="uid://r4qyh0il3dqk" path="res://3D/ECS/data_scripts/builtin_resource_growth_stages.gd" id="1_epbig"]
+[ext_resource type="Script" uid="uid://esbf576fn0cw" path="res://3D/ECS/data_scripts/builtin_resource_growth_stages_array.gd" id="2_bdjkh"]
+
+[sub_resource type="Resource" id="Resource_5rc45"]
+script = ExtResource("1_epbig")
+builtin_resource_id = 17
+stages = Array[PackedScene]([null, null, null, null, null])
+metadata/_custom_type_script = "uid://r4qyh0il3dqk"
+
+[resource]
+script = ExtResource("2_bdjkh")
+list = Array[ExtResource("1_epbig")]([SubResource("Resource_5rc45")])
+metadata/_custom_type_script = "uid://esbf576fn0cw"

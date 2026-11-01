@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cmd7j3wdll7s3"]
+
+[ext_resource type="Shader" uid="uid://cgtb7k5eqvdjm" path="res://VFX/combat/aggro/AggroAreaIndicatorVFX_1/aggro_area_indicator_vfx_1_shader_1.tres" id="1_18wtv"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_18wtv")
+shader_parameter/Color = Color(1, 0, 0, 1)

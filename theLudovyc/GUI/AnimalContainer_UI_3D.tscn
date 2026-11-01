@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://bex1f8kdkaqwx"]
+
+[ext_resource type="Script" uid="uid://0ktgedyudxlo" path="res://theLudovyc/GUI/AnimalContainer_UI_3D.gd" id="1_1ik82"]
+[ext_resource type="Texture2D" uid="uid://nvllfmr40fbx" path="res://Assets/dafluffypotato/flags/es.png" id="2_1ik82"]
+[ext_resource type="Texture2D" uid="uid://cg01wdpe7802i" path="res://Assets/dafluffypotato/flags/fr.png" id="2_du7mr"]
+[ext_resource type="Texture2D" uid="uid://dapd765c0bvd8" path="res://Art/Image/Gui/Buttons/delete_small.png" id="3_jtd0j"]
+[ext_resource type="Texture2D" uid="uid://btewy0y3mrcwd" path="res://Art/Image/Gui/Buttons/delete_small_bw.png" id="4_ojfrf"]
+[ext_resource type="Texture2D" uid="uid://cswhnjs5r8fkk" path="res://Art/Image/Gui/Buttons/delete_small_h.png" id="5_ua8v5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_or0xk"]
+bg_color = Color(0.388235, 0.341176, 0.247059, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.388235, 0.345098, 0.25098, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[node name="AnimalContainer_UI_3D" type="VBoxContainer" unique_id=748671080]
+script = ExtResource("1_1ik82")
+metadata/_tab_index = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1873558872]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer" unique_id=994797590]
+layout_mode = 2
+
+[node name="FactionTextureRect" type="TextureRect" parent="CenterContainer/HBoxContainer2" unique_id=411593461]
+layout_mode = 2
+texture = ExtResource("2_1ik82")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="FactionNameLabel" type="Label" parent="CenterContainer/HBoxContainer2" unique_id=48184117]
+layout_mode = 2
+text = "Spain"
+
+[node name="RelationshipLabel" type="Label" parent="." unique_id=2092764912]
+layout_mode = 2
+text = "Friendly"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=489517595]
+layout_mode = 2
+alignment = 1
+
+[node name="FlagTextureRect" type="TextureRect" parent="HBoxContainer" unique_id=79147693]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_du7mr")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="NameLabel" type="Label" parent="HBoxContainer" unique_id=679909845]
+layout_mode = 2
+size_flags_vertical = 1
+text = "UnitName"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NameRichTextLabel" type="RichTextLabel" parent="HBoxContainer" unique_id=855327186]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+bbcode_enabled = true
+text = "[center]UnitName [img]res://Assets/dafluffypotato/flags/fr.png[/img][/center]"
+fit_content = true
+autowrap_mode = 0
+
+[node name="DeleteButton" type="TextureButton" parent="HBoxContainer" unique_id=641425484]
+visible = false
+layout_mode = 2
+texture_normal = ExtResource("3_jtd0j")
+texture_pressed = ExtResource("4_ojfrf")
+texture_hover = ExtResource("5_ua8v5")
+
+[node name="HSeparator" type="HSeparator" parent="." unique_id=1440464710]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxFlat_or0xk")
+
+[node name="UnitInfoContainer" type="TabContainer" parent="." unique_id=1172860554]
+layout_mode = 2
+current_tab = 0
+clip_tabs = false
+tabs_visible = false
+
+[node name="UnitDefaultContainer" type="VBoxContainer" parent="UnitInfoContainer" unique_id=1703771399]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="HealthLabel" type="Label" parent="UnitInfoContainer/UnitDefaultContainer" unique_id=348636229]
+layout_mode = 2
+text = "Health: 10/10"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1487541196]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1696151948]
+visible = false
+layout_mode = 2
+text = "Cargo"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=625397258]
+visible = false
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxFlat_or0xk")
+
+[node name="GoldLabel" type="Label" parent="VBoxContainer" unique_id=2129999240]
+visible = false
+layout_mode = 2
+text = "Gold: 100"
+
+[connection signal="pressed" from="HBoxContainer/DeleteButton" to="." method="_on_DeleteButton_pressed"]

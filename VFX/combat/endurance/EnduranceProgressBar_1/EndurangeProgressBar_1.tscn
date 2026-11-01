@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dy0ilqyokqgup"]
+
+[ext_resource type="Script" uid="uid://b4ij66biakud" path="res://VFX/combat/endurance/EnduranceProgressBar_1/endurange_progress_bar_1.gd" id="1_0wmu0"]
+[ext_resource type="Shader" uid="uid://osuym1hi0kfo" path="res://VFX/combat/endurance/EnduranceProgressBar_1/endurange_progress_bar_1_shader_1.gdshader" id="1_55vpk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bc1et"]
+render_priority = 0
+shader = ExtResource("1_55vpk")
+shader_parameter/use_billboard = true
+shader_parameter/color = Color(0.2041519, 0.66656023, 0.93350583, 1)
+shader_parameter/background_color = Color(0.63, 0.63, 0.63, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_sfkqh"]
+size = Vector2(1, 0.05)
+
+[node name="EndurangeProgressBar1" type="Node3D" unique_id=1478552112]
+script = ExtResource("1_0wmu0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1859013413]
+material_override = SubResource("ShaderMaterial_bc1et")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_sfkqh")

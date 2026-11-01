@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://c2188w3x5w5op"]
+
+[ext_resource type="Shader" uid="uid://rmk1gn5i4who" path="res://VFX/common/simple_instance_color_shader_1.tres" id="1_dkx51"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_dkx51")

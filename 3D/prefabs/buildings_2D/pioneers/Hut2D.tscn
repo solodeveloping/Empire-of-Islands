@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cyaaeguiw0hv8"]
+
+[ext_resource type="Script" uid="uid://bnuq7okvfdpws" path="res://3D/prefabs/buildings_2D/pioneers/hut_2d.gd" id="1_2hrta"]
+
+[node name="Hut2d" type="Node2D" unique_id=828242039]
+script = ExtResource("1_2hrta")

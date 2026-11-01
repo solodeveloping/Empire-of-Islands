@@ -1,0 +1,401 @@
+[gd_resource type="Resource" script_class="BuildingListDefinition" format=3 uid="uid://crvbljys5kfnk"]
+
+[ext_resource type="Script" uid="uid://c5basxvhkxhgh" path="res://3D/misc/definitions/building_definition.gd" id="1_bfftw"]
+[ext_resource type="Script" uid="uid://cpht101lc1jh1" path="res://3D/misc/definitions/cost_definition.gd" id="2_5evuj"]
+[ext_resource type="PackedScene" uid="uid://bwcqu7lunanpr" path="res://3D/prefabs/buildings/composed/sailors/Dock_1.tscn" id="3_n8iq8"]
+[ext_resource type="PackedScene" uid="uid://ci0jby3u567pt" path="res://3D/prefabs/buildings_2D/sailors/TentDock2D.tscn" id="4_gx5by"]
+[ext_resource type="PackedScene" uid="uid://c0crs07wbol7p" path="res://3D/prefabs/buildings/composed/sailors/HousingTent.tscn" id="4_jv7nq"]
+[ext_resource type="PackedScene" uid="uid://c0f7np4ixkd1x" path="res://3D/prefabs/buildings/composed/sailors/Lumberjack_1.tscn" id="5_bxw2s"]
+[ext_resource type="PackedScene" uid="uid://cdefoo0ghsb74" path="res://3D/prefabs/buildings/composed/sailors/HunterTent_1.tscn" id="6_ena2b"]
+[ext_resource type="PackedScene" uid="uid://dp3fd01pq1aha" path="res://3D/prefabs/buildings/composed/sailors_2/FarmTent_1.tscn" id="7_gx5by"]
+[ext_resource type="PackedScene" uid="uid://b2vquy7ybrytv" path="res://3D/prefabs/buildings_2D/sailors/TentHunter2D.tscn" id="8_jv7nq"]
+[ext_resource type="PackedScene" uid="uid://d3enupduhucey" path="res://3D/prefabs/buildings_2D/sailors/TentLumberjack2D.tscn" id="8_mbi3n"]
+[ext_resource type="PackedScene" uid="uid://c2gwgg7qb3iuo" path="res://3D/prefabs/buildings/composed/sailors_2/PastureTent_1.tscn" id="8_o10br"]
+[ext_resource type="PackedScene" uid="uid://dgflhswvnmgx3" path="res://3D/prefabs/buildings/composed/sailors/FishermanTent_1.tscn" id="9_mbi3n"]
+[ext_resource type="PackedScene" uid="uid://bmde582hv8jwm" path="res://3D/prefabs/buildings/composed/sailors/CityCenter_1.tscn" id="10_0nvaj"]
+[ext_resource type="Script" uid="uid://dfmexpqbio71u" path="res://3D/misc/definitions/building_list_definition.gd" id="11_ml4a5"]
+[ext_resource type="PackedScene" uid="uid://b0sdpcekd2xfp" path="res://3D/prefabs/buildings_2D/sailors/TentHousing2D.tscn" id="12_jv7nq"]
+[ext_resource type="PackedScene" uid="uid://c2ra35dpj6pv0" path="res://3D/prefabs/buildings_2D/sailors/MainSquare2D.tscn" id="12_n8iq8"]
+[ext_resource type="PackedScene" uid="uid://dlswce023nbyv" path="res://3D/prefabs/buildings_2D/pioneers/Farm2D.tscn" id="12_o10br"]
+[ext_resource type="PackedScene" uid="uid://6qq3jme41cba" path="res://3D/prefabs/buildings_2D/sailors/TentFisherman2D.tscn" id="14_0nvaj"]
+[ext_resource type="PackedScene" uid="uid://44oev2b24w2e" path="res://3D/prefabs/buildings_2D/pioneers/Pasture2D.tscn" id="14_mbi3n"]
+[ext_resource type="PackedScene" uid="uid://w67s82ud7ovv" path="res://3D/prefabs/buildings_2D/settlers/Windmill2D.tscn" id="19_5yniq"]
+[ext_resource type="PackedScene" uid="uid://yorsmmvo413u" path="res://3D/prefabs/buildings_2D/pioneers/PotatoField2D.tscn" id="19_l0cm6"]
+[ext_resource type="PackedScene" uid="uid://dqtserweejky0" path="res://3D/prefabs/buildings_2D/pioneers/Pigsty2D.tscn" id="19_ml4a5"]
+[ext_resource type="PackedScene" uid="uid://cj1ndgx7cwqh1" path="res://3D/prefabs/buildings_2D/settlers/Bakery2D.tscn" id="20_7yhpi"]
+[ext_resource type="PackedScene" uid="uid://drsbsh2yl3tbf" path="res://3D/prefabs/buildings_2D/pioneers/Butchery2D.tscn" id="20_l0cm6"]
+[ext_resource type="PackedScene" uid="uid://cyaaeguiw0hv8" path="res://3D/prefabs/buildings_2D/pioneers/Hut2D.tscn" id="22_tm57f"]
+[ext_resource type="PackedScene" uid="uid://u2whwuywx2cq" path="res://3D/prefabs/buildings_2D/pioneers/ClayPit2D.tscn" id="23_0t3n4"]
+[ext_resource type="PackedScene" uid="uid://l3up5k320wjj" path="res://3D/prefabs/buildings_2D/pioneers/Brickyard2D.tscn" id="24_yktge"]
+[ext_resource type="PackedScene" uid="uid://5jmbera47v3n" path="res://3D/prefabs/buildings_2D/settlers/WheatField2D.tscn" id="25_tmaw6"]
+[ext_resource type="PackedScene" uid="uid://d35clewbnor7u" path="res://3D/prefabs/buildings_2D/settlers/Stonepit2D.tscn" id="26_olp3d"]
+[ext_resource type="PackedScene" uid="uid://d3giagib800vi" path="res://3D/prefabs/buildings_2D/settlers/Weaver2D.tscn" id="27_5ocir"]
+[ext_resource type="PackedScene" uid="uid://np63mm8ie7yn" path="res://3D/prefabs/buildings_2D/settlers/Stonemason2D.tscn" id="28_olp3d"]
+[ext_resource type="PackedScene" uid="uid://ddvh3uqcnwi6h" path="res://3D/prefabs/buildings_2D/citizens/StoneHouse2D.tscn" id="31_3fbwi"]
+[ext_resource type="PackedScene" uid="uid://dbxfdfjhk8mqc" path="res://3D/prefabs/buildings_2D/settlers/House2D.tscn" id="32_8ktvp"]
+
+[sub_resource type="Resource" id="Resource_imrfu"]
+script = ExtResource("2_5evuj")
+resource = 3
+cost = 50
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_tnibl"]
+script = ExtResource("2_5evuj")
+resource = 1
+cost = 50
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_vr5bk"]
+script = ExtResource("1_bfftw")
+scene = ExtResource("3_n8iq8")
+scene_2d = ExtResource("4_gx5by")
+costs = Array[ExtResource("2_5evuj")]([SubResource("Resource_imrfu"), SubResource("Resource_tnibl")])
+metadata/_custom_type_script = "uid://c5basxvhkxhgh"
+
+[sub_resource type="Resource" id="Resource_tropj"]
+script = ExtResource("2_5evuj")
+resource = 3
+cost = 5
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_tk656"]
+script = ExtResource("2_5evuj")
+resource = 1
+cost = 10
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_ws72x"]
+script = ExtResource("1_bfftw")
+scene = ExtResource("4_jv7nq")
+scene_2d = ExtResource("12_jv7nq")
+costs = Array[ExtResource("2_5evuj")]([SubResource("Resource_tropj"), SubResource("Resource_tk656")])
+metadata/_custom_type_script = "uid://c5basxvhkxhgh"
+
+[sub_resource type="Resource" id="Resource_06bce"]
+script = ExtResource("2_5evuj")
+resource = 1
+cost = 5
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_xvjc2"]
+script = ExtResource("1_bfftw")
+scene = ExtResource("5_bxw2s")
+scene_2d = ExtResource("8_mbi3n")
+costs = Array[ExtResource("2_5evuj")]([SubResource("Resource_06bce")])
+metadata/_custom_type_script = "uid://c5basxvhkxhgh"
+
+[sub_resource type="Resource" id="Resource_waljl"]
+script = ExtResource("2_5evuj")
+resource = 3
+cost = 10
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_kg5sq"]
+script = ExtResource("2_5evuj")
+resource = 1
+cost = 5
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_hqty3"]
+script = ExtResource("1_bfftw")
+scene = ExtResource("6_ena2b")
+scene_2d = ExtResource("8_jv7nq")
+costs = Array[ExtResource("2_5evuj")]([SubResource("Resource_waljl"), SubResource("Resource_kg5sq")])
+metadata/_custom_type_script = "uid://c5basxvhkxhgh"
+
+[sub_resource type="Resource" id="Resource_r3j55"]
+script = ExtResource("2_5evuj")
+resource = 3
+cost = 50
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_llcbi"]
+script = ExtResource("1_bfftw")
+scene_2d = ExtResource("22_tm57f")
+costs = Array[ExtResource("2_5evuj")]([SubResource("Resource_r3j55")])
+metadata/_custom_type_script = "uid://c5basxvhkxhgh"
+
+[sub_resource type="Resource" id="Resource_p7khg"]
+script = ExtResource("2_5evuj")
+resource = 3
+cost = 50
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_hi4tu"]
+script = ExtResource("2_5evuj")
+resource = 1
+cost = 50
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_xdasp"]
+script = ExtResource("2_5evuj")
+resource = 16
+cost = 50
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_1mccj"]
+script = ExtResource("1_bfftw")
+scene = ExtResource("7_gx5by")
+scene_2d = ExtResource("12_o10br")
+costs = Array[ExtResource("2_5evuj")]([SubResource("Resource_p7khg"), SubResource("Resource_hi4tu"), SubResource("Resource_xdasp")])
+metadata/_custom_type_script = "uid://c5basxvhkxhgh"
+
+[sub_resource type="Resource" id="Resource_dvkna"]
+script = ExtResource("2_5evuj")
+resource = 3
+cost = 50
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_n4y2n"]
+script = ExtResource("1_bfftw")
+scene_2d = ExtResource("19_l0cm6")
+costs = Array[ExtResource("2_5evuj")]([SubResource("Resource_dvkna")])
+metadata/_custom_type_script = "uid://c5basxvhkxhgh"
+
+[sub_resource type="Resource" id="Resource_lygs7"]
+script = ExtResource("2_5evuj")
+resource = 3
+cost = 50
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_gk03p"]
+script = ExtResource("1_bfftw")
+scene_2d = ExtResource("19_ml4a5")
+costs = Array[ExtResource("2_5evuj")]([SubResource("Resource_lygs7")])
+metadata/_custom_type_script = "uid://c5basxvhkxhgh"
+
+[sub_resource type="Resource" id="Resource_rgskd"]
+script = ExtResource("2_5evuj")
+resource = 3
+cost = 50
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_qpkem"]
+script = ExtResource("2_5evuj")
+resource = 1
+cost = 50
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_megyo"]
+script = ExtResource("1_bfftw")
+scene_2d = ExtResource("20_l0cm6")
+costs = Array[ExtResource("2_5evuj")]([SubResource("Resource_rgskd"), SubResource("Resource_qpkem")])
+metadata/_custom_type_script = "uid://c5basxvhkxhgh"
+
+[sub_resource type="Resource" id="Resource_3fbwi"]
+script = ExtResource("2_5evuj")
+resource = 3
+cost = 50
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_8ktvp"]
+script = ExtResource("1_bfftw")
+scene_2d = ExtResource("26_olp3d")
+costs = Array[ExtResource("2_5evuj")]([SubResource("Resource_3fbwi")])
+metadata/_custom_type_script = "uid://c5basxvhkxhgh"
+
+[sub_resource type="Resource" id="Resource_5ocir"]
+script = ExtResource("2_5evuj")
+resource = 3
+cost = 50
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_1xjfw"]
+script = ExtResource("1_bfftw")
+scene_2d = ExtResource("28_olp3d")
+costs = Array[ExtResource("2_5evuj")]([SubResource("Resource_5ocir")])
+metadata/_custom_type_script = "uid://c5basxvhkxhgh"
+
+[sub_resource type="Resource" id="Resource_w5442"]
+script = ExtResource("2_5evuj")
+resource = 3
+cost = 25
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_n4m21"]
+script = ExtResource("2_5evuj")
+resource = 16
+cost = 50
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_02jbn"]
+script = ExtResource("2_5evuj")
+resource = 1
+cost = 25
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_fok55"]
+script = ExtResource("1_bfftw")
+scene = ExtResource("8_o10br")
+scene_2d = ExtResource("14_mbi3n")
+costs = Array[ExtResource("2_5evuj")]([SubResource("Resource_w5442"), SubResource("Resource_n4m21"), SubResource("Resource_02jbn")])
+metadata/_custom_type_script = "uid://c5basxvhkxhgh"
+
+[sub_resource type="Resource" id="Resource_4p8v4"]
+script = ExtResource("2_5evuj")
+resource = 3
+cost = 50
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_4x3uw"]
+script = ExtResource("1_bfftw")
+scene_2d = ExtResource("27_5ocir")
+costs = Array[ExtResource("2_5evuj")]([SubResource("Resource_4p8v4")])
+metadata/_custom_type_script = "uid://c5basxvhkxhgh"
+
+[sub_resource type="Resource" id="Resource_mbch0"]
+script = ExtResource("2_5evuj")
+resource = 3
+cost = 100
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_7q4xw"]
+script = ExtResource("1_bfftw")
+scene_2d = ExtResource("32_8ktvp")
+costs = Array[ExtResource("2_5evuj")]([SubResource("Resource_mbch0")])
+metadata/_custom_type_script = "uid://c5basxvhkxhgh"
+
+[sub_resource type="Resource" id="Resource_5yniq"]
+script = ExtResource("2_5evuj")
+resource = 3
+cost = 25
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_7yhpi"]
+script = ExtResource("1_bfftw")
+scene_2d = ExtResource("25_tmaw6")
+costs = Array[ExtResource("2_5evuj")]([SubResource("Resource_5yniq")])
+metadata/_custom_type_script = "uid://c5basxvhkxhgh"
+
+[sub_resource type="Resource" id="Resource_j06r2"]
+script = ExtResource("2_5evuj")
+resource = 3
+cost = 50
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_ooua1"]
+script = ExtResource("1_bfftw")
+scene_2d = ExtResource("19_5yniq")
+costs = Array[ExtResource("2_5evuj")]([SubResource("Resource_j06r2")])
+metadata/_custom_type_script = "uid://c5basxvhkxhgh"
+
+[sub_resource type="Resource" id="Resource_bi63i"]
+script = ExtResource("2_5evuj")
+resource = 3
+cost = 50
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_ujk5d"]
+script = ExtResource("1_bfftw")
+scene_2d = ExtResource("20_7yhpi")
+costs = Array[ExtResource("2_5evuj")]([SubResource("Resource_bi63i")])
+metadata/_custom_type_script = "uid://c5basxvhkxhgh"
+
+[sub_resource type="Resource" id="Resource_m2a3m"]
+script = ExtResource("2_5evuj")
+resource = 3
+cost = 25
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_d3h78"]
+script = ExtResource("2_5evuj")
+resource = 1
+cost = 5
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_fhx1l"]
+script = ExtResource("1_bfftw")
+scene = ExtResource("9_mbi3n")
+scene_2d = ExtResource("14_0nvaj")
+costs = Array[ExtResource("2_5evuj")]([SubResource("Resource_m2a3m"), SubResource("Resource_d3h78")])
+metadata/_custom_type_script = "uid://c5basxvhkxhgh"
+
+[sub_resource type="Resource" id="Resource_3rnm1"]
+script = ExtResource("2_5evuj")
+resource = 3
+cost = 50
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_tdah1"]
+script = ExtResource("1_bfftw")
+scene_2d = ExtResource("23_0t3n4")
+costs = Array[ExtResource("2_5evuj")]([SubResource("Resource_3rnm1")])
+metadata/_custom_type_script = "uid://c5basxvhkxhgh"
+
+[sub_resource type="Resource" id="Resource_7i0t0"]
+script = ExtResource("2_5evuj")
+resource = 3
+cost = 50
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_7nel1"]
+script = ExtResource("1_bfftw")
+scene_2d = ExtResource("24_yktge")
+costs = Array[ExtResource("2_5evuj")]([SubResource("Resource_7i0t0")])
+metadata/_custom_type_script = "uid://c5basxvhkxhgh"
+
+[sub_resource type="Resource" id="Resource_dcdl6"]
+script = ExtResource("2_5evuj")
+resource = 3
+cost = 50
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_n3td1"]
+script = ExtResource("2_5evuj")
+resource = 8
+cost = 50
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_qpu21"]
+script = ExtResource("1_bfftw")
+scene_2d = ExtResource("31_3fbwi")
+costs = Array[ExtResource("2_5evuj")]([SubResource("Resource_dcdl6"), SubResource("Resource_n3td1")])
+metadata/_custom_type_script = "uid://c5basxvhkxhgh"
+
+[sub_resource type="Resource" id="Resource_sh8ai"]
+script = ExtResource("2_5evuj")
+resource = 3
+cost = 150
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_cr17y"]
+script = ExtResource("2_5evuj")
+resource = 1
+cost = 100
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_1eclw"]
+script = ExtResource("1_bfftw")
+scene = ExtResource("10_0nvaj")
+scene_2d = ExtResource("12_n8iq8")
+costs = Array[ExtResource("2_5evuj")]([SubResource("Resource_sh8ai"), SubResource("Resource_cr17y")])
+metadata/_custom_type_script = "uid://c5basxvhkxhgh"
+
+[resource]
+script = ExtResource("11_ml4a5")
+builtin_buildings = Dictionary[int, ExtResource("1_bfftw")]({
+0: SubResource("Resource_vr5bk"),
+1: SubResource("Resource_ws72x"),
+2: SubResource("Resource_xvjc2"),
+3: SubResource("Resource_hqty3"),
+4: SubResource("Resource_llcbi"),
+6: SubResource("Resource_1mccj"),
+7: SubResource("Resource_n4y2n"),
+8: SubResource("Resource_gk03p"),
+9: SubResource("Resource_megyo"),
+10: SubResource("Resource_8ktvp"),
+11: SubResource("Resource_1xjfw"),
+12: SubResource("Resource_fok55"),
+13: SubResource("Resource_4x3uw"),
+14: SubResource("Resource_7q4xw"),
+15: SubResource("Resource_7yhpi"),
+16: SubResource("Resource_ooua1"),
+17: SubResource("Resource_ujk5d"),
+18: SubResource("Resource_fhx1l"),
+19: SubResource("Resource_tdah1"),
+20: SubResource("Resource_7nel1"),
+21: SubResource("Resource_qpu21"),
+22: SubResource("Resource_1eclw")
+})
+metadata/_custom_type_script = "uid://dfmexpqbio71u"

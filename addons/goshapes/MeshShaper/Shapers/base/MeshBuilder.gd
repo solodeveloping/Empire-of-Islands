@@ -47,10 +47,11 @@ func apply_mesh(parent: Node3D, new_mesh: ArrayMesh, name_tag := "Mesh") -> Mesh
 	var mesh_node := MeshInstance3D.new()
 	mesh_node.mesh = new_mesh
 	mesh_node.name = "%s%s" % [new_mesh.resource_name, name_tag]
+	mesh_node.layers = base_style.visual_layers
 	commit_to_group(mesh_node)
 	return SceneUtils.add_child(parent, mesh_node) as MeshInstance3D
-		
-		
+
+
 func apply_collider(parent: Node3D, collision_mesh: ArrayMesh) -> StaticBody3D:
 	if collision_mesh == null:
 		return

@@ -33,6 +33,7 @@ func _on_ResourcePopup_result(resource_type: Resources.Types):
 
 
 func _on_NewOrderButton_pressed():
+	print("_on_NewOrderButton_pressed")
 	resource_popup.popup_centered()
 
 

@@ -32,7 +32,7 @@ func attempt_to_spawn(max_attempt_count: int) -> bool:
 			var is_constructible = tile_map.is_entity_constructible(
 				pos,
 				data[NaturalResource.Datas.Width],
-				data[NaturalResource.Datas.Height]
+				data[NaturalResource.Datas.Height],
 			)
 			if is_constructible == -1:
 				continue

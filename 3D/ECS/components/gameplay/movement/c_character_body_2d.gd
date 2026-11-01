@@ -1,0 +1,2 @@
+extends Component
+class_name C_CharacterBody2D

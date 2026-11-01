@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dnwpxbdjjk2h0" path="res://3D/prefabs/buildings/sensors/GroundSensorEditable1.tscn" id="12_pm28m"]
 [ext_resource type="Script" uid="uid://b1ly1gc8mu6j5" path="res://3D/misc/multimesh_instances_remover.gd" id="13_sduf7"]
 [ext_resource type="PackedScene" uid="uid://dg458rcdnjioo" path="res://Assets/Kenney/kenney_watercraft-pack/Models/GLB format/buoy-flag.tscn" id="14_blk61"]
+[ext_resource type="Script" uid="uid://063chpxin8a2" path="res://3D/minimap/minimap_entity_display_handler.gd" id="15_6dc4s"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sduf7"]
 shading_mode = 0
@@ -31,6 +32,10 @@ colors = PackedColorArray(1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_6dc4s"]
 gradient = SubResource("Gradient_blk61")
+
+[sub_resource type="QuadMesh" id="QuadMesh_sfkqh"]
+size = Vector2(10, 10)
+orientation = 1
 
 [node name="Dock1" type="Node3D" unique_id=567939795]
 script = ExtResource("1_admh2")
@@ -185,6 +190,15 @@ gizmo_extents = 1.0
 [node name="SpawnPoint6" type="Marker3D" parent="SpawnPointContainer" unique_id=1493598103]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1140456, 0, -7.8354497)
 gizmo_extents = 1.0
+
+[node name="WhiteIconMain" type="MeshInstance3D" parent="." unique_id=2108486177]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -6.535)
+layers = 524288
+mesh = SubResource("QuadMesh_sfkqh")
+
+[node name="MinimapEntityDisplayHandler" type="Node3D" parent="." unique_id=1103089264 node_paths=PackedStringArray("white_icon")]
+script = ExtResource("15_6dc4s")
+white_icon = NodePath("../WhiteIconMain")
 
 [connection signal="multimesh_instance_area_entered" from="BuildingMainArea1" to="." method="_on_BuildingMainArea1_multimesh_instance_area_entered"]
 [connection signal="multimesh_instance_area_exited" from="BuildingMainArea1" to="." method="_on_BuildingMainArea1_multimesh_instance_area_exited"]

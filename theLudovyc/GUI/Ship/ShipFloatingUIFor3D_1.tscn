@@ -1,0 +1,134 @@
+[gd_scene format=3 uid="uid://cd3gdnsh7cjbu"]
+
+[ext_resource type="Script" uid="uid://bwwl1yrthkian" path="res://theLudovyc/GUI/Ship/ship_floating_ui_for_3d_1.gd" id="1_uox6n"]
+[ext_resource type="Texture2D" uid="uid://nvllfmr40fbx" path="res://Assets/dafluffypotato/flags/es.png" id="2_73i26"]
+[ext_resource type="FontFile" uid="uid://c7mf5eos0ogry" path="res://Art/Fonts/LinLibertineB.ttf" id="3_v8xc7"]
+[ext_resource type="Texture2D" uid="uid://bvj1vmbiadc85" path="res://Assets/Openclipart/SpainFlag.svg" id="4_kgmcx"]
+[ext_resource type="Texture2D" uid="uid://toeqa364p2tp" path="res://Art/Image/Gui/Icons/Resources/32/001.png" id="5_hrjd4"]
+[ext_resource type="Texture2D" uid="uid://3mmetdaeiip0" path="res://Art/Image/Gui/Icons/Resources/32/002.png" id="6_pvu7l"]
+[ext_resource type="Texture2D" uid="uid://o3aikxwqsv82" path="res://Art/Image/Gui/Icons/Widgets/CityInfo/inhabitants_small.png" id="7_vgjk7"]
+[ext_resource type="Texture2D" uid="uid://bjvjocnxnlysr" path="res://Art/Image/Gui/Icons/Resources/32/040.png" id="8_uox6n"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n4y2n"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sfkqh"]
+bg_color = Color(0.114, 0.6, 0.20310003, 1)
+
+[node name="ShipFloatingUIFor3D_1" type="MarginContainer" unique_id=24407110]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1097.5
+offset_top = -460.0
+offset_right = 14.5
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("1_uox6n")
+text_font_size = 125
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=195999361]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=819647237]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer" unique_id=493603848]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer" unique_id=638407990]
+layout_mode = 2
+
+[node name="FlagTextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer" unique_id=1659423987]
+visible = false
+layout_mode = 2
+texture = ExtResource("2_73i26")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer" unique_id=387115291]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_v8xc7")
+theme_override_font_sizes/font_size = 125
+text = "The Something"
+
+[node name="CenterContainer2" type="CenterContainer" parent="MarginContainer/VBoxContainer" unique_id=1472401634]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer2" unique_id=526349054]
+layout_mode = 2
+
+[node name="FactionFlagTextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer2/HBoxContainer" unique_id=288951807]
+layout_mode = 2
+texture = ExtResource("4_kgmcx")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="FactionNameLabel" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer2/HBoxContainer" unique_id=513878506]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_v8xc7")
+theme_override_font_sizes/font_size = 125
+text = "< Something >"
+
+[node name="HealthProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer" unique_id=1746811253]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+tooltip_text = "50/100"
+theme_override_styles/background = SubResource("StyleBoxFlat_n4y2n")
+theme_override_styles/fill = SubResource("StyleBoxFlat_sfkqh")
+value = 50.0
+show_percentage = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1111311670]
+layout_mode = 2
+
+[node name="GoldLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1019754651]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_v8xc7")
+theme_override_font_sizes/font_size = 125
+text = " 20"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1205531114]
+layout_mode = 2
+texture = ExtResource("5_hrjd4")
+expand_mode = 3
+
+[node name="CurrentStorageLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=973942283]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_v8xc7")
+theme_override_font_sizes/font_size = 125
+text = "20"
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1773751494]
+layout_mode = 2
+texture = ExtResource("6_pvu7l")
+expand_mode = 3
+
+[node name="PassengerLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1349585868]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_v8xc7")
+theme_override_font_sizes/font_size = 125
+text = " 20"
+
+[node name="TextureRect4" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1753939982]
+layout_mode = 2
+texture = ExtResource("7_vgjk7")
+expand_mode = 3
+
+[node name="CannonCountLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=770470127]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_v8xc7")
+theme_override_font_sizes/font_size = 125
+text = "0"
+
+[node name="TextureRect3" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=661133736]
+layout_mode = 2
+texture = ExtResource("8_uox6n")
+expand_mode = 3

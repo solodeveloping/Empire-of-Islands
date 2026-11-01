@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cwdh31b0w8vwk"]
+
+[ext_resource type="Script" uid="uid://dq2vfqcxl54t8" path="res://3D/prefabs/misc/own_rts_camera.gd" id="1_mwc77"]
+[ext_resource type="PackedScene" uid="uid://cf7brgwaxlmud" path="res://addons/3d_rts_camera/rtscam.tscn" id="2_u6slw"]
+
+[node name="OwnRtsCamera" type="Node3D" unique_id=1732871897]
+script = ExtResource("1_mwc77")
+
+[node name="RTScamera" parent="." unique_id=1060845444 instance=ExtResource("2_u6slw")]
+cull_mask = 524287
+camera_speed = 50.0
+camera_zoom_speed = 500.0
+camera_zoom_max = 500.0

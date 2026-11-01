@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://np63mm8ie7yn"]
+
+[ext_resource type="Script" uid="uid://fi5gtrxn6cxr" path="res://3D/prefabs/buildings_2D/settlers/stonemason_2d.gd" id="1_waonv"]
+
+[node name="Stonemason2d" type="Node2D" unique_id=1629873056]
+script = ExtResource("1_waonv")

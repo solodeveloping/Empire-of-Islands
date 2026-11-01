@@ -38,9 +38,11 @@ var natural_resource_id: NaturalResources.Ids = -1:
 			update_offset()
 
 var event_bus: EventBus
+#@onready var event_bus: EventBus = %EventBus
 
 # FIXME : accessing %TheCursor is returning null
 var the_cursor: TheCursor
+#@onready var the_cursor: TheCursor = %TheCursor
 
 var is_selected := false
 
@@ -48,23 +50,24 @@ func _ready() -> void:
 	var current_scene = get_tree().current_scene
 	if current_scene.has_node("EventBus"):
 		event_bus = current_scene.get_node("EventBus")
-		event_bus.send_natural_resource_selected.connect(_on_natural_resource_selected)
-		event_bus.send_building_selected.connect(_on_building_selected)
-	if current_scene.has_node("TheCursor"):
-		the_cursor = current_scene.get_node("TheCursor")
-		
+		event_bus.send_selection_changed.connect(_on_event_bus_send_selection_changed)
+	if current_scene.has_node("%TheCursor"):
+		the_cursor = current_scene.get_node("%TheCursor")
+	else:
+		push_error("%TheCursor not found")
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.pressed:
-			deselect()
+			if is_selected:
+				deselect()
 
-func _on_natural_resource_selected(natural_resource: NaturalResource):
-	if is_selected and natural_resource != self:
-		deselect()
-		
-func _on_building_selected(_building):
-	if is_selected:
-		deselect()
+func _on_event_bus_send_selection_changed(node):
+	if !is_selected:
+		return
+	if node == self:
+		return
+	deselect()
 
 func select():
 	is_selected = true
@@ -76,8 +79,12 @@ func deselect():
 	
 	event_bus.send_natural_resource_deselected.emit(self)
 
-func _on_Area2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if not is_selected and event.is_action_pressed("alt_command"):
+func _on_Area2d_input_event(
+	_viewport: Node,
+	event: InputEvent,
+	_shape_idx: int
+) -> void:
+	if not is_selected and event.is_action_pressed("left_click"):
 		select()
 		if event_bus != null and the_cursor.cursor_entity == null:
 			event_bus.send_natural_resource_selected.emit(self)

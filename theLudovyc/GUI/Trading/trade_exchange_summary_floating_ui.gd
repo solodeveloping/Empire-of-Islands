@@ -1,8 +1,8 @@
 extends MarginContainer
 class_name TradeExchangeSummaryFloatingUI
 
-@onready var label: Label = $MarginContainer/VBoxContainer/HBoxContainer/Label
-@onready var texture_rect: TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/TextureRect
+@onready var label: Label = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Label
+@onready var texture_rect: TextureRect = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/TextureRect
 
 func set_content(
 	texture: Texture2D,

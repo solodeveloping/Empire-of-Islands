@@ -6,26 +6,42 @@ signal gold_count_changed(changes_per_faction: Dictionary[int, int])
 func sub_systems():
 	return [
 		[
-			ECS.world.query.with_all([C_Working,]),
+			ECS.world.query.with_all([
+				C_Working,
+				C_Storage,
+			]).enabled().iterate([
+				C_Working,
+				C_Storage,
+			]),
 			pay_entities
 		],
 		[
-			ECS.world.query.with_all([C_NotGettingPaid,]),
+			ECS.world.query.with_all([
+				C_NotGettingPaid,
+			]).enabled().iterate([
+				C_NotGettingPaid,
+			]),
 			process_entities_not_getting_paid
 		],
 	]
 
 func pay_entities(
 	entities: Array[Entity],
-	_components: Array,
+	components: Array,
 	delta: float
 ):
 	#print("produce_resources %s" % [
 		#entities.size(),
 	#])
+	
+	var C_Working_Index: int = 0
+	var C_Storage_Index: int = 1
+	
 	var gold_count_changes_per_faction: Dictionary[int, int] = {}
-	for entity: Entity in entities:
-		var c_working: C_Working = entity.get_component(C_Working)
+	for i in entities.size():
+		var entity: Entity = entities[i]
+		var c_working: C_Working = components[C_Working_Index][i]
+		
 		if c_working.is_active == false:
 			continue
 		
@@ -34,10 +50,11 @@ func pay_entities(
 		if c_working.working_time <= c_working.pay_time_limit:
 			continue
 			
-		var c_storage: C_Storage = entity.get_component(C_Storage)
-		if !c_storage:
-			printerr("C_Storage not found")
-			continue
+		#var c_storage: C_Storage = entity.get_component(C_Storage)
+		var c_storage: C_Storage = components[C_Storage_Index][i]
+		#if !c_storage:
+			#printerr("C_Storage not found")
+			#continue
 		
 		# Info: we have to query the building
 		# because that's the entity that pays the workers
@@ -75,6 +92,7 @@ func pay_entities(
 				var c_not_getting_paid: C_NotGettingPaid = entity.get_component(
 					C_NotGettingPaid
 				)
+				# They're back at work
 				if c_not_getting_paid.stopped_working:
 					var c_workers: C_Workers = r_works_at.target.get_component(
 						C_Workers
@@ -110,18 +128,21 @@ func pay_entities(
 
 func process_entities_not_getting_paid(
 	entities: Array[Entity],
-	_components: Array,
+	components: Array,
 	delta: float
 ):
 	#print("process_entities_not_getting_paid %s" % [
 		#entities.size(),
 	#])
+	
+	var C_NotGettingPaid_Index: int = 0
+	
 	# TODO: discontentment system
 	# And reputation system
-	for entity: Entity in entities:
-		var c_not_getting_paid: C_NotGettingPaid = entity.get_component(
-			C_NotGettingPaid
-		)
+	for i in entities.size():
+		var entity: Entity = entities[i]
+		var c_not_getting_paid: C_NotGettingPaid = components[C_NotGettingPaid_Index][i]
+		
 		c_not_getting_paid.time += delta
 		
 		if c_not_getting_paid.time <= c_not_getting_paid.stop_working_time_limit:
@@ -135,6 +156,7 @@ func process_entities_not_getting_paid(
 		var c_workers: C_Workers = r_works_at.target.get_component(
 			C_Workers
 		)
+		# TODO: should we be indexing it?
 		var c_pop_unit: C_PopUnit = entity.get_component(
 			C_PopUnit
 		)

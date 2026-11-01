@@ -2,6 +2,7 @@
 
 [node name="RangeCylinderIndicator" type="CSGCylinder3D" unique_id=315133955]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+cast_shadow = 0
 radius = 10.0
 height = 0.5
 sides = 30

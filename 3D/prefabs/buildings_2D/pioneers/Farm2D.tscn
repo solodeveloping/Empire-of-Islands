@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dlswce023nbyv"]
+
+[ext_resource type="Script" uid="uid://ccx6vbfml6spc" path="res://3D/prefabs/buildings_2D/pioneers/farm_2d.gd" id="1_5tctd"]
+
+[node name="Farm2d" type="Node2D" unique_id=776647435]
+script = ExtResource("1_5tctd")

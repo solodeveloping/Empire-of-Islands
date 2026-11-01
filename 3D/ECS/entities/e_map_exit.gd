@@ -4,7 +4,6 @@ class_name MapExit_ECS
 
 func define_components() -> Array:
 	return [
-		#C_DockBuoy.new(),
 		C_MapShipExitPoint.new(),
 		C_Transform.new(),
 	]

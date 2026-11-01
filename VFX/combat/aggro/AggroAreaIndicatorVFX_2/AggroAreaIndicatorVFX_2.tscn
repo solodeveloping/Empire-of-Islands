@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bn54ls1uvhrup"]
+
+[ext_resource type="Script" uid="uid://cg27jtmovptin" path="res://VFX/combat/aggro/AggroAreaIndicatorVFX_2/aggro_area_indicator_vfx_2.gd" id="1_2hclc"]
+[ext_resource type="Shader" uid="uid://kvln87pc5m30" path="res://VFX/combat/aggro/AggroAreaIndicatorVFX_2/aagro_area_indicator_vfx_2_shader_1.tres" id="1_2y8s7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sfkqh"]
+render_priority = 0
+shader = ExtResource("1_2y8s7")
+shader_parameter/Color = Color(1, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_d66px"]
+top_radius = 10.0
+bottom_radius = 10.0
+height = 0.2
+cap_top = false
+cap_bottom = false
+
+[node name="AggroAreaIndicatorVfx2" type="Node3D" unique_id=2070641419]
+script = ExtResource("1_2hclc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=618353248]
+material_override = SubResource("ShaderMaterial_sfkqh")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_d66px")

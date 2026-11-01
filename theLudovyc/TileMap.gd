@@ -6,7 +6,9 @@ class_name MyTileMap
 @onready var trees_layer: TileMapLayer = $TreesLayer
 @onready var ground_overlay_layer: TileMapLayer = %GroundOverlayLayer
 @onready var building_ground_overlay_layer: TileMapLayer = $BuildingGroundOverlayLayer
-@onready var the_builder = $"../../TheBuilder"
+
+@onready var the_builder: Node = %TheBuilder
+
 @onready var natural_resources = %NaturalResources
 @onready var gaea_generator: GaeaGenerator = %GaeaGenerator
 
@@ -61,7 +63,8 @@ func entityStatic_get_top_left_tile(entity:EntityStatic, tile_center:Vector2i) -
 		tile_center,
 		entity.width,
 		entity.height,
-		entity.height_offset
+		entity.height_offset,
+		entity.width_offset,
 	)
 
 ## Visually left tile
@@ -69,12 +72,16 @@ func entity_get_top_left_tile(
 	tile_center:Vector2i,
 	width: int,
 	height: int,
-	height_offset: int = 0
+	height_offset: int = 0,
+	width_offset: int = 0,
 ) -> Vector2i:
 	if height % 2 == 0:
 		return Vector2i(tile_center.x, tile_center.y - height / 2 + height_offset)
 	else:
-		return Vector2i(tile_center.x - ceil(width / 2), tile_center.y - ceil(height / 2) + height_offset)
+		return Vector2i(
+			tile_center.x - ceil(width / 2) + width_offset,
+			tile_center.y - ceil(height / 2) + height_offset
+		)
 
 # 0 or >0 == OK
 # -1 == KO
@@ -84,10 +91,10 @@ func is_entityStatic_constructible(entity:EntityStatic, tile_center:Vector2i) ->
 	
 	var require_cell_type = Buildings.get_require_map_cell_type(entity.building_id)
 	if require_cell_type != -1:
-		var trees = are_tiles_constructible_on_cell_type(
+		var trees_ = are_tiles_constructible_on_cell_type(
 			entity, top_left_tile, require_cell_type
 		)
-		return trees
+		return trees_
 	
 	var trees = are_tiles_constructible(
 		entity, top_left_tile
@@ -192,13 +199,15 @@ func is_entity_constructible(
 	tile_center: Vector2i,
 	width: int,
 	height: int,
-	height_offset: int = 0
+	height_offset: int = 0,
+	width_offset: int = 0
 ) -> int:
 	var top_left_tile = entity_get_top_left_tile(
 		tile_center,
 		width,
 		height,
-		height_offset
+		height_offset,
+		width_offset,
 	)
 	
 	var trees = 0
@@ -265,15 +274,15 @@ func show_constructible_area_on_overlay(building_id: Buildings.Ids):
 	var require_building = Buildings.get_require_building(building_id)
 	if require_building == -1:
 		show_all_constructible_tiles()
-		var range = Buildings.get_dependency_max_range(building_id)
-		if range != -1:
-			var buildings = the_builder.get_buildings_of_id(building_id)
+		var range_2 = Buildings.get_dependency_max_range(building_id)
+		if range_2 != -1:
+			var buildings_ = the_builder.get_buildings_of_id(building_id)
 			# we show similar buildings range for better experience
-			for building in buildings:
-				show_affected_area_of_existing_building(building, range)
+			for building in buildings_:
+				show_affected_area_of_existing_building(building, range_2)
 		return
 	
-	var range = Buildings.get_dependency_max_range(require_building)
+	var range_ = Buildings.get_dependency_max_range(require_building)
 	var buildings = the_builder.get_buildings_of_id(require_building)
 	for building in buildings:
 		var center = ground_layer.local_to_map(ground_layer.to_local(building.global_position))
@@ -281,14 +290,14 @@ func show_constructible_area_on_overlay(building_id: Buildings.Ids):
 			building,
 			center
 		)
-		var top_left_tile = top_left_building - Vector2i(range, range)
-		for x in building.width + range * 2:
-			for y in building.height + range * 2:
+		var top_left_tile = top_left_building - Vector2i(range_, range_)
+		for x in building.width + range_ * 2:
+			for y in building.height + range_ * 2:
 				var tile_coord = top_left_tile + Vector2i(x, y)
 				var type = minimap_get_cell(tile_coord)
 				color_overlay_at_pos(tile_coord, type)
 		
-		var polygon = get_polygon_range_of_building(building, range)
+		var polygon = get_polygon_range_of_building(building, range_)
 		allowed_polygons.push_back(polygon)
 		
 		# Use this to debug the farms limit visually in global coordinates
@@ -303,20 +312,20 @@ func show_constructible_area_on_overlay(building_id: Buildings.Ids):
 
 func get_polygon_range_of_building(
 	building: Building2D,
-	range: int,
+	range_: int,
 ) -> Array:
 	var center = ground_layer.local_to_map(ground_layer.to_local(building.global_position))
 	var top_left_building = entityStatic_get_top_left_tile(
 		building,
 		center
 	)
-	var top_left_tile = top_left_building - Vector2i(range, range)
+	var top_left_tile = top_left_building - Vector2i(range_, range_)
 	
 	var polygon = []
 	# x is top-right
 	# y is left-bottom
-	var right_offset = building.height + range * 2 - 1
-	var top_right_offset = building.width + range * 2 - 1
+	var right_offset = building.height + range_ * 2 - 1
+	var top_right_offset = building.width + range_ * 2 - 1
 	# visually left
 	polygon.push_back(top_left_tile + Vector2i(0 , 0))
 	# visually top
@@ -352,29 +361,35 @@ func color_overlay_at_pos(pos: Vector2i, tile_type: MyMap.Minimap_Cell_Type):
 		MyMap.Minimap_Cell_Type.Tree:
 			ground_overlay_layer.set_cell(pos, OverlayTileset.Yellow, tile_overlay_pos)
 
-func show_affected_area_of_building(building: Building2D, range: int):
+func show_affected_area_of_building(
+	building: Building2D,
+	range_: int
+):
 	building_ground_overlay_layer.clear()
 	var center = ground_layer.local_to_map(ground_layer.to_local(building.global_position))
 	var top_left_building = entityStatic_get_top_left_tile(
 		building,
 		center
 	)
-	var top_left_tile = top_left_building - Vector2i(range, range)
-	for x in building.width + range * 2:
-		for y in building.height + range * 2:
+	var top_left_tile = top_left_building - Vector2i(range_, range_)
+	for x in building.width + range_ * 2:
+		for y in building.height + range_ * 2:
 			var tile_coord = top_left_tile + Vector2i(x, y)
 			color_affected_area_at_pos(tile_coord)
 
-func show_affected_area_of_existing_building(building: Building2D, range: int):
+func show_affected_area_of_existing_building(
+	building: Building2D,
+	range_: int
+):
 	building_ground_overlay_layer.clear()
 	var center = ground_layer.local_to_map(ground_layer.to_local(building.global_position))
 	var top_left_building = entityStatic_get_top_left_tile(
 		building,
 		center
 	)
-	var top_left_tile = top_left_building - Vector2i(range, range)
-	for x in building.width + range * 2:
-		for y in building.height + range * 2:
+	var top_left_tile = top_left_building - Vector2i(range_, range_)
+	for x in building.width + range_ * 2:
+		for y in building.height + range_ * 2:
 			var tile_coord = top_left_tile + Vector2i(x, y)
 			# we color in appropriate color the affected tiles
 			# we could color trees in yellow but I think it looks better

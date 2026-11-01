@@ -1,0 +1,45 @@
+[gd_resource type="VisualShader" format=3 uid="uid://bqk667bcufp81"]
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_1ay01"]
+parameter_name = "Texture"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_tk6sk"]
+expanded_output_ports = [0]
+source = 5
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_m6bvy"]
+constant = 0.5
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_1ay01"]
+constant = 1.0
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_tk6sk"]
+constant = 1.0
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_6h06y"]
+constant = 1.0
+
+[sub_resource type="VisualShaderNodeBillboard" id="VisualShaderNodeBillboard_6h06y"]
+keep_scale = true
+
+[resource]
+flags/unshaded = true
+flags/ambient_light_disabled = true
+flags/fog_disabled = true
+nodes/vertex/2/node = SubResource("VisualShaderNodeBillboard_6h06y")
+nodes/vertex/2/position = Vector2(2.405274, 534.2989)
+nodes/vertex/connections = PackedInt32Array(2, 0, 0, 10)
+nodes/fragment/0/position = Vector2(640, 100)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture2DParameter_1ay01")
+nodes/fragment/3/position = Vector2(-720, 460)
+nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_tk6sk")
+nodes/fragment/4/position = Vector2(-260, 280)
+nodes/fragment/5/node = SubResource("VisualShaderNodeFloatConstant_m6bvy")
+nodes/fragment/5/position = Vector2(0, 780)
+nodes/fragment/6/node = SubResource("VisualShaderNodeFloatConstant_1ay01")
+nodes/fragment/6/position = Vector2(100, 580)
+nodes/fragment/7/node = SubResource("VisualShaderNodeFloatConstant_tk6sk")
+nodes/fragment/7/position = Vector2(100, 480)
+nodes/fragment/8/node = SubResource("VisualShaderNodeFloatConstant_6h06y")
+nodes/fragment/8/position = Vector2(200, 680)
+nodes/fragment/connections = PackedInt32Array(3, 0, 4, 2, 4, 0, 0, 0, 4, 4, 0, 1, 5, 0, 0, 19, 7, 0, 0, 2, 6, 0, 0, 3, 8, 0, 0, 4)

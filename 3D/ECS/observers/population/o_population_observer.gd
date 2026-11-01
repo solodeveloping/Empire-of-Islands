@@ -5,6 +5,7 @@ class_name O_PopulationObserver
 
 # FIXME: should we keep this?
 signal new_pop_unit_joined(pop_type: int, island: Entity)
+# Info: there is another in [O_BuildingAddedObserver]
 signal pop_unit_found_work(pop_type: int, island: Entity)
 signal pop_unit_left_work(pop_type: int, island: Entity)
 
@@ -26,6 +27,14 @@ func sub_observers() -> Array[Array]:
 				ECSEvents.POP_UNIT_JOINED
 			),
 			_on_pop_unit_joined_island
+		],
+		# FIXME: should it be done in a building observer?
+		# Will need to call these methods though
+		[
+			q.with_all([C_Building]).on_event(
+				ECSEvents.SPAWN_POP_UNITS_REQIESTED
+			),
+			_on_spawn_pop_units_requested
 		],
 		[
 			q.with_all([C_PopUnit]).on_event(
@@ -100,16 +109,142 @@ func _on_pop_unit_joined_island(
 		c_pop_summary.population_increase(c_pop_unit.pop_type, 1)
 	else:
 		push_error("island does not have C_PopulationSummary")
-		
-	spawn_pop_unit_visual(
-		entity,
-		data.dock,
-	)
+	
+	if entity.has_component(C_PopUnitWithVisual):
+		spawn_pop_unit_visual(
+			entity,
+			data.dock,
+		)
 	
 	new_pop_unit_joined.emit(
 		c_pop_unit.pop_type,
 		island,
 	)
+
+func _on_spawn_pop_units_requested(
+	_event: Variant,
+	building: Entity,
+	data: Variant
+) -> void:
+	print("O_PopulationObserver:_on_spawn_pop_units_requested")
+	var island: Entity = data.island
+	if !island:
+		push_error("island not present")
+	var nationality: Nationality = data.nationality
+	if !nationality:
+		push_error("nationality not present")
+	var faction: Entity = data.faction
+	if !faction:
+		push_error("faction not present")
+	
+	# TODO: assign to production building
+	# For 2D, I visibly found another way
+	# Would be nice to fix the whole thing though
+	
+	var c_housing_capacity: C_HousingCapacity = building.get_component(
+		C_HousingCapacity
+	)
+	if c_housing_capacity:
+		var count = c_housing_capacity.maximum - c_housing_capacity.current
+		if count == 0:
+			push_error("housing is already filled")
+		for i in count:
+			if c_housing_capacity.current >= c_housing_capacity.maximum:
+				break
+			
+			var pop_unit = Entity.new()
+			pop_unit.name = "entity_pop_unit_%s" % [
+				randi(),
+			]
+			var first_name: String = ""
+			var gender = randi_range(0, 1)
+			if gender == 0:
+				first_name = nationality.male_first_names.pick_random()
+			else:
+				first_name = nationality.female_first_names.pick_random()
+			
+			var last_name = nationality.last_names.pick_random()
+			
+			pop_unit.add_components([
+				C_PersonName.new(
+					first_name,
+					last_name,
+				),
+				C_Name.new(
+					"%s %s" % [
+						first_name,
+						last_name,
+					]
+				),
+				C_PopUnitLocation.new(C_PopUnitLocation.LOCATION.HOUSING),
+				C_ConsumeResources.new(),
+				C_Nationality.new(nationality),
+				# TODO: could have a more complicated system
+				C_Storage.new(
+					randi_range(10, 30)
+				),
+				C_PopUnit.new(
+					c_housing_capacity.pop_type,
+					false
+				),
+				C_JobLess.new(),
+			])
+			
+			pop_unit.add_relationship(
+				Rels.create_belongs_to_faction(
+					faction
+				)
+			)
+			
+			cmd.add_relationship(
+				pop_unit,
+				Rels.create_is_on_island(island)
+			)
+			if c_housing_capacity.current >= c_housing_capacity.maximum:
+				cmd.remove_component(building, C_NotFullyOccupied)
+			
+			cmd.add_relationship(
+				pop_unit,
+				Rels.create_lives_in(building)
+			)
+			
+			ECS.world.add_entity(pop_unit)
+			
+			if island.has_component(C_PopulationSummary):
+				var c_pop_summary: C_PopulationSummary = island.get_component(
+					C_PopulationSummary
+				)
+				c_pop_summary.population_increase(
+					c_housing_capacity.pop_type,
+					1
+				)
+			else:
+				push_error("island does not have C_PopulationSummary")
+				
+			#spawn_pop_unit_visual(
+				#entity,
+				#data.dock,
+			#)
+			
+			c_housing_capacity.current += 1
+			
+			_find_and_assign_production_buildings(
+				null,
+				pop_unit,
+				data,
+				island
+			)
+			
+			print("emitting new_pop_unit_joined")
+			new_pop_unit_joined.emit(
+				c_housing_capacity.pop_type,
+				island,
+			)
+			
+	else:
+		push_error("c_housing not present %s" % [
+			building.name,
+		])
 
 #func _on_pop_unit_left_housing(
 	#event: Variant,
@@ -121,11 +256,11 @@ func _on_pop_unit_joined_island(
 # This is assigning a production building to the pop unit
 func _find_and_assign_production_buildings(
 	_event: Variant,
-	entity: Entity,
+	pop_unit: Entity,
 	_data: Variant,
 	island: Entity,
 ):
-	var c_pop_unit: C_PopUnit = entity.get_component(C_PopUnit)
+	var c_pop_unit: C_PopUnit = pop_unit.get_component(C_PopUnit)
 	
 	var _b: ClassForLambdaFunction = ClassForLambdaFunction.new()
 	
@@ -150,9 +285,21 @@ func _find_and_assign_production_buildings(
 		#)
 		_b.worker_quantity.worker_count += 1
 		
+		# Info: if there is no visual, just consider it present
+		if !pop_unit.has_component(C_PopUnitWithVisual):
+			var workers: WorkerQuantity = _b.workers.present_workers.get(
+				c_pop_unit.pop_type
+			)
+			workers.worker_count += 1
+			var c_pop_unit_location: C_PopUnitLocation = pop_unit.get_component(
+				C_PopUnitLocation
+			)
+			if c_pop_unit_location:
+				c_pop_unit_location.location = C_PopUnitLocation.LOCATION.WORKPLACE
+		
 		c_pop_unit.is_working = true
 		cmd.add_relationship(
-			entity, Rels.create_works_at(_b.building)
+			pop_unit, Rels.create_works_at(_b.building)
 		)
 		
 		if island.has_component(C_PopulationSummary):
@@ -173,8 +320,10 @@ func _find_and_assign_production_buildings(
 			# FIXME: mutualize?
 			# Accessing if building is still missing workers
 			var is_one_missing = false
-			for req in _b.worker_requirements.requirements:
-				var current: WorkerQuantity = _b.workers.workers.get(req.worker_type)
+			for req in _b.worker_requirements.requirements.values():
+				var current: WorkerQuantity = _b.workers.workers.get(
+					req.worker_type
+				)
 				if current.worker_count < req.worker_count:
 					is_one_missing = true
 			if is_one_missing == false:
@@ -185,6 +334,10 @@ func _find_and_assign_production_buildings(
 				
 				#_b.building.remove_component(C_MissingWorkers)
 				cmd.remove_component(_b.building, C_MissingWorkers)
+				if _b.building.has_method("hide_production_stoppped_indicator"):
+					_b.building.hide_production_stoppped_indicator()
+				else:
+					push_error("building needs method hide_production_stoppped_indicator")
 			
 			# this was for the loop
 			#_b.building = _b.buildings_needing_workers.pop_back()
@@ -211,7 +364,7 @@ func _find_building_needing_workers(b: ClassForLambdaFunction, c_pop_unit: C_Pop
 		if !b.worker_requirements:
 			b.building = b.buildings_needing_workers.pop_back()
 			continue
-		for wr in b.worker_requirements.requirements:
+		for wr in b.worker_requirements.requirements.values():
 			if wr.worker_type == c_pop_unit.pop_type:
 				b.worker_requirement = wr
 		if !b.worker_requirement:
@@ -227,7 +380,11 @@ func _find_building_needing_workers(b: ClassForLambdaFunction, c_pop_unit: C_Pop
 		break
 
 # This is assigning a housing building to the pop unit
-func _find_assign_housing_building(_event: Variant, entity: Entity, data: Variant):
+func _find_assign_housing_building(
+	_event: Variant,
+	entity: Entity,
+	data: Variant
+):
 	print("_find_assign_housing_building")
 	var housing_buildings = ECS.world.query.with_all(
 		[C_HousingCapacity, C_NotFullyOccupied]
@@ -255,7 +412,9 @@ func _find_and_assign_housing_to_pop_unit(
 	
 	var found_housing: bool = false
 	for housing: Entity in housing_buildings:
-		var c_housing_capacity: C_HousingCapacity = housing.get_component(C_HousingCapacity)
+		var c_housing_capacity: C_HousingCapacity = housing.get_component(
+			C_HousingCapacity
+		)
 		if !c_housing_capacity:
 			push_error("c_housing_capacity is not present")
 			continue
@@ -275,9 +434,9 @@ func _find_and_assign_housing_to_pop_unit(
 			continue
 			
 		found_housing = true
-		print("increasing capacity of %s"% [
-			housing.get_path(),
-		])
+		#print("increasing capacity of %s"% [
+			#housing.get_path(),
+		#])
 		c_housing_capacity.current += 1
 		if c_housing_capacity.current >= c_housing_capacity.maximum:
 			cmd.remove_component(housing, C_NotFullyOccupied)
@@ -317,6 +476,7 @@ func _find_and_assign_housing_to_pop_units(
 	).enabled().execute()
 	for pop_unit: Entity in pop_units:
 		if existing_building:
+			#print("remove_relationship")
 			cmd.remove_relationship(
 				pop_unit,
 				Rels.create_lives_in(existing_building)
@@ -350,16 +510,19 @@ func _find_and_assign_housing_to_pop_units(
 			# FIXME: prolly should not be here
 			# the notion to know where to go
 			
+			if !pop_unit.has_component(C_PopUnitWithVisual):
+				return
+			
 			# if not at work, find a new loc to go to
 			if c_loc.location != C_PopUnitLocation.LOCATION.WORKPLACE:
 				if !pop_unit.visible:
-					print("showing pop_unit")
+					#print("showing pop_unit")
 					pop_unit.show()
 					pop_unit.enable_physics()
 				
-				print("adding C_LookingForMoveTarget %s" % [
-					pop_unit.name,
-				])
+				#print("adding C_LookingForMoveTarget %s" % [
+					#pop_unit.name,
+				#])
 				cmd.add_component(
 					pop_unit,
 					C_LookingForMoveTarget.new(),
@@ -392,45 +555,95 @@ func _find_and_assign_production_building_to_pop_units(
 		LogMonitor.add(pop_unit.name)
 		
 		if existing_building:
+			#print("remove_relationship")
 			cmd.remove_relationship(
 				pop_unit,
 				Rels.create_works_at(existing_building)
 			)
 		
-		var c_pop_unit: C_PopUnit = pop_unit.get_component(C_PopUnit)
+		var c_pop_unit: C_PopUnit = pop_unit.get_component(
+			C_PopUnit
+		)
 		
 		var found_building: bool = false
 		for building: Entity in buildings:
-			var c_req: C_WorkerRequirement = building.get_component(C_WorkerRequirement)
-			var c_workers: C_Workers = building.get_component(C_Workers)
-			if c_workers.workers.has(c_pop_unit.pop_type):
-				var worker: WorkerQuantity = c_workers.workers.get(c_pop_unit.pop_type)
-				var req: Worker_Requirement = c_req.requirements.get(c_pop_unit.pop_type)
-				if worker.worker_count >= req.worker_count:
-					continue
-				
-				print("found workplace for %s %s"% [
-					pop_unit.name,
-					building.name,
-				])
-				found_building = true
-				worker.worker_count += 1
-				cmd.add_relationship(
-					pop_unit,
-					Rels.create_works_at(building)
+			var c_req: C_WorkerRequirement = building.get_component(
+				C_WorkerRequirement
+			)
+			var c_workers: C_Workers = building.get_component(
+				C_Workers
+			)
+			if !c_workers.workers.has(c_pop_unit.pop_type):
+				continue
+			
+			var worker: WorkerQuantity = c_workers.workers.get(
+				c_pop_unit.pop_type
+			)
+			var req: Worker_Requirement = c_req.requirements.get(
+				c_pop_unit.pop_type
+			)
+			if worker.worker_count >= req.worker_count:
+				continue
+			
+			#print("found workplace for %s %s"% [
+				#pop_unit.name,
+				#building.name,
+			#])
+			found_building = true
+			worker.worker_count += 1
+			
+			# Info: if there is no visual, just consider it present
+			if !pop_unit.has_component(C_PopUnitWithVisual):
+				var workers: WorkerQuantity = c_workers.present_workers.get(
+					c_pop_unit.pop_type
 				)
-				
-				# Info: we are removing the building if we can assess it's full
-				if c_workers.workers.size() == 1 and worker.worker_count >= req.worker_count:
-					buildings.erase(building)
+				workers.worker_count += 1
+				var c_pop_unit_location: C_PopUnitLocation = worker.get_component(
+					C_PopUnitLocation
+				)
+				if c_pop_unit_location:
+					c_pop_unit_location.location = C_PopUnitLocation.LOCATION.WORKPLACE
+			
+			cmd.add_relationship(
+				pop_unit,
+				Rels.create_works_at(building)
+			)
+			
+			if worker.worker_count >= req.worker_count:
+				# FIXME: mutualize?
+				# Accessing if building is still missing workers
+				var is_one_missing = false
+				for req2 in c_req.requirements.values():
+					var current: WorkerQuantity = c_workers.workers.get(
+						req2.worker_type
+					)
+					if current.worker_count < req2.worker_count:
+						is_one_missing = true
+				if is_one_missing == false:
+					cmd.remove_component(
+						building,
+						C_MissingWorkers
+					)
+					# FIXME: could react using a Observer to mutualize?
+					if building.has_method("hide_production_stoppped_indicator"):
+						building.hide_production_stoppped_indicator()
+					else:
+						push_error("building needs method hide_production_stoppped_indicator")
+			
+			# Info: we are removing the building if we can assess it's full
+			if c_workers.workers.size() == 1 and worker.worker_count >= req.worker_count:
+				buildings.erase(building)
 				
 		if !found_building:
-			print("did not find workplace for %s" % [
-				pop_unit.name,
-			])
+			#print("did not find workplace for %s" % [
+				#pop_unit.name,
+			#])
 			c_pop_unit.is_working = false
 			if !pop_unit.has_component(C_JobLess):
 				cmd.add_component(pop_unit, C_JobLess.new())
+		
+		if !pop_unit.has_component(C_PopUnitWithVisual):
+			continue
 		
 		# FIXME: maybe C_LookingForMoveTarget could do that
 		var c_loc: C_PopUnitLocation = pop_unit.get_component(
@@ -439,15 +652,16 @@ func _find_and_assign_production_building_to_pop_units(
 		if c_loc.location == C_PopUnitLocation.LOCATION.WORKPLACE:
 			c_loc.location = C_PopUnitLocation.LOCATION.IDLE_ON_LAND
 		
-		if !pop_unit.visible:
-			print("showing pop_unit")
-			pop_unit.show()
-			pop_unit.enable_physics()
+		if pop_unit.has_method("enable_physics"):
+			if !pop_unit.visible:
+				#print("showing pop_unit")
+				pop_unit.show()
+				pop_unit.enable_physics()
 		
-		print("adding C_LookingForMoveTarget %s %s" % [
-			pop_unit.name,
-			existing_building.name,
-		])
+		#print("adding C_LookingForMoveTarget %s %s" % [
+			#pop_unit.name,
+			#existing_building.name,
+		#])
 		cmd.add_component(
 			pop_unit,
 			C_LookingForMoveTarget.new(),
@@ -518,6 +732,9 @@ func _on_pop_unit_leave_workplace_requested(
 	var c_workers: C_Workers = building.get_component(C_Workers)
 	var c_pop_unit: C_PopUnit = pop_unit.get_component(C_PopUnit)
 	
+	# TODO: if no visual
+	# Just assign to building
+	
 	if c_workers and c_pop_unit:
 		var workers: WorkerQuantity = c_workers.workers.get(c_pop_unit.pop_type)
 		if workers:
@@ -532,6 +749,7 @@ func _on_pop_unit_leave_workplace_requested(
 			c_pop_unit,
 		])
 	
+	#print("remove_relationship")
 	cmd.remove_relationship(
 		pop_unit,
 		Rels.works_at
@@ -578,6 +796,7 @@ func _on_pop_unit_leave_housing_requested(
 	else:
 		printerr("C_HousingCapacity not found")
 	
+	#print("remove_relationship")
 	cmd.remove_relationship(
 		pop_unit,
 		Rels.lives_in,

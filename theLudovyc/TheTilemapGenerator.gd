@@ -13,7 +13,7 @@ var gaea_generator: GaeaGenerator
 func _ready() -> void:
 	gaea_generator.generation_finished.connect(_on_gaea_generator_generation_finished)
 
-func _on_gaea_generator_generation_finished(grid: GaeaGrid):
+func _on_gaea_generator_generation_finished(_grid: GaeaGrid):
 	# FIXME : maybe we should not do the Godot terrain here?
 	# Or not in the Editor
 	# Or redo it during gameplay

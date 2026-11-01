@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ResourceCollectionDefinition" format=3 uid="uid://bf7bn4rep3wij"]
+
+[ext_resource type="Script" uid="uid://b2majk3tlsr2v" path="res://3D/misc/definitions/builtin_resource_quantity_definition.gd" id="1_eadkn"]
+[ext_resource type="Script" uid="uid://do80cmvl4p40w" path="res://3D/misc/definitions/resource_quantity_definition.gd" id="2_oqt0u"]
+[ext_resource type="Script" uid="uid://ugs07ideknah" path="res://3D/misc/definitions/resource_collection_definition.gd" id="3_i78pa"]
+
+[sub_resource type="Resource" id="Resource_ek21l"]
+script = ExtResource("1_eadkn")
+resource_type = 1
+quantity = 300
+metadata/_custom_type_script = "uid://b2majk3tlsr2v"
+
+[sub_resource type="Resource" id="Resource_di3ws"]
+script = ExtResource("1_eadkn")
+resource_type = 3
+quantity = 300
+metadata/_custom_type_script = "uid://b2majk3tlsr2v"
+
+[resource]
+script = ExtResource("3_i78pa")
+builtin_resources = Dictionary[int, ExtResource("1_eadkn")]({
+1: SubResource("Resource_ek21l"),
+3: SubResource("Resource_di3ws")
+})
+gold_count = 500
+metadata/_custom_type_script = "uid://ugs07ideknah"

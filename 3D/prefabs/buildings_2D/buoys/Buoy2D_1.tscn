@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://5h8h5povuddd"]
+
+[ext_resource type="Texture2D" uid="uid://2243rtdnpc0f" path="res://Art/Image/Buildings/Buoy/buoy_1_atlas_texture.tres" id="1_cm37o"]
+[ext_resource type="Script" uid="uid://qgdbh0ub6tex" path="res://3D/ECS/entities/e_dock_buoy_2d_1.gd" id="1_refyw"]
+[ext_resource type="Texture2D" uid="uid://cr5gwhomd6mpk" path="res://Assets/Kenney/kenney_watercraft-pack/Previews/buoy-flag.png" id="3_xsyyv"]
+
+[node name="Buoy2d1" type="Node2D" unique_id=183367175]
+script = ExtResource("1_refyw")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=828072203]
+visible = false
+z_index = 15
+scale = Vector2(3, 3)
+texture = ExtResource("1_cm37o")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=551145072]
+z_index = 5
+texture = ExtResource("3_xsyyv")

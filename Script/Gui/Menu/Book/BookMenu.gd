@@ -7,13 +7,18 @@ class_name BookMenu
 ## Add [b]BookMenuPage[/b] scenes inside the [code]%Pages[/code]
 ## [TabContainer] node in order to create multipage interfaces.
 
+func _ready() -> void:
+	print("BookMenu:_ready")
+
 ## Reference to the Control which opened this menu.
-#var parent: Control = null
-#
-#@export var has_delete_button: bool : set = set_has_delete_button
-#@export var has_cancel_button: bool : set = set_has_cancel_button
-#@export var has_ok_button: bool = true : set = set_has_ok_button
-#
+var parent: Control = null
+
+@export var has_delete_button: bool : set = set_has_delete_button
+@export var has_cancel_button: bool : set = set_has_cancel_button
+@export var has_ok_button: bool = true : set = set_has_ok_button
+
+# FIXME: comments
+
 #func _ready() -> void:
 	#var page_control: Control
 	#for page in %Pages.get_children():
@@ -29,47 +34,48 @@ class_name BookMenu
 	## Force-call to determine initial state of page controls (enabled/disabled)
 	#%Pages.tab_changed.emit(%Pages.current_tab)
 
-# FIXME: comment
-#func set_has_delete_button(new_has_delete_button: bool) -> void:
-	#if not is_inside_tree():
-		#await self.ready
-#
-	#has_delete_button = new_has_delete_button
-#
-	#for page in %Pages.get_children():
-		#var delete_button := page.find_child("DeleteButton") as TextureButton
-		#Utils.ensure_connected(delete_button.pressed, _on_DeleteButton_pressed)
-		#delete_button.visible = has_delete_button
-#
-#func set_has_cancel_button(new_has_cancel_button: bool) -> void:
-	#if not is_inside_tree():
-		#await self.ready
-#
-	#has_cancel_button = new_has_cancel_button
-#
-	#for page in %Pages.get_children():
-		## Place CancelButton on
-		##	left side for one-paged menus
-		##	right side for multi-paged menus
-		#var cancel_button: TextureButton
-		#if %Pages.get_child_count() > 1:
-			#cancel_button = page.find_child("RightPageControls").find_child("CancelButton") as TextureButton
-		#else:
-			#cancel_button = page.find_child("CancelButton") as TextureButton
-		#Utils.ensure_connected(cancel_button.pressed, _on_CancelButton_pressed)
-		#cancel_button.visible = has_cancel_button
+# FIXME: could be done another way?
+
+func set_has_delete_button(new_has_delete_button: bool) -> void:
+	if not is_inside_tree():
+		await self.ready
+
+	has_delete_button = new_has_delete_button
+
+	for page in %Pages.get_children():
+		var delete_button := page.find_child("DeleteButton") as TextureButton
+		Utils.ensure_connected(delete_button.pressed, _on_DeleteButton_pressed)
+		delete_button.visible = has_delete_button
+
+func set_has_cancel_button(new_has_cancel_button: bool) -> void:
+	if not is_inside_tree():
+		await self.ready
+
+	has_cancel_button = new_has_cancel_button
+
+	for page in %Pages.get_children():
+		# Place CancelButton on
+		#	left side for one-paged menus
+		#	right side for multi-paged menus
+		var cancel_button: TextureButton
+		if %Pages.get_child_count() > 1:
+			cancel_button = page.find_child("RightPageControls").find_child("CancelButton") as TextureButton
+		else:
+			cancel_button = page.find_child("CancelButton") as TextureButton
+		Utils.ensure_connected(cancel_button.pressed, _on_CancelButton_pressed)
+		cancel_button.visible = has_cancel_button
 
 
-#func set_has_ok_button(new_has_ok_button: bool) -> void:
-	#if not is_inside_tree():
-		#await self.ready
-#
-	#has_ok_button = new_has_ok_button
-#
-	#for page in %Pages.get_children():
-		#var ok_button := page.find_child("OKButton") as TextureButton
-		#Utils.ensure_connected(ok_button.pressed, _on_OKButton_pressed)
-		#ok_button.visible = has_ok_button
+func set_has_ok_button(new_has_ok_button: bool) -> void:
+	if not is_inside_tree():
+		await self.ready
+
+	has_ok_button = new_has_ok_button
+
+	for page in %Pages.get_children():
+		var ok_button := page.find_child("OKButton") as TextureButton
+		Utils.ensure_connected(ok_button.pressed, _on_OKButton_pressed)
+		ok_button.visible = has_ok_button
 #
 #func _on_PrevButton_pressed() -> void:
 	##prints("_on_PrevButton_pressed", "current_tab:", %Pages.current_tab)
@@ -101,22 +107,22 @@ class_name BookMenu
 			#current_page_control.get_node("NextButton").disabled = false
 
 # FIXME: comment
-#func _on_DeleteButton_pressed() -> void:
-	##print("_on_DeleteButton_pressed")
+func _on_DeleteButton_pressed() -> void:
+	print("_on_DeleteButton_pressed")
 	#Audio.play_snd_click()
-#
-#func _on_CancelButton_pressed() -> void:
-	##print("_on_CancelButton_pressed")
+
+func _on_CancelButton_pressed() -> void:
+	print("_on_CancelButton_pressed")
 	#Audio.play_snd_click()
-#
-	#if parent != null:
-		#parent.visible = true
-	#queue_free()
-#
-#func _on_OKButton_pressed() -> void:
-	##print("_on_OKButton_pressed")
+
+	if parent != null:
+		parent.visible = true
+	queue_free()
+
+func _on_OKButton_pressed() -> void:
+	print("_on_OKButton_pressed")
 	#Audio.play_snd_click()
-#
-	#if parent != null:
-		#parent.visible = true
-	#queue_free()
+
+	if parent != null:
+		parent.visible = true
+	queue_free()

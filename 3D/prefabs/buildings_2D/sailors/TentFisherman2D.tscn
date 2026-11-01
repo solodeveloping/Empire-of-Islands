@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://6qq3jme41cba"]
+
+[ext_resource type="Script" uid="uid://blr2840i8m1lj" path="res://3D/prefabs/buildings_2D/sailors/tent_fisherman_2d.gd" id="1_t3q50"]
+
+[node name="TentFisherman2d" type="Node2D" unique_id=1371764867]
+script = ExtResource("1_t3q50")

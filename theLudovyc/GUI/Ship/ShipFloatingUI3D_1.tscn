@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://cbyovokkokrod"]
+
+[ext_resource type="Script" uid="uid://cwvkdds4eg7v" path="res://theLudovyc/GUI/Ship/ship_floating_ui_3d_1.gd" id="1_g6r3v"]
+[ext_resource type="PackedScene" uid="uid://cd3gdnsh7cjbu" path="res://theLudovyc/GUI/Ship/ShipFloatingUIFor3D_1.tscn" id="2_u133g"]
+[ext_resource type="Shader" uid="uid://bqk667bcufp81" path="res://VFX/common/render_texture_billboard_no_fog_1.tres" id="3_u133g"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_w1pc8"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n4y2n"]
+resource_local_to_scene = true
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+no_depth_test = true
+disable_fog = true
+albedo_texture = SubResource("ViewportTexture_w1pc8")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_sfkqh"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_tk6sk"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g6r3v"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_u133g")
+shader_parameter/Texture = SubResource("ViewportTexture_tk6sk")
+
+[node name="ShipFloatingUI3D_1" type="Node3D" unique_id=1989830556]
+script = ExtResource("1_g6r3v")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=405722997]
+transparent_bg = true
+size = Vector2i(4365, 1778)
+render_target_update_mode = 1
+
+[node name="ShipFloatingUIFor3D_1" parent="SubViewport" unique_id=24407110 instance=ExtResource("2_u133g")]
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1197429237]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_n4y2n")
+cast_shadow = 0
+visibility_range_end = 500.0
+visibility_range_end_margin = 10.0
+double_sided = false
+texture = SubResource("ViewportTexture_sfkqh")
+
+[node name="Sprite3D2" type="Sprite3D" parent="." unique_id=1277992540]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+visible = false
+material_override = SubResource("ShaderMaterial_g6r3v")
+cast_shadow = 0
+visibility_range_end = 500.0
+visibility_range_end_margin = 10.0
+double_sided = false
+texture = SubResource("ViewportTexture_sfkqh")
+
+[node name="UpdateSpriteScaleTimer" type="Timer" parent="." unique_id=302416053]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="UpdateSpriteScaleTimer" to="." method="_on_UpdateSpriteScaleTimer_timeout"]

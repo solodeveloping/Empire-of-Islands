@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b0sdpcekd2xfp"]
+
+[ext_resource type="Script" uid="uid://c06ffddq3cge0" path="res://3D/prefabs/buildings_2D/sailors/tent_housing_2D.gd" id="1_358kv"]
+
+[node name="TentHousing" type="Node2D" unique_id=1208606729]
+script = ExtResource("1_358kv")

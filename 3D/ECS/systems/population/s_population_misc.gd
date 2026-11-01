@@ -19,7 +19,9 @@ func sub_systems():
 					C_PopUnit,
 					C_LookingForMoveTarget,
 				]
-			),
+			).with_none([
+				C_PopUnitWithVisual,
+			]),
 			find_move_targets
 		],
 		[
@@ -52,10 +54,10 @@ func find_move_targets(
 		#entities[0].name,
 		#entities.size(),
 	#])
-	if entities.size() > 1:
-		printerr("find_move_targets %s" % [
-			entities.size(),
-		])
+	#if entities.size() > 1:
+		#printerr("find_move_targets %s" % [
+			#entities.size(),
+		#])
 	
 	for pop_unit in entities:
 		LogMonitor.info(pop_unit.name, "find_move_targets %s" % [
@@ -72,6 +74,7 @@ func find_move_targets(
 			if c_loc.location == C_PopUnitLocation.LOCATION.WORKPLACE:
 				printerr("unit is already at WORKPLACE")
 			
+			# TODO: 2D version
 			c_loc.location = C_PopUnitLocation.LOCATION.MOVING_ON_LAND
 			cmd.add_component(
 				pop_unit,
@@ -103,6 +106,7 @@ func find_move_targets(
 			print("moving target will be housing %s" % [
 				pop_unit.name,
 			])
+			# TODO: 2D version
 			if c_loc.location != C_PopUnitLocation.LOCATION.HOUSING:
 				c_loc.location = C_PopUnitLocation.LOCATION.MOVING_ON_LAND
 				cmd.add_component(
@@ -233,6 +237,9 @@ func increment_jobless_time(
 			pop_unit,
 			C_LookingToLeaveIsland.new()
 		)
+		
+		if !pop_unit.has_component(C_PopUnitWithVisual):
+			continue
 		
 		# FIXME: could put it elsewhere
 		# and maybe optimize it

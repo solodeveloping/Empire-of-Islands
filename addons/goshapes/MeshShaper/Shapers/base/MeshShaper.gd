@@ -3,6 +3,14 @@ class_name MeshShaper
 extends Shaper
 ## The base shaper for all shapers
 
+# TODO: this is new, push to new repository
+@export_flags_3d_render
+var visual_layers: int = 1:
+	set(value):
+		if visual_layers != value:
+			visual_layers = value
+			emit_changed()
+
 ## Toggles whether or not to build a collider
 @export_group("Groups & Collisions")
 @export var build_collider: bool = true:

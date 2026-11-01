@@ -1,4 +1,5 @@
 extends Node3D
+class_name TestMap3D
 
 @onready var island_1: IslandGECS1 = $Island1
 @onready var buildings: Node3D = $Buildings
@@ -25,7 +26,7 @@ func _ready() -> void:
 		child.hide()
 	select_ocean_visual(0)
 
-func add_buildings_to_ecs(city: Entity):
+func add_entitiess_to_ecs(city: Entity):
 	# TODO: maybe we should have a better system
 	var building_list = SceneUtils.find_all_child_of_type_depth_first(
 		self,
@@ -49,7 +50,13 @@ func add_buildings_to_ecs(city: Entity):
 						building.name
 					])
 				
-				building.add_relationship(Rels.create_belongs_to(city))
+				# FIXME: not sure if should be in finalize_construction or not
+				if building.has_method("add_children_entities"):
+					building.add_children_entities()
+				
+				building.add_relationship(
+					Rels.create_belongs_to(city)
+				)
 			
 			#var c_building: C_Building = building.get_component(C_Building)
 			#if c_building:

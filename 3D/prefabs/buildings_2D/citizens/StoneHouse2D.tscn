@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ddvh3uqcnwi6h"]
+
+[ext_resource type="Script" uid="uid://d23w0s8vysbxg" path="res://3D/prefabs/buildings_2D/citizens/stone_house_2d.gd" id="1_mitls"]
+
+[node name="StoneHouse2d" type="Node2D" unique_id=917719733]
+script = ExtResource("1_mitls")

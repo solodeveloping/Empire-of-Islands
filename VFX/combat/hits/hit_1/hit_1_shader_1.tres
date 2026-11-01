@@ -1,0 +1,34 @@
+[gd_resource type="VisualShader" format=3 uid="uid://drk24hdk4tkpg"]
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_yilo0"]
+parameter_name = "MaskTexture"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_psobj"]
+expanded_output_ports = [0]
+source = 5
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_860yp"]
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_gqq7c"]
+constant = 0.5
+
+[sub_resource type="VisualShaderNodeBillboard" id="VisualShaderNodeBillboard_eixo3"]
+keep_scale = true
+
+[resource]
+flags/depth_test_disabled = true
+flags/unshaded = true
+flags/shadows_disabled = true
+nodes/vertex/2/node = SubResource("VisualShaderNodeBillboard_eixo3")
+nodes/vertex/2/position = Vector2(8.918062, 558.6291)
+nodes/vertex/connections = PackedInt32Array(2, 0, 0, 10)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_yilo0")
+nodes/fragment/2/position = Vector2(-700, 560)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_psobj")
+nodes/fragment/3/position = Vector2(-300, 400)
+nodes/fragment/4/node = SubResource("VisualShaderNodeInput_860yp")
+nodes/fragment/4/position = Vector2(-420, 160)
+nodes/fragment/5/node = SubResource("VisualShaderNodeFloatConstant_gqq7c")
+nodes/fragment/5/position = Vector2(10.94447, 789.90735)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 2, 4, 0, 0, 0, 3, 1, 0, 1, 5, 0, 0, 19)

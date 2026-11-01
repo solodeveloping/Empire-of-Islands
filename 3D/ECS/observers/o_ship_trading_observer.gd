@@ -75,8 +75,12 @@ func _on_ship_trading_requested(
 	
 	# sell
 	for res_id in ship_c_storage.storage.keys():
-		print("ship attempting to sell %s" % [
+		var res_id_name = Resources.get_resource_name(
 			res_id,
+		)
+		print("ship attempting to sell %s %s" % [
+			res_id,
+			res_id_name
 		])
 		var ship_res_storage: CargoResourceStorageDef = ship_c_storage.storage.get(
 			res_id
@@ -341,6 +345,9 @@ func _on_ship_trading_requested(
 						ship_res_storage,
 					)
 					
+					ship_res_storage.weight_per_quantity = space_weight_def.weight_per_quantity
+					ship_res_storage.space_per_quantity = space_weight_def.space_per_quantity
+					
 				dock_faction_storage_def.quantity -= 1
 				ship_res_storage.quantity += 1
 				
@@ -411,6 +418,10 @@ func _on_ship_trading_requested(
 						res_id,
 						ship_res_storage,
 					)
+					
+					ship_res_storage.weight_per_quantity = space_weight_def.weight_per_quantity
+					ship_res_storage.space_per_quantity = space_weight_def.space_per_quantity
+					
 				
 				dock_faction_storage_def.quantity -= 1
 				ship_res_storage.quantity += 1

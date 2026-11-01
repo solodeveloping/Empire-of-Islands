@@ -6,6 +6,8 @@ extends Component
 @export
 var workers: Dictionary[int, WorkerQuantity] = {}
 
+# This is instantiated by default if not passed
+# If they are not present, the building will not produce
 @export
 var present_workers: Dictionary[int, WorkerQuantity] = {}
 

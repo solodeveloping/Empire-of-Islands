@@ -85,6 +85,7 @@ building_id = 22
 
 [node name="BuildResidential" type="TextureButton" parent="VBoxContainer/InfrastructureGridContainer" unique_id=325197074]
 layout_mode = 2
+tooltip_text = "test"
 texture_normal = ExtResource("7_n6vtb")
 texture_pressed = ExtResource("8_ym7fx")
 texture_hover = ExtResource("9_qixeh")
@@ -178,3 +179,5 @@ texture_hover = ExtResource("13_0hdvq")
 texture_disabled = ExtResource("14_eudfw")
 script = ExtResource("6_2q3ia")
 building_id = 2
+
+[connection signal="mouse_entered" from="VBoxContainer/InfrastructureGridContainer/BuildResidential" to="." method="_on_BuildResidential_mouse_entered"]

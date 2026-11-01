@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c477wb60alcth"
+path="res://.godot/imported/Gems_Single_06.wav-fc1f3abeb4c59cf74625a9236bc59233.sample"
+
+[deps]
+
+source_file="res://Assets/OpenGameArt/Little Robot Sound Factory/Coins Sound Library/Wav/Gems_Single/Gems_Single_06.wav"
+dest_files=["res://.godot/imported/Gems_Single_06.wav-fc1f3abeb4c59cf74625a9236bc59233.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

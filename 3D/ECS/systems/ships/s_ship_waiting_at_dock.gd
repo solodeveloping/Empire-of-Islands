@@ -1,12 +1,14 @@
 extends System
 class_name ShipWaitingAtDockSystem
 
-@export var the_storage: Node
-
 func sub_systems():
 	return [
 		[
-			ECS.world.query.with_all([C_ShipWaitingAtDock]), 
+			ECS.world.query.with_all([
+				C_ShipWaitingAtDock
+			]).with_none([
+				C_IsDead
+			]),
 			process_ships
 		],
 	]

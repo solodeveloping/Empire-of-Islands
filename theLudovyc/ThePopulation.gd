@@ -1,8 +1,8 @@
 extends Node
 class_name ThePopulation
 
-@onready var event_bus = $"../EventBus"
-@onready var the_factory = $"../TheFactory"
+@onready var event_bus: EventBus = %EventBus
+@onready var the_factory: TheFactory = %TheFactory
 
 # FIXME : the instantiation could be automated
 var populations: Array[int] = [0, 0, 0, 0]:

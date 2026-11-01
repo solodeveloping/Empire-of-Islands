@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://vh5lyw8a3x8"]
+
+[ext_resource type="Shader" uid="uid://dekxfbkb8m0wy" path="res://VFX/loot/SphereOutlineFresnelVFX_1/sphere_outline_fresnel_1_shader_1.tres" id="1_y7msc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bd578"]
+render_priority = 0
+shader = ExtResource("1_y7msc")
+shader_parameter/Color = Color(2.0974698, 1.9954569, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_sfkqh"]
+
+[node name="SphereOutlineFresnelVfx1" type="Node3D" unique_id=263566430]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1176188651]
+material_override = SubResource("ShaderMaterial_bd578")
+mesh = SubResource("SphereMesh_sfkqh")

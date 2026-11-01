@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d3enupduhucey"]
+
+[ext_resource type="Script" uid="uid://bfs3dp6pfluxc" path="res://3D/prefabs/buildings_2D/sailors/tent_lumberjack_2d.gd" id="1_wc3qs"]
+
+[node name="TentLumberjack2d" type="Node2D" unique_id=1659849208]
+script = ExtResource("1_wc3qs")

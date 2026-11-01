@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" format=3 uid="uid://c0soxg3l4xeqj"]
+
+[ext_resource type="Texture2D" uid="uid://doi3afojbhfdn" path="res://Art/Image/Units/Frigate/Frigate_idle.png" id="1_q4e30"]
+
+[resource]
+atlas = ExtResource("1_q4e30")
+region = Rect2(256, 0, 256, 256)

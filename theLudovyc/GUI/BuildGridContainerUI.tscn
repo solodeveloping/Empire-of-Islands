@@ -1,0 +1,257 @@
+[gd_scene format=3 uid="uid://dy1b6i8egw0s7"]
+
+[ext_resource type="Script" uid="uid://dq3u8n07dklf5" path="res://theLudovyc/GUI/BuildGridContainer.gd" id="1_pj2q3"]
+[ext_resource type="Texture2D" uid="uid://bk6sk4bgpqvya" path="res://Art/Image/Gui/Icons/BuildMenu/002.png" id="2_4qvqu"]
+[ext_resource type="Texture2D" uid="uid://c45071tebp07s" path="res://Art/Image/Gui/Icons/BuildMenu/002_d.png" id="3_fetmk"]
+[ext_resource type="Texture2D" uid="uid://db2epqefty5oq" path="res://Art/Image/Gui/Icons/BuildMenu/002_h.png" id="4_upukj"]
+[ext_resource type="Texture2D" uid="uid://ckotlmsd3us4u" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/002.png" id="5_iot4q"]
+[ext_resource type="Script" uid="uid://dxo6pwnqt8tjp" path="res://theLudovyc/GUI/ButtonBuild.gd" id="6_ya3by"]
+[ext_resource type="Texture2D" uid="uid://ddlgbu2x5p4tg" path="res://Art/Image/Gui/Icons/BuildMenu/003.png" id="7_ermrb"]
+[ext_resource type="Texture2D" uid="uid://56ilapcigjvn" path="res://Art/Image/Gui/Icons/BuildMenu/004.png" id="7_iot4q"]
+[ext_resource type="Texture2D" uid="uid://cwbtvjpicrocv" path="res://Art/Image/Gui/Icons/BuildMenu/003_d.png" id="8_l4toy"]
+[ext_resource type="Texture2D" uid="uid://deyp6cd7q22dg" path="res://Art/Image/Gui/Icons/BuildMenu/004_d.png" id="8_ya3by"]
+[ext_resource type="Texture2D" uid="uid://djf38b054w0jm" path="res://Art/Image/Gui/Icons/BuildMenu/004_h.png" id="9_ermrb"]
+[ext_resource type="Texture2D" uid="uid://bnrw8bxew25wd" path="res://Art/Image/Gui/Icons/BuildMenu/003_h.png" id="9_ojo4h"]
+[ext_resource type="Texture2D" uid="uid://dc7nnxt6u1rpa" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/004.png" id="10_l4toy"]
+[ext_resource type="Texture2D" uid="uid://c36pqi8rnvbl0" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/003.png" id="10_uup4g"]
+[ext_resource type="Texture2D" uid="uid://d2a22cr70qsmg" path="res://Art/Image/Gui/Icons/BuildMenu/008.png" id="11_nnod6"]
+[ext_resource type="Texture2D" uid="uid://dxx4hctv3pcww" path="res://Art/Image/Gui/Icons/BuildMenu/008_d.png" id="12_x856i"]
+[ext_resource type="Texture2D" uid="uid://340ntgsok673" path="res://Art/Image/Gui/Icons/BuildMenu/008_h.png" id="13_ls63u"]
+[ext_resource type="Texture2D" uid="uid://dx33akwrax38v" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/008.png" id="14_itkxc"]
+[ext_resource type="Texture2D" uid="uid://r3027vyqk7wl" path="res://Art/Image/Gui/Icons/BuildMenu/009.png" id="15_hdbbl"]
+[ext_resource type="Texture2D" uid="uid://cnhwvotyn7ksj" path="res://Art/Image/Gui/Icons/BuildMenu/009_d.png" id="16_ygmik"]
+[ext_resource type="Texture2D" uid="uid://djk6eik5xkhhw" path="res://Art/Image/Gui/Icons/BuildMenu/009_h.png" id="17_agoak"]
+[ext_resource type="Texture2D" uid="uid://bnk4p0rrv0ed5" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/009.png" id="18_e87w8"]
+[ext_resource type="Texture2D" uid="uid://l7d17eiba0b3" path="res://Art/Image/Gui/Icons/BuildMenu/011.png" id="19_acrjv"]
+[ext_resource type="Texture2D" uid="uid://cns0nj567vhnm" path="res://Art/Image/Gui/Icons/BuildMenu/011_d.png" id="20_mddn0"]
+[ext_resource type="Texture2D" uid="uid://dict4wln1k2un" path="res://Art/Image/Gui/Icons/BuildMenu/011_h.png" id="21_1f8cx"]
+[ext_resource type="Texture2D" uid="uid://ol6wf5tsvoqt" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/011.png" id="22_7vck3"]
+[ext_resource type="Texture2D" uid="uid://bqvkxst5fhe7u" path="res://Art/Image/Gui/Icons/BuildMenu/020.png" id="23_fo82e"]
+[ext_resource type="Texture2D" uid="uid://chsaot336foxe" path="res://Art/Image/Gui/Icons/BuildMenu/020_d.png" id="24_dfht0"]
+[ext_resource type="Texture2D" uid="uid://difqb3sikk4b3" path="res://Art/Image/Gui/Icons/BuildMenu/020_h.png" id="25_g8h2n"]
+[ext_resource type="Texture2D" uid="uid://drbmncjyty61r" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/020.png" id="26_p7fee"]
+[ext_resource type="Texture2D" uid="uid://cuxu1af4s3ym2" path="res://Art/Image/Gui/Icons/BuildMenu/019.png" id="27_ui5sy"]
+[ext_resource type="Texture2D" uid="uid://bfwkj4qpaltng" path="res://Art/Image/Gui/Icons/BuildMenu/019_d.png" id="28_c7h2q"]
+[ext_resource type="Texture2D" uid="uid://dlu8qriqt5b8w" path="res://Art/Image/Gui/Icons/BuildMenu/019_h.png" id="29_xsynf"]
+[ext_resource type="Texture2D" uid="uid://bkcjnj6dc04ir" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/019.png" id="30_j5em8"]
+[ext_resource type="Texture2D" uid="uid://bj0ig3hsjxl7q" path="res://Art/Image/Gui/Icons/BuildMenu/039.png" id="31_v75xr"]
+[ext_resource type="Texture2D" uid="uid://div73bs1hkxwc" path="res://Art/Image/Gui/Icons/BuildMenu/039_d.png" id="32_p4g1n"]
+[ext_resource type="Texture2D" uid="uid://cct56i6qr81fr" path="res://Art/Image/Gui/Icons/BuildMenu/039_h.png" id="33_t16yn"]
+[ext_resource type="Texture2D" uid="uid://co7yxlkko5mm5" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/039.png" id="34_b5p5g"]
+[ext_resource type="Texture2D" uid="uid://c2fwglu1y3ll5" path="res://Art/Image/Gui/Icons/BuildMenu/046.png" id="35_g84ir"]
+[ext_resource type="Texture2D" uid="uid://cnr2qdyokj2va" path="res://Art/Image/Gui/Icons/BuildMenu/046_d.png" id="36_kc3vg"]
+[ext_resource type="Texture2D" uid="uid://dxcccu06661g4" path="res://Art/Image/Gui/Icons/BuildMenu/046_h.png" id="37_30q2x"]
+[ext_resource type="Texture2D" uid="uid://meyfdyrkdiah" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/046.png" id="38_n8ys4"]
+[ext_resource type="Texture2D" uid="uid://d06s04d06gpg3" path="res://Art/Image/Gui/Icons/BuildMenu/018.png" id="39_kjt74"]
+[ext_resource type="Texture2D" uid="uid://csflapl4smyst" path="res://Art/Image/Gui/Icons/BuildMenu/018_d.png" id="40_51bak"]
+[ext_resource type="Texture2D" uid="uid://c25d2gqjswcio" path="res://Art/Image/Gui/Icons/BuildMenu/018_h.png" id="41_6asai"]
+[ext_resource type="Texture2D" uid="uid://cr078gitr0b2e" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/018.png" id="42_ohhvc"]
+[ext_resource type="Texture2D" uid="uid://etyxgvuub3qn" path="res://Art/Image/Gui/Icons/BuildMenu/041.png" id="43_1b7v2"]
+[ext_resource type="Texture2D" uid="uid://cf518se81cj2d" path="res://Art/Image/Gui/Icons/BuildMenu/041_d.png" id="44_cj6k7"]
+[ext_resource type="Texture2D" uid="uid://dbbd074dljjdh" path="res://Art/Image/Gui/Icons/BuildMenu/041_h.png" id="45_687ct"]
+[ext_resource type="Texture2D" uid="uid://dheotgyfkpraw" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/041.png" id="46_sbr7w"]
+[ext_resource type="Texture2D" uid="uid://dwkjtxjhyygxb" path="res://Art/Image/Gui/Icons/BuildMenu/047.png" id="47_gn62h"]
+[ext_resource type="Texture2D" uid="uid://cx77unr2pgyd3" path="res://Art/Image/Gui/Icons/BuildMenu/047_d.png" id="48_3e12o"]
+[ext_resource type="Texture2D" uid="uid://q75smkfyvqj8" path="res://Art/Image/Gui/Icons/BuildMenu/047_h.png" id="49_ypr4f"]
+[ext_resource type="Texture2D" uid="uid://cy3kb84wgmo7e" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/047.png" id="50_tmy24"]
+[ext_resource type="Texture2D" uid="uid://qbyjam3478ta" path="res://Art/Image/Gui/Icons/BuildMenu/054.png" id="51_3cm1i"]
+[ext_resource type="Texture2D" uid="uid://dkpa3kwuxtxvn" path="res://Art/Image/Gui/Icons/BuildMenu/054_d.png" id="52_5ktks"]
+[ext_resource type="Texture2D" uid="uid://b6wfqgtsw61me" path="res://Art/Image/Gui/Icons/BuildMenu/054_h.png" id="53_r6dua"]
+[ext_resource type="Texture2D" uid="uid://cg015lc2qdy2f" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/054.png" id="54_a2c74"]
+[ext_resource type="Texture2D" uid="uid://dllnqwm5uidpt" path="res://Art/Image/Gui/Icons/BuildMenu/055.png" id="55_qv8bi"]
+[ext_resource type="Texture2D" uid="uid://btjpbjtllg176" path="res://Art/Image/Gui/Icons/BuildMenu/055_d.png" id="56_184pr"]
+[ext_resource type="Texture2D" uid="uid://cpwh4wjrdxk26" path="res://Art/Image/Gui/Icons/BuildMenu/055_h.png" id="57_e01ay"]
+[ext_resource type="Texture2D" uid="uid://btqpf17vpcpn0" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/055.png" id="58_6rybf"]
+[ext_resource type="Texture2D" uid="uid://bb7pfd7nxoux" path="res://Art/Image/Gui/Icons/BuildMenu/007.png" id="59_ko1ka"]
+[ext_resource type="Texture2D" uid="uid://cet5qi63h6ybt" path="res://Art/Image/Gui/Icons/BuildMenu/007_d.png" id="60_ikjfe"]
+[ext_resource type="Texture2D" uid="uid://e2esl67a231m" path="res://Art/Image/Gui/Icons/BuildMenu/007_h.png" id="61_vi1e2"]
+[ext_resource type="Texture2D" uid="uid://c7itsp5vqf76e" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/007.png" id="62_2d2m7"]
+[ext_resource type="Texture2D" uid="uid://dlwlduri34m3l" path="res://Art/Image/Gui/Icons/BuildMenu/048.png" id="63_uu1l4"]
+[ext_resource type="Texture2D" uid="uid://dg6rg1yh44od4" path="res://Art/Image/Gui/Icons/BuildMenu/048_d.png" id="64_b2vda"]
+[ext_resource type="Texture2D" uid="uid://pcttsvsppfsv" path="res://Art/Image/Gui/Icons/BuildMenu/048_h.png" id="65_veqvq"]
+[ext_resource type="Texture2D" uid="uid://cvfmbonc68uck" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/048.png" id="66_g71j0"]
+
+[node name="BuildGridContainer" type="GridContainer" unique_id=1386305415]
+mouse_filter = 2
+columns = 4
+script = ExtResource("1_pj2q3")
+metadata/_tab_index = 1
+
+[node name="BuildWarehouse" type="TextureButton" parent="." unique_id=995784853]
+layout_mode = 2
+texture_normal = ExtResource("2_4qvqu")
+texture_pressed = ExtResource("3_fetmk")
+texture_hover = ExtResource("4_upukj")
+texture_disabled = ExtResource("5_iot4q")
+script = ExtResource("6_ya3by")
+
+[node name="BuildMainsquare" type="TextureButton" parent="." unique_id=714332500]
+layout_mode = 2
+texture_normal = ExtResource("7_iot4q")
+texture_pressed = ExtResource("8_ya3by")
+texture_hover = ExtResource("9_ermrb")
+texture_disabled = ExtResource("10_l4toy")
+script = ExtResource("6_ya3by")
+building_id = 22
+
+[node name="BuildResidential" type="TextureButton" parent="." unique_id=453824473]
+layout_mode = 2
+texture_normal = ExtResource("7_ermrb")
+texture_pressed = ExtResource("8_l4toy")
+texture_hover = ExtResource("9_ojo4h")
+texture_disabled = ExtResource("10_uup4g")
+script = ExtResource("6_ya3by")
+building_id = 1
+
+[node name="BuildLumberjack" type="TextureButton" parent="." unique_id=335205908]
+layout_mode = 2
+texture_normal = ExtResource("11_nnod6")
+texture_pressed = ExtResource("12_x856i")
+texture_hover = ExtResource("13_ls63u")
+texture_disabled = ExtResource("14_itkxc")
+script = ExtResource("6_ya3by")
+building_id = 2
+
+[node name="BuildHunterTent" type="TextureButton" parent="." unique_id=1934956546]
+layout_mode = 2
+texture_normal = ExtResource("15_hdbbl")
+texture_pressed = ExtResource("16_ygmik")
+texture_hover = ExtResource("17_agoak")
+texture_disabled = ExtResource("18_e87w8")
+script = ExtResource("6_ya3by")
+building_id = 3
+
+[node name="BuildFishery" type="TextureButton" parent="." unique_id=1226454215]
+layout_mode = 2
+texture_normal = ExtResource("19_acrjv")
+texture_pressed = ExtResource("20_mddn0")
+texture_hover = ExtResource("21_1f8cx")
+texture_disabled = ExtResource("22_7vck3")
+script = ExtResource("6_ya3by")
+building_id = 18
+
+[node name="BuildHut" type="TextureButton" parent="." unique_id=196821269]
+layout_mode = 2
+texture_normal = ExtResource("7_ermrb")
+texture_pressed = ExtResource("8_l4toy")
+texture_hover = ExtResource("9_ojo4h")
+texture_disabled = ExtResource("10_uup4g")
+script = ExtResource("6_ya3by")
+building_id = 4
+
+[node name="BuildSawmill" type="TextureButton" parent="." unique_id=1253507686]
+layout_mode = 2
+texture_normal = ExtResource("11_nnod6")
+texture_pressed = ExtResource("12_x856i")
+texture_hover = ExtResource("13_ls63u")
+texture_disabled = ExtResource("14_itkxc")
+script = ExtResource("6_ya3by")
+building_id = 5
+
+[node name="BuildFarm" type="TextureButton" parent="." unique_id=2001128061]
+layout_mode = 2
+texture_normal = ExtResource("23_fo82e")
+texture_pressed = ExtResource("24_dfht0")
+texture_hover = ExtResource("25_g8h2n")
+texture_disabled = ExtResource("26_p7fee")
+script = ExtResource("6_ya3by")
+building_id = 6
+
+[node name="BuildPotatoField" type="TextureButton" parent="." unique_id=2100046956]
+layout_mode = 2
+texture_normal = ExtResource("27_ui5sy")
+texture_pressed = ExtResource("28_c7h2q")
+texture_hover = ExtResource("29_xsynf")
+texture_disabled = ExtResource("30_j5em8")
+script = ExtResource("6_ya3by")
+building_id = 7
+
+[node name="BuildPigsty" type="TextureButton" parent="." unique_id=633119100]
+layout_mode = 2
+texture_normal = ExtResource("31_v75xr")
+texture_pressed = ExtResource("32_p4g1n")
+texture_hover = ExtResource("33_t16yn")
+texture_disabled = ExtResource("34_b5p5g")
+script = ExtResource("6_ya3by")
+building_id = 8
+
+[node name="BuildWheatField" type="TextureButton" parent="." unique_id=2044795919]
+layout_mode = 2
+texture_normal = ExtResource("35_g84ir")
+texture_pressed = ExtResource("36_kc3vg")
+texture_hover = ExtResource("37_30q2x")
+texture_disabled = ExtResource("38_n8ys4")
+script = ExtResource("6_ya3by")
+building_id = 15
+
+[node name="BuildPasture" type="TextureButton" parent="." unique_id=1253918376]
+layout_mode = 2
+texture_normal = ExtResource("39_kjt74")
+texture_pressed = ExtResource("40_51bak")
+texture_hover = ExtResource("41_6asai")
+texture_disabled = ExtResource("42_ohhvc")
+script = ExtResource("6_ya3by")
+building_id = 12
+
+[node name="BuildButchery" type="TextureButton" parent="." unique_id=1782877903]
+layout_mode = 2
+texture_normal = ExtResource("43_1b7v2")
+texture_pressed = ExtResource("44_cj6k7")
+texture_hover = ExtResource("45_687ct")
+texture_disabled = ExtResource("46_sbr7w")
+script = ExtResource("6_ya3by")
+building_id = 9
+
+[node name="BuildWindmill" type="TextureButton" parent="." unique_id=1355474786]
+layout_mode = 2
+texture_normal = ExtResource("47_gn62h")
+texture_pressed = ExtResource("48_3e12o")
+texture_hover = ExtResource("49_ypr4f")
+texture_disabled = ExtResource("50_tmy24")
+script = ExtResource("6_ya3by")
+building_id = 16
+
+[node name="BuildStonePit" type="TextureButton" parent="." unique_id=1652880734]
+layout_mode = 2
+texture_normal = ExtResource("51_3cm1i")
+texture_pressed = ExtResource("52_5ktks")
+texture_hover = ExtResource("53_r6dua")
+texture_disabled = ExtResource("54_a2c74")
+script = ExtResource("6_ya3by")
+building_id = 10
+
+[node name="BuildStonemason" type="TextureButton" parent="." unique_id=855961791]
+layout_mode = 2
+texture_normal = ExtResource("55_qv8bi")
+texture_pressed = ExtResource("56_184pr")
+texture_hover = ExtResource("57_e01ay")
+texture_disabled = ExtResource("58_6rybf")
+script = ExtResource("6_ya3by")
+building_id = 11
+
+[node name="BuildHouse" type="TextureButton" parent="." unique_id=863309496]
+layout_mode = 2
+texture_normal = ExtResource("7_ermrb")
+texture_pressed = ExtResource("8_l4toy")
+texture_hover = ExtResource("9_ojo4h")
+texture_disabled = ExtResource("10_uup4g")
+script = ExtResource("6_ya3by")
+building_id = 14
+
+[node name="BuildWeaver" type="TextureButton" parent="." unique_id=370673579]
+layout_mode = 2
+texture_normal = ExtResource("59_ko1ka")
+texture_pressed = ExtResource("60_ikjfe")
+texture_hover = ExtResource("61_vi1e2")
+texture_disabled = ExtResource("62_2d2m7")
+script = ExtResource("6_ya3by")
+building_id = 13
+
+[node name="BuildBakery" type="TextureButton" parent="." unique_id=1558003419]
+layout_mode = 2
+texture_normal = ExtResource("63_uu1l4")
+texture_pressed = ExtResource("64_b2vda")
+texture_hover = ExtResource("65_veqvq")
+texture_disabled = ExtResource("66_g71j0")
+script = ExtResource("6_ya3by")
+building_id = 17

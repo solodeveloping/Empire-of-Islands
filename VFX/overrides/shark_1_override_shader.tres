@@ -1,0 +1,76 @@
+[gd_resource type="VisualShader" format=3 uid="uid://b0wbx6yy8blpl"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_3r1ma"]
+input_name = "inv_view_matrix"
+
+[sub_resource type="VisualShaderNodeTransformVecMult" id="VisualShaderNodeTransformVecMult_80lwa"]
+expanded_output_ports = [0]
+
+[sub_resource type="Curve" id="Curve_2ouk3"]
+_data = [Vector2(0, 0.37540495), 0.0, 0.0, 0, 0, Vector2(0.17948179, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_mhc8g"]
+curve = SubResource("Curve_2ouk3")
+
+[sub_resource type="VisualShaderNodeCurveTexture" id="VisualShaderNodeCurveTexture_3r1ma"]
+texture = SubResource("CurveTexture_mhc8g")
+
+[sub_resource type="VisualShaderNodeGlobalExpression" id="VisualShaderNodeGlobalExpression_3r1ma"]
+size = Vector2(560, 280)
+expression = "// we cant use alpha
+// because the eyes are visible otherwise
+// or we need to hide theem
+// or use another model with another uv"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_3r1ma"]
+source = 5
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_80lwa"]
+parameter_name = "AlbedoTexture"
+
+[sub_resource type="VisualShaderNodeWorldPositionFromDepth" id="VisualShaderNodeWorldPositionFromDepth_st43i"]
+
+[sub_resource type="VisualShaderNodeStep" id="VisualShaderNodeStep_3r1ma"]
+default_input_values = [0, 0.4, 1, 0.0]
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_st43i"]
+constant = 1.0
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_8fufw"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_ph44m"]
+expanded_output_ports = [0]
+input_name = "vertex"
+
+[resource]
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_3r1ma")
+nodes/fragment/3/position = Vector2(-710.14514, 225.30562)
+nodes/fragment/4/node = SubResource("VisualShaderNodeTexture2DParameter_80lwa")
+nodes/fragment/4/position = Vector2(-1160, 460)
+nodes/fragment/5/node = SubResource("VisualShaderNodeWorldPositionFromDepth_st43i")
+nodes/fragment/5/position = Vector2(-220, 1060)
+nodes/fragment/6/node = SubResource("VisualShaderNodeStep_3r1ma")
+nodes/fragment/6/position = Vector2(80, 360)
+nodes/fragment/7/node = SubResource("VisualShaderNodeFloatConstant_st43i")
+nodes/fragment/7/position = Vector2(120, 840)
+nodes/fragment/8/node = SubResource("VisualShaderNodeVectorDecompose_8fufw")
+nodes/fragment/8/position = Vector2(-100, 840)
+nodes/fragment/9/node = SubResource("VisualShaderNodeInput_ph44m")
+nodes/fragment/9/position = Vector2(-980, 1080)
+nodes/fragment/10/node = SubResource("VisualShaderNodeInput_3r1ma")
+nodes/fragment/10/position = Vector2(-940, 960)
+nodes/fragment/11/node = SubResource("VisualShaderNodeTransformVecMult_80lwa")
+nodes/fragment/11/position = Vector2(-441.13162, 780.0419)
+nodes/fragment/12/node = SubResource("VisualShaderNodeCurveTexture_3r1ma")
+nodes/fragment/12/position = Vector2(-440, 360)
+nodes/fragment/13/node = SubResource("VisualShaderNodeGlobalExpression_3r1ma")
+nodes/fragment/13/position = Vector2(-480, 1180)
+nodes/fragment/13/size = Vector2(560, 280)
+nodes/fragment/13/input_ports = ""
+nodes/fragment/13/output_ports = ""
+nodes/fragment/13/expression = "// we cant use alpha
+// because the eyes are visible otherwise
+// or we need to hide theem
+// or use another model with another uv"
+nodes/fragment/connections = PackedInt32Array(3, 0, 0, 0, 4, 0, 3, 2, 5, 0, 8, 0, 10, 0, 11, 0, 9, 0, 11, 1, 11, 2, 6, 1, 11, 2, 12, 0, 6, 0, 0, 1, 7, 0, 0, 19)

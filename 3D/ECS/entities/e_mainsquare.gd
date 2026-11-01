@@ -2,6 +2,8 @@
 class_name MainSquare_ECS
 extends Entity
 
+# TODO: make it do something
+
 signal multimesh_instance_area_entered_main_area(area: MultiMeshInstanceArea)
 signal multimesh_instance_area_exited_main_area(area: MultiMeshInstanceArea)
 
@@ -14,6 +16,8 @@ var ray_ground_layers: int = 0
 @onready var sprite_indicator: Sprite3D = $SpriteIndicators/SpriteIndicator
 
 @onready var multi_mesh_instances_remover: MultiMeshInstancesRemover = $MultiMeshInstancesRemover
+
+@onready var minimap_entity_display_handler: MinimapEntityDisplayHandler = $MinimapEntityDisplayHandler
 
 var is_constructible: bool:
 	get:
@@ -62,6 +66,12 @@ func finalize_construction():
 	])
 	is_constructed = true
 	multi_mesh_instances_remover.disable_instance_areas()
+
+func update_minimap_display():
+	#print("update_minimap_display")
+	minimap_entity_display_handler.update_display(
+		self,
+	)
 
 # WARN: this could interact right back with the building's area
 func show_all_tree_hidden():

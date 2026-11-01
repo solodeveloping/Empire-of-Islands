@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dy205tydfe14t"
+path="res://.godot/imported/Coins_Pouring_05.wav-fe2222b6b6f780b1252143ed78e31ec0.sample"
+
+[deps]
+
+source_file="res://Assets/OpenGameArt/Little Robot Sound Factory/Coins Sound Library/Wav/Coins_Pouring/Coins_Pouring_05.wav"
+dest_files=["res://.godot/imported/Coins_Pouring_05.wav-fe2222b6b6f780b1252143ed78e31ec0.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

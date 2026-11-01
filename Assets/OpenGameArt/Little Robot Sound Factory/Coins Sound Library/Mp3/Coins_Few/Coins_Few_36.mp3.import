@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://wa6g6rxfy1qk"
+path="res://.godot/imported/Coins_Few_36.mp3-71099b0575f44a8cbd3843d0e66bf15e.mp3str"
+
+[deps]
+
+source_file="res://Assets/OpenGameArt/Little Robot Sound Factory/Coins Sound Library/Mp3/Coins_Few/Coins_Few_36.mp3"
+dest_files=["res://.godot/imported/Coins_Few_36.mp3-71099b0575f44a8cbd3843d0e66bf15e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,9 +1,8 @@
 extends Node
 
-@onready var the_storage = $"../TheStorage"
-@onready var the_bank = $"../TheBank"
-@onready var event_bus: EventBus = $"../EventBus"
-
+@onready var the_storage: TheStorage = %TheStorage
+@onready var the_bank: TheBank = %TheBank
+@onready var event_bus: EventBus = %EventBus
 
 class Order:
 	var buy_amount := 0

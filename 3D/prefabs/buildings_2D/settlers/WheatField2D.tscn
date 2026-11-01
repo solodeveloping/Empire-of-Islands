@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://5jmbera47v3n"]
+
+[ext_resource type="Script" uid="uid://7viyvtljl6gw" path="res://3D/prefabs/buildings_2D/settlers/wheat_field_2d.gd" id="1_s3qf0"]
+
+[node name="WheatField2d" type="Node2D" unique_id=2070762170]
+script = ExtResource("1_s3qf0")

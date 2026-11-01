@@ -26,9 +26,9 @@ config/features=PackedStringArray("4.7")
 boot_splash/image="res://boot_splash.png"
 config/icon="res://icon.png"
 boot_splash/minimum_display_time=2000
-addons/rakugo_game_template/loading_scene_path="res://scenes/LoadingScreen/LoadingScreen.tscn"
-addons/rakugo_game_template/main_menu_path="res://scenes/MainMenu/MainMenu.tscn"
-addons/rakugo_game_template/first_game_scene_path="res://scenes/Game/game.tscn"
+addons/rakugo_game_template/loading_scene_path="uid://cd0jbh4metflb"
+addons/rakugo_game_template/main_menu_path="uid://dytw0n3b07ux4"
+addons/rakugo_game_template/first_game_scene_path="uid://c8evbn2f6ohyf"
 
 [audio]
 
@@ -39,6 +39,7 @@ buses/default_bus_layout="uid://bfrjvaf03kwyl"
 Entities="*res://theLudovyc/Entities.gd"
 DebugMenu="*uid://cggqb75a8w8r"
 ECS="*uid://dfqwl5njvdnmq"
+Loggie="*uid://bmh2auo806k0k"
 PhantomCameraManager="*uid://duq6jhf6unyis"
 AppSettings="*uid://dtdx30l1ls16e"
 SceneLoader="*uid://hvk5xe04tvdh"
@@ -46,7 +47,8 @@ ProjectMusicController="*uid://r5t485lr3p7t"
 UISoundManager="*uid://cc37235kj4384"
 Transitions="*uid://b0w163uxufsvm"
 SoundManager="*uid://b2br4fwxbj2s8"
-Loggie="*uid://bmh2auo806k0k"
+Config="*uid://b42lubwlvp8mr"
+Global="*uid://b3ms76a7w3om8"
 
 [debug]
 
@@ -61,7 +63,7 @@ settings/fps/force_fps=60
 
 settings/addon_root_folder="res://addons/debug_draw_3d"
 settings/updates/check_for_updates=false
-settings/telemetry_state=true
+settings/telemetry_state=false
 
 [display]
 
@@ -83,6 +85,7 @@ enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg", "res://addons/ga
 [global_group]
 
 ocean_surface_nav="group for ocean surface and navigation"
+land=""
 
 [gui]
 
@@ -150,24 +153,28 @@ move_up={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":87,"key_label":0,"unicode":122,"location":0,"echo":false,"script":null)
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":-1.0,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194320,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
 move_down={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"key_label":0,"unicode":115,"location":0,"echo":false,"script":null)
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":1.0,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194322,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
 move_left={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":65,"key_label":0,"unicode":113,"location":0,"echo":false,"script":null)
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":0,"axis_value":-1.0,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194319,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
 move_right={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":68,"key_label":0,"unicode":100,"location":0,"echo":false,"script":null)
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":0,"axis_value":1.0,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194321,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
 move_faster={
@@ -244,12 +251,12 @@ time_reset={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":47,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
-main_command={
+right_click={
 "deadzone": 0.5,
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":2,"canceled":false,"pressed":false,"double_click":false,"script":null)
 ]
 }
-alt_command={
+left_click={
 "deadzone": 0.5,
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
 ]
@@ -264,22 +271,56 @@ ui_shift={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194325,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
+place_building={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":70,"key_label":0,"unicode":102,"location":0,"echo":false,"script":null)
+]
+}
 
 [layer_names]
 
+3d_render/layer_1="default"
+3d_render/layer_2="water"
+3d_render/layer_3="terrain"
+3d_render/layer_20="minimap_exclusive_1"
+2d_physics/layer_1="player"
 2d_navigation/layer_1="ships"
 3d_physics/layer_1="player"
 3d_navigation/layer_1="ships"
+2d_physics/layer_2="water"
 2d_navigation/layer_2="land_units"
 3d_physics/layer_2="water"
 3d_navigation/layer_2="land_units"
+2d_physics/layer_3="constructible_ground"
 3d_physics/layer_3="constructible_ground"
-3d_physics/layer_4="not_constructible_ground"
+2d_physics/layer_4="not_constructible_pathing_ground"
+3d_physics/layer_4="not_constructible_pathing_ground"
+2d_physics/layer_5="units"
 3d_physics/layer_5="units"
+2d_physics/layer_6="buildings"
 3d_physics/layer_6="buildings"
+2d_physics/layer_7="not_constructible_no_pathing_ground"
+3d_physics/layer_7="not_constructible_no_pathing_ground"
+2d_physics/layer_8="loot"
+3d_physics/layer_8="loot"
+2d_physics/layer_9="trees"
 3d_physics/layer_9="trees"
+2d_physics/layer_10="water_area"
+3d_physics/layer_10="water_area"
+2d_physics/layer_11="misc"
+3d_physics/layer_11="misc"
+2d_physics/layer_12="selectable"
+3d_physics/layer_12="selectable"
+2d_physics/layer_13="snaps"
+3d_physics/layer_13="snaps"
+2d_physics/layer_14="buildings_no_clicks"
+3d_physics/layer_14="buildings_no_clicks"
 avoidance/layer_1="ships"
 avoidance/layer_2="land_units"
+
+[loggie]
+
+general/check_for_updates=0
 
 [logging]
 
@@ -288,10 +329,6 @@ file_logging/enable_file_logging=true
 [memory]
 
 limits/message_queue/max_size_kb=16384
-
-[network]
-
-limits/debugger/max_chars_per_second=100000
 
 [physics]
 

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://l3up5k320wjj"]
+
+[ext_resource type="Script" uid="uid://ppxcart8dw3c" path="res://3D/prefabs/buildings_2D/pioneers/brickyard_2d.gd" id="1_kh1pb"]
+
+[node name="Brickyard2d" type="Node2D" unique_id=573569773]
+script = ExtResource("1_kh1pb")

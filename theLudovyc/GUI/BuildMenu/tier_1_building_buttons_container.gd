@@ -46,9 +46,15 @@ func bind_buttons(container: GridContainer):
 		child.mouse_exited.connect(_on_building_button_mouse_exited)
 
 func _on_building_button_pressed(building_id: Buildings.Ids):
+	print("_on_building_button_pressed %s" % [
+		building_id,
+	])
 	clicked_on_building.emit(building_id)
 
 func _on_building_button_mouse_entered(building_id: Buildings.Ids):
+	print("_on_building_button_mouse_entered %s" % [
+		building_id,
+	])
 	mouse_entered_building.emit(building_id)
 
 func _on_building_button_mouse_exited():
@@ -63,3 +69,6 @@ func _on_send_building_limit_updated(building_id: Buildings.Ids, limit_reached: 
 		button.disabled = true
 	else:
 		button.disabled = false
+
+func _on_BuildResidential_mouse_entered() -> void:
+	print("_on_BuildResidential_mouse_entered")

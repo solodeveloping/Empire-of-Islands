@@ -1,0 +1,135 @@
+[gd_scene format=3 uid="uid://c7iqtnp71y8dg"]
+
+[ext_resource type="Script" uid="uid://b0asdf38h4fuh" path="res://3D/prefabs/loots/ship/ship_barrel_drop_1.gd" id="1_dyhhb"]
+[ext_resource type="PackedScene" uid="uid://clj2wptu8nwud" path="res://Assets/Quaternius/Fantasy Props MegaKit[Standard]/Exports/glTF/Barrel.gltf" id="2_75fq2"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_m3hd0"]
+[ext_resource type="PackedScene" uid="uid://dky77phg25hh7" path="res://VFX/loot/SpherePuffVFX_1/SpherePuffVFX_1.tscn" id="3_dyhhb"]
+[ext_resource type="Script" uid="uid://ciot132dw1lg1" path="res://3D/ECS/components/gameplay/loot/c_is_loot.gd" id="3_g50kc"]
+[ext_resource type="PackedScene" uid="uid://p3i2cqq3qu6g" path="res://VFX/loot/LootSparksVFX_1/LootSparksVFX_1.tscn" id="4_u5m55"]
+[ext_resource type="PackedScene" uid="uid://vh5lyw8a3x8" path="res://VFX/loot/SphereOutlineFresnelVFX_1/SphereOutlineFresnelVFX_1.tscn" id="5_rg10w"]
+[ext_resource type="AudioStream" uid="uid://cyv4wvpuia0ub" path="res://Assets/OpenGameArt/Little Robot Sound Factory/Coins Sound Library/Wav/Coins_Several/Coins_Several_00.wav" id="6_yiybd"]
+[ext_resource type="AudioStream" uid="uid://glqsn6y0y2vb" path="res://Assets/OpenGameArt/Little Robot Sound Factory/Fantasy Sound Effects Library/Wav/Inventory_Open_00.wav" id="7_cbj1t"]
+
+[sub_resource type="Resource" id="Resource_n4y2n"]
+script = ExtResource("3_g50kc")
+metadata/_custom_type_script = "uid://ciot132dw1lg1"
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_sfkqh"]
+height = 0.8754883
+radius = 0.3227539
+
+[sub_resource type="Gradient" id="Gradient_skvsn"]
+offsets = PackedFloat32Array(0.39271256, 0.51417005, 0.6234818)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ilxyu"]
+gradient = SubResource("Gradient_skvsn")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d66px"]
+albedo_color = Color(0.100000024, 0.3399998, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_sfkqh"]
+size = Vector2(3, 3.39)
+
+[sub_resource type="Animation" id="Animation_skvsn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Barrel2:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_75fq2"]
+resource_name = "idle_1"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Barrel2:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.11732105, -0.020282459, -0.15052447), Vector3(0.1551641, 0.075223364, 0.0018373679), Vector3(0.17992902, 0.0921241, 0.20493451), Vector3(-0.16161077, 0.0031556867, 0.12042412)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k81cd"]
+_data = {
+&"RESET": SubResource("Animation_skvsn"),
+&"idle_1": SubResource("Animation_75fq2")
+}
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_d66px"]
+height = 1.0
+radius = 1.0
+
+[node name="ShipBarrelDrop1" type="RigidBody3D" unique_id=1734707050]
+collision_layer = 128
+collision_mask = 509
+gravity_scale = 0.0
+freeze = true
+script = ExtResource("1_dyhhb")
+component_resources = Array[ExtResource("2_m3hd0")]([SubResource("Resource_n4y2n")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1060418455]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43774414, 0)
+shape = SubResource("CylinderShape3D_sfkqh")
+
+[node name="Barrel2" parent="." unique_id=1864501420 instance=ExtResource("2_75fq2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 0, 0, 0)
+
+[node name="Decal" type="Decal" parent="." unique_id=1670879759]
+visible = false
+texture_albedo = SubResource("GradientTexture2D_ilxyu")
+texture_emission = SubResource("GradientTexture2D_ilxyu")
+emission_energy = 16.0
+modulate = Color(1, 0.98333335, 0, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1987626939]
+visible = false
+material_override = SubResource("StandardMaterial3D_d66px")
+mesh = SubResource("PlaneMesh_sfkqh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1554410472]
+libraries/ = SubResource("AnimationLibrary_k81cd")
+autoplay = &"idle_1"
+speed_scale = 0.5
+
+[node name="SpherePuffVfx1" parent="." unique_id=93410627 instance=ExtResource("3_dyhhb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45814228, 0)
+
+[node name="LootSparksVfx1" parent="." unique_id=1448021691 instance=ExtResource("4_u5m55")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.91280365, 0)
+
+[node name="Area3D" type="Area3D" parent="." unique_id=177231405]
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1286869175]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_d66px")
+
+[node name="SphereOutlineFresnelVfx1" parent="." unique_id=263566430 instance=ExtResource("5_rg10w")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.5460005, 0)
+
+[node name="GoldLootedAudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1097322189]
+stream = ExtResource("6_yiybd")
+max_distance = 200.0
+bus = &"Effects"
+
+[node name="DefaultLootedAudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="." unique_id=2077658820]
+stream = ExtResource("7_cbj1t")
+max_distance = 200.0
+bus = &"Effects"

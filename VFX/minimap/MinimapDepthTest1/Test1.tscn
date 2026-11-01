@@ -1,0 +1,562 @@
+[gd_scene format=3 uid="uid://m08q55nyve6e"]
+
+[ext_resource type="PackedScene" uid="uid://cj58mgwq0tw3b" path="res://3D/prefabs/islands/Island1_binary.scn" id="1_ybqr3"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_7u4mu"]
+[ext_resource type="Script" uid="uid://ccfh5xaqdeycf" path="res://3D/ECS/components/gameplay/c_island.gd" id="3_23opc"]
+[ext_resource type="PackedScene" uid="uid://c0crs07wbol7p" path="res://3D/prefabs/buildings/composed/sailors/HousingTent.tscn" id="4_ylujq"]
+[ext_resource type="Script" uid="uid://bx6scx0xgauoc" path="res://3D/ECS/components/gameplay/faction/c_assign_to_faction_by_alias.gd" id="5_28gdr"]
+[ext_resource type="PackedScene" uid="uid://bwcqu7lunanpr" path="res://3D/prefabs/buildings/composed/sailors/Dock_1.tscn" id="6_uf77b"]
+[ext_resource type="PackedScene" uid="uid://dgflhswvnmgx3" path="res://3D/prefabs/buildings/composed/sailors/FishermanTent_1.tscn" id="7_1y8fi"]
+[ext_resource type="PackedScene" uid="uid://bmde582hv8jwm" path="res://3D/prefabs/buildings/composed/sailors/CityCenter_1.tscn" id="8_fip8q"]
+[ext_resource type="PackedScene" uid="uid://c0f7np4ixkd1x" path="res://3D/prefabs/buildings/composed/sailors/Lumberjack_1.tscn" id="9_m1akk"]
+[ext_resource type="PackedScene" uid="uid://ci0jb4qptteg5" path="res://3D/prefabs/buildings/composed/sailors/TentTavern_1.tscn" id="10_3rpb1"]
+[ext_resource type="PackedScene" uid="uid://cdefoo0ghsb74" path="res://3D/prefabs/buildings/composed/sailors/HunterTent_1.tscn" id="11_asg65"]
+[ext_resource type="Shader" uid="uid://be50ph36peocc" path="res://VFX/ocean/visual_shaders/simple_ocean_visual_shader_1/simple_ocean_visual_shader_1.tres" id="12_agg8r"]
+[ext_resource type="Script" uid="uid://bbhr52k31vvcc" path="res://3D/ocean_node_1.gd" id="13_8kpp5"]
+[ext_resource type="Shader" uid="uid://c8q2dk870h4xv" path="res://VFX/ocean/visual_shaders/simple_ocean_visual_shader_3/simple_ocean_visual_shader_3.tres" id="14_yock8"]
+[ext_resource type="Shader" uid="uid://c52w6i4li57sk" path="res://VFX/ocean/ocean_shader_2.gdshader" id="15_udynl"]
+[ext_resource type="Shader" uid="uid://dd7ybmpebmb0y" path="res://VFX/ocean/ocean_shader_1.gdshader" id="16_a203r"]
+[ext_resource type="Shader" uid="uid://d34owjk0phptk" path="res://VFX/ocean/visual_shaders/ocean_visual_shader_2/ocean_visual_shader_2.tres" id="17_2pdog"]
+[ext_resource type="PackedScene" uid="uid://cxnlyh32i278d" path="res://3D/prefabs/ocean/OceanArea3D.tscn" id="18_l3ejy"]
+[ext_resource type="Script" uid="uid://dmcpbn8o7vyr2" path="res://3D/minimap/camera_follow_target_xz.gd" id="19_lc08g"]
+[ext_resource type="Shader" uid="uid://cv7cs6ajtq6li" path="res://VFX/minimap/MinimapDepthTest1/depth_test_shader_1.gdshader" id="20_icxrw"]
+
+[sub_resource type="Resource" id="Resource_tnibl"]
+script = ExtResource("3_23opc")
+island_name = "First island"
+metadata/_custom_type_script = "uid://ccfh5xaqdeycf"
+
+[sub_resource type="Resource" id="Resource_145y1"]
+script = ExtResource("5_28gdr")
+alias = "Player 1"
+metadata/_custom_type_script = "uid://bx6scx0xgauoc"
+
+[sub_resource type="Resource" id="Resource_h0kfh"]
+script = ExtResource("5_28gdr")
+alias = "Player 1"
+metadata/_custom_type_script = "uid://bx6scx0xgauoc"
+
+[sub_resource type="Resource" id="Resource_ilxyu"]
+script = ExtResource("5_28gdr")
+alias = "Player 1"
+metadata/_custom_type_script = "uid://bx6scx0xgauoc"
+
+[sub_resource type="Resource" id="Resource_j3o3q"]
+script = ExtResource("5_28gdr")
+alias = "Player 1"
+metadata/_custom_type_script = "uid://bx6scx0xgauoc"
+
+[sub_resource type="Resource" id="Resource_ctpdx"]
+script = ExtResource("5_28gdr")
+alias = "Player 1"
+metadata/_custom_type_script = "uid://bx6scx0xgauoc"
+
+[sub_resource type="Resource" id="Resource_1rp2j"]
+script = ExtResource("5_28gdr")
+alias = "Player 1"
+metadata/_custom_type_script = "uid://bx6scx0xgauoc"
+
+[sub_resource type="Resource" id="Resource_8esnl"]
+script = ExtResource("5_28gdr")
+alias = "Player 1"
+metadata/_custom_type_script = "uid://bx6scx0xgauoc"
+
+[sub_resource type="Gradient" id="Gradient_tagtu"]
+colors = PackedColorArray(0.5370113, 0.5370113, 0.5370113, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4ao7c"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_r0xnc"]
+width = 1024
+height = 1024
+noise = SubResource("FastNoiseLite_4ao7c")
+color_ramp = SubResource("Gradient_tagtu")
+
+[sub_resource type="Gradient" id="Gradient_t862w"]
+offsets = PackedFloat32Array(0, 0.24422443)
+colors = PackedColorArray(0, 0.59607846, 0.96862745, 1, 2.4065375e-07, 0.33822235, 0.56322634, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ws72x"]
+gradient = SubResource("Gradient_t862w")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mmhri"]
+render_priority = 0
+shader = ExtResource("12_agg8r")
+shader_parameter/ColorTexture = SubResource("GradientTexture2D_ws72x")
+shader_parameter/EdgeProximityFadeDistance = 2.185
+shader_parameter/AlbedoNoisePanningSpeed = Vector2(-0.01, -0.01)
+shader_parameter/AlbedoNoiseScale = Vector2(10, 10)
+shader_parameter/AlbedoNoiseDark = SubResource("NoiseTexture2D_r0xnc")
+shader_parameter/AlbedoNoiseStrngth = 0.315
+shader_parameter/MinAlpha = 0.9
+shader_parameter/Roughness = 0.2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_wjkwe"]
+size = Vector2(1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y3lhk"]
+size = Vector3(1, 0.001, 1)
+
+[sub_resource type="Gradient" id="Gradient_nfmqc"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.007142857, 0.18571429, 0.6857143)
+colors = PackedColorArray(1, 1, 1, 1, 0.25681156, 0.69858474, 0.99999994, 1, 8.663535e-07, 0.49730903, 0.7609819, 1, 4.813075e-07, 0.5593595, 0.8526551, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_v2c6q"]
+gradient = SubResource("Gradient_nfmqc")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hd4ey"]
+render_priority = 0
+shader = ExtResource("14_yock8")
+shader_parameter/ColorRamp = SubResource("GradientTexture2D_v2c6q")
+shader_parameter/Roughness = 0.0190000009025
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_3ivvb"]
+size = Vector2(10000, 10000)
+
+[sub_resource type="Gradient" id="Gradient_eibff"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.007142857, 0.18571429, 0.6857143)
+colors = PackedColorArray(1, 1, 1, 1, 0.25681156, 0.69858474, 0.99999994, 1, 8.663535e-07, 0.49730903, 0.7609819, 1, 4.813075e-07, 0.5593595, 0.8526551, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_doxnu"]
+gradient = SubResource("Gradient_eibff")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7g5vr"]
+render_priority = 0
+shader = ExtResource("14_yock8")
+shader_parameter/ColorRamp = SubResource("GradientTexture2D_doxnu")
+shader_parameter/Roughness = 1.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_c3hhj"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_v2c6q"]
+noise = SubResource("FastNoiseLite_c3hhj")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vaap7"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fqsyf"]
+noise = SubResource("FastNoiseLite_vaap7")
+seamless = true
+as_normal_map = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_abj1k"]
+render_priority = 0
+shader = ExtResource("15_udynl")
+shader_parameter/tint_color = Color(7.315874e-06, 0.7513934, 0.95543903, 1)
+shader_parameter/slowdown = 5.0
+shader_parameter/time_caust = 0.13
+shader_parameter/caust_form = 0.15
+shader_parameter/tile = 4.0
+shader_parameter/height_scale = 0.1
+shader_parameter/noise = SubResource("NoiseTexture2D_v2c6q")
+shader_parameter/normalmap = SubResource("NoiseTexture2D_fqsyf")
+shader_parameter/intersection_color = Color(0, 0.5781992, 0.9146779, 1)
+shader_parameter/main_color = Color(0, 0.60001147, 0.94295704, 1)
+shader_parameter/intersection_max_threshold = 0.5
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_togu7"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sfkqh"]
+noise = SubResource("FastNoiseLite_togu7")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_v638u"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6dves"]
+noise = SubResource("FastNoiseLite_v638u")
+
+[sub_resource type="Gradient" id="Gradient_rrut4"]
+colors = PackedColorArray(0.62152386, 0.62152386, 0.6215238, 1, 0.99101776, 0.99672014, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fqsyf"]
+gradient = SubResource("Gradient_rrut4")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hfa7l"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cmqjj"]
+noise = SubResource("FastNoiseLite_hfa7l")
+seamless = true
+as_normal_map = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nj4ge"]
+render_priority = 0
+shader = ExtResource("16_a203r")
+shader_parameter/absorption_color = Color(1, 0.35, 0, 1)
+shader_parameter/fresnel_radius = 2.0
+shader_parameter/fresnel_color = Color(0, 0.57, 0.72, 1)
+shader_parameter/roughness = 0.15
+shader_parameter/specular = 0.25
+shader_parameter/depth_distance = 25.0
+shader_parameter/beers_law = 4.5
+shader_parameter/displacement_strength = 0.3
+shader_parameter/displacement_scroll_speed = 0.1
+shader_parameter/displacement_scroll_offset = Vector2(-0.2, 0.3)
+shader_parameter/displacement_scale_offset = 0.5
+shader_parameter/displacement_scale = Vector2(0.04, 0.04)
+shader_parameter/displacement_texture = SubResource("NoiseTexture2D_sfkqh")
+shader_parameter/edge_thickness = 0.3
+shader_parameter/edge_speed = 0.35
+shader_parameter/edge_noise_scale = Vector2(0.4, 0.4)
+shader_parameter/edge_noise = SubResource("NoiseTexture2D_6dves")
+shader_parameter/edge_ramp = SubResource("GradientTexture2D_fqsyf")
+shader_parameter/influence_size = 1.0
+shader_parameter/player_wave_frequenzy = 10.0
+shader_parameter/player_wave_speed = 5.0
+shader_parameter/caustic_size = 2.0
+shader_parameter/caustic_range = 40.0
+shader_parameter/caustic_strength = 0.08
+shader_parameter/ssr_mix_strength = 0.65
+shader_parameter/ssr_travel = 0.0
+shader_parameter/ssr_resolution_near = 1.0
+shader_parameter/ssr_resolution_far = 5.0
+shader_parameter/ssr_tolerance = 1.0
+shader_parameter/refraction_strength = 1.25
+shader_parameter/normal_map_strength = 1.0
+shader_parameter/scroll_speed = 0.3
+shader_parameter/scroll_offset = Vector2(0.1, -0.3)
+shader_parameter/scale_offset = 0.5
+shader_parameter/normal_map_scale = Vector2(0.1, 0.1)
+shader_parameter/normal_map = SubResource("NoiseTexture2D_cmqjj")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_axwb2"]
+render_priority = 0
+shader = ExtResource("16_a203r")
+shader_parameter/absorption_color = Color(1, 0.35, 0, 1)
+shader_parameter/fresnel_radius = 2.0
+shader_parameter/fresnel_color = Color(0, 0.57, 0.72, 1)
+shader_parameter/roughness = 0.15
+shader_parameter/specular = 0.25
+shader_parameter/depth_distance = 25.0
+shader_parameter/beers_law = 4.5
+shader_parameter/displacement_strength = 0.3
+shader_parameter/displacement_scroll_speed = 0.1
+shader_parameter/displacement_scroll_offset = Vector2(-0.2, 0.3)
+shader_parameter/displacement_scale_offset = 0.5
+shader_parameter/displacement_scale = Vector2(0.04, 0.04)
+shader_parameter/edge_thickness = 0.3
+shader_parameter/edge_speed = 0.35
+shader_parameter/edge_noise_scale = Vector2(0.4, 0.4)
+shader_parameter/influence_size = 1.0
+shader_parameter/player_wave_frequenzy = 10.0
+shader_parameter/player_wave_speed = 5.0
+shader_parameter/caustic_size = 2.0
+shader_parameter/caustic_range = 40.0
+shader_parameter/caustic_strength = 0.08
+shader_parameter/ssr_mix_strength = 0.65
+shader_parameter/ssr_travel = 0.0
+shader_parameter/ssr_resolution_near = 1.0
+shader_parameter/ssr_resolution_far = 5.0
+shader_parameter/ssr_tolerance = 1.0
+shader_parameter/refraction_strength = 1.25
+shader_parameter/normal_map_strength = 1.0
+shader_parameter/scroll_speed = 0.3
+shader_parameter/scroll_offset = Vector2(0.1, -0.3)
+shader_parameter/scale_offset = 0.5
+shader_parameter/normal_map_scale = Vector2(0.1, 0.1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vafap"]
+size = Vector2(10000, 10000)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_w2syd"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mq3k7"]
+noise = SubResource("FastNoiseLite_w2syd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_33xg5"]
+render_priority = 0
+shader = ExtResource("17_2pdog")
+shader_parameter/BaseColor = Color(3e-06, 0.695316, 0.979321, 1)
+shader_parameter/OceanSize = 1000
+shader_parameter/AbyssWorldSize = 10
+shader_parameter/AbyssTexture = SubResource("NoiseTexture2D_mq3k7")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1eyu4"]
+size = Vector2(1000, 1000)
+
+[sub_resource type="Gradient" id="Gradient_t0eiy"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.57700837, 0.5770084, 0.57700837, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6x2l5"]
+gradient = SubResource("Gradient_t0eiy")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3he06"]
+render_priority = 0
+shader = ExtResource("17_2pdog")
+shader_parameter/BaseColor = Color(3e-06, 0.695316, 0.979321, 1)
+shader_parameter/OceanSize = 1000
+shader_parameter/AbyssWorldSize = 10
+shader_parameter/AbyssTexture = SubResource("GradientTexture1D_6x2l5")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5tpda"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_doxnu"]
+noise = SubResource("FastNoiseLite_5tpda")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_cty1r"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7vaof"]
+noise = SubResource("FastNoiseLite_cty1r")
+
+[sub_resource type="Gradient" id="Gradient_4lsbd"]
+colors = PackedColorArray(0.62152386, 0.62152386, 0.6215238, 1, 0.99101776, 0.99672014, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_145y1"]
+gradient = SubResource("Gradient_4lsbd")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_asv6e"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ilxyu"]
+noise = SubResource("FastNoiseLite_asv6e")
+seamless = true
+as_normal_map = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kke60"]
+render_priority = 0
+shader = ExtResource("16_a203r")
+shader_parameter/absorption_color = Color(1, 0.35, 0, 1)
+shader_parameter/fresnel_radius = 2.0
+shader_parameter/fresnel_color = Color(0, 0.57, 0.72, 1)
+shader_parameter/roughness = 0.15
+shader_parameter/specular = 0.25
+shader_parameter/depth_distance = 50.0
+shader_parameter/beers_law = 4.5
+shader_parameter/displacement_strength = 0.3
+shader_parameter/displacement_scroll_speed = 0.1
+shader_parameter/displacement_scroll_offset = Vector2(-0.2, 0.3)
+shader_parameter/displacement_scale_offset = 0.5
+shader_parameter/displacement_scale = Vector2(0.04, 0.04)
+shader_parameter/displacement_texture = SubResource("NoiseTexture2D_doxnu")
+shader_parameter/edge_thickness = 0.1590000075525
+shader_parameter/edge_speed = 0.35
+shader_parameter/edge_noise_scale = Vector2(0.4, 0.4)
+shader_parameter/edge_noise = SubResource("NoiseTexture2D_7vaof")
+shader_parameter/edge_ramp = SubResource("GradientTexture2D_145y1")
+shader_parameter/influence_size = 1.0
+shader_parameter/player_wave_frequenzy = 10.0
+shader_parameter/player_wave_speed = 5.0
+shader_parameter/caustic_size = 2.0
+shader_parameter/caustic_range = 40.0
+shader_parameter/caustic_strength = 0.25999999418848
+shader_parameter/ssr_mix_strength = 0.65
+shader_parameter/ssr_travel = 0.0
+shader_parameter/ssr_resolution_near = 1.0
+shader_parameter/ssr_resolution_far = 5.0
+shader_parameter/ssr_tolerance = 1.0
+shader_parameter/refraction_strength = 1.25
+shader_parameter/normal_map_strength = 1.0
+shader_parameter/scroll_speed = 0.3
+shader_parameter/scroll_offset = Vector2(0.1, -0.3)
+shader_parameter/scale_offset = 0.5
+shader_parameter/normal_map_scale = Vector2(0.1, 0.1)
+shader_parameter/normal_map = SubResource("NoiseTexture2D_ilxyu")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_64m2v"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_a2q6b"]
+noise = SubResource("FastNoiseLite_64m2v")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_m3ue3"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_h0kfh"]
+noise = SubResource("FastNoiseLite_m3ue3")
+
+[sub_resource type="Gradient" id="Gradient_7vhoo"]
+colors = PackedColorArray(0.62152386, 0.62152386, 0.6215238, 1, 0.99101776, 0.99672014, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_j3o3q"]
+gradient = SubResource("Gradient_7vhoo")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_cc04m"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1rp2j"]
+noise = SubResource("FastNoiseLite_cc04m")
+seamless = true
+as_normal_map = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3vyo5"]
+render_priority = 0
+shader = ExtResource("16_a203r")
+shader_parameter/absorption_color = Color(1, 0.35, 0, 1)
+shader_parameter/fresnel_radius = 2.0
+shader_parameter/fresnel_color = Color(0, 0.57, 0.72, 1)
+shader_parameter/roughness = 0.15
+shader_parameter/specular = 0.25
+shader_parameter/depth_distance = 50.0
+shader_parameter/beers_law = 4.5
+shader_parameter/displacement_strength = 0.3
+shader_parameter/displacement_scroll_speed = 0.1
+shader_parameter/displacement_scroll_offset = Vector2(-0.2, 0.3)
+shader_parameter/displacement_scale_offset = 0.5
+shader_parameter/displacement_scale = Vector2(0.04, 0.04)
+shader_parameter/displacement_texture = SubResource("NoiseTexture2D_a2q6b")
+shader_parameter/edge_thickness = 0.1590000075525
+shader_parameter/edge_speed = 0.35
+shader_parameter/edge_noise_scale = Vector2(0.4, 0.4)
+shader_parameter/edge_noise = SubResource("NoiseTexture2D_h0kfh")
+shader_parameter/edge_ramp = SubResource("GradientTexture2D_j3o3q")
+shader_parameter/influence_size = 1.0
+shader_parameter/player_wave_frequenzy = 10.0
+shader_parameter/player_wave_speed = 5.0
+shader_parameter/caustic_size = 2.0
+shader_parameter/caustic_range = 40.0
+shader_parameter/caustic_strength = 0.25999999418848
+shader_parameter/ssr_mix_strength = 0.65
+shader_parameter/ssr_travel = 0.0
+shader_parameter/ssr_resolution_near = 1.0
+shader_parameter/ssr_resolution_far = 5.0
+shader_parameter/ssr_tolerance = 1.0
+shader_parameter/refraction_strength = 0.0
+shader_parameter/normal_map_strength = 1.0
+shader_parameter/scroll_speed = 0.3
+shader_parameter/scroll_offset = Vector2(0.1, -0.3)
+shader_parameter/scale_offset = 0.5
+shader_parameter/normal_map_scale = Vector2(0.1, 0.1)
+shader_parameter/normal_map = SubResource("NoiseTexture2D_1rp2j")
+
+[sub_resource type="Compositor" id="Compositor_o7x6r"]
+
+[sub_resource type="Gradient" id="Gradient_bis12"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.14130434)
+colors = PackedColorArray(0, 1, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gdfht"]
+gradient = SubResource("Gradient_bis12")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5a4ub"]
+render_priority = 0
+shader = ExtResource("20_icxrw")
+shader_parameter/gradient_texture = SubResource("GradientTexture2D_gdfht")
+
+[sub_resource type="QuadMesh" id="QuadMesh_r8yh2"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[node name="Test1" type="Node3D" unique_id=953112436]
+
+[node name="Island1" parent="." unique_id=1967343092 groups=["ocean_surface_nav"] instance=ExtResource("1_ybqr3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+component_resources = Array[ExtResource("2_7u4mu")]([SubResource("Resource_tnibl")])
+
+[node name="Buildings" type="Node3D" parent="." unique_id=1657559314]
+
+[node name="HousingTent" parent="Buildings" unique_id=13075898 instance=ExtResource("4_ylujq")]
+transform = Transform3D(-0.05125533, 0, -0.9986856, 0, 1, 0, 0.9986856, 0, -0.05125533, -12.80324, 0.12383449, 45.570404)
+component_resources = Array[ExtResource("2_7u4mu")]([SubResource("Resource_145y1")])
+
+[node name="Dock1" parent="Buildings" unique_id=567939795 instance=ExtResource("6_uf77b")]
+transform = Transform3D(-0.1883161, 0, -0.98210853, 0, 1, 0, 0.98210853, 0, -0.1883161, -24.963541, 0, 23.0443)
+component_resources = Array[ExtResource("2_7u4mu")]([SubResource("Resource_h0kfh")])
+
+[node name="FishermanTent1" parent="Buildings" unique_id=1145789329 instance=ExtResource("7_1y8fi")]
+transform = Transform3D(0.21229698, 0, -0.9772052, 0, 1, 0, 0.9772052, 0, 0.21229698, -28.115309, 0, 36.250404)
+component_resources = Array[ExtResource("2_7u4mu")]([SubResource("Resource_ilxyu")])
+
+[node name="CityCenter1" parent="Buildings" unique_id=1391554778 instance=ExtResource("8_fip8q")]
+transform = Transform3D(-0.01589927, 0, -0.9998736, 0, 1, 0, 0.9998736, 0, -0.01589927, 13, 1.413, 35.76505)
+component_resources = Array[ExtResource("2_7u4mu")]([SubResource("Resource_j3o3q")])
+
+[node name="Lumberjack1" parent="Buildings" unique_id=1826247262 instance=ExtResource("9_m1akk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.633343, 1.4859228, 70.47168)
+component_resources = Array[ExtResource("2_7u4mu")]([SubResource("Resource_ctpdx")])
+
+[node name="TentTavern1" parent="Buildings" unique_id=1535012436 instance=ExtResource("10_3rpb1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.138184, 0, 65.016846)
+
+[node name="HousingTent2" parent="Buildings" unique_id=999666450 instance=ExtResource("4_ylujq")]
+transform = Transform3D(-0.05125533, 0, -0.9986856, 0, 1, 0, 0.9986856, 0, -0.05125533, 8.404318, 1.4240098, 53.148922)
+component_resources = Array[ExtResource("2_7u4mu")]([SubResource("Resource_1rp2j")])
+
+[node name="HunterTent1" parent="Buildings" unique_id=1037776830 instance=ExtResource("11_asg65")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.162996, 1.4302037, 49.614365)
+component_resources = Array[ExtResource("2_7u4mu")]([SubResource("Resource_8esnl")])
+
+[node name="Oceans" type="Node3D" parent="." unique_id=1217189700]
+
+[node name="OceanSimpleVisualShader1" type="MeshInstance3D" parent="Oceans" unique_id=672225456 groups=["ocean_surface_nav"]]
+transform = Transform3D(10000, 0, 0, 0, 10000, 0, 0, 0, 10000, 0, 0, 0)
+visible = false
+material_override = SubResource("ShaderMaterial_mmhri")
+mesh = SubResource("PlaneMesh_wjkwe")
+skeleton = NodePath("../..")
+script = ExtResource("13_8kpp5")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Oceans/OceanSimpleVisualShader1" unique_id=288950654]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0004927301, 0)
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Oceans/OceanSimpleVisualShader1/StaticBody3D" unique_id=403347479]
+shape = SubResource("BoxShape3D_y3lhk")
+debug_color = Color(0, 0.0001292147, 0.000322998, 1)
+
+[node name="OceanSimpeVisualShader3" type="MeshInstance3D" parent="Oceans" unique_id=677128517]
+visible = false
+material_override = SubResource("ShaderMaterial_hd4ey")
+mesh = SubResource("PlaneMesh_3ivvb")
+
+[node name="OceanSimpeVisualShader3_2" type="MeshInstance3D" parent="Oceans" unique_id=194523208]
+visible = false
+material_override = SubResource("ShaderMaterial_7g5vr")
+mesh = SubResource("PlaneMesh_3ivvb")
+
+[node name="OceanShader2" type="MeshInstance3D" parent="Oceans" unique_id=1108255273]
+visible = false
+material_override = SubResource("ShaderMaterial_abj1k")
+mesh = SubResource("PlaneMesh_3ivvb")
+
+[node name="OceanShader1" type="MeshInstance3D" parent="Oceans" unique_id=1623304018]
+visible = false
+material_override = SubResource("ShaderMaterial_nj4ge")
+mesh = SubResource("PlaneMesh_3ivvb")
+
+[node name="OceanShader1_2" type="MeshInstance3D" parent="Oceans" unique_id=443170697]
+visible = false
+material_override = SubResource("ShaderMaterial_axwb2")
+mesh = SubResource("PlaneMesh_vafap")
+
+[node name="OceanNoiseAndNormals" type="MeshInstance3D" parent="Oceans" unique_id=1539972668]
+visible = false
+material_override = SubResource("ShaderMaterial_33xg5")
+mesh = SubResource("PlaneMesh_1eyu4")
+
+[node name="OceanNoiseAndNormals2" type="MeshInstance3D" parent="Oceans" unique_id=2025268261]
+visible = false
+material_override = SubResource("ShaderMaterial_3he06")
+mesh = SubResource("PlaneMesh_1eyu4")
+
+[node name="OceanShader1_caustic_1" type="MeshInstance3D" parent="Oceans" unique_id=1448717059]
+visible = false
+material_override = SubResource("ShaderMaterial_kke60")
+mesh = SubResource("PlaneMesh_3ivvb")
+
+[node name="OceanShader1_caustic_1_no_refraction_1" type="MeshInstance3D" parent="Oceans" unique_id=1141090005]
+material_override = SubResource("ShaderMaterial_3vyo5")
+mesh = SubResource("PlaneMesh_3ivvb")
+
+[node name="OceanArea3D" parent="Oceans" unique_id=256397017 instance=ExtResource("18_l3ejy")]
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1117449427]
+render_target_update_mode = 1
+
+[node name="MinimapCamera3D" type="Camera3D" parent="SubViewport" unique_id=2080634327]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 15.484554, 0)
+cull_mask = 1048574
+compositor = SubResource("Compositor_o7x6r")
+projection = 1
+size = 512.0
+script = ExtResource("19_lc08g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/MinimapCamera3D" unique_id=789404785]
+layers = 524289
+material_override = SubResource("ShaderMaterial_5a4ub")
+cast_shadow = 0
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_r8yh2")

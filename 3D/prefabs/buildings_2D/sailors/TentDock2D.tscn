@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ci0jby3u567pt"]
+
+[ext_resource type="Script" uid="uid://c2ms6mlcxmnh3" path="res://3D/prefabs/buildings_2D/sailors/tent_dock_2d.gd" id="1_egq4a"]
+
+[node name="TentDock2d" type="Node2D" unique_id=617559646]
+script = ExtResource("1_egq4a")

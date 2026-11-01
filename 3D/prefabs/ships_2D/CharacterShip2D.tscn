@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://csj7g4n1rfq6i"]
+
+[ext_resource type="Script" uid="uid://dupn5r8gtxc41" path="res://3D/ECS/entities/2D/e_ship_2D.gd" id="1_5lcu2"]
+[ext_resource type="Texture2D" uid="uid://bgtyagtsu4avu" path="res://Art/Image/Units/Frigate/directions/Frigate_NorthEast_atlas_texture.tres" id="2_0i5ev"]
+[ext_resource type="Texture2D" uid="uid://dpyumuafpmdra" path="res://Art/Image/Units/Frigate/directions/Frigate_North_atlas_texture.tres" id="2_is67a"]
+[ext_resource type="Texture2D" uid="uid://buwo0f8bet2ry" path="res://Art/Image/Units/Frigate/directions/Frigate_East_atlas_texture.tres" id="4_d7rcu"]
+[ext_resource type="Texture2D" uid="uid://c0soxg3l4xeqj" path="res://Art/Image/Units/Frigate/directions/Frigate_SouthEast_atlas_texture.tres" id="5_j7xa8"]
+[ext_resource type="Texture2D" uid="uid://bw30gwdvmvbnx" path="res://Art/Image/Units/Frigate/directions/Frigate_South_atlas_texture.tres" id="6_uemxa"]
+[ext_resource type="Texture2D" uid="uid://bg7lau7ujp2f3" path="res://Art/Image/Units/Frigate/directions/Frigate_SouthWest_atlas_texture.tres" id="7_00e11"]
+[ext_resource type="Texture2D" uid="uid://saa68bkj1auh" path="res://Art/Image/Units/Frigate/directions/Frigate_West_atlas_texture.tres" id="8_xlo06"]
+[ext_resource type="Texture2D" uid="uid://ntwvck5002es" path="res://Art/Image/Units/Frigate/directions/Frigate_NorthWest_atlas_texture.tres" id="9_uxaav"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sfkqh"]
+radius = 45.75
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_syd0k"]
+radius = 92.58
+
+[sub_resource type="Gradient" id="Gradient_is67a"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.08510638, 0.5425532, 0.59574467)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sfkqh"]
+gradient = SubResource("Gradient_is67a")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 1)
+
+[node name="Ship2d" type="CharacterBody2D" unique_id=2142486486]
+z_index = 10
+script = ExtResource("1_5lcu2")
+selected_color = Color(1, 0.7647059, 0.22352941, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=181397190]
+shape = SubResource("CircleShape2D_sfkqh")
+
+[node name="SelectionArea2D" type="Area2D" parent="." unique_id=506691858]
+collision_layer = 2049
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectionArea2D" unique_id=1386961354]
+shape = SubResource("CircleShape2D_syd0k")
+
+[node name="Sprites" type="Node2D" parent="." unique_id=1895927532]
+
+[node name="EastSprite2D" type="Sprite2D" parent="Sprites" unique_id=2016322294]
+visible = false
+texture = ExtResource("4_d7rcu")
+
+[node name="SouthEastSprite2D" type="Sprite2D" parent="Sprites" unique_id=319310101]
+visible = false
+texture = ExtResource("5_j7xa8")
+
+[node name="SouthSprite2D" type="Sprite2D" parent="Sprites" unique_id=1983323289]
+visible = false
+texture = ExtResource("6_uemxa")
+
+[node name="SouthWestSprite2D" type="Sprite2D" parent="Sprites" unique_id=858190114]
+visible = false
+texture = ExtResource("7_00e11")
+
+[node name="WestSprite2D" type="Sprite2D" parent="Sprites" unique_id=1076371764]
+visible = false
+texture = ExtResource("8_xlo06")
+
+[node name="NorthWestSprite2D" type="Sprite2D" parent="Sprites" unique_id=323198468]
+visible = false
+texture = ExtResource("9_uxaav")
+
+[node name="NorthSprite2D" type="Sprite2D" parent="Sprites" unique_id=869843068]
+texture = ExtResource("2_is67a")
+
+[node name="NorthEastSprite2D" type="Sprite2D" parent="Sprites" unique_id=1404582605]
+visible = false
+texture = ExtResource("2_0i5ev")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1991923763]
+target_position = Vector2(60, 180)
+path_desired_distance = 75.0
+target_desired_distance = 100.0
+
+[node name="SelectionSprite2D" type="Sprite2D" parent="." unique_id=2066181394]
+scale = Vector2(1.5, 1.5)
+texture = SubResource("GradientTexture2D_sfkqh")
+
+[connection signal="input_event" from="SelectionArea2D" to="." method="_on_SelectionArea2d_input_event"]
+[connection signal="mouse_entered" from="SelectionArea2D" to="." method="_on_SelectionArea2d_mouse_entered"]
+[connection signal="mouse_exited" from="SelectionArea2D" to="." method="_on_SelectionArea2d_mouse_exited"]

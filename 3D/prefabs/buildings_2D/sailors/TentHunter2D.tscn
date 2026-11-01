@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b2vquy7ybrytv"]
+
+[ext_resource type="Script" uid="uid://cjaf2u76tcp1f" path="res://3D/prefabs/buildings_2D/sailors/tent_hunter_2d.gd" id="1_artv0"]
+
+[node name="TentHunter2d" type="Node2D" unique_id=108714642]
+script = ExtResource("1_artv0")

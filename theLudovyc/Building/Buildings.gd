@@ -1,7 +1,13 @@
 extends Object
 class_name Buildings
 
-enum Types { Placeholder, Warehouse, MainSquare, Residential, Producing }
+enum Types { 
+	Placeholder,
+	Warehouse,
+	MainSquare,
+	Residential,
+	Producing
+}
 
 # WARN : if you change this order, you will have to modify the BuildingGridContainer
 # In the GUI because of the serialized ids
@@ -394,7 +400,17 @@ static func get_building_cost(building_id: Buildings.Ids) -> Array:
 	var building_datas = datas[building_id]
 	if not building_datas.has(Datas.Cost):
 		return []
-	return building_datas[Datas.Cost]
+	
+	# We can't just have the normal array nor duplicate
+	# We need a array which is not typed
+	var costs = building_datas[Datas.Cost]
+	var result = []
+	for cost in costs:
+		var res_cost = []
+		for item in cost:
+			res_cost.push_back(item)
+		result.push_back(res_cost)
+	return result
 
 
 static func get_produce_resource(building_id: Buildings.Ids) -> Resources.Types:
