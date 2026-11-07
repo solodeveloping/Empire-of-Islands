@@ -140,7 +140,7 @@ func find_building_needing_workers(b: ClassForLambdaFunction, c_housing: C_Housi
 
 func _on_production_building_added(
 	_event: Variant,
-	entity: Entity,
+	building: Entity,
 	data: Variant,
 ) -> void:
 	print("_on_production_building_added")
@@ -148,8 +148,12 @@ func _on_production_building_added(
 	if !island:
 		push_error("island is not present in data")
 	
-	var c_worker_requirements: C_WorkerRequirement = entity.get_component(C_WorkerRequirement)
-	var c_workers: C_Workers = entity.get_component(C_Workers)
+	var c_worker_requirements: C_WorkerRequirement = building.get_component(
+		C_WorkerRequirement
+	)
+	var c_workers: C_Workers = building.get_component(
+		C_Workers
+	)
 	if !c_worker_requirements or !c_workers:
 		printerr("missing worker components")
 		# TODO : exit?
@@ -206,9 +210,11 @@ func _on_production_building_added(
 			
 			cmd.add_relationship(
 				worker,
-				Relationship.new(
-					R_WorksAt.new(), entity
-				)
+				Rels.create_works_at(building)
+			)
+			cmd.add_component(
+				worker,
+				C_Working.new(0, 5, 1, true)
 			)
 			worker_quantity.worker_count += 1
 			
@@ -255,10 +261,12 @@ func _on_production_building_added(
 			is_one_missing = true
 	if is_one_missing == true:
 		#print("not enough workers")
-		#entity.add_component(C_MissingWorkers.new())
-		cmd.add_component(entity, C_MissingWorkers.new())
-		if entity.has_method("show_production_stoppped_indicator"):
-			entity.show_production_stoppped_indicator()
+		cmd.add_component(
+			building,
+			C_MissingWorkers.new()
+		)
+		if building.has_method("show_production_stoppped_indicator"):
+			building.show_production_stoppped_indicator()
 		else:
 			push_error("building needs method show_production_stoppped_indicator")
 

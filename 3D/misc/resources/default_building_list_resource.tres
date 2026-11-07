@@ -33,6 +33,8 @@
 [ext_resource type="PackedScene" uid="uid://np63mm8ie7yn" path="res://3D/prefabs/buildings_2D/settlers/Stonemason2D.tscn" id="28_olp3d"]
 [ext_resource type="PackedScene" uid="uid://ddvh3uqcnwi6h" path="res://3D/prefabs/buildings_2D/citizens/StoneHouse2D.tscn" id="31_3fbwi"]
 [ext_resource type="PackedScene" uid="uid://dbxfdfjhk8mqc" path="res://3D/prefabs/buildings_2D/settlers/House2D.tscn" id="32_8ktvp"]
+[ext_resource type="PackedScene" uid="uid://davactodftoud" path="res://3D/prefabs/buildings_2D/pioneers/SugarcaneField2D.tscn" id="33_4p8v4"]
+[ext_resource type="PackedScene" uid="uid://c4kwus5q4rjvt" path="res://3D/prefabs/buildings_2D/pioneers/Distillery2D.tscn" id="34_4x3uw"]
 
 [sub_resource type="Resource" id="Resource_imrfu"]
 script = ExtResource("2_5evuj")
@@ -372,6 +374,30 @@ scene_2d = ExtResource("12_n8iq8")
 costs = Array[ExtResource("2_5evuj")]([SubResource("Resource_sh8ai"), SubResource("Resource_cr17y")])
 metadata/_custom_type_script = "uid://c5basxvhkxhgh"
 
+[sub_resource type="Resource" id="Resource_t3a65"]
+script = ExtResource("2_5evuj")
+resource = 3
+cost = 50
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_pi4jv"]
+script = ExtResource("1_bfftw")
+scene_2d = ExtResource("33_4p8v4")
+costs = Array[ExtResource("2_5evuj")]([SubResource("Resource_t3a65")])
+metadata/_custom_type_script = "uid://c5basxvhkxhgh"
+
+[sub_resource type="Resource" id="Resource_jofae"]
+script = ExtResource("2_5evuj")
+resource = 3
+cost = 50
+metadata/_custom_type_script = "uid://cpht101lc1jh1"
+
+[sub_resource type="Resource" id="Resource_k42wf"]
+script = ExtResource("1_bfftw")
+scene_2d = ExtResource("34_4x3uw")
+costs = Array[ExtResource("2_5evuj")]([SubResource("Resource_jofae")])
+metadata/_custom_type_script = "uid://c5basxvhkxhgh"
+
 [resource]
 script = ExtResource("11_ml4a5")
 builtin_buildings = Dictionary[int, ExtResource("1_bfftw")]({
@@ -396,6 +422,8 @@ builtin_buildings = Dictionary[int, ExtResource("1_bfftw")]({
 19: SubResource("Resource_tdah1"),
 20: SubResource("Resource_7nel1"),
 21: SubResource("Resource_qpu21"),
-22: SubResource("Resource_1eclw")
+22: SubResource("Resource_1eclw"),
+23: SubResource("Resource_pi4jv"),
+24: SubResource("Resource_k42wf")
 })
 metadata/_custom_type_script = "uid://dfmexpqbio71u"

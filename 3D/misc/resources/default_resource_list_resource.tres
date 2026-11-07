@@ -36,6 +36,10 @@
 [ext_resource type="Texture2D" uid="uid://dmu5dytfsywh5" path="res://Art/Image/Gui/Icons/Resources/32/greyscale/007.png" id="30_mtjaa"]
 [ext_resource type="Texture2D" uid="uid://dk30d5n6rym6f" path="res://Art/Image/Gui/Icons/Resources/32/greyscale/001.png" id="34_qvw63"]
 [ext_resource type="Texture2D" uid="uid://toeqa364p2tp" path="res://Art/Image/Gui/Icons/Resources/32/001.png" id="35_s82v1"]
+[ext_resource type="Texture2D" uid="uid://ug7464krd1sp" path="res://Art/Image/Gui/Icons/Resources/32/greyscale/018.png" id="36_v0gtl"]
+[ext_resource type="Texture2D" uid="uid://cbhabrpskpjun" path="res://Art/Image/Gui/Icons/Resources/32/018.png" id="37_ifm0k"]
+[ext_resource type="Texture2D" uid="uid://cd164pyf7xcgf" path="res://Art/Image/Gui/Icons/Resources/32/greyscale/022.png" id="38_fe2v1"]
+[ext_resource type="Texture2D" uid="uid://cii2684a7yjae" path="res://Art/Image/Gui/Icons/Resources/32/022.png" id="39_mtjaa"]
 
 [sub_resource type="Resource" id="Resource_hofyb"]
 script = ExtResource("1_jsmmv")
@@ -155,7 +159,21 @@ normal_icon = ExtResource("35_s82v1")
 grey_icon = ExtResource("34_qvw63")
 metadata/_custom_type_script = "uid://d3ildill70jlw"
 
+[sub_resource type="Resource" id="Resource_lon8l"]
+script = ExtResource("1_jsmmv")
+builtin_resource_id = 18
+normal_icon = ExtResource("37_ifm0k")
+grey_icon = ExtResource("36_v0gtl")
+metadata/_custom_type_script = "uid://d3ildill70jlw"
+
+[sub_resource type="Resource" id="Resource_0wqwo"]
+script = ExtResource("1_jsmmv")
+builtin_resource_id = 19
+normal_icon = ExtResource("39_mtjaa")
+grey_icon = ExtResource("38_fe2v1")
+metadata/_custom_type_script = "uid://d3ildill70jlw"
+
 [resource]
 script = ExtResource("2_enmub")
-list = Array[ExtResource("1_jsmmv")]([SubResource("Resource_hofyb"), SubResource("Resource_n4y2n"), SubResource("Resource_ooua1"), SubResource("Resource_8px35"), SubResource("Resource_0xwtv"), SubResource("Resource_hvk1t"), SubResource("Resource_op373"), SubResource("Resource_rkxgr"), SubResource("Resource_8iiqs"), SubResource("Resource_xi7jg"), SubResource("Resource_aqb6m"), SubResource("Resource_mmxq7"), SubResource("Resource_lkysh"), SubResource("Resource_1wivi"), SubResource("Resource_gmyf8"), SubResource("Resource_pdh61"), SubResource("Resource_n3oqw")])
+list = Array[ExtResource("1_jsmmv")]([SubResource("Resource_hofyb"), SubResource("Resource_n4y2n"), SubResource("Resource_ooua1"), SubResource("Resource_8px35"), SubResource("Resource_0xwtv"), SubResource("Resource_hvk1t"), SubResource("Resource_op373"), SubResource("Resource_rkxgr"), SubResource("Resource_8iiqs"), SubResource("Resource_xi7jg"), SubResource("Resource_aqb6m"), SubResource("Resource_mmxq7"), SubResource("Resource_lkysh"), SubResource("Resource_1wivi"), SubResource("Resource_gmyf8"), SubResource("Resource_pdh61"), SubResource("Resource_n3oqw"), SubResource("Resource_lon8l"), SubResource("Resource_0wqwo")])
 metadata/_custom_type_script = "uid://b45m4ksfiq6pi"

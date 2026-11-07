@@ -14,16 +14,8 @@ var event_bus: EventBus
 @onready var companies_grid_container: GridContainer = $VBoxContainer/CompaniesGridContainer
 @onready var military_grid_container: GridContainer = $VBoxContainer/MilitaryGridContainer
 
-# FIXME : this should be automated
-@onready
-var building_buttons = {
-	Buildings.Ids.Warehouse: $VBoxContainer/InfrastructureGridContainer/BuildWarehouse,
-	Buildings.Ids.MainSquare: $VBoxContainer/InfrastructureGridContainer/BuildMainSquare,
-	Buildings.Ids.Tent: $VBoxContainer/InfrastructureGridContainer/BuildResidential,
-	Buildings.Ids.Lumberjack: $VBoxContainer/CompaniesGridContainer/BuildLumberjack,
-	Buildings.Ids.HunterTent: $VBoxContainer/CompaniesGridContainer/BuildHunterTent,
-	Buildings.Ids.Fishery: $VBoxContainer/CompaniesGridContainer/BuildFishery,
-}
+# Maps Buildings.Ids
+var building_buttons: Dictionary[int, Node] = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -38,12 +30,24 @@ func _ready():
 		bind_buttons(services_grid_container)
 		bind_buttons(companies_grid_container)
 		bind_buttons(military_grid_container)
+	
 
 func bind_buttons(container: GridContainer):
 	for child in container.get_children():
-		child.pressed.connect(_on_building_button_pressed.bind(child.building_id))
-		child.mouse_entered.connect(_on_building_button_mouse_entered.bind(child.building_id))
-		child.mouse_exited.connect(_on_building_button_mouse_exited)
+		if child is ButtonBuild:
+			child.pressed.connect(
+				_on_building_button_pressed.bind(child.building_id)
+			)
+			child.mouse_entered.connect(
+				_on_building_button_mouse_entered.bind(child.building_id)
+			)
+			child.mouse_exited.connect(
+				_on_building_button_mouse_exited
+			)
+			building_buttons.set(
+				child.building_id,
+				child
+			)
 
 func _on_building_button_pressed(building_id: Buildings.Ids):
 	print("_on_building_button_pressed %s" % [

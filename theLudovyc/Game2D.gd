@@ -25,6 +25,9 @@ func list_disabled_systems() -> void:
 					child.get_path(),
 				])
 
+@export_flags_2d_render()
+var main_viewport_cull_mask: int = 0
+
 @export_category("ECS")
 
 @export
@@ -68,7 +71,7 @@ var default_builtin_resources_space_weight_ref_def: BuiltinResourcesSpaceWeightR
 var default_basic_trade_system_prices: BuiltinTradePriceList
 
 @export_flags_2d_physics
-var physics_building_layers: int = 0
+var physics_visible_entity_layers_2d: int = 0
 
 @export_category("Systems")
 
@@ -100,7 +103,9 @@ var debug_display_names: bool = false
 
 @onready var tm := %TileMap
 
-@onready var cam := $Camera2D
+@onready var camera_2d: Camera2D = $Camera2D
+
+@onready var movement_2d: Movement2D = $Movement2D
 
 @onready var node_buildings := %Buildings
 
@@ -108,6 +113,8 @@ var debug_display_names: bool = false
 
 @onready var audio_player: AudioPlayer = $AudioPlayer
 @onready var ship_bell_audio_stream_player_2d: AudioStreamPlayer2D = $ShipBellAudioStreamPlayer2D
+
+@onready var main_sub_viewport: SubViewport = $MainSubViewport
 
 @onready var the_storage: TheStorage = %TheStorage
 @onready var the_bank: TheBank = %TheBank
@@ -124,6 +131,7 @@ var debug_display_names: bool = false
 @onready var o_population_movement_observer: O_PopulationMovementObserver = $ECS/World/Systems/gameplay/O_PopulationMovementObserver
 @onready var population_misc_system: PopulationMiscSystem = $ECS/World/Systems/gameplay/PopulationMiscSystem
 @onready var the_storages: Node = $ECS/TheStorages
+@onready var gm_storage_evolution_sampler: GM_StorageEvolutionSampler = $ECS/GM_StorageEvolutionSampler
 @onready var ge_map_ship_spawner_2d: GE_MapShipSpawner2D = $ECS/World/GE_MapShipSpawner2D
 @onready var faction_misc_system: FactionMiscSystem = $ECS/World/Systems/gameplay/FactionMiscSystem
 @onready var o_faction_misc_observer: O_FactionMiscObserver = $ECS/World/Systems/gameplay/O_FactionMiscObserver
@@ -196,8 +204,9 @@ func _ready():
 	# set camera limits
 	var pos_limits = tm.get_pos_limits()
 
-	cam.pos_limit_top_left = pos_limits[0]
-	cam.pos_limit_bot_right = pos_limits[1]
+	camera_2d.pos_limit_top_left = pos_limits[0]
+	camera_2d.pos_limit_bot_right = pos_limits[1]
+	get_viewport().canvas_cull_mask = main_viewport_cull_mask
 	
 	#var warehouse_pos = Vector2.ZERO
 	if USE_ECS:
@@ -243,12 +252,12 @@ func initialize_not_ecs():
 	
 	# force camera initial pos on warehouse
 	if the_builder.warehouse:
-		cam.position = the_builder.warehouse.global_position
+		camera_2d.position = the_builder.warehouse.global_position
 	else:
 		var rect = ground_layer.get_used_rect()
 		var center = ground_layer.to_global(ground_layer.map_to_local(rect.get_center()))
-		cam.position = center
-	cam.reset_smoothing()
+		camera_2d.position = center
+	camera_2d.reset_smoothing()
 	
 	pause_menu.visibility_changed.connect(_on_PauseMenu_visibility_changed)
 
@@ -256,12 +265,12 @@ func initialize_ecs():
 	# FIXME: this is common
 	var rect = ground_layer.get_used_rect()
 	var center = ground_layer.to_global(ground_layer.map_to_local(rect.get_center()))
-	cam.position = center
-	cam.reset_smoothing()
+	camera_2d.position = center
+	camera_2d.reset_smoothing()
 	
 	pause_menu.visibility_changed.connect(_on_PauseMenu_visibility_changed)
 
-	Global.physics_building_layers_2d = physics_building_layers
+	Global.physics_visible_entity_layers_2d = physics_visible_entity_layers_2d
 	
 	# TODO: we could have ECS ticker too
 	the_ticker.stop()
@@ -357,6 +366,11 @@ func initialize_ecs():
 	local_player_c_faction = local_player_faction.get_component(
 		C_Faction
 	)
+	gm_storage_evolution_sampler.storage = local_player_storage
+	gm_storage_evolution_sampler.local_player_c_faction = local_player_c_faction
+	movement_2d.allowed_to_move_faction_ids = [
+		local_player_faction_index
+	]
 	
 	event_bus.send_local_player_faction_storage_changed.emit(
 		local_player_storage
@@ -462,6 +476,10 @@ func initialize_ecs():
 	ECS.world.add_entity(
 		ship_2d
 	)
+	ship_2d.set_meta(
+		StaticFactions.BELONGS_TO_LOCAL_PLAYER_META,
+		true
+	)
 	
 	# More events
 	bind_ecs_events()
@@ -500,6 +518,7 @@ func initialize_ecs():
 	call_deferred("call_after_init_is_done")
 
 func bind_ecs_events():
+	print("bind_ecs_events")
 	production_system.produced_resources.connect(
 		_on_ProductionSystem_produced_resources
 	)
@@ -635,6 +654,11 @@ func initialize_storage_ecs():
 	event_bus.money_updated.emit(
 		local_player_c_faction.gold_count
 	)
+	
+	gm_storage_evolution_sampler.initialize(
+		local_player_c_faction.gold_count
+	)
+	
 
 # return [money_cost, [[Resources.Types, cost], ...]]
 func get_building_total_cost(
@@ -687,7 +711,7 @@ func _process(delta):
 	rtl.text += str(mouse_pos) + "\n"
 	rtl.text += str(mouse_local_tilemap) + "\n"
 	rtl.text += str(tile_pos) + "\n"
-	rtl.text += str(cam.get_screen_center_position()) + "\n"
+	rtl.text += str(camera_2d.get_screen_center_position()) + "\n"
 	
 	var cell_type = tm.minimap_get_cell(tile_pos)
 	var cell_name = MyMap.get_cell_type_name(cell_type)
@@ -929,7 +953,10 @@ func try_build_building_ecs(
 	#the_bank.money += building_total_cost[0]
 	#the_storage.conclude_building_construction(building_total_cost[1])
 	
-	the_builder.conclude_building_construction(the_cursor.cursor_entity)
+	the_builder.conclude_building_construction(
+		the_cursor.cursor_entity,
+		false
+	)
 	the_nature.conclude_building_construction(
 		the_cursor.cursor_entity,
 		tile_pos
@@ -1215,12 +1242,13 @@ func _physics_is_position_inside_discovered_area(
 	world_position: Vector2
 ):
 	var circle := CircleShape2D.new()
-	circle.radius = 25.0
+	# TODO: make it a parameter
+	circle.radius = 250.0
 
 	var query := PhysicsShapeQueryParameters2D.new()
 	query.shape = circle
 	query.transform = Transform2D(0.0, world_position)
-	query.collision_mask = physics_building_layers
+	query.collision_mask = Global.physics_visible_entity_layers_2d
 	query.collide_with_areas = true
 	query.collide_with_bodies = false
 

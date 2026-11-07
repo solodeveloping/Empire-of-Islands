@@ -79,6 +79,7 @@ signal send_resource_updated(resource_type, resource_amount)
 signal send_resource_prodution_rate_updated(resource_type, production_rate)
 
 ## MONEY
+# FIXME: should be send_*
 signal money_updated(money_amount)
 signal money_production_rate_updated(money_production_rate)
 

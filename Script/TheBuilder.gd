@@ -34,9 +34,11 @@ var cycle_food_consumed = {}
 func instantiate_building(building_id: Buildings.Ids) -> Building2D:
 	var instance = Building_2D_Scene.instantiate() as Building2D
 	
-	instance.building_id = building_id
-	
 	node_buildings_preview.add_child(instance)
+	
+	# Info: we are doing it after add_child
+	# because it triggers something with his child nodes
+	instance.building_id = building_id
 	
 	return instance
 	
@@ -61,7 +63,10 @@ func build(building_id: Buildings.Ids, pos: Vector2) -> Building2D:
 func build_warehouse(pos: Vector2):
 	warehouse = build(Buildings.Ids.Warehouse, pos)
 
-func conclude_building_construction(building: Building2D):
+func conclude_building_construction(
+	building: Building2D,
+	update_maintenance_cost: bool = true
+):
 	var preview_buildings = node_buildings_preview.get_children()
 	for preview in preview_buildings:
 		node_buildings_preview.remove_child(preview)
@@ -76,8 +81,14 @@ func conclude_building_construction(building: Building2D):
 	if limit != -1:
 		if buildings_count[building.building_id] >= limit:
 			event_bus.send_building_limit_updated.emit(building.building_id, true)
-			
-	maintenance_cost += Buildings.get_maintenance_cost(building.building_id)
+	
+	# FIXME: something better
+	# Info: we are calling the same method for ECS
+	# but don't need this
+	if update_maintenance_cost:
+		maintenance_cost += Buildings.get_maintenance_cost(
+			building.building_id
+		)
 	
 	var range_ = Buildings.get_dependency_max_range(building.building_id)
 	if range_ != -1:

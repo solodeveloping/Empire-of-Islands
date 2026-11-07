@@ -90,8 +90,6 @@ func attempt_to_spawn_in_tiles(max_attempt_count: int, tiles: Array[Vector2i]) -
 		
 		var instance = NATURAL_RESOURCE.instantiate()
 		
-		instance.natural_resource_id = res_key
-		
 		instance.position = tile_map.ground_layer.map_to_local(pos)
 		
 		var cell_type = NaturalResources.get_natural_resource_tile_type(
@@ -103,6 +101,10 @@ func attempt_to_spawn_in_tiles(max_attempt_count: int, tiles: Array[Vector2i]) -
 		)
 		
 		add_child(instance)
+		
+		# Info: we do this here because it triggers something
+		# with the child nodes
+		instance.natural_resource_id = res_key
 		
 		return true
 	return false

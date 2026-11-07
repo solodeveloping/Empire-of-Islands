@@ -23,6 +23,10 @@ enum Types {
 	ClayBrick,
 	Gold,
 	Tomato,
+	# TODO: add sugarcane and the building for sugarcane -> sugar
+	Sugar,
+	# TODO: other types of liquor
+	Liquor,
 }
 
 const Icons = {
@@ -41,6 +45,8 @@ const Icons = {
 	Types.Flour: preload("res://Art/Image/Gui/Icons/Resources/32/044.png"),
 	Types.Clay: preload("res://Art/Image/Gui/Icons/Resources/32/021.png"),
 	Types.ClayBrick: preload("res://Art/Image/Gui/Icons/Resources/32/007.png"),
+	Types.Sugar: preload("uid://cbhabrpskpjun"),
+	Types.Liquor: preload("uid://cii2684a7yjae"),
 	# Level 3
 	Types.Bread: preload("res://Art/Temp/cc0-food-icons/bread.png"),
 	Types.Textile: preload("res://Art/Image/Gui/Icons/Resources/32/003.png"),
@@ -123,6 +129,16 @@ const datas = {
 	{
 		Datas.Name: &"Clay brick",
 		Datas.Type: Types.ClayBrick,
+	},
+	Types.Sugar:
+	{
+		Datas.Name: &"Sugar",
+		Datas.Type: Types.Sugar,
+	},
+	Types.Liquor:
+	{
+		Datas.Name: &"Liquor",
+		Datas.Type: Types.Liquor,
 	},
 	# Level 3
 	Types.Meat:

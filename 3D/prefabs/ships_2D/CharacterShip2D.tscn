@@ -31,8 +31,12 @@ fill_to = Vector2(1, 1)
 
 [node name="Ship2d" type="CharacterBody2D" unique_id=2142486486]
 z_index = 10
+collision_layer = 16416
+collision_mask = 33
 script = ExtResource("1_5lcu2")
 selected_color = Color(1, 0.7647059, 0.22352941, 1)
+metadata/is_visible = true
+metadata/belongs_to_local_player_faction = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=181397190]
 shape = SubResource("CircleShape2D_sfkqh")
@@ -44,6 +48,7 @@ collision_layer = 2049
 shape = SubResource("CircleShape2D_syd0k")
 
 [node name="Sprites" type="Node2D" parent="." unique_id=1895927532]
+visibility_layer = 2
 
 [node name="EastSprite2D" type="Sprite2D" parent="Sprites" unique_id=2016322294]
 visible = false
@@ -78,8 +83,9 @@ texture = ExtResource("2_0i5ev")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1991923763]
 target_position = Vector2(60, 180)
-path_desired_distance = 75.0
-target_desired_distance = 100.0
+path_desired_distance = 150.0
+target_desired_distance = 250.0
+path_max_distance = 200.0
 
 [node name="SelectionSprite2D" type="Sprite2D" parent="." unique_id=2066181394]
 scale = Vector2(1.5, 1.5)

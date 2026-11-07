@@ -53,6 +53,7 @@ func _on_event_bus_send_natural_resource_deselected(_node):
 
 func _on_event_bus_send_ecs_ship_selected(node):
 	print("_on_event_bus_send_ecs_ship_selected")
+	print_stack()
 	if node == selection:
 		return
 	selection = node

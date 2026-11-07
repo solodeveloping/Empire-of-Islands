@@ -30,7 +30,7 @@ func pay_entities(
 	components: Array,
 	delta: float
 ):
-	#print("produce_resources %s" % [
+	#print("pay_entities %s" % [
 		#entities.size(),
 	#])
 	
@@ -56,6 +56,8 @@ func pay_entities(
 			#printerr("C_Storage not found")
 			#continue
 		
+		#print("attempting to pay")
+		
 		# Info: we have to query the building
 		# because that's the entity that pays the workers
 		var r_works_at = entity.get_relationship(Rels.works_at)
@@ -65,17 +67,17 @@ func pay_entities(
 		
 		# FIXME: get_relationship is kinda slow compared to get_compoent
 		# or instant access
-		var r_faction = r_works_at.target.get_relationship(Rels.works_at)
-		if !r_faction:
+		var r_faction = r_works_at.target.get_relationship(Rels.belongs_to_faction)
+		if !r_faction or !r_faction.target:
 			printerr("r_faction not found")
+			print_stack()
 			continue
 		
-		var c_faction: C_Faction = r_faction.target.get_component(C_Faction)
-		var faction_c_storage: C_Storage = r_faction.target.get_component(
-			C_Storage
+		var c_faction: C_Faction = r_faction.target.get_component(
+			C_Faction
 		)
-		if faction_c_storage.gold_count >= c_working.pay:
-			faction_c_storage.gold_count -= c_working.pay
+		if c_faction.gold_count >= c_working.pay:
+			c_faction.gold_count -= c_working.pay
 			c_storage.gold_count += c_working.pay
 			c_working.working_time = 0
 			
@@ -112,6 +114,7 @@ func pay_entities(
 				)
 				
 		else:
+			# TODO: should monitor this, notify the player
 			var c_not_getting_paid: C_NotGettingPaid = entity.get_component(
 				C_NotGettingPaid
 			)
@@ -122,6 +125,7 @@ func pay_entities(
 				)
 	
 	if !gold_count_changes_per_faction.is_empty():
+		#print("gold_count_changed")
 		gold_count_changed.emit(
 			gold_count_changes_per_faction
 		)

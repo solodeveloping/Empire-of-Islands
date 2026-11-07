@@ -256,6 +256,20 @@ func try_spawn_ship():
 			faction
 		)
 	)
+	if c_faction.faction_id == StaticFactions.local_player_faction_id:
+		ship.set_meta(
+			StaticFactions.BELONGS_TO_LOCAL_PLAYER_META,
+			true
+		)
+		ship.set_meta(
+			"is_visible",
+			true
+		)
+	else:
+		ship.set_meta(
+			"is_visible",
+			false
+		)
 	
 	ship_container.add_child(ship)
 	

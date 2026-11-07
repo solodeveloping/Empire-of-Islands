@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://davactodftoud"]
+
+[ext_resource type="Script" uid="uid://dur7u1xul5dy7" path="res://3D/prefabs/buildings_2D/pioneers/sugarcane_field_2d.gd" id="1_iwia3"]
+
+[node name="SugarcaneField2d" type="Node2D" unique_id=1237261915]
+script = ExtResource("1_iwia3")

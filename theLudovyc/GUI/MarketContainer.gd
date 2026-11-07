@@ -12,18 +12,27 @@ var resource_order_scene = preload("res://theLudovyc/GUI/ResourceOrder.tscn")
 
 var order_nodes = {}
 
-
 func _ready():
 	var current_scene = get_tree().current_scene
 
 	if current_scene.has_node("EventBus"):
-		event_bus = current_scene.get_node("EventBus") as EventBus
+		event_bus = current_scene.get_node("EventBus")
 
-		event_bus.send_create_new_order.connect(_on_receive_create_new_order)
-		event_bus.send_create_new_order_with_values.connect(_on_receive_create_new_order_with_values)
-		event_bus.send_remove_order.connect(_on_receive_remove_order)
-		event_bus.send_update_order_buy.connect(_on_receive_update_order_buy)
-		event_bus.money_production_rate_updated.connect(_on_receive_money_production_rate_updated)
+		event_bus.send_create_new_order.connect(
+			_on_receive_create_new_order
+		)
+		event_bus.send_create_new_order_with_values.connect(
+			_on_receive_create_new_order_with_values
+		)
+		event_bus.send_remove_order.connect(
+			_on_receive_remove_order
+		)
+		event_bus.send_update_order_buy.connect(
+			_on_receive_update_order_buy
+		)
+		event_bus.money_production_rate_updated.connect(
+			_on_receive_money_production_rate_updated
+		)
 
 	resource_popup.result.connect(_on_ResourcePopup_result)
 

@@ -6,6 +6,9 @@ var storage: Dictionary[int, GMStorageRef] = {}
 # TODO: not sure how the other methods should behave related to this
 var has_infinite_resources: bool = false
 
+func get_storage_as_list() -> Array[GMStorageRef]:
+	return storage.values()
+
 func get_storage(
 	item_id: int,
 ) -> GMStorageRef:

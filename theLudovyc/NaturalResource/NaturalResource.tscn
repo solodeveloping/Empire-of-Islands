@@ -1,14 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://bl1hgyy50orya"]
+[gd_scene format=3 uid="uid://bl1hgyy50orya"]
 
 [ext_resource type="Script" uid="uid://dg708pt3igb2u" path="res://theLudovyc/NaturalResource/NaturalResource.gd" id="1_rxjj4"]
 
-[node name="NaturalResource" type="Sprite2D"]
+[node name="NaturalResource" type="Node2D" unique_id=1983194888]
 script = ExtResource("1_rxjj4")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=882080959]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" unique_id=592706135]
 polygon = PackedVector2Array(0, -16, -32, 0, 0, 16, 32, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=201594195]
 
 [connection signal="input_event" from="Area2D" to="." method="_on_Area2d_input_event"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_Area2d_mouse_entered"]

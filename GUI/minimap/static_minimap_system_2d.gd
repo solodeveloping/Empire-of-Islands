@@ -14,9 +14,6 @@ var sub_viewport_camera: Camera2D
 @export
 var tile_map_layer: TileMapLayer
 
-@export_range(0.0, 0.5)
-var margin_fraction: float = 0.05
-
 @export
 var extra_padding := Vector2(0, 0)
 
@@ -129,6 +126,10 @@ func _ready() -> void:
 		padding.y
 	)
 	
+	print("StaticMinimapSystem2D rect: %s" % [
+		rect2,
+	])
+	
 	# center the sub_viewport's camera on the bound's center
 	sub_viewport_camera.global_position = rect2.get_center()
 	
@@ -179,6 +180,10 @@ func _ready() -> void:
 			minimap_center.x,
 			minimap_center.y,
 		)
+	)
+	minimap_with_shader_texture_rect.material.set(
+		"shader_parameter/map_world_size",
+		rect2.size
 	)
 	
 	render()
@@ -237,6 +242,10 @@ func _on_event_bus_ask_minimap_zoom_in_for_shader():
 			is_zoom_out_enabled = true
 			event_bus.send_minimap_enable_zoom_out.emit()
 	
+	#print("zoom %s" % [
+		#current_zoom,
+	#])
+	
 	minimap_with_shader_texture_rect.material.set(
 		"shader_parameter/current_zoom_level",
 		current_zoom
@@ -270,6 +279,10 @@ func _on_event_bus_ask_minimap_zoom_out_for_shader():
 		if current_zoom > min_zoom_level_for_shader:
 			is_zoom_in_enabled = true
 			event_bus.send_minimap_enable_zoom_in.emit()
+	
+	#print("zoom %s" % [
+		#current_zoom,
+	#])
 	
 	minimap_with_shader_texture_rect.material.set(
 		"shader_parameter/current_zoom_level",

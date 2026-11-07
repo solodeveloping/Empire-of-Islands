@@ -29,12 +29,14 @@ layout(set = 0, binding = 3, std430) readonly buffer Node2Ds {
 } node_2ds;
 
 layout(push_constant, std430) uniform Parameters {
-    int texture_width;
-    int texture_height;
-    int map_width;
-    int map_height;
-    ivec2 map_origin;
-    int object_count;
+  // texture size
+  int texture_width;
+  int texture_height;
+  // real size in world units
+  int map_width;
+  int map_height;
+  ivec2 map_origin;
+  int object_count;
 } params;
 
 void _do_double_store(ivec2 position, vec4 new_color) {
@@ -65,8 +67,29 @@ void main() {
       return;
   }
 
+  // Info: this is to have a orthographic projection
+  // otherwise we occupy the whole texture in the y coord
+  // which is causing problems elsewhere
+  float y = remap(
+    float(position.y),
+    float(0),
+    float(params.texture_height),
+    // 0.25 to 0.75, 0.5 in size
+    float(params.texture_height) / 4,
+    float(params.texture_height) - float(params.texture_height) / 4
+  );
+  int int_y = int(y);
+
+  ivec2 resized_pos = ivec2(
+    position.x,
+    int_y
+  );
+
+  // position = resized_pos;
+
   // We have to write the value, otherwise they don't synchronize
-  float existing_value = imageLoad(previous_texture, position).r;
+  // float existing_value = imageLoad(previous_texture, position).r;
+  float existing_value = imageLoad(previous_texture, resized_pos).r;
   // if (existing_value > (EPSILON)) {
     // _do_double_store(position, vec4(existing_value, existing_value, 0.0, 1.0));
     // return;
@@ -149,9 +172,14 @@ void main() {
 
   if (color > existing_value) {
     // _do_double_store(position, vec4(color, max_d / 255, color, 1.0));
-    _do_double_store(position, vec4(color, 0.0, color, 1.0));
+
+    // normal texture writing
+    // _do_double_store(position, vec4(color, 0.0, color, 1.0));
+    _do_double_store(resized_pos, vec4(color, 0.0, color, 1.0));
   } else if (existing_value > EPSILON) {
-    _do_double_store(position, vec4(existing_value, existing_value, 0.0, 1.0));
+    // normal texture writing
+    // _do_double_store(position, vec4(existing_value, existing_value, 0.0, 1.0));
+    _do_double_store(resized_pos, vec4(existing_value, existing_value, 0.0, 1.0));
   }
 
 }

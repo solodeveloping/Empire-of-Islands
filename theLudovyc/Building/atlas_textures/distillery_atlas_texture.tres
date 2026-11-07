@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" format=3 uid="uid://c7vtt8fi0m4t2"]
+
+[ext_resource type="Texture2D" uid="uid://dc80c7fbxxnrg" path="res://Art/Image/Buildings/Distillery/Distillery_idle.png" id="1_rdnhs"]
+
+[resource]
+atlas = ExtResource("1_rdnhs")
+region = Rect2(0, 0, 128, 96)

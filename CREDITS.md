@@ -82,6 +82,10 @@ I generated the .oggs from the .flac for this one.
 
 [map_bg_2.png](res://Art/Image/Gui/Background/Widgets/map_bg_2.png) and [map_bg_mask.png](res://Art/Image/Gui/Background/Widgets/map_bg_mask.png) were reworked from [map_bg.png](res://Art/Image/Gui/Background/Widgets/map_bg.png) (and the associated .kra file).
 
+The original textures of [Jess Hammer](https://www.youtube.com/@jesscodes) in [jess-hammer](res://Assets/jess-hammer/) were taken from [repeated-texture-on-tilemap-demo-godot](https://github.com/jess-hammer/repeated-texture-on-tilemap-demo-godot), MIT license.
+
+I edited the textures to obtain various effects.
+
 ## Godot
 
 Images in the [Assets/Godot](res://Assets/Godot/) directory were taken from the [official Godot repository](https://github.com/godotengine/godot/tree/master/editor/icons)

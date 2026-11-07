@@ -161,6 +161,11 @@ func process_3D():
 		
 		simple_ui.position = simple_ui_pos# + Vector2(size_.x / 2, size_.y / 2)
 		ui.position = ui_pos# + Vector2(size_.x / 2, size_.y / 2)
+		
+		if ship.has_meta("is_visible"):
+			var _is_visible = ship.get_meta("is_visible")
+			if !_is_visible:
+				ui.visible = false
 	
 	#for ship in to_remove_ships:
 		#ships.erase(ship)
@@ -263,6 +268,14 @@ func process_2D():
 		
 		simple_ui.position = simple_ui_pos# + Vector2(size_.x / 2, size_.y / 2)
 		ui.position = ui_pos# + Vector2(size_.x / 2, size_.y / 2)
+		
+		if ship.has_meta("is_visible"):
+			var _is_visible = ship.get_meta("is_visible")
+			if !_is_visible:
+				print("not visible")
+				ui.visible = false
+		else:
+			push_error("does not have meta is_visible")
 	
 	#for ship in to_remove_ships:
 		#ships.erase(ship)

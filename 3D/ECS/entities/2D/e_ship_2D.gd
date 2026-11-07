@@ -79,8 +79,8 @@ func define_components() -> Array:
 		C_Name.new("Ship"),
 		C_Health.new(250.0),
 		C_Movement.new(
-			10.0 * 8,
-			#10.0 * 16 * 2,
+			#10.0 * 8,
+			10.0 * 16 * 2,
 			4,
 			8,
 		),
@@ -360,3 +360,72 @@ func _on_SelectionArea2d_mouse_exited() -> void:
 	if is_selected:
 		return
 	selection_sprite_2d.hide()
+
+# Info: this is for other ships
+# not the ship as itself
+# the ship seeing should notify the other one
+
+func _on_vision_area_area_entered(
+	area: Area2D
+):
+	print("_on_vision_area_body_entered %s %s" % [
+		self.get_path(),
+		area.get_path(),
+	])
+	if area == self or area.get_parent() == self:
+		return
+	
+	if !area.get_parent().has_method("handle_area_entered"):
+		return
+	
+	if area.get_parent().get_meta(StaticFactions.BELONGS_TO_LOCAL_PLAYER_META, false):
+		return
+	
+	area.get_parent().handle_area_entered(self)
+	
+
+func _on_vision_area_area_exited(
+	area: Area2D
+):
+	print("_on_vision_area_body_exited %s %s" % [
+		self.get_path(),
+		area.get_path(),
+	])
+	if area == self or area.get_parent() == self:
+		return
+	
+	if !area.get_parent().has_method("handle_area_exited"):
+		return
+	
+	# Info: this caches Rels.belongs_to_faction
+	# So we don't have to query it
+	if area.get_parent().get_meta(StaticFactions.BELONGS_TO_LOCAL_PLAYER_META, false):
+		return
+	
+	area.get_parent().handle_area_exited(self)
+
+var inside_visions: Dictionary[int, int] = {}
+
+func handle_area_entered(
+	entity: Entity
+):
+	print("handle_area_entered %s" % [
+		inside_visions.size(),
+	])
+	inside_visions.set(
+		entity.ecs_id,
+		entity.ecs_id,
+	)
+	set_meta("is_visible", true)
+
+func handle_area_exited(
+	entity: Entity
+):
+	print("handle_area_exited %s" % [
+		inside_visions.size(),
+	])
+	inside_visions.erase(
+		entity.ecs_id,
+	)
+	if inside_visions.size() <= 0:
+		set_meta("is_visible", false)

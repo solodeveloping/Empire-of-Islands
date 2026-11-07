@@ -146,7 +146,14 @@ func _former_version_of_production_building_being_removed(
 	
 	for pop_unit in pop_units:
 		#print("remove_relationship")
-		cmd.remove_relationship(pop_unit, Rels.create_works_at(entity))
+		cmd.remove_relationship(
+			pop_unit,
+			Rels.create_works_at(entity)
+		)
+		cmd.remove_component(
+			pop_unit,
+			C_Working,
+		)
 		ECS.world.emit_event(
 			ECSEvents.POP_UNIT_LEFT_PRODUCTION_BUILDING, 
 			pop_unit,

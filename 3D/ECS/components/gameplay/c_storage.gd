@@ -1,3 +1,4 @@
+## This is the storage for the pop units and other entities
 class_name C_Storage
 extends Component
 

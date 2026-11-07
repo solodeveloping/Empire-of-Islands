@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cjik88o0gfyrd"]
+[gd_scene format=3 uid="uid://cjik88o0gfyrd"]
 
 [ext_resource type="Script" uid="uid://snq0xdo03ehv" path="res://theLudovyc/GUI/BuildMenu/tier_2_building_buttons_container.gd" id="1_pggkw"]
 [ext_resource type="Script" uid="uid://dxo6pwnqt8tjp" path="res://theLudovyc/GUI/ButtonBuild.gd" id="6_kaoaq"]
@@ -22,14 +22,22 @@
 [ext_resource type="Texture2D" uid="uid://div73bs1hkxwc" path="res://Art/Image/Gui/Icons/BuildMenu/039_d.png" id="20_36vux"]
 [ext_resource type="Texture2D" uid="uid://cct56i6qr81fr" path="res://Art/Image/Gui/Icons/BuildMenu/039_h.png" id="21_4s8tm"]
 [ext_resource type="Texture2D" uid="uid://co7yxlkko5mm5" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/039.png" id="22_3legw"]
+[ext_resource type="Texture2D" uid="uid://dkadq4ne1teh5" path="res://Art/Image/Gui/Icons/BuildMenu/022.png" id="23_a3y55"]
+[ext_resource type="Texture2D" uid="uid://bubkbifu4rx0p" path="res://Art/Image/Gui/Icons/BuildMenu/022_d.png" id="24_h0b2w"]
+[ext_resource type="Texture2D" uid="uid://c7fv5vqawpogg" path="res://Art/Image/Gui/Icons/BuildMenu/022_h.png" id="25_og0qd"]
+[ext_resource type="Texture2D" uid="uid://bgppp3m5mhcaa" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/022.png" id="26_26jpw"]
 [ext_resource type="Texture2D" uid="uid://etyxgvuub3qn" path="res://Art/Image/Gui/Icons/BuildMenu/041.png" id="31_qk36b"]
 [ext_resource type="Texture2D" uid="uid://cf518se81cj2d" path="res://Art/Image/Gui/Icons/BuildMenu/041_d.png" id="32_4nsgw"]
 [ext_resource type="Texture2D" uid="uid://dbbd074dljjdh" path="res://Art/Image/Gui/Icons/BuildMenu/041_h.png" id="33_ndwhs"]
 [ext_resource type="Texture2D" uid="uid://dheotgyfkpraw" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/041.png" id="34_rqt0k"]
+[ext_resource type="Texture2D" uid="uid://bt58xny5se24v" path="res://Art/Image/Gui/Icons/BuildMenu/026.png" id="39_4nsgw"]
 [ext_resource type="Texture2D" uid="uid://uus0ttjqii0v" path="res://Art/Image/Gui/Icons/BuildMenu/025.png" id="39_qk36b"]
 [ext_resource type="Texture2D" uid="uid://bx8rxyll8xo7d" path="res://Art/Image/Gui/Icons/BuildMenu/025_d.png" id="40_4nsgw"]
+[ext_resource type="Texture2D" uid="uid://cnnsp11vmkgwq" path="res://Art/Image/Gui/Icons/BuildMenu/026_d.png" id="40_ndwhs"]
 [ext_resource type="Texture2D" uid="uid://u6g5it04iw0q" path="res://Art/Image/Gui/Icons/BuildMenu/025_h.png" id="41_ndwhs"]
+[ext_resource type="Texture2D" uid="uid://dwis3ppmbv6xa" path="res://Art/Image/Gui/Icons/BuildMenu/026_h.png" id="41_rqt0k"]
 [ext_resource type="Texture2D" uid="uid://cgce4rugxsuml" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/025.png" id="42_rqt0k"]
+[ext_resource type="Texture2D" uid="uid://djgpmr1fcxwye" path="res://Art/Image/Gui/Icons/BuildMenu/Greyscale/026.png" id="42_udbig"]
 [ext_resource type="Texture2D" uid="uid://bfwsbgfa63v84" path="res://Art/Image/Gui/Icons/BuildMenu/024.png" id="43_qk36b"]
 [ext_resource type="Texture2D" uid="uid://d3cp3sh6227a" path="res://Art/Image/Gui/Icons/BuildMenu/024_d.png" id="44_4nsgw"]
 [ext_resource type="Texture2D" uid="uid://kfwstu0er6wa" path="res://Art/Image/Gui/Icons/BuildMenu/024_h.png" id="45_ndwhs"]
@@ -41,7 +49,7 @@ grow_begin = -10.0
 grow_end = -10.0
 thickness = 5
 
-[node name="Tier2BuildingButtonsContainer" type="MarginContainer"]
+[node name="Tier2BuildingButtonsContainer" type="MarginContainer" unique_id=56713377]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -49,32 +57,32 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pggkw")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1808707489]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=673258984]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Pioneers"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=478150792]
 layout_mode = 2
 theme_override_constants/separation = 4
 theme_override_styles/separator = SubResource("StyleBoxLine_kcqtq")
 
-[node name="Label2" type="Label" parent="VBoxContainer"]
+[node name="Label2" type="Label" parent="VBoxContainer" unique_id=941494584]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Residents and infrastructure"
 vertical_alignment = 1
 
-[node name="InfrastructureGridContainer" type="GridContainer" parent="VBoxContainer"]
+[node name="InfrastructureGridContainer" type="GridContainer" parent="VBoxContainer" unique_id=77524768]
 layout_mode = 2
 columns = 4
 
-[node name="BuildHut" type="TextureButton" parent="VBoxContainer/InfrastructureGridContainer"]
+[node name="BuildHut" type="TextureButton" parent="VBoxContainer/InfrastructureGridContainer" unique_id=209440733]
 layout_mode = 2
 texture_normal = ExtResource("7_fkrya")
 texture_pressed = ExtResource("8_fcgqw")
@@ -83,29 +91,29 @@ texture_disabled = ExtResource("10_6uxy8")
 script = ExtResource("6_kaoaq")
 building_id = 4
 
-[node name="Label3" type="Label" parent="VBoxContainer"]
+[node name="Label3" type="Label" parent="VBoxContainer" unique_id=1782614948]
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Services"
 vertical_alignment = 1
 
-[node name="ServicesGridContainer" type="GridContainer" parent="VBoxContainer"]
+[node name="ServicesGridContainer" type="GridContainer" parent="VBoxContainer" unique_id=1560816913]
 visible = false
 layout_mode = 2
 columns = 4
 
-[node name="Label4" type="Label" parent="VBoxContainer"]
+[node name="Label4" type="Label" parent="VBoxContainer" unique_id=1920110927]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Companies"
 vertical_alignment = 1
 
-[node name="CompaniesGridContainer" type="GridContainer" parent="VBoxContainer"]
+[node name="CompaniesGridContainer" type="GridContainer" parent="VBoxContainer" unique_id=550353069]
 layout_mode = 2
 columns = 4
 
-[node name="BuildSawmill" type="TextureButton" parent="VBoxContainer/CompaniesGridContainer"]
+[node name="BuildSawmill" type="TextureButton" parent="VBoxContainer/CompaniesGridContainer" unique_id=1473750542]
 visible = false
 layout_mode = 2
 texture_normal = ExtResource("11_b584v")
@@ -115,34 +123,7 @@ texture_disabled = ExtResource("14_36vux")
 script = ExtResource("6_kaoaq")
 building_id = 5
 
-[node name="BuildFarm" type="TextureButton" parent="VBoxContainer/CompaniesGridContainer"]
-layout_mode = 2
-texture_normal = ExtResource("11_6dry3")
-texture_pressed = ExtResource("12_doxou")
-texture_hover = ExtResource("13_p4inc")
-texture_disabled = ExtResource("14_4ku7d")
-script = ExtResource("6_kaoaq")
-building_id = 6
-
-[node name="BuildPotatoField" type="TextureButton" parent="VBoxContainer/CompaniesGridContainer"]
-layout_mode = 2
-texture_normal = ExtResource("15_lpu35")
-texture_pressed = ExtResource("16_6uxy8")
-texture_hover = ExtResource("17_b584v")
-texture_disabled = ExtResource("18_mtgx2")
-script = ExtResource("6_kaoaq")
-building_id = 7
-
-[node name="BuildPigsty" type="TextureButton" parent="VBoxContainer/CompaniesGridContainer"]
-layout_mode = 2
-texture_normal = ExtResource("19_nfmty")
-texture_pressed = ExtResource("20_36vux")
-texture_hover = ExtResource("21_4s8tm")
-texture_disabled = ExtResource("22_3legw")
-script = ExtResource("6_kaoaq")
-building_id = 8
-
-[node name="BuildButchery" type="TextureButton" parent="VBoxContainer/CompaniesGridContainer"]
+[node name="BuildButchery" type="TextureButton" parent="VBoxContainer/CompaniesGridContainer" unique_id=1569572398]
 layout_mode = 2
 texture_normal = ExtResource("31_qk36b")
 texture_pressed = ExtResource("32_4nsgw")
@@ -151,7 +132,7 @@ texture_disabled = ExtResource("34_rqt0k")
 script = ExtResource("6_kaoaq")
 building_id = 9
 
-[node name="BuildClayPit" type="TextureButton" parent="VBoxContainer/CompaniesGridContainer"]
+[node name="BuildClayPit" type="TextureButton" parent="VBoxContainer/CompaniesGridContainer" unique_id=1320016768]
 layout_mode = 2
 texture_normal = ExtResource("39_qk36b")
 texture_pressed = ExtResource("40_4nsgw")
@@ -160,7 +141,7 @@ texture_disabled = ExtResource("42_rqt0k")
 script = ExtResource("6_kaoaq")
 building_id = 19
 
-[node name="BuildBrickyard" type="TextureButton" parent="VBoxContainer/CompaniesGridContainer"]
+[node name="BuildBrickyard" type="TextureButton" parent="VBoxContainer/CompaniesGridContainer" unique_id=2058497607]
 layout_mode = 2
 texture_normal = ExtResource("43_qk36b")
 texture_pressed = ExtResource("44_4nsgw")
@@ -169,14 +150,69 @@ texture_disabled = ExtResource("46_rqt0k")
 script = ExtResource("6_kaoaq")
 building_id = 20
 
-[node name="Label5" type="Label" parent="VBoxContainer"]
+[node name="BuildDistillery" type="TextureButton" parent="VBoxContainer/CompaniesGridContainer" unique_id=492915236]
+layout_mode = 2
+texture_normal = ExtResource("39_4nsgw")
+texture_pressed = ExtResource("40_ndwhs")
+texture_hover = ExtResource("41_rqt0k")
+texture_disabled = ExtResource("42_udbig")
+script = ExtResource("6_kaoaq")
+building_id = 24
+
+[node name="Label6" type="Label" parent="VBoxContainer" unique_id=1717975210]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Fields"
+vertical_alignment = 1
+
+[node name="FieldsGridContainer" type="GridContainer" parent="VBoxContainer" unique_id=915797106]
+layout_mode = 2
+columns = 4
+
+[node name="BuildFarm" type="TextureButton" parent="VBoxContainer/FieldsGridContainer" unique_id=746322353]
+layout_mode = 2
+texture_normal = ExtResource("11_6dry3")
+texture_pressed = ExtResource("12_doxou")
+texture_hover = ExtResource("13_p4inc")
+texture_disabled = ExtResource("14_4ku7d")
+script = ExtResource("6_kaoaq")
+building_id = 6
+
+[node name="BuildPotatoField" type="TextureButton" parent="VBoxContainer/FieldsGridContainer" unique_id=1284249965]
+layout_mode = 2
+texture_normal = ExtResource("15_lpu35")
+texture_pressed = ExtResource("16_6uxy8")
+texture_hover = ExtResource("17_b584v")
+texture_disabled = ExtResource("18_mtgx2")
+script = ExtResource("6_kaoaq")
+building_id = 7
+
+[node name="BuildPigsty" type="TextureButton" parent="VBoxContainer/FieldsGridContainer" unique_id=1703576691]
+layout_mode = 2
+texture_normal = ExtResource("19_nfmty")
+texture_pressed = ExtResource("20_36vux")
+texture_hover = ExtResource("21_4s8tm")
+texture_disabled = ExtResource("22_3legw")
+script = ExtResource("6_kaoaq")
+building_id = 8
+
+[node name="BuildSugarcaneField" type="TextureButton" parent="VBoxContainer/FieldsGridContainer" unique_id=556910098]
+layout_mode = 2
+texture_normal = ExtResource("23_a3y55")
+texture_pressed = ExtResource("24_h0b2w")
+texture_hover = ExtResource("25_og0qd")
+texture_disabled = ExtResource("26_26jpw")
+script = ExtResource("6_kaoaq")
+building_id = 23
+
+[node name="Label5" type="Label" parent="VBoxContainer" unique_id=1035192226]
 visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Military"
 vertical_alignment = 1
 
-[node name="MilitaryGridContainer" type="GridContainer" parent="VBoxContainer"]
+[node name="MilitaryGridContainer" type="GridContainer" parent="VBoxContainer" unique_id=1848879575]
 visible = false
 layout_mode = 2
 columns = 4

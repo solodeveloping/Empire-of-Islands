@@ -33,7 +33,7 @@ var natural_resource_id: NaturalResources.Ids = -1:
 			
 			width = data[Datas.Width]
 			height = data[Datas.Height]
-			texture = data[Datas.Texture]
+			sprite_2d.texture = data[Datas.Texture]
 			
 			update_offset()
 

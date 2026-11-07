@@ -117,9 +117,25 @@ void fragment() {
 		// pass
 		small_color = 0.0;
 	} else {
+		// Info: this is when the orthographic projection has already
+		// been applied to the history texture
+		// because we only write from 0.25 to 0.75 in the y dir
+		// in this case
+		float remapped_y = remap(
+			mask_uv.y,
+			0,
+			1,
+			0.25,
+			0.75
+		);
+		mask_uv.y = remapped_y;
+		
 		small_color = texture(small_tex, mask_uv).r;
 		
 		// FIXME: do this properly
+		
+		// Info: can use bilinear sampling instead
+		// filter_linear or filter_linear_mipmap
 		
 		// attempt 1 for a blur
 		small_color += texture(small_tex, mask_uv + screen_px).r;

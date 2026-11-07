@@ -1,9 +1,15 @@
 extends Node2D
+class_name Movement2D
 
 @onready var event_bus: EventBus = %EventBus
 
+# Info: this is the factions that the local player
+# is allowed to move
+var allowed_to_move_faction_ids: Array[int] = []
+
 ## For now it's [Ship2D_ECS]
 var selected_ship: Entity
+var can_move_selected_ship: bool = false
 
 func _ready() -> void:
 	event_bus.send_natural_resource_selected.connect(
@@ -22,8 +28,9 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if !selected_ship:
 		return
+	if !can_move_selected_ship:
+		return
 	if Input.is_action_just_pressed("right_click"):
-		#print("pressed")
 		var position_ = get_global_mouse_position()
 		#selected_ship.set_movement_target(position_)
 		
@@ -118,6 +125,22 @@ func _on_event_bus_send_ecs_ship_selected(
 	entity: Entity
 ):
 	selected_ship = entity
+	
+	var r_faction = selected_ship.get_relationship(
+		Rels.belongs_to_faction
+	)
+	if !r_faction or !r_faction.target:
+		push_error("no faction")
+		return
+	
+	var c_faction: C_Faction = r_faction.target.get_component(
+		C_Faction
+	)
+	if c_faction.faction_id in allowed_to_move_faction_ids:
+		can_move_selected_ship = true
+	else:
+		can_move_selected_ship = false
+	
 
 func _on_event_bus_send_ecs_ship_deselected(
 	_entity: Entity

@@ -53,3 +53,39 @@ func set_visual_node(node: Node):
 
 func get_visual_node() -> Node:
 	return visual_node
+
+func _on_vision_area_area_entered(
+	area: Area2D
+):
+	#print("_on_vision_area_area_entered %s %s" % [
+		#self.get_path(),
+		#area.get_path(),
+	#])
+	if area == self or area.get_parent() == self:
+		return
+	
+	if !area.get_parent().has_method("handle_area_entered"):
+		return
+	
+	if area.get_parent().get_meta(StaticFactions.BELONGS_TO_LOCAL_PLAYER_META, false):
+		return
+	
+	area.get_parent().handle_area_entered(self)
+
+func _on_vision_area_area_exited(
+	area: Area2D
+):
+	#print("_on_vision_area_area_exited %s %s" % [
+		#self.get_path(),
+		#area.get_path(),
+	#])
+	if area == self or area.get_parent() == self:
+		return
+	
+	if !area.get_parent().has_method("handle_area_exited"):
+		return
+	
+	if area.get_parent().get_meta(StaticFactions.BELONGS_TO_LOCAL_PLAYER_META, false):
+		return
+	
+	area.get_parent().handle_area_exited(self)

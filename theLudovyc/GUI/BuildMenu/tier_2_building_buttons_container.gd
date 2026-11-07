@@ -10,19 +10,11 @@ var event_bus: EventBus
 @onready var infrastructure_grid_container: GridContainer = $VBoxContainer/InfrastructureGridContainer
 @onready var services_grid_container: GridContainer = $VBoxContainer/ServicesGridContainer
 @onready var companies_grid_container: GridContainer = $VBoxContainer/CompaniesGridContainer
+@onready var fields_grid_container: GridContainer = $VBoxContainer/FieldsGridContainer
 @onready var military_grid_container: GridContainer = $VBoxContainer/MilitaryGridContainer
 
-# FIXME : this should be automated
-@onready
-var building_buttons = {
-	Buildings.Ids.Hut: $VBoxContainer/InfrastructureGridContainer/BuildHut,
-	Buildings.Ids.Farm: $VBoxContainer/CompaniesGridContainer/BuildFarm,
-	Buildings.Ids.PotatoField: $VBoxContainer/CompaniesGridContainer/BuildPotatoField,
-	Buildings.Ids.Pigsty: $VBoxContainer/CompaniesGridContainer/BuildPigsty,
-	Buildings.Ids.ClayPit: $VBoxContainer/CompaniesGridContainer/BuildClayPit,
-	Buildings.Ids.Brickyard: $VBoxContainer/CompaniesGridContainer/BuildBrickyard,
-	Buildings.Ids.Sawmill: $VBoxContainer/CompaniesGridContainer/BuildSawmill,
-}
+# Maps Buildings.Ids
+var building_buttons: Dictionary[int, Node] = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -36,13 +28,25 @@ func _ready():
 		bind_buttons(infrastructure_grid_container)
 		bind_buttons(services_grid_container)
 		bind_buttons(companies_grid_container)
+		bind_buttons(fields_grid_container)
 		bind_buttons(military_grid_container)
 
 func bind_buttons(container: GridContainer):
 	for child in container.get_children():
-		child.pressed.connect(_on_building_button_pressed.bind(child.building_id))
-		child.mouse_entered.connect(_on_building_button_mouse_entered.bind(child.building_id))
-		child.mouse_exited.connect(_on_building_button_mouse_exited)
+		if child is ButtonBuild:
+			child.pressed.connect(
+				_on_building_button_pressed.bind(child.building_id)
+			)
+			child.mouse_entered.connect(
+				_on_building_button_mouse_entered.bind(child.building_id)
+			)
+			child.mouse_exited.connect(
+				_on_building_button_mouse_exited
+			)
+			building_buttons.set(
+				child.building_id,
+				child
+			)
 
 func _on_building_button_pressed(building_id: Buildings.Ids):
 	clicked_on_building.emit(building_id)

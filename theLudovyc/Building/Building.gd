@@ -1,5 +1,4 @@
 @tool
-
 extends EntityStatic
 class_name Building2D
 
@@ -105,6 +104,11 @@ const datas = {
 		Datas.Width: 3,
 		Datas.Height: 3,
 	},
+	Buildings.Ids.SugarcaneField: {
+		Datas.Texture: preload("uid://cadll38iu1tji"),
+		Datas.Width: 3,
+		Datas.Height: 3,
+	},
 	Buildings.Ids.Butchery: {
 		Datas.Texture: preload("res://theLudovyc/Building/atlas_textures/butchery_atlas_texture.tres"),
 		Datas.Width: 2,
@@ -120,6 +124,11 @@ const datas = {
 		Datas.Width: 2,
 		Datas.Height: 4,
 		Datas.HeightOffset: 1,
+	},
+	Buildings.Ids.Distillery: {
+		Datas.Texture: preload("uid://c7vtt8fi0m4t2"),
+		Datas.Width: 2,
+		Datas.Height: 2,
 	},
 	# Level 3
 	Buildings.Ids.House: {
@@ -194,9 +203,9 @@ var building_id: Buildings.Ids = -1:
 			
 			var is_coastal = Buildings.get_is_coastal(building_id)
 			if !is_coastal:
-				texture = building_data[Datas.Texture]
+				sprite_2d.texture = building_data[Datas.Texture]
 			else:
-				texture = building_data[Datas.TextureNorthWest]
+				sprite_2d.texture = building_data[Datas.TextureNorthWest]
 			
 			update_offset()
 
@@ -310,25 +319,25 @@ func hide_production_stoppped_indicator():
 func switch_to_north_west_texture():
 	#print("switch_to_north_west_texture")
 	var building_data = datas.get(building_id)
-	texture = building_data[Datas.TextureNorthWest]
+	sprite_2d.texture = building_data[Datas.TextureNorthWest]
 	face_direction = FaceDirection.NorthWest
 	
 func switch_to_north_east_texture():
 	#print("switch_to_north_east_texture")
 	var building_data = datas.get(building_id)
-	texture = building_data[Datas.TextureNorthEast]
+	sprite_2d.texture = building_data[Datas.TextureNorthEast]
 	face_direction = FaceDirection.NorthEast
 	
 func switch_to_south_east_texture():
 	#print("switch_to_south_east_texture")
 	var building_data = datas.get(building_id)
-	texture = building_data[Datas.TextureSouthEast]
+	sprite_2d.texture = building_data[Datas.TextureSouthEast]
 	face_direction = FaceDirection.SouthEast
 	
 func switch_to_south_west_texture():
 	#print("switch_to_south_west_texture")
 	var building_data = datas.get(building_id)
-	texture = building_data[Datas.TextureSouthWest]
+	sprite_2d.texture = building_data[Datas.TextureSouthWest]
 	face_direction = FaceDirection.SouthWest
 
 func get_height_offset() -> int:

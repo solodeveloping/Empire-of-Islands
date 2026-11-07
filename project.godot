@@ -315,6 +315,7 @@ place_building={
 3d_physics/layer_13="snaps"
 2d_physics/layer_14="buildings_no_clicks"
 3d_physics/layer_14="buildings_no_clicks"
+2d_physics/layer_15="visible"
 avoidance/layer_1="ships"
 avoidance/layer_2="land_units"
 

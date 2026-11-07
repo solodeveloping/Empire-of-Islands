@@ -1,6 +1,9 @@
 extends Node
 class_name GM_I_StorageNode
 
+func get_storage_as_list() -> Array[GMStorageRef]:
+	return []
+
 func get_storage(
 	item_id: int,
 ) -> GMStorageRef:

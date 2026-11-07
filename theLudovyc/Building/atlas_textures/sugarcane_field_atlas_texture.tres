@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" format=3 uid="uid://cadll38iu1tji"]
+
+[ext_resource type="Texture2D" uid="uid://bmlglky3whwwd" path="res://Art/Image/Buildings/SugarField/SugarField_idle_full.png" id="1_giy1d"]
+
+[resource]
+atlas = ExtResource("1_giy1d")
+region = Rect2(0, 64, 192, 128)

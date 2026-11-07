@@ -280,9 +280,6 @@ func _find_and_assign_production_buildings(
 	_find_building_needing_workers(_b, c_pop_unit)
 	
 	if _b.building_needing_workers_exist:
-		#e_pop_unit.add_relationship(
-			#Relationship.new(R_WorksAt.new(), _b.building)
-		#)
 		_b.worker_quantity.worker_count += 1
 		
 		# Info: if there is no visual, just consider it present
@@ -299,7 +296,12 @@ func _find_and_assign_production_buildings(
 		
 		c_pop_unit.is_working = true
 		cmd.add_relationship(
-			pop_unit, Rels.create_works_at(_b.building)
+			pop_unit,
+			Rels.create_works_at(_b.building)
+		)
+		cmd.add_component(
+			pop_unit,
+			C_Working.new(0, 5, 1, true)
 		)
 		
 		if island.has_component(C_PopulationSummary):
@@ -556,9 +558,14 @@ func _find_and_assign_production_building_to_pop_units(
 		
 		if existing_building:
 			#print("remove_relationship")
+			# FIXME: mutualize?
 			cmd.remove_relationship(
 				pop_unit,
 				Rels.create_works_at(existing_building)
+			)
+			cmd.remove_component(
+				pop_unit,
+				C_Working,
 			)
 		
 		var c_pop_unit: C_PopUnit = pop_unit.get_component(
@@ -607,6 +614,11 @@ func _find_and_assign_production_building_to_pop_units(
 			cmd.add_relationship(
 				pop_unit,
 				Rels.create_works_at(building)
+			)
+			cmd.add_component(
+				pop_unit,
+				# FIXME: should not be hardcoded
+				C_Working.new(0, 5, 1, true)
 			)
 			
 			if worker.worker_count >= req.worker_count:

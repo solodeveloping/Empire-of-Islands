@@ -296,7 +296,7 @@ var map: PackedScene
 #var World: Node3D = null
 #var PlayerStart: Node3D = null
 
-var physics_building_layers_2d: int = 0
+var physics_visible_entity_layers_2d: int = 0
 
 #@warning_ignore("unused_private_class_variable")
 #var _warning := false # DEBUG

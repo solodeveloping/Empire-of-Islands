@@ -263,8 +263,12 @@ func _on_ship_trading_requested(
 	
 	# buy
 	for res_id in dock_faction_storage2.storage.keys():
-		print("dock attempting to sell %s" % [
+		var res_id_name = Resources.get_resource_name(
 			res_id,
+		)
+		print("dock attempting to sell %s %s" % [
+			res_id,
+			res_id_name
 		])
 		var dock_trade_def: TradeResourceDefinition = dock_c_faction.global_trades_as_dict.get(
 			res_id

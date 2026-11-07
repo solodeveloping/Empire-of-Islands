@@ -24,6 +24,14 @@ var texture_rect: TextureRect
 
 @onready var ship_navigation_region_2d: NavigationRegion2D = $"../../ShipNavigationRegion2D"
 
+@onready var minimap_with_shader_texture_rect: TextureRect = $"../../GUI/Widget/Map/MinimapWithShaderTextureRect"
+
+@export
+var tile_map_layer: TileMapLayer
+
+@export
+var extra_padding := Vector2(0, 0)
+
 var target_world_position := Vector2(500, 300)
 
 var entities: Array[Entity] = []
@@ -72,9 +80,11 @@ func _ready() -> void:
 			_on_event_bus_send_local_player_faction_id_changed
 		)
 		
-	
+	# Info: get_sceen_aabb was not good
 	var rect = get_scene_aabb(current_scene)
-	#print("rect", rect)
+	print("FOWTextureRect2D rect", rect)
+	rect = get_rect2()
+	print("FOWTextureRect2D rect 2", rect)
 	#print("nav_mesh rect", ship_navigation_region_2d.get_bounds())
 	
 	map_rect = rect
@@ -117,6 +127,10 @@ func _initialize_compute_shader():
 	create_textures()
 	
 	material.set_shader_parameter(
+		"small_tex",
+		display_texture
+	)
+	minimap_with_shader_texture_rect.material.set_shader_parameter(
 		"small_tex",
 		display_texture
 	)
@@ -423,6 +437,67 @@ func get_scene_aabb(root: Node2D) -> Rect2:
 
 	return result
 
+# TODO: mutualize
+func get_rect2() -> Rect2:
+	# This is the used rect of the tile_map_layer
+	var used_rect: Rect2i = tile_map_layer.get_used_rect()
+	if used_rect.size == Vector2i.ZERO:
+		push_error("used_rect is ZERO")
+		return Rect2()
+	
+	# map_to_local returns cell center's positions
+	# the end of Rect2i is exclusive
+	var end: Vector2i = used_rect.end - Vector2i.ONE
+	var points := [
+		tile_map_layer.to_global(tile_map_layer.map_to_local(used_rect.position)),
+		tile_map_layer.to_global(tile_map_layer.map_to_local(Vector2i(end.x, used_rect.position.y))),
+		tile_map_layer.to_global(tile_map_layer.map_to_local(Vector2i(used_rect.position.x, end.y))),
+		tile_map_layer.to_global(tile_map_layer.map_to_local(end)),
+	]
+	
+	print("points %s" % [
+		points,
+	])
+	
+	# (8160.0, 16.0)
+	# middle right of the diamond
+
+	# expand all points
+	# it makes so the Rect2 encloses the points
+	var rect2: Rect2 = Rect2(
+		# position
+		points[0],
+		# size
+		Vector2.ZERO
+	)
+	for point in points:
+		rect2 = rect2.expand(point)
+	
+	# FIXME: there is probably a better way?
+	
+	# this is one X unit
+	var x_step: Vector2 = tile_map_layer.map_to_local(used_rect.position + Vector2i.RIGHT) \
+		- tile_map_layer.map_to_local(used_rect.position)
+	
+	# this is one Y unit
+	var y_step: Vector2 = tile_map_layer.map_to_local(used_rect.position + Vector2i.DOWN) \
+		- tile_map_layer.map_to_local(used_rect.position)
+	
+	# FIXME: useless?
+	# padding as vect2
+	var padding: Vector2 = (x_step.abs() + y_step.abs()) * 0.5 + extra_padding
+
+	# extend the rect by the given amount on each side
+	# must be positive to grow
+	rect2 = rect2.grow_individual(
+		padding.x,
+		padding.y,
+		padding.x,
+		padding.y
+	)
+	
+	return rect2
+
 func _on_event_bus_send_visible_entity_added(
 	entity: Entity,
 ):
@@ -508,6 +583,16 @@ func _refresh_objects_positions():
 	
 	material.set_shader_parameter("objects", objects)
 	material.set_shader_parameter("object_count", count)
+	
+	minimap_with_shader_texture_rect.material.set_shader_parameter(
+		"objects",
+		objects
+	)
+	minimap_with_shader_texture_rect.material.set_shader_parameter(
+		"object_count",
+		count
+	)
+	
 
 #region "Compute shader initialize"
 
@@ -821,3 +906,33 @@ func make_image_uniform(
 #endregion
 
 #endregion
+
+# TODO: something cleaner
+func _on_Button_button_down() -> void:
+	print("_on_Button_button_down")
+	var data: PackedByteArray = rd.texture_get_data(
+		current_texture_rid,
+		0
+	)
+	
+	var image: Image = Image.create_from_data(
+		output_width,
+		output_height,
+		false,
+		Image.FORMAT_RGBA8,
+		#Image.FORMAT_RF,
+		data
+	)
+	#var texture = ImageTexture.create_from_image(image)
+
+	var filename = "user://fow_%s_2d.png" % [
+		0,
+	]
+	image.save_png(filename)
+	var global_path = ProjectSettings.globalize_path(
+		filename
+	)
+	print("path %s" % [
+		global_path,
+	])
+	print("minimap image saved")

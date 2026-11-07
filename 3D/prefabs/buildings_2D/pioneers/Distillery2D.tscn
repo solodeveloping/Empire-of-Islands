@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c4kwus5q4rjvt"]
+
+[ext_resource type="Script" uid="uid://btubmhkwrovfi" path="res://3D/prefabs/buildings_2D/pioneers/distillery_2d.gd" id="1_pi4jv"]
+
+[node name="Distillery2d" type="Node2D" unique_id=1999053479]
+script = ExtResource("1_pi4jv")

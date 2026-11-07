@@ -5,8 +5,12 @@ shader_type canvas_item;
 
 uniform vec2 texture_size = vec2(512, 512);
 uniform vec2 map_size = vec2(512, 512);
+// position of the camera in global coordinates
 uniform vec2 player_global_position = vec2(0, 0);
+// origin of the map
 uniform vec2 map_center_global_position = vec2(0, 0);
+// size of the map in world units
+uniform vec2 map_world_size = vec2(0, 0);
 
 uniform vec2 min_visible_size = vec2(64, 64);
 uniform vec2 max_visible_size = vec2(512, 512);
@@ -24,6 +28,26 @@ uniform bool clamp_to_bounds;
  * This is the main mask, the circular mask
  */
 uniform sampler2D mask_texture;
+
+group_uniforms Fog_of_war;
+
+// TODO: rename this maybe
+/**
+ * This is the smaller size texture for already seen places
+ */
+uniform sampler2D small_tex : filter_nearest;
+
+// Gives    0 if on surface
+// Gives    < 0 if inside
+// Gives    > 0 if outside
+float sdCircle(vec2 p, float r)
+{
+	return length(p) - r;
+}
+
+uniform int object_count = 0;
+// xy/z = position, w = radius
+uniform vec4 objects[512];
 
 group_uniforms DiamondBorder;
 
@@ -184,8 +208,8 @@ void fragment() {
 	//vec2 player_uv_pos_scaled = player_uv_pos * uv_size;
 	
 	// -1 to 1 and 0 to 1
-	float start_uv_x = player_uv_pos.x - uv_size.x/2.0;
-	float start_uv_y = player_uv_pos.y - uv_size.y/2.0;
+	float start_uv_x = player_uv_pos.x - uv_size.x / 2.0;
+	float start_uv_y = player_uv_pos.y - uv_size.y / 2.0;
 	
 	float end_uv_x = start_uv_x + uv_size.x;
 	float end_uv_y = start_uv_y + uv_size.y;
@@ -210,6 +234,8 @@ void fragment() {
 			end_uv_y
 		)
 	);
+	
+	float color = 0.0;
 
 	if (result_uv.x < 0.0 || result_uv.x > 1.0 || result_uv.y < 0.0 || result_uv.y > 1.0) {
 	    COLOR = outter_region_color;
@@ -245,8 +271,124 @@ void fragment() {
 	    } else {
 	        ////COLOR = fill_color;
 	    }
+		
+		// Info:
+		// we want, from result_uv, a global position
+		// so can remap to world size
+		
+		vec2 world_position = vec2(
+			remap(
+				// 0 to 1 or less
+				result_uv.x,
+				// 0 to 1 or less
+				//start_uv_x,
+				0,
+				// 0 to 1 or less
+				//end_uv_x,
+				1,
+				// center - half size
+				map_center_global_position.x - map_world_size.x/2.0,
+				// center + half size
+				map_center_global_position.x + map_world_size.x/2.0
+			),
+			remap(
+				result_uv.y,
+				//start_uv_y,
+				0,
+				//end_uv_y,
+				1.0,
+				map_center_global_position.y - map_world_size.y,
+				//map_center_global_position.y - map_world_size.y/2.0,
+				//map_center_global_position.y - map_world_size.y/4.0,
+				map_center_global_position.y + map_world_size.y
+				//map_center_global_position.y + map_world_size.y/2.0
+			)
+		);
+		
+		// <= 0 if inside
+		// step: 0 if < and 1 if >
+		//float color = 0.0;
+		float max_radius = 0.0;
+		for (int i = 0; i < object_count; i++) {
+			// Gives    0 if on surface
+			// Gives    < 0 if inside
+			// Gives    > 0 if outside
+			// Use objects[i]
+			float sdfVal = sdCircle(
+				objects[i].xy - world_position,
+				// a stores the radius
+				objects[i].a
+			);
+			if (objects[i].a > max_radius) {
+				max_radius = objects[i].a;
+			}
+			// Info: only divergent paths are slow, I think
+			// normal "if"s are okay to use
+			// float result = sdfVal <= 0 ? 1.0 : 0.0;
+			
+			// min selects the most "inside" value
+			color = min(
+				color,
+				sdfVal
+			);
+		}
+		
+		// we inverse it
+		// it was 0 or neg
+		// now it's 0 or pos
+		// higher value: seen
+		color = -color;
+		
+		// normalize it
+		// before that, will be 1 and above
+		//color = color / 255.0;
+		color = color / max_radius;
+		
+		//COLOR.g = color;
+		
+		// 1.0 is seen
+		// 0.0 is not seen
+		float small_color = texture(
+			small_tex,
+			vec2(result_uv.x, result_uv.y)
+		).r;
+		//COLOR.r = small_color;
+		
+		// TODO: was doing a smooth in the other shader
+		
+		// unify the color
+		small_color = smoothstep(
+			0.0,
+			0.0,
+			small_color
+		);
+		
+		if (color > 0.0) {
+			// we apply the sdf at 0.3
+			color = smoothstep(
+				0.0,
+				0.3,
+				color
+			);
+			// we select the highest value between the 2
+			color = max(
+				color, small_color
+			);
+		} else if (small_color > 0.0) {
+			// this gives a range
+			color = (1.0 - (small_color / 2.0));
+		} else {
+			// just set to 0
+			color = 0.0;
+		}
+		
+		//color = 1.0 - color;
+		
 	}
-	COLOR.a = 1.0 - mask_color.a;
+	//COLOR.a = color;
+	// the mask does nothing further restrict the drawing
+	// not sure why color only also works, it's not a square
+	COLOR.a = color * (1.0 - mask_color.a);
 }
 
 //void light() {

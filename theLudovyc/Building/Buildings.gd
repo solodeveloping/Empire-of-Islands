@@ -35,6 +35,8 @@ enum Ids {
 	Brickyard,
 	StoneHouse,
 	MainSquare,
+	SugarcaneField,
+	Distillery,
 }
 
 # FIXME : PopulationType is duplicated with the Recipes
@@ -191,6 +193,17 @@ const datas = {
 		Datas.PopulationType: Populations.Types.Pioneer,
 		Datas.Require_Building: Ids.Farm,
 	},
+	Ids.SugarcaneField:
+	{
+		Datas.Name: &"Sugarcane field",
+		Datas.Type: Types.Producing,
+		Datas.Cost: [[Resources.Types.Plank, 1],],
+		Datas.Produce: Resources.Types.Sugar,
+		Datas.Max_Workers: 1,
+		Datas.Level: 2,
+		Datas.PopulationType: Populations.Types.Pioneer,
+		Datas.Require_Building: Ids.Farm,
+	},
 	Ids.Butchery:
 	{
 		Datas.Name: &"Butchery",
@@ -236,6 +249,17 @@ const datas = {
 		Datas.Produce: Resources.Types.ClayBrick,
 		Datas.Max_Workers: 2,
 		Datas.Maintenance_Cost: 1,
+	},
+	Ids.Distillery:
+	{
+		Datas.Name: &"Distillery",
+		Datas.Type: Types.Producing,
+		Datas.Cost: [[Resources.Types.Plank, 1],],
+		Datas.Produce: Resources.Types.Liquor,
+		Datas.Max_Workers: 4,
+		Datas.Level: 2,
+		Datas.PopulationType: Populations.Types.Pioneer,
+		Datas.Maintenance_Cost: 2,
 	},
 	# Level 3
 	Ids.House:
